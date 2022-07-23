@@ -1,14 +1,33 @@
 import React from "react";
-import { Typography, Form, Input, Button, Checkbox, Divider } from "antd";
+import {
+    Typography,
+    Form,
+    Input,
+    Button,
+    Checkbox,
+    Divider,
+    message,
+} from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
 import ROUTES from "../../routes";
+import { useLoginMutation } from "../../services/LoginService";
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 const Login = () => {
     const navigate = useNavigate();
+
+    const [postLogin, { error, data }] = useLoginMutation();
+
+    const onFinish = (values) => {
+        postLogin({
+            username: values.username,
+            password: values.password,
+        });
+    };
+
     return (
         <div>
             {/* <div
@@ -32,14 +51,20 @@ const Login = () => {
                     >
                         АВТОРИЗАЦИЯ
                     </Text>
-                    <Form style={{ width: "100%" }}>
+                    <Form style={{ width: "100%" }} onFinish={onFinish}>
                         <Form.Item
                             label={
                                 <Text style={{ fontWeight: 600, fontSize: 16 }}>
                                     Логин
                                 </Text>
                             }
-                            name="name"
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your username!",
+                                },
+                            ]}
                             labelCol={{ span: 24 }}
                         >
                             <Input placeholder="Логин" size="large" />
@@ -52,6 +77,12 @@ const Login = () => {
                             }
                             name="password"
                             labelCol={{ span: 24 }}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your password!",
+                                },
+                            ]}
                         >
                             <Input.Password placeholder="Пароль" size="large" />
                         </Form.Item>

@@ -121,9 +121,9 @@ const MyLayout = () => {
                                 className="site-layout-background"
                                 style={{
                                     paddingLeft: 24,
-                                    minHeight: 900,
                                     paddingTop: 16,
                                     paddingRight: 24,
+                                    paddingBottom: 12,
                                 }}
                             >
                                 <div style={{ marginBottom: 16 }}>
