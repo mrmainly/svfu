@@ -1,9 +1,12 @@
 import React from "react";
 import { Layout, Menu, Typography, Divider } from "antd";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
+import { BsPersonFill, BsCardChecklist } from "react-icons/bs";
+import { HiOutlineDocumentText } from "react-icons/hi";
 
 import "./layout.css";
 import ROUTES from "../routes";
+import { pathname } from "./pathname";
 
 const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
@@ -12,47 +15,58 @@ const MyLayout = () => {
     const navigate = useNavigate();
     const params = useLocation();
 
-    const pathname = () => {
-        switch (params.pathname) {
-            case "/orders":
-                return "Заказы";
-                break;
-        }
-    };
-
     const items = [
         {
-            label: "Заказы",
-            navigate: ROUTES.ORDERS,
+            label: "Иванов Иван",
+            key: "submenu-1",
+            icon: <BsPersonFill />,
+            children: [
+                {
+                    label: "Настройка профиля",
+                    key: "submenu-item-1",
+                    onClick: () => navigate(ROUTES.PROFILE),
+                },
+                {
+                    label: "Выйти из системы",
+                    key: "submenu-item-2",
+                    onClick: () => navigate(ROUTES.LOGIN),
+                },
+            ],
         },
         {
-            label: "Блог",
-            navigate: ROUTES.BLOG,
+            label: "Тестирование",
+            key: "submenu-2",
+            icon: <BsCardChecklist />,
+            children: [
+                {
+                    label: "Доступные тесты",
+                    key: "submenu-item-3",
+                    onClick: () => navigate(ROUTES.AVAILABLE_TESTS),
+                },
+                {
+                    label: "Результаты тестов",
+                    key: "submenu-item-4",
+                    onClick: () => navigate(ROUTES.TEST_RESULTS),
+                },
+            ],
         },
         {
-            label: "Акции",
-            navigate: ROUTES.STOCKS,
+            label: "Документы",
+            key: "submenu-3",
+            icon: <HiOutlineDocumentText />,
+            children: [
+                {
+                    label: "Загрузить документы",
+                    key: "submenu-item-5",
+                    onClick: () => navigate(ROUTES.DOCUMENTS),
+                },
+                {
+                    label: "Мои квалификации",
+                    key: "submenu-item-6",
+                    onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),
+                },
+            ],
         },
-        {
-            label: "Аналитика",
-            navigate: ROUTES.ANALYTICS,
-        },
-        {
-            label: "Города",
-            navigate: ROUTES.CITY,
-        },
-        {
-            label: "Пользователи",
-            navigate: ROUTES.USERS,
-        },
-        {
-            label: "Вакансии",
-            navigate: ROUTES.WORK,
-        },
-        // {
-        //     label: "Теги",
-        //     navigate: ROUTES.TAGS,
-        // },
     ];
 
     return (
@@ -97,8 +111,49 @@ const MyLayout = () => {
                         <Menu
                             mode="inline"
                             style={{ background: "#09304A", color: "white" }}
-                        >
-                            {items.map((item, index) => (
+                            items={items}
+                            theme="dark"
+                        />
+                    </Sider>
+                    <Layout>
+                        <Content style={{ margin: "24px 24px 0" }}>
+                            <div
+                                className="site-layout-background"
+                                style={{
+                                    paddingLeft: 24,
+                                    minHeight: 900,
+                                    paddingTop: 16,
+                                    paddingRight: 24,
+                                }}
+                            >
+                                <div style={{ marginBottom: 16 }}>
+                                    <Text style={{ fontSize: 20 }}>
+                                        {pathname(params)}
+                                    </Text>
+                                    <div
+                                        style={{
+                                            background: "grey",
+                                            height: 1,
+                                            marginLeft: "-24px",
+                                            marginRight: "-24px",
+                                            marginTop: 16,
+                                        }}
+                                    ></div>
+                                </div>
+                                <Outlet />
+                            </div>
+                        </Content>
+                    </Layout>
+                </Layout>
+            )}
+        </>
+    );
+};
+
+export default MyLayout;
+
+{
+    /* {items.map((item, index) => (
                                 <Menu.Item
                                     key={index}
                                     onClick={() => navigate(item.navigate)}
@@ -112,23 +167,5 @@ const MyLayout = () => {
                                 }}
                             >
                                 Выйти
-                            </Menu.Item>
-                        </Menu>
-                    </Sider>
-                    <Layout>
-                        <Content style={{ margin: "16px 16px 0" }}>
-                            <div
-                                className="site-layout-background"
-                                style={{ padding: 24, minHeight: 900 }}
-                            >
-                                <Outlet />
-                            </div>
-                        </Content>
-                    </Layout>
-                </Layout>
-            )}
-        </>
-    );
-};
-
-export default MyLayout;
+                            </Menu.Item> */
+}

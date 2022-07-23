@@ -3,7 +3,17 @@ import "antd/dist/antd.min.css";
 
 import ROUTES from "./routes";
 import Layout from "./layout";
-import { Registration, Login, Profile, ForgotPassword } from "./pages";
+import {
+    Registration,
+    Login,
+    Profile,
+    ForgotPassword,
+    ProfileDetail,
+    Documents,
+    Test,
+    ResultTests,
+    Qualifications,
+} from "./pages";
 
 function App() {
     return (
@@ -20,6 +30,16 @@ function App() {
                         path={ROUTES.FORGOT_PASSWORD}
                     />
                     <Route element={<Profile />} path={ROUTES.PROFILE} />
+                    <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
+                    <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
+                    <Route
+                        element={<ResultTests />}
+                        path={ROUTES.TEST_RESULTS}
+                    />
+                    <Route
+                        element={<Qualifications />}
+                        path={ROUTES.MY_QUALIFICATIONS}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>
