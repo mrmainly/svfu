@@ -1,12 +1,9 @@
-import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
-import cookie from "js-cookie";
-
-const jwttoken = cookie.get("jwttoken");
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: "https://notalone.medic.fun/api/v1/",
     prepareHeaders: (headers, { getState }) => {
-        const token = jwttoken;
+        const token = localStorage.getItem("jwttokwn");
         if (token) {
             headers.set("authentication", `Token ${token}`);
         }

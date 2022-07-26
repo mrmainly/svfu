@@ -1,13 +1,13 @@
 import React from "react";
 import { Typography, Form, Input, Button, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import "./registration.css";
+import "./forgot_password.css";
 
-import ROUTES from "../../routes";
+import ROUTES from "../../../routes";
 
 const { Text } = Typography;
 
-const Registration = () => {
+const ForgotPassword = () => {
     const navigate = useNavigate();
     return (
         <div>
@@ -29,22 +29,30 @@ const Registration = () => {
                             fontStyle: "normal",
                         }}
                     >
-                        РЕГИСТРАЦИЯ
+                        ВОССТАНОВЛЕНИЕ ПАРОЛЯ
+                    </Text>
+                    <Text
+                        style={{
+                            fontWeight: 400,
+                            fontSize: 16,
+                            fontStyle: "normal",
+                        }}
+                    >
+                        Введите вашу почту, которую вы ввели при регистрации.
+                        Если вы забыли адрес электронной почты, проверьте
+                        данные.
                     </Text>
                     <Form style={{ width: "100%" }}>
                         <Form.Item
                             label={
                                 <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                                    Почта
+                                    Электронная почта
                                 </Text>
                             }
                             name="name"
                             labelCol={{ span: 24 }}
                         >
-                            <Input
-                                placeholder="Введите вашу почту"
-                                size="large"
-                            />
+                            <Input placeholder="E-mail" size="large" />
                         </Form.Item>
                         <Button
                             style={{
@@ -62,8 +70,7 @@ const Registration = () => {
                             style={{ marginTop: 12, marginBottom: "-12px" }}
                             direction="vertical"
                         >
-                            <Link to={ROUTES.LOGIN}>Есть аккаунт? Войти</Link>
-                            <Link to="/">Восстановление пароля</Link>
+                            <Link to={ROUTES.LOGIN}>Назад</Link>
                         </Space>
                     </Form>
                 </div>
@@ -72,4 +79,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default ForgotPassword;

@@ -29,7 +29,10 @@ const MyLayout = () => {
                 {
                     label: "Выйти из системы",
                     key: "submenu-item-2",
-                    onClick: () => navigate(ROUTES.LOGIN),
+                    onClick: () => {
+                        localStorage.removeItem("jwttoken");
+                        navigate(ROUTES.LOGIN);
+                    },
                 },
             ],
         },

@@ -11,20 +11,27 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
-import ROUTES from "../../routes";
-import { useLoginMutation } from "../../services/LoginService";
+import ROUTES from "../../../routes";
+import { useLoginMutation } from "../../../services/LoginService";
 
 const { Text } = Typography;
 
 const Login = () => {
     const navigate = useNavigate();
 
-    const [postLogin, { error, data }] = useLoginMutation();
+    const [postLogin] = useLoginMutation();
 
     const onFinish = (values) => {
         postLogin({
             username: values.username,
             password: values.password,
+        }).then((res) => {
+            if (res.error) {
+                message.error(res?.error?.data?.errors[0]);
+            } else {
+                localStorage.setItem("jwttoken", res.data.token);
+                navigate(ROUTES.PROFILE);
+            }
         });
     };
 
@@ -62,7 +69,7 @@ const Login = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: "Please input your username!",
+                                    message: "Please input your login!",
                                 },
                             ]}
                             labelCol={{ span: 24 }}
@@ -87,7 +94,7 @@ const Login = () => {
                             <Input.Password placeholder="Пароль" size="large" />
                         </Form.Item>
                         <Form.Item name="checkbox" labelCol={{ span: 24 }}>
-                            <Checkbox>
+                            <Checkbox checked={false}>
                                 <Text style={{ fontWeight: 600, fontSize: 16 }}>
                                     Запомнить логин
                                 </Text>
