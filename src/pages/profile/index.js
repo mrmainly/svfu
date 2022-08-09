@@ -1,90 +1,36 @@
 import React from "react";
+import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
-import { Typography, Space, Button } from "antd";
-
-const { Text } = Typography;
+import MainInfo from "./components/MainInfo";
+import SocialNetworks from "./components/SocialNetworks";
+import InfoScreen from "./components/InfoScreen";
+import { Line } from "../../components";
+import ROUTES from "../../routes";
 
 const Profile = () => {
-    const data = [
-        {
-            label: "Фамилия:",
-            value: "Колесов",
-        },
-        {
-            label: "Имя:",
-            value: "Колесов",
-        },
-        {
-            label: "Отчество:",
-            value: "Колесов",
-        },
-        {
-            label: "Дата рождения:",
-            value: "Колесов",
-        },
-        {
-            label: "Пол:",
-            value: "Колесов",
-        },
-        {
-            label: "Телефон:",
-            value: "Колесов",
-        },
-        {
-            label: "Почта:",
-            value: "Колесов",
-        },
-        {
-            label: "Должность:",
-            value: "Колесов",
-        },
-        {
-            label: "Стаж работы:",
-            value: "Колесов",
-        },
-        {
-            label: "Направление:",
-            value: "Колесов",
-        },
-    ];
+    const navigate = useNavigate();
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            {data.map((item, index) => (
-                <Space
-                    key={index}
-                    size="middle"
-                    style={{ marginTop: index === 0 ? 0 : 12 }}
-                >
-                    <div style={{ width: 200 }}>
-                        <Text style={{ fontWeight: 600 }}>{item.label}</Text>
-                    </div>
-                    <Text>{item.value}</Text>
-                </Space>
-            ))}
-            <div
+            <MainInfo />
+            <Line />
+            <SocialNetworks />
+            <InfoScreen />
+            <Line />
+            <Button
                 style={{
-                    background: "grey",
-                    height: 1,
-                    marginLeft: "-24px",
-                    marginRight: "-24px",
-                    marginTop: 16,
+                    background: "#0D6EFD",
+                    borderRadius: 4,
+                    width: "max-content",
                 }}
-            />
-            <div>
-                <Button
-                    style={{
-                        background: "#0D6EFD",
-                        borderRadius: 4,
-                        marginTop: 19,
-                    }}
-                    type="primary"
-                    htmlType="submit"
-                    size="large"
-                >
-                    Редактировать профиль
-                </Button>
-            </div>
+                type="primary"
+                htmlType="submit"
+                size="large"
+                onClick={() => navigate(ROUTES.PROFILE_EDITING)}
+            >
+                Редактировать профиль
+            </Button>
         </div>
     );
 };

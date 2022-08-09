@@ -30,6 +30,10 @@ function App() {
                         path={ROUTES.FORGOT_PASSWORD}
                     />
                     <Route element={<Profile />} path={ROUTES.PROFILE} />
+                    <Route
+                        element={<ProfileDetail />}
+                        path={ROUTES.PROFILE_EDITING}
+                    />
                     <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
                     <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route

@@ -126,7 +126,7 @@ const MyLayout = () => {
                                     paddingLeft: 24,
                                     paddingTop: 16,
                                     paddingRight: 24,
-                                    paddingBottom: 12,
+                                    paddingBottom: 16,
                                 }}
                             >
                                 <div style={{ marginBottom: 16 }}>
