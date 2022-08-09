@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const baseQuery = fetchBaseQuery({
     baseUrl: "https://notalone.medic.fun/api/v1/",
     prepareHeaders: (headers, { getState }) => {
-        const token = localStorage.getItem("jwttokwn");
+        const token = localStorage.getItem("jwttoken");
         if (token) {
-            headers.set("authentication", `Token ${token}`);
+            headers.set("authorization", `Token ${token}`);
         }
         return headers;
     },

@@ -3,31 +3,36 @@ import { Typography, Space } from "antd";
 
 const { Text, Title } = Typography;
 
-const SocialNetworks = () => {
-    const data = [
+const SocialNetworks = ({ data }) => {
+    const items = [
         {
             label: "VK:",
-            value: "vk.com",
+            value: data.vk,
         },
         {
             label: "Одноклассники:",
-            value: "ok.com",
+            value: data.ok,
         },
         {
             label: "Youtube:",
-            value: "youtube.com",
+            value: data.youtube,
         },
     ];
 
     return (
         <>
             <Title level={4}>Социальные сети</Title>
-            {data.map((item, index) => (
+            {items.map((item, index) => (
                 <Space key={index} size="middle" style={{ marginTop: 12 }}>
                     <div style={{ width: 200 }}>
                         <Text style={{ fontWeight: 600 }}>{item.label}</Text>
                     </div>
-                    <Text>{item.value}</Text>
+                    <Text>
+                        {" "}
+                        {item.value === "" || item.value === null
+                            ? "-"
+                            : item.value}
+                    </Text>
                 </Space>
             ))}
         </>

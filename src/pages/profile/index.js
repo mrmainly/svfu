@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import MainInfo from "./components/MainInfo";
@@ -7,16 +7,36 @@ import SocialNetworks from "./components/SocialNetworks";
 import InfoScreen from "./components/InfoScreen";
 import { Line } from "../../components";
 import ROUTES from "../../routes";
+import { useGetProfileQuery } from "../../services/ProfileService";
 
 const Profile = () => {
+    const { data, isLoading, error } = useGetProfileQuery("");
+
     const navigate = useNavigate();
+
+    if (isLoading) {
+        return (
+            <div
+                style={{
+                    height: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingTop: 100,
+                }}
+            >
+                <Spin />
+            </div>
+        );
+    }
+
+    console.log(data);
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <MainInfo />
+            <MainInfo data={data} />
             <Line />
-            <SocialNetworks />
-            <InfoScreen />
+            <SocialNetworks data={data} />
+            <InfoScreen data={data} />
             <Line />
             <Button
                 style={{

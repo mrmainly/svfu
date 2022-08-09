@@ -9,47 +9,47 @@ const InfoForm = () => {
     const data = [
         {
             label: "Моя биография",
-            name: "vk",
+            name: "my_biography",
             required: false,
         },
         {
             label: "Мои обязанности",
-            name: "last_name2",
+            name: "my_responsibilities",
             required: false,
         },
         {
             label: "Достижения и поощрения",
-            name: "first_name2",
+            name: "scientific_interests",
             required: false,
         },
         {
             label: "Научные интересы",
-            name: "first_name2",
+            name: "scientific_interests",
             required: false,
         },
         {
             label: "Научные гранты",
-            name: "first_name2",
+            name: "scientific_grants",
             required: false,
         },
         {
             label: "Проведение конференций",
-            name: "first_name2",
+            name: "holding_conferences",
             required: false,
         },
         {
             label: "Участие в конференциях, симпозиумах",
-            name: "first_name2",
+            name: "participation_conferences",
             required: false,
         },
         {
             label: "Почетные звания",
-            name: "first_name2",
+            name: "honoured_title",
             required: false,
         },
         {
             label: "Научно-общественная деятельность",
-            name: "first_name2",
+            name: "ssa",
             required: false,
         },
     ];
@@ -98,6 +98,7 @@ const InfoForm = () => {
                 }
                 name={"total_experience"}
                 labelCol={{ span: 24 }}
+                style={{ width: 350 }}
             >
                 <Input
                     placeholder="Общий стаж работы"
@@ -118,6 +119,7 @@ const InfoForm = () => {
                 }
                 name={"specialty_experience"}
                 labelCol={{ span: 24 }}
+                style={{ width: 350 }}
             >
                 <Input
                     placeholder="Стаж работы по специальности"

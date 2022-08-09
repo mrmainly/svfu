@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Form, Typography, Input, Upload } from "antd";
+import { Form, Typography, Input, Upload, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
+const getBase64 = (file) =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = () => resolve(reader.result);
+
+        reader.onerror = (error) => reject(error);
+    });
+
 const ProfileForm = () => {
-    const data = [
-        {
-            label: "Логин",
-            name: "login",
-            required: true,
-            requiredText: "Введите логин",
-        },
+    const [fileList, setFileList] = useState([]);
+
+    const inputs = [
         {
             label: "Фамилия",
             name: "last_name",
@@ -70,33 +76,35 @@ const ProfileForm = () => {
         </div>
     );
 
+    const normFile = (e) => {
+        console.log("Upload event:", e);
+        if (Array.isArray(e)) {
+            return e;
+        }
+        return e?.fileList;
+    };
+
     return (
         <div style={{ width: 350 }}>
             <Form.Item
-                label={
-                    <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                        Изображение
-                    </Text>
-                }
                 name="photo"
+                label="Photo"
+                valuePropName="fileList"
                 labelCol={{ span: 24 }}
-                rules={[
-                    {
-                        required: true,
-                        message: "Please input your password!",
-                    },
-                ]}
+                getValueFromEvent={normFile}
             >
                 <Upload
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
-                    // fileList={fileList}
+                    multiple={false}
+                    name="photo"
+                    maxCount={1}
                     // onPreview={handlePreview}
-                    // onChange={handleChange}
                 >
                     {uploadButton}
                 </Upload>
             </Form.Item>
-            {data.map((item, index) => (
+            {inputs.map((item, index) => (
                 <Form.Item
                     key={index}
                     label={

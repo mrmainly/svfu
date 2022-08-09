@@ -3,43 +3,43 @@ import { Typography, Space } from "antd";
 
 const { Text } = Typography;
 
-const MainInfo = () => {
-    const data = [
+const MainInfo = ({ data }) => {
+    const items = [
         {
             label: "Логин:",
-            value: "Колесов",
+            value: data.username,
         },
         {
             label: "Фамилия:",
-            value: "Колесов",
+            value: data.last_name,
         },
         {
             label: "Имя:",
-            value: "Колесов",
+            value: data.first_name,
         },
         {
             label: "Отчество:",
-            value: "Колесов",
+            value: data.patronymic,
         },
         {
             label: "Дата рождения:",
-            value: "Колесов",
+            value: data.birth_date,
         },
         {
             label: "Электронная почта:",
-            value: "Колесов",
+            value: data.email,
         },
         {
             label: "Телефон:",
-            value: "Колесов",
+            value: data.phone,
         },
         {
             label: "Инн:",
-            value: "Колесов",
+            value: data.inn,
         },
         {
             label: "СНИЛС:",
-            value: "Колесов",
+            value: data.snils,
         },
     ];
 
@@ -57,12 +57,16 @@ const MainInfo = () => {
                     style={{ width: 90, height: 120 }}
                 />
             </Space>
-            {data.map((item, index) => (
+            {items.map((item, index) => (
                 <Space key={index} size="middle" style={{ marginTop: 12 }}>
                     <div style={{ width: 200 }}>
                         <Text style={{ fontWeight: 600 }}>{item.label}</Text>
                     </div>
-                    <Text>{item.value}</Text>
+                    <Text>
+                        {item.value === "" || item.value === null
+                            ? "-"
+                            : item.value}
+                    </Text>
                 </Space>
             ))}
         </>
