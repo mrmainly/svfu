@@ -11,7 +11,7 @@ export const login = api.injectEndpoints({
                 };
             },
         }),
-        registerV1: build.mutation({
+        registerEmailVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/register/email/`,
@@ -20,7 +20,7 @@ export const login = api.injectEndpoints({
                 };
             },
         }),
-        registerV2: build.mutation({
+        registerVerifyVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/code/verify/`,
@@ -29,7 +29,7 @@ export const login = api.injectEndpoints({
                 };
             },
         }),
-        registerV3: build.mutation({
+        registerProfileVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/register/profile/`,
@@ -43,7 +43,7 @@ export const login = api.injectEndpoints({
 
 export const {
     useLoginMutation,
-    useRegisterV1Mutation,
-    useRegisterV2Mutation,
-    useRegisterV3Mutation,
+    useRegisterEmailVersionMutation,
+    useRegisterProfileVersionMutation,
+    useRegisterVerifyVersionMutation,
 } = login;

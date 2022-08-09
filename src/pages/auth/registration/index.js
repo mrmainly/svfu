@@ -1,9 +1,8 @@
 import React from "react";
-import { Typography, Space } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Typography } from "antd";
 import "./registration.css";
+import { useSelector } from "react-redux";
 
-import ROUTES from "../../../routes";
 import RegisterEmail from "./components/registerEmail";
 import RegisterVerify from "./components/registerVerify";
 import RegisterProfile from "./components/registerProfile";
@@ -11,6 +10,10 @@ import RegisterProfile from "./components/registerProfile";
 const { Text } = Typography;
 
 const Registration = () => {
+    const { email, verify, profile } = useSelector(
+        (state) => state.register_verison_slice
+    );
+
     return (
         <div>
             {/* <div
@@ -33,9 +36,9 @@ const Registration = () => {
                     >
                         РЕГИСТРАЦИЯ
                     </Text>
-                    {/* <RegisterEmail /> */}
-                    {/* <RegisterVerify /> */}
-                    <RegisterProfile />
+                    {email && <RegisterEmail />}
+                    {verify && <RegisterVerify />}
+                    {profile && <RegisterProfile />}
                 </div>
             </div>
         </div>

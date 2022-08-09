@@ -29,7 +29,7 @@ const Login = () => {
             if (res.error) {
                 message.error(res?.error?.data?.errors[0]);
             } else {
-                localStorage.setItem("jwttoken", res.data.token);
+                localStorage.setItem("jwttoken", res.data.token); 
                 navigate(ROUTES.PROFILE);
             }
         });

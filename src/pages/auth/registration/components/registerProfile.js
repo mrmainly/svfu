@@ -1,43 +1,106 @@
 import React from "react";
-import { Form, Input, Button, Typography } from "antd";
+import { Form, Input, Button, Typography, message } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { useRegisterProfileVersionMutation } from "../../../../services/LoginService";
+import { RegisterVersionSlice } from "../../../../reducers/RegisterVersionSlice";
+import ROUTES from "../../../../routes";
 
 const { Text } = Typography;
 
 const RegisterProfile = () => {
-    const data = [
-        {
-            name: "",
-        },
-    ];
+    const [postRegisterProfile] = useRegisterProfileVersionMutation();
+    const { handleOpenProfileVersion, handleOpenEmailVersion } =
+        RegisterVersionSlice.actions;
+    const { code } = useSelector((state) => state.register_verison_slice);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const onSubmit = (data) => {
+        if (data.password === data.password_verify) {
+            delete data.password_verify;
+            data.code = code;
+            postRegisterProfile(data).then((res) => {
+                if (res.data) {
+                    dispatch(handleOpenProfileVersion(false));
+                    dispatch(handleOpenEmailVersion(true));
+                    navigate(ROUTES.LOGIN);
+                } else {
+                    message.error(res.error.data.errors[0]);
+                }
+                console.log(res);
+            });
+        } else {
+            message.error("Пароль не подошел");
+        }
+    };
 
     return (
-        <Form style={{ width: "100%" }}>
+        <Form style={{ width: "100%" }} onFinish={onSubmit}>
             <Form.Item
                 label={
                     <Text style={{ fontWeight: 600, fontSize: 16 }}>Логин</Text>
                 }
-                name="name"
+                required
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста введите логин",
+                    },
+                ]}
+                name="username"
                 labelCol={{ span: 24 }}
             >
                 <Input placeholder="Введите логин" size="large" />
             </Form.Item>
             <Form.Item
                 label={
-                    <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                        Фамилия имя отчество
-                    </Text>
+                    <Text style={{ fontWeight: 600, fontSize: 16 }}>Имя</Text>
                 }
-                name="name"
+                name="first_name"
                 labelCol={{ span: 24 }}
             >
-                <Input placeholder="Введите ваше ФИО" size="large" />
+                <Input placeholder=" Введите имя" size="large" />
             </Form.Item>
             <Form.Item
                 label={
-                    <Text style={{ fontWeight: 600, fontSize: 16 }}>Почта</Text>
+                    <Text style={{ fontWeight: 600, fontSize: 16 }}>
+                        Фамилия
+                    </Text>
                 }
-                name="name"
+                name="last_name"
                 labelCol={{ span: 24 }}
+            >
+                <Input placeholder="Введите фамилия" size="large" />
+            </Form.Item>
+            <Form.Item
+                label={
+                    <Text style={{ fontWeight: 600, fontSize: 16 }}>
+                        Отчество
+                    </Text>
+                }
+                name="patronymic"
+                labelCol={{ span: 24 }}
+            >
+                <Input placeholder="Введите отчество" size="large" />
+            </Form.Item>
+            <Form.Item
+                label={
+                    <Text style={{ fontWeight: 600, fontSize: 16 }}>
+                        Номер телефона
+                    </Text>
+                }
+                name="phone"
+                labelCol={{ span: 24 }}
+                required
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста введите номер телефона",
+                    },
+                ]}
             >
                 <Input placeholder="Дата рождения" size="large" />
             </Form.Item>
@@ -47,10 +110,14 @@ const RegisterProfile = () => {
                         Введите дату рождения дд.мм.гггг
                     </Text>
                 }
-                name="name"
+                name="birth_date"
                 labelCol={{ span: 24 }}
             >
-                <Input placeholder="Введите вашу почту" size="large" />
+                <Input
+                    placeholder="Введите вашу почту"
+                    size="large"
+                    type={"date"}
+                />
             </Form.Item>
             <Form.Item
                 label={
@@ -58,8 +125,15 @@ const RegisterProfile = () => {
                         Пароль
                     </Text>
                 }
-                name="name"
+                name="password"
                 labelCol={{ span: 24 }}
+                required
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста введите пароль",
+                    },
+                ]}
             >
                 <Input placeholder="Введите пароль" size="large" />
             </Form.Item>
@@ -69,8 +143,15 @@ const RegisterProfile = () => {
                         Повторить пароль
                     </Text>
                 }
-                name="name"
+                name="password_verify"
                 labelCol={{ span: 24 }}
+                required
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста повторите пароль",
+                    },
+                ]}
             >
                 <Input placeholder="Повторите пароль" size="large" />
             </Form.Item>

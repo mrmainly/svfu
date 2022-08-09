@@ -1,25 +1,59 @@
 import React from "react";
-import { Form, Input, Button, Typography, Space } from "antd";
+import { Form, Input, Button, Typography, Space, message } from "antd";
+import { useDispatch } from "react-redux";
+
+import { useRegisterVerifyVersionMutation } from "../../../../services/LoginService";
+import { RegisterVersionSlice } from "../../../../reducers/RegisterVersionSlice";
 
 const { Text } = Typography;
 
 const RegisterVerify = () => {
+    const [postRegisterVerify] = useRegisterVerifyVersionMutation();
+    const {
+        handleOpenVerifyVersion,
+        handleOpenProfileVersion,
+        handleOpenEmailVersion,
+        addedCode,
+    } = RegisterVersionSlice.actions;
+
+    const dispatch = useDispatch();
+
+    const onSubmit = (data) => {
+        postRegisterVerify(data).then((res) => {
+            if (res.data) {
+                dispatch(handleOpenVerifyVersion(false));
+                dispatch(handleOpenProfileVersion(true));
+                dispatch(addedCode(data.code));
+            } else {
+                message.error(res.error.data.errors[0]);
+            }
+            console.log(res);
+        });
+    };
+
     return (
-        <Form style={{ width: "100%" }}>
+        <Form style={{ width: "100%" }} onFinish={onSubmit}>
             <Text style={{ fontWeight: 600, fontSize: 16 }}>
                 Мы отправили Вам письмо с кодом подтверждения.
             </Text>
             <Form.Item
                 style={{ marginBottom: 10, marginTop: 10 }}
+                required
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста введите верификационный код",
+                    },
+                ]}
                 label={
                     <Text style={{ fontWeight: 600, fontSize: 16 }}>
                         Верификационный код
                     </Text>
                 }
-                name="name"
+                name="code"
                 labelCol={{ span: 24 }}
             >
-                <Input placeholder="Код" size="large" />
+                <Input placeholder="Код" size="large" type="number" />
             </Form.Item>
             <Text style={{ color: "#0D6EFD", fontSize: 16 }}>
                 Отправить код повторно: 59
@@ -49,6 +83,10 @@ const RegisterVerify = () => {
                         color: "#0D6EFD",
                         cursor: "pointer",
                         fontSize: 16,
+                    }}
+                    onClick={() => {
+                        dispatch(handleOpenVerifyVersion(false));
+                        dispatch(handleOpenEmailVersion(true));
                     }}
                 >
                     Назад

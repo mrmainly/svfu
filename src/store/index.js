@@ -6,8 +6,10 @@ import {
 // import productReducer from "../reducer/product_slice";
 import { api } from "../services/api";
 
+import register_verison_slice from "../reducers/RegisterVersionSlice";
+
 const rootReducer = combineReducers({
-    // productReducer,
+    register_verison_slice,
     [api.reducerPath]: api.reducer,
 });
 
