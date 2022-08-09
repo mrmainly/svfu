@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Form, Typography, Input } from "antd";
+import { Form, Typography, Input, Upload } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
@@ -62,8 +63,39 @@ const ProfileForm = () => {
         },
     ];
 
+    const uploadButton = (
+        <div>
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
+
     return (
         <div style={{ width: 350 }}>
+            <Form.Item
+                label={
+                    <Text style={{ fontWeight: 600, fontSize: 16 }}>
+                        Изображение
+                    </Text>
+                }
+                name="photo"
+                labelCol={{ span: 24 }}
+                rules={[
+                    {
+                        required: true,
+                        message: "Please input your password!",
+                    },
+                ]}
+            >
+                <Upload
+                    listType="picture-card"
+                    // fileList={fileList}
+                    // onPreview={handlePreview}
+                    // onChange={handleChange}
+                >
+                    {uploadButton}
+                </Upload>
+            </Form.Item>
             {data.map((item, index) => (
                 <Form.Item
                     key={index}

@@ -4,7 +4,7 @@ import { Form, Button } from "antd";
 import ProfileForm from "./components/ProfileForm";
 import InfoForm from "./components/InfoForm";
 import SocialForm from "./components/SocialForm";
-import { Line } from "../../../components";
+import { Line, MyButton } from "../../../components";
 
 const ProfileDetail = () => {
     const onSubmit = (data) => {
@@ -19,19 +19,7 @@ const ProfileDetail = () => {
                 <SocialForm />
                 <InfoForm />
                 <Line />
-                <Button
-                    style={{
-                        background: "#0D6EFD",
-                        width: "100%",
-                        borderRadius: 4,
-                        width: "max-content",
-                    }}
-                    type="primary"
-                    htmlType="submit"
-                    size="large"
-                >
-                    Обновить
-                </Button>
+                <MyButton htmlType="submit">Сохранить</MyButton>
             </Form>
         </div>
     );
