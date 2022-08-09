@@ -8,7 +8,7 @@ import "./layout.css";
 import ROUTES from "../routes";
 import { pathname } from "./pathname";
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 const { Title, Text } = Typography;
 
 const MyLayout = () => {
@@ -119,7 +119,7 @@ const MyLayout = () => {
                         />
                     </Sider>
                     <Layout>
-                        <Content style={{ margin: "24px 24px 0" }}>
+                        <Content style={{ margin: "24px 24px 24px" }}>
                             <div
                                 className="site-layout-background"
                                 style={{

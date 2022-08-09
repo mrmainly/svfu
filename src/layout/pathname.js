@@ -5,6 +5,9 @@ export const pathname = (params) => {
         case ROUTES.PROFILE:
             return "Профиль";
             break;
+        case ROUTES.PROFILE_EDITING:
+            return "Редактирование профиля";
+            break;
         case ROUTES.AVAILABLE_TESTS:
             return "Доступные тесты";
             break;
