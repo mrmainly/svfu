@@ -135,7 +135,7 @@ const RegisterProfile = () => {
                     },
                 ]}
             >
-                <Input placeholder="Введите пароль" size="large" />
+                <Input.Password placeholder="Введите пароль" size="large" />
             </Form.Item>
             <Form.Item
                 label={
@@ -153,7 +153,7 @@ const RegisterProfile = () => {
                     },
                 ]}
             >
-                <Input placeholder="Повторите пароль" size="large" />
+                <Input.Password placeholder="Повторите пароль" size="large" />
             </Form.Item>
             <Button
                 style={{

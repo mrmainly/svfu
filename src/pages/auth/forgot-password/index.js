@@ -1,14 +1,16 @@
 import React from "react";
-import { Typography, Form, Input, Button, Space } from "antd";
-import { Link, useNavigate } from "react-router-dom";
 import "./forgot_password.css";
+import { useSelector } from "react-redux";
 
-import ROUTES from "../../../routes";
-
-const { Text } = Typography;
+import EmailForm from "./components/EmailForm";
+import PasswordForm from "./components/PasswordForm";
+import VerifyForm from "./components/VerifyForm";
 
 const ForgotPassword = () => {
-    const navigate = useNavigate();
+    const { email_form, password_form, verify_form } = useSelector(
+        (state) => state.forgot_version_slice
+    );
+
     return (
         <div>
             {/* <div
@@ -21,59 +23,9 @@ const ForgotPassword = () => {
                 }}
             /> */}
             <div className="background_style">
-                <div className="form">
-                    <Text
-                        style={{
-                            fontWeight: 400,
-                            fontSize: 18,
-                            fontStyle: "normal",
-                        }}
-                    >
-                        ВОССТАНОВЛЕНИЕ ПАРОЛЯ
-                    </Text>
-                    <Text
-                        style={{
-                            fontWeight: 400,
-                            fontSize: 16,
-                            fontStyle: "normal",
-                        }}
-                    >
-                        Введите вашу почту, которую вы ввели при регистрации.
-                        Если вы забыли адрес электронной почты, проверьте
-                        данные.
-                    </Text>
-                    <Form style={{ width: "100%" }}>
-                        <Form.Item
-                            label={
-                                <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                                    Электронная почта
-                                </Text>
-                            }
-                            name="name"
-                            labelCol={{ span: 24 }}
-                        >
-                            <Input placeholder="E-mail" size="large" />
-                        </Form.Item>
-                        <Button
-                            style={{
-                                background: "#0D6EFD",
-                                width: "100%",
-                                borderRadius: 4,
-                            }}
-                            type="primary"
-                            htmlType="submit"
-                            size="large"
-                        >
-                            Далее
-                        </Button>
-                        <Space
-                            style={{ marginTop: 12, marginBottom: "-12px" }}
-                            direction="vertical"
-                        >
-                            <Link to={ROUTES.LOGIN}>Назад</Link>
-                        </Space>
-                    </Form>
-                </div>
+                {email_form && <EmailForm />}
+                {password_form && <PasswordForm />}
+                {verify_form && <VerifyForm />}
             </div>
         </div>
     );

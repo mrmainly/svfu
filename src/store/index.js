@@ -7,9 +7,11 @@ import {
 import { api } from "../services/api";
 
 import register_verison_slice from "../reducers/RegisterVersionSlice";
+import forgot_version_slice from "../reducers/ForgotVersionSlice";
 
 const rootReducer = combineReducers({
     register_verison_slice,
+    forgot_version_slice,
     [api.reducerPath]: api.reducer,
 });
 
