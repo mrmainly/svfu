@@ -17,6 +17,7 @@ import {
     DocumentDetail,
     TestDetail,
     CertificationResults,
+    QualificationAdded,
 } from "./pages";
 
 function App() {
@@ -60,6 +61,10 @@ function App() {
                     <Route
                         element={<DocumentDetail />}
                         path={ROUTES.DOCUMENTS_EDITING}
+                    />
+                    <Route
+                        element={<QualificationAdded />}
+                        path={ROUTES.QUALIFICATION_ADDED}
                     />
                 </Route>
             </Routes>

@@ -14,6 +14,7 @@ const ROUTES = {
     QUALIFICATION_EDITING: "qualification-editing",
     CERTIFICATION_RESULTS: "/certification-results",
     TEST_DETAIL: "/test-detail",
+    QUALIFICATION_ADDED: "/qualification-added",
 };
 
 export default ROUTES;

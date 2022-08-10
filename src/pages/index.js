@@ -10,6 +10,7 @@ import Qualifications from "./qualifications";
 import DocumentDetail from "./documents/detail";
 import TestDetail from "./tests/detail";
 import CertificationResults from "./certification-results";
+import QualificationAdded from "./qualifications/added";
 
 export {
     Login,
@@ -24,4 +25,5 @@ export {
     DocumentDetail,
     TestDetail,
     CertificationResults,
+    QualificationAdded,
 };

@@ -10,13 +10,13 @@ const QualificationsTable = ({ data, loading, routes }) => {
         { title: "№ документа", dataIndex: "name", key: "name" },
         {
             title: "Название квалификации",
-            dataIndex: "created",
-            key: "created",
+            dataIndex: "name",
+            key: "name",
         },
         {
             title: "Дата выдачи",
-            dataIndex: "time_exam",
-            key: "time_exam",
+            dataIndex: "date",
+            key: "date",
         },
         {
             title: "Действие",
@@ -24,7 +24,7 @@ const QualificationsTable = ({ data, loading, routes }) => {
             key: "x",
             render: (id) => (
                 <MyButton onClick={() => navigate(`${routes}/${id}`)}>
-                    Начать тестирование
+                    Просмотр
                 </MyButton>
             ),
         },
