@@ -18,6 +18,7 @@ import {
     TestDetail,
     CertificationResults,
     QualificationAdded,
+    Surveys,
 } from "./pages";
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
                         element={<QualificationAdded />}
                         path={ROUTES.QUALIFICATION_ADDED}
                     />
+                    <Route element={<Surveys />} path={ROUTES.SURVEYS} />
                 </Route>
             </Routes>
         </BrowserRouter>

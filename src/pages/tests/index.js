@@ -18,25 +18,16 @@ const Test = () => {
     //         points: 150,
     //     },
     // ];
-    if (isLoading) {
-        return (
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    height: "100vh",
-                }}
-            >
-                <Spin />
-            </div>
-        );
-    }
 
     console.log(data);
 
     return (
         <div>
-            <AvailableTestTable data={data} routes={ROUTES.TEST_DETAIL} />
+            <AvailableTestTable
+                data={data}
+                routes={ROUTES.TEST_DETAIL}
+                loading={isLoading}
+            />
         </div>
     );
 };

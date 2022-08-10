@@ -1,9 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Spin, Space, Typography } from "antd";
 
 import { useGetSurveysIdQuery } from "../../services/SurveysService";
 import { Line, MyButton } from "../../components";
+import ROUTES from "../../routes";
 
 const { Text } = Typography;
 
@@ -11,10 +12,18 @@ const TestDetail = () => {
     const params = useParams();
 
     const { data, isFetching, error } = useGetSurveysIdQuery({ id: params.id });
+    const navigate = useNavigate();
 
     if (isFetching) {
         return (
-            <div>
+            <div
+                style={{
+                    height: 210,
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingTop: 100,
+                }}
+            >
                 <Spin />
             </div>
         );
@@ -56,7 +65,15 @@ const TestDetail = () => {
                 </Space>
             ))}
             <Line />
-            <MyButton>Начать тестирование</MyButton>
+            <MyButton
+                onClick={() =>
+                    navigate(ROUTES.SURVEYS, {
+                        state: { surveyquest: data.surveyquest },
+                    })
+                }
+            >
+                Начать тестирование
+            </MyButton>
         </div>
     );
 };
