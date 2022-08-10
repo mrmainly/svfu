@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Typography, Input } from "antd";
+import { Form, Input, Typography } from "antd";
 
 const { Text, Title } = Typography;
 
@@ -13,12 +13,12 @@ const SocialForm = () => {
         },
         {
             label: "Одноклассники",
-            name: "last_name2",
+            name: "ok",
             required: false,
         },
         {
             label: "Youtube",
-            name: "first_name2",
+            name: "youtube",
             required: false,
         },
     ];
