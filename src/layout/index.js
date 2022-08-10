@@ -4,9 +4,11 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import { BsPersonFill, BsCardChecklist } from "react-icons/bs";
 import { HiOutlineDocumentText } from "react-icons/hi";
 
-import "./layout.css";
 import ROUTES from "../routes";
-import { pathname } from "./pathname";
+import MainLayout from "./layouts/MainLayout";
+import SurveyLayout from "./layouts/SurveyLayout";
+
+import "./layout.css";
 
 const { Content, Sider } = Layout;
 const { Title, Text } = Typography;
@@ -97,35 +99,12 @@ const MyLayout = () => {
                         />
                         <Divider style={{ background: "white" }} />
                     </Sider>
-                    <Layout>
-                        <Content style={{ margin: "24px 24px 24px" }}>
-                            <div
-                                className="site-layout-background"
-                                style={{
-                                    paddingLeft: 24,
-                                    paddingTop: 16,
-                                    paddingRight: 24,
-                                    paddingBottom: 16,
-                                }}
-                            >
-                                <div style={{ marginBottom: 16 }}>
-                                    <Text style={{ fontSize: 20 }}>
-                                        {pathname(params)}
-                                    </Text>
-                                    <div
-                                        style={{
-                                            background: "grey",
-                                            height: 1,
-                                            marginLeft: "-24px",
-                                            marginRight: "-24px",
-                                            marginTop: 16,
-                                        }}
-                                    ></div>
-                                </div>
-                                <Outlet />
-                            </div>
-                        </Content>
-                    </Layout>
+
+                    {params.pathname === ROUTES.SURVEYS ? (
+                        <SurveyLayout />
+                    ) : (
+                        <MainLayout params={params} />
+                    )}
                 </Layout>
             )}
         </>
