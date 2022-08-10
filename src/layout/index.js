@@ -94,34 +94,13 @@ const MyLayout = () => {
             className="site-layout-background"
             style={{ background: "#09304A" }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginTop: 10,
-                marginBottom: "-15px",
-                paddingLeft: 18,
-              }}
-            >
-              <img src="/img/image11.svg" style={{ width: 56 }} />
-              <Title
-                style={{
-                  color: "white",
-                  marginLeft: 15,
-                  marginTop: 10,
-                }}
-                level={3}
-              >
-                САиЭС
-              </Title>
-            </div>
-            <Divider style={{ background: "white" }} />
             <Menu
               mode="inline"
               style={{ background: "#09304A", color: "white" }}
               items={items}
               theme="dark"
             />
+            <Divider style={{ background: "white" }} />
           </Sider>
           <Layout>
             <Content style={{ margin: "24px 24px 24px" }}>

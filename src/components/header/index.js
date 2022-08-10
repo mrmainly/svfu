@@ -52,9 +52,15 @@ const Header = () => {
                 gap: "10px",
               }}
             >
-              <div onClick={() => navigate(ROUTES.PROFILE)}>Иванов Иван</div>
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate(ROUTES.PROFILE)}
+              >
+                Иванов Иван
+              </div>
               <Divider style={{ height: "16px" }} type="vertical" />
               <div
+                style={{ cursor: "pointer" }}
                 onClick={() => {
                   localStorage.removeItem("jwttoken");
                   navigate(ROUTES.LOGIN);
