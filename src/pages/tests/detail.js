@@ -1,7 +1,64 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { Spin, Space, Typography } from "antd";
+
+import { useGetSurveysIdQuery } from "../../services/SurveysService";
+import { Line, MyButton } from "../../components";
+
+const { Text } = Typography;
 
 const TestDetail = () => {
-    return <div></div>;
+    const params = useParams();
+
+    const { data, isFetching, error } = useGetSurveysIdQuery({ id: params.id });
+
+    if (isFetching) {
+        return (
+            <div>
+                <Spin />
+            </div>
+        );
+    }
+
+    console.log("detail", data);
+
+    const items = [
+        {
+            label: "Квалификация",
+            value: data.name,
+        },
+        {
+            label: "Начало доступа:",
+            value: data.exam_date_start,
+        },
+        {
+            label: "Конец доступа:",
+            value: data.exam_date_finish,
+        },
+        {
+            label: "Время на выполнение:",
+            value: `${data.time_exam} мин`,
+        },
+    ];
+
+    return (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+            {items.map((item, index) => (
+                <Space
+                    size="large"
+                    key={index}
+                    style={{ marginTop: index === 0 ? 0 : 15 }}
+                >
+                    <div style={{ width: 150, fontWeight: 600 }}>
+                        {item.label}
+                    </div>
+                    <Text>{item.value}</Text>
+                </Space>
+            ))}
+            <Line />
+            <MyButton>Начать тестирование</MyButton>
+        </div>
+    );
 };
 
 export default TestDetail;

@@ -1,9 +1,25 @@
 import React from "react";
-import { Typography, Space } from "antd";
+import { Typography, Space, Form, Upload } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
 const MainInfo = ({ data }) => {
+    const uploadButton = (
+        <div>
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
+
+    const normFile = (e) => {
+        console.log("Upload event:", e);
+        if (Array.isArray(e)) {
+            return e;
+        }
+        return e?.fileList;
+    };
+
     const items = [
         {
             label: "Логин:",
@@ -52,10 +68,16 @@ const MainInfo = ({ data }) => {
                 <div style={{ width: 200 }}>
                     <Text style={{ fontWeight: 600 }}>Фотография:</Text>
                 </div>
-                <img
-                    src="/img/Rectangle34.png"
-                    style={{ width: 90, height: 120 }}
-                />
+                <Upload
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    listType="picture-card"
+                    multiple={false}
+                    name="photo"
+                    maxCount={1}
+                    // onPreview={handlePreview}
+                >
+                    {uploadButton}
+                </Upload>
             </Space>
             {items.map((item, index) => (
                 <Space key={index} size="middle" style={{ marginTop: 12 }}>
