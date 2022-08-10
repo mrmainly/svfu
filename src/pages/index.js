@@ -9,6 +9,7 @@ import ResultTests from "./result-tests";
 import Qualifications from "./qualifications";
 import DocumentDetail from "./documents/detail";
 import TestDetail from "./tests/detail";
+import CertificationResults from "./certification-results";
 
 export {
     Login,
@@ -22,4 +23,5 @@ export {
     ResultTests,
     DocumentDetail,
     TestDetail,
+    CertificationResults,
 };

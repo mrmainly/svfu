@@ -12,6 +12,7 @@ const ROUTES = {
     DOCUMENTS_EDITING: "/documents-editing",
     MY_QUALIFICATIONS: "/my-qualifications",
     QUALIFICATION_EDITING: "qualification-editing",
+    CERTIFICATION_RESULTS: "/certification-results",
     TEST_DETAIL: "/test-detail",
 };
 

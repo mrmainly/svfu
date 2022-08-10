@@ -15,6 +15,7 @@ import {
     Qualifications,
     DocumentDetail,
     TestDetail,
+    CertificationResults,
 } from "./pages";
 
 function App() {
@@ -49,6 +50,10 @@ function App() {
                     <Route
                         element={<Qualifications />}
                         path={ROUTES.MY_QUALIFICATIONS}
+                    />
+                    <Route
+                        element={<CertificationResults />}
+                        path={ROUTES.CERTIFICATION_RESULTS}
                     />
                 </Route>
             </Routes>
