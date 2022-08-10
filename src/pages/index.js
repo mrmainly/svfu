@@ -7,6 +7,8 @@ import Test from "./tests";
 import Documents from "./documents";
 import ResultTests from "./result-tests";
 import Qualifications from "./qualifications";
+import DocumentDetail from "./documents/detail";
+import TestDetail from "./tests/detail";
 
 export {
     Login,
@@ -18,4 +20,6 @@ export {
     Documents,
     Qualifications,
     ResultTests,
+    DocumentDetail,
+    TestDetail,
 };

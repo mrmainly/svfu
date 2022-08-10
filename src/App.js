@@ -13,6 +13,8 @@ import {
     Test,
     ResultTests,
     Qualifications,
+    DocumentDetail,
+    TestDetail,
 } from "./pages";
 
 function App() {
@@ -36,6 +38,10 @@ function App() {
                     />
                     <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
                     <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
+                    <Route
+                        element={<TestDetail />}
+                        path={`${ROUTES.TEST_DETAIL}/:id`}
+                    />
                     <Route
                         element={<ResultTests />}
                         path={ROUTES.TEST_RESULTS}

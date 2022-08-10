@@ -5,11 +5,9 @@ const AvailableTestTable = ({ data, loading, routes }) => {
     const navigate = useNavigate();
 
     const columns = [
-        { title: "Название", dataIndex: "name", key: "name" },
-        { title: "Дата и время начала", dataIndex: "date", key: "date" },
-        { title: "Затрачено времени", dataIndex: "time", key: "time" },
-        { title: "Статус", dataIndex: "status", key: "status" },
-        { title: "Баллы", dataIndex: "points", key: "points" },
+        { title: "Название квалификации", dataIndex: "name", key: "name" },
+        { title: "Дата начала теста", dataIndex: "created", key: "created" },
+        { title: "Время на выполнение", dataIndex: "time", key: "time" },
         {
             title: "Действие",
             dataIndex: "id",

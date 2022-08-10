@@ -12,6 +12,7 @@ const ROUTES = {
     DOCUMENTS_EDITING: "/documents-editing",
     MY_QUALIFICATIONS: "/my-qualifications",
     QUALIFICATION_EDITING: "qualification-editing",
+    TEST_DETAIL: "/test-detail",
 };
 
 export default ROUTES;

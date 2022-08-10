@@ -10,11 +10,11 @@ import ROUTES from "../../routes";
 import { useGetProfileQuery } from "../../services/ProfileService";
 
 const Profile = () => {
-    const { data, isLoading, error } = useGetProfileQuery("");
+    const { data, isFetching, error } = useGetProfileQuery("");
 
     const navigate = useNavigate();
 
-    if (isLoading) {
+    if (isFetching) {
         return (
             <div
                 style={{
