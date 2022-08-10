@@ -1,26 +1,38 @@
-import { Table, Button } from "antd";
+import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
+
+import { MyButton } from "..";
 
 const AvailableTestTable = ({ data, loading, routes }) => {
     const navigate = useNavigate();
 
     const columns = [
-        { title: "Название", dataIndex: "name", key: "name" },
-        { title: "Дата и время начала", dataIndex: "date", key: "date" },
-        { title: "Затрачено времени", dataIndex: "time", key: "time" },
-        { title: "Статус", dataIndex: "status", key: "status" },
-        { title: "Баллы", dataIndex: "points", key: "points" },
+        { title: "Название квалификации", dataIndex: "name", key: "name" },
+        { title: "Дата начала теста", dataIndex: "created", key: "created" },
+        {
+            title: "Время на выполнение",
+            dataIndex: "time_exam",
+            key: "time_exam",
+            render: (time_exam) => (
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        height: "100%",
+                    }}
+                >
+                    <div>{time_exam} мин</div>
+                </div>
+            ),
+        },
         {
             title: "Действие",
             dataIndex: "id",
             key: "x",
             render: (id) => (
-                <Button
-                    style={{ color: "#55CD61", borderColor: "#55CD61" }}
-                    onClick={() => navigate(`${routes}/${id}`)}
-                >
-                    Редактирование
-                </Button>
+                <MyButton onClick={() => navigate(`${routes}/${id}`)}>
+                    Начать тестирование
+                </MyButton>
             ),
         },
     ];

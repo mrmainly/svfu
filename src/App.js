@@ -14,6 +14,8 @@ import {
   Test,
   ResultTests,
   Qualifications,
+  DocumentDetail,
+  TestDetail,
   CertificationResults,
 } from "./pages";
 
@@ -30,6 +32,7 @@ function App() {
           <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
           <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
           <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
+          <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />
           <Route element={<ResultTests />} path={ROUTES.TEST_RESULTS} />
           <Route element={<Qualifications />} path={ROUTES.MY_QUALIFICATIONS} />
           <Route
