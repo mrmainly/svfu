@@ -7,15 +7,16 @@ import Test from "./tests";
 import Documents from "./documents";
 import ResultTests from "./result-tests";
 import Qualifications from "./qualifications";
-
+import CertificationResults from "./certification-results";
 export {
-    Login,
-    Registration,
-    Profile,
-    ForgotPassword,
-    ProfileDetail,
-    Test,
-    Documents,
-    Qualifications,
-    ResultTests,
+  Login,
+  Registration,
+  Profile,
+  ForgotPassword,
+  ProfileDetail,
+  Test,
+  Documents,
+  Qualifications,
+  ResultTests,
+  CertificationResults,
 };
