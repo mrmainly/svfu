@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { Form, Typography, Input, Upload, message } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
@@ -69,41 +68,8 @@ const ProfileForm = () => {
         },
     ];
 
-    const uploadButton = (
-        <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
-        </div>
-    );
-
-    const normFile = (e) => {
-        console.log("Upload event:", e);
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e?.fileList;
-    };
-
     return (
         <div style={{ width: 350 }}>
-            <Form.Item
-                name="photo"
-                label="Photo"
-                valuePropName="fileList"
-                labelCol={{ span: 24 }}
-                getValueFromEvent={normFile}
-            >
-                <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    multiple={false}
-                    name="photo"
-                    maxCount={1}
-                    // onPreview={handlePreview}
-                >
-                    {uploadButton}
-                </Upload>
-            </Form.Item>
             {inputs.map((item, index) => (
                 <Form.Item
                     key={index}

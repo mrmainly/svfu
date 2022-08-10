@@ -5,7 +5,10 @@ export const surveys = api.injectEndpoints({
         getSurveys: build.query({
             query: () => `tester/survey/`,
         }),
+        getSurveysId: build.query({
+            query: ({ id }) => `tester/survey/part-one/${id}`,
+        }),
     }),
 });
 
-export const { useGetSurveysQuery } = surveys;
+export const { useGetSurveysQuery, useGetSurveysIdQuery } = surveys;

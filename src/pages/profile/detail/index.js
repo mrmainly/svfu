@@ -65,7 +65,6 @@ const ProfileDetail = () => {
                         ["scientific_interests"]: data.scientific_interests,
                         ["specialty_experience"]: data.specialty_experience,
                         ["ssa"]: data.ssa,
-                        ["photo"]: data.photo,
                         ["phone"]: data.phone,
                         ["holding_conferences"]: data.holding_conferences,
                         ["honoured_title"]: data.honoured_title,
