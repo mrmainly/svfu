@@ -103,7 +103,7 @@ const MyLayout = () => {
                 paddingLeft: 18,
               }}
             >
-              <img src="/img/image11.png" style={{ width: 56 }} />
+              <img src="/img/image11.svg" style={{ width: 56 }} />
               <Title
                 style={{
                   color: "white",

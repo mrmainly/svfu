@@ -3,6 +3,7 @@ import "antd/dist/antd.min.css";
 
 import ROUTES from "./routes";
 import Layout from "./layout";
+import Header from "./components/header";
 import {
     Registration,
     Login,
@@ -21,6 +22,7 @@ import {
 function App() {
     return (
         <BrowserRouter>
+            <Header />
             <Routes>
                 <Route path={ROUTES.LOGIN} element={<Layout />}>
                     <Route index element={<Login />} />
