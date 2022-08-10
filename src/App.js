@@ -55,6 +55,10 @@ function App() {
                         element={<CertificationResults />}
                         path={ROUTES.CERTIFICATION_RESULTS}
                     />
+                    <Route
+                        element={<DocumentDetail />}
+                        path={ROUTES.DOCUMENTS_EDITING}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>

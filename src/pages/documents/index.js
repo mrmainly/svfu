@@ -1,10 +1,15 @@
 import React from "react";
 import { Typography, Space } from "antd";
+import { useNavigate } from "react-router-dom";
+
+import ROUTES from "../../routes";
 import { Line, MyButton } from "../../components";
 
 const { Text } = Typography;
 
 const Documents = () => {
+    const navigate = useNavigate();
+
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
             <Space size="large">
@@ -38,7 +43,9 @@ const Documents = () => {
                 </Text>
             </Space>
             <Line />
-            <MyButton>Редактировать документы</MyButton>
+            <MyButton onClick={() => navigate(ROUTES.DOCUMENTS_EDITING)}>
+                Редактировать документы
+            </MyButton>
         </div>
     );
 };
