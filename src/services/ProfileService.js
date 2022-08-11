@@ -3,7 +3,12 @@ import { api } from "./api";
 export const profile = api.injectEndpoints({
     endpoints: (build) => ({
         getProfile: build.query({
-            query: () => `users/me/`,
+            query({ cookie }) {
+                return {
+                    url: `users/me/`,
+                    dependencies: cookie,
+                };
+            },
         }),
         profilePatch: build.mutation({
             query(body) {
