@@ -1,7 +1,7 @@
 import { api } from "./api";
 import { SurveysSlice } from "../reducers/SurveysSlice";
 
-const { surveyDispatch } = SurveysSlice.actions;
+const { getData } = SurveysSlice.actions;
 
 export const surveys = api.injectEndpoints({
     endpoints: (build) => ({
@@ -13,7 +13,7 @@ export const surveys = api.injectEndpoints({
             async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
-                    dispatch(surveyDispatch(data));
+                    dispatch(getData(data));
                 } catch (err) {
                     console.log(err);
                 }

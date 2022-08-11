@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Typography, Radio, Space } from "antd";
+import { Typography, Radio, Space, Checkbox, Input, Form } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Line, MyButton } from "../../components";
+import { SurveysSlice } from "../../reducers/SurveysSlice";
 
 const { Text, Title } = Typography;
 
 const Surveys = () => {
-    const [arrayIndex, setArrayIndex] = useState(0);
+    const { arrayIndex } = useSelector((state) => state.survey_slice);
+    const { handleArrayIndex } = SurveysSlice.actions;
+
     const [arrayPost, setArrayPost] = useState([]);
 
     const location = useLocation();
     const state = location.state;
+    const dispatch = useDispatch();
 
     const { surveyquest } = state;
 
@@ -28,18 +33,70 @@ const Surveys = () => {
                         <Text style={{ marginTop: 12 }}>
                             {item.question.description}
                         </Text>
-                        <Text style={{ marginTop: 12, marginBottom: 12 }}>
-                            Выберите один ответ:
-                        </Text>
-                        <Radio.Group>
-                            <Space direction="vertical">
-                                {item.question.variant.map((item, index) => (
-                                    <Radio value={item.id} key={index}>
-                                        {item.name}
-                                    </Radio>
-                                ))}
-                            </Space>
-                        </Radio.Group>
+                        <Form
+                            style={{ display: "flex", flexDirection: "column" }}
+                        >
+                            {item.question.technique === "ONE_CHOICE" ? (
+                                <>
+                                    <Text
+                                        style={{
+                                            marginTop: 12,
+                                            marginBottom: 12,
+                                        }}
+                                    >
+                                        Выберите один ответ:
+                                    </Text>
+                                    <Radio.Group>
+                                        <Space direction="vertical">
+                                            {item.question.variant.map(
+                                                (item, index) => (
+                                                    <Radio
+                                                        value={item.id}
+                                                        key={index}
+                                                    >
+                                                        {item.name}
+                                                    </Radio>
+                                                )
+                                            )}
+                                        </Space>
+                                    </Radio.Group>
+                                </>
+                            ) : item.question.technique === "DESCRIBE" ? (
+                                <>
+                                    <Text
+                                        style={{
+                                            marginTop: 12,
+                                            marginBottom: 12,
+                                        }}
+                                    >
+                                        Напишите ответ
+                                    </Text>
+                                    <Space direction="vertical">
+                                        <Input />
+                                    </Space>
+                                </>
+                            ) : (
+                                <>
+                                    <Text
+                                        style={{
+                                            marginTop: 12,
+                                            marginBottom: 12,
+                                        }}
+                                    >
+                                        Выберите несколько ответов:
+                                    </Text>
+                                    <Space direction="vertical">
+                                        {item.question.variant.map(
+                                            (item, index) => (
+                                                <Checkbox key={index}>
+                                                    {item.name}
+                                                </Checkbox>
+                                            )
+                                        )}
+                                    </Space>
+                                </>
+                            )}
+                        </Form>
                         <Line />
                         <div
                             style={{
@@ -52,7 +109,9 @@ const Surveys = () => {
                             ) : (
                                 <MyButton
                                     onClick={() => {
-                                        setArrayIndex((prev) => prev - 1);
+                                        dispatch(
+                                            handleArrayIndex(arrayIndex - 1)
+                                        );
                                     }}
                                 >
                                     Назад
@@ -63,7 +122,9 @@ const Surveys = () => {
                             ) : (
                                 <MyButton
                                     onClick={() => {
-                                        setArrayIndex((prev) => prev + 1);
+                                        dispatch(
+                                            handleArrayIndex(arrayIndex + 1)
+                                        );
                                     }}
                                 >
                                     Далее

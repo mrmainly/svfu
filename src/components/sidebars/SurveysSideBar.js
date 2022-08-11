@@ -1,25 +1,49 @@
 import React from "react";
 
 import { Typography, Button } from "antd";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { SurveysSlice } from "../../reducers/SurveysSlice";
 
 import "./surveySideBar.css";
 
 const { Text } = Typography;
 
-const SurveysSideBar = ({ data }) => {
+const SurveysSideBar = () => {
+    const { data, arrayIndex } = useSelector((state) => state.survey_slice);
+    const { handleArrayIndex } = SurveysSlice.actions;
+
+    console.log(data);
+    const dispatch = useDispatch();
+
     const dataItems = [
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     ];
     return (
         <div style={{ marginLeft: 28 }}>
-            <Text style={{ fontWeight: 600 }}>Название теста</Text>
+            <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div className="root">
                 <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
                 <div style={{ display: "flex", flexWrap: "wrap" }}>
                     {data
-                        ? data.map((item, index) => (
-                              <div key={index} className="circul">
+                        ? data.surveyquest.map((item, index) => (
+                              <div
+                                  key={index}
+                                  className="circul"
+                                  style={{
+                                      background:
+                                          arrayIndex === index
+                                              ? "#2f80ed"
+                                              : "white",
+                                      color:
+                                          arrayIndex === index
+                                              ? "white"
+                                              : "#2f80ed",
+                                  }}
+                                  onClick={() =>
+                                      dispatch(handleArrayIndex(index))
+                                  }
+                              >
                                   {index + 1}
                               </div>
                           ))
@@ -51,7 +75,7 @@ const SurveysSideBar = ({ data }) => {
                     style={{ display: "flex", justifyContent: "space-between" }}
                 >
                     <Text>Общее время:</Text>
-                    <Text>45:00</Text>
+                    <Text>{data.time_exam}:00</Text>
                 </div>
                 <div
                     style={{

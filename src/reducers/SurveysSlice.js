@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     data: [],
+    arrayIndex: 0,
 };
 
 export const SurveysSlice = createSlice({
@@ -10,6 +11,9 @@ export const SurveysSlice = createSlice({
     reducers: {
         getData(state, action) {
             state.data = action.payload;
+        },
+        handleArrayIndex(state, action) {
+            state.arrayIndex = action.payload;
         },
     },
 });
