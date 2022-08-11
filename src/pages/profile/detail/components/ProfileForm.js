@@ -43,12 +43,6 @@ const ProfileForm = () => {
             type: "date",
         },
         {
-            label: "Почта",
-            name: "email",
-            required: true,
-            requiredText: "Введите вашу почту",
-        },
-        {
             label: "Телефон",
             name: "phone",
             required: true,

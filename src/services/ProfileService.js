@@ -9,6 +9,7 @@ export const profile = api.injectEndpoints({
                     dependencies: cookie,
                 };
             },
+            providesTags: ["Profile"],
         }),
         profilePatch: build.mutation({
             query(body) {
@@ -18,6 +19,7 @@ export const profile = api.injectEndpoints({
                     body,
                 };
             },
+            invalidatesTags: [{ type: "Profile" }],
         }),
     }),
 });
