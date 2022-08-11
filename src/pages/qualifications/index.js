@@ -26,7 +26,11 @@ const Qualifications = () => {
       >
         Загрузить мою квалификацию
       </MyButton>
-      <QualificationsTable data={data} />
+      <QualificationsTable
+        data={data}
+        routes={ROUTES.QUALIFICATION_DETAIL}
+        loading={isLoading}
+      />
     </div>
   );
 };

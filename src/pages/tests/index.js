@@ -19,7 +19,7 @@ const Test = () => {
   //     },
   // ];
 
-  //   console.log(data);
+  console.log(data);
 
   return (
     <div>

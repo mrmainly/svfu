@@ -11,21 +11,23 @@ import DocumentDetail from "./documents/detail";
 import TestDetail from "./tests/detail";
 import CertificationResults from "./certification-results";
 import QualificationAdded from "./qualifications/added";
+import QualificationDetail from "./qualifications/detail";
 import Surveys from "./tests/surveys";
 
 export {
-    Login,
-    Registration,
-    Profile,
-    ForgotPassword,
-    ProfileDetail,
-    Test,
-    Documents,
-    Qualifications,
-    ResultTests,
-    DocumentDetail,
-    TestDetail,
-    CertificationResults,
-    QualificationAdded,
-    Surveys,
+  Login,
+  Registration,
+  Profile,
+  ForgotPassword,
+  ProfileDetail,
+  Test,
+  Documents,
+  Qualifications,
+  ResultTests,
+  DocumentDetail,
+  TestDetail,
+  CertificationResults,
+  QualificationAdded,
+  QualificationDetail,
+  Surveys,
 };

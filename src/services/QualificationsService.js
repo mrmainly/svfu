@@ -5,7 +5,11 @@ export const qualifications = api.injectEndpoints({
     getQualifications: build.query({
       query: () => `users/qualification_improvement/`,
     }),
+    getQualificationsId: build.query({
+      query: ({ id }) => `users/qualification_improvement/${id}`,
+    }),
   }),
 });
 
-export const { useGetQualificationsQuery } = qualifications;
+export const { useGetQualificationsQuery, useGetQualificationsIdQuery } =
+  qualifications;

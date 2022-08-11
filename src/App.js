@@ -19,6 +19,7 @@ import {
   CertificationResults,
   QualificationAdded,
   Surveys,
+  QualificationDetail,
 } from "./pages";
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
           <Route
             element={<QualificationAdded />}
             path={ROUTES.QUALIFICATION_ADDED}
+          />
+          <Route
+            element={<QualificationDetail />}
+            path={ROUTES.QUALIFICATION_DETAIL}
           />
           <Route element={<Surveys />} path={ROUTES.SURVEYS} />
         </Route>
