@@ -52,7 +52,6 @@ const ProfileDetail = () => {
                         ["snils"]: data.snils,
                         ["inn"]: data.inn,
                         ["birth_date"]: data.birth_date,
-                        ["email"]: data.email,
                         ["total_experience"]: data.total_experience,
                         ["youtube"]: data.youtube,
                         ["ok"]: data.ok,

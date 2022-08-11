@@ -42,10 +42,6 @@ const MainInfo = ({ data }) => {
             value: data.birth_date,
         },
         {
-            label: "Электронная почта:",
-            value: data.email,
-        },
-        {
             label: "Телефон:",
             value: data.phone,
         },
