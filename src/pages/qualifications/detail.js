@@ -1,36 +1,58 @@
 import React from "react";
-import { Form, Input, Typography } from "antd";
+import { Form, Space, Typography, Spin } from "antd";
+import { FileTwoTone } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { MyButton, Line } from "../../components";
-// import { useGetQuialificationIdIdQuery } from "../../services/QualificationService";
+import { useGetQualificationsIdQuery } from "../../services/QualificationsService";
 
 const { Text } = Typography;
 
 const QualificationDetail = () => {
   const params = useParams();
+  const { data, isFetching, error } = useGetQualificationsIdQuery({
+    id: params.id,
+  });
+  if (isFetching) {
+    return (
+      <div
+        style={{
+          height: 210,
+          display: "flex",
+          justifyContent: "center",
+          paddingTop: 100,
+        }}
+      >
+        <Spin />
+        fsfds
+      </div>
+    );
+  }
+  console.log("detailq", data);
 
   const inputs = [
     {
       title: "Номер документа:",
-      name: "nomber_document",
-      text: "Введите номер документа",
+      value: data.id,
     },
     {
       title: "Название квалификации:",
-      name: "nomber_qual",
-      text: "Введите номер квалификации",
+      value: data.name,
     },
     {
       title: "Дата выдачи документа:",
-      name: "nomber_document",
-      text: "Введите дату выдачу документа",
-      type: "date",
+      value: data.created.substring(0, 10),
     },
     {
-      title: "Срок действия",
-      name: "date_srok",
-      text: "Введите срок действия",
-      type: "date",
+      title: "Начало срока:",
+      value: data.date_start,
+    },
+    {
+      title: "Окончание срока:",
+      value: data.date_finish,
+    },
+    {
+      title: "Скан документа:",
+      value: data.file,
     },
   ];
 
@@ -38,28 +60,30 @@ const QualificationDetail = () => {
     <div>
       <Form>
         {inputs.map((item, index) => (
-          <Form.Item
-            label={
-              <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                {item.title}
-              </Text>
-            }
-            name={item.name}
-            required
-            rules={[
-              {
-                required: true,
-                message: item.text,
-              },
-            ]}
-            labelCol={{ span: 24 }}
-            style={{ width: 350 }}
+          <Space
+            key={index}
+            size="middle"
+            style={{ marginTop: 12, display: "flex", alignItems: "start" }}
           >
-            <Input placeholder={item.text} size="large" type={item.type} />
-          </Form.Item>
+            <div style={{ width: 200 }}>
+              <Text style={{ fontWeight: 600 }}>{item.title}</Text>
+            </div>
+            {item.value === data.file ? (
+              <div>
+                <FileTwoTone />
+                <a href={item.value} target="_blank">
+                  {item.value.split("/")[5]}
+                </a>
+              </div>
+            ) : (
+              <Text>
+                {item.value === "" || item.value === null ? "-" : item.value}
+              </Text>
+            )}
+          </Space>
         ))}
         <Line />
-        <MyButton htmlType="submit">Загрузить</MyButton>
+        <MyButton htmlType="submit">Редактировать квалификацию</MyButton>
       </Form>
     </div>
   );

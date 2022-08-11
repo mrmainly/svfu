@@ -49,7 +49,7 @@ function App() {
           />
           <Route
             element={<QualificationDetail />}
-            path={ROUTES.QUALIFICATION_DETAIL}
+            path={`${ROUTES.QUALIFICATION_DETAIL}/:id`}
           />
           <Route element={<Surveys />} path={ROUTES.SURVEYS} />
         </Route>

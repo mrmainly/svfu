@@ -16,7 +16,7 @@ const Qualifications = () => {
   //         id: 1,
   //     },
   // ];
-  console.log(data);
+  console.log("qu index", data);
 
   return (
     <div>
