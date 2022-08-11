@@ -1,13 +1,12 @@
 import React from "react";
 
-import { Typography, Button, Space } from "antd";
+import { Typography, Button } from "antd";
 
 import "./surveySideBar.css";
-import MyButton from "../UI/button";
 
 const { Text } = Typography;
 
-const SurveysSideBar = ({ data, name, time }) => {
+const SurveysSideBar = ({ data }) => {
     const dataItems = [
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
