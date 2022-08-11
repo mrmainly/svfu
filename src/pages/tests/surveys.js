@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Typography, Radio, Space } from "antd";
 
-import { Line, MyButton, SurveysSideBar } from "../../components";
+import { Line, MyButton } from "../../components";
 
 const { Text, Title } = Typography;
 
