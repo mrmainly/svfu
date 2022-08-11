@@ -61,7 +61,7 @@ const SurveysSideBar = ({ data, name, time }) => {
                         marginTop: 8,
                     }}
                 >
-                    <Text>Общее время:</Text>
+                    <Text>Осталось:</Text>
                     <Text>45:00</Text>
                 </div>
             </div>
