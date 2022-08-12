@@ -35,6 +35,9 @@ export const pathname = (params) => {
         case ROUTES.QUALIFICATION_EDITING:
             return "Редактирование квалификации";
             break;
+        case ROUTES.APPILYNG:
+            return "Подача заявления";
+            break;
         case ROUTES.QUALIFICATION_ADDED:
             return "Загрузить квалификацию";
     }

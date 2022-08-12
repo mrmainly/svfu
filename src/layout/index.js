@@ -44,6 +44,11 @@ const MyLayout = () => {
             icon: <BsCardChecklist />,
             children: [
                 {
+                    label: "Подача заявления",
+                    key: "submenu-item-4",
+                    onClick: () => navigate(ROUTES.APPILYNG),
+                },
+                {
                     label: "Доступные тесты",
                     key: "submenu-item-3",
                     onClick: () => navigate(ROUTES.AVAILABLE_TESTS),

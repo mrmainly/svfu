@@ -4,6 +4,7 @@ import MyButton from "./UI/button";
 import CerificationResultsTable from "./tables/CerificationResultsTable";
 import QualificationsTable from "./tables/QualificationsTable";
 import SurveysSideBar from "./sidebars/SurveysSideBar";
+import AppilyngTable from "./tables/AppilyngTable";
 
 export {
     AvailableTestTable,
@@ -12,4 +13,5 @@ export {
     MyButton,
     QualificationsTable,
     SurveysSideBar,
+    AppilyngTable,
 };

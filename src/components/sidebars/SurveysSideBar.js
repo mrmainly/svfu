@@ -11,8 +11,6 @@ const { Text } = Typography;
 const SurveysSideBar = () => {
     const { data, arrayIndex } = useSelector((state) => state.survey_slice);
     const { handleArrayIndex } = SurveysSlice.actions;
-
-    console.log(data);
     const dispatch = useDispatch();
 
     const dataItems = [

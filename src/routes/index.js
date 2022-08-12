@@ -17,6 +17,8 @@ const ROUTES = {
     TEST_DETAIL: "/test-detail",
     QUALIFICATION_ADDED: "/qualification-added",
     SURVEYS: "/surveys",
+    CERTIFICATION_RESULTS_DETAIL: "/certification-results_detail",
+    APPILYNG: "/appilyng",
 };
 
 export default ROUTES;

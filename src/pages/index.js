@@ -5,7 +5,6 @@ import ForgotPassword from "./auth/forgot-password";
 import ProfileDetail from "./profile/detail";
 import Test from "./tests";
 import Documents from "./documents";
-import ResultTests from "./result-tests";
 import Qualifications from "./qualifications";
 import DocumentDetail from "./documents/detail";
 import TestDetail from "./tests/detail";
@@ -14,6 +13,8 @@ import QualificationAdded from "./qualifications/added";
 import QualificationDetail from "./qualifications/detail";
 import QualificationEdit from "./qualifications/edit";
 import Surveys from "./tests/surveys";
+import CertificationResultsDetial from "./certification-results/detail";
+import Applying from "./applying";
 
 export {
     Login,
@@ -24,7 +25,6 @@ export {
     Test,
     Documents,
     Qualifications,
-    ResultTests,
     DocumentDetail,
     TestDetail,
     CertificationResults,
@@ -32,4 +32,6 @@ export {
     QualificationDetail,
     QualificationEdit,
     Surveys,
+    CertificationResultsDetial,
+    Applying,
 };

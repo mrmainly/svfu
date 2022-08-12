@@ -21,7 +21,7 @@ const Surveys = () => {
     const { surveyquest } = state;
 
     const onSubmitFurther = (data) => {
-        setArrayPost();
+        console.log(data);
     };
 
     return (
@@ -39,6 +39,7 @@ const Surveys = () => {
                         </Text>
                         <Form
                             style={{ display: "flex", flexDirection: "column" }}
+                            onFieldsChange={onSubmitFurther}
                         >
                             {item.question.technique === "ONE_CHOICE" ? (
                                 <>
@@ -51,18 +52,33 @@ const Surveys = () => {
                                         Выберите один ответ:
                                     </Text>
                                     <Radio.Group>
-                                        <Space direction="vertical">
-                                            {item.question.variant.map(
-                                                (item, index) => (
-                                                    <Radio
-                                                        value={item.id}
-                                                        key={index}
-                                                    >
-                                                        {item.name}
-                                                    </Radio>
-                                                )
-                                            )}
-                                        </Space>
+                                        <Form.Item
+                                            label={
+                                                <Text
+                                                    style={{
+                                                        fontWeight: 600,
+                                                        fontSize: 16,
+                                                    }}
+                                                >
+                                                    Логин
+                                                </Text>
+                                            }
+                                            name={`q1`}
+                                            labelCol={{ span: 24 }}
+                                        >
+                                            <Space direction="vertical">
+                                                {item.question.variant.map(
+                                                    (item, index) => (
+                                                        <Radio
+                                                            value={item.id}
+                                                            key={index}
+                                                        >
+                                                            {item.name}
+                                                        </Radio>
+                                                    )
+                                                )}
+                                            </Space>
+                                        </Form.Item>
                                     </Radio.Group>
                                 </>
                             ) : item.question.technique === "DESCRIBE" ? (
