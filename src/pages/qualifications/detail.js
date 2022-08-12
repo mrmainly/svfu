@@ -10,101 +10,95 @@ import ROUTES from "../../routes";
 const { Text } = Typography;
 
 const QualificationDetail = () => {
-    const params = useParams();
-    const navigate = useNavigate();
+  const params = useParams();
+  const navigate = useNavigate();
 
-    const { data, isFetching, error } = useGetQualificationsIdQuery({
-        id: params.id,
-    });
-    if (isFetching) {
-        return (
-            <div
-                style={{
-                    height: 210,
-                    display: "flex",
-                    justifyContent: "center",
-                    paddingTop: 100,
-                }}
-            >
-                <Spin />
-                fsfds
-            </div>
-        );
-    }
-    console.log("detailq", data);
-
-    const inputs = [
-        {
-            title: "Номер документа:",
-            value: data.id,
-        },
-        {
-            title: "Название квалификации:",
-            value: data.name,
-        },
-        {
-            title: "Дата выдачи документа:",
-            value: data.created.substring(0, 10),
-        },
-        {
-            title: "Начало срока:",
-            value: data.date_start,
-        },
-        {
-            title: "Окончание срока:",
-            value: data.date_finish,
-        },
-        {
-            title: "Скан документа:",
-            value: data.file,
-        },
-    ];
-
+  const { data, isFetching, error } = useGetQualificationsIdQuery({
+    id: params.id,
+  });
+  if (isFetching) {
     return (
-        <div>
-            <Form>
-                {inputs.map((item, index) => (
-                    <Space
-                        key={index}
-                        size="middle"
-                        style={{
-                            marginTop: 12,
-                            display: "flex",
-                            alignItems: "start",
-                        }}
-                    >
-                        <div style={{ width: 200 }}>
-                            <Text style={{ fontWeight: 600 }}>
-                                {item.title}
-                            </Text>
-                        </div>
-                        {item.value === data.file ? (
-                            <div>
-                                <FileTwoTone />
-                                <a href={item.value} target="_blank">
-                                    {item.value.split("/")[5]}
-                                </a>
-                            </div>
-                        ) : (
-                            <Text>
-                                {item.value === "" || item.value === null
-                                    ? "-"
-                                    : item.value}
-                            </Text>
-                        )}
-                    </Space>
-                ))}
-                <Line />
-                <MyButton
-                    onClick={() =>
-                        navigate(`${ROUTES.QUALIFICATION_EDITING}/${data.id}`)
-                    }
-                >
-                    Редактировать квалификацию
-                </MyButton>
-            </Form>
-        </div>
+      <div
+        style={{
+          height: 210,
+          display: "flex",
+          justifyContent: "center",
+          paddingTop: 100,
+        }}
+      >
+        <Spin />
+        fsfds
+      </div>
     );
+  }
+  console.log("detailq", data);
+
+  const inputs = [
+    {
+      title: "Номер документа:",
+      value: data.id,
+    },
+    {
+      title: "Название квалификации:",
+      value: data.name,
+    },
+    {
+      title: "Дата выдачи документа:",
+      value: data.created.substring(0, 10),
+    },
+    {
+      title: "Начало срока:",
+      value: data.date_start,
+    },
+    {
+      title: "Окончание срока:",
+      value: data.date_finish,
+    },
+    {
+      title: "Скан документа:",
+      value: data.file,
+    },
+  ];
+
+  return (
+    <div>
+      <Form>
+        {inputs.map((item, index) => (
+          <Space
+            key={index}
+            size="middle"
+            style={{
+              marginTop: 12,
+              display: "flex",
+              alignItems: "start",
+            }}
+          >
+            <div style={{ width: 200 }}>
+              <Text style={{ fontWeight: 600 }}>{item.title}</Text>
+            </div>
+            {item.value === data.file ? (
+              <div>
+                <FileTwoTone />
+                <a href={item.value} target="_blank">
+                  {item.value.split("/")[5]}
+                </a>
+              </div>
+            ) : (
+              <Text>
+                {item.value === "" || item.value === null ? "-" : item.value}
+              </Text>
+            )}
+          </Space>
+        ))}
+        <Line />
+        <MyButton
+          onClick={() => navigate(`${ROUTES.QUALIFICATION_EDITING}/${data.id}`)}
+        >
+          Редактировать квалификацию
+        </MyButton>
+      </Form>
+    </div>
+  );
 };
 
 export default QualificationDetail;
