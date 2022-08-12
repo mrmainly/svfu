@@ -26,6 +26,7 @@ export const qualifications = api.injectEndpoints({
           url: `users/qualification_improvement/`,
           method: "POST",
           body: formData,
+          header: "multipart/form-data",
         };
       },
       invalidatesTags: [{ type: "Qualification" }],

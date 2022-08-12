@@ -1,5 +1,6 @@
 import React from "react";
-import { Form, Input, message, Typography } from "antd";
+import { Form, Input, message, Typography, Button, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
 import { MyButton, Line } from "../../components";
 import { usePostQualificationMutation } from "../../services/QualificationsService";
@@ -32,14 +33,24 @@ const QualificationAdded = () => {
       text: "Введите срок действия",
       type: "date",
     },
+    {
+      title: "Выберите файл",
+      name: "file",
+      text: "Выберите файл",
+      type: "file",
+    },
   ];
   const onSubmit = (data) => {
-    console.log(data);
     let formData = new FormData();
     formData.append("name", data.name);
     formData.append("date_of_issue", data.date_of_issue);
     formData.append("date_start", data.date_start);
     formData.append("date_finish", data.date_finish);
+    formData.append(
+      "file",
+      document.getElementById("file").files[0],
+      data.file
+    );
     postQualification({ formData: formData }).then((res) => {
       if (res.data) {
         message.success("Документ изменен");
@@ -73,7 +84,6 @@ const QualificationAdded = () => {
             <Input placeholder={item.text} size="large" type={item.type} />
           </Form.Item>
         ))}
-
         <Line />
         <MyButton htmlType="submit">Загрузить</MyButton>
       </Form>

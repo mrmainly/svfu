@@ -21,10 +21,17 @@ const { Text } = Typography;
 const QualificationEdit = () => {
   const params = useParams();
 
+  const [date, setDate] = React.useState(new Date());
+
   const [patchQualificationId] = usePatchQualificationIdMutation();
   const { data, isFetching, error } = useGetQualificationsIdQuery({
     id: params.id,
   });
+
+  React.useEffect(() => {
+    setDate(new Date(data?.date_start));
+  }, [data]);
+
   if (isFetching) {
     return (
       <div
@@ -40,40 +47,12 @@ const QualificationEdit = () => {
     );
   }
 
-  const inputs = [
-    {
-      title: "Номер документа:",
-      name: "doc_id",
-    },
-    {
-      title: "Название квалификации:",
-      name: "name",
-    },
-
-    {
-      title: "Дата выдачи документа:",
-      name: "created",
-      type: "date",
-    },
-    {
-      title: "Начало срока:",
-      name: "date_start",
-    },
-    {
-      title: "Окончание срока:",
-      name: "date_finish",
-    },
-    {
-      title: "Скан документа:",
-      name: "file",
-    },
-  ];
   const onSubmit = (data) => {
-    console.log(data);
     let formData = new FormData();
     formData.append("name", data.name);
     formData.append("doc_id", data.doc_id);
-    formData.append("date_start", data.doc_id);
+    formData.append("date_start", date.toISOString());
+    // formData.append("created", date);
     // formData.append("date_of_issue", data.doc_id);
     // formData.append("date_finish", data.doc_id);
     patchQualificationId({ id: data.doc_id, formData: formData }).then(
@@ -93,7 +72,7 @@ const QualificationEdit = () => {
         initialValues={{
           ["doc_id"]: data.id,
           ["name"]: data.name,
-          ["date_start"]: data.date_start,
+          // ["date_start"]: data.date_start,
           // ["date_finish"]: data.date_finish,
           // ["file"]: data.file,
           // ["created"]: data.date_of_issue,
@@ -134,15 +113,21 @@ const QualificationEdit = () => {
         >
           <Input size="large" />
         </Form.Item>
+
         <Form.Item
           label={
             <Text style={{ fontWeight: 600, fontSize: 16 }}>Начало срока:</Text>
           }
-          name="date_start"
           style={{ width: 350 }}
           labelCol={{ span: 24 }}
         >
-          <Input type="date" size="large" />
+          <DatePicker
+            value={moment(date)}
+            onChange={(e) => {
+              if (e) setDate(e.toDate());
+              else setDate(new Date());
+            }}
+          ></DatePicker>
         </Form.Item>
         <Form.Item
           label={
