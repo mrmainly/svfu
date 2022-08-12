@@ -20,6 +20,10 @@ const Surveys = () => {
 
     const { surveyquest } = state;
 
+    const onSubmitFurther = (data) => {
+        setArrayPost();
+    };
+
     return (
         <div>
             {surveyquest
