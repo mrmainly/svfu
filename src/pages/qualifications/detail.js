@@ -16,7 +16,7 @@ const QualificationDetail = () => {
   const { data, isFetching, error } = useGetQualificationsIdQuery({
     id: params.id,
   });
-  
+
   if (isFetching) {
     return (
       <div
@@ -31,7 +31,7 @@ const QualificationDetail = () => {
       </div>
     );
   }
-
+  console.log(data);
   const inputs = [
     {
       title: "Номер документа:",
@@ -43,17 +43,24 @@ const QualificationDetail = () => {
     },
     {
       title: "Дата выдачи документа:",
-      value: data.created === "" || data.created === null ? "-" : data.created.substring(0, 10),
+      value:
+        data.created === "" || data.created === null
+          ? "-"
+          : data.created.substring(0, 10),
     },
     {
       title: "Начало срока:",
-      value: data.date_start === "" || data.date_start === null ? "-" : data.date_start.substring(0, 10),
-
+      value:
+        data.date_start === "" || data.date_start === null
+          ? "-"
+          : data.date_start.substring(0, 10),
     },
     {
       title: "Окончание срока:",
-      value: data.date_finish === "" || data.date_finish === null ? "-" : data.date_finish.substring(0, 10),
-
+      value:
+        data.date_finish === "" || data.date_finish === null
+          ? "-"
+          : data.date_finish.substring(0, 10),
     },
     {
       title: "Скан документа:",

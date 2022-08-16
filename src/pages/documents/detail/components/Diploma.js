@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { UploadOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { Form, Typography, Input, Upload, Button } from "antd";
+import moment from "moment";
 
 const { Text, Title } = Typography;
 const { TextArea } = Input;
@@ -14,7 +15,7 @@ const Diploma = ({ data }) => {
   const addInput = async (e) => {
     setIdCounter((idCounter += 1));
     let newInput = localData.concat({
-      created: "2022-08-15T18:56:39.473183",
+      created: moment(new Date()),
       document: "",
       file: "",
       id: idCounter,
