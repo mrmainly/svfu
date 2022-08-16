@@ -96,13 +96,14 @@ const MainInfo = ({ data }) => {
                     multiple={false}
                     maxCount={1}
                     // onPreview={handlePreview}
-                    defaultFileList={defualtFileList}
+                    defaultFileList={
+                        data.photo === null ? null : defualtFileList
+                    }
                     onChange={handleImageChange}
                 >
                     {uploadButton}
                 </Upload>
             </Space>
-            {/* <img src={`${data.photo}`} /> */}
             {items.map((item, index) => (
                 <Space key={index} size="middle" style={{ marginTop: 12 }}>
                     <div style={{ width: 200 }}>

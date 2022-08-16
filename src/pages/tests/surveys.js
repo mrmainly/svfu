@@ -54,21 +54,22 @@ const Surveys = () => {
                                     >
                                         Выберите один ответ:
                                     </Text>
-                                    <Radio.Group>
-                                        <Form.Item
-                                            label={
-                                                <Text
-                                                    style={{
-                                                        fontWeight: 600,
-                                                        fontSize: 16,
-                                                    }}
-                                                >
-                                                    Логин
-                                                </Text>
-                                            }
-                                            name={`q1`}
-                                            labelCol={{ span: 24 }}
-                                        >
+
+                                    <Form.Item
+                                        label={
+                                            <Text
+                                                style={{
+                                                    fontWeight: 600,
+                                                    fontSize: 16,
+                                                }}
+                                            >
+                                                Логин
+                                            </Text>
+                                        }
+                                        name={`q1`}
+                                        labelCol={{ span: 24 }}
+                                    >
+                                        <Radio.Group>
                                             <Space direction="vertical">
                                                 {item.question.variant.map(
                                                     (item, index) => (
@@ -81,8 +82,8 @@ const Surveys = () => {
                                                     )
                                                 )}
                                             </Space>
-                                        </Form.Item>
-                                    </Radio.Group>
+                                        </Radio.Group>
+                                    </Form.Item>
                                 </>
                             ) : item.question.technique === "DESCRIBE" ? (
                                 <>
