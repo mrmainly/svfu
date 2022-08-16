@@ -12,7 +12,7 @@ const Surveys = () => {
     const { arrayIndex } = useSelector((state) => state.survey_slice);
     const { handleArrayIndex } = SurveysSlice.actions;
 
-    const [arrayPost, setArrayPost] = useState([]);
+    let [arrayPost, setArrayPost] = useState([]);
 
     const location = useLocation();
     const state = location.state;
@@ -22,7 +22,10 @@ const Surveys = () => {
 
     const onSubmitFurther = (data) => {
         console.log(data);
+        setArrayPost(arrayPost.push(data));
     };
+
+    console.log(arrayPost);
 
     return (
         <div>
@@ -140,15 +143,23 @@ const Surveys = () => {
                             {surveyquest.length - 1 === arrayIndex ? (
                                 ""
                             ) : (
-                                <MyButton
-                                    onClick={() => {
-                                        dispatch(
-                                            handleArrayIndex(arrayIndex + 1)
-                                        );
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                        width: "100%",
                                     }}
                                 >
-                                    Далее
-                                </MyButton>
+                                    <MyButton
+                                        onClick={() => {
+                                            dispatch(
+                                                handleArrayIndex(arrayIndex + 1)
+                                            );
+                                        }}
+                                    >
+                                        Далее
+                                    </MyButton>
+                                </div>
                             )}
                         </div>
                     </div>

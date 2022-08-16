@@ -2,9 +2,14 @@ import React from "react";
 import { Typography, Space, Form, Upload } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
+import { useProfilePostImageMutation } from "../../../services/ProfileService";
+
 const { Text } = Typography;
 
 const MainInfo = ({ data }) => {
+    const [image, setImage] = React.useState("");
+    const [profilePostImage] = useProfilePostImageMutation();
+
     const uploadButton = (
         <div>
             <PlusOutlined />
@@ -12,12 +17,24 @@ const MainInfo = ({ data }) => {
         </div>
     );
 
-    const normFile = (e) => {
-        console.log("Upload event:", e);
-        if (Array.isArray(e)) {
-            return e;
+    // const normFile = (e) => {
+    //     console.log("Upload event:", e);
+    //     if (Array.isArray(e)) {
+    //         return e;
+    //     }
+    //     return e?.fileList;
+    // };
+
+    const handleImageChange = (e) => {
+        if (e.file.status === "done") {
+            console.log(e);
+            const image = e.file.originFileObj;
+            let formData = new FormData();
+            formData.append("photo", image);
+            profilePostImage(formData).then((res) => {
+                console.log(res);
+            });
         }
-        return e?.fileList;
     };
 
     const items = [
@@ -55,6 +72,15 @@ const MainInfo = ({ data }) => {
         },
     ];
 
+    const defualtFileList = [
+        {
+            uid: "-1",
+            name: "image.png",
+            status: "done",
+            url: `${data.photo}`,
+        },
+    ];
+
     return (
         <>
             <Space
@@ -68,13 +94,15 @@ const MainInfo = ({ data }) => {
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
                     multiple={false}
-                    name="photo"
                     maxCount={1}
                     // onPreview={handlePreview}
+                    defaultFileList={defualtFileList}
+                    onChange={handleImageChange}
                 >
                     {uploadButton}
                 </Upload>
             </Space>
+            {/* <img src={`${data.photo}`} /> */}
             {items.map((item, index) => (
                 <Space key={index} size="middle" style={{ marginTop: 12 }}>
                     <div style={{ width: 200 }}>

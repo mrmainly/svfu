@@ -11,51 +11,51 @@ import ROUTES from "../../routes";
 import { useGetProfileQuery } from "../../services/ProfileService";
 
 const Profile = () => {
-  const { data, isFetching, error } = useGetProfileQuery({
-    cookie: cookie.get("token"),
-  });
+    const { data, isFetching, error } = useGetProfileQuery({
+        cookie: cookie.get("token"),
+    });
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  if (isFetching) {
+    if (isFetching) {
+        return (
+            <div
+                style={{
+                    height: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingTop: 100,
+                }}
+            >
+                <Spin />
+            </div>
+        );
+    }
+
+    console.log(data);
+
     return (
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          paddingTop: 100,
-        }}
-      >
-        <Spin />
-      </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+            <MainInfo data={data} />
+            <Line />
+            <SocialNetworks data={data} />
+            <InfoScreen data={data} />
+            <Line />
+            <Button
+                style={{
+                    background: "#0D6EFD",
+                    borderRadius: 4,
+                    width: "max-content",
+                }}
+                type="primary"
+                htmlType="submit"
+                size="large"
+                onClick={() => navigate(ROUTES.PROFILE_EDITING)}
+            >
+                Редактировать профиль
+            </Button>
+        </div>
     );
-  }
-
-  console.log(data);
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <MainInfo data={data} />
-      <Line />
-      <SocialNetworks data={data} />
-      <InfoScreen data={data} />
-      <Line />
-      <Button
-        style={{
-          background: "#0D6EFD",
-          borderRadius: 4,
-          width: "max-content",
-        }}
-        type="primary"
-        htmlType="submit"
-        size="large"
-        onClick={() => navigate(ROUTES.PROFILE_EDITING)}
-      >
-        Редактировать профиль
-      </Button>
-    </div>
-  );
 };
 
 export default Profile;
