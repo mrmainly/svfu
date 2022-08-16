@@ -51,6 +51,7 @@ const QualificationAdded = () => {
       document.getElementById("file").files[0],
       data.file
     );
+
     postQualification({ formData: formData }).then((res) => {
       if (res.data) {
         message.success("Документ изменен");

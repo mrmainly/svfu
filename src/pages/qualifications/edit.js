@@ -1,13 +1,15 @@
 import React from "react";
 import moment from "moment";
+import { UploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
   Form,
-  Space,
   Typography,
   Spin,
   Input,
   message,
   DatePicker,
+  Upload,
+  Button,
 } from "antd";
 import { useParams } from "react-router-dom";
 import { MyButton, Line } from "../../components";
@@ -22,6 +24,7 @@ const { RangePicker } = DatePicker;
 const QualificationEdit = () => {
   const params = useParams();
 
+  const [file, setFile] = React.useState("");
   const [date_start, setDate_start] = React.useState(new Date());
   const [date_finish, setDate_finish] = React.useState(new Date());
 
@@ -29,11 +32,9 @@ const QualificationEdit = () => {
   const { data, isFetching, error } = useGetQualificationsIdQuery({
     id: params.id,
   });
-
   React.useEffect(() => {
     setDate_start(new Date(data?.date_start));
     setDate_finish(new Date(data?.date_finish));
-
   }, [data]);
 
   if (isFetching) {
@@ -57,6 +58,7 @@ const QualificationEdit = () => {
     formData.append("doc_id", data.doc_id);
     formData.append("date_start", date_start.toISOString());
     formData.append("date_finish", date_finish.toISOString());
+    formData.append("file", file, file.name);
     patchQualificationId({ id: data.doc_id, formData: formData }).then(
       (res) => {
         if (res.data) {
@@ -73,7 +75,22 @@ const QualificationEdit = () => {
     setDate_finish(dates[1]);
   }
 
-  console.log(data);
+  const handleFile = (e) => {
+    setFile(e.file);
+  };
+
+  const props = {
+    beforeUpload: (file) => {
+      const isPDF = file.type === "application/pdf";
+
+      if (!isPDF) {
+        message.error(`${file.name} не является pdf файлом`);
+      }
+
+      return false;
+    },
+  };
+
   return (
     <div>
       <Form
@@ -82,7 +99,6 @@ const QualificationEdit = () => {
           ["name"]: data.name,
           ["date_start"]: moment(date_start),
           ["date_finish"]: moment(date_finish),
-          // ["file"]: data.file,
           ["created"]: data.date_of_issue,
         }}
         onFinish={(data) => onSubmit(data)}
@@ -119,7 +135,9 @@ const QualificationEdit = () => {
           name="created"
           style={{ width: 350 }}
         >
-          <Text style={{ fontWeight: 400, fontSize: 16 }}>{data.created.substring(0, 10)}</Text>
+          <Text style={{ fontWeight: 400, fontSize: 16 }}>
+            {data.created.substring(0, 10)}
+          </Text>
         </Form.Item>
         <Form.Item
           label={
@@ -131,54 +149,35 @@ const QualificationEdit = () => {
           labelCol={{ span: 24 }}
         >
           <RangePicker
-          defaultValue={[moment(date_start), moment(date_finish)]}
+            defaultValue={[moment(date_start), moment(date_finish)]}
             onChange={onChange}
-            size="large" 
+            size="large"
           ></RangePicker>
         </Form.Item>
-        {/* <Form.Item
-          label={
-            <Text style={{ fontWeight: 600, fontSize: 16 }}>Начало срока:</Text>
-          }
-          style={{ width: 350 }}
-          labelCol={{ span: 24 }}
-          name="date_start"
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: 20,
+          }}
         >
-          <Input type="date" size="large" />
-          <DatePicker
-            value={moment(date)}
-            onChange={(e) => {
-              if (e) setDate(e.toDate());
-              else setDate(new Date());
-            }}
-            size="large" 
-          ></DatePicker>
-        </Form.Item> */}
-        {/* <Form.Item
-          label={
-            <Text style={{ fontWeight: 600, fontSize: 16 }}>Конец срока:</Text>
-          }
-          name="date_finish"
-          style={{ width: 350 }}
-          labelCol={{ span: 24 }}
-        >
-          <Input size="large" />
-        </Form.Item> */}
-        {/* {inputs.map((item, index) => (
-          <Form.Item
-            key={index}
-            label={
-              <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                {item.title}
-              </Text>
-            }
-            name={item.name}
-            labelCol={{ span: 24 }}
-            style={{ width: 350 }}
+          <Upload
+            {...props}
+            listType=""
+            multiple={false}
+            maxCount={1}
+            onChange={handleFile}
           >
-            <Input placeholder={item.text} size="large" />
-          </Form.Item>
-        ))} */}
+            <Button icon={<UploadOutlined />}>Upload</Button>
+          </Upload>
+          {file === "" ? (
+            <a href={data.file} target="_blank" style={{ marginLeft: 20 }}>
+              {data.file.split("/")[5]}
+            </a>
+          ) : (
+            ""
+          )}
+        </div>
         <Line />
         <MyButton htmlType="submit">Загрузить</MyButton>
       </Form>
