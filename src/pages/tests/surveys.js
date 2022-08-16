@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Typography, Radio, Space, Checkbox, Input, Form } from "antd";
+import {
+    Typography,
+    Radio,
+    Space,
+    Checkbox,
+    Input,
+    Form,
+    Col,
+    Row,
+} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Line, MyButton } from "../../components";
@@ -21,29 +30,39 @@ const Surveys = () => {
     const { surveyquest } = state;
 
     const onSubmitFurther = (data) => {
-        console.log(data);
-        setArrayPost(arrayPost.push(data));
+        console.log("data", data);
+
+        setArrayPost((prev) => [
+            ...prev,
+            data.map((item) => {
+                return {
+                    [item.name[0]]: item.value,
+                };
+            }),
+        ]);
     };
+    console.log("asd", arrayPost);
+    // data.map((item) => {
 
-    console.log(arrayPost);
-
+    // })
     return (
         <div>
-            {surveyquest
-                .filter((item, index) => index === arrayIndex)
-                .map((item, index) => (
-                    <div
-                        key={index}
-                        style={{ display: "flex", flexDirection: "column" }}
-                    >
-                        <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
-                        <Text style={{ marginTop: 12 }}>
-                            {item.question.description}
-                        </Text>
-                        <Form
+            <Form
+                style={{ display: "flex", flexDirection: "column" }}
+                onFinish={onSubmitFurther}
+            >
+                {surveyquest
+                    .filter((item, index) => index === arrayIndex)
+                    .map((item, index) => (
+                        <div
+                            key={index}
                             style={{ display: "flex", flexDirection: "column" }}
-                            onFieldsChange={onSubmitFurther}
                         >
+                            <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
+                            <Text style={{ marginTop: 12 }}>
+                                {item.question.description}
+                            </Text>
+
                             {item.question.technique === "ONE_CHOICE" ? (
                                 <>
                                     <Text
@@ -66,7 +85,7 @@ const Surveys = () => {
                                                 Логин
                                             </Text>
                                         }
-                                        name={`q1`}
+                                        name={`q${item.id}`}
                                         labelCol={{ span: 24 }}
                                     >
                                         <Radio.Group>
@@ -109,62 +128,92 @@ const Surveys = () => {
                                     >
                                         Выберите несколько ответов:
                                     </Text>
-                                    <Space direction="vertical">
-                                        {item.question.variant.map(
-                                            (item, index) => (
-                                                <Checkbox key={index}>
-                                                    {item.name}
-                                                </Checkbox>
-                                            )
-                                        )}
-                                    </Space>
+                                    <Form.Item
+                                        label={
+                                            <Text
+                                                style={{
+                                                    fontWeight: 600,
+                                                    fontSize: 16,
+                                                }}
+                                            >
+                                                Логин
+                                            </Text>
+                                        }
+                                        name={`q${item.id}`}
+                                        labelCol={{ span: 24 }}
+                                    >
+                                        <Checkbox.Group
+                                            style={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                            }}
+                                        >
+                                            {item.question.variant.map(
+                                                (item, index) => (
+                                                    <Checkbox
+                                                        style={{
+                                                            marginTop: 10,
+                                                            marginLeft: 1,
+                                                        }}
+                                                        key={index}
+                                                        value={item.id}
+                                                    >
+                                                        {item.name}
+                                                    </Checkbox>
+                                                )
+                                            )}
+                                        </Checkbox.Group>
+                                    </Form.Item>
                                 </>
                             )}
-                        </Form>
-                        <Line />
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            {arrayIndex === 0 ? (
-                                ""
-                            ) : (
-                                <MyButton
-                                    onClick={() => {
-                                        dispatch(
-                                            handleArrayIndex(arrayIndex - 1)
-                                        );
-                                    }}
-                                >
-                                    Назад
-                                </MyButton>
-                            )}
-                            {surveyquest.length - 1 === arrayIndex ? (
-                                ""
-                            ) : (
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "flex-end",
-                                        width: "100%",
-                                    }}
-                                >
+                            <Line />
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                {arrayIndex === 0 ? (
+                                    ""
+                                ) : (
                                     <MyButton
                                         onClick={() => {
                                             dispatch(
-                                                handleArrayIndex(arrayIndex + 1)
+                                                handleArrayIndex(arrayIndex - 1)
                                             );
                                         }}
                                     >
-                                        Далее
+                                        Назад
                                     </MyButton>
-                                </div>
-                            )}
+                                )}
+                                {surveyquest.length - 1 === arrayIndex ? (
+                                    ""
+                                ) : (
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "flex-end",
+                                            width: "100%",
+                                        }}
+                                    >
+                                        <MyButton
+                                            // onClick={() => {
+                                            //     dispatch(
+                                            //         handleArrayIndex(
+                                            //             arrayIndex + 1
+                                            //         )
+                                            //     );
+                                            // }}
+                                            htmlType="submit"
+                                        >
+                                            Далее
+                                        </MyButton>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+            </Form>
         </div>
     );
 };
