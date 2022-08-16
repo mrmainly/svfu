@@ -28,17 +28,16 @@ export const documents = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "Document" }],
     }),
-    // patchDocuments: build.mutation({
-    //   query({ id, formData }) {
-    //     return {
-    //       url: `users/qualification_improvement/${id}`,
-    //       method: "PATCH",
-    //       body: formData,
-    //     };
-    //   },
-    //   invalidatesTags: [{ type: "Qualification" }],
-    // }),
-
+    patchDocumentsDiploma: build.mutation({
+      query({ id, formData }) {
+        return {
+          url: `users/documents/diploma/${id}`,
+          method: "PATCH",
+          body: formData,
+        };
+      },
+      invalidatesTags: [{ type: "Document" }],
+    }),
   }),
 });
 
@@ -46,4 +45,5 @@ export const {
   useGetDocumentsQuery,
   usePostDocumentsMutation,
   usePostDocumentsDiplomaMutation,
+  usePatchDocumentsDiplomaMutation,
 } = documents;
