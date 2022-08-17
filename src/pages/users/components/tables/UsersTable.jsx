@@ -41,7 +41,7 @@ const UsersTable = () => {
             onFilter: (value, record) => record.role === value,
         },
         {
-            title: 'Текущее тестирование',
+            title: 'Текущая аттестация',
             dataIndex: 'currentlCassification',
             key: 'currentlCassification',
         },
