@@ -1,11 +1,12 @@
-import AvailableTestTable from "./tables/AvailableTestTable";
-import Line from "./line";
-import MyButton from "./UI/button";
-import CerificationResultsTable from "./tables/CerificationResultsTable";
-import QualificationsTable from "./tables/QualificationsTable";
-import SurveysSideBar from "./sidebars/SurveysSideBar";
-import AppilyngTable from "./tables/AppilyngTable";
-import { AttestedTable } from "./tables/users";
+import AvailableTestTable from './tables/AvailableTestTable'
+import Line from './line'
+import MyButton from './UI/button'
+import CerificationResultsTable from './tables/CerificationResultsTable'
+import QualificationsTable from './tables/QualificationsTable'
+import SurveysSideBar from './sidebars/SurveysSideBar'
+import AppilyngTable from './tables/AppilyngTable'
+import { AttestedTable } from './tables/users'
+import SurveyModalAnswer from './modals/SurveyAnswer'
 
 export {
     AvailableTestTable,
@@ -16,4 +17,5 @@ export {
     SurveysSideBar,
     AppilyngTable,
     AttestedTable,
-};
+    SurveyModalAnswer,
+}
