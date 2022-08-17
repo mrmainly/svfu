@@ -1,61 +1,72 @@
-import { api } from "./api";
+import { api } from './api'
 
 export const documents = api.injectEndpoints({
-  endpoints: (build) => ({
-    getDocuments: build.query({
-      query: () => `users/document/`,
-      providesTags: ["Document"],
+    endpoints: (build) => ({
+        getDocuments: build.query({
+            query: () => `users/document/`,
+            providesTags: ['Document'],
+        }),
+        postDocuments: build.mutation({
+            query({ formData }) {
+                return {
+                    url: `users/document/`,
+                    method: 'POST',
+                    body: formData,
+                    header: 'multipart/form-data',
+                }
+            },
+            invalidatesTags: [{ type: 'Document' }],
+        }),
+        postDocumentsDiploma: build.mutation({
+            query({ formData }) {
+                return {
+                    url: `users/document/diploma`,
+                    method: 'POST',
+                    body: formData,
+                    header: 'multipart/form-data',
+                }
+            },
+            invalidatesTags: [{ type: 'Document' }],
+        }),
+        postDocumentsTitles: build.mutation({
+            query({ formData }) {
+                return {
+                    url: `users/document/titlesdegrees`,
+                    method: 'POST',
+                    body: formData,
+                    header: 'multipart/form-data',
+                }
+            },
+            invalidatesTags: [{ type: 'Document' }],
+        }),
+        patchDocumentsDiploma: build.mutation({
+            query({ id, formData }) {
+                return {
+                    url: `users/document/diploma/${id}`,
+                    method: 'PATCH',
+                    body: formData,
+                }
+            },
+            invalidatesTags: [{ type: 'Document' }],
+        }),
+        patchDocumentsTitles: build.mutation({
+            query({ id, formData }) {
+                return {
+                    url: `users/document/titlesdegrees/${id}`,
+                    method: 'PATCH',
+                    body: formData,
+                }
+            },
+            invalidatesTags: [{ type: 'Document' }],
+        }),
     }),
-    postDocuments: build.mutation({
-      query({ formData }) {
-        return {
-          url: `users/document/`,
-          method: "POST",
-          body: formData,
-          header: "multipart/form-data",
-        };
-      },
-      invalidatesTags: [{ type: "Document" }],
-    }),
-    postDocumentsDiploma: build.mutation({
-      query({ formData }) {
-        return {
-          url: `users/document/diploma`,
-          method: "POST",
-          body: formData,
-          header: "multipart/form-data",
-        };
-      },
-      invalidatesTags: [{ type: "Document" }],
-    }),
-    postDocumentsTitles: build.mutation({
-      query({ formData }) {
-        return {
-          url: `users/document/titlesdegrees`,
-          method: "POST",
-          body: formData,
-          header: "multipart/form-data",
-        };
-      },
-      invalidatesTags: [{ type: "Document" }],
-    }),
-    patchDocumentsDiploma: build.mutation({
-      query({ id, formData }) {
-        return {
-          url: `users/documents/diploma/${id}`,
-          method: "PATCH",
-          body: formData,
-        };
-      },
-      invalidatesTags: [{ type: "Document" }],
-    }),
-  }),
-});
+})
 
 export const {
-  useGetDocumentsQuery,
-  usePostDocumentsMutation,
-  usePostDocumentsDiplomaMutation,
-  usePostDocumentsTitlesMutation,
-  usePatchDocumentsDiplomaMutation,
-} = documents;
+    useGetDocumentsQuery,
+    usePostDocumentsMutation,
+    usePostDocumentsDiplomaMutation,
+    usePostDocumentsTitlesMutation,
+    usePatchDocumentsDiplomaMutation,
+    usePatchDocumentsTitlesMutation,
+} = documents
