@@ -1,48 +1,47 @@
-import ROUTES from "../routes";
+import ROUTES from '../routes'
 
 export const pathname = (params) => {
     switch (params.pathname) {
         case ROUTES.PROFILE:
-            return "Профиль";
-            break;
+            return 'Профиль'
+            break
         case ROUTES.PROFILE_EDITING:
-            return "Редактирование профиля";
-            break;
+            return 'Редактирование профиля'
+            break
         case ROUTES.AVAILABLE_TESTS:
-            return "Доступные тесты";
-            break;
+            return 'Доступные тесты'
+            break
         case ROUTES.CERTIFICATION_RESULTS:
-            return "Итоги аттестации";
-            break;
+            return 'Итоги аттестации'
+            break
         case ROUTES.AVAILABLE_TEST:
-            return "Название_теста";
-            break;
+            return 'Название_теста'
+            break
         case ROUTES.TEST_RESULTS:
-            return "Результаты тестов";
-            break;
+            return 'Результаты тестов'
+            break
         case ROUTES.TEST_RESULT:
-            return "Название_теста";
-            break;
+            return 'Название_теста'
+            break
         case ROUTES.DOCUMENTS:
-            return "Документы";
-            break;
+            return 'Документы'
+            break
         case ROUTES.DOCUMENTS_EDITING:
-            return "Редактирование документов";
-            break;
+            return 'Редактирование документов'
+            break
         case ROUTES.MY_QUALIFICATIONS:
-            return "Мои квалификации";
-            break;
+            return 'Мои квалификации'
+            break
         case ROUTES.QUALIFICATION_EDITING:
-            return "Редактирование квалификации";
-            break;
+            return 'Редактирование квалификации'
+            break
         case ROUTES.APPILYNG:
-            return "Подача заявления";
-            break;
+            return 'Подача заявления'
+            break
         case ROUTES.QUALIFICATION_ADDED:
-            return "Загрузить квалификацию";
+            return 'Загрузить квалификацию'
             break
         case ROUTES.USERS_ATTESTED:
-            return "Пользователи";
-            break
+            return 'Пользователи'
     }
-};
+}

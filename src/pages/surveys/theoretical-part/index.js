@@ -3,21 +3,17 @@ import { useLocation } from 'react-router-dom'
 import { Typography, Radio, Space, Checkbox, Input, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Line, MyButton, SurveyModalAnswer } from '../../components'
-import { SurveysSlice } from '../../reducers/SurveysSlice'
-import { useSurveyPostMutation } from '../../services/SurveysService'
-import { NoStyleItemContext } from 'antd/lib/form/context'
+import { Line, MyButton, SurveyModalAnswer } from '../../../components'
+import { SurveysSlice } from '../../../reducers/SurveysSlice'
 
 const { Text, Title } = Typography
 
-const Surveys = () => {
+const TheoreticalPart = () => {
     const [openModal, setOpenModal] = useState(false)
-    const [text, setText] = useState('')
     const [postList, setPostList] = useState([])
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
-    const [postSurvey] = useSurveyPostMutation()
 
     const location = useLocation()
     const state = location.state
@@ -26,6 +22,7 @@ const Surveys = () => {
     const { surveyquest, id } = state
 
     const onSubmitFurther = (data) => {
+        console.log(data)
         const postData = {
             answers: [],
         }
@@ -39,6 +36,7 @@ const Surveys = () => {
                 postData.answers.push({ q_id: Number(key), a_id: value })
             }
         })
+        console.log(postData)
         setOpenModal(true)
         setPostList(postData)
     }
@@ -47,7 +45,6 @@ const Surveys = () => {
             <SurveyModalAnswer
                 open={openModal}
                 setOpen={setOpenModal}
-                text={text}
                 id={id}
                 postData={postList}
             />
@@ -94,26 +91,6 @@ const Surveys = () => {
                                         </Radio.Group>
                                     </Form.Item>
                                 </>
-                            ) : item.question.technique === 'DESCRIBE' ? (
-                                <div>
-                                    <Text
-                                        style={{
-                                            marginTop: 12,
-                                            marginBottom: 12,
-                                        }}
-                                    >
-                                        Напишите ответ
-                                    </Text>
-                                    <Form.Item
-                                        name={item.id}
-                                        labelCol={{ span: 24 }}
-                                        htmlFor={item.id}
-                                    >
-                                        <Space direction="vertical">
-                                            <Input />
-                                        </Space>
-                                    </Form.Item>
-                                </div>
                             ) : (
                                 <>
                                     <Text
@@ -196,4 +173,4 @@ const Surveys = () => {
     )
 }
 
-export default Surveys
+export default TheoreticalPart

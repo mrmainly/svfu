@@ -1,9 +1,9 @@
-import { Route, BrowserRouter, Routes } from "react-router-dom";
-import "antd/dist/antd.min.css";
+import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import 'antd/dist/antd.min.css'
 
-import ROUTES from "./routes";
-import Layout from "./layout";
-import Header from "./components/header";
+import ROUTES from './routes'
+import Layout from './layout'
+import Header from './components/header'
 import {
     Registration,
     Login,
@@ -17,13 +17,14 @@ import {
     TestDetail,
     CertificationResults,
     QualificationAdded,
-    Surveys,
     QualificationDetail,
     QualificationEdit,
     CertificationResultsDetial,
     Applying,
     Attested,
-} from "./pages";
+    TheoreticalPart,
+    PracticalPart,
+} from './pages'
 
 function App() {
     return (
@@ -32,41 +33,17 @@ function App() {
             <Routes>
                 <Route path={ROUTES.LOGIN} element={<Layout />}>
                     <Route index element={<Login />} />
-                    <Route
-                        element={<Registration />}
-                        path={ROUTES.REGISTRATION}
-                    />
-                    <Route
-                        element={<ForgotPassword />}
-                        path={ROUTES.FORGOT_PASSWORD}
-                    />
+                    <Route element={<Registration />} path={ROUTES.REGISTRATION} />
+                    <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
                     <Route element={<Profile />} path={ROUTES.PROFILE} />
-                    <Route
-                        element={<ProfileDetail />}
-                        path={ROUTES.PROFILE_EDITING}
-                    />
+                    <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
                     <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
                     <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
-                    <Route
-                        element={<TestDetail />}
-                        path={`${ROUTES.TEST_DETAIL}/:id`}
-                    />
-                    <Route
-                        element={<Qualifications />}
-                        path={ROUTES.MY_QUALIFICATIONS}
-                    />
-                    <Route
-                        element={<CertificationResults />}
-                        path={ROUTES.CERTIFICATION_RESULTS}
-                    />
-                    <Route
-                        element={<DocumentDetail />}
-                        path={ROUTES.DOCUMENTS_EDITING}
-                    />
-                    <Route
-                        element={<QualificationAdded />}
-                        path={ROUTES.QUALIFICATION_ADDED}
-                    />
+                    <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />
+                    <Route element={<Qualifications />} path={ROUTES.MY_QUALIFICATIONS} />
+                    <Route element={<CertificationResults />} path={ROUTES.CERTIFICATION_RESULTS} />
+                    <Route element={<DocumentDetail />} path={ROUTES.DOCUMENTS_EDITING} />
+                    <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
                     <Route
                         element={<QualificationDetail />}
                         path={`${ROUTES.QUALIFICATION_DETAIL}/:id`}
@@ -75,17 +52,18 @@ function App() {
                         element={<QualificationEdit />}
                         path={`${ROUTES.QUALIFICATION_EDITING}/:id`}
                     />
-                    <Route element={<Surveys />} path={ROUTES.SURVEYS} />
+                    <Route element={<TheoreticalPart />} path={ROUTES.THEORETICAL_PART} />
                     <Route element={<Applying />} path={ROUTES.APPILYNG} />
                     <Route
                         element={<CertificationResultsDetial />}
                         path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
                     />
-                    <Route element={<Attested/>} path={ROUTES.USERS_ATTESTED}/>
+                    <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} />
+                    <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
                 </Route>
             </Routes>
         </BrowserRouter>
-    );
+    )
 }
 
-export default App;
+export default App

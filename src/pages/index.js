@@ -1,21 +1,22 @@
-import Login from "./auth/login";
-import Registration from "./auth/registration";
-import Profile from "./profile";
-import ForgotPassword from "./auth/forgot-password";
-import ProfileDetail from "./profile/detail";
-import Test from "./tests";
-import Documents from "./documents";
-import Qualifications from "./qualifications";
-import DocumentDetail from "./documents/detail";
-import TestDetail from "./tests/detail";
-import CertificationResults from "./certification-results";
-import QualificationAdded from "./qualifications/added";
-import QualificationDetail from "./qualifications/detail";
-import QualificationEdit from "./qualifications/edit";
-import Surveys from "./tests/surveys";
-import CertificationResultsDetial from "./certification-results/detail";
-import Applying from "./applying";
-import { Attested } from "./users";
+import Login from './auth/login'
+import Registration from './auth/registration'
+import Profile from './profile'
+import ForgotPassword from './auth/forgot-password'
+import ProfileDetail from './profile/detail'
+import Test from './tests'
+import Documents from './documents'
+import Qualifications from './qualifications'
+import DocumentDetail from './documents/detail'
+import TestDetail from './tests/detail'
+import CertificationResults from './certification-results'
+import QualificationAdded from './qualifications/added'
+import QualificationDetail from './qualifications/detail'
+import QualificationEdit from './qualifications/edit'
+import CertificationResultsDetial from './certification-results/detail'
+import Applying from './applying'
+import { Attested } from './users'
+import TheoreticalPart from './surveys/theoretical-part'
+import PracticalPart from './surveys/practical-part'
 
 export {
     Login,
@@ -32,8 +33,9 @@ export {
     QualificationAdded,
     QualificationDetail,
     QualificationEdit,
-    Surveys,
+    TheoreticalPart,
     CertificationResultsDetial,
     Applying,
     Attested,
-};
+    PracticalPart,
+}

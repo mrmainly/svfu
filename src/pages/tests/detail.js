@@ -52,7 +52,7 @@ const TestDetail = () => {
     const pathcSurvey = () => {
         surveyPatch({ id: data.id }).then((res) => {
             if (res.data) {
-                navigate(ROUTES.SURVEYS, {
+                navigate(ROUTES.THEORETICAL_PART, {
                     state: { surveyquest: data.surveyquest, id: data.id },
                 })
             } else {
