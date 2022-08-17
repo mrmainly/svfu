@@ -46,5 +46,9 @@ export const pathname = (params) => {
         case ROUTES.USERS:
             return 'Пользователи'
             break
+        case ROUTES.ATTESTATION_TESTS_BANK:
+            return 'Банк пользователей'
+            break    
+            
     }
 }

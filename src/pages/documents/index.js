@@ -190,13 +190,13 @@ const Documents = () => {
                                 <a href={data?.passport} target="_blank">
                                     {decodeURI(data.passport.split('/')[5])}
                                 </a>
+                                <EditOutlined
+                                    onClick={() => handleEdit(data.passport, 'Паспорт')}
+                                    style={{ marginLeft: 20, color: 'green' }}
+                                />
                             </div>
                         )}
                     </div>
-                    <EditOutlined
-                        onClick={() => handleEdit(data.passport, 'Паспорт')}
-                        style={{ marginLeft: 20, color: 'green' }}
-                    />
                 </Space>
                 {inputs.map((it, index) => (
                     <Space
@@ -219,7 +219,7 @@ const Documents = () => {
                                 gap: 5,
                             }}
                         >
-                            {it.value.map((itt, index) => (
+                            {it?.value.map((itt, index) => (
                                 <div key={index}>
                                     <FileTwoTone />
                                     <a href={itt.file} target="_blank">
