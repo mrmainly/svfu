@@ -28,6 +28,17 @@ export const documents = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "Document" }],
     }),
+    postDocumentsTitles: build.mutation({
+      query({ formData }) {
+        return {
+          url: `users/document/titlesdegrees`,
+          method: "POST",
+          body: formData,
+          header: "multipart/form-data",
+        };
+      },
+      invalidatesTags: [{ type: "Document" }],
+    }),
     patchDocumentsDiploma: build.mutation({
       query({ id, formData }) {
         return {
@@ -45,5 +56,6 @@ export const {
   useGetDocumentsQuery,
   usePostDocumentsMutation,
   usePostDocumentsDiplomaMutation,
+  usePostDocumentsTitlesMutation,
   usePatchDocumentsDiplomaMutation,
 } = documents;

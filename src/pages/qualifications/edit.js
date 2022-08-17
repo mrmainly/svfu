@@ -85,6 +85,7 @@ const QualificationEdit = () => {
 
       if (!isPDF) {
         message.error(`${file.name} не является pdf файлом`);
+        return isPDF || Upload.LIST_IGNORE;
       }
 
       return false;
