@@ -1,6 +1,6 @@
 import UsersTable from './components/tables/UsersTable'
 
-const Attested = () => {
+const UsersList = () => {
     return (
         <div>
             <UsersTable />
@@ -8,4 +8,4 @@ const Attested = () => {
     )
 }
 
-export default Attested
+export default UsersList

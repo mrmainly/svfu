@@ -8,7 +8,7 @@ import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import ClassificationTable from './components/tables/ClassificationTable'
 
-const AttestedDetail = () => {
+const UsersDetail = () => {
     const navigate = useNavigate()
     const [mode, setMode] = useState('info')
     const handleModeChange = (e) => {
@@ -72,4 +72,4 @@ const AttestedDetail = () => {
     )
 }
 
-export default AttestedDetail
+export default UsersDetail
