@@ -188,7 +188,7 @@ const Documents = () => {
                             <div>
                                 <FileTwoTone />
                                 <a href={data?.passport} target="_blank">
-                                    {data.passport.split('/')[5]}
+                                    {decodeURI(data.passport.split('/')[5])}
                                 </a>
                             </div>
                         )}
@@ -223,7 +223,7 @@ const Documents = () => {
                                 <div key={index}>
                                     <FileTwoTone />
                                     <a href={itt.file} target="_blank">
-                                        {itt.file.split('/')[5]}
+                                        {decodeURI(itt.file).split('/')[5]}
                                     </a>
                                     <Text style={{ marginLeft: 15 }}>{itt.name}</Text>
                                     <EditOutlined

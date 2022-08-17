@@ -1,50 +1,47 @@
-import React from "react";
-import ROUTES from "../../routes";
-import { Divider } from "antd";
-import { useNavigate } from "react-router-dom";
-import { useGetProfileQuery } from "../../services/ProfileService";
-import cookie from "js-cookie";
+import React from 'react'
+import ROUTES from '../../routes'
+import { Divider } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { useGetProfileQuery } from '../../services/ProfileService'
+import cookie from 'js-cookie'
 
 const HeaderUser = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const { data, isLoading, error } = useGetProfileQuery({
-        cookie: cookie.get("token"),
-    });
+        cookie: cookie.get('token'),
+    })
     return (
         <div>
             <div
                 style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    height: "52px",
-                    background: "url(./img/header_up.svg)",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPositionX: "center",
-                    padding: "0 32px",
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    height: '52px',
+                    background: 'url(./img/header_up.svg)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPositionX: 'center',
+                    padding: '0 32px',
                 }}
             >
-                <img src="/img/image11.svg" style={{ height: "52px" }} />
+                <img src="/img/image11.svg" style={{ height: '52px' }} />
                 <div
                     style={{
-                        display: "flex",
-                        alignItems: "center",
-                        flexDirection: "row",
-                        gap: "10px",
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        gap: '10px',
                     }}
                 >
-                    <div
-                        style={{ cursor: "pointer" }}
-                        onClick={() => navigate(ROUTES.PROFILE)}
-                    >
+                    <div style={{ cursor: 'pointer' }} onClick={() => navigate(ROUTES.PROFILE)}>
                         {data?.last_name} {data?.first_name}
                     </div>
-                    <Divider style={{ height: "16px" }} type="vertical" />
+                    <Divider style={{ height: '16px' }} type="vertical" />
                     <div
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                         onClick={() => {
-                            cookie.remove("token");
-                            navigate(ROUTES.LOGIN);
+                            cookie.remove('token')
+                            navigate(ROUTES.LOGIN)
                         }}
                     >
                         Выйти
@@ -53,14 +50,14 @@ const HeaderUser = () => {
             </div>
             <div
                 style={{
-                    backgroundColor: "#09304A",
-                    height: "16px",
-                    backgroundImage: "url(./img/header_down.svg)",
-                    backgroundRepeat: "no-repeat",
+                    backgroundColor: '#09304A',
+                    height: '16px',
+                    backgroundImage: 'url(./img/header_down.svg)',
+                    backgroundRepeat: 'no-repeat',
                 }}
             ></div>
         </div>
-    );
-};
+    )
+}
 
-export default HeaderUser;
+export default HeaderUser
