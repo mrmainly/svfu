@@ -14,4 +14,5 @@ export {
     QualificationsTable,
     SurveysSideBar,
     AppilyngTable,
-};
+    SurveyModalAnswer,
+}

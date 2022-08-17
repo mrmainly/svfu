@@ -1,24 +1,20 @@
-import React from "react";
-import { Spin } from "antd";
+import React from 'react'
+import { Spin } from 'antd'
 
-import { AvailableTestTable } from "../../components";
-import { useGetSurveysQuery } from "../../services/SurveysService";
-import ROUTES from "../../routes";
+import { AvailableTestTable } from '../../components'
+import { useGetSurveysQuery } from '../../services/SurveysService'
+import ROUTES from '../../routes'
 
 const Test = () => {
-    const { data, isLoading, error } = useGetSurveysQuery("");
+    const { data, isLoading, error } = useGetSurveysQuery('')
 
-    console.log(data);
+    console.log(data)
 
     return (
         <div>
-            <AvailableTestTable
-                data={data}
-                routes={ROUTES.TEST_DETAIL}
-                loading={isLoading}
-            />
+            <AvailableTestTable data={data} routes={ROUTES.TEST_DETAIL} loading={isLoading} />
         </div>
-    );
-};
+    )
+}
 
-export default Test;
+export default Test
