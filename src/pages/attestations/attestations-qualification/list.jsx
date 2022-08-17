@@ -21,11 +21,10 @@ const AttestationsQualifications = () => {
                         placeholder="Поиск..."
                         onSearch={onSearch}
                         enterButton
-                        style={{ background: '#0D6EFD', borderRadius: 4 }}
+                        style={{ borderRadius: 4 }}
                     />
                 </Col>
             </Row>
-            <AttestationsQualificationsTable />
             <Modal
                 destroyOnClose={true}
                 title="Создание квалификации"
@@ -52,6 +51,7 @@ const AttestationsQualifications = () => {
                     </Form.Item>
                 </Form>
             </Modal>
+            <AttestationsQualificationsTable />
         </div>
     )
 }

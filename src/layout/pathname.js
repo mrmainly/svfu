@@ -47,8 +47,7 @@ export const pathname = (params) => {
             return 'Пользователи'
             break
         case ROUTES.ATTESTATION_TESTS_BANK:
-            return 'Банк пользователей'
-            break    
-            
+            return 'Банк тестов'
+            break
     }
 }
