@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Spin, Space, Typography } from 'antd'
+import { Spin, Space, Typography, message } from 'antd'
 
 import { useGetSurveysIdQuery, useSurveyPatchMutation } from '../../services/SurveysService'
 import { Line, MyButton } from '../../components'
@@ -56,7 +56,7 @@ const TestDetail = () => {
                     state: { surveyquest: data.surveyquest, id: data.id },
                 })
             } else {
-                console.log('error')
+                message.error('Вы уже прошли тестирование')
             }
         })
     }
