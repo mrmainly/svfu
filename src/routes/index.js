@@ -19,6 +19,7 @@ const ROUTES = {
     SURVEYS: "/surveys",
     CERTIFICATION_RESULTS_DETAIL: "/certification-results_detail",
     APPILYNG: "/appilyng",
+    USERS_ATTESTED: "/users-attested",
 };
 
 export default ROUTES;
