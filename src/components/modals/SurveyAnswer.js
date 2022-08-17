@@ -1,14 +1,28 @@
-import { Button, Modal } from 'antd'
+import { Button, Modal, message } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 import { MyButton } from '..'
 import { useSurveyPostMutation } from '../../services/SurveysService'
+import ROUTES from '../../routes'
 
 const SurveyAnswer = ({ open, setOpen, text, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
 
+    const navigate = useNavigate()
+
     const onFinishSubmit = () => {
         postSurvey({ body: postData, id: id }).then((res) => {
             console.log(res)
+            if (res.data) {
+                if (res.data.survey_status === 'NOT_PASSED') {
+                    message.error('Вы не прошли тестовую часть=')
+                    navigate(ROUTES.PROFILE)
+                } else {
+                    navigate(ROUTES.PRACTICAL_PART, {
+                        state: { id: id },
+                    })
+                }
+            }
         })
     }
 

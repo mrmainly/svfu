@@ -113,8 +113,7 @@ const MyLayout = () => {
                         />
                         <Divider style={{ background: 'white' }} />
                     </Sider>
-
-                    {params.pathname === ROUTES.SURVEYS ? (
+                    {params.pathname === ROUTES.THEORETICAL_PART ? (
                         <SurveyLayout />
                     ) : (
                         <MainLayout params={params} />
@@ -126,21 +125,3 @@ const MyLayout = () => {
 }
 
 export default MyLayout
-
-{
-    /* {items.map((item, index) => (
-                                <Menu.Item
-                                    key={index}
-                                    onClick={() => navigate(item.navigate)}
-                                >
-                                    {item.label}
-                                </Menu.Item>
-                            ))}
-                            <Menu.Item
-                                onClick={() => {
-                                    navigate(ROUTES.SIGN_IN);
-                                }}
-                            >
-                                Выйти
-                            </Menu.Item> */
-}
