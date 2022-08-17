@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Menu, Typography, Divider } from "antd";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
-import { BsPersonFill, BsCardChecklist } from "react-icons/bs";
+import { BsPersonFill, BsCardChecklist, BsPeople } from "react-icons/bs";
 import { HiOutlineDocumentText } from "react-icons/hi";
 
 import ROUTES from "../routes";
@@ -56,6 +56,18 @@ const MyLayout = () => {
           onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),
         },
       ],
+    },
+    {
+      label: "Пользователи",
+      key: "submenu-5",
+      icon: <BsPeople/>,
+      children: [
+        {
+          label: "Аттестуемые",
+          key: "submenu-item-5-1",
+          onClick: () => navigate(ROUTES.USERS_ATTESTED),
+        },
+      ]
     },
   ];
 
