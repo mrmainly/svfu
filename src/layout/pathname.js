@@ -41,7 +41,7 @@ export const pathname = (params) => {
         case ROUTES.QUALIFICATION_ADDED:
             return "Загрузить квалификацию";
             break
-        case ROUTES.USERS_ATTESTED:
+        case ROUTES.USERS:
             return "Пользователи";
             break
     }

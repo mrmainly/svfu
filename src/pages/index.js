@@ -15,7 +15,7 @@ import QualificationEdit from "./qualifications/edit";
 import Surveys from "./tests/surveys";
 import CertificationResultsDetial from "./certification-results/detail";
 import Applying from "./applying";
-import { Attested } from "./users";
+import { Attested, AttestedDetail } from "./users";
 
 export {
     Login,
@@ -36,4 +36,5 @@ export {
     CertificationResultsDetial,
     Applying,
     Attested,
+    AttestedDetail,
 };

@@ -1,5 +1,4 @@
-import Attested from "./attested";
+import Attested from './list'
+import AttestedDetail from './detail'
 
-export {
-    Attested
-}
+export { Attested, AttestedDetail }
