@@ -23,6 +23,7 @@ import {
     CertificationResultsDetial,
     Applying,
     Attested,
+    AttestedDetail,
 } from "./pages";
 
 function App() {
@@ -81,7 +82,8 @@ function App() {
                         element={<CertificationResultsDetial />}
                         path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
                     />
-                    <Route element={<Attested/>} path={ROUTES.USERS_ATTESTED}/>
+                    <Route element={<AttestedDetail/>} path={ROUTES.USERS_DETAIL + '/:id'}/>
+                    <Route element={<Attested/>} path={ROUTES.USERS}/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -5,7 +5,6 @@ import CerificationResultsTable from "./tables/CerificationResultsTable";
 import QualificationsTable from "./tables/QualificationsTable";
 import SurveysSideBar from "./sidebars/SurveysSideBar";
 import AppilyngTable from "./tables/AppilyngTable";
-import { AttestedTable } from "./tables/users";
 
 export {
     AvailableTestTable,
@@ -15,5 +14,4 @@ export {
     QualificationsTable,
     SurveysSideBar,
     AppilyngTable,
-    AttestedTable,
 };

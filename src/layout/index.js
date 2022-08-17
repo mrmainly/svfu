@@ -63,9 +63,9 @@ const MyLayout = () => {
       icon: <BsPeople/>,
       children: [
         {
-          label: "Аттестуемые",
+          label: "Пользователи",
           key: "submenu-item-5-1",
-          onClick: () => navigate(ROUTES.USERS_ATTESTED),
+          onClick: () => navigate(ROUTES.USERS),
         },
       ]
     },
