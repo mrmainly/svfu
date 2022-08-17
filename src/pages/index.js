@@ -14,9 +14,10 @@ import QualificationDetail from './qualifications/detail'
 import QualificationEdit from './qualifications/edit'
 import CertificationResultsDetial from './certification-results/detail'
 import Applying from './applying'
-import { Attested } from './users'
 import TheoreticalPart from './surveys/theoretical-part'
 import PracticalPart from './surveys/practical-part'
+import UsersDetail from './users/detail'
+import UsersList from './users/list'
 
 export {
     Login,
@@ -36,6 +37,7 @@ export {
     TheoreticalPart,
     CertificationResultsDetial,
     Applying,
-    Attested,
     PracticalPart,
+    UsersDetail,
+    UsersList,
 }

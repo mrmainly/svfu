@@ -24,6 +24,9 @@ import {
     Attested,
     TheoreticalPart,
     PracticalPart,
+    AttestedDetail,
+    UsersDetail,
+    UsersList,
 } from './pages'
 
 function App() {
@@ -58,8 +61,12 @@ function App() {
                         element={<CertificationResultsDetial />}
                         path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
                     />
-                    <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} />
+
+                    {/* <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} /> */}
                     <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
+
+                    <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
+                    <Route element={<UsersList />} path={ROUTES.USERS} />
                 </Route>
             </Routes>
         </BrowserRouter>

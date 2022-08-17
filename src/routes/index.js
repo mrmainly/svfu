@@ -21,6 +21,8 @@ const ROUTES = {
     APPILYNG: '/appilyng',
     USERS_ATTESTED: '/users-attested',
     PRACTICAL_PART: '/practical-part',
+    USERS: '/users',
+    USERS_DETAIL: '/users',
 }
 
 export default ROUTES
