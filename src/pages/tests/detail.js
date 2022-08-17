@@ -2,7 +2,10 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Spin, Space, Typography } from "antd";
 
-import { useGetSurveysIdQuery } from "../../services/SurveysService";
+import {
+    useGetSurveysIdQuery,
+    useSurveyPatchMutation,
+} from "../../services/SurveysService";
 import { Line, MyButton } from "../../components";
 import ROUTES from "../../routes";
 
@@ -12,6 +15,7 @@ const TestDetail = () => {
     const params = useParams();
 
     const { data, isFetching, error } = useGetSurveysIdQuery({ id: params.id });
+    const [surveyPatch] = useSurveyPatchMutation();
     const navigate = useNavigate();
 
     if (isFetching) {
@@ -28,8 +32,6 @@ const TestDetail = () => {
             </div>
         );
     }
-
-    console.log("detail", data);
 
     const items = [
         {
@@ -50,6 +52,18 @@ const TestDetail = () => {
         },
     ];
 
+    const pathcSurvey = () => {
+        surveyPatch({ id: data.id }).then((res) => {
+            if (res.data) {
+                navigate(ROUTES.SURVEYS, {
+                    state: { surveyquest: data.surveyquest, id: data.id },
+                });
+            } else {
+                console.log("error");
+            }
+        });
+    };
+
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
             {items.map((item, index) => (
@@ -65,15 +79,7 @@ const TestDetail = () => {
                 </Space>
             ))}
             <Line />
-            <MyButton
-                onClick={() =>
-                    navigate(ROUTES.SURVEYS, {
-                        state: { surveyquest: data.surveyquest },
-                    })
-                }
-            >
-                Начать тестирование
-            </MyButton>
+            <MyButton onClick={pathcSurvey}>Начать тестирование</MyButton>
         </div>
     );
 };

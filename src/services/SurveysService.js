@@ -19,7 +19,29 @@ export const surveys = api.injectEndpoints({
                 }
             },
         }),
+        surveyPost: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `tester/survey/part-one/${id}`,
+                    method: "POST",
+                    body,
+                };
+            },
+        }),
+        surveyPatch: build.mutation({
+            query({ id }) {
+                return {
+                    url: `tester/survey/part-one/${id}`,
+                    method: "PATCH",
+                };
+            },
+        }),
     }),
 });
 
-export const { useGetSurveysQuery, useGetSurveysIdQuery } = surveys;
+export const {
+    useGetSurveysQuery,
+    useGetSurveysIdQuery,
+    useSurveyPostMutation,
+    useSurveyPatchMutation,
+} = surveys;

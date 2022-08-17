@@ -1,68 +1,66 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import {
-    Typography,
-    Radio,
-    Space,
-    Checkbox,
-    Input,
-    Form,
-    Col,
-    Row,
-} from "antd";
+import { Typography, Radio, Space, Checkbox, Input, Form } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Line, MyButton } from "../../components";
 import { SurveysSlice } from "../../reducers/SurveysSlice";
+import { useSurveyPostMutation } from "../../services/SurveysService";
 
 const { Text, Title } = Typography;
 
 const Surveys = () => {
     const { arrayIndex } = useSelector((state) => state.survey_slice);
     const { handleArrayIndex } = SurveysSlice.actions;
-
-    let [arrayPost, setArrayPost] = useState([]);
+    const [postSurvey] = useSurveyPostMutation();
 
     const location = useLocation();
     const state = location.state;
     const dispatch = useDispatch();
 
-    const { surveyquest } = state;
+    const { surveyquest, id } = state;
 
     const onSubmitFurther = (data) => {
         console.log("data", data);
-
-        setArrayPost((prev) => [
-            ...prev,
-            data.map((item) => {
-                return {
-                    [item.name[0]]: item.value,
-                };
-            }),
-        ]);
+        const postData = {
+            answers: [],
+        };
+        const abjArr = Object.entries(data);
+        abjArr.forEach(([key, value]) => {
+            if (Array.isArray(value)) {
+                value.forEach((item) => {
+                    postData.answers.push({ q_id: Number(key), a_id: item });
+                });
+            } else {
+                postData.answers.push({ q_id: Number(key), a_id: value });
+            }
+        });
+        postSurvey({ body: postData, id: id }).then((res) => {
+            console.log(res);
+        });
+        console.log(postData);
     };
-    console.log("asd", arrayPost);
-    // data.map((item) => {
-
-    // })
     return (
         <div>
             <Form
                 style={{ display: "flex", flexDirection: "column" }}
                 onFinish={onSubmitFurther}
+                id="my-form"
             >
                 {surveyquest
-                    .filter((item, index) => index === arrayIndex)
+                    // .filter((item, index) => index === arrayIndex)
                     .map((item, index) => (
                         <div
                             key={index}
-                            style={{ display: "flex", flexDirection: "column" }}
+                            style={{
+                                display: index === arrayIndex ? "flex" : "none",
+                                flexDirection: "column",
+                            }}
                         >
                             <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
                             <Text style={{ marginTop: 12 }}>
                                 {item.question.description}
                             </Text>
-
                             {item.question.technique === "ONE_CHOICE" ? (
                                 <>
                                     <Text
@@ -73,20 +71,10 @@ const Surveys = () => {
                                     >
                                         Выберите один ответ:
                                     </Text>
-
                                     <Form.Item
-                                        label={
-                                            <Text
-                                                style={{
-                                                    fontWeight: 600,
-                                                    fontSize: 16,
-                                                }}
-                                            >
-                                                Логин
-                                            </Text>
-                                        }
-                                        name={`q${item.id}`}
+                                        name={item.id}
                                         labelCol={{ span: 24 }}
+                                        htmlFor={item.id}
                                     >
                                         <Radio.Group>
                                             <Space direction="vertical">
@@ -105,7 +93,7 @@ const Surveys = () => {
                                     </Form.Item>
                                 </>
                             ) : item.question.technique === "DESCRIBE" ? (
-                                <>
+                                <div>
                                     <Text
                                         style={{
                                             marginTop: 12,
@@ -114,10 +102,16 @@ const Surveys = () => {
                                     >
                                         Напишите ответ
                                     </Text>
-                                    <Space direction="vertical">
-                                        <Input />
-                                    </Space>
-                                </>
+                                    <Form.Item
+                                        name={item.id}
+                                        labelCol={{ span: 24 }}
+                                        htmlFor={item.id}
+                                    >
+                                        <Space direction="vertical">
+                                            <Input />
+                                        </Space>
+                                    </Form.Item>
+                                </div>
                             ) : (
                                 <>
                                     <Text
@@ -129,18 +123,9 @@ const Surveys = () => {
                                         Выберите несколько ответов:
                                     </Text>
                                     <Form.Item
-                                        label={
-                                            <Text
-                                                style={{
-                                                    fontWeight: 600,
-                                                    fontSize: 16,
-                                                }}
-                                            >
-                                                Логин
-                                            </Text>
-                                        }
-                                        name={`q${item.id}`}
+                                        name={item.id}
                                         labelCol={{ span: 24 }}
+                                        htmlFor={item.id}
                                     >
                                         <Checkbox.Group
                                             style={{
@@ -197,14 +182,13 @@ const Surveys = () => {
                                         }}
                                     >
                                         <MyButton
-                                            // onClick={() => {
-                                            //     dispatch(
-                                            //         handleArrayIndex(
-                                            //             arrayIndex + 1
-                                            //         )
-                                            //     );
-                                            // }}
-                                            htmlType="submit"
+                                            onClick={() => {
+                                                dispatch(
+                                                    handleArrayIndex(
+                                                        arrayIndex + 1
+                                                    )
+                                                );
+                                            }}
                                         >
                                             Далее
                                         </MyButton>

@@ -52,7 +52,7 @@ const SurveysSideBar = () => {
                           ))}
                 </div>
             </div>
-            <div className="practic-block">
+            {/* <div className="practic-block">
                 <Text>Практическая часть:</Text>
                 <Button
                     type="default"
@@ -67,7 +67,7 @@ const SurveysSideBar = () => {
                 >
                     Задание П.Ч.
                 </Button>
-            </div>
+            </div> */}
             <div className="time-block">
                 <div
                     style={{ display: "flex", justifyContent: "space-between" }}
@@ -96,8 +96,10 @@ const SurveysSideBar = () => {
                     borderRadius: 3,
                 }}
                 size="large"
+                htmlType="submit"
+                form="my-form"
             >
-                Завершить тест
+                Завершить тестовую часть
             </Button>
         </div>
     );

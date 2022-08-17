@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     data: [],
     arrayIndex: 0,
+    modalText: "",
+    modalOpenStatus: false,
 };
 
 export const SurveysSlice = createSlice({
@@ -14,6 +16,9 @@ export const SurveysSlice = createSlice({
         },
         handleArrayIndex(state, action) {
             state.arrayIndex = action.payload;
+        },
+        handleModalStatus(state, action) {
+            state.modalOpenStatus = action;
         },
     },
 });
