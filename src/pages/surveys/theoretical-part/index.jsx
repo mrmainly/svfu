@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Typography, Radio, Space, Checkbox, Input, Form } from 'antd'
+import { Typography, Radio, Space, Checkbox, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Line, MyButton } from '../../../components'

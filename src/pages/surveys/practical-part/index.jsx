@@ -1,7 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Typography, Input, Form, Spin, Upload, message } from 'antd'
-import { useDispatch } from 'react-redux'
 import { InboxOutlined } from '@ant-design/icons'
 
 import {
@@ -19,19 +18,13 @@ const PracticalPart = () => {
     const state = location.state
     const { id } = state
 
-    const { data: practical_data, isLoading, error } = useGetPracticalPartIdQuery({ id: id })
+    const { data: practical_data, isLoading } = useGetPracticalPartIdQuery({ id: id })
     const [postPracticalPart] = usePracticalPartPostMutation()
 
-    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     if (isLoading) {
         return <Spin />
-    }
-
-    const props = {
-        multiple: false,
-        maxCount: 1,
     }
 
     const onSubmitFurther = (data) => {

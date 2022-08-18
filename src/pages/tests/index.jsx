@@ -1,12 +1,11 @@
 import React from 'react'
-import { Spin } from 'antd'
 
 import { AvailableTestTable } from '../../components'
 import { useGetSurveysQuery } from '../../services/SurveysService'
 import ROUTES from '../../routes'
 
 const Test = () => {
-    const { data, isLoading, error } = useGetSurveysQuery('')
+    const { data, isLoading } = useGetSurveysQuery('')
 
     console.log(data)
 

@@ -11,7 +11,7 @@ const { Text } = Typography
 const TestDetail = () => {
     const params = useParams()
 
-    const { data, isFetching, error } = useGetSurveysIdQuery({ id: params.id })
+    const { data, isFetching } = useGetSurveysIdQuery({ id: params.id })
     const [surveyPatch] = useSurveyPatchMutation()
     const navigate = useNavigate()
 
