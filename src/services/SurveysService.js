@@ -17,6 +17,7 @@ export const surveys = api.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled
                     dispatch(getData(data))
+                    console.log(data)
                 } catch (err) {
                     console.log(err)
                 }

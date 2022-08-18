@@ -8,7 +8,7 @@ const { Option } = Select
 
 const TestsBank = () => {
     const [modalNewTest, setModalNewTest] = useState(false)
-    const onSearch = (value: string) => console.log(value)
+    const onSearch = (value) => console.log(value)
     return (
         <div>
             <Row gutter={10} style={{ marginBottom: '10px' }}>

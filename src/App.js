@@ -21,12 +21,12 @@ import {
     QualificationEdit,
     CertificationResultsDetial,
     Applying,
-    Attested,
     TheoreticalPart,
     PracticalPart,
-    AttestedDetail,
     UsersDetail,
     UsersList,
+    TestsBank,
+    AttestationsQualifications,
 } from './pages'
 
 function App() {
@@ -65,6 +65,11 @@ function App() {
                     <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
+                    <Route
+                        element={<AttestationsQualifications />}
+                        path={ROUTES.ATTESTATION_QUALI}
+                    />
+                    <Route element={<TestsBank />} path={ROUTES.ATTESTATION_TESTS_BANK} />
                 </Route>
             </Routes>
         </BrowserRouter>
