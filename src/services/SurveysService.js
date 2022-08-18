@@ -8,6 +8,9 @@ export const surveys = api.injectEndpoints({
         getSurveys: build.query({
             query: () => `tester/survey/`,
         }),
+        getTestResults: build.query({
+            query: ({ id }) => `tester/result/`,
+        }),
         getSurveysId: build.query({
             query: ({ id }) => `tester/survey/part-one/${id}`,
             async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
@@ -39,6 +42,7 @@ export const surveys = api.injectEndpoints({
         getPracticalPartId: build.query({
             query: ({ id }) => `tester/survey/part-two/${id}`,
         }),
+
         practicalPartPost: build.mutation({
             query({ body, id }) {
                 return {
@@ -58,4 +62,5 @@ export const {
     useSurveyPatchMutation,
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,
+    useGetTestResultsQuery,
 } = surveys

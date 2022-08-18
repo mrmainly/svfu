@@ -68,20 +68,18 @@ const TheoreticalPart = () => {
                             <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
                             {item.question.technique === 'ONE_CHOICE' ? (
                                 <>
-                                    <Text
-                                        style={{
-                                            marginTop: 12,
-                                            marginBottom: 12,
-                                        }}
-                                    >
-                                        Выберите один ответ:
-                                    </Text>
                                     <Form.Item
                                         name={item.id}
-                                        labelCol={{ span: 24 }}
                                         htmlFor={item.id}
+                                        style={{ marginTop: 20 }}
+                                        labelCol={{ span: 24 }}
+                                        label={
+                                            <Text style={{ fontSize: 16 }}>
+                                                Выберите несколько ответов
+                                            </Text>
+                                        }
                                     >
-                                        <Radio.Group>
+                                        <Radio.Group style={{ marginTop: '-10px' }}>
                                             <Space direction="vertical">
                                                 {item.question.variant.map((item, index) => (
                                                     <Radio value={item.id} key={index}>
@@ -94,23 +92,22 @@ const TheoreticalPart = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Text
-                                        style={{
-                                            marginTop: 12,
-                                            marginBottom: 12,
-                                        }}
-                                    >
-                                        Выберите несколько ответов:
-                                    </Text>
                                     <Form.Item
                                         name={item.id}
-                                        labelCol={{ span: 24 }}
                                         htmlFor={item.id}
+                                        labelCol={{ span: 24 }}
+                                        label={
+                                            <Text style={{ fontSize: 16 }}>
+                                                Выберите несколько ответов
+                                            </Text>
+                                        }
+                                        style={{ marginTop: 20 }}
                                     >
                                         <Checkbox.Group
                                             style={{
                                                 display: 'flex',
                                                 flexDirection: 'column',
+                                                marginTop: '-10px',
                                             }}
                                         >
                                             {item.question.variant.map((item, index) => (

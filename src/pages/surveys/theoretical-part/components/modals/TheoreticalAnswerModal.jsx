@@ -15,7 +15,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, text, id, postData }) => {
             console.log(res)
             if (res.data) {
                 if (res.data.survey_status === 'NOT_PASSED') {
-                    message.error('Вы не прошли тестовую часть=')
+                    message.error('Вы не прошли тестовую часть')
                     navigate(ROUTES.PROFILE)
                 } else {
                     navigate(ROUTES.PRACTICAL_PART, {
