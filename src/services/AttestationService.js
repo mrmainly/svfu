@@ -26,6 +26,15 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        putAttestationsQualificationId: build.mutation({
+            query({ id }) {
+                return {
+                    url: `/constructor/direction/${id}`,
+                    method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
         // getQualificationsId: build.query({
         //   query: ({ id }) => `users/qualification_improvement/${id}`,
         //   providesTags: ["Qualification"],
@@ -58,4 +67,5 @@ export const {
     useGetAttestationsQualificationQuery,
     usePostAttestationsQualificationMutation,
     usePatchAttestationsQualificationIdMutation,
+    usePutAttestationsQualificationIdMutation,
 } = attestation
