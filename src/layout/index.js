@@ -113,7 +113,8 @@ const MyLayout = () => {
                         />
                         <Divider style={{ background: 'white' }} />
                     </Sider>
-                    {params.pathname === ROUTES.THEORETICAL_PART ? (
+                    {params.pathname === ROUTES.THEORETICAL_PART ||
+                    params.pathname === ROUTES.PRACTICAL_PART ? (
                         <SurveyLayout />
                     ) : (
                         <MainLayout params={params} />

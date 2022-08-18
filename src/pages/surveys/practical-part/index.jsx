@@ -28,6 +28,8 @@ const PracticalPart = () => {
         return <Spin />
     }
 
+    console.log(practical_data)
+
     const onSubmitFurther = (data) => {
         console.log(data)
         let formData = new FormData()

@@ -6,7 +6,7 @@ const initialState = {
     modalText: '',
     modalOpenStatus: false,
     postData: [],
-    timeStatus: '',
+    timeStatus: false,
 }
 
 export const SurveysSlice = createSlice({

@@ -49,7 +49,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, text, id, postData }) => {
                             background: '#6C757D',
                             color: 'white',
                             borderRadius: 4,
-                            display: timeStatus ? 'none' : 'block',
+                            display: timeStatus ? 'none' : '',
                         }}
                         onClick={handleClose}
                     >
