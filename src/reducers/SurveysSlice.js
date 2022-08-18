@@ -6,6 +6,7 @@ const initialState = {
     modalText: '',
     modalOpenStatus: false,
     postData: [],
+    timeStatus: '',
 }
 
 export const SurveysSlice = createSlice({
@@ -26,6 +27,9 @@ export const SurveysSlice = createSlice({
         },
         addPostData(state, action) {
             state.postData = action.payload
+        },
+        changeTimeStatus(state, action) {
+            state.timeStatus = action.payload
         },
     },
 })

@@ -37,7 +37,6 @@ const TheoreticalPart = () => {
                 postData.answers.push({ q_id: Number(key), a_id: value })
             }
         })
-        console.log(postData)
         setOpenModal(true)
         setPostList(postData)
     }

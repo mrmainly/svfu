@@ -2,7 +2,6 @@ import React from 'react'
 import { Button, Spin } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
-import { useTimer } from 'use-timer'
 
 import MainInfo from './components/MainInfo'
 import SocialNetworks from './components/SocialNetworks'
@@ -17,13 +16,6 @@ const Profile = () => {
     })
 
     const navigate = useNavigate()
-    const { time, start, pause, reset, status } = useTimer({
-        initialTime: 3,
-        timerType: 'DECREMENTAL',
-        endTime: 0,
-    })
-
-    console.log(time)
 
     if (isFetching) {
         return (
@@ -40,10 +32,8 @@ const Profile = () => {
         )
     }
 
-    console.log(status)
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {time}
             <MainInfo data={data} />
             <Line />
             <SocialNetworks data={data} />
@@ -62,8 +52,6 @@ const Profile = () => {
             >
                 Редактировать профиль
             </Button>
-            <Button onClick={() => start()}>start</Button>
-            <Button onClick={() => pause()}>end</Button>
         </div>
     )
 }

@@ -1,14 +1,12 @@
 import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 import { MyButton } from '../../../../../components'
 import { useSurveyPostMutation } from '../../../../../services/SurveysService'
 import ROUTES from '../../../../../routes'
 
-const TheoreticalAnswerModal = ({ open, setOpen, text, id, postData }) => {
+const TimeIsUpModal = ({ open, setOpen, text, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
-    const { timeStatus } = useSelector((state) => state.survey_slice)
 
     const navigate = useNavigate()
 
@@ -41,30 +39,21 @@ const TheoreticalAnswerModal = ({ open, setOpen, text, id, postData }) => {
                 onCancel={handleClose}
                 footer={[
                     <MyButton size="medium" onClick={onFinishSubmit}>
-                        {timeStatus ? 'Ok' : 'Закончить тестирование'}
+                        Закончить тестирование
                     </MyButton>,
                     <Button
                         size="medium"
-                        style={{
-                            background: '#6C757D',
-                            color: 'white',
-                            borderRadius: 4,
-                            display: timeStatus ? 'none' : 'block',
-                        }}
+                        style={{ background: '#6C757D', color: 'white', borderRadius: 4 }}
                         onClick={handleClose}
                     >
                         Отмена
                     </Button>,
                 ]}
             >
-                <p>
-                    {timeStatus
-                        ? 'Мы отправим вам результаты в ближайшее время'
-                        : 'Закончив тестирование, вы не сможете изменить свои ответы на вопросы'}
-                </p>
+                <p>Закончив тестирование, вы не сможете изменить свои ответы на вопросы</p>
             </Modal>
         </>
     )
 }
 
-export default TheoreticalAnswerModal
+export default TimeIsUpModal

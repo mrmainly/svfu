@@ -16,8 +16,7 @@ export const surveys = api.injectEndpoints({
             async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled
-                    dispatch(getData(data))
-                    console.log(data)
+                    window.localStorage.setItem('survey-datas', JSON.stringify(data, null, '\t'))
                 } catch (err) {
                     console.log(err)
                 }
