@@ -1,10 +1,16 @@
 import { useState } from 'react'
 import { Modal, Input, Row, Col, Form } from 'antd'
 
-import AttestationsQualificationsTable from '../tables/AttestationsQualificationsTable'
+import AttestationsQualificationsTable from '../components/tables/AttestationsQualificationsTable'
+import AQAddModal from '../components/modals/aqaddmodal'
 import { MyButton } from '../../../components'
+
+import { useGetAttestationsQualificationQuery } from '../../../services/AttestationService'
+
 const { Search } = Input
+
 const AttestationsQualifications = () => {
+    const { data, isLoading } = useGetAttestationsQualificationQuery('')
     const [modalNewQuali, setModalNewQuali] = useState(false)
     const onSearch = (value) => console.log(value)
     return (
@@ -25,33 +31,8 @@ const AttestationsQualifications = () => {
                     />
                 </Col>
             </Row>
-            <Modal
-                destroyOnClose={true}
-                title="Создание квалификации"
-                visible={modalNewQuali}
-                onOk={() => setModalNewQuali(false)}
-                onCancel={() => setModalNewQuali(false)}
-                footer={[
-                    <MyButton key="submit">Сохранить</MyButton>,
-                    <MyButton
-                        key="back"
-                        type="default"
-                        style={{
-                            background: '#FFF',
-                        }}
-                        onClick={() => setModalNewQuali(false)}
-                    >
-                        Отмена
-                    </MyButton>,
-                ]}
-            >
-                <Form layout="vertical">
-                    <Form.Item label="Название квалификации">
-                        <Input></Input>
-                    </Form.Item>
-                </Form>
-            </Modal>
-            <AttestationsQualificationsTable />
+            <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
+            <AttestationsQualificationsTable data={data} loading={isLoading} />
         </div>
     )
 }

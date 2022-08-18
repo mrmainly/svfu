@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { Modal, Row, Col, Form, Input, Select, TimePicker, InputNumber, Typography } from 'antd'
 
-import TestsBankTable from '../components/tables/TestsBankTable'
+import QuestionsBankTable from '../components/tables/QuestionsBankTable'
 import { MyButton } from '../../../components'
 const { Search } = Input
 const { Option } = Select
 
-const TestsBank = () => {
-    const [modalNewTest, setModalNewTest] = useState(false)
+const QuestionsBank = () => {
+    const [modalNewQuestion, setModalNewQuestion] = useState(false)
     const onSearch = (value) => console.log(value)
     return (
         <div>
             <Row gutter={10} style={{ marginBottom: '10px' }}>
                 <Col>
-                    <MyButton onClick={() => setModalNewTest(true)}>Создать новый тест</MyButton>
+                    <MyButton onClick={() => setModalNewQuestion(true)}>Создать вопрос</MyButton>
                 </Col>
                 <Col>
                     <Search
@@ -24,12 +24,35 @@ const TestsBank = () => {
                         style={{ borderRadius: 4 }}
                     />
                 </Col>
+                <Col>
+                    <Select
+                        placeholder="Выберите направление"
+                        size="large"
+                        // onChange={(value) => setValue(value)}
+                    >
+                        <Option value="Направление 1" />
+                        <Option value="Направление 2" />
+                        <Option value="Направление 3" />
+                    </Select>
+                </Col>
+                <Col>
+                    <Select
+                        placeholder="Сложность"
+                        size="large"
+                        // onChange={(value) => setValue(value)}
+                    >
+                        <Option value="Легкая" />
+                        <Option value="Средняя" />
+                        <Option value="Тяжелая" />
+                        <Option value="Открытый вопрос" />
+                    </Select>
+                </Col>
             </Row>
             <Modal
                 destroyOnClose={true}
-                title="Создание тестирования"
-                visible={modalNewTest}
-                onCancel={() => setModalNewTest(false)}
+                title="Создание вопрос"
+                visible={modalNewQuestion}
+                onCancel={() => setModalNewQuestion(false)}
                 style={{ top: 0 }}
                 footer={[
                     <MyButton key="submit">Сохранить</MyButton>,
@@ -37,7 +60,7 @@ const TestsBank = () => {
                         key="back"
                         type="default"
                         style={{ background: '#FFF' }}
-                        onClick={() => setModalNewTest(false)}
+                        onClick={() => setModalNewQuestion(false)}
                     >
                         Отмена
                     </MyButton>,
@@ -123,9 +146,9 @@ const TestsBank = () => {
                     </Row>
                 </Form>
             </Modal>
-            <TestsBankTable />
+            <QuestionsBankTable />
         </div>
     )
 }
 
-export default TestsBank
+export default QuestionsBank
