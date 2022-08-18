@@ -1,11 +1,11 @@
 import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import { MyButton } from '..'
-import { useSurveyPostMutation } from '../../services/SurveysService'
-import ROUTES from '../../routes'
+import { MyButton } from '../../../../../components'
+import { useSurveyPostMutation } from '../../../../../services/SurveysService'
+import ROUTES from '../../../../../routes'
 
-const SurveyAnswer = ({ open, setOpen, text, id, postData }) => {
+const TheoreticalAnswerModal = ({ open, setOpen, text, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
 
     const navigate = useNavigate()
@@ -56,4 +56,4 @@ const SurveyAnswer = ({ open, setOpen, text, id, postData }) => {
     )
 }
 
-export default SurveyAnswer
+export default TheoreticalAnswerModal

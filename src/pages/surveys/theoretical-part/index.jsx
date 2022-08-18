@@ -3,8 +3,9 @@ import { useLocation } from 'react-router-dom'
 import { Typography, Radio, Space, Checkbox, Input, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Line, MyButton, SurveyModalAnswer } from '../../../components'
+import { Line, MyButton } from '../../../components'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
+import TheoreticalAnswerModal from './components/modals/TheoreticalAnswerModal'
 
 const { Text, Title } = Typography
 
@@ -42,7 +43,7 @@ const TheoreticalPart = () => {
     }
     return (
         <div>
-            <SurveyModalAnswer
+            <TheoreticalAnswerModal
                 open={openModal}
                 setOpen={setOpenModal}
                 id={id}

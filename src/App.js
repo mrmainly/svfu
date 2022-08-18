@@ -27,8 +27,6 @@ import {
     AttestedDetail,
     UsersDetail,
     UsersList,
-    AttestationsQualifications,
-    TestsBank,
 } from './pages'
 
 function App() {
@@ -44,7 +42,7 @@ function App() {
                     <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
                     <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
                     <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
-                    <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />
+                    <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />v
                     <Route element={<Qualifications />} path={ROUTES.MY_QUALIFICATIONS} />
                     <Route element={<CertificationResults />} path={ROUTES.CERTIFICATION_RESULTS} />
                     <Route element={<DocumentDetail />} path={ROUTES.DOCUMENTS_EDITING} />
@@ -63,15 +61,8 @@ function App() {
                         element={<CertificationResultsDetial />}
                         path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
                     />
-                    <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
-                    <Route element={<UsersList />} path={ROUTES.USERS} />
-                    <Route
-                        element={<AttestationsQualifications />}
-                        path={ROUTES.ATTESTATION_QUALI}
-                    />
-                    <Route element={<TestsBank />} path={ROUTES.ATTESTATION_TESTS_BANK} />
+                    {/* <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} /> */}
                     <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
-
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
                 </Route>
