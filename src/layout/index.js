@@ -84,6 +84,11 @@ const MyLayout = () => {
                     key: 'submenu-item-4-2',
                     onClick: () => navigate(ROUTES.ATTESTATION_TESTS_BANK),
                 },
+                {
+                    label: 'Банк вопросов',
+                    key: 'submenu-item-4-3',
+                    onClick: () => navigate(ROUTES.ATTESTATION_QUESTIONS_BANK),
+                },
             ],
         },
     ]

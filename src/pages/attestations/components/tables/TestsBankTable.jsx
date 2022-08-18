@@ -1,27 +1,30 @@
 import Table from 'antd/lib/table'
-import ROUTES from '../../../routes'
+import ROUTES from '../../../../routes'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-const AttestationsQualificationsTable = () => {
+const TestsBankTable = () => {
     const navigate = useNavigate()
 
     const data = [
         {
-            id: 1,
-            name: 'Название_квалификации',
-            questions: '125',
+            id: 12,
+            name: 'Название_тестирования',
+            qualification: 'Название_квалификации',
+            questions: 10,
         },
         {
-            id: 1,
-            name: 'Название_квалификации',
-            questions: '125',
+            id: 12,
+            name: 'Название_тестирования',
+            qualification: 'Название_квалификации',
+            questions: 10,
         },
     ]
 
     const columns = [
-        { title: 'ID', dataIndex: 'id', key: 'id' },
+        { title: '№', dataIndex: 'id', key: 'id' },
         { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
+        { title: 'Квалификация', dataIndex: 'qualification', key: 'qualification' },
         {
             title: 'Вопросов',
             dataIndex: 'questions',
@@ -38,7 +41,7 @@ const AttestationsQualificationsTable = () => {
                     //     navigate(ROUTES.USERS_DETAIL + `/${id}`)
                     // }}
                 >
-                    Проверить
+                    Перейти
                 </Button>
             ),
         },
@@ -51,4 +54,4 @@ const AttestationsQualificationsTable = () => {
     )
 }
 
-export default AttestationsQualificationsTable
+export default TestsBankTable

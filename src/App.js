@@ -27,6 +27,7 @@ import {
     UsersList,
     TestsBank,
     AttestationsQualifications,
+    QuestionsBank,
 } from './pages'
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
                         path={ROUTES.ATTESTATION_QUALI}
                     />
                     <Route element={<TestsBank />} path={ROUTES.ATTESTATION_TESTS_BANK} />
+                    <Route element={<QuestionsBank />} path={ROUTES.ATTESTATION_QUESTIONS_BANK} />
                 </Route>
             </Routes>
         </BrowserRouter>

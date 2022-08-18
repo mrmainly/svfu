@@ -1,34 +1,34 @@
 import Table from 'antd/lib/table'
-import ROUTES from '../../../routes'
+import ROUTES from '../../../../routes'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-const TestsBankTable = () => {
+const QuestionsBankTable = () => {
     const navigate = useNavigate()
 
     const data = [
         {
             id: 12,
-            name: 'Название_тестирования',
-            qualification: 'Название_квалификации',
-            questions: 10,
+            name: 'Квалификация',
+            type: 'Один из нескольких',
+            difficult: 'Средняя',
         },
         {
             id: 12,
-            name: 'Название_тестирования',
-            qualification: 'Название_квалификации',
-            questions: 10,
+            name: 'Название квалификации',
+            type: 'Практическая часть',
+            difficult: 'Открытый вопрос',
         },
     ]
 
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
-        { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
-        { title: 'Квалификация', dataIndex: 'name', key: 'name' },
+        { title: 'Название валификации', dataIndex: 'name', key: 'name' },
+        { title: 'Тип вопросв', dataIndex: 'type', key: 'type' },
         {
-            title: 'Вопросов',
-            dataIndex: 'questions',
-            key: 'questions',
+            title: 'Сложность',
+            dataIndex: 'difficult',
+            key: 'difficult',
         },
         {
             title: 'Действие',
@@ -54,4 +54,4 @@ const TestsBankTable = () => {
     )
 }
 
-export default TestsBankTable
+export default QuestionsBankTable

@@ -25,6 +25,7 @@ const ROUTES = {
     USERS_DETAIL: '/users',
     ATTESTATION_QUALI: '/attestation_qualification',
     ATTESTATION_TESTS_BANK: '/attestation_tests_bank',
+    ATTESTATION_QUESTIONS_BANK: '/attestation_questions_bank',
 }
 
 export default ROUTES
