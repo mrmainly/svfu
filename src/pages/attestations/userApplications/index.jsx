@@ -1,7 +1,6 @@
 import React from 'react'
 import { Input, Space, Select } from 'antd'
 
-import { MyButton } from '../../../components'
 import UserApplicationsTable from '../components/tables/UserApplicationsTable'
 import { useGetTestGroupQuery } from '../../../services/TestGroup'
 
@@ -11,8 +10,6 @@ const { Option } = Select
 
 const UserApplications = () => {
     const { data, isFetching } = useGetTestGroupQuery('')
-
-    console.log(data)
 
     return (
         <div>

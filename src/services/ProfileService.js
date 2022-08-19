@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from './api'
 
 export const profile = api.injectEndpoints({
     endpoints: (build) => ({
@@ -7,34 +7,38 @@ export const profile = api.injectEndpoints({
                 return {
                     url: `users/me/`,
                     dependencies: cookie,
-                };
+                }
             },
-            providesTags: ["Profile"],
+            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled
+                    window.localStorage.setItem('role', JSON.stringify(data.role, null, '\t'))
+                } catch (err) {
+                    console.log(err)
+                }
+            },
+            providesTags: ['Profile'],
         }),
         profilePatch: build.mutation({
             query(body) {
                 return {
                     url: `users/me/`,
-                    method: "PATCH",
+                    method: 'PATCH',
                     body,
-                };
+                }
             },
-            invalidatesTags: [{ type: "Profile" }],
+            invalidatesTags: [{ type: 'Profile' }],
         }),
         profilePostImage: build.mutation({
             query(body) {
                 return {
                     url: `users/photo/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
         }),
     }),
-});
+})
 
-export const {
-    useGetProfileQuery,
-    useProfilePatchMutation,
-    useProfilePostImageMutation,
-} = profile;
+export const { useGetProfileQuery, useProfilePatchMutation, useProfilePostImageMutation } = profile
