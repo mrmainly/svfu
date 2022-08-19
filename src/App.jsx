@@ -31,6 +31,7 @@ import {
     ExaminationGroups,
     UserApplications,
     Certified,
+    ExamSchedule,
 } from './pages'
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
                     <Route element={<ExaminationGroups />} path={ROUTES.EXAMINATION_GROUPS} />
                     <Route element={<UserApplications />} path={ROUTES.USER_APPLICATIONS} />
                     <Route element={<Certified />} path={ROUTES.CERTIFIED} />
+                    <Route element={<ExamSchedule />} path={ROUTES.EXAM_SCHEDULE} />
                 </Route>
             </Routes>
         </BrowserRouter>

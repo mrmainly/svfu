@@ -29,6 +29,7 @@ const ROUTES = {
     EXAMINATION_GROUPS: '/examination-groups',
     USER_APPLICATIONS: '/user-applocations',
     CERTIFIED: '/certified',
+    EXAM_SCHEDULE: '/exam-schedule',
 }
 
 export default ROUTES

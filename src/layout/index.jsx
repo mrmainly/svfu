@@ -103,6 +103,11 @@ const MyLayout = () => {
                     key: 'submenu-item-4-6',
                     onClick: () => navigate(ROUTES.CERTIFIED),
                 },
+                {
+                    label: 'Расписание экзаменов',
+                    key: 'submenu-item-4-7',
+                    onClick: () => navigate(ROUTES.EXAM_SCHEDULE),
+                },
             ],
         },
     ]

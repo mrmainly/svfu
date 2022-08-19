@@ -42,5 +42,7 @@ export const pathname = (params) => {
             return 'Заявки пользователей'
         case ROUTES.CERTIFIED:
             return 'Аттестуемые'
+        case ROUTES.EXAM_SCHEDULE:
+            return 'Расписание экзаменов'
     }
 }

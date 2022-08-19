@@ -24,6 +24,7 @@ import QuestionsBank from './attestations/questions-bank/list'
 import ExaminationGroups from './attestations/examination-groups'
 import UserApplications from './attestations/userApplications'
 import Certified from './attestations/certified'
+import ExamSchedule from './attestations/exam-schedule'
 
 export {
     Login,
@@ -52,4 +53,5 @@ export {
     ExaminationGroups,
     UserApplications,
     Certified,
+    ExamSchedule,
 }
