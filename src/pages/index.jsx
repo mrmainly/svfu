@@ -21,6 +21,9 @@ import UsersList from './users/list'
 import AttestationsQualifications from './attestations/attestations-qualification/list'
 import TestsBank from './attestations/tests-bank/list'
 import QuestionsBank from './attestations/questions-bank/list'
+import ExaminationGroups from './attestations/examination-groups'
+import UserApplications from './attestations/userApplications'
+import Certified from './attestations/certified'
 
 export {
     Login,
@@ -46,4 +49,7 @@ export {
     AttestationsQualifications,
     TestsBank,
     QuestionsBank,
+    ExaminationGroups,
+    UserApplications,
+    Certified,
 }

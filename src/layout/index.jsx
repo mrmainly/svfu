@@ -1,7 +1,7 @@
 import React from 'react'
-import { Layout, Menu, Typography, Divider } from 'antd'
+import { Layout, Menu, Divider } from 'antd'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
-import { BsPersonFill, BsCardChecklist, BsPeople } from 'react-icons/bs'
+import { BsCardChecklist, BsPeople } from 'react-icons/bs'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 
 import ROUTES from '../routes'
@@ -10,8 +10,7 @@ import SurveyLayout from './layouts/SurveyLayout'
 
 import './layout.css'
 
-const { Content, Sider } = Layout
-const { Title, Text } = Typography
+const { Sider } = Layout
 
 const MyLayout = () => {
     const navigate = useNavigate()
@@ -88,6 +87,21 @@ const MyLayout = () => {
                     label: 'Банк вопросов',
                     key: 'submenu-item-4-3',
                     onClick: () => navigate(ROUTES.ATTESTATION_QUESTIONS_BANK),
+                },
+                {
+                    label: 'Экзаменационные группы',
+                    key: 'submenu-item-4-4',
+                    onClick: () => navigate(ROUTES.EXAMINATION_GROUPS),
+                },
+                {
+                    label: 'Заявки пользователей',
+                    key: 'submenu-item-4-5',
+                    onClick: () => navigate(ROUTES.USER_APPLICATIONS),
+                },
+                {
+                    label: 'Аттестуемые',
+                    key: 'submenu-item-4-6',
+                    onClick: () => navigate(ROUTES.CERTIFIED),
                 },
             ],
         },

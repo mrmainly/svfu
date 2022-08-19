@@ -26,6 +26,9 @@ const ROUTES = {
     ATTESTATION_QUALI: '/attestation_qualification',
     ATTESTATION_TESTS_BANK: '/attestation_tests_bank',
     ATTESTATION_QUESTIONS_BANK: '/attestation_questions_bank',
+    EXAMINATION_GROUPS: '/examination-groups',
+    USER_APPLICATIONS: '/user-applocations',
+    CERTIFIED: '/certified',
 }
 
 export default ROUTES

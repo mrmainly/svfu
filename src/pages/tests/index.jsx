@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AvailableTestTable } from '../../components'
+import AvailableTestTable from './components/tables/AvailableTestTable'
 import { useGetSurveysQuery } from '../../services/SurveysService'
 import ROUTES from '../../routes'
 
