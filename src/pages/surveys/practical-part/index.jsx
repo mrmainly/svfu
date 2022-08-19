@@ -13,6 +13,7 @@ import ROUTES from '../../../routes'
 
 const { Text, Title } = Typography
 const { Dragger } = Upload
+const { TextArea } = Input
 
 const PracticalPart = () => {
     const location = useLocation()
@@ -62,10 +63,11 @@ const PracticalPart = () => {
                         <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
                         <Form.Item
                             name="describe"
+                            labelCol={{ span: 24 }}
                             label={<Text style={{ fontSize: 16 }}>Ответ:</Text>}
                             style={{ marginTop: 20 }}
                         >
-                            <Input />
+                            <TextArea style={{ height: 134 }} />
                         </Form.Item>
                         <Form.Item
                             label={<Text style={{ fontSize: 16 }}>Загрузить файл:</Text>}

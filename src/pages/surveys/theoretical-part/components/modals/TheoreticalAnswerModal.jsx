@@ -6,7 +6,7 @@ import { MyButton } from '../../../../../components'
 import { useSurveyPostMutation } from '../../../../../services/SurveysService'
 import ROUTES from '../../../../../routes'
 
-const TheoreticalAnswerModal = ({ open, setOpen, text, id, postData }) => {
+const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
     const { timeStatus } = useSelector((state) => state.survey_slice)
 
