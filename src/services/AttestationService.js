@@ -2,8 +2,12 @@ import { api } from './api'
 
 export const attestation = api.injectEndpoints({
     endpoints: (build) => ({
+        getAttestationsTag: build.query({
+            query: () => `constructor/direction/tag`,
+            providesTags: ['Attestation'],
+        }),
         getAttestationsQualification: build.query({
-            query: ({ is_active }) => `constructor/direction/?is_active=${is_active}`,
+            query: () => `constructor/direction/`,
             providesTags: ['Attestation'],
         }),
         postAttestationsQualification: build.mutation({
@@ -49,39 +53,31 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
-        // getQualificationsId: build.query({
-        //   query: ({ id }) => `users/qualification_improvement/${id}`,
-        //   providesTags: ["Qualification"],
-        // }),
-        // patchQualificationId: build.mutation({
-        //   query({ id, formData }) {
-        //     return {
-        //       url: `users/qualification_improvement/${id}`,
-        //       method: "PATCH",
-        //       body: formData,
-        //     };
-        //   },
-        //   invalidatesTags: [{ type: "Qualification" }],
-        // }),
-        // postQualification: build.mutation({
-        //   query({ formData }) {
-        //     return {
-        //       url: `users/qualification_improvement/`,
-        //       method: "POST",
-        //       body: formData,
-        //       header: "multipart/form-data",
-        //     };
-        //   },
-        //   invalidatesTags: [{ type: "Qualification" }],
-        // }),
+        patchAttestationsTestsBankId: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `/constructor/unit/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        getAttestationsQuestionsBank: build.query({
+            query: () => `constructor/question/`,
+            providesTags: ['Attestation'],
+        }),
     }),
 })
 
 export const {
+    useGetAttestationsTagQuery,
     useGetAttestationsQualificationQuery,
     usePostAttestationsQualificationMutation,
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
     useGetAttestationsTestsBankQuery,
     usePostAttestationsTestsBankMutation,
+    usePatchAttestationsTestsBankIdMutation,
+    useGetAttestationsQuestionsBankQuery,
 } = attestation

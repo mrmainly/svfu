@@ -1,30 +1,48 @@
-import { useState } from 'react'
-import { Modal, Row, Col, Form, Input, Select, TimePicker, InputNumber, Typography } from 'antd'
+import moment from 'moment'
+import {
+    message,
+    Modal,
+    Row,
+    Col,
+    Form,
+    Input,
+    Select,
+    TimePicker,
+    InputNumber,
+    Typography,
+} from 'antd'
 
 import { MyButton } from '../../../../components'
-import { usePatchAttestationsQualificationIdMutation } from '../../../../services/AttestationService'
-
+import {
+    usePatchAttestationsTestsBankIdMutation,
+    useGetAttestationsTagQuery,
+} from '../../../../services/AttestationService'
 const { TextArea } = Input
 const { Option } = Select
 
 const TBEditModal = ({ open, setOpen, dataList }) => {
-    // const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
-    // const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
-
+    const { data, isLoading } = useGetAttestationsTagQuery()
+    const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
     const onSubmit = (data) => {
-        console.log(data)
-        // patchAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
-        //     if (res.data) {
-        //         message.success('Квалификация изменена')
-        //         setOpen(false)
-        //     } else {
-        //         message.error(res.error.data.errors[0])
-        //     }
-        //     console.log(res)
-        // })
+        const minutes =
+            parseInt(moment(data.test_time).format('HH') * 60) +
+            parseInt(moment(data.test_time).format('mm'))
+
+        data.test_time = minutes
+        patchAttestationsTestsBankId({ id: dataList[0].id, body: data }).then((res) => {
+            if (res.data) {
+                message.success('Квалификация изменена')
+                setOpen(false)
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+            console.log(res)
+        })
     }
     const onSearch = (value) => console.log(value)
-    // const [active, setActive] = useState(true)
+    const hours = Math.floor(dataList[0]?.test_time / 60) + ':' + (dataList[0]?.test_time % 60)
+    const hhminuts = moment(hours, 'HH:mm')
+
     return (
         <div>
             <Modal
@@ -47,11 +65,29 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="tbadd-form">
-                    <Form.Item label="Название теста">
+                <Form
+                    layout="vertical"
+                    initialValues={{
+                        ['name']: dataList[0]?.name,
+                        ['tag_direction']: {
+                            value: dataList[0]?.direction.tag_direction.id,
+                            label: dataList[0]?.direction.tag_direction.name,
+                        },
+                        ['test_time']: hhminuts,
+                        ['beginner_count']: dataList[0]?.beginner_count,
+                        ['advanced_count']: dataList[0]?.advanced_count,
+                        ['expert_count']: dataList[0]?.expert_count,
+                        ['beginner_score']: dataList[0]?.beginner_score,
+                        ['advanced_score']: dataList[0]?.advanced_score,
+                        ['passing_percent_score']: dataList[0]?.passing_percent_score,
+                    }}
+                    onFinish={onSubmit}
+                    id="tbadd-form"
+                >
+                    <Form.Item label="Название теста" name="name">
                         <Input placeholder="Название теста" />
                     </Form.Item>
-                    <Form.Item label="Квалификация">
+                    <Form.Item label="Квалификация" name="tag_direction">
                         <Select
                             placeholder="Выберите квалификацию"
                             style={{
@@ -59,9 +95,11 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             }}
                             // onChange={(value) => setValue(value)}
                         >
-                            <Option value="Квалификация 1">Квалификация 1</Option>
-                            <Option value="Квалификация 2">Квалификация 2</Option>
-                            <Option value="Квалификация 3">Квалификация 3</Option>
+                            {data?.map((item, index) => (
+                                <Option key={index} value={item.id}>
+                                    {item.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                     <Form.Item label="Время на тест(ЧЧ:мм)" name="test_time">
@@ -75,24 +113,24 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                     <Row gutter={[16, 0]}>
                         <Col span={12}>
                             <Form.Item label="Количество легких вопросов" name="beginner_count">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                                <InputNumber style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item label="Количество средних вопросов" name="advanced_count">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                                <InputNumber style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item label="Количество сложных вопросов" name="expert_count">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                                <InputNumber style={{ width: '100%' }} />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item label="Балл за правильный ответ" name="beginner_score">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                                <InputNumber style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item label="Балл за правильный ответ" name="advanced_score">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                                <InputNumber style={{ width: '100%' }} />
                             </Form.Item>
                             <Form.Item label="Балл за правильный ответ" name="expert_score">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                                <InputNumber style={{ width: '100%' }} />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -108,9 +146,6 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             formatter={(value) => `${value}%`}
                             //parser?????
                         />
-                    </Form.Item>
-                    <Form.Item label="Количество вопросов в практической части">
-                        <InputNumber style={{ width: '100%' }} defaultValue="1" />
                     </Form.Item>
                     <Row gutter={[10, 10]}>
                         <Col span={22}>

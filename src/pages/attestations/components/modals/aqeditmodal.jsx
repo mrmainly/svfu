@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Modal, message, Input, Select, Form, Switch, Typography, Space } from 'antd'
 
 import { MyButton } from '../../../../components'
 import {
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
+    useGetAttestationsTagQuery,
 } from '../../../../services/AttestationService'
 
 const { TextArea } = Input
@@ -13,9 +14,9 @@ const { Option } = Select
 const AQEditModal = ({ open, setOpen, dataList }) => {
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
     const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
+    const { data, isLoading } = useGetAttestationsTagQuery()
 
     const onSubmit = (data) => {
-        console.log(active)
         patchAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Квалификация изменена')
@@ -25,24 +26,21 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
             }
             console.log(res)
         })
-        {
-            active ? (
-                putAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
-                    if (res.data) {
-                        message.success('Квалификация изменена')
-                        setOpen(false)
-                    } else {
-                        message.error(res.error.data.errors[0])
-                    }
-                    console.log(res)
-                })
-            ) : (
-                <></>
-            )
+        if (active !== dataList[0]?.is_active) {
+            putAttestationsQualificationId({ id: dataList[0].id }).then((res) => {
+                if (!res.data) {
+                    message.error(res.error.data.errors[0])
+                }
+                console.log(res)
+            })
         }
     }
     const onSearch = (value) => console.log(value)
-    const [active, setActive] = useState(true)
+    const [active, setActive] = useState()
+
+    useEffect(() => {
+        setActive(dataList[0]?.is_active)
+    }, [dataList])
     return (
         <div>
             <Modal
@@ -72,6 +70,10 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                     initialValues={{
                         ['name']: dataList[0]?.name,
                         ['description']: dataList[0]?.description,
+                        ['tag_direction']: {
+                            value: dataList[0]?.tag_direction.id,
+                            label: dataList[0]?.tag_direction.name,
+                        },
                     }}
                     onFinish={onSubmit}
                     id="aqedit-form"
@@ -83,21 +85,17 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                         <TextArea />
                     </Form.Item>
                     <Form.Item label="Тег квалификации" name="tag_direction">
-                        <Select
-                            placeholder="Выберите тег"
-                            defaultValue={{
-                                value: dataList[0]?.tag_direction.id,
-                                label: dataList[0]?.tag_direction.name,
-                            }}
-                        >
-                            <Option value="1">История</Option>
-                            <Option value="2">ХЫЗЫ</Option>
-                            <Option value="3">АХАХАХАХАХ</Option>
+                        <Select placeholder="Выберите тег">
+                            {data?.map((item, index) => (
+                                <Option key={index} value={item.id}>
+                                    {item.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                     <Space align="baseline">
                         <Form.Item>
-                            <Switch onChange={setActive}></Switch>
+                            <Switch defaultChecked={active} onChange={setActive} />
                         </Form.Item>
                         <Typography>Активность квалификации</Typography>
                     </Space>

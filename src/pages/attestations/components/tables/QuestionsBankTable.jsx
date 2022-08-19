@@ -1,34 +1,21 @@
+import { useState } from 'react'
 import Table from 'antd/lib/table'
 import ROUTES from '../../../../routes'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-const QuestionsBankTable = () => {
-    const navigate = useNavigate()
-
-    const data = [
-        {
-            id: 12,
-            name: 'Квалификация',
-            type: 'Один из нескольких',
-            difficult: 'Средняя',
-        },
-        {
-            id: 12,
-            name: 'Название квалификации',
-            type: 'Практическая часть',
-            difficult: 'Открытый вопрос',
-        },
-    ]
+const QuestionsBankTable = ({ data, loading }) => {
+    const [currentData, setCurrentData] = useState([])
+    const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
 
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
-        { title: 'Название валификации', dataIndex: 'name', key: 'name' },
-        { title: 'Тип вопросв', dataIndex: 'type', key: 'type' },
+        { title: 'Текст вопроса', dataIndex: 'name', key: 'name' },
+        { title: 'Квалификации', dataIndex: 'direction', key: 'direction' },
         {
             title: 'Сложность',
-            dataIndex: 'difficult',
-            key: 'difficult',
+            dataIndex: 'difficulty',
+            key: 'difficulty',
         },
         {
             title: 'Действие',
@@ -41,7 +28,7 @@ const QuestionsBankTable = () => {
                     //     navigate(ROUTES.USERS_DETAIL + `/${id}`)
                     // }}
                 >
-                    Перейти
+                    Изменить
                 </Button>
             ),
         },

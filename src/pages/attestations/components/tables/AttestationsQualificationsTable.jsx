@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 const AttestationsQualificationsTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditQuali, setModalEditQuali] = useState(false)
-    console.log(data)
 
     const columns = [
         { title: 'ID', dataIndex: 'id', key: 'id' },
@@ -34,7 +33,7 @@ const AttestationsQualificationsTable = ({ data, loading }) => {
                 <Button
                     type="primary"
                     onClick={() => {
-                        const itemData = data.filter((e) => e.id === id)
+                        const itemData = data?.filter((e) => e.id === id)
                         setCurrentData(itemData)
                         setModalEditQuali(true)
                     }}
@@ -44,7 +43,6 @@ const AttestationsQualificationsTable = ({ data, loading }) => {
             ),
         },
     ]
-
     return (
         <>
             <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />

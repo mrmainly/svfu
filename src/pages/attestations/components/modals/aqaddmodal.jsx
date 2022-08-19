@@ -1,13 +1,17 @@
 import { Modal, message, Input, Select, Form } from 'antd'
+import Item from 'antd/lib/list/Item'
 
 import { MyButton } from '../../../../components'
-import { usePostAttestationsQualificationMutation } from '../../../../services/AttestationService'
-
+import {
+    usePostAttestationsQualificationMutation,
+    useGetAttestationsTagQuery,
+} from '../../../../services/AttestationService'
 const { TextArea } = Input
 const { Option } = Select
 
 const AQAddModal = ({ open, setOpen }) => {
     const [postAttestationsQualification] = usePostAttestationsQualificationMutation()
+    const { data, isLoading } = useGetAttestationsTagQuery()
     const onSubmit = (data) => {
         console.log(data)
 
@@ -22,6 +26,7 @@ const AQAddModal = ({ open, setOpen }) => {
         })
     }
     const onSearch = (value) => console.log(value)
+
     return (
         <div>
             <Modal
@@ -55,9 +60,11 @@ const AQAddModal = ({ open, setOpen }) => {
                     </Form.Item>
                     <Form.Item label="Тег квалификации" name="tag_direction">
                         <Select placeholder="Выберите тег">
-                            <Option value="1">История</Option>
-                            <Option value="2">ХЫЗЫ</Option>
-                            <Option value="3">АХАХАХАХАХ</Option>
+                            {data?.map((item, index) => (
+                                <Option key={index} value={item.id}>
+                                    {item.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                 </Form>

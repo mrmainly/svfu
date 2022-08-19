@@ -1,24 +1,45 @@
-import { Modal, Row, Col, Form, Input, Select, TimePicker, InputNumber, Typography } from 'antd'
+import {
+    Modal,
+    Row,
+    Col,
+    Form,
+    Input,
+    Select,
+    TimePicker,
+    InputNumber,
+    Typography,
+    message,
+} from 'antd'
+import moment from 'moment'
 
 import { MyButton } from '../../../../components'
-import { usePostAttestationsTestsBankMutation } from '../../../../services/AttestationService'
+import {
+    usePostAttestationsTestsBankMutation,
+    useGetAttestationsTagQuery,
+} from '../../../../services/AttestationService'
 
 const { Option } = Select
 
 const TBAddModal = ({ open, setOpen }) => {
     const [postAttestationsTestsBankMutation] = usePostAttestationsTestsBankMutation()
-    const onSubmit = (data) => {
-        console.log(data)
+    const { data, isLoading } = useGetAttestationsTagQuery()
 
-        // postAttestationsQualification(data).then((res) => {
-        //     if (res.data) {
-        //         message.success('Квалификация создана')
-        //         setOpen(false)
-        //     } else {
-        //         message.error(res.error.data.errors[0])
-        //     }
-        //     console.log(res)
-        // })
+    const onSubmit = (data) => {
+        const hhminuts =
+            parseInt(moment(data.test_time).format('HH') * 60) +
+            parseInt(moment(data.test_time).format('mm'))
+
+        data.test_time = hhminuts
+        // .toString()
+        postAttestationsTestsBankMutation(data).then((res) => {
+            if (res.data) {
+                message.success('Тестирование создано')
+                setOpen(false)
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+            console.log(res)
+        })
     }
     const onSearch = (value) => console.log(value)
     return (
@@ -30,7 +51,7 @@ const TBAddModal = ({ open, setOpen }) => {
                 onCancel={() => setOpen(false)}
                 style={{ top: 0 }}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="tbadd-form">
+                    <MyButton key="submit" onFinish={onSubmit} htmlType="submit" form="tbadd-form">
                         Сохранить
                     </MyButton>,
                     <MyButton
@@ -44,20 +65,21 @@ const TBAddModal = ({ open, setOpen }) => {
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="tbadd-form">
-                    <Form.Item label="Название теста">
+                    <Form.Item label="Название теста" name="name">
                         <Input placeholder="Название теста" />
                     </Form.Item>
-                    <Form.Item label="Квалификация">
+                    <Form.Item label="Квалификация" name="direction">
                         <Select
                             placeholder="Выберите квалификацию"
                             style={{
                                 width: '100%',
                             }}
-                            // onChange={(value) => setValue(value)}
                         >
-                            <Option value="Квалификация 1">Квалификация 1</Option>
-                            <Option value="Квалификация 2">Квалификация 2</Option>
-                            <Option value="Квалификация 3">Квалификация 3</Option>
+                            {data?.map((item, index) => (
+                                <Option key={index} value={item.id}>
+                                    {item.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                     <Form.Item label="Время на тест(ЧЧ:мм)" name="test_time">
@@ -104,9 +126,6 @@ const TBAddModal = ({ open, setOpen }) => {
                             formatter={(value) => `${value}%`}
                             //parser?????
                         />
-                    </Form.Item>
-                    <Form.Item label="Количество вопросов в практической части">
-                        <InputNumber style={{ width: '100%' }} defaultValue="1" />
                     </Form.Item>
                     <Row gutter={[10, 10]}>
                         <Col span={22}>

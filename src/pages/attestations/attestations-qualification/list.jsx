@@ -10,7 +10,7 @@ import { useGetAttestationsQualificationQuery } from '../../../services/Attestat
 const { Search } = Input
 
 const AttestationsQualifications = () => {
-    const { data, isLoading } = useGetAttestationsQualificationQuery({ is_active: 'false' })
+    const { data, isLoading } = useGetAttestationsQualificationQuery()
     const [modalNewQuali, setModalNewQuali] = useState(false)
     const onSearch = (value) => console.log(value)
     return (
