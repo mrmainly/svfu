@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom'
 
 const AttestationsQualificationsTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
-    const navigate = useNavigate()
     const [modalEditQuali, setModalEditQuali] = useState(false)
+    console.log(data)
 
     const columns = [
         { title: 'ID', dataIndex: 'id', key: 'id' },

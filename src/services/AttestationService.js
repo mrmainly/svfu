@@ -3,7 +3,7 @@ import { api } from './api'
 export const attestation = api.injectEndpoints({
     endpoints: (build) => ({
         getAttestationsQualification: build.query({
-            query: () => `constructor/direction/`,
+            query: ({ is_active }) => `constructor/direction/?is_active=${is_active}`,
             providesTags: ['Attestation'],
         }),
         postAttestationsQualification: build.mutation({
@@ -31,6 +31,20 @@ export const attestation = api.injectEndpoints({
                 return {
                     url: `/constructor/direction/${id}`,
                     method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        getAttestationsTestsBank: build.query({
+            query: () => `constructor/unit/`,
+            providesTags: ['Attestation'],
+        }),
+        postAttestationsTestsBank: build.mutation({
+            query(body) {
+                return {
+                    url: `constructor/unit/`,
+                    method: 'POST',
+                    body,
                 }
             },
             invalidatesTags: [{ type: 'Attestation' }],
@@ -68,4 +82,6 @@ export const {
     usePostAttestationsQualificationMutation,
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
+    useGetAttestationsTestsBankQuery,
+    usePostAttestationsTestsBankMutation,
 } = attestation

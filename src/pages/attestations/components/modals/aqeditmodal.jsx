@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Modal, message, Input, Select, Form, Switch, Typography } from 'antd'
+import { Modal, message, Input, Select, Form, Switch, Typography, Space } from 'antd'
 
 import { MyButton } from '../../../../components'
 import {
@@ -95,10 +95,12 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                             <Option value="3">АХАХАХАХАХ</Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item>
-                        <Switch onChange={setActive}></Switch>
+                    <Space align="baseline">
+                        <Form.Item>
+                            <Switch onChange={setActive}></Switch>
+                        </Form.Item>
                         <Typography>Активность квалификации</Typography>
-                    </Form.Item>
+                    </Space>
                 </Form>
             </Modal>
         </div>

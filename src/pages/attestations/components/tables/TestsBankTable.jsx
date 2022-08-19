@@ -1,34 +1,42 @@
+import { useState } from 'react'
+import TBEditModal from '../modals/tbeditmodal'
 import Table from 'antd/lib/table'
-import ROUTES from '../../../../routes'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-const TestsBankTable = () => {
+const TestsBankTable = ({ data, loading }) => {
+    const [currentData, setCurrentData] = useState([])
+    const [modalEditTB, setModalEditTB] = useState(false)
     const navigate = useNavigate()
-
-    const data = [
-        {
-            id: 12,
-            name: 'Название_тестирования',
-            qualification: 'Название_квалификации',
-            questions: 10,
-        },
-        {
-            id: 12,
-            name: 'Название_тестирования',
-            qualification: 'Название_квалификации',
-            questions: 10,
-        },
-    ]
+    // console.log(data)
+    // let newData = [...data]
+    // newData?.map(
+    //     (item) => (item['sum'] = item.beginner_count + item.advanced_count + item.expert_count)
+    // )
+    // console.log(newData)
+    // const data = [
+    //     {
+    //         id: 12,
+    //         name: 'Название_тестирования',
+    //         qualification: 'Название_квалификации',
+    //         questions: 10,
+    //     },
+    //     {
+    //         id: 12,
+    //         name: 'Название_тестирования',
+    //         qualification: 'Название_квалификации',
+    //         questions: 10,
+    //     },
+    // ]
 
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
-        { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
-        { title: 'Квалификация', dataIndex: 'qualification', key: 'qualification' },
+        { title: 'Название квалификации', dataIndex: 'test_time', key: 'test_time' },
+        { title: 'Квалификация', dataIndex: 'direction', key: 'direction' },
         {
             title: 'Вопросов',
-            dataIndex: 'questions',
-            key: 'questions',
+            dataIndex: 'beginner_count',
+            key: 'beginner_count',
         },
         {
             title: 'Действие',
@@ -37,11 +45,13 @@ const TestsBankTable = () => {
             render: (id) => (
                 <Button
                     type="primary"
-                    // onClick={() => {
-                    //     navigate(ROUTES.USERS_DETAIL + `/${id}`)
-                    // }}
+                    onClick={() => {
+                        const itemData = data.filter((e) => e.id === id)
+                        setCurrentData(itemData)
+                        setModalEditTB(true)
+                    }}
                 >
-                    Перейти
+                    Изменить
                 </Button>
             ),
         },
@@ -50,6 +60,7 @@ const TestsBankTable = () => {
     return (
         <>
             <Table columns={columns} dataSource={data} rowKey="id" />
+            <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
         </>
     )
 }
