@@ -1,16 +1,21 @@
 import { useState } from 'react'
-import { Modal, message, Input, Select, Form } from 'antd'
+import { Modal, message, Input, Select, Form, Switch, Typography } from 'antd'
 
 import { MyButton } from '../../../../components'
-import { usePatchAttestationsQualificationIdMutation } from '../../../../services/AttestationService'
+import {
+    usePatchAttestationsQualificationIdMutation,
+    usePutAttestationsQualificationIdMutation,
+} from '../../../../services/AttestationService'
 
 const { TextArea } = Input
 const { Option } = Select
 
 const AQEditModal = ({ open, setOpen, dataList }) => {
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
+    const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
 
     const onSubmit = (data) => {
+        console.log(active)
         patchAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Квалификация изменена')
@@ -20,8 +25,24 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
             }
             console.log(res)
         })
+        {
+            active ? (
+                putAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
+                    if (res.data) {
+                        message.success('Квалификация изменена')
+                        setOpen(false)
+                    } else {
+                        message.error(res.error.data.errors[0])
+                    }
+                    console.log(res)
+                })
+            ) : (
+                <></>
+            )
+        }
     }
     const onSearch = (value) => console.log(value)
+    const [active, setActive] = useState(true)
     return (
         <div>
             <Modal
@@ -73,6 +94,10 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                             <Option value="2">ХЫЗЫ</Option>
                             <Option value="3">АХАХАХАХАХ</Option>
                         </Select>
+                    </Form.Item>
+                    <Form.Item>
+                        <Switch onChange={setActive}></Switch>
+                        <Typography>Активность квалификации</Typography>
                     </Form.Item>
                 </Form>
             </Modal>
