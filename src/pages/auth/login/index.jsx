@@ -1,26 +1,18 @@
-import React from "react";
-import {
-    Typography,
-    Form,
-    Input,
-    Button,
-    Checkbox,
-    Divider,
-    message,
-} from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import cookie from "js-cookie";
-import "./login.css";
+import React from 'react'
+import { Typography, Form, Input, Button, Checkbox, Divider, message } from 'antd'
+import { Link, useNavigate } from 'react-router-dom'
+import cookie from 'js-cookie'
+import './login.css'
 
-import ROUTES from "../../../routes";
-import { useLoginMutation } from "../../../services/LoginService";
+import ROUTES from '../../../routes'
+import { useLoginMutation } from '../../../services/LoginService'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 const Login = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const [postLogin] = useLoginMutation();
+    const [postLogin] = useLoginMutation()
 
     const onFinish = (values) => {
         postLogin({
@@ -28,13 +20,14 @@ const Login = () => {
             password: values.password,
         }).then((res) => {
             if (res.error) {
-                message.error(res?.error?.data?.errors[0]);
+                message.error(res?.error?.data?.errors[0])
             } else {
-                cookie.set("token", res.data.token);
-                navigate(ROUTES.PROFILE);
+                cookie.set('token', res.data.token)
+                localStorage.setItem('role', JSON.stringify(res.data.role, null, '\t'))
+                navigate(ROUTES.PROFILE)
             }
-        });
-    };
+        })
+    }
 
     return (
         <div>
@@ -54,23 +47,19 @@ const Login = () => {
                         style={{
                             fontWeight: 400,
                             fontSize: 18,
-                            fontStyle: "normal",
+                            fontStyle: 'normal',
                         }}
                     >
                         АВТОРИЗАЦИЯ
                     </Text>
-                    <Form style={{ width: "100%" }} onFinish={onFinish}>
+                    <Form style={{ width: '100%' }} onFinish={onFinish}>
                         <Form.Item
-                            label={
-                                <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                                    Логин
-                                </Text>
-                            }
+                            label={<Text style={{ fontWeight: 600, fontSize: 16 }}>Логин</Text>}
                             name="username"
                             rules={[
                                 {
                                     required: true,
-                                    message: "Please input your login!",
+                                    message: 'Please input your login!',
                                 },
                             ]}
                             labelCol={{ span: 24 }}
@@ -84,17 +73,13 @@ const Login = () => {
                             />
                         </Form.Item>
                         <Form.Item
-                            label={
-                                <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                                    Пароль
-                                </Text>
-                            }
+                            label={<Text style={{ fontWeight: 600, fontSize: 16 }}>Пароль</Text>}
                             name="password"
                             labelCol={{ span: 24 }}
                             rules={[
                                 {
                                     required: true,
-                                    message: "Please input your password!",
+                                    message: 'Please input your password!',
                                 },
                             ]}
                         >
@@ -115,8 +100,8 @@ const Login = () => {
                         </Form.Item>
                         <Button
                             style={{
-                                background: "#0D6EFD",
-                                width: "100%",
+                                background: '#0D6EFD',
+                                width: '100%',
                                 borderRadius: 4,
                             }}
                             type="primary"
@@ -129,7 +114,7 @@ const Login = () => {
                             to={ROUTES.FORGOT_PASSWORD}
                             style={{
                                 marginTop: 12,
-                                float: "right",
+                                float: 'right',
                                 marginBottom: 24,
                             }}
                         >
@@ -138,10 +123,10 @@ const Login = () => {
                         <Divider style={{ marginBottom: 24 }} />
                         <Button
                             style={{
-                                background: "#09304A",
-                                width: "100%",
+                                background: '#09304A',
+                                width: '100%',
                                 borderRadius: 4,
-                                color: "white",
+                                color: 'white',
                             }}
                             htmlType="submit"
                             size="large"
@@ -153,7 +138,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Login;
+export default Login

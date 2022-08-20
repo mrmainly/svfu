@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from './api'
 
 export const login = api.injectEndpoints({
     endpoints: (build) => ({
@@ -6,58 +6,59 @@ export const login = api.injectEndpoints({
             query(body) {
                 return {
                     url: `users/login/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
+            invalidatesTags: [{ type: 'Profile' }],
         }),
         registerEmailVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/register/email/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
         }),
         registerVerifyVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/code/verify/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
         }),
         registerProfileVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/register/profile/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
         }),
         forgotEmailVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/reset/email/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
         }),
         forgotPasswordVersion: build.mutation({
             query(body) {
                 return {
                     url: `users/reset/password/`,
-                    method: "POST",
+                    method: 'POST',
                     body,
-                };
+                }
             },
         }),
     }),
-});
+})
 
 export const {
     useLoginMutation,
@@ -66,4 +67,4 @@ export const {
     useRegisterVerifyVersionMutation,
     useForgotEmailVersionMutation,
     useForgotPasswordVersionMutation,
-} = login;
+} = login

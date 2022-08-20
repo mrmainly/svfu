@@ -3,20 +3,12 @@ import { api } from './api'
 export const profile = api.injectEndpoints({
     endpoints: (build) => ({
         getProfile: build.query({
-            query({ cookie }) {
+            query() {
                 return {
                     url: `users/me/`,
-                    dependencies: cookie,
                 }
             },
-            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled
-                    window.localStorage.setItem('role', JSON.stringify(data.role, null, '\t'))
-                } catch (err) {
-                    console.log(err)
-                }
-            },
+
             providesTags: ['Profile'],
         }),
         profilePatch: build.mutation({

@@ -11,9 +11,7 @@ import ROUTES from '../../routes'
 import { useGetProfileQuery } from '../../services/ProfileService'
 
 const Profile = () => {
-    const { data, isFetching, error } = useGetProfileQuery({
-        cookie: cookie.get('token'),
-    })
+    const { data, isFetching, error } = useGetProfileQuery('')
 
     const navigate = useNavigate()
 
@@ -36,7 +34,7 @@ const Profile = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <MainInfo data={data} />
+            <MainInfo data={data} /> l;o/lo
             <Line />
             <SocialNetworks data={data} />
             <InfoScreen data={data} />

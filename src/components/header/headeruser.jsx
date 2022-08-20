@@ -7,9 +7,7 @@ import cookie from 'js-cookie'
 
 const HeaderUser = () => {
     const navigate = useNavigate()
-    const { data, isLoading, error } = useGetProfileQuery({
-        cookie: cookie.get('token'),
-    })
+    const { data, isLoading, error } = useGetProfileQuery('')
     return (
         <div>
             <div
