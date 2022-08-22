@@ -77,18 +77,29 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        postAttestationsQuestionsBankImage: build.mutation({
+            query({ id, formData }) {
+                return {
+                    url: `constructor/question/image/${id}`,
+                    method: 'POST',
+                    body: formData,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
     }),
 })
 
 export const {
     useGetAttestationsTagQuery,
+    useGetAttestationsTestsBankQuery,
+    useGetAttestationsQuestionsBankQuery,
     useGetAttestationsQualificationQuery,
+    usePostAttestationsTestsBankMutation,
     usePostAttestationsQualificationMutation,
+    usePostAttestationsQuestionsBankMutation,
+    usePostAttestationsQuestionsBankImageMutation,
+    usePatchAttestationsTestsBankIdMutation,
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
-    useGetAttestationsTestsBankQuery,
-    usePostAttestationsTestsBankMutation,
-    usePatchAttestationsTestsBankIdMutation,
-    useGetAttestationsQuestionsBankQuery,
-    usePostAttestationsQuestionsBankMutation,
 } = attestation

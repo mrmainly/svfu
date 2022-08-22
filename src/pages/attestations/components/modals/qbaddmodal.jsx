@@ -23,64 +23,22 @@ import { MinusCircleOutlined, PlusOutlined, UploadOutlined, DeleteTwoTone } from
 
 import { MyButton } from '../../../../components'
 import {
+    usePostAttestationsQuestionsBankImageMutation,
     usePostAttestationsQuestionsBankMutation,
     useGetAttestationsQualificationQuery,
+    useGetAttestationsQuestionsBankQuery,
 } from '../../../../services/AttestationService'
-import FormItem from 'antd/lib/form/FormItem'
 
 const { Option } = Select
 const { TextArea } = Input
-const formItemLayout = {
-    labelCol: {
-        xs: {
-            span: 24,
-        },
-        sm: {
-            span: 4,
-        },
-    },
-    wrapperCol: {
-        xs: {
-            span: 24,
-        },
-        sm: {
-            span: 20,
-        },
-    },
-}
-const formItemLayoutWithOutLabel = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 20,
-            offset: 4,
-        },
-    },
-}
 const QBAddModal = ({ open, setOpen }) => {
-    let checkData = []
+    const { data: imageId } = useGetAttestationsQuestionsBankQuery()
     const { data } = useGetAttestationsQualificationQuery()
     const [file, setFile] = useState()
+    const [pdfFile, setPdfFile] = useState()
     const [technique, setTechnique] = useState('')
-    const [radioId, setRadioId] = useState('111')
-
-    const [checkId, setCheckId] = useState()
-    const onChange = (e) => {
-        let checkboxID = checkData.findIndex((item) => item.value === e.value)
-        {
-            checkboxID === -1
-                ? checkData.push({ value: e.value, checked: e.checked })
-                : checkData.splice(checkboxID, 1, { value: e.value, checked: e.checked })
-        }
-        console.log('checkboxID', checkboxID)
-
-        console.log('data', checkData)
-    }
+    const [radioId, setRadioId] = useState('')
     const [form] = Form.useForm()
-    const nameValue = Form.useWatch('variant_m', form)
     const uploadButton = (
         <div>
             <PlusOutlined />
@@ -103,33 +61,66 @@ const QBAddModal = ({ open, setOpen }) => {
             return false
         },
     }
+    const props2 = {
+        beforeUpload: (file) => {
+            const isPDF = file.type === 'application/pdf'
+            setPdfFile(file)
+            if (!isPDF) {
+                message.error(`${file.name} не является pdf файлом`)
+                return isPDF || Upload.LIST_IGNORE
+            }
+
+            return false
+        },
+    }
     const children = [
         { value: 'MULTIPLE_CHOICE', label: 'Checkbox' },
         { value: 'ONE_CHOICE', label: 'Radiobutton' },
         { value: 'DESCRIBE', label: 'Открытый вопрос' },
     ]
     const [postAttestationsQuestionsBank] = usePostAttestationsQuestionsBankMutation()
+    const [postAttestationsQuestionsBankImage] = usePostAttestationsQuestionsBankImageMutation()
     const onSubmit = (data) => {
-        console.log('data', data)
-        // data.variant = data.variant.map(
-        //     (item, index) => (item = { name: item, is_true: radioId === index ? true : false })
-        // )
+        // let formData = new FormData()
+        // formData.append('image', file)
+        // formData.append('image_name', file.name)
+        // console.log('someid', someid[someid.length - 1].id)
+        if (data.technique === 'ONE_CHOICE') {
+            data.variant = data.variant.map(
+                (item, index) =>
+                    (item = { name: item.name, is_true: radioId === index ? true : false })
+            )
+        }
+        // if (data.technique === 'DESCRIBE') {
+        //     data.variant = data.variant.delete
+        // }
+
         // data.question_images = [
         //     { image_name: data.question_images.file.name, image: data.question_images.file },
         // ]
-        console.log('changedData', data)
-
-        // postAttestationsQuestionsBank(data).then((res) => {
-        //     if (res.data) {
-        //         message.success('Вопрос создан')
-        //         setOpen(false)
-        //     } else {
-        //         message.error(res.error.data.errors[0])
-        //     }
-        //     console.log(res)
-        // })
+        postAttestationsQuestionsBank(data).then((res, req) => {
+            if (res.data) {
+                // let someid = imageId.filter((item) => item.name === data.name)
+                // postAttestationsQuestionsBankImage({
+                //     id: someid[someid.length - 1].id,
+                //     formData: formData,
+                // }).then((res) => {
+                //     if (res.data) {
+                //         message.success('Вопрос создан')
+                //         setOpen(false)
+                //     } else {
+                //         message.error(res.error.data.errors[0])
+                //     }
+                //     console.log(res)
+                // })
+                message.success('Вопрос создан')
+                setOpen(false)
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+            console.log('req.params.id', req.params.id)
+        })
     }
-    const onSearch = (value) => console.log(value)
     return (
         <div>
             <Modal
@@ -152,15 +143,7 @@ const QBAddModal = ({ open, setOpen }) => {
                     </MyButton>,
                 ]}
             >
-                <Form
-                    form={form}
-                    layout="vertical"
-                    onFinish={onSubmit}
-                    id="qbadd-form"
-                    initialValues={{
-                        ['names']: [{ id: '', inname: '', is_active: '' }],
-                    }}
-                >
+                <Form form={form} layout="vertical" onFinish={onSubmit} id="qbadd-form">
                     <Form.Item label="Название вопроса" name="name">
                         <Input />
                     </Form.Item>
@@ -238,11 +221,12 @@ const QBAddModal = ({ open, setOpen }) => {
                                                             rules={[
                                                                 {
                                                                     required: true,
-                                                                    message: 'Missing first name',
+                                                                    message:
+                                                                        'Заполните вариант ответа или удалите поле',
                                                                 },
                                                             ]}
                                                         >
-                                                            <Input placeholder="First Name" />
+                                                            <Input placeholder="Вариант ответа" />
                                                         </Form.Item>
                                                     </Col>
                                                     <Form.Item
@@ -254,10 +238,12 @@ const QBAddModal = ({ open, setOpen }) => {
                                                         <Checkbox></Checkbox>
                                                     </Form.Item>
                                                     <Form.Item>
-                                                        <DeleteTwoTone
-                                                            twoToneColor="#EB5757"
-                                                            onClick={() => remove(name)}
-                                                        />
+                                                        {fields.length > 2 ? (
+                                                            <DeleteTwoTone
+                                                                twoToneColor="#EB5757"
+                                                                onClick={() => remove(name)}
+                                                            />
+                                                        ) : null}
                                                     </Form.Item>
                                                 </Row>
                                             ))}
@@ -278,53 +264,51 @@ const QBAddModal = ({ open, setOpen }) => {
                             )) ||
                             (getFieldValue('technique') === 'ONE_CHOICE' && (
                                 <Form.List name="variant">
-                                    {(fields, { add, remove }) => (
+                                    {(fields, { add, remove }, { errors }) => (
                                         <>
-                                            {fields.map(({ key, name, ...restField }) => (
+                                            {fields.map((field, index) => (
                                                 <Row
-                                                    key={key}
+                                                    key={field.key}
                                                     justify="space-between"
                                                     style={{ width: '80%' }}
-                                                    align=""
                                                 >
                                                     <Col span={18}>
                                                         <Form.Item
-                                                            {...restField}
-                                                            name={[name, 'name']}
+                                                            {...field}
+                                                            name={[field.name, 'name']}
+                                                            validateTrigger={['onChange', 'onBlur']}
                                                             rules={[
                                                                 {
                                                                     required: true,
-                                                                    message: 'Missing first name',
+                                                                    message:
+                                                                        'Заполните вариант ответа или удалите поле',
                                                                 },
                                                             ]}
+                                                            noStyle
                                                         >
-                                                            <Input placeholder="First Name" />
+                                                            <Input placeholder="Вариант ответа" />
                                                         </Form.Item>
                                                     </Col>
-                                                    <Form.Item
-                                                        {...restField}
-                                                        name={[name, 'is_true']}
-                                                        initialValue={false}
-                                                    >
-                                                        <Radio
-                                                        // defaultChecked={false}
-                                                        // checked={this.formRef.current.setFieldsValue(
-                                                        //     {
-                                                        //         variant: {
-                                                        //             name: {
-                                                        //                 is_true: 'John',
-                                                        //             },
-                                                        //         },
-                                                        //     }
-                                                        // )}
-                                                        ></Radio>
-                                                    </Form.Item>
-                                                    <Form.Item>
-                                                        <DeleteTwoTone
-                                                            twoToneColor="#EB5757"
-                                                            onClick={() => remove(name)}
-                                                        />
-                                                    </Form.Item>
+                                                    <Col>
+                                                        <Form.Item>
+                                                            <Radio
+                                                                checked={index === radioId}
+                                                                onChange={() => setRadioId(index)}
+                                                            ></Radio>
+                                                        </Form.Item>
+                                                    </Col>
+                                                    <Col>
+                                                        {fields.length > 2 ? (
+                                                            <Form.Item>
+                                                                <DeleteTwoTone
+                                                                    twoToneColor="#EB5757"
+                                                                    onClick={() =>
+                                                                        remove(field.name)
+                                                                    }
+                                                                />
+                                                            </Form.Item>
+                                                        ) : null}
+                                                    </Col>
                                                 </Row>
                                             ))}
                                             <Form.Item>
@@ -337,180 +321,25 @@ const QBAddModal = ({ open, setOpen }) => {
                                                 >
                                                     Добавить вариант ответа
                                                 </Button>
+                                                <Form.ErrorList errors={errors} />
                                             </Form.Item>
                                         </>
                                     )}
                                 </Form.List>
+                            )) ||
+                            (getFieldValue('technique') === 'DESCRIBE' && (
+                                <Upload
+                                    action="none"
+                                    {...props2}
+                                    multiple={false}
+                                    maxCount={1}
+                                    labelCol={{ span: 24 }}
+                                >
+                                    <Button icon={<UploadOutlined />}>Upload</Button>
+                                </Upload>
                             ))
                         }
                     </Form.Item>
-
-                    {/* <Form.Item
-                        noStyle
-                        shouldUpdate={(prevValues, currentValues) =>
-                            prevValues.gender !== currentValues.gender
-                        }
-                    >
-                        {
-                            ({ getFieldValue }) =>
-                                getFieldValue('technique') === 'MULTIPLE_CHOICE' && (
-                                    <Form.List name="variant_m">
-                                        {(fields, { add, remove }, { errors }) => (
-                                            <>
-                                                {fields.map(({ field, index, ...restField }) => (
-                                                    <Form.Item
-                                                        label={index === 0 ? 'Ответы' : ''}
-                                                        required={false}
-                                                        key={field.key}
-                                                    >
-                                                        <Row
-                                                            justify="space-between"
-                                                            style={{ width: '80%' }}
-                                                        >
-                                                            <Col span={18}>
-                                                                <Form.Item
-                                                                    {...restField}
-                                                                    name={[variant_m, 'namsse']}
-                                                                    {...field}
-                                                                    validateTrigger={[
-                                                                        'onChange',
-                                                                        'onBlur',
-                                                                    ]}
-                                                                    rules={[
-                                                                        {
-                                                                            required: true,
-                                                                            whitespace: true,
-                                                                            message:
-                                                                                'Заполните вариант ответа или удалите поле',
-                                                                        },
-                                                                    ]}
-                                                                    noStyle
-                                                                >
-                                                                    <Input placeholder="Вариант ответа" />
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col>
-                                                                <Form.Item valuePropName="checked">
-                                                                    <Checkbox
-                                                                    // value={index}
-                                                                    // onChange={(e) =>
-                                                                    //     onChange(e.target)
-                                                                    // }
-                                                                    ></Checkbox>
-                                                                </Form.Item>
-                                                            </Col>
-                                                            <Col>
-                                                                {fields.length > 2 ? (
-                                                                    <MinusCircleOutlined
-                                                                        className="dynamic-delete-button"
-                                                                        onClick={() => {
-                                                                            remove(field.name)
-                                                                            console.log(index)
-                                                                            checkData.splice(
-                                                                                index,
-                                                                                1
-                                                                            )
-                                                                        }}
-                                                                        style={{
-                                                                            marginLeft: '5px',
-                                                                        }}
-                                                                    />
-                                                                ) : null}
-                                                            </Col>
-                                                        </Row>
-                                                    </Form.Item>
-                                                ))}
-                                                <Form.Item>
-                                                    <Button
-                                                        type="dashed"
-                                                        onClick={() => add()}
-                                                        style={{
-                                                            width: '60%',
-                                                        }}
-                                                        icon={<PlusOutlined />}
-                                                    >
-                                                        Add field
-                                                    </Button>
-                                                    <Form.ErrorList errors={errors} />
-                                                </Form.Item>
-                                            </>
-                                        )}
-                                    </Form.List>
-                                )
-                            // ||
-                            // (getFieldValue('technique') === 'ONE_CHOICE' && (
-                            //     <Form.List name="variant">
-                            //         {(fields, { add, remove }, { errors }) => (
-                            //             <>
-                            //                 {fields.map((field, index) => (
-                            //                     <Form.Item
-                            //                         label={index === 0 ? 'Ответы' : ''}
-                            //                         required={false}
-                            //                         key={field.key}
-                            //                     >
-                            //                         <Row
-                            //                             justify="space-between"
-                            //                             style={{ width: '80%' }}
-                            //                         >
-                            //                             <Col span={18}>
-                            //                                 <Form.Item
-                            //                                     {...field}
-                            //                                     validateTrigger={[
-                            //                                         'onChange',
-                            //                                         'onBlur',
-                            //                                     ]}
-                            //                                     rules={[
-                            //                                         {
-                            //                                             required: true,
-                            //                                             whitespace: true,
-                            //                                             message:
-                            //                                                 'Заполните вариант ответа или удалите поле',
-                            //                                         },
-                            //                                     ]}
-                            //                                     noStyle
-                            //                                 >
-                            //                                     <Input placeholder="Вариант ответа" />
-                            //                                 </Form.Item>
-                            //                             </Col>
-                            //                             <Col>
-                            //                                 <Radio
-                            //                                     checked={index === radioId}
-                            //                                     onChange={() => setRadioId(index)}
-                            //                                 ></Radio>
-                            //                             </Col>
-                            //                             <Col>
-                            //                                 {fields.length > 2 ? (
-                            //                                     <MinusCircleOutlined
-                            //                                         className="dynamic-delete-button"
-                            //                                         onClick={() =>
-                            //                                             remove(field.name)
-                            //                                         }
-                            //                                         style={{ marginLeft: '5px' }}
-                            //                                     />
-                            //                                 ) : null}
-                            //                             </Col>
-                            //                         </Row>
-                            //                     </Form.Item>
-                            //                 ))}
-                            //                 <Form.Item>
-                            //                     <Button
-                            //                         type="dashed"
-                            //                         onClick={() => add()}
-                            //                         style={{
-                            //                             width: '60%',
-                            //                         }}
-                            //                         icon={<PlusOutlined />}
-                            //                     >
-                            //                         Add field
-                            //                     </Button>
-                            //                     <Form.ErrorList errors={errors} />
-                            //                 </Form.Item>
-                            //             </>
-                            //         )}
-                            //     </Form.List>
-                            // ))
-                        }
-                    </Form.Item> */}
                 </Form>
             </Modal>
         </div>
