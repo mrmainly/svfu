@@ -8,7 +8,7 @@ const ROUTES = {
     AVAILABLE_TEST: '/available-test',
     TEST_RESULTS: '/test-results',
     TEST_RESULT: '/test-result',
-    DOCUMENTS: '/documents',
+    UPLOAD_DOCUMENTS: '/upload-documents',
     DOCUMENTS_EDITING: '/documents-editing',
     MY_QUALIFICATIONS: '/my-qualifications',
     QUALIFICATION_EDITING: '/qualification-editing',

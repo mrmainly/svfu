@@ -35,7 +35,7 @@ const TESTER = (navigate) => {
                 {
                     label: 'Загрузить документы',
                     key: 'submenu-item-2-1',
-                    onClick: () => navigate(ROUTES.DOCUMENTS),
+                    onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
                 },
                 {
                     label: 'Мои квалификации',

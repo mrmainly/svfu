@@ -16,7 +16,7 @@ export const pathname = (params) => {
             return 'Результаты тестов'
         case ROUTES.TEST_RESULT:
             return 'Название_теста'
-        case ROUTES.DOCUMENTS:
+        case ROUTES.UPLOAD_DOCUMENTS:
             return 'Документы'
         case ROUTES.DOCUMENTS_EDITING:
             return 'Редактирование документов'

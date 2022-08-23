@@ -10,7 +10,6 @@ import {
     Profile,
     ForgotPassword,
     ProfileDetail,
-    Documents,
     Test,
     Qualifications,
     DocumentDetail,
@@ -32,6 +31,7 @@ import {
     UserApplications,
     Certified,
     ExamSchedule,
+    UploadDocuments,
 } from './pages'
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
                     <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
                     <Route element={<Profile />} path={ROUTES.PROFILE} />
                     <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
-                    <Route element={<Documents />} path={ROUTES.DOCUMENTS} />
+                    <Route element={<UploadDocuments />} path={ROUTES.UPLOAD_DOCUMENTS} />
                     <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />v
                     <Route element={<Qualifications />} path={ROUTES.MY_QUALIFICATIONS} />

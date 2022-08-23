@@ -4,7 +4,6 @@ import Profile from './profile'
 import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import Test from './tests'
-import Documents from './documents'
 import Qualifications from './qualifications'
 import DocumentDetail from './documents/detail'
 import TestDetail from './tests/detail'
@@ -25,6 +24,7 @@ import ExaminationGroups from './attestations/examination-groups'
 import UserApplications from './attestations/userApplications'
 import Certified from './attestations/certified'
 import ExamSchedule from './attestations/exam-schedule'
+import UploadDocuments from './documents/upload-documents/list'
 
 export {
     Login,
@@ -33,7 +33,6 @@ export {
     ForgotPassword,
     ProfileDetail,
     Test,
-    Documents,
     Qualifications,
     DocumentDetail,
     TestDetail,
@@ -54,4 +53,5 @@ export {
     UserApplications,
     Certified,
     ExamSchedule,
+    UploadDocuments,
 }
