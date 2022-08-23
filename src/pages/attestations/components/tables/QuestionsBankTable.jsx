@@ -16,6 +16,14 @@ const QuestionsBankTable = ({ data, loading }) => {
             title: 'Сложность',
             dataIndex: 'difficulty',
             key: 'difficulty',
+            render: (difficulty) =>
+                difficulty === 'BEGINNER'
+                    ? 'Легкий'
+                    : difficulty === 'ADVANCED'
+                    ? 'Средний'
+                    : difficulty === 'EXPERT'
+                    ? 'Сложный'
+                    : 'Открытый',
         },
         {
             title: 'Действие',

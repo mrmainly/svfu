@@ -7,16 +7,11 @@ import {
     Form,
     Input,
     Select,
-    TimePicker,
-    InputNumber,
-    Typography,
     Button,
     Upload,
     message,
     Radio,
-    Space,
     Checkbox,
-    Switch,
 } from 'antd'
 
 import { MinusCircleOutlined, PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
@@ -24,6 +19,7 @@ import { MinusCircleOutlined, PlusOutlined, UploadOutlined, DeleteTwoTone } from
 import { MyButton } from '../../../../components'
 import {
     usePostAttestationsQuestionsBankImageMutation,
+    usePostAttestationsQuestionsBankFileMutation,
     usePostAttestationsQuestionsBankMutation,
     useGetAttestationsQualificationQuery,
     useGetAttestationsQuestionsBankQuery,
@@ -34,23 +30,22 @@ const { TextArea } = Input
 const QBAddModal = ({ open, setOpen }) => {
     const { data: imageId } = useGetAttestationsQuestionsBankQuery()
     const { data } = useGetAttestationsQualificationQuery()
-    const [file, setFile] = useState()
-    const [pdfFile, setPdfFile] = useState()
+    const [img, setImg] = useState()
     const [technique, setTechnique] = useState('')
     const [radioId, setRadioId] = useState('')
     const [form] = Form.useForm()
+    const [fileList, setFileList] = useState([])
+    const [id, setId] = useState()
     const uploadButton = (
         <div>
             <PlusOutlined />
             <div style={{ marginTop: 8 }}>Upload</div>
         </div>
     )
-    const handleFile = (e) => {
-        setFile(e.file)
-    }
 
     const props = {
         beforeUpload: (file) => {
+            setImg(file)
             const isPNG = file.type === 'image/png' || 'image/jpeg'
 
             if (!isPNG) {
@@ -63,15 +58,10 @@ const QBAddModal = ({ open, setOpen }) => {
     }
     const props2 = {
         beforeUpload: (file) => {
-            const isPDF = file.type === 'application/pdf'
-            setPdfFile(file)
-            if (!isPDF) {
-                message.error(`${file.name} не является pdf файлом`)
-                return isPDF || Upload.LIST_IGNORE
-            }
-
+            setFileList([...fileList, file])
             return false
         },
+        fileList,
     }
     const children = [
         { value: 'MULTIPLE_CHOICE', label: 'Checkbox' },
@@ -80,55 +70,61 @@ const QBAddModal = ({ open, setOpen }) => {
     ]
     const [postAttestationsQuestionsBank] = usePostAttestationsQuestionsBankMutation()
     const [postAttestationsQuestionsBankImage] = usePostAttestationsQuestionsBankImageMutation()
+    const [postAttestationsQuestionsBankFile] = usePostAttestationsQuestionsBankFileMutation()
     const onSubmit = (data) => {
-        // let formData = new FormData()
-        // formData.append('image', file)
-        // formData.append('image_name', file.name)
-        // console.log('someid', someid[someid.length - 1].id)
+        console.log(fileList)
         if (data.technique === 'ONE_CHOICE') {
             data.variant = data.variant.map(
                 (item, index) =>
                     (item = { name: item.name, is_true: radioId === index ? true : false })
             )
+        } else {
+            data.difficulty = 'DESCRIBE'
         }
-        // if (data.technique === 'DESCRIBE') {
-        //     data.variant = data.variant.delete
-        // }
-
-        // data.question_images = [
-        //     { image_name: data.question_images.file.name, image: data.question_images.file },
-        // ]
-        postAttestationsQuestionsBank(data).then((res, req) => {
+        postAttestationsQuestionsBank(data).then((res) => {
             if (res.data) {
-                // let someid = imageId.filter((item) => item.name === data.name)
-                // postAttestationsQuestionsBankImage({
-                //     id: someid[someid.length - 1].id,
-                //     formData: formData,
-                // }).then((res) => {
-                //     if (res.data) {
-                //         message.success('Вопрос создан')
-                //         setOpen(false)
-                //     } else {
-                //         message.error(res.error.data.errors[0])
-                //     }
-                //     console.log(res)
-                // })
                 message.success('Вопрос создан')
+                setId(res.data.question_id)
                 setOpen(false)
+                form.resetFields()
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log('req.params.id', req.params.id)
         })
+        if (img !== null) {
+            let formData = new FormData()
+            formData.append('image', img)
+            postAttestationsQuestionsBankImage({
+                id: id,
+                formData: formData,
+            })
+        }
+        if (data.technique === 'DESCRIBE') {
+            fileList.forEach((file) => {
+                const formData = new FormData()
+                formData.append('file', file)
+                postAttestationsQuestionsBankFile({
+                    id: id,
+                    formData: formData,
+                })
+            })
+        }
     }
     return (
         <div>
             <Modal
+                forceRender
+                getContainer={false}
                 destroyOnClose={true}
-                title="Создание вопрос"
+                title="Создание вопроса"
                 visible={open}
-                onCancel={() => setOpen(false)}
-                style={{ top: 0 }}
+                onOk={() => {
+                    setOpen(false)
+                }}
+                onCancel={() => {
+                    setOpen(false)
+                    form.resetFields()
+                }}
                 footer={[
                     <MyButton key="submit" htmlType="submit" form="qbadd-form">
                         Сохранить
@@ -149,7 +145,7 @@ const QBAddModal = ({ open, setOpen }) => {
                     </Form.Item>
                     <Form.Item label="Квалификация вопроса" name="direction">
                         <Select
-                            mode="tags"
+                            mode="multiple"
                             style={{
                                 width: '100%',
                             }}
@@ -175,13 +171,13 @@ const QBAddModal = ({ open, setOpen }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Изображение" name="question_images">
+                    <Form.Item label="Изображение">
                         <Upload
                             {...props}
                             listType="picture-card"
                             multiple={false}
                             maxCount={1}
-                            onChange={handleFile}
+                            onRemove={() => setImg()}
                         >
                             {uploadButton}
                         </Upload>
@@ -189,14 +185,145 @@ const QBAddModal = ({ open, setOpen }) => {
                     <Form.Item label="Текст вопроса" name="description">
                         <TextArea />
                     </Form.Item>
-                    <Form.Item label="Сложность вопроса" name="difficulty">
-                        <Select>
-                            <Option value="BEGINNER">Легкая</Option>
-                            <Option value="ADVANCED">Средняя</Option>
-                            <Option value="EXPERT ">Тяжелая</Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
+
+                    {(form.getFieldValue('technique') === 'ONE_CHOICE' ||
+                        form.getFieldValue('technique') === 'MULTIPLE_CHOICE') && (
+                        <Form.Item label="Сложность вопроса" name="difficulty">
+                            <Select>
+                                <Option value="BEGINNER">Легкая</Option>
+                                <Option value="ADVANCED">Средняя</Option>
+                                <Option value="EXPERT">Тяжелая</Option>
+                            </Select>
+                        </Form.Item>
+                    )}
+                    {form.getFieldValue('technique') === 'MULTIPLE_CHOICE' && (
+                        <Form.List name="variant">
+                            {(fields, { add, remove }) => (
+                                <>
+                                    {fields.map(({ key, name, ...restField }) => (
+                                        <Row
+                                            key={key}
+                                            justify="space-between"
+                                            style={{ width: '80%' }}
+                                            align=""
+                                        >
+                                            <Col span={18}>
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[name, 'name']}
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Заполните вариант ответа или удалите поле',
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Input placeholder="Вариант ответа" />
+                                                </Form.Item>
+                                            </Col>
+                                            <Form.Item
+                                                {...restField}
+                                                name={[name, 'is_true']}
+                                                valuePropName="checked"
+                                                initialValue={false}
+                                            >
+                                                <Checkbox></Checkbox>
+                                            </Form.Item>
+                                            <Form.Item>
+                                                {fields.length > 2 ? (
+                                                    <DeleteTwoTone
+                                                        twoToneColor="#EB5757"
+                                                        onClick={() => remove(name)}
+                                                    />
+                                                ) : null}
+                                            </Form.Item>
+                                        </Row>
+                                    ))}
+                                    <Form.Item>
+                                        <Button
+                                            onClick={() => add()}
+                                            block
+                                            type="primary"
+                                            ghost
+                                            icon={<PlusOutlined />}
+                                        >
+                                            Добавить вариант ответа
+                                        </Button>
+                                    </Form.Item>
+                                </>
+                            )}
+                        </Form.List>
+                    )}
+                    {form.getFieldValue('technique') === 'ONE_CHOICE' && (
+                        <Form.List name="variant">
+                            {(fields, { add, remove }, { errors }) => (
+                                <>
+                                    {fields.map((field, index) => (
+                                        <Row
+                                            key={field.key}
+                                            justify="space-between"
+                                            style={{ width: '80%' }}
+                                        >
+                                            <Col span={18}>
+                                                <Form.Item
+                                                    {...field}
+                                                    name={[field.name, 'name']}
+                                                    validateTrigger={['onChange', 'onBlur']}
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message:
+                                                                'Заполните вариант ответа или удалите поле',
+                                                        },
+                                                    ]}
+                                                    noStyle
+                                                >
+                                                    <Input placeholder="Вариант ответа" />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col>
+                                                <Form.Item>
+                                                    <Radio
+                                                        checked={index === radioId}
+                                                        onChange={() => setRadioId(index)}
+                                                    ></Radio>
+                                                </Form.Item>
+                                            </Col>
+                                            <Col>
+                                                {fields.length > 2 ? (
+                                                    <Form.Item>
+                                                        <DeleteTwoTone
+                                                            twoToneColor="#EB5757"
+                                                            onClick={() => remove(field.name)}
+                                                        />
+                                                    </Form.Item>
+                                                ) : null}
+                                            </Col>
+                                        </Row>
+                                    ))}
+                                    <Form.Item>
+                                        <Button
+                                            onClick={() => add()}
+                                            block
+                                            type="primary"
+                                            ghost
+                                            icon={<PlusOutlined />}
+                                        >
+                                            Добавить вариант ответа
+                                        </Button>
+                                        <Form.ErrorList errors={errors} />
+                                    </Form.Item>
+                                </>
+                            )}
+                        </Form.List>
+                    )}
+                    {form.getFieldValue('technique') === 'DESCRIBE' && (
+                        <Upload action="none" {...props2} multiple={true} labelCol={{ span: 24 }}>
+                            <Button icon={<UploadOutlined />}>Upload</Button>
+                        </Upload>
+                    )}
+                    {/* <Form.Item
                         noStyle
                         shouldUpdate={(prevValues, currentValues) =>
                             prevValues.gender !== currentValues.gender
@@ -331,15 +458,14 @@ const QBAddModal = ({ open, setOpen }) => {
                                 <Upload
                                     action="none"
                                     {...props2}
-                                    multiple={false}
-                                    maxCount={1}
+                                    multiple={true}
                                     labelCol={{ span: 24 }}
                                 >
                                     <Button icon={<UploadOutlined />}>Upload</Button>
                                 </Upload>
                             ))
                         }
-                    </Form.Item>
+                    </Form.Item> */}
                 </Form>
             </Modal>
         </div>
