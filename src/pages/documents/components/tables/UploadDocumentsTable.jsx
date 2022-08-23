@@ -1,37 +1,37 @@
 import { useState } from 'react'
 import Table from 'antd/lib/table'
-import ROUTES from '../../../../routes'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import UDEditModal from '../modals/udeditmodal'
 
 const UploadDocumentsTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
-    const [modalEditQuali, setModalEditQuali] = useState(false)
+    const [modalEditDocs, setModalEditDocs] = useState(false)
 
     const columns = [
-        { title: 'Документ', dataIndex: 'id', key: 'id' },
-        { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
-        // {
-        //     title: 'Тип документа',
-        //     dataIndex: 'diploma' || 'titles_degrees',
-        //     key: 'diploma' || 'titles_degrees',
-        //     render:
-        //         ((diploma) => <>{diploma.name}</>) ||
-        //         ((titles_degrees) => <>{titles_degrees.name}</>),
-        // },
-        // { title: 'Описание', dataIndex: 'description', key: 'description' },
+        {
+            title: 'Документ',
+            dataIndex: 'document',
+            key: 'document',
+            render: (document) => (
+                <a href={document} target="_blank">
+                    {decodeURI(document).split('/')[5]}
+                </a>
+            ),
+        },
+        { title: 'Тип документа', dataIndex: 'type', key: 'type' },
+        { title: 'Описание', dataIndex: 'name', key: 'name' },
         {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => (
+            render: (text, record) => (
                 <Button
                     type="primary"
-                    // onClick={() => {
-                    //     const itemData = data?.filter((e) => e.id === id)
-                    //     setCurrentData(itemData)
-                    //     setModalEditQuali(true)
-                    // }}
+                    onClick={() => {
+                        setCurrentData(record)
+                        setModalEditDocs(true)
+                    }}
                 >
                     Изменить
                 </Button>
@@ -40,18 +40,31 @@ const UploadDocumentsTable = ({ data, loading }) => {
     ]
     const inputs = [
         {
-            title: 'Диплом:',
-            value: data.diploma,
-        },
-        {
-            title: 'Образование, ученое звание и учёные степени:',
-            value: data.titles_degrees,
+            type: 'Паспорт',
+            document: data?.passport,
+            name: '',
         },
     ]
+    {
+        data?.diploma.map((item) =>
+            inputs.push({ type: 'Диплом', document: item.file, id: item.id, name: item.name })
+        )
+    }
+    {
+        data?.titles_degrees.map((item) =>
+            inputs.push({
+                type: 'Образование, ученое звание и учёные степени',
+                document: item.file,
+                id: item.id,
+                name: item.name,
+            })
+        )
+    }
+    console.log('cd', currentData)
     return (
         <>
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
-            {/* <AQEditModal open={modalEditQuali} setOpen={setModalEditQuali} dataList={currentData} /> */}
+            <Table columns={columns} dataSource={inputs} loading={loading} rowKey="id" />
+            <UDEditModal open={modalEditDocs} setOpen={setModalEditDocs} dataList={currentData} />
         </>
     )
 }

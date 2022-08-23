@@ -6,17 +6,17 @@ import Item from 'antd/lib/list/Item'
 
 import { MyButton } from '../../../../components'
 import {
-    usePostDocumentsDiplomaMutation,
     usePostDocumentsMutation,
-    usePostDocumentsTitlesMutation,
+    usePatchDocumentsDiplomaMutation,
+    usePatchDocumentsTitlesMutation,
 } from '../../../../services/DocumentsService'
 const { TextArea } = Input
 const { Option } = Select
 const { Text } = Typography
 
-const UDAddModal = ({ open, setOpen }) => {
-    const [postDocumentsDiploma] = usePostDocumentsDiplomaMutation()
-    const [postDocumentsTitles] = usePostDocumentsTitlesMutation()
+const UDEditModal = ({ open, setOpen, dataList }) => {
+    const [patchDocumentsDiploma] = usePatchDocumentsDiplomaMutation()
+    const [patchDocumentsTitles] = usePatchDocumentsTitlesMutation()
     const [postDocuments] = usePostDocumentsMutation()
     let valRef = useRef()
     let editRef = useRef()
@@ -36,11 +36,12 @@ const UDAddModal = ({ open, setOpen }) => {
             return false
         },
     }
-    const onSubmit = (data) => {
+    const onEdit = () => {
+        console.log(edit)
         let formData = new FormData()
-        switch (value) {
+        switch (dataList.type) {
             case 'Паспорт':
-                formData.append('passport', file)
+                if (file) formData.append('passport', file)
                 postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
                         message.success('Документ изменен')
@@ -51,9 +52,10 @@ const UDAddModal = ({ open, setOpen }) => {
                 setFile()
                 break
             case 'Диплом':
-                formData.append('file', file)
-                formData.append('name', valRef.current.input.value)
-                postDocumentsDiploma({ formData: formData }).then((res) => {
+                if (file) formData.append('file', file)
+                formData.append('name', editRef.current.input.value)
+                console.log(file)
+                patchDocumentsDiploma({ id: dataList.id, formData: formData }).then((res) => {
                     if (res.data) {
                         message.success('Документ изменен')
                     } else {
@@ -62,10 +64,10 @@ const UDAddModal = ({ open, setOpen }) => {
                 })
                 setFile()
                 break
-            case 'Образование':
-                formData.append('file', file)
-                formData.append('name', valRef.current.input.value)
-                postDocumentsTitles({ formData: formData }).then((res) => {
+            case 'Образование, ученое звание и учёные степени':
+                if (file) formData.append('file', file)
+                formData.append('name', editRef.current.input.value)
+                patchDocumentsTitles({ id: dataList.id, formData: formData }).then((res) => {
                     if (res.data) {
                         message.success('Документ изменен')
                     } else {
@@ -79,12 +81,12 @@ const UDAddModal = ({ open, setOpen }) => {
         setOpen(false)
     }
     const onSearch = (value) => console.log(value)
-
+    console.log('dasd', dataList)
     return (
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Добавить документы"
+                title="Изменить документ"
                 style={{
                     top: 20,
                 }}
@@ -95,28 +97,18 @@ const UDAddModal = ({ open, setOpen }) => {
                     <Button key="back" onClick={() => setOpen(false)}>
                         Отмена
                     </Button>,
-                    <Button key="submit" type="primary" onClick={onSubmit}>
+                    <Button key="submit" type="primary" onClick={onEdit}>
                         Сохранить
                     </Button>,
                 ]}
             >
                 <Text style={{ fontWeight: 600, fontSize: 16 }}>Тип документа</Text>
                 <div style={{ marginTop: '10px' }}>
-                    <Select
-                        defaultValue="Выберите тип документа"
-                        style={{
-                            width: '100%',
-                        }}
-                        onChange={(value) => setValue(value)}
-                    >
-                        <Option value="Паспорт">Паспорт</Option>
-                        <Option value="Диплом">Диплом</Option>
-                        <Option value="Образование">
-                            Образование, ученое звание и учёные степени
-                        </Option>
-                    </Select>
+                    <Typography style={{ fontWeight: 400, fontSize: 16 }}>
+                        {dataList.type}
+                    </Typography>
                 </div>
-                {value === 'Паспорт' ? (
+                {dataList.type === 'Паспорт' ? (
                     <></>
                 ) : (
                     <div style={{ marginTop: '10px' }}>
@@ -124,8 +116,9 @@ const UDAddModal = ({ open, setOpen }) => {
                         <Input
                             style={{ marginTop: '10px' }}
                             size="large"
-                            ref={valRef}
+                            ref={editRef}
                             type="text"
+                            defaultValue={dataList.name}
                         />
                     </div>
                 )}
@@ -139,14 +132,7 @@ const UDAddModal = ({ open, setOpen }) => {
                     }}
                 >
                     <Text style={{ fontWeight: 600, fontSize: 16 }}>Документ</Text>
-                    <Upload
-                        action="none"
-                        {...props}
-                        name="passport"
-                        multiple={false}
-                        maxCount={1}
-                        labelCol={{ span: 24 }}
-                    >
+                    <Upload {...props} multiple={false} maxCount={1} labelCol={{ span: 24 }}>
                         <Button icon={<UploadOutlined />}>Загрузить документ</Button>
                     </Upload>
                 </div>
@@ -155,4 +141,4 @@ const UDAddModal = ({ open, setOpen }) => {
     )
 }
 
-export default UDAddModal
+export default UDEditModal
