@@ -78,7 +78,6 @@ const TestProcessingTable = ({ data, loading }) => {
                     <Button
                         type="primary"
                         ghost
-                        type="primary"
                         // onClick={() => {
                         //     const itemData = data?.filter((e) => e.id === id)
                         //     setCurrentData(itemData)
