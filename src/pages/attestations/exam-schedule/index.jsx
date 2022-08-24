@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Space, Select } from 'antd'
 
 import UserApplicationsTable from '../components/tables/UserApplicationsTable'
-import { useGetTestGroupQuery } from '../../../services/TestGroup'
+import { useGetTestGroupQuery } from '../../../services/TutorService'
 
 const { Search } = Input
 

@@ -2,14 +2,16 @@ import React from 'react'
 import { Input, Space, Select } from 'antd'
 
 import UserApplicationsTable from '../components/tables/UserApplicationsTable'
-import { useGetTestGroupQuery } from '../../../services/TestGroup'
+import { useGetApplicationQuery } from '../../../services/TutorService'
 
 const { Search } = Input
 
 const { Option } = Select
 
 const UserApplications = () => {
-    const { data, isFetching } = useGetTestGroupQuery('')
+    const { data, isFetching } = useGetApplicationQuery('')
+
+    console.log(data)
 
     return (
         <div>
@@ -20,7 +22,7 @@ const UserApplications = () => {
                 </Select>
             </Space>
 
-            <UserApplicationsTable data={data} loading={isFetching} />
+            <UserApplicationsTable data={data?.results} loading={isFetching} />
         </div>
     )
 }

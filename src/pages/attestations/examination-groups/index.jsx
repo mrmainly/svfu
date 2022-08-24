@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { MyButton } from '../../../components'
 import ExaminationGroupsTable from '../components/tables/ExaminationGroupsTable'
-import { useGetTestGroupQuery } from '../../../services/TestGroup'
+import { useGetTestGroupQuery } from '../../../services/TutorService'
+import EgCreateModal from '../components/modals/egCreateModal'
 
 const ExaminationGroups = () => {
-    const { data, isFetching } = useGetTestGroupQuery('')
+    const [open, setOpen] = useState(false)
 
-    console.log(data)
+    const { data, isFetching } = useGetTestGroupQuery('')
 
     return (
         <div>
-            <MyButton style={{ marginBottom: 20 }}>Создать группу</MyButton>
-            <ExaminationGroupsTable data={data} loading={isFetching} />
+            <EgCreateModal open={open} setOpen={setOpen} />
+            <MyButton style={{ marginBottom: 20 }} onClick={() => setOpen(true)}>
+                Создать группу
+            </MyButton>
+            <ExaminationGroupsTable data={data?.results} loading={isFetching} />
         </div>
     )
 }
