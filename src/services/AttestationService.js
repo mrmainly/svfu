@@ -97,6 +97,16 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        patchAttestationsQuestionsBank: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `constructor/question/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
     }),
 })
 
@@ -112,5 +122,6 @@ export const {
     usePostAttestationsQuestionsBankFileMutation,
     usePatchAttestationsTestsBankIdMutation,
     usePatchAttestationsQualificationIdMutation,
+    usePatchAttestationsQuestionsBankMutation,
     usePutAttestationsQualificationIdMutation,
 } = attestation
