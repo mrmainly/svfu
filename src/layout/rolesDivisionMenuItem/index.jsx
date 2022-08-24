@@ -1,6 +1,7 @@
 import TESTER from './menuItems/TESTER'
 import TUTOR from './menuItems/TUTOR'
 import CONSTRUCTOR from './menuItems/CONSTRUCTOR'
+import EXPERT from './menuItems/EXPERT'
 
 const RolesDivisionMenuItem = (navigate) => {
     const role = JSON.parse(localStorage.getItem('role'))
@@ -11,6 +12,8 @@ const RolesDivisionMenuItem = (navigate) => {
         return CONSTRUCTOR(navigate)
     } else if (role === 'TUTOR') {
         return TUTOR(navigate)
+    } else if (role === 'EXPERT') {
+        return EXPERT(navigate)
     }
 }
 

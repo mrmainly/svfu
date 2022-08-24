@@ -50,7 +50,7 @@ const QuestionsBankTable = ({ data, loading }) => {
                 setOpen={setModalEditQuestionsBank}
                 dataList={currentData}
             />
-            <Table columns={columns} dataSource={data} rowKey="id" />
+            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
         </>
     )
 }

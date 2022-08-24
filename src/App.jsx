@@ -32,6 +32,7 @@ import {
     Certified,
     ExamSchedule,
     UploadDocuments,
+    TestProcessing,
 } from './pages'
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
                         element={<AttestationsQualifications />}
                         path={ROUTES.ATTESTATION_QUALI}
                     />
+                    <Route element={<TestProcessing />} path={ROUTES.TEST_PROCESSING} />
                     <Route element={<TestsBank />} path={ROUTES.ATTESTATION_TESTS_BANK} />
                     <Route element={<QuestionsBank />} path={ROUTES.ATTESTATION_QUESTIONS_BANK} />
                     <Route element={<ExaminationGroups />} path={ROUTES.EXAMINATION_GROUPS} />

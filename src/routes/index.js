@@ -30,6 +30,7 @@ const ROUTES = {
     USER_APPLICATIONS: '/user-applocations',
     CERTIFIED: '/certified',
     EXAM_SCHEDULE: '/exam-schedule',
+    TEST_PROCESSING: '/test-processing',
 }
 
 export default ROUTES
