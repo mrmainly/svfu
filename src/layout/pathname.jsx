@@ -46,5 +46,7 @@ export const pathname = (params) => {
             return 'Расписание экзаменов'
         case ROUTES.TEST_PROCESSING:
             return 'Обработка тестов'
+        case ROUTES.ATTESTATION_PROTOCOL:
+            return 'Аттестационные протоколы'
     }
 }
