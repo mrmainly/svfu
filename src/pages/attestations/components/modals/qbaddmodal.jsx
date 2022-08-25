@@ -144,7 +144,7 @@ const QBAddModal = ({ open, setOpen }) => {
                                 width: '100%',
                             }}
                         >
-                            {data?.map((item, index) => (
+                            {data?.results.map((item, index) => (
                                 <Option value={item.id} key={index}>
                                     {item.name}
                                 </Option>

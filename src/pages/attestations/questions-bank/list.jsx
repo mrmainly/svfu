@@ -10,14 +10,15 @@ const { Search } = Input
 const { Option } = Select
 
 const QuestionsBank = () => {
-    const { data, isLoading } = useGetAttestationsQuestionsBankQuery()
+    const { data, isLoading } = useGetAttestationsQuestionsBankQuery('')
+
     const [modalNewQuestion, setModalNewQuestion] = useState(false)
     const onSearch = (value) => console.log(value)
     return (
         <div>
             <MyButton onClick={() => setModalNewQuestion(true)}>Создать вопрос</MyButton>
             <QBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
-            <QuestionsBankTable data={data} loading={isLoading} />
+            <QuestionsBankTable data={data?.results} loading={isLoading} />
         </div>
     )
 }

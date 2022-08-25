@@ -11,7 +11,11 @@ const Test = () => {
 
     return (
         <div>
-            <AvailableTestTable data={data} routes={ROUTES.TEST_DETAIL} loading={isLoading} />
+            <AvailableTestTable
+                data={data?.results}
+                routes={ROUTES.TEST_DETAIL}
+                loading={isLoading}
+            />
         </div>
     )
 }
