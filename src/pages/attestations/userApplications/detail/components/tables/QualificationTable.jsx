@@ -10,7 +10,7 @@ const QualificationTable = ({ data, loading }) => {
 
     const columns = [
         {
-            title: 'ФИО',
+            title: '№',
             dataIndex: 'user',
             key: 'user',
             render: (user) => (
@@ -26,15 +26,10 @@ const QualificationTable = ({ data, loading }) => {
             render: (direction) => <div>{direction.name}</div>,
         },
         {
-            title: 'Должность',
+            title: 'Дата выдачи',
             dataIndex: 'testers',
             key: 'testers',
             render: (testers) => <div>{testers?.length}</div>,
-        },
-        {
-            title: 'Стаж работы',
-            dataIndex: 'difficult',
-            key: 'difficult',
         },
         {
             title: 'Действие',

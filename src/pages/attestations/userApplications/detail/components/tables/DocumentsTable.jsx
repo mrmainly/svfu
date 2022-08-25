@@ -10,7 +10,7 @@ const DocumentsTable = ({ data, loading }) => {
 
     const columns = [
         {
-            title: 'ФИО',
+            title: 'Документ',
             dataIndex: 'user',
             key: 'user',
             render: (user) => (
@@ -20,21 +20,16 @@ const DocumentsTable = ({ data, loading }) => {
             ),
         },
         {
-            title: 'Название квалификации',
+            title: 'Тип документа',
             dataIndex: 'direction',
             key: 'direction',
             render: (direction) => <div>{direction.name}</div>,
         },
         {
-            title: 'Должность',
+            title: 'Описание',
             dataIndex: 'testers',
             key: 'testers',
             render: (testers) => <div>{testers?.length}</div>,
-        },
-        {
-            title: 'Стаж работы',
-            dataIndex: 'difficult',
-            key: 'difficult',
         },
         {
             title: 'Действие',
@@ -45,7 +40,7 @@ const DocumentsTable = ({ data, loading }) => {
                     type="primary"
                     onClick={() => navigate(`${ROUTES.USER_APPLICATIONS_DETAIL}/${id}`)}
                 >
-                    Проверить
+                    Посмотреть
                 </Button>
             ),
         },
