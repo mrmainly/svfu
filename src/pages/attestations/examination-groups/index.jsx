@@ -6,6 +6,7 @@ import {
     useGetTestGroupQuery,
     useGetDirectionTuterQuery,
     useGetTestGroupIdQuery,
+    useGetTesterQuery,
 } from '../../../services/TutorService'
 import EgCreateModal from '../components/modals/egCreateModal'
 import EgEditModal from '../components/modals/egEditModal'
@@ -16,11 +17,8 @@ const ExaminationGroups = () => {
     const [testGroupId, setTestGroupId] = useState(null)
 
     const { data, isFetching } = useGetTestGroupQuery('')
-    const { data: tester } = useGetTestGroupQuery('')
+    const { data: tester } = useGetTesterQuery('')
     const { data: direction } = useGetDirectionTuterQuery('')
-    const { data: getTestGroupId } = useGetTestGroupIdQuery(testGroupId)
-
-    console.log('tester', data)
 
     return (
         <div>
@@ -35,7 +33,7 @@ const ExaminationGroups = () => {
                 setOpen={setOpenEditModal}
                 tester={tester?.results}
                 direction={direction?.results}
-                testGroupId={getTestGroupId}
+                id={testGroupId}
             />
             <MyButton style={{ marginBottom: 20 }} onClick={() => setOpen(true)}>
                 Создать группу

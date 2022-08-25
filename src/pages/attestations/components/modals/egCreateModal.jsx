@@ -12,6 +12,7 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
     const onSubmit = (data) => {
         postTestGroup(data).then((res) => {
             if (res.data) {
+                message.success('Группа создана')
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -88,7 +89,7 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
                                         >
                                             <Select placeholder="Выберите аттестуемого">
                                                 {tester
-                                                    ? tester[0]?.testers?.map((item, index) => (
+                                                    ? tester.map((item, index) => (
                                                           <Option key={index} value={item.id}>
                                                               {item.last_name} {item.first_name}{' '}
                                                               {item.patronymic}

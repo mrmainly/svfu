@@ -14,12 +14,23 @@ export const Tutor = api.injectEndpoints({
                 url: `tutor/testgroup/${id}`,
                 dependencies: id,
             }),
+            providesTags: ['TestGroup'],
         }),
         postTesterGroup: build.mutation({
             query(body) {
                 return {
                     url: `tutor/testgroup`,
                     method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
+        patchTesterGroup: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `tutor/testgroup/${id}`,
+                    method: 'PATCH',
                     body,
                 }
             },
@@ -45,4 +56,5 @@ export const {
     useGetApplicationQuery,
     useGetTesterQuery,
     usePostTesterGroupMutation,
+    usePatchTesterGroupMutation,
 } = Tutor

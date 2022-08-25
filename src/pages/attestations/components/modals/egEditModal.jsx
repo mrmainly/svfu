@@ -1,23 +1,31 @@
-import { Modal, message, Select, Form, Button } from 'antd'
+import { Modal, message, Select, Form, Button, Spin } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
-import { usePostTesterGroupMutation } from '../../../../services/TutorService'
+import {
+    usePatchTesterGroupMutation,
+    useGetTestGroupIdQuery,
+} from '../../../../services/TutorService'
 
 const { Option } = Select
 
-const EgEditModal = ({ open, setOpen, tester, direction }) => {
-    const [postTestGroup] = usePostTesterGroupMutation()
+const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
+    const [patchTestGroup] = usePatchTesterGroupMutation()
+    const { data: getTestGroupId, isFetching, isLoading } = useGetTestGroupIdQuery(id)
 
     const onSubmit = (data) => {
-        postTestGroup(data).then((res) => {
+        patchTestGroup({ body: data, id: id }).then((res) => {
             if (res.data) {
+                message.success('Группа обновлена')
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
+    }
+
+    if (isLoading) {
+        return <></>
     }
 
     return (
@@ -29,7 +37,7 @@ const EgEditModal = ({ open, setOpen, tester, direction }) => {
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="egCreate-form">
+                    <MyButton key="submit" htmlType="submit" form="egEdit-form">
                         Сохранить
                     </MyButton>,
                     <MyButton
@@ -44,7 +52,18 @@ const EgEditModal = ({ open, setOpen, tester, direction }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="egCreate-form">
+                <Form
+                    layout="vertical"
+                    onFinish={onSubmit}
+                    id="egEdit-form"
+                    name="dynamic_form_item"
+                    initialValues={{
+                        direction: getTestGroupId?.direction?.id,
+                        testers: getTestGroupId?.testers.map((item) => {
+                            return item.id
+                        }),
+                    }}
+                >
                     <Form.Item label="Квалификация" name="direction">
                         <Select placeholder="Выберите тег">
                             {direction
@@ -56,17 +75,6 @@ const EgEditModal = ({ open, setOpen, tester, direction }) => {
                                 : ''}
                         </Select>
                     </Form.Item>
-                    {/* <Form.Item label={`Аттестуемый 1`} name={`tester_1`} required>
-                        <Select placeholder="Выберите аттестуемого">
-                            {tester
-                                ? tester[0]?.testers?.map((item, index) => (
-                                      <Option key={index} value={item.id}>
-                                          {item.last_name} {item.first_name} {item.patronymic}
-                                      </Option>
-                                  ))
-                                : ''}
-                        </Select>
-                    </Form.Item> */}
                     <Form.List name="testers">
                         {(fields, { add, remove }) => (
                             <>
@@ -88,7 +96,7 @@ const EgEditModal = ({ open, setOpen, tester, direction }) => {
                                         >
                                             <Select placeholder="Выберите аттестуемого">
                                                 {tester
-                                                    ? tester[0]?.testers?.map((item, index) => (
+                                                    ? tester.map((item, index) => (
                                                           <Option key={index} value={item.id}>
                                                               {item.last_name} {item.first_name}{' '}
                                                               {item.patronymic}

@@ -9,6 +9,7 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupI
             title: 'Название квалификации',
             dataIndex: 'direction',
             key: 'direction',
+            render: (direction) => <div>{direction?.name}</div>,
         },
         {
             title: 'Количество аттестуемых',
