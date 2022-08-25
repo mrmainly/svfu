@@ -1,14 +1,24 @@
-import { useState, useEffect } from 'react'
-import { Modal, message, Input, Select, Form, Row, Col, Button } from 'antd'
+import { Modal, message, Select, Form, Button } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
-import { useGetDirectionQuery } from '../../../../services/TutorService'
+import { usePostTesterGroupMutation } from '../../../../services/TutorService'
 
 const { Option } = Select
 
-const EgCreateModal = ({ open, setOpen }) => {
-    const { data: directions, isLoading } = useGetDirectionQuery('')
+const EgCreateModal = ({ open, setOpen, tester, direction }) => {
+    const [postTestGroup] = usePostTesterGroupMutation()
+
+    const onSubmit = (data) => {
+        postTestGroup(data).then((res) => {
+            if (res.data) {
+                setOpen(false)
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+            console.log(res)
+        })
+    }
 
     return (
         <div>
@@ -19,7 +29,7 @@ const EgCreateModal = ({ open, setOpen }) => {
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="aqedit-form">
+                    <MyButton key="submit" htmlType="submit" form="egCreate-form">
                         Сохранить
                     </MyButton>,
                     <MyButton
@@ -34,24 +44,30 @@ const EgCreateModal = ({ open, setOpen }) => {
                     </MyButton>,
                 ]}
             >
-                <Form
-                    layout="vertical"
-                    // onFinish={onSubmit}
-                    id="aqedit-form"
-                >
-                    <Form.Item label="Квалификация" name="tag_direction">
+                <Form layout="vertical" onFinish={onSubmit} id="egCreate-form">
+                    <Form.Item label="Квалификация" name="direction">
                         <Select placeholder="Выберите тег">
-                            {/* {data?.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.name}
-                                </Option>
-                            ))} */}
+                            {direction
+                                ? direction.map((item, index) => (
+                                      <Option key={index} value={item.id}>
+                                          {item.name}
+                                      </Option>
+                                  ))
+                                : ''}
                         </Select>
                     </Form.Item>
-                    <Form.Item label={`Аттестуемый 1`} name="description" required>
-                        <Input placeholder="Выберите аттестуемого" />
-                    </Form.Item>
-                    <Form.List name="variant">
+                    {/* <Form.Item label={`Аттестуемый 1`} name={`tester_1`} required>
+                        <Select placeholder="Выберите аттестуемого">
+                            {tester
+                                ? tester[0]?.testers?.map((item, index) => (
+                                      <Option key={index} value={item.id}>
+                                          {item.last_name} {item.first_name} {item.patronymic}
+                                      </Option>
+                                  ))
+                                : ''}
+                        </Select>
+                    </Form.Item> */}
+                    <Form.List name="testers">
                         {(fields, { add, remove }) => (
                             <>
                                 {fields.map(({ key, name, ...restField }) => (
@@ -65,12 +81,21 @@ const EgCreateModal = ({ open, setOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Аттестуемый ${key + 2} `}
-                                            name="description"
+                                            label={`Аттестуемый ${key + 1} `}
+                                            name={key}
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
-                                            <Input placeholder="Выберите аттестуемого" />
+                                            <Select placeholder="Выберите аттестуемого">
+                                                {tester
+                                                    ? tester[0]?.testers?.map((item, index) => (
+                                                          <Option key={index} value={item.id}>
+                                                              {item.last_name} {item.first_name}{' '}
+                                                              {item.patronymic}
+                                                          </Option>
+                                                      ))
+                                                    : ''}
+                                            </Select>
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"

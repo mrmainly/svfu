@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Button, Table } from 'antd'
 
-const ExaminationGroupsTable = ({ data, loading }) => {
+const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupId }) => {
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
         {
-            title: 'Название валификации',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'Название квалификации',
+            dataIndex: 'direction',
+            key: 'direction',
         },
         {
             title: 'Количество аттестуемых',
@@ -25,7 +25,17 @@ const ExaminationGroupsTable = ({ data, loading }) => {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => <Button type="primary">Перейти</Button>,
+            render: (id) => (
+                <Button
+                    type="primary"
+                    onClick={() => {
+                        setOpenEditModal(true)
+                        setTestGroupId(id)
+                    }}
+                >
+                    Перейти
+                </Button>
+            ),
         },
     ]
 

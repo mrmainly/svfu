@@ -7,8 +7,26 @@ export const Tutor = api.injectEndpoints({
     endpoints: (build) => ({
         getTestGroup: build.query({
             query: () => `tutor/testgroup`,
+            providesTags: ['TestGroup'],
         }),
-        getDirection: build.query({
+        getTestGroupId: build.query({
+            query: (id) => ({
+                url: `tutor/testgroup/${id}`,
+                dependencies: id,
+            }),
+        }),
+        postTesterGroup: build.mutation({
+            query(body) {
+                return {
+                    url: `tutor/testgroup`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
+
+        getDirectionTuter: build.query({
             query: () => `tutor/direction`,
         }),
         getApplication: build.query({
@@ -22,7 +40,9 @@ export const Tutor = api.injectEndpoints({
 
 export const {
     useGetTestGroupQuery,
-    useGetDirectionQuery,
+    useGetDirectionTuterQuery,
+    useGetTestGroupIdQuery,
     useGetApplicationQuery,
     useGetTesterQuery,
+    usePostTesterGroupMutation,
 } = Tutor
