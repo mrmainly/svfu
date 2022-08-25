@@ -12,7 +12,6 @@ import {
     ProfileDetail,
     Test,
     MyQualification,
-    DocumentDetail,
     TestDetail,
     CertificationResults,
     QualificationAdded,
@@ -35,6 +34,8 @@ import {
     TestProcessing,
     AttestationProtocol,
     UserApplicationsDetail,
+    LprUsers,
+    LprUsersDetail,
     CertifiedDetail,
 } from './pages'
 
@@ -54,7 +55,6 @@ function App() {
                     <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />v
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
                     <Route element={<CertificationResults />} path={ROUTES.CERTIFICATION_RESULTS} />
-                    <Route element={<DocumentDetail />} path={ROUTES.DOCUMENTS_EDITING} />
                     <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
                     <Route
                         element={<QualificationDetail />}
@@ -74,6 +74,8 @@ function App() {
                     <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
+                    <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />
+                    <Route element={<LprUsersDetail />} path={ROUTES.LPR_USERS_DETAIL + '/:id'} />
                     <Route
                         element={<AttestationsQualifications />}
                         path={ROUTES.ATTESTATION_QUALI}

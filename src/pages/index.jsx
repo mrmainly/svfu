@@ -4,7 +4,6 @@ import Profile from './profile'
 import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import Test from './tests'
-import DocumentDetail from './documents/detail'
 import TestDetail from './tests/detail'
 import CertificationResults from './certification-results'
 import QualificationAdded from './qualifications/added'
@@ -27,6 +26,8 @@ import ExamSchedule from './attestations/exam-schedule'
 import TestProcessing from './attestations/test-processing/list'
 import UploadDocuments from './documents/upload-documents/list'
 import MyQualification from './documents/my-qualification/list'
+import LprUsers from './attestations/lpr-users/list'
+import LprUsersDetail from './attestations/lpr-users/detail'
 import UserApplicationsDetail from './attestations/userApplications/detail'
 import CertifiedDetail from './attestations/certified/detail'
 
@@ -37,7 +38,6 @@ export {
     ForgotPassword,
     ProfileDetail,
     Test,
-    DocumentDetail,
     TestDetail,
     CertificationResults,
     QualificationAdded,
@@ -61,5 +61,7 @@ export {
     TestProcessing,
     AttestationProtocol,
     UserApplicationsDetail,
+    LprUsers,
+    LprUsersDetail,
     CertifiedDetail,
 }

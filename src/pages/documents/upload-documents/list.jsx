@@ -12,27 +12,15 @@ const { Search } = Input
 const UploadDocuments = () => {
     const { data, isLoading } = useGetDocumentsQuery()
     const [modalNewDoc, setModalNewDoc] = useState(false)
+    console.log('datares', data)
     const onSearch = (value) => console.log(value)
     return (
         <div>
-            <Row gutter={10} style={{ marginBottom: '10px' }}>
-                <Col>
-                    <MyButton style={{ marginBottom: 20 }} onClick={() => setModalNewDoc(true)}>
-                        Создать новый документ
-                    </MyButton>
-                </Col>
-                <Col>
-                    <Search
-                        size="large"
-                        placeholder="Поиск..."
-                        onSearch={onSearch}
-                        enterButton
-                        style={{ borderRadius: 4 }}
-                    />
-                </Col>
-            </Row>
+            <MyButton style={{ marginBottom: 20 }} onClick={() => setModalNewDoc(true)}>
+                Создать новый документ
+            </MyButton>
             <UDAddModal open={modalNewDoc} setOpen={setModalNewDoc} />
-            <UploadDocumentsTable data={data?.result} loading={isLoading} />
+            <UploadDocumentsTable data={data?.results} loading={isLoading} />
         </div>
     )
 }

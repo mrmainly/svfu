@@ -20,11 +20,11 @@ const LPR = (navigate) => {
                     key: 'submenu-item-1-6',
                     onClick: () => navigate(ROUTES.ATTESTATION_PROTOCOL),
                 },
-                // {
-                //     label: 'Пользователи',
-                //     key: 'submenu-item-1-7',
-                //     onClick: () => navigate(ROUTES.TEST_PROCESSING),
-                // },
+                {
+                    label: 'Пользователи',
+                    key: 'submenu-item-1-7',
+                    onClick: () => navigate(ROUTES.LPR_USERS),
+                },
             ],
         },
         {
@@ -35,7 +35,7 @@ const LPR = (navigate) => {
                 {
                     label: 'Загрузить документы',
                     key: 'submenu-item-2-1',
-                    onClick: () => navigate(ROUTES.DOCUMENTS),
+                    onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
                 },
                 {
                     label: 'Мои квалификации',

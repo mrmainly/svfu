@@ -27,6 +27,7 @@ export const api = createApi({
         'Attestation',
         'TestProcessing',
         'TestGroup',
+        'AttestationProtocol',
     ],
 
     endpoints: () => ({}),
