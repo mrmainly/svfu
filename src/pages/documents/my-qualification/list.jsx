@@ -16,7 +16,7 @@ const MyQualification = () => {
                 Загрузить мою квалификацию
             </MyButton>
             <MQAddModal open={modalNewQualification} setOpen={setModalNewQualification} />
-            <MyQualificationTable data={data} loading={isLoading} />
+            <MyQualificationTable data={data?.result} loading={isLoading} />
         </div>
     )
 }

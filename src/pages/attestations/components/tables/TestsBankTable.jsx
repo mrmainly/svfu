@@ -43,7 +43,7 @@ const TestsBankTable = ({ data, loading }) => {
 
     return (
         <>
-            <Table columns={columns} dataSource={data} rowKey="id" />
+            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
             <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
         </>
     )

@@ -19,7 +19,14 @@ export const api = createApi({
 
     baseQuery: baseQuery,
 
-    tagTypes: ['Profile', 'Qualification', 'Document', 'Direction', 'Attestation'],
+    tagTypes: [
+        'Profile',
+        'Qualification',
+        'Document',
+        'Direction',
+        'Attestation',
+        'TestProcessing',
+    ],
 
     endpoints: () => ({}),
 })

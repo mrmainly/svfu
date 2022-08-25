@@ -23,6 +23,7 @@ import ExaminationGroups from './attestations/examination-groups'
 import UserApplications from './attestations/userApplications'
 import Certified from './attestations/certified'
 import ExamSchedule from './attestations/exam-schedule'
+import TestProcessing from './attestations/test-processing/list'
 import UploadDocuments from './documents/upload-documents/list'
 import MyQualification from './documents/my-qualification/list'
 
@@ -54,4 +55,5 @@ export {
     ExamSchedule,
     MyQualification,
     UploadDocuments,
+    TestProcessing,
 }

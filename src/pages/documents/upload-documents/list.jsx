@@ -32,7 +32,7 @@ const UploadDocuments = () => {
                 </Col>
             </Row>
             <UDAddModal open={modalNewDoc} setOpen={setModalNewDoc} />
-            <UploadDocumentsTable data={data} loading={isLoading} />
+            <UploadDocumentsTable data={data?.result} loading={isLoading} />
         </div>
     )
 }
