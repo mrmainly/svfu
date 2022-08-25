@@ -24,6 +24,7 @@ const ROUTES = {
     USERS: '/users',
     USERS_DETAIL: '/users',
     ATTESTATION_QUALI: '/attestation_qualification',
+    ATTESTATION_PROTOCOL: '/attestation_protocol',
     ATTESTATION_TESTS_BANK: '/attestation_tests_bank',
     ATTESTATION_QUESTIONS_BANK: '/attestation_questions_bank',
     EXAMINATION_GROUPS: '/examination-groups',

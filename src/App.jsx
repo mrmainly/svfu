@@ -33,6 +33,7 @@ import {
     ExamSchedule,
     UploadDocuments,
     TestProcessing,
+    AttestationProtocol,
 } from './pages'
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
                     />
                     <Route element={<TestProcessing />} path={ROUTES.TEST_PROCESSING} />
                     <Route element={<TestsBank />} path={ROUTES.ATTESTATION_TESTS_BANK} />
+                    <Route element={<AttestationProtocol />} path={ROUTES.ATTESTATION_PROTOCOL} />
                     <Route element={<QuestionsBank />} path={ROUTES.ATTESTATION_QUESTIONS_BANK} />
                     <Route element={<ExaminationGroups />} path={ROUTES.EXAMINATION_GROUPS} />
                     <Route element={<UserApplications />} path={ROUTES.USER_APPLICATIONS} />
