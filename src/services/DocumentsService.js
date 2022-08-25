@@ -17,42 +17,10 @@ export const documents = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Document' }],
         }),
-        postDocumentsDiploma: build.mutation({
-            query({ formData }) {
-                return {
-                    url: `users/document/diploma`,
-                    method: 'POST',
-                    body: formData,
-                    header: 'multipart/form-data',
-                }
-            },
-            invalidatesTags: [{ type: 'Document' }],
-        }),
-        postDocumentsTitles: build.mutation({
-            query({ formData }) {
-                return {
-                    url: `users/document/titlesdegrees`,
-                    method: 'POST',
-                    body: formData,
-                    header: 'multipart/form-data',
-                }
-            },
-            invalidatesTags: [{ type: 'Document' }],
-        }),
-        patchDocumentsDiploma: build.mutation({
+        patchDocuments: build.mutation({
             query({ id, formData }) {
                 return {
-                    url: `users/document/diploma/${id}`,
-                    method: 'PATCH',
-                    body: formData,
-                }
-            },
-            invalidatesTags: [{ type: 'Document' }],
-        }),
-        patchDocumentsTitles: build.mutation({
-            query({ id, formData }) {
-                return {
-                    url: `users/document/titlesdegrees/${id}`,
+                    url: `users/document/${id}`,
                     method: 'PATCH',
                     body: formData,
                 }
@@ -62,11 +30,5 @@ export const documents = api.injectEndpoints({
     }),
 })
 
-export const {
-    useGetDocumentsQuery,
-    usePostDocumentsMutation,
-    usePostDocumentsDiplomaMutation,
-    usePostDocumentsTitlesMutation,
-    usePatchDocumentsDiplomaMutation,
-    usePatchDocumentsTitlesMutation,
-} = documents
+export const { useGetDocumentsQuery, usePostDocumentsMutation, usePatchDocumentsMutation } =
+    documents

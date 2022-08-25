@@ -12,7 +12,6 @@ import {
     ProfileDetail,
     Test,
     MyQualification,
-    DocumentDetail,
     TestDetail,
     CertificationResults,
     QualificationAdded,
@@ -37,6 +36,7 @@ import {
     UserApplicationsDetail,
     LprUsers,
     LprUsersDetail,
+    CertifiedDetail,
 } from './pages'
 
 function App() {
@@ -55,7 +55,6 @@ function App() {
                     <Route element={<TestDetail />} path={`${ROUTES.TEST_DETAIL}/:id`} />v
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
                     <Route element={<CertificationResults />} path={ROUTES.CERTIFICATION_RESULTS} />
-                    <Route element={<DocumentDetail />} path={ROUTES.DOCUMENTS_EDITING} />
                     <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
                     <Route
                         element={<QualificationDetail />}
@@ -93,6 +92,7 @@ function App() {
                         element={<UserApplicationsDetail />}
                         path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}
                     />
+                    <Route element={<CertifiedDetail />} path={`${ROUTES.CERTIFIED_DETAIL}/:id`} />
                 </Route>
             </Routes>
         </BrowserRouter>

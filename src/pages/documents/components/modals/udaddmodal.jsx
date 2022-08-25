@@ -5,18 +5,12 @@ import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
 import Item from 'antd/lib/list/Item'
 
 import { MyButton } from '../../../../components'
-import {
-    usePostDocumentsDiplomaMutation,
-    usePostDocumentsMutation,
-    usePostDocumentsTitlesMutation,
-} from '../../../../services/DocumentsService'
+import { usePostDocumentsMutation } from '../../../../services/DocumentsService'
 const { TextArea } = Input
 const { Option } = Select
 const { Text } = Typography
 
 const UDAddModal = ({ open, setOpen }) => {
-    const [postDocumentsDiploma] = usePostDocumentsDiplomaMutation()
-    const [postDocumentsTitles] = usePostDocumentsTitlesMutation()
     const [postDocuments] = usePostDocumentsMutation()
     let valRef = useRef()
     let editRef = useRef()
@@ -40,36 +34,40 @@ const UDAddModal = ({ open, setOpen }) => {
         let formData = new FormData()
         switch (value) {
             case 'Паспорт':
-                formData.append('passport', file)
+                formData.append('file', file)
+                formData.append('document_type', 'PASSPORT')
+                formData.append('name', 'Паспорт')
                 postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
-                        message.success('Документ изменен')
+                        message.success('Паспорт загружен')
                     } else {
-                        message.error(`${res.error.data.errors[1]}`)
+                        message.error(`${res.error.data.errors[0]}`)
                     }
                 })
                 setFile()
                 break
             case 'Диплом':
                 formData.append('file', file)
+                formData.append('document_type', 'DIPLOMA')
                 formData.append('name', valRef.current.input.value)
-                postDocumentsDiploma({ formData: formData }).then((res) => {
+                postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
-                        message.success('Документ изменен')
+                        message.success('Диплом загружен')
                     } else {
-                        message.error(`${res.error.data.errors[1]}`)
+                        message.error(`${res.error.data.errors[0]}`)
                     }
                 })
                 setFile()
                 break
             case 'Образование':
                 formData.append('file', file)
+                formData.append('document_type', 'TITLESDEGREES')
                 formData.append('name', valRef.current.input.value)
-                postDocumentsTitles({ formData: formData }).then((res) => {
+                postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
-                        message.success('Документ изменен')
+                        message.success('Документ об образовании загружен')
                     } else {
-                        message.error(`${res.error.data.errors[1]}`)
+                        message.error(`${res.error.data.errors[0]}`)
                     }
                 })
                 setFile()

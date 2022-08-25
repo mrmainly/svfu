@@ -1,8 +1,13 @@
 import React from 'react'
 
 import { Button, Table } from 'antd'
+import { useNavigate } from 'react-router-dom'
+
+import ROUTES from '../../../../routes'
 
 const CerifiedTable = ({ data, loading }) => {
+    const navigate = useNavigate()
+
     const columns = [
         { title: 'ID', dataIndex: 'id', key: 'id' },
         {
@@ -24,7 +29,11 @@ const CerifiedTable = ({ data, loading }) => {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => <Button type="primary">Перейти</Button>,
+            render: (id) => (
+                <Button type="primary" onClick={() => navigate(`${ROUTES.CERTIFIED_DETAIL}/${id}`)}>
+                    Перейти
+                </Button>
+            ),
         },
     ]
 

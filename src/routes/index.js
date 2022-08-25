@@ -35,6 +35,7 @@ const ROUTES = {
     USER_APPLICATIONS_DETAIL: '/user-applications-detail',
     LPR_USERS: '/lpr-users',
     LPR_USERS_DETAIL: '/lpr-users',
+    CERTIFIED_DETAIL: '/certified-detail',
 }
 
 export default ROUTES
