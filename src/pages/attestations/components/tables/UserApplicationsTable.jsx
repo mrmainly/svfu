@@ -1,8 +1,13 @@
 import React from 'react'
 
 import { Button, Table } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
-const UserApplicationsTable = ({ data, loading, navigate }) => {
+import ROUTES from '../../../../routes'
+
+const UserApplicationsTable = ({ data, loading }) => {
+    const navigate = useNavigate()
+
     const columns = [
         {
             title: 'ФИО',
@@ -35,7 +40,14 @@ const UserApplicationsTable = ({ data, loading, navigate }) => {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => <Button type="primary">Проверить</Button>,
+            render: (id) => (
+                <Button
+                    type="primary"
+                    onClick={() => navigate(`${ROUTES.USER_APPLICATIONS_DETAIL}/${id}`)}
+                >
+                    Проверить
+                </Button>
+            ),
         },
     ]
 
