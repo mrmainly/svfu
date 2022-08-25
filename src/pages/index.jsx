@@ -26,7 +26,8 @@ import ExamSchedule from './attestations/exam-schedule'
 import TestProcessing from './attestations/test-processing/list'
 import UploadDocuments from './documents/upload-documents/list'
 import MyQualification from './documents/my-qualification/list'
-import UserApplicationsDetail from './attestations/userApplications/detial'
+import UserApplicationsDetail from './attestations/userApplications/detail'
+import CertifiedDetail from './attestations/certified/detail'
 
 export {
     Login,
@@ -58,4 +59,5 @@ export {
     TestProcessing,
     AttestationProtocol,
     UserApplicationsDetail,
+    CertifiedDetail,
 }

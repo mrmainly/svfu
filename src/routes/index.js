@@ -33,6 +33,7 @@ const ROUTES = {
     EXAM_SCHEDULE: '/exam-schedule',
     TEST_PROCESSING: '/test-processing',
     USER_APPLICATIONS_DETAIL: '/user-applications-detail',
+    CERTIFIED_DETAIL: '/certified-detail',
 }
 
 export default ROUTES
