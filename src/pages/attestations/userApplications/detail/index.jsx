@@ -10,7 +10,7 @@ import Information from './components/Information'
 const { Text } = Typography
 
 const UserApplicationsDetail = () => {
-    const [mode, setMode] = useState([])
+    const [mode, setMode] = useState('info')
 
     const handleModeChange = (e) => {
         setMode(e.target.value)

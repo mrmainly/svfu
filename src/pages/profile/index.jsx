@@ -30,8 +30,6 @@ const Profile = () => {
         )
     }
 
-    console.log(data)
-
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <MainInfo data={data} /> l;o/lo
