@@ -4,7 +4,6 @@ import Profile from './profile'
 import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import Test from './tests'
-import DocumentDetail from './documents/detail'
 import TestDetail from './tests/detail'
 import CertificationResults from './certification-results'
 import QualificationAdded from './qualifications/added'
@@ -36,7 +35,6 @@ export {
     ForgotPassword,
     ProfileDetail,
     Test,
-    DocumentDetail,
     TestDetail,
     CertificationResults,
     QualificationAdded,

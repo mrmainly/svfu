@@ -5,19 +5,13 @@ import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
 import Item from 'antd/lib/list/Item'
 
 import { MyButton } from '../../../../components'
-import {
-    usePostDocumentsMutation,
-    usePatchDocumentsDiplomaMutation,
-    usePatchDocumentsTitlesMutation,
-} from '../../../../services/DocumentsService'
+import { usePatchDocumentsMutation } from '../../../../services/DocumentsService'
 const { TextArea } = Input
 const { Option } = Select
 const { Text } = Typography
 
 const UDEditModal = ({ open, setOpen, dataList }) => {
-    const [patchDocumentsDiploma] = usePatchDocumentsDiplomaMutation()
-    const [patchDocumentsTitles] = usePatchDocumentsTitlesMutation()
-    const [postDocuments] = usePostDocumentsMutation()
+    const [patchDocuments] = usePatchDocumentsMutation()
     let valRef = useRef()
     let editRef = useRef()
     const [value, setValue] = useState()
@@ -37,39 +31,42 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
         },
     }
     const onEdit = () => {
-        console.log(edit)
+        console.log('edit', dataList)
         let formData = new FormData()
-        switch (dataList.type) {
-            case 'Паспорт':
-                if (file) formData.append('passport', file)
-                postDocuments({ formData: formData }).then((res) => {
+        if (file) {
+            formData.append('file', file)
+        }
+        switch (dataList.document_type) {
+            case 'PASSPORT':
+                formData.append('name', 'Паспорт')
+                formData.append('document_type', 'PASSPORT')
+                patchDocuments({ id: dataList.id, formData: formData }).then((res) => {
                     if (res.data) {
-                        message.success('Документ изменен')
+                        message.success('Паспорт изменен')
                     } else {
                         message.error(`${res.error.data.errors[1]}`)
                     }
                 })
                 setFile()
                 break
-            case 'Диплом':
-                if (file) formData.append('file', file)
+            case 'DIPLOMA':
                 formData.append('name', editRef.current.input.value)
-                console.log(file)
-                patchDocumentsDiploma({ id: dataList.id, formData: formData }).then((res) => {
+                formData.append('document_type', 'DIPLOMA')
+                patchDocuments({ id: dataList.id, formData: formData }).then((res) => {
                     if (res.data) {
-                        message.success('Документ изменен')
+                        message.success('Диплом изменен')
                     } else {
                         message.error(`${res.error.data.errors[1]}`)
                     }
                 })
                 setFile()
                 break
-            case 'Образование, ученое звание и учёные степени':
-                if (file) formData.append('file', file)
+            case 'TITLESDEGREES':
                 formData.append('name', editRef.current.input.value)
-                patchDocumentsTitles({ id: dataList.id, formData: formData }).then((res) => {
+                formData.append('document_type', 'TITLESDEGREES')
+                patchDocuments({ id: dataList.id, formData: formData }).then((res) => {
                     if (res.data) {
-                        message.success('Документ изменен')
+                        message.success('Документ об образовании изменен')
                     } else {
                         message.error(`${res.error.data.errors[1]}`)
                     }
@@ -81,7 +78,6 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
         setOpen(false)
     }
     const onSearch = (value) => console.log(value)
-    console.log('dasd', dataList)
     return (
         <div>
             <Modal
