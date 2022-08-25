@@ -5,12 +5,14 @@ import { MyButton } from '../../../../components'
 import {
     usePatchTesterGroupMutation,
     useGetTestGroupIdQuery,
+    useDeleteTesterGroupMutation,
 } from '../../../../services/TutorService'
 
 const { Option } = Select
 
 const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
     const [patchTestGroup] = usePatchTesterGroupMutation()
+    const [deleteTestGroup] = useDeleteTesterGroupMutation()
     const { data: getTestGroupId, isFetching, isLoading } = useGetTestGroupIdQuery(id)
 
     const onSubmit = (data) => {
@@ -49,6 +51,22 @@ const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
                         onClick={() => setOpen(false)}
                     >
                         Отмена
+                    </MyButton>,
+                    <MyButton
+                        key="back"
+                        type="primary"
+                        style={{
+                            background: ' #DC3545',
+                            borderColor: '#DC3545',
+                        }}
+                        onClick={() =>
+                            deleteTestGroup(id).then((res) => {
+                                setOpen(false)
+                                message.success('Группа удалена')
+                            })
+                        }
+                    >
+                        Удалить
                     </MyButton>,
                 ]}
             >

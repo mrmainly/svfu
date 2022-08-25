@@ -36,6 +36,15 @@ export const Tutor = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'TestGroup' }],
         }),
+        deleteTesterGroup: build.mutation({
+            query(id) {
+                return {
+                    url: `tutor/testgroup/${id}`,
+                    method: 'DELETE',
+                }
+            },
+            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
 
         getDirectionTuter: build.query({
             query: () => `tutor/direction`,
@@ -57,4 +66,5 @@ export const {
     useGetTesterQuery,
     usePostTesterGroupMutation,
     usePatchTesterGroupMutation,
+    useDeleteTesterGroupMutation,
 } = Tutor
