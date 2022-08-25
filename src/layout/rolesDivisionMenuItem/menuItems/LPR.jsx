@@ -44,18 +44,6 @@ const LPR = (navigate) => {
                 },
             ],
         },
-        {
-            label: 'Пользователи',
-            key: 'submenu-3',
-            icon: <BsPeople />,
-            children: [
-                {
-                    label: 'Пользователи',
-                    key: 'submenu-item-3-1',
-                    onClick: () => navigate(ROUTES.USERS),
-                },
-            ],
-        },
     ]
 }
 
