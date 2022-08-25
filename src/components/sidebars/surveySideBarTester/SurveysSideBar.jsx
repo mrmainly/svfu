@@ -24,8 +24,9 @@ const SurveysSideBar = () => {
         setData(newData)
         setTimer(moment(newData?.time_exam, 'mm:ss').format('mm:ss'))
         clearTimer(getDeadTime(newData?.time_exam))
+        console.log(data)
     }, [localStorage.getItem('survey-datas')])
-
+    // console.log('SBData', data)
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date())
         const seconds = Math.floor((total / 1000) % 60)
