@@ -35,6 +35,8 @@ import {
     TestProcessing,
     AttestationProtocol,
     UserApplicationsDetail,
+    LprUsers,
+    LprUsersDetail,
 } from './pages'
 
 function App() {
@@ -73,6 +75,8 @@ function App() {
                     <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
+                    <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />
+                    <Route element={<LprUsersDetail />} path={ROUTES.LPR_USERS_DETAIL + '/:id'} />
                     <Route
                         element={<AttestationsQualifications />}
                         path={ROUTES.ATTESTATION_QUALI}

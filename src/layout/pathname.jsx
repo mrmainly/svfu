@@ -48,5 +48,9 @@ export const pathname = (params) => {
             return 'Обработка тестов'
         case ROUTES.ATTESTATION_PROTOCOL:
             return 'Аттестационные протоколы'
+        case ROUTES.LPR_USERS:
+            return 'Пользователи'
+        case ROUTES.LPR_USERS_DETAIL:
+            return ''
     }
 }

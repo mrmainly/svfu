@@ -20,11 +20,11 @@ const LPR = (navigate) => {
                     key: 'submenu-item-1-6',
                     onClick: () => navigate(ROUTES.ATTESTATION_PROTOCOL),
                 },
-                // {
-                //     label: 'Пользователи',
-                //     key: 'submenu-item-1-7',
-                //     onClick: () => navigate(ROUTES.TEST_PROCESSING),
-                // },
+                {
+                    label: 'Пользователи',
+                    key: 'submenu-item-1-7',
+                    onClick: () => navigate(ROUTES.LPR_USERS),
+                },
             ],
         },
         {

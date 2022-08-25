@@ -28,6 +28,8 @@ import TestProcessing from './attestations/test-processing/list'
 import UploadDocuments from './documents/upload-documents/list'
 import MyQualification from './documents/my-qualification/list'
 import UserApplicationsDetail from './attestations/userApplications/detial'
+import LprUsers from './attestations/lpr-users/list'
+import LprUsersDetail from './attestations/lpr-users/detail'
 
 export {
     Login,
@@ -60,4 +62,6 @@ export {
     TestProcessing,
     AttestationProtocol,
     UserApplicationsDetail,
+    LprUsers,
+    LprUsersDetail,
 }
