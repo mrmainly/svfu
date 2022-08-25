@@ -18,8 +18,8 @@ const ExaminationGroupsTable = ({ data, loading }) => {
         },
         {
             title: 'Статус',
-            dataIndex: 'difficult',
-            key: 'difficult',
+            dataIndex: 'exam_status',
+            key: 'exam_status',
         },
         {
             title: 'Действие',

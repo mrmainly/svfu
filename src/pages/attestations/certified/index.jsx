@@ -2,12 +2,17 @@ import React from 'react'
 import { Input, Space, Select } from 'antd'
 
 import CerifiedTable from '../components/tables/CerifiedTable'
+import { useGetTesterQuery } from '../../../services/TutorService'
 
 const { Search } = Input
 
 const { Option } = Select
 
 const Certified = () => {
+    const { data: tester, isLoading } = useGetTesterQuery('')
+
+    console.log(tester)
+
     return (
         <div>
             <Space style={{ marginBottom: 20 }}>
@@ -16,7 +21,7 @@ const Certified = () => {
                     <Option value="jack">Jack</Option>
                 </Select>
             </Space>
-            <CerifiedTable />
+            <CerifiedTable data={tester?.results} loading={isLoading} />
         </div>
     )
 }

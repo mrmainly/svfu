@@ -34,6 +34,7 @@ import {
     UploadDocuments,
     TestProcessing,
     AttestationProtocol,
+    UserApplicationsDetail,
 } from './pages'
 
 function App() {
@@ -84,6 +85,10 @@ function App() {
                     <Route element={<UserApplications />} path={ROUTES.USER_APPLICATIONS} />
                     <Route element={<Certified />} path={ROUTES.CERTIFIED} />
                     <Route element={<ExamSchedule />} path={ROUTES.EXAM_SCHEDULE} />
+                    <Route
+                        element={<UserApplicationsDetail />}
+                        path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>

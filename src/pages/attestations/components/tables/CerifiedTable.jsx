@@ -5,17 +5,20 @@ import { Button, Table } from 'antd'
 const CerifiedTable = ({ data, loading }) => {
     const columns = [
         { title: 'ID', dataIndex: 'id', key: 'id' },
-        { title: 'ФИО', dataIndex: 'id', key: 'id' },
         {
-            title: 'Название квалификации',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'ФИО',
+            dataIndex: 'last_name',
+            key: 'full_name',
+            render: (last_name, record) => (
+                <div>
+                    {record.last_name} {record.first_name} {record.patronymic}
+                </div>
+            ),
         },
         {
-            title: '',
-            dataIndex: 'testers',
-            key: 'testers',
-            render: (testers) => <div>{testers?.length}</div>,
+            title: 'Название квалификации',
+            dataIndex: 'active_application',
+            key: 'active_application',
         },
         {
             title: 'Действие',
