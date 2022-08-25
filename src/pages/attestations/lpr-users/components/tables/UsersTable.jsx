@@ -1,22 +1,104 @@
-import Table from 'antd/lib/table'
-import ROUTES from '../../../../../routes'
-import { Button } from 'antd'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { SearchOutlined } from '@ant-design/icons'
+import Table from 'antd/lib/table'
+import { Button, Input, Space } from 'antd'
+
 import { useGetAttestationUsersQuery } from '../../../../../services/AttestationProtocolService'
+import ROUTES from '../../../../../routes'
 
 const UsersTable = () => {
     const navigate = useNavigate()
-
+    const [searchText, setSearchText] = useState('')
+    const [searchedColumn, setSearchedColumn] = useState('')
     const { data, isLoading } = useGetAttestationUsersQuery()
+    const searchInput = useRef()
     console.log(data)
+
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm()
+        setSearchText(selectedKeys[0])
+        setSearchedColumn(dataIndex)
+    }
+
+    const handleReset = (clearFilters) => {
+        clearFilters()
+        setSearchText('')
+    }
+
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+            >
+                <Input
+                    ref={searchInput}
+                    placeholder={`Поиск...`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Поиск
+                    </Button>
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Очистить
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100)
+            }
+        },
+    })
 
     const columns = [
         { title: 'ID', dataIndex: 'id', key: 'id' },
-        { title: 'ФИО', dataIndex: 'full_name', key: 'full_name' },
+        {
+            title: 'ФИО',
+            dataIndex: 'full_name',
+            key: 'full_name',
+            ...getColumnSearchProps('full_name'),
+        },
         {
             title: 'Текущая аттестация',
             dataIndex: 'direction',
             key: 'direction',
+            render: (direction) => (direction ? direction : '-'),
+            ...getColumnSearchProps('direction'),
         },
         {
             title: 'Роль',
@@ -24,32 +106,32 @@ const UsersTable = () => {
             key: 'role',
             filters: [
                 {
-                    text: 'ADMIN',
-                    value: 'Администратор',
+                    text: 'Администратор',
+                    value: 'ADMIN',
                 },
                 {
-                    text: 'MODERATOR',
-                    value: 'Модератор',
+                    text: 'Модератор',
+                    value: 'MODERATOR',
                 },
                 {
-                    text: 'EXPERT',
-                    value: 'Эксперт',
+                    text: 'Эксперт',
+                    value: 'EXPERT',
                 },
                 {
-                    text: 'TUTOR',
-                    value: 'Тьютор',
+                    text: 'Тьютор',
+                    value: 'TUTOR',
                 },
                 {
-                    text: 'CONSTRUCTOR',
-                    value: 'Менеджер оценочных средств',
+                    text: 'Менеджер оценочных средств',
+                    value: 'CONSTRUCTOR',
                 },
                 {
-                    text: 'LPR',
-                    value: 'Лицо принимающее решение',
+                    text: 'Лицо принимающее решение',
+                    value: 'LPR',
                 },
                 {
-                    text: 'TESTER',
-                    value: 'Аттестуемый',
+                    text: 'Аттестуемый',
+                    value: 'TESTER',
                 },
             ],
             onFilter: (value, record) => record.role === value,

@@ -66,16 +66,22 @@ const TestProcessingTable = ({ data, loading }) => {
             key: 'x',
             render: (status_result, record) =>
                 status_result === 'WAITING' ? (
-                    <Button
-                        type="primary"
-                        onClick={() =>
-                            navigate(ROUTES.THEORETICAL_PART, {
-                                state: { surveyquest: record.survey.surveyquest, id: record.id },
-                            })
-                        }
-                    >
-                        Проверить
-                    </Button>
+                    <>
+                        <Button
+                            type="primary"
+                            onClick={() =>
+                                navigate(ROUTES.THEORETICAL_PART, {
+                                    state: {
+                                        surveyquest: record.survey.surveyquest,
+                                        id: record.id,
+                                    },
+                                })
+                            }
+                        >
+                            Проверить
+                        </Button>
+                        {console.log('record', record.survey.surveyquest)}
+                    </>
                 ) : status_result === 'FINISHED' ? (
                     <Button
                         type="primary"
