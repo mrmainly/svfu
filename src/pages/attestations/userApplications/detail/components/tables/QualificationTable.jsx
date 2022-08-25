@@ -8,45 +8,33 @@ import ROUTES from '../../../../../../routes'
 const QualificationTable = ({ data, loading }) => {
     const navigate = useNavigate()
 
+    console.log('qualification', data)
+
     const columns = [
         {
             title: '№',
-            dataIndex: 'user',
-            key: 'user',
-            render: (user) => (
-                <div>
-                    {user.last_name} {user.first_name} {user.patronymic}
-                </div>
-            ),
+            dataIndex: 'id',
+            key: 'id',
         },
         {
             title: 'Название квалификации',
-            dataIndex: 'direction',
-            key: 'direction',
-            render: (direction) => <div>{direction.name}</div>,
+            dataIndex: 'name',
+            key: 'name',
         },
         {
             title: 'Дата выдачи',
             dataIndex: 'testers',
             key: 'testers',
-            render: (testers) => <div>{testers?.length}</div>,
         },
         {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => (
-                <Button
-                    type="primary"
-                    onClick={() => navigate(`${ROUTES.USER_APPLICATIONS_DETAIL}/${id}`)}
-                >
-                    Проверить
-                </Button>
-            ),
+            render: (id) => <Button type="primary">Проверить</Button>,
         },
     ]
 
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return <Table columns={columns} dataSource={data} rowKey="id" />
 }
 
 export default QualificationTable

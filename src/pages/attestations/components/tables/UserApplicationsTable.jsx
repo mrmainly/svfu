@@ -27,14 +27,15 @@ const UserApplicationsTable = ({ data, loading }) => {
         },
         {
             title: 'Должность',
-            dataIndex: 'testers',
-            key: 'testers',
-            render: (testers) => <div>{testers?.length}</div>,
+            dataIndex: 'user',
+            key: 'post',
+            render: (user) => <div>{user?.post}</div>,
         },
         {
             title: 'Стаж работы',
-            dataIndex: 'difficult',
-            key: 'difficult',
+            dataIndex: 'user',
+            key: 'total_experience',
+            render: (user) => <div>{user?.total_experience}</div>,
         },
         {
             title: 'Действие',
@@ -45,7 +46,7 @@ const UserApplicationsTable = ({ data, loading }) => {
                     type="primary"
                     onClick={() => navigate(`${ROUTES.USER_APPLICATIONS_DETAIL}/${id}`)}
                 >
-                    Проверить
+                    Просмотр
                 </Button>
             ),
         },

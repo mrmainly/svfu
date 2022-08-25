@@ -7,15 +7,15 @@ const SocialNetworks = ({ data }) => {
     const items = [
         {
             label: 'VK:',
-            value: '',
+            value: data.vk,
         },
         {
             label: 'Одноклассники:',
-            value: '',
+            value: data.ok,
         },
         {
             label: 'Youtube:',
-            value: '',
+            value: data.youtube,
         },
     ]
 

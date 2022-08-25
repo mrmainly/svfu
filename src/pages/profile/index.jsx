@@ -32,7 +32,7 @@ const Profile = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <MainInfo data={data} /> l;o/lo
+            <MainInfo data={data} />
             <Line />
             <SocialNetworks data={data} />
             <InfoScreen data={data} />
