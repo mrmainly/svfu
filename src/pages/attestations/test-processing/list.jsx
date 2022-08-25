@@ -15,7 +15,6 @@ const TestProcessing = () => {
     console.log(data?.results)
     return (
         <div>
-            test processing
             <TestProcessingTable data={data?.results} loading={isLoading} />
         </div>
     )

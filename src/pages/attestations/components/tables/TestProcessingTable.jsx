@@ -2,12 +2,14 @@ import moment from 'moment'
 import { useState } from 'react'
 import TBEditModal from '../modals/tbeditmodal'
 import Table from 'antd/lib/table'
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import ROUTES from '../../../../routes'
 
 const TestProcessingTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
+    const navigate = useNavigate()
 
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
@@ -62,15 +64,15 @@ const TestProcessingTable = ({ data, loading }) => {
             title: 'Действие',
             dataIndex: 'status_result',
             key: 'x',
-            render: (status_result) =>
+            render: (status_result, record) =>
                 status_result === 'WAITING' ? (
                     <Button
                         type="primary"
-                        // onClick={() => {
-                        //     const itemData = data?.filter((e) => e.id === id)
-                        //     setCurrentData(itemData)
-                        //     setModalEditTB(true)
-                        // }}
+                        onClick={() =>
+                            navigate(ROUTES.THEORETICAL_PART, {
+                                state: { surveyquest: record.survey.surveyquest, id: record.id },
+                            })
+                        }
                     >
                         Проверить
                     </Button>
