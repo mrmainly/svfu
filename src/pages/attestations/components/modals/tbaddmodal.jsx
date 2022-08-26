@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
     Modal,
     Row,
@@ -15,14 +16,21 @@ import moment from 'moment'
 import { MyButton } from '../../../../components'
 import {
     usePostAttestationsTestsBankMutation,
-    useGetAttestationsTagQuery,
+    useGetAttestationsQualificationQuery,
 } from '../../../../services/AttestationService'
 
 const { Option } = Select
 
 const TBAddModal = ({ open, setOpen }) => {
+    const [bc, setBc] = useState(0)
+    const [ac, setAc] = useState(0)
+    const [ec, setEc] = useState(0)
+    const [bs, setBs] = useState(0)
+    const [aas, setAs] = useState(0)
+    const [es, setEs] = useState(0)
+    const [pro, setPro] = useState(0)
     const [postAttestationsTestsBankMutation] = usePostAttestationsTestsBankMutation()
-    const { data, isLoading } = useGetAttestationsTagQuery()
+    const { data, isLoading } = useGetAttestationsQualificationQuery()
 
     const onSubmit = (data) => {
         const hhminuts =
@@ -35,6 +43,13 @@ const TBAddModal = ({ open, setOpen }) => {
             if (res.data) {
                 message.success('Тестирование создано')
                 setOpen(false)
+                setBc(0)
+                setAc(0)
+                setEc(0)
+                setBs(0)
+                setAs(0)
+                setEs(0)
+                setPro(0)
             } else {
                 message.error(res.error.data.errors[0])
             }
@@ -48,7 +63,16 @@ const TBAddModal = ({ open, setOpen }) => {
                 destroyOnClose={true}
                 title="Создание тестирования"
                 visible={open}
-                onCancel={() => setOpen(false)}
+                onCancel={() => {
+                    setOpen(false)
+                    setBc(0)
+                    setAc(0)
+                    setEc(0)
+                    setBs(0)
+                    setAs(0)
+                    setEs(0)
+                    setPro(0)
+                }}
                 style={{ top: 0 }}
                 footer={[
                     <MyButton key="submit" onFinish={onSubmit} htmlType="submit" form="tbadd-form">
@@ -58,17 +82,26 @@ const TBAddModal = ({ open, setOpen }) => {
                         key="back"
                         type="default"
                         style={{ background: '#FFF' }}
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                            setOpen(false)
+                            setBc(0)
+                            setAc(0)
+                            setEc(0)
+                            setBs(0)
+                            setAs(0)
+                            setEs(0)
+                            setPro(0)
+                        }}
                     >
                         Отмена
                     </MyButton>,
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="tbadd-form">
-                    <Form.Item label="Название теста" name="name">
+                    <Form.Item required label="Название теста" name="name">
                         <Input placeholder="Название теста" />
                     </Form.Item>
-                    <Form.Item label="Квалификация" name="direction">
+                    <Form.Item required label="Квалификация" name="direction">
                         <Select
                             placeholder="Выберите квалификацию"
                             style={{
@@ -82,7 +115,7 @@ const TBAddModal = ({ open, setOpen }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Время на тест(ЧЧ:мм)" name="test_time">
+                    <Form.Item required label="Время на тест(ЧЧ:мм)" name="test_time">
                         <TimePicker
                             placeholder="Таймер тестирования"
                             style={{ width: '100%' }}
@@ -92,33 +125,77 @@ const TBAddModal = ({ open, setOpen }) => {
 
                     <Row gutter={[16, 0]}>
                         <Col span={12}>
-                            <Form.Item label="Количество легких вопросов" name="beginner_count">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                            <Form.Item
+                                required
+                                label="Количество легких вопросов"
+                                name="beginner_count"
+                            >
+                                <InputNumber
+                                    onChange={(value) => setBc(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
-                            <Form.Item label="Количество средних вопросов" name="advanced_count">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                            <Form.Item
+                                required
+                                label="Количество средних вопросов"
+                                name="advanced_count"
+                            >
+                                <InputNumber
+                                    onChange={(value) => setAc(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
-                            <Form.Item label="Количество сложных вопросов" name="expert_count">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                            <Form.Item
+                                required
+                                label="Количество сложных вопросов"
+                                name="expert_count"
+                            >
+                                <InputNumber
+                                    onChange={(value) => setEc(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item label="Балл за правильный ответ" name="beginner_score">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                            <Form.Item
+                                required
+                                label="Балл за правильный ответ"
+                                name="beginner_score"
+                            >
+                                <InputNumber
+                                    onChange={(value) => setBs(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
-                            <Form.Item label="Балл за правильный ответ" name="advanced_score">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                            <Form.Item
+                                required
+                                label="Балл за правильный ответ"
+                                name="advanced_score"
+                            >
+                                <InputNumber
+                                    onChange={(value) => setAs(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
-                            <Form.Item label="Балл за правильный ответ" name="expert_score">
-                                <InputNumber style={{ width: '100%' }} defaultValue="0" />
+                            <Form.Item
+                                required
+                                label="Балл за правильный ответ"
+                                name="expert_score"
+                            >
+                                <InputNumber
+                                    onChange={(value) => setEs(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Form.Item
+                        required
                         label="Допустимый балл теоретической части(в процентах)"
                         name="passing_percent_score"
                     >
                         <InputNumber
+                            onChange={(value) => setPro(value)}
                             style={{ width: '100%' }}
                             defaultValue="0"
                             min={0}
@@ -128,19 +205,17 @@ const TBAddModal = ({ open, setOpen }) => {
                         />
                     </Form.Item>
                     <Row gutter={[10, 10]}>
-                        <Col span={22}>
+                        <Col span={21}>
                             <Typography>
                                 Общее количество вопросов в теоретической части:
                             </Typography>
-                            <Typography>Общее количество вопросов в практической части:</Typography>
                             <Typography>Максимальный балл теоретической части:</Typography>
                             <Typography>Допустимый балл теоретической части:</Typography>
                         </Col>
-                        <Col span={2}>
-                            <Typography>100</Typography>
-                            <Typography>100</Typography>
-                            <Typography>100</Typography>
-                            <Typography>100</Typography>
+                        <Col span={3}>
+                            <Typography>{ac + bc + ec}</Typography>
+                            <Typography>{bc * bs + aas * ac + es * ec}</Typography>
+                            <Typography>{((bc * bs + aas * ac + es * ec) / 100) * pro}</Typography>
                         </Col>
                     </Row>
                 </Form>
