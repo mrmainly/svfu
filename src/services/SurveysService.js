@@ -42,7 +42,6 @@ export const surveys = api.injectEndpoints({
         getPracticalPartId: build.query({
             query: ({ id }) => `tester/survey/part-two/${id}`,
         }),
-
         practicalPartPost: build.mutation({
             query({ body, id }) {
                 return {

@@ -17,8 +17,6 @@ const MyLayout = () => {
     const navigate = useNavigate()
     const params = useLocation()
 
-    console.log(localStorage.getItem('role'))
-
     return (
         <>
             {params.pathname == '/' ||

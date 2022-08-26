@@ -1,74 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Typography, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import moment from 'moment'
 
 import '../surveySideBar.css'
 
 const { Text } = Typography
 
 const SurveysSideBar = () => {
-    const Ref = useRef(null)
-
     const [data, setData] = useState([])
-    const [timer, setTimer] = useState(0)
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex, changeTimeStatus } = SurveysSlice.actions
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const newData = JSON.parse(localStorage.getItem('survey-datas'))
+        const newData = JSON.parse(localStorage.getItem('side_bar_data_expert'))
         setData(newData)
-        setTimer(moment(newData?.time_exam, 'mm:ss').format('mm:ss'))
-        clearTimer(getDeadTime(newData?.time_exam))
-    }, [localStorage.getItem('survey-datas')])
-
-    const getTimeRemaining = (e) => {
-        const total = Date.parse(e) - Date.parse(new Date())
-        const seconds = Math.floor((total / 1000) % 60)
-        const minutes = Math.floor((total / 1000 / 60) % 60)
-        return {
-            total,
-            minutes,
-            seconds,
-        }
-    }
-
-    const startTimer = (e) => {
-        let { total, minutes, seconds } = getTimeRemaining(e)
-        if (total >= 0) {
-            setTimer(
-                (minutes > 9 ? minutes : '0' + minutes) +
-                    ':' +
-                    (seconds > 9 ? seconds : '0' + seconds)
-            )
-        }
-    }
-
-    const clearTimer = (e) => {
-        if (Ref.current) clearInterval(Ref.current)
-        const id = setInterval(() => {
-            startTimer(e)
-        }, 1000)
-        Ref.current = id
-    }
-
-    const getDeadTime = (newTime) => {
-        let deadline = new Date()
-
-        deadline.setSeconds(deadline.getSeconds() + newTime * 60)
-        return deadline
-    }
-
-    const TimerIsAp = () => {
-        document.querySelector('.theoretical-form-button').click()
-        dispatch(changeTimeStatus(true))
-    }
-
-    timer == '00:00' && TimerIsAp()
+        console.log('newData', newData)
+    }, [localStorage.getItem('side_bar_data_expert')])
 
     return (
         <div style={{ marginLeft: 28 }}>
@@ -76,8 +27,8 @@ const SurveysSideBar = () => {
             <div className="root">
                 <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {data?.surveyquest?.length
-                        ? data.surveyquest.map((item, index) => (
+                    {data?.survey?.surveyquest?.length
+                        ? data.survey.surveyquest.map((item, index) => (
                               <div
                                   key={index}
                                   className="circul"
@@ -93,23 +44,6 @@ const SurveysSideBar = () => {
                         : ''}
                 </div>
             </div>
-            <div className="time-block">
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Text>Общее время:</Text>
-                    <Text>{data.time_exam}:00</Text>
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginTop: 8,
-                    }}
-                >
-                    <Text>Осталось:</Text>
-                    <Text>{timer}</Text>
-                </div>
-            </div>
-            {/* <Button onClick={onClickReset}>asd</Button> */}
             <Button
                 type="default"
                 style={{
@@ -126,9 +60,6 @@ const SurveysSideBar = () => {
             >
                 Завершить тестовую часть
             </Button>
-            {/* <Button onClick={() => }>
-                asd
-            </Button> */}
         </div>
     )
 }

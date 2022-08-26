@@ -69,18 +69,21 @@ const TestProcessingTable = ({ data, loading }) => {
                     <>
                         <Button
                             type="primary"
-                            onClick={() =>
-                                navigate(ROUTES.THEORETICAL_PART, {
+                            onClick={() => {
+                                navigate(ROUTES.THEORETICAL_PART_EXPERT, {
                                     state: {
-                                        surveyquest: record.survey.surveyquest,
+                                        surveyquest: record,
                                         id: record.id,
                                     },
                                 })
-                            }
+                                localStorage.setItem(
+                                    'side_bar_data_expert',
+                                    JSON.stringify(record, null, '\t')
+                                )
+                            }}
                         >
                             Проверить
                         </Button>
-                        {console.log('record', record.survey.surveyquest)}
                     </>
                 ) : status_result === 'FINISHED' ? (
                     <Button
