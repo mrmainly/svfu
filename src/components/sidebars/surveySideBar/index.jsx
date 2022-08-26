@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Typography, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { SurveysSlice } from '../../reducers/SurveysSlice'
+import { SurveysSlice } from '../../../reducers/SurveysSlice'
 import moment from 'moment'
 
-import './surveySideBar.css'
+import '../surveySideBar.css'
 
 const { Text } = Typography
 

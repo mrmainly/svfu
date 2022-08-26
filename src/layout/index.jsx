@@ -45,7 +45,9 @@ const MyLayout = () => {
                         <Divider style={{ background: 'white' }} />
                     </Sider>
                     {params.pathname === ROUTES.THEORETICAL_PART ||
-                    params.pathname === ROUTES.PRACTICAL_PART ? (
+                    params.pathname === ROUTES.PRACTICAL_PART ||
+                    params.pathname === ROUTES.THEORETICAL_PART_EXPERT ||
+                    params.pathname === ROUTES.PRACTICAL_PART_EXPERT ? (
                         <SurveyLayout />
                     ) : (
                         <MainLayout params={params} />

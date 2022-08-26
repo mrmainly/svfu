@@ -10,8 +10,8 @@ import QualificationDetail from './qualifications/detail'
 import QualificationEdit from './qualifications/edit'
 import CertificationResultsDetial from './certification-results/detail'
 import Applying from './applying'
-import TheoreticalPart from './surveys/theoretical-part'
-import PracticalPart from './surveys/practical-part'
+import TheoreticalPart from './surveys/tester/theoretical-part'
+import PracticalPart from './surveys/tester/practical-part'
 import UsersDetail from './users/detail'
 import UsersList from './users/list'
 import AttestationsQualifications from './attestations/attestations-qualification/list'
@@ -30,6 +30,8 @@ import LprUsersDetail from './attestations/lpr-users/detail'
 import UserApplicationsDetail from './attestations/userApplications/detail'
 import CertifiedDetail from './attestations/certified/detail'
 import TestResult from './tests/result'
+import TheoreticalPartExpert from './surveys/expert/theoretical-part-expert'
+import PracticalPartExpert from './surveys/expert/practical-part-expert'
 
 export {
     Login,
@@ -64,4 +66,6 @@ export {
     LprUsersDetail,
     CertifiedDetail,
     TestResult,
+    TheoreticalPartExpert,
+    PracticalPartExpert,
 }

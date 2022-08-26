@@ -37,6 +37,8 @@ import {
     LprUsersDetail,
     CertifiedDetail,
     TestResult,
+    TheoreticalPartExpert,
+    PracticalPartExpert,
 } from './pages'
 
 function App() {
@@ -93,6 +95,11 @@ function App() {
                         path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}
                     />
                     <Route element={<CertifiedDetail />} path={`${ROUTES.CERTIFIED_DETAIL}/:id`} />
+                    <Route
+                        element={<TheoreticalPartExpert />}
+                        path={ROUTES.THEORETICAL_PART_EXPERT}
+                    />
+                    <Route element={<PracticalPartExpert />} path={ROUTES.PRACTICAL_PART_EXPERT} />
                 </Route>
             </Routes>
         </BrowserRouter>

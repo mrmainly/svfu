@@ -7,15 +7,15 @@ import { useTimer } from 'use-timer'
 import {
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,
-} from '../../../services/SurveysService'
-import { MyButton } from '../../../components'
-import ROUTES from '../../../routes'
+} from '../../../../services/SurveysService'
+import { MyButton } from '../../../../components'
+import ROUTES from '../../../../routes'
 
 const { Text, Title } = Typography
 const { Dragger } = Upload
 const { TextArea } = Input
 
-const PracticalPart = () => {
+const PracticalPartExpert = () => {
     const location = useLocation()
     const state = location.state
     const { id } = state
@@ -96,4 +96,4 @@ const PracticalPart = () => {
     )
 }
 
-export default PracticalPart
+export default PracticalPartExpert

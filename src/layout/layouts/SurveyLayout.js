@@ -1,20 +1,25 @@
-import React from "react";
-import { Layout, Typography } from "antd";
-import { Outlet } from "react-router-dom";
+import React from 'react'
+import { Layout } from 'antd'
+import { Outlet, useLocation } from 'react-router-dom'
 
-import "../layout.css";
-import { SurveysSideBar } from "../../components";
+import '../layout.css'
+import { SurveysSideBar, SurveysSideBarTester } from '../../components'
+import ROUTES from '../../routes'
 
-const { Content } = Layout;
+const { Content } = Layout
 
 const SurveyLayout = () => {
+    const params = useLocation()
+
+    console.log('params', params)
+
     return (
         <Layout>
             <Content
                 style={{
-                    margin: "24px 24px 24px",
-                    display: "flex",
-                    alignItems: "start",
+                    margin: '24px 24px 24px',
+                    display: 'flex',
+                    alignItems: 'start',
                 }}
             >
                 <div
@@ -28,10 +33,15 @@ const SurveyLayout = () => {
                 >
                     <Outlet />
                 </div>
-                <SurveysSideBar />
+                {params.pathname === ROUTES.THEORETICAL_PART ||
+                params.pathname === ROUTES.PRACTICAL_PART ? (
+                    <SurveysSideBarTester />
+                ) : (
+                    <SurveysSideBar />
+                )}
             </Content>
         </Layout>
-    );
-};
+    )
+}
 
-export default SurveyLayout;
+export default SurveyLayout

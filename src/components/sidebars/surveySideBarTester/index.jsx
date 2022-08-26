@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
 import moment from 'moment'
 
-import './surveySideBar.css'
+import '../surveySideBar.css'
 
 const { Text } = Typography
 
