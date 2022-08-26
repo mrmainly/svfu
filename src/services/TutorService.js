@@ -9,6 +9,10 @@ export const Tutor = api.injectEndpoints({
             query: () => `tutor/testgroup`,
             providesTags: ['TestGroup'],
         }),
+        getTestExam: build.query({
+            query: () => `tutor/exam`,
+            providesTags: ['TestGroup'],
+        }),
         getTestGroupId: build.query({
             query: (id) => ({
                 url: `tutor/testgroup/${id}`,
@@ -57,6 +61,23 @@ export const Tutor = api.injectEndpoints({
         getTester: build.query({
             query: () => `tutor/tester`,
         }),
+        getUsersRole: build.query({
+            query: ({ role }) => ({
+                url: `tutor/users?role=${role}`,
+                dependencies: role,
+            }),
+            providesTags: ['TestGroup'],
+        }),
+        postTestExam: build.mutation({
+            query(body) {
+                return {
+                    url: `tutor/exam`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
     }),
 })
 
@@ -67,7 +88,10 @@ export const {
     useGetApplicationQuery,
     useGetTesterQuery,
     usePostTesterGroupMutation,
+    usePostTestExamMutation,
     usePatchTesterGroupMutation,
     useDeleteTesterGroupMutation,
     useGetApplicationIdQuery,
+    useGetTestExamQuery,
+    useGetUsersRoleQuery,
 } = Tutor
