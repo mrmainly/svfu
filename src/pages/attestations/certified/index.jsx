@@ -11,8 +11,6 @@ const { Option } = Select
 const Certified = () => {
     const { data: tester, isLoading } = useGetTesterQuery('')
 
-    console.log(tester)
-
     return (
         <div>
             <Space style={{ marginBottom: 20 }}>

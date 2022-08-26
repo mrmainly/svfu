@@ -78,6 +78,9 @@ export const Tutor = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'TestGroup' }],
         }),
+        getCertifiedId: build.query({
+            query: ({ id }) => `tutor/tester/${id}`,
+        }),
     }),
 })
 
@@ -94,4 +97,5 @@ export const {
     useGetApplicationIdQuery,
     useGetTestExamQuery,
     useGetUsersRoleQuery,
+    useGetCertifiedIdQuery,
 } = Tutor
