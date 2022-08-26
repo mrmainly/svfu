@@ -7,12 +7,15 @@ import { Line } from '../../../../components'
 import QualificationTable from './components/tables/QualificationTable'
 import DocumentsTable from './components/tables/DocumentsTable'
 import Information from './components/Information'
+import QualificationDetailModal from './components/modals/QualificationDetialModal'
 import { useGetApplicationIdQuery } from '../../../../services/TutorService'
 
 const { Text } = Typography
 
 const UserApplicationsDetail = () => {
     const [mode, setMode] = useState('info')
+    const [open, setOpen] = useState(false)
+    const [qualificationData, setQualificationData] = useState([])
 
     const params = useParams()
 
@@ -22,10 +25,9 @@ const UserApplicationsDetail = () => {
         setMode(e.target.value)
     }
 
-    console.log(data)
-
     return (
         <>
+            <QualificationDetailModal open={open} setOpen={setOpen} data={qualificationData} />
             {isLoading ? (
                 <div
                     style={{
@@ -48,7 +50,7 @@ const UserApplicationsDetail = () => {
                     >
                         <Text style={{ fontSize: 16 }}>
                             Заявление на квалификацию:
-                            <span style={{ color: '#2F80ED' }}> Название_квалификации</span>
+                            <span style={{ color: '#2F80ED' }}> {data.direction.name}</span>
                         </Text>
                         <div style={{ display: 'flex' }}>
                             <Button size="large" type="primary">
@@ -77,8 +79,14 @@ const UserApplicationsDetail = () => {
                     </Radio.Group>
                     <div style={{ marginTop: 15 }}>
                         {mode === 'info' && <Information data={data} />}
-                        {mode === 'docs' && <DocumentsTable />}
-                        {mode === 'classification' && <QualificationTable data={data.direction} />}
+                        {mode === 'docs' && <DocumentsTable docs={data?.user.documents} />}
+                        {mode === 'classification' && (
+                            <QualificationTable
+                                data={data?.user.qualification_improvement}
+                                setOpen={setOpen}
+                                setQualificationData={setQualificationData}
+                            />
+                        )}
                     </div>
                 </div>
             )}

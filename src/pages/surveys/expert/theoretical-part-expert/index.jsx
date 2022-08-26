@@ -22,24 +22,24 @@ const TheoreticalPartExpert = () => {
 
     const { surveyquest, id } = state
 
-    const onSubmitFurther = (data) => {
-        console.log(data)
-        const postData = {
-            answers: [],
-        }
-        const abjArr = Object.entries(data)
-        abjArr.forEach(([key, value]) => {
-            if (Array.isArray(value)) {
-                value.forEach((item) => {
-                    postData.answers.push({ q_id: Number(key), a_id: item })
-                })
-            } else {
-                postData.answers.push({ q_id: Number(key), a_id: value })
-            }
-        })
-        setOpenModal(true)
-        setPostList(postData)
-    }
+    // const onSubmitFurther = (data) => {
+    //     console.log(data)
+    //     const postData = {
+    //         answers: [],
+    //     }
+    //     const abjArr = Object.entries(data)
+    //     abjArr.forEach(([key, value]) => {
+    //         if (Array.isArray(value)) {
+    //             value.forEach((item) => {
+    //                 postData.answers.push({ q_id: Number(key), a_id: item })
+    //             })
+    //         } else {
+    //             postData.answers.push({ q_id: Number(key), a_id: value })
+    //         }
+    //     })
+    //     setOpenModal(true)
+    //     setPostList(postData)
+    // }
     return (
         <div>
             {/* <TheoreticalAnswerModal
@@ -48,11 +48,7 @@ const TheoreticalPartExpert = () => {
                 id={id}
                 postData={postList}
             /> */}
-            <Form
-                style={{ display: 'flex', flexDirection: 'column' }}
-                onFinish={onSubmitFurther}
-                id="my-form"
-            >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {surveyquest?.survey?.surveyquest.map((item, index) => (
                     <div
                         key={index}
@@ -63,66 +59,63 @@ const TheoreticalPartExpert = () => {
                     >
                         <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
                         <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
-                        {item.question.technique === 'ONE_CHOICE' ? (
-                            <>
-                                <Form.Item
-                                    name={item.id}
-                                    htmlFor={item.id}
-                                    style={{ marginTop: 20 }}
-                                    labelCol={{ span: 24 }}
-                                    label={
-                                        <Text style={{ fontSize: 16 }}>
-                                            Выберите несколько ответов
+                        <Text style={{ marginTop: 20, fontWeight: 'bold' }}>Варианты ответа:</Text>
+                        <div style={{ marginTop: 10 }}>
+                            {item.question.technique === 'ONE_CHOICE' ? (
+                                <Space direction="vertical">
+                                    {item.question.variant.map((item, index) => (
+                                        <Text key={index}>
+                                            {item.name}
+                                            <span style={{ marginLeft: 3, fontWeight: 'bold' }}>
+                                                {item.is_true === true && '(правильный)'}
+                                            </span>
                                         </Text>
-                                    }
+                                    ))}
+                                </Space>
+                            ) : (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        marginTop: '-10px',
+                                    }}
                                 >
-                                    <Radio.Group style={{ marginTop: '-10px' }}>
-                                        <Space direction="vertical">
-                                            {item.question.variant.map((item, index) => (
-                                                <Radio value={item.id} key={index}>
-                                                    {item.name}
-                                                </Radio>
-                                            ))}
-                                        </Space>
-                                    </Radio.Group>
-                                </Form.Item>
-                            </>
-                        ) : (
-                            <>
-                                <Form.Item
-                                    name={item.id}
-                                    htmlFor={item.id}
-                                    labelCol={{ span: 24 }}
-                                    label={
-                                        <Text style={{ fontSize: 16 }}>
-                                            Выберите несколько ответов
+                                    {item.question.variant.map((item, index) => (
+                                        <Text
+                                            style={{
+                                                marginTop: 10,
+                                                marginLeft: 1,
+                                            }}
+                                            key={index}
+                                        >
+                                            {item.name}
+                                            <span style={{ marginLeft: 3, fontWeight: 'bold' }}>
+                                                {item.is_true === true && '(правильный)'}
+                                            </span>
                                         </Text>
-                                    }
-                                    style={{ marginTop: 20 }}
-                                >
-                                    <Checkbox.Group
-                                        style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            marginTop: '-10px',
-                                        }}
-                                    >
-                                        {item.question.variant.map((item, index) => (
-                                            <Checkbox
-                                                style={{
-                                                    marginTop: 10,
-                                                    marginLeft: 1,
-                                                }}
-                                                key={index}
-                                                value={item.id}
-                                            >
-                                                {item.name}
-                                            </Checkbox>
-                                        ))}
-                                    </Checkbox.Group>
-                                </Form.Item>
-                            </>
-                        )}
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <div
+                            style={{
+                                height: 1,
+                                background: '#E6E6E6',
+                                width: '100%',
+                                marginTop: 20,
+                                marginBottom: 20,
+                            }}
+                        />
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <Space>
+                                <Text>Ответ аттестуемого:</Text>
+                                <Text style={{ fontWeight: 'bold' }}>Вариант 2</Text>
+                            </Space>
+                            <Space style={{ marginTop: 10 }}>
+                                <Text>Балл:</Text>
+                                <Text style={{ fontWeight: 'bold' }}>4</Text>
+                            </Space>
+                        </div>
                         <Line />
                         <div
                             style={{
@@ -163,7 +156,7 @@ const TheoreticalPartExpert = () => {
                         </div>
                     </div>
                 ))}
-            </Form>
+            </div>
         </div>
     )
 }

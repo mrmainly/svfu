@@ -5,10 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 import ROUTES from '../../../../../../routes'
 
-const QualificationTable = ({ data, loading }) => {
+const QualificationTable = ({ data, setOpen, setQualificationData }) => {
     const navigate = useNavigate()
-
-    console.log('qualification', data)
 
     const columns = [
         {
@@ -23,14 +21,24 @@ const QualificationTable = ({ data, loading }) => {
         },
         {
             title: 'Дата выдачи',
-            dataIndex: 'testers',
-            key: 'testers',
+            dataIndex: 'date_start',
+            key: 'date_start',
         },
         {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => <Button type="primary">Проверить</Button>,
+            render: (id, record) => (
+                <Button
+                    type="primary"
+                    onClick={() => {
+                        setOpen(true)
+                        setQualificationData(record)
+                    }}
+                >
+                    Проверить
+                </Button>
+            ),
         },
     ]
 

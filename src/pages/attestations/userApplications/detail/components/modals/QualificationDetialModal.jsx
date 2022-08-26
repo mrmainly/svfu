@@ -1,9 +1,10 @@
 import { Modal } from 'antd'
 import moment from 'moment'
 
-import { MyButton } from '../../../../../components'
+import { MyButton } from '../../../../../../components'
 
-const QualificationModal = ({ open, setOpen, data }) => {
+const QualificationDetailModal = ({ open, setOpen, data }) => {
+    console.log(data)
     const dataList = [
         {
             name: 'Выданный документ:',
@@ -95,4 +96,4 @@ const QualificationModal = ({ open, setOpen, data }) => {
     )
 }
 
-export default QualificationModal
+export default QualificationDetailModal

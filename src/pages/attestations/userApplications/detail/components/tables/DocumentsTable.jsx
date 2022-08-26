@@ -1,52 +1,84 @@
-import React from 'react'
+import { useState } from 'react'
 
-import { Button, Table } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { Modal, Button } from 'antd'
+import Table from 'antd/lib/table'
 
-import ROUTES from '../../../../../../routes'
+import DocumentsModal from '../modals/DocumentsModal'
 
-const DocumentsTable = ({ data, loading }) => {
-    const navigate = useNavigate()
-
+const DocumentTable = ({ docs }) => {
+    const [open, setOpen] = useState()
+    const [data, setData] = useState()
     const columns = [
         {
-            title: 'Документ',
-            dataIndex: 'user',
-            key: 'user',
-            render: (user) => (
-                <div>
-                    {user.last_name} {user.first_name} {user.patronymic}
-                </div>
-            ),
+            title: 'Название',
+            dataIndex: 'file',
+            key: 'file',
+            render: (file) =>
+                file ? (
+                    <a href={file} target="_blank">
+                        {decodeURI(file).split('/')[5]}
+                    </a>
+                ) : (
+                    '-'
+                ),
         },
         {
             title: 'Тип документа',
-            dataIndex: 'direction',
-            key: 'direction',
-            render: (direction) => <div>{direction.name}</div>,
+            dataIndex: 'document_type',
+            key: 'document_type',
+            filters: [
+                {
+                    text: 'Диплом',
+                    value: 'DIPLOMA',
+                },
+                {
+                    text: 'Образование, ученая степень',
+                    value: 'TITLESDEGREES',
+                },
+                {
+                    text: 'Паспорт',
+                    value: 'PASSPORT',
+                },
+            ],
+            onFilter: (value, record) => record.document_type === value,
+            render: (type) =>
+                type === 'DIPLOMA'
+                    ? 'Диплом'
+                    : type === 'TITLESDEGREES'
+                    ? 'Образование, ученая степень'
+                    : type === 'PASSPORT'
+                    ? 'Паспорт'
+                    : '',
         },
         {
             title: 'Описание',
-            dataIndex: 'testers',
-            key: 'testers',
-            render: (testers) => <div>{testers?.length}</div>,
+            dataIndex: 'name',
+            key: 'name',
+            render: (name) => (name ? name : '-'),
         },
         {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => (
+            render: (text, record) => (
                 <Button
                     type="primary"
-                    onClick={() => navigate(`${ROUTES.USER_APPLICATIONS_DETAIL}/${id}`)}
+                    onClick={() => {
+                        setOpen(true)
+                        setData(record)
+                    }}
                 >
                     Посмотреть
                 </Button>
             ),
         },
     ]
-
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return (
+        <div>
+            <Table dataSource={docs} columns={columns} rowKey="id" />
+            <DocumentsModal open={open} setOpen={setOpen} data={data} />
+        </div>
+    )
 }
 
-export default DocumentsTable
+export default DocumentTable

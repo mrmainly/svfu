@@ -1,10 +1,8 @@
-import { Modal, message, Input, Select, Form } from 'antd'
-import Item from 'antd/lib/list/Item'
-import moment from 'moment'
+import { Modal } from 'antd'
 
 import { MyButton } from '../../../../../components'
 
-const QualificationModal = ({ open, setOpen, data }) => {
+const DocumentsModal = ({ open, setOpen, data }) => {
     const dataList = [
         {
             name: 'Тип документа:',
@@ -87,4 +85,4 @@ const QualificationModal = ({ open, setOpen, data }) => {
     )
 }
 
-export default QualificationModal
+export default DocumentsModal

@@ -1,58 +1,58 @@
-import React from "react";
+import React from 'react'
 
-import { Form, Typography, Input } from "antd";
+import { Form, Typography, Input } from 'antd'
 
-const { Text, Title } = Typography;
-const { TextArea } = Input;
+const { Text, Title } = Typography
+const { TextArea } = Input
 
 const InfoForm = () => {
     const data = [
         {
-            label: "Моя биография",
-            name: "my_biography",
+            label: 'Моя биография',
+            name: 'my_biography',
             required: false,
         },
         {
-            label: "Мои обязанности",
-            name: "my_responsibilities",
+            label: 'Мои обязанности',
+            name: 'my_responsibilities',
             required: false,
         },
         {
-            label: "Достижения и поощрения",
-            name: "scientific_interests",
+            label: 'Достижения и поощрения',
+            name: 'scientific_interests',
             required: false,
         },
         {
-            label: "Научные интересы",
-            name: "scientific_interests",
+            label: 'Научные интересы',
+            name: 'scientific_interests',
             required: false,
         },
         {
-            label: "Научные гранты",
-            name: "scientific_grants",
+            label: 'Научные гранты',
+            name: 'scientific_grants',
             required: false,
         },
         {
-            label: "Проведение конференций",
-            name: "holding_conferences",
+            label: 'Проведение конференций',
+            name: 'holding_conferences',
             required: false,
         },
         {
-            label: "Участие в конференциях, симпозиумах",
-            name: "participation_conferences",
+            label: 'Участие в конференциях, симпозиумах',
+            name: 'participation_conferences',
             required: false,
         },
         {
-            label: "Почетные звания",
-            name: "honoured_title",
+            label: 'Почетные звания',
+            name: 'honoured_title',
             required: false,
         },
         {
-            label: "Научно-общественная деятельность",
-            name: "ssa",
+            label: 'Научно-общественная деятельность',
+            name: 'ssa',
             required: false,
         },
-    ];
+    ]
 
     return (
         <div>
@@ -81,7 +81,7 @@ const InfoForm = () => {
                     <TextArea
                         placeholder="Комментарий к вопросу"
                         rows={4}
-                        type={item.type ? item.type : ""}
+                        type={item.type ? item.type : ''}
                     />
                 </Form.Item>
             ))}
@@ -96,15 +96,11 @@ const InfoForm = () => {
                         Общий стаж работы
                     </Text>
                 }
-                name={"total_experience"}
+                name={'total_experience'}
                 labelCol={{ span: 24 }}
                 style={{ width: 350 }}
             >
-                <Input
-                    placeholder="Общий стаж работы"
-                    size="medium"
-                    type="number"
-                />
+                <Input placeholder="Общий стаж работы" size="medium" type="number" />
             </Form.Item>
             <Form.Item
                 label={
@@ -117,18 +113,14 @@ const InfoForm = () => {
                         Стаж работы по специальности
                     </Text>
                 }
-                name={"specialty_experience"}
+                name={'specialty_experience'}
                 labelCol={{ span: 24 }}
                 style={{ width: 350 }}
             >
-                <Input
-                    placeholder="Стаж работы по специальности"
-                    size="medium"
-                    type="number"
-                />
+                <Input placeholder="Стаж работы по специальности" size="medium" type="number" />
             </Form.Item>
         </div>
-    );
-};
+    )
+}
 
-export default InfoForm;
+export default InfoForm
