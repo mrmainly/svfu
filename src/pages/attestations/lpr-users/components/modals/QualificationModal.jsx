@@ -8,31 +8,37 @@ const QualificationModal = ({ open, setOpen, data }) => {
     const dataList = [
         {
             name: 'Выданный документ',
-            label: data?.name,
+            label: data?.name ? data?.name : '-',
         },
         {
             name: 'Номер документа',
-            label: data?.id,
+            label: data?.id ? data?.id : '-',
         },
         {
             name: 'Название курса',
-            label: data?.direction,
+            label: data?.direction ? data?.direction : '-',
         },
         {
             name: 'Дата выдачи документа',
-            label: moment(data?.date_of_issue).format('hh.mm.yyyy'),
+            label: data?.date_of_issue ? moment(data?.date_of_issue).format('hh.mm.yyyy') : '-',
         },
         {
             name: 'Начало срока',
-            label: moment(data?.date_start).format('hh.mm.yyyy'),
+            label: data?.date_start ? moment(data?.date_start).format('hh.mm.yyyy') : '-',
         },
         {
             name: 'Окончание срока',
-            label: moment(data?.date_finish).format('hh.mm.yyyy'),
+            label: data?.date_finish ? moment(data?.date_finish).format('hh.mm.yyyy') : '-',
         },
         {
             name: 'Документ',
-            // label: data?.file,
+            label: data?.file ? (
+                <a href={data?.file} target="_blank">
+                    {decodeURI(data?.file).split('/')[5]}
+                </a>
+            ) : (
+                '-'
+            ),
         },
     ]
     return (

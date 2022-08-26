@@ -11,13 +11,18 @@ const QualificationTable = ({ qualifications }) => {
     const [open, setOpen] = useState(false)
     const [data, setData] = useState()
     const columns = [
-        { title: '№', dataIndex: 'id', key: 'id' },
-        { title: 'Название классификации', dataIndex: 'name', key: 'name' },
+        { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
+        {
+            title: 'Название классификации',
+            dataIndex: 'name',
+            key: 'name',
+            render: (name) => (name ? name : '-'),
+        },
         {
             title: 'Дата выдачи',
             dataIndex: 'date_of_issue',
             key: 'date_of_issue',
-            render: (date) => moment(date).format('DD.MM.YYYY'),
+            render: (date) => (date ? moment(date).format('DD.MM.YYYY') : '-'),
         },
         {
             title: 'Посмотреть',

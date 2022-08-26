@@ -21,8 +21,13 @@ const AttestationProtocol = () => {
         setMode(e.target.value)
     }
     const columns = [
-        { title: '№', dataIndex: 'id', key: 'id' },
-        { title: 'ФИО аттестуемого', dataIndex: 'user', key: 'user' },
+        { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
+        {
+            title: 'ФИО аттестуемого',
+            dataIndex: 'user',
+            key: 'user',
+            render: (user) => (user ? user : '-'),
+        },
         {
             title: 'Тип протокола',
             dataIndex: 'type',
@@ -43,13 +48,13 @@ const AttestationProtocol = () => {
                     ? 'Экзаменационный протокол'
                     : type === 'CERTIFICATION_RESULT'
                     ? 'Аттестационный протокол'
-                    : '',
+                    : '-',
         },
         {
             title: 'Дата формирования',
             dataIndex: 'created',
             key: 'created',
-            render: (date) => moment(date).format('DD.MM.YYYY, hh:mm'),
+            render: (date) => (date ? moment(date).format('DD.MM.YYYY, hh:mm') : '-'),
         },
         {
             title: 'Действие',

@@ -19,11 +19,17 @@ const QualificationModal = ({ open, setOpen, data }) => {
         },
         {
             name: 'Описание',
-            // label: data?.desc,
+            label: data?.name ? data?.name : '-',
         },
         {
             name: 'Документ',
-            // label: data?.file,
+            label: data?.file ? (
+                <a href={data?.file} target="_blank">
+                    {decodeURI(data?.file).split('/')[5]}
+                </a>
+            ) : (
+                '-'
+            ),
         },
     ]
     return (

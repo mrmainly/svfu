@@ -6,14 +6,22 @@ import Table from 'antd/lib/table'
 import DocumentsModal from '../components/modals/DocumentsModal'
 
 const DocumentList = ({ docs }) => {
+    console.log(docs)
     const [open, setOpen] = useState()
     const [data, setData] = useState()
     const columns = [
         {
             title: 'Название',
-            dataIndex: 'name',
-            key: 'name',
-            render: (name) => (name ? name : '-'),
+            dataIndex: 'file',
+            key: 'file',
+            render: (file) =>
+                file ? (
+                    <a href={file} target="_blank">
+                        {decodeURI(file).split('/')[5]}
+                    </a>
+                ) : (
+                    '-'
+                ),
         },
         {
             title: 'Тип документа',
@@ -42,6 +50,12 @@ const DocumentList = ({ docs }) => {
                     : type === 'PASSPORT'
                     ? 'Паспорт'
                     : '',
+        },
+        {
+            title: 'Описание',
+            dataIndex: 'name',
+            key: 'name',
+            render: (name) => (name ? name : '-'),
         },
         {
             title: 'Действие',
