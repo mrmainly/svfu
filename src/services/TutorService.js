@@ -76,7 +76,23 @@ export const Tutor = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
+        postAcceptApplication: build.mutation({
+            query({ id }) {
+                return {
+                    url: `tutor/application/${id}`,
+                    method: 'POST',
+                }
+            },
+        }),
+        putUserApplicationReject: build.mutation({
+            query({ id, data }) {
+                return {
+                    url: `tutor/application/${id}`,
+                    method: 'PUT',
+                    body: data,
+                }
+            },
         }),
         getCertifiedId: build.query({
             query: ({ id }) => `tutor/tester/${id}`,
@@ -98,4 +114,6 @@ export const {
     useGetTestExamQuery,
     useGetUsersRoleQuery,
     useGetCertifiedIdQuery,
+    usePostAcceptApplicationMutation,
+    usePutUserApplicationRejectMutation,
 } = Tutor
