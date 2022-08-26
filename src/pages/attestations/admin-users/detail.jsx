@@ -1,25 +1,26 @@
 import { BsArrowLeft } from 'react-icons/bs'
-import { Radio } from 'antd'
+import { Radio, Button, message } from 'antd'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ROUTES from '../../../routes'
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
-import { useGetUserIdQuery } from '../../../services/AdminService'
+import RoleChangeModal from './components/modals/RoleChangeModal'
+import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
 
 import moment from 'moment'
 
 const AdminUsersDetail = () => {
     const params = useParams()
     const { data, isLoading } = useGetUserIdQuery({ id: params.id })
+    const [putUser] = usePutUserMutation()
     const navigate = useNavigate()
     const [mode, setMode] = useState('info')
+    const [open, setOpen] = useState(false)
     const handleModeChange = (e) => {
         setMode(e.target.value)
     }
-
-    console.log(data)
 
     const profileData = [
         {
@@ -157,7 +158,7 @@ const AdminUsersDetail = () => {
                 <BsArrowLeft
                     style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
                     onClick={() => {
-                        navigate(ROUTES.LPR_USERS)
+                        navigate(ROUTES.ADMIN_USERS)
                     }}
                 />
                 <span
@@ -173,17 +174,21 @@ const AdminUsersDetail = () => {
                 </span>
             </div>
             <hr />
-            <Radio.Group
-                onChange={handleModeChange}
-                value={mode}
-                style={{
-                    margin: '16px 0',
-                }}
-            >
-                <Radio.Button value="info">Информация</Radio.Button>
-                <Radio.Button value="docs">Документы</Radio.Button>
-                <Radio.Button value="classification">Квалификация</Radio.Button>
-            </Radio.Group>
+            <div style={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
+                <Radio.Group onChange={handleModeChange} value={mode}>
+                    <Radio.Button value="info">Информация</Radio.Button>
+                    <Radio.Button value="docs">Документы</Radio.Button>
+                    <Radio.Button value="classification">Квалификация</Radio.Button>
+                </Radio.Group>
+                <Button
+                    style={{ display: mode === 'info' ? 'block' : 'none' }}
+                    onClick={() => {
+                        setOpen(true)
+                    }}
+                >
+                    Изменить роль пользователя
+                </Button>
+            </div>
             {mode === 'info' && (
                 <AttestedInfo profileData={profileData} bio={bio} contacts={contacts} />
             )}
@@ -191,6 +196,34 @@ const AdminUsersDetail = () => {
             {mode === 'classification' && (
                 <QualificationTable qualifications={data?.qualification_improvement} />
             )}
+            <hr style={{ display: mode === 'info' ? 'block' : 'none' }} />
+            <div
+                style={{
+                    display: mode === 'info' ? 'block' : 'none',
+                    padding: '12px 0',
+                }}
+            >
+                <Button
+                    ghost
+                    type={data?.is_active ? 'danger' : 'primary'}
+                    onClick={() => {
+                        putUser({ id: params.id }).then((res) => {
+                            if (res.data) {
+                                message.success(
+                                    data?.is_active
+                                        ? 'Пользователь заблокирован'
+                                        : 'Пользователь разблокирован'
+                                )
+                            } else {
+                                message.error(res.error.data.errors[0])
+                            }
+                        })
+                    }}
+                >
+                    {data?.is_active ? 'Заблокировать' : 'Разблокировать'}
+                </Button>
+            </div>
+            <RoleChangeModal open={open} setOpen={setOpen} data={data?.role} />
         </div>
     )
 }

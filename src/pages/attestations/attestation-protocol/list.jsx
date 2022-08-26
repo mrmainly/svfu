@@ -20,7 +20,6 @@ const AttestationProtocol = () => {
     const handleModeChange = (e) => {
         setMode(e.target.value)
     }
-    console.log(data?.results)
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
         {
