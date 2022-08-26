@@ -2,9 +2,9 @@ import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { MyButton } from '../../../../../components'
-import { useSurveyPostMutation } from '../../../../../services/SurveysService'
-import ROUTES from '../../../../../routes'
+import { MyButton } from '../../../../../../components'
+import { useSurveyPostMutation } from '../../../../../../services/SurveysService'
+import ROUTES from '../../../../../../routes'
 
 const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()

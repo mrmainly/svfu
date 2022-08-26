@@ -3,13 +3,13 @@ import { useLocation } from 'react-router-dom'
 import { Typography, Radio, Space, Checkbox, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Line, MyButton } from '../../../components'
-import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import TheoreticalAnswerModal from './components/modals/TheoreticalAnswerModal'
+import { Line, MyButton } from '../../../../components'
+import { SurveysSlice } from '../../../../reducers/SurveysSlice'
+// import TheoreticalAnswerModal from './components/modals/TheoreticalAnswerModal'
 
 const { Text, Title } = Typography
 
-const TheoreticalPart = () => {
+const TheoreticalPartExpert = () => {
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])
 
@@ -42,12 +42,12 @@ const TheoreticalPart = () => {
     }
     return (
         <div>
-            <TheoreticalAnswerModal
+            {/* <TheoreticalAnswerModal
                 open={openModal}
                 setOpen={setOpenModal}
                 id={id}
                 postData={postList}
-            />
+            /> */}
             <Form
                 style={{ display: 'flex', flexDirection: 'column' }}
                 onFinish={onSubmitFurther}
@@ -170,4 +170,4 @@ const TheoreticalPart = () => {
     )
 }
 
-export default TheoreticalPart
+export default TheoreticalPartExpert
