@@ -52,5 +52,7 @@ export const pathname = (params) => {
             return 'Пользователи'
         case ROUTES.LPR_USERS_DETAIL:
             return ''
+        case ROUTES.TEST_RESULT:
+            return 'Пользователи'
     }
 }

@@ -27,7 +27,7 @@ const TestProcessingTable = ({ data, loading }) => {
             title: 'Дата выдачи теста',
             dataIndex: 'exam_date_start',
             key: 'exam_date_start',
-            render: (exam_date_start) => moment(exam_date_start).format('DD/MM/YYYY, hh:mm'),
+            render: (exam_date_start) => moment(exam_date_start).format('DD.MM.YYYY, hh:mm'),
         },
         {
             title: 'Статус',

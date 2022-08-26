@@ -6,8 +6,6 @@ const ROUTES = {
     PROFILE_EDITING: '/profile-editing',
     AVAILABLE_TESTS: '/available-tests',
     AVAILABLE_TEST: '/available-test',
-    TEST_RESULTS: '/test-results',
-    TEST_RESULT: '/test-result',
     UPLOAD_DOCUMENTS: '/upload-documents',
     DOCUMENTS_EDITING: '/documents-editing',
     MY_QUALIFICATIONS: '/my-qualifications',
@@ -36,6 +34,7 @@ const ROUTES = {
     LPR_USERS: '/lpr-users',
     LPR_USERS_DETAIL: '/lpr-users',
     CERTIFIED_DETAIL: '/certified-detail',
+    TEST_RESULT: '/test-result',
     THEORETICAL_PART_EXPERT: '/theoretical-part-expert',
     PRACTICAL_PART_EXPERT: '/practical-part-expert',
 }
