@@ -1,9 +1,8 @@
 import Table from 'antd/lib/table'
 
 const GroupTable = (props) => {
-	const data = props?.data
-	const columns = props?.columns
-	console.log(data)
+    const data = props?.data
+    const columns = props?.columns
 
     return (
         <>
