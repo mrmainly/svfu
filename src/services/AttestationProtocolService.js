@@ -14,6 +14,10 @@ export const attestationProtocol = api.injectEndpoints({
             query: ({ id }) => `lpr/user/${id}`,
             providesTags: ['AttestationProtocol'],
         }),
+        getLprExamList: build.query({
+            query: () => `lpr/exam/`,
+            providesTags: ['AttestationProtocol'],
+        }),
     }),
 })
 
@@ -21,4 +25,5 @@ export const {
     useGetAttestationProtocolQuery,
     useGetAttestationUsersQuery,
     useGetAttestationUserIdQuery,
+    useGetLprExamListQuery,
 } = attestationProtocol

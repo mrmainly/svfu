@@ -7,31 +7,31 @@ import { MyButton } from '../../../../../components'
 const QualificationModal = ({ open, setOpen, data }) => {
     const dataList = [
         {
-            name: 'Выданный документ',
+            name: 'Выданный документ:',
             label: data?.name ? data?.name : '-',
         },
         {
-            name: 'Номер документа',
+            name: 'Номер документа:',
             label: data?.id ? data?.id : '-',
         },
         {
-            name: 'Название курса',
+            name: 'Название курса:',
             label: data?.direction ? data?.direction : '-',
         },
         {
-            name: 'Дата выдачи документа',
+            name: 'Дата выдачи документа:',
             label: data?.date_of_issue ? moment(data?.date_of_issue).format('hh.mm.yyyy') : '-',
         },
         {
-            name: 'Начало срока',
+            name: 'Начало срока:',
             label: data?.date_start ? moment(data?.date_start).format('hh.mm.yyyy') : '-',
         },
         {
-            name: 'Окончание срока',
+            name: 'Окончание срока:',
             label: data?.date_finish ? moment(data?.date_finish).format('hh.mm.yyyy') : '-',
         },
         {
-            name: 'Документ',
+            name: 'Документ:',
             label: data?.file ? (
                 <a href={data?.file} target="_blank">
                     {decodeURI(data?.file).split('/')[5]}

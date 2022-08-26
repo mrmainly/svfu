@@ -12,8 +12,8 @@ const LPR = (navigate) => {
             children: [
                 {
                     label: 'Расписание экзаменов',
-                    key: 'submenu-item-1-4',
-                    onClick: () => navigate(ROUTES.EXAM_SCHEDULE),
+                    key: 'submenu-item-1-8',
+                    onClick: () => navigate(ROUTES.LPR_EXAM),
                 },
                 {
                     label: 'Протоколы аттестации',

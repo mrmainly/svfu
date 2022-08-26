@@ -32,6 +32,7 @@ import CertifiedDetail from './attestations/certified/detail'
 import TestResult from './tests/result'
 import TheoreticalPartExpert from './surveys/expert/theoretical-part-expert'
 import PracticalPartExpert from './surveys/expert/practical-part-expert'
+import LprExam from './attestations/exam-schedule/lpr-exam'
 
 export {
     Login,
@@ -68,4 +69,5 @@ export {
     TestResult,
     TheoreticalPartExpert,
     PracticalPartExpert,
+    LprExam,
 }

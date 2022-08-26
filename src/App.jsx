@@ -39,6 +39,7 @@ import {
     TestResult,
     TheoreticalPartExpert,
     PracticalPartExpert,
+    LprExam,
 } from './pages'
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
                     <Route element={<UserApplications />} path={ROUTES.USER_APPLICATIONS} />
                     <Route element={<Certified />} path={ROUTES.CERTIFIED} />
                     <Route element={<ExamSchedule />} path={ROUTES.EXAM_SCHEDULE} />
+                    <Route element={<LprExam />} path={ROUTES.LPR_EXAM} />
                     <Route
                         element={<UserApplicationsDetail />}
                         path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}

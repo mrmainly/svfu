@@ -37,6 +37,7 @@ const ROUTES = {
     TEST_RESULT: '/test-result',
     THEORETICAL_PART_EXPERT: '/theoretical-part-expert',
     PRACTICAL_PART_EXPERT: '/practical-part-expert',
+    LPR_EXAM: '/lpr-exam',
 }
 
 export default ROUTES
