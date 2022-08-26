@@ -2,13 +2,11 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Typography, Input, Form, Spin, Upload, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
-import { useTimer } from 'use-timer'
 
 import {
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,
 } from '../../../../services/SurveysService'
-import { MyButton } from '../../../../components'
 import ROUTES from '../../../../routes'
 
 const { Text, Title } = Typography
@@ -29,13 +27,11 @@ const PracticalPart = () => {
         return <Spin />
     }
 
-    console.log(practical_data)
-
     const onSubmitFurther = (data) => {
         console.log(data)
         let formData = new FormData()
         formData.append('file', data.file.file.originFileObj)
-        formData.append('q_id', practical_data.surveyquest[0].id)
+        formData.append('q_id', practical_data.surveyquest[0].question.id)
         formData.append('describe', data.describe)
         postPracticalPart({
             id: id,
@@ -51,7 +47,11 @@ const PracticalPart = () => {
 
     return (
         <div>
-            <Form style={{ display: 'flex', flexDirection: 'column' }} onFinish={onSubmitFurther}>
+            <Form
+                style={{ display: 'flex', flexDirection: 'column' }}
+                onFinish={onSubmitFurther}
+                id="form-practical-part"
+            >
                 {practical_data.surveyquest.map((item, index) => (
                     <div
                         key={index}
@@ -66,16 +66,18 @@ const PracticalPart = () => {
                             labelCol={{ span: 24 }}
                             label={<Text style={{ fontSize: 16 }}>Ответ:</Text>}
                             style={{ marginTop: 20 }}
+                            required
                         >
                             <TextArea style={{ height: 134 }} />
                         </Form.Item>
                         <Form.Item
+                            required
                             label={<Text style={{ fontSize: 16 }}>Загрузить файл:</Text>}
                             style={{ marginTop: 20 }}
                             labelCol={{ span: 24 }}
                             name="file"
                         >
-                            <Dragger>
+                            <Dragger action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
                                 <p className="ant-upload-drag-icon">
                                     <InboxOutlined />
                                 </p>
@@ -90,7 +92,6 @@ const PracticalPart = () => {
                         </Form.Item>
                     </div>
                 ))}
-                <MyButton htmlType="submit">Завершить тест</MyButton>
             </Form>
         </div>
     )

@@ -2,7 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Typography, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { useLocation } from 'react-router-dom'
+
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
+import ROUTES from '../../../routes'
 import moment from 'moment'
 
 import '../surveySideBar.css'
@@ -18,15 +21,15 @@ const SurveysSideBar = () => {
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex, changeTimeStatus } = SurveysSlice.actions
     const dispatch = useDispatch()
+    const location = useLocation()
 
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
         setData(newData)
         setTimer(moment(newData?.time_exam, 'mm:ss').format('mm:ss'))
         clearTimer(getDeadTime(newData?.time_exam))
-        console.log(data)
     }, [localStorage.getItem('survey-datas')])
-    // console.log('SBData', data)
+
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date())
         const seconds = Math.floor((total / 1000) % 60)
@@ -66,6 +69,7 @@ const SurveysSideBar = () => {
 
     const TimerIsAp = () => {
         document.querySelector('.theoretical-form-button').click()
+        document.querySelector('.practical-form-button').click()
         dispatch(changeTimeStatus(true))
     }
 
@@ -85,8 +89,18 @@ const SurveysSideBar = () => {
                                   style={{
                                       background: arrayIndex === index ? '#2f80ed' : 'white',
                                       color: arrayIndex === index ? 'white' : '#2f80ed',
+                                      opacity:
+                                          location.pathname === ROUTES.PRACTICAL_PART ? 0.6 : 1,
+                                      cursor:
+                                          location.pathname === ROUTES.PRACTICAL_PART
+                                              ? 'text'
+                                              : 'pointer',
                                   }}
-                                  onClick={() => dispatch(handleArrayIndex(index))}
+                                  onClick={() =>
+                                      location.pathname === ROUTES.PRACTICAL_PART
+                                          ? ''
+                                          : dispatch(handleArrayIndex(index))
+                                  }
                               >
                                   {index + 1}
                               </div>
@@ -111,22 +125,41 @@ const SurveysSideBar = () => {
                 </div>
             </div>
             {/* <Button onClick={onClickReset}>asd</Button> */}
-            <Button
-                type="default"
-                style={{
-                    borderColor: '#BF4C25',
-                    color: '#BF4C25',
-                    width: '100%',
-                    marginTop: 12,
-                    borderRadius: 3,
-                }}
-                size="large"
-                htmlType="submit"
-                form="my-form"
-                className="theoretical-form-button"
-            >
-                Завершить тестовую часть
-            </Button>
+            {location.pathname === ROUTES.PRACTICAL_PART ? (
+                <Button
+                    type="default"
+                    style={{
+                        borderColor: '#BF4C25',
+                        color: '#BF4C25',
+                        width: '100%',
+                        marginTop: 12,
+                        borderRadius: 3,
+                    }}
+                    size="large"
+                    htmlType="submit"
+                    form="form-practical-part"
+                    className="practical-form-button"
+                >
+                    Завершить тест
+                </Button>
+            ) : (
+                <Button
+                    type="default"
+                    style={{
+                        borderColor: '#BF4C25',
+                        color: '#BF4C25',
+                        width: '100%',
+                        marginTop: 12,
+                        borderRadius: 3,
+                    }}
+                    size="large"
+                    htmlType="submit"
+                    form="my-form"
+                    className="theoretical-form-button"
+                >
+                    Завершить тестовую часть
+                </Button>
+            )}
             {/* <Button onClick={() => }>
                 asd
             </Button> */}

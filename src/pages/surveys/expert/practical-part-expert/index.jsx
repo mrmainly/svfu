@@ -2,7 +2,6 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Typography, Input, Form, Spin, Upload, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
-import { useTimer } from 'use-timer'
 
 import {
     useGetPracticalPartIdQuery,

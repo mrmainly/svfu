@@ -22,6 +22,8 @@ const TheoreticalPart = () => {
 
     const { surveyquest, id } = state
 
+    console.log(surveyquest)
+
     const onSubmitFurther = (data) => {
         console.log(data)
         const postData = {
@@ -68,7 +70,7 @@ const TheoreticalPart = () => {
                             {item.question.technique === 'ONE_CHOICE' ? (
                                 <>
                                     <Form.Item
-                                        name={item.id}
+                                        name={item.question.id}
                                         htmlFor={item.id}
                                         style={{ marginTop: 20 }}
                                         labelCol={{ span: 24 }}
@@ -92,7 +94,7 @@ const TheoreticalPart = () => {
                             ) : (
                                 <>
                                     <Form.Item
-                                        name={item.id}
+                                        name={item.question.id}
                                         htmlFor={item.id}
                                         labelCol={{ span: 24 }}
                                         label={
