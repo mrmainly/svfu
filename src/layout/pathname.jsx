@@ -56,5 +56,7 @@ export const pathname = (params) => {
             return 'Пользователи'
         case ROUTES.LPR_EXAM:
             return 'Расписание экзаменов'
+        case ROUTES.ADMIN_USERS:
+            return 'Пользователи'
     }
 }

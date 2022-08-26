@@ -33,6 +33,8 @@ import TestResult from './tests/result'
 import TheoreticalPartExpert from './surveys/expert/theoretical-part-expert'
 import PracticalPartExpert from './surveys/expert/practical-part-expert'
 import LprExam from './attestations/exam-schedule/lpr-exam'
+import AdminUsers from './attestations/admin-users/list'
+import AdminUsersDetail from './attestations/admin-users/detail'
 
 export {
     Login,
@@ -70,4 +72,6 @@ export {
     TheoreticalPartExpert,
     PracticalPartExpert,
     LprExam,
+    AdminUsers,
+    AdminUsersDetail,
 }

@@ -40,6 +40,8 @@ import {
     TheoreticalPartExpert,
     PracticalPartExpert,
     LprExam,
+    AdminUsers,
+    AdminUsersDetail,
 } from './pages'
 
 function App() {
@@ -78,6 +80,8 @@ function App() {
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
                     <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />
+                    <Route element={<AdminUsers />} path={ROUTES.ADMIN_USERS} />
+                    <Route element={<AdminUsersDetail />} path={ROUTES.ADMIN_USERS + '/:id'} />
                     <Route element={<LprUsersDetail />} path={ROUTES.LPR_USERS_DETAIL + '/:id'} />
                     <Route
                         element={<AttestationsQualifications />}

@@ -20,6 +20,7 @@ const AttestationProtocol = () => {
     const handleModeChange = (e) => {
         setMode(e.target.value)
     }
+    console.log(data?.results)
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
         {
@@ -58,10 +59,10 @@ const AttestationProtocol = () => {
         },
         {
             title: 'Действие',
-            dataIndex: 'id',
-            key: 'x',
-            render: (id) => (
-                <a href={data?.results[id]?.file} target="_blank" rel="noopener noreferrer">
+            dataIndex: 'file',
+            key: 'file',
+            render: (file) => (
+                <a href={file} target="_blank" rel="noopener noreferrer">
                     <Button type="primary">Скачать</Button>
                 </a>
             ),

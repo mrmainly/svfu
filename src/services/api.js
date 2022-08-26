@@ -28,6 +28,7 @@ export const api = createApi({
         'TestProcessing',
         'TestGroup',
         'AttestationProtocol',
+        'Admin',
     ],
 
     endpoints: () => ({}),
