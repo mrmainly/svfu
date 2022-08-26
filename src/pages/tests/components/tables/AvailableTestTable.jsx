@@ -1,16 +1,34 @@
-import { Table } from 'antd'
+import { useState } from 'react'
+import { Table, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 import { MyButton } from '../../../../components'
+import TestDetail from '../modal/detail'
+import ROUTES from '../../../../routes'
 
-const AvailableTestTable = ({ data, loading, routes }) => {
+const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
-
+    const [modalATT, setModalATT] = useState(false)
+    const [ID, setID] = useState()
+    console.log('testdata', data)
     const columns = [
+        { title: 'ID', dataIndex: 'id', key: 'id' },
         { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
-        { title: 'Дата начала теста', dataIndex: 'created', key: 'created' },
         {
-            title: 'Время на выполнение',
+            title: 'Начало аттестации',
+            dataIndex: 'created',
+            key: 'created',
+            render: (created) => moment(created).format('DD.MM.YYYY, hh:mm'),
+        },
+        {
+            title: 'Конец аттестации',
+            dataIndex: 'created',
+            key: 'created',
+            render: (created) => moment(created).format('DD.MM.YYYY, hh:mm'),
+        },
+        {
+            title: 'Время',
             dataIndex: 'time_exam',
             key: 'time_exam',
             render: (time_exam) => (
@@ -26,16 +44,55 @@ const AvailableTestTable = ({ data, loading, routes }) => {
             ),
         },
         {
+            title: 'Статус',
+            dataIndex: 'survey_status',
+            key: 'survey_status',
+            render: (survey_status) =>
+                survey_status === 'WAITING'
+                    ? 'Ожидание'
+                    : survey_status === 'ON_REVIEW'
+                    ? 'На рассмотрении'
+                    : survey_status === 'REVIEWED'
+                    ? 'Рассмотрен'
+                    : 'Недоступно',
+        },
+        {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => (
-                <MyButton onClick={() => navigate(`${routes}/${id}`)}>Начать тестирование</MyButton>
-            ),
+            render: (id, record) =>
+                record.survey_status === 'WAITING' ? (
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            setID(id)
+                            setModalATT(true)
+                        }}
+                    >
+                        Начать
+                    </Button>
+                ) : record.survey_status === 'REVIEWED' ? (
+                    <Button
+                        type="primary"
+                        ghost
+                        onClick={() => navigate(`${ROUTES.TEST_RESULT}/${id}`)}
+                    >
+                        Результат
+                    </Button>
+                ) : (
+                    <Button type="primary" disabled>
+                        Недоступно
+                    </Button>
+                ),
         },
     ]
 
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return (
+        <>
+            <TestDetail open={modalATT} setOpen={setModalATT} ID={ID} />
+            <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+        </>
+    )
 }
 
 export default AvailableTestTable

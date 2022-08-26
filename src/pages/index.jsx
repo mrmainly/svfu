@@ -4,7 +4,6 @@ import Profile from './profile'
 import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import Test from './tests'
-import TestDetail from './tests/detail'
 import CertificationResults from './certification-results'
 import QualificationAdded from './qualifications/added'
 import QualificationDetail from './qualifications/detail'
@@ -30,6 +29,7 @@ import LprUsers from './attestations/lpr-users/list'
 import LprUsersDetail from './attestations/lpr-users/detail'
 import UserApplicationsDetail from './attestations/userApplications/detail'
 import CertifiedDetail from './attestations/certified/detail'
+import TestResult from './tests/result'
 
 export {
     Login,
@@ -38,7 +38,6 @@ export {
     ForgotPassword,
     ProfileDetail,
     Test,
-    TestDetail,
     CertificationResults,
     QualificationAdded,
     QualificationDetail,
@@ -64,4 +63,5 @@ export {
     LprUsers,
     LprUsersDetail,
     CertifiedDetail,
+    TestResult,
 }

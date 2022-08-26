@@ -2,7 +2,6 @@ import React from 'react'
 
 import AvailableTestTable from './components/tables/AvailableTestTable'
 import { useGetSurveysQuery } from '../../services/SurveysService'
-import ROUTES from '../../routes'
 
 const Test = () => {
     const { data, isLoading } = useGetSurveysQuery('')
@@ -11,11 +10,7 @@ const Test = () => {
 
     return (
         <div>
-            <AvailableTestTable
-                data={data?.results}
-                routes={ROUTES.TEST_DETAIL}
-                loading={isLoading}
-            />
+            <AvailableTestTable data={data?.results} loading={isLoading} />
         </div>
     )
 }
