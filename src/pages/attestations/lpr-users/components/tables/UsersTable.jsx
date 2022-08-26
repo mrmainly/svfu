@@ -14,7 +14,6 @@ const UsersTable = () => {
     const [searchedColumn, setSearchedColumn] = useState('')
     const { data, isLoading } = useGetAttestationUsersQuery()
     const searchInput = useRef()
-    console.log(data)
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm()

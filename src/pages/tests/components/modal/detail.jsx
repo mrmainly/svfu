@@ -10,23 +10,9 @@ import ROUTES from '../../../../routes'
 const { Text } = Typography
 
 const TestDetail = ({ open, setOpen, ID }) => {
-    const { data, isFetching } = useGetSurveysIdQuery({ id: ID })
+    const { data } = useGetSurveysIdQuery({ id: ID })
     const [surveyPatch] = useSurveyPatchMutation()
     const navigate = useNavigate()
-    if (isFetching) {
-        return (
-            <div
-                style={{
-                    height: 210,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    paddingTop: 100,
-                }}
-            >
-                <Spin />
-            </div>
-        )
-    }
 
     const items = [
         {

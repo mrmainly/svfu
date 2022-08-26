@@ -6,7 +6,6 @@ import Table from 'antd/lib/table'
 import DocumentsModal from '../components/modals/DocumentsModal'
 
 const DocumentList = ({ docs }) => {
-    console.log(docs)
     const [open, setOpen] = useState()
     const [data, setData] = useState()
     const columns = [

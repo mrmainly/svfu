@@ -67,7 +67,6 @@ const AttestationProtocol = () => {
             ),
         },
     ]
-    console.log(data)
     return (
         <div>
             <Radio.Group
@@ -81,24 +80,6 @@ const AttestationProtocol = () => {
                 <Radio.Button value="GROUP">Групповые</Radio.Button>
             </Radio.Group>
             <Table dataSource={data?.results} columns={columns} rowKey="id" />
-            {/* <Row gutter={10} style={{ marginBottom: '10px' }}>
-                <Col>
-                    <MyButton onClick={() => setModalNewQuali(true)}>
-                        Создать новую квалификацию
-                    </MyButton>
-                </Col>
-                <Col>
-                    <Search
-                        size="large"
-                        placeholder="Поиск..."
-                        onSearch={onSearch}
-                        enterButton
-                        style={{ borderRadius: 4 }}
-                    />
-                </Col>
-            </Row>
-            <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
-            <AttestationsQualificationsTable data={data} loading={isLoading} /> */}
         </div>
     )
 }

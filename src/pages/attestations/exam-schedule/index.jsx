@@ -1,28 +1,26 @@
-import React from 'react'
-import { Input, Space, Select } from 'antd'
+import React, { useState } from 'react'
+import { Input, Space, Select, Button } from 'antd'
 
-import UserApplicationsTable from '../components/tables/UserApplicationsTable'
-import { useGetTestGroupQuery } from '../../../services/TutorService'
+import ExamScheduleTable from '../components/tables/ExamScheduleTable'
+import ESAddModal from '../components/modals/ESAddModal'
+import { useGetTestExamQuery } from '../../../services/TutorService'
+import { MyButton } from '../../../components'
 
 const { Search } = Input
 
 const { Option } = Select
 
 const ExamSchedule = () => {
-    const { data, isFetching } = useGetTestGroupQuery('')
-
-    console.log(data)
+    const { data, isFetching } = useGetTestExamQuery('')
+    const [modalEditES, setModalEditES] = useState(false)
 
     return (
         <div>
-            <Space style={{ marginBottom: 20 }}>
-                <Search size="large" enterButton placeholder="Поиск..." />
-                <Select style={{ width: 220 }} size="large" placeholder="Выберите направление">
-                    <Option value="jack">Jack</Option>
-                </Select>
-            </Space>
-
-            <UserApplicationsTable data={data} loading={isFetching} />
+            <MyButton style={{ marginBottom: 20 }} onClick={() => setModalEditES(true)}>
+                Создать группу
+            </MyButton>
+            <ESAddModal open={modalEditES} setOpen={setModalEditES} />
+            <ExamScheduleTable data={data?.results} loading={isFetching} />
         </div>
     )
 }
