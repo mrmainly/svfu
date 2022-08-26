@@ -75,7 +75,7 @@ const TBAddModal = ({ open, setOpen }) => {
                                 width: '100%',
                             }}
                         >
-                            {data?.map((item, index) => (
+                            {data?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>

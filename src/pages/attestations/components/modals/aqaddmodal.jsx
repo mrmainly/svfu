@@ -60,7 +60,7 @@ const AQAddModal = ({ open, setOpen }) => {
                     </Form.Item>
                     <Form.Item label="Тег квалификации" name="tag_direction">
                         <Select placeholder="Выберите тег">
-                            {data?.map((item, index) => (
+                            {data?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>

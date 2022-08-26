@@ -77,12 +77,41 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        patchAttestationsQuestionsBank: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `constructor/question/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
         postAttestationsQuestionsBankImage: build.mutation({
             query({ id, formData }) {
                 return {
                     url: `constructor/question/image/${id}`,
                     method: 'POST',
                     body: formData,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        patchAttestationsQuestionsBankImage: build.mutation({
+            query({ id, formData }) {
+                return {
+                    url: `constructor/question/${id}/image/`,
+                    method: 'PATCH',
+                    body: formData,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        deleteAttestationsQuestionsBankImage: build.mutation({
+            query(id) {
+                return {
+                    url: `constructor/question/${id}/image/`,
+                    method: 'DELETE',
                 }
             },
             invalidatesTags: [{ type: 'Attestation' }],
@@ -97,10 +126,29 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        deleteAttestationsQuestionsBankFile: build.mutation({
+            query(id) {
+                return {
+                    url: `constructor/question/${id}/file/`,
+                    method: 'DELETE',
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
         patchAttestationsQuestionsBank: build.mutation({
             query({ id, body }) {
                 return {
                     url: `constructor/question/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        patchAttestationsQuestionsAnswer: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `constructor/answer/${id}`,
                     method: 'PATCH',
                     body,
                 }
@@ -123,5 +171,9 @@ export const {
     usePatchAttestationsTestsBankIdMutation,
     usePatchAttestationsQualificationIdMutation,
     usePatchAttestationsQuestionsBankMutation,
+    usePatchAttestationsQuestionsBankImageMutation,
+    usePatchAttestationsQuestionsAnswerMutation,
     usePutAttestationsQualificationIdMutation,
+    useDeleteAttestationsQuestionsBankFileMutation,
+    useDeleteAttestationsQuestionsBankImageMutation,
 } = attestation

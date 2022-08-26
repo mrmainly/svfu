@@ -29,7 +29,7 @@ const TestsBank = () => {
                 </Col>
             </Row>
             <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />
-            <TestsBankTable data={data} loading={isLoading} />
+            <TestsBankTable data={data?.results} loading={isLoading} />
         </div>
     )
 }

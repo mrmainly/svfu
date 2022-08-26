@@ -95,7 +95,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             }}
                             // onChange={(value) => setValue(value)}
                         >
-                            {data?.map((item, index) => (
+                            {data?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>

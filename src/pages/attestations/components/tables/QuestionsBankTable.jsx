@@ -5,8 +5,10 @@ import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 const QuestionsBankTable = ({ data, loading }) => {
-    const [currentData, setCurrentData] = useState([])
+    const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
+
+    console.log(data)
 
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
@@ -50,7 +52,7 @@ const QuestionsBankTable = ({ data, loading }) => {
                 setOpen={setModalEditQuestionsBank}
                 dataList={currentData}
             />
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
+            <Table columns={columns} dataSource={data} loading={loading} rowKey="description" />
         </>
     )
 }

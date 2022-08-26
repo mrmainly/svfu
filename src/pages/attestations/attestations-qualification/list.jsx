@@ -32,7 +32,7 @@ const AttestationsQualifications = () => {
                 </Col>
             </Row>
             <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
-            <AttestationsQualificationsTable data={data} loading={isLoading} />
+            <AttestationsQualificationsTable data={data?.results} loading={isLoading} />
         </div>
     )
 }
