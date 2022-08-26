@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom'
 const TestsBankTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
-
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
         { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
@@ -15,7 +14,7 @@ const TestsBankTable = ({ data, loading }) => {
             title: 'Квалификация',
             dataIndex: 'direction',
             key: 'direction',
-            render: (direction) => <>{direction.name}</>,
+            render: (direction) => <>{direction?.name}</>,
         },
         {
             title: 'Вопросов',

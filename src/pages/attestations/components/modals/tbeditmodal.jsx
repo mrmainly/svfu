@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import moment from 'moment'
 import {
     message,
@@ -15,15 +16,34 @@ import {
 import { MyButton } from '../../../../components'
 import {
     usePatchAttestationsTestsBankIdMutation,
-    useGetAttestationsTagQuery,
+    useGetAttestationsQualificationQuery,
 } from '../../../../services/AttestationService'
 const { TextArea } = Input
 const { Option } = Select
 
 const TBEditModal = ({ open, setOpen, dataList }) => {
-    const { data, isLoading } = useGetAttestationsTagQuery()
+    const [bc, setBc] = useState(0)
+    const [ac, setAc] = useState(0)
+    const [ec, setEc] = useState(0)
+    const [bs, setBs] = useState(0)
+    const [aas, setAs] = useState(0)
+    const [es, setEs] = useState(0)
+    const [pro, setPro] = useState(0)
+    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery()
     const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
+    useEffect(() => {
+        setBc(dataList[0]?.beginner_count)
+        setAc(dataList[0]?.advanced_count)
+        setEc(dataList[0]?.expert_count)
+        setBs(dataList[0]?.beginner_score)
+        setAs(dataList[0]?.advanced_score)
+        setEs(dataList[0]?.expert_score)
+        setPro(dataList[0]?.passing_percent_score)
+    }, [dataList])
+
     const onSubmit = (data) => {
+        console.log('data', data)
+
         const minutes =
             parseInt(moment(data.test_time).format('HH') * 60) +
             parseInt(moment(data.test_time).format('mm'))
@@ -69,16 +89,17 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                     layout="vertical"
                     initialValues={{
                         ['name']: dataList[0]?.name,
-                        ['tag_direction']: {
-                            value: dataList[0]?.direction.tag_direction.id,
-                            label: dataList[0]?.direction.tag_direction.name,
-                        },
+                        // ['direction']: {
+                        //     value: dataList[0]?.direction.tag_direction.id,
+                        //     label: dataList[0]?.direction.tag_direction.name,
+                        // },
                         ['test_time']: hhminuts,
                         ['beginner_count']: dataList[0]?.beginner_count,
                         ['advanced_count']: dataList[0]?.advanced_count,
                         ['expert_count']: dataList[0]?.expert_count,
                         ['beginner_score']: dataList[0]?.beginner_score,
                         ['advanced_score']: dataList[0]?.advanced_score,
+                        ['expert_score']: dataList[0]?.expert_score,
                         ['passing_percent_score']: dataList[0]?.passing_percent_score,
                     }}
                     onFinish={onSubmit}
@@ -87,15 +108,16 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                     <Form.Item label="Название теста" name="name">
                         <Input placeholder="Название теста" />
                     </Form.Item>
-                    <Form.Item label="Квалификация" name="tag_direction">
+                    <Form.Item label="Квалификация" name="direction">
                         <Select
                             placeholder="Выберите квалификацию"
                             style={{
                                 width: '100%',
                             }}
+                            defaultValue={dataList[0]?.direction.tag_direction.id}
                             // onChange={(value) => setValue(value)}
                         >
-                            {data?.results.map((item, index) => (
+                            {dataDirection?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>
@@ -113,24 +135,42 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                     <Row gutter={[16, 0]}>
                         <Col span={12}>
                             <Form.Item label="Количество легких вопросов" name="beginner_count">
-                                <InputNumber style={{ width: '100%' }} />
+                                <InputNumber
+                                    onChange={(value) => setBc(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                             <Form.Item label="Количество средних вопросов" name="advanced_count">
-                                <InputNumber style={{ width: '100%' }} />
+                                <InputNumber
+                                    onChange={(value) => setAc(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                             <Form.Item label="Количество сложных вопросов" name="expert_count">
-                                <InputNumber style={{ width: '100%' }} />
+                                <InputNumber
+                                    onChange={(value) => setEc(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item label="Балл за правильный ответ" name="beginner_score">
-                                <InputNumber style={{ width: '100%' }} />
+                                <InputNumber
+                                    onChange={(value) => setBs(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                             <Form.Item label="Балл за правильный ответ" name="advanced_score">
-                                <InputNumber style={{ width: '100%' }} />
+                                <InputNumber
+                                    onChange={(value) => setAs(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                             <Form.Item label="Балл за правильный ответ" name="expert_score">
-                                <InputNumber style={{ width: '100%' }} />
+                                <InputNumber
+                                    onChange={(value) => setEs(value)}
+                                    style={{ width: '100%' }}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -139,28 +179,26 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                         name="passing_percent_score"
                     >
                         <InputNumber
+                            onChange={(value) => setPro(value)}
                             style={{ width: '100%' }}
                             defaultValue="0"
                             min={0}
                             max={100}
                             formatter={(value) => `${value}%`}
-                            //parser?????
                         />
                     </Form.Item>
                     <Row gutter={[10, 10]}>
-                        <Col span={22}>
+                        <Col span={21}>
                             <Typography>
                                 Общее количество вопросов в теоретической части:
                             </Typography>
-                            <Typography>Общее количество вопросов в практической части:</Typography>
                             <Typography>Максимальный балл теоретической части:</Typography>
                             <Typography>Допустимый балл теоретической части:</Typography>
                         </Col>
-                        <Col span={2}>
-                            <Typography>100</Typography>
-                            <Typography>100</Typography>
-                            <Typography>100</Typography>
-                            <Typography>100</Typography>
+                        <Col span={3}>
+                            <Typography>{ac + bc + ec}</Typography>
+                            <Typography>{bc * bs + aas * ac + es * ec}</Typography>
+                            <Typography>{((bc * bs + aas * ac + es * ec) / 100) * pro}</Typography>
                         </Col>
                     </Row>
                 </Form>
