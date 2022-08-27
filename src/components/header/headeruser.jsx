@@ -8,6 +8,7 @@ import cookie from 'js-cookie'
 const HeaderUser = () => {
     const navigate = useNavigate()
     const { data, isLoading, error } = useGetProfileQuery('')
+
     return (
         <div>
             <div
@@ -31,8 +32,21 @@ const HeaderUser = () => {
                         gap: '10px',
                     }}
                 >
-                    <div style={{ cursor: 'pointer' }} onClick={() => navigate(ROUTES.PROFILE)}>
-                        {data?.last_name} {data?.first_name}
+                    <div
+                        style={{
+                            cursor: 'pointer',
+                            padding: 5,
+                            boxShadow: '0px -2px 23px 0px rgba(34, 60, 80, 0.2)',
+                        }}
+                        onClick={() => navigate(ROUTES.PROFILE)}
+                    >
+                        {data?.last_name === null || data?.first_name === null ? (
+                            <div>Ваш профиль</div>
+                        ) : (
+                            <div>
+                                {data?.last_name} {data?.first_name}
+                            </div>
+                        )}
                     </div>
                     <Divider style={{ height: '16px' }} type="vertical" />
                     <div

@@ -11,7 +11,6 @@ const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
     const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
-
     const columns = [
         { title: 'ID', dataIndex: 'id', key: 'id' },
         { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
