@@ -5,6 +5,7 @@ import { MyButton } from '../../../../../components'
 import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
 
 import { usePostUserMutation } from '../../../../../services/AdminService'
+import moment from 'moment'
 
 const { Text } = Typography
 const { Option } = Select
@@ -175,9 +176,10 @@ const UserAddModal = ({ open, setOpen }) => {
     ]
 
     const onSubmit = (data) => {
-        if (data.role === 'default') {
-            data.role = ''
+        if (data.birth_date) {
+            data.birth_date = moment(data.birth_date._d).format('YYYY-MM-DD')
         }
+        console.log(data)
         postUser({ body: data }).then((res) => {
             if (res.data) {
                 message.success('Пользователь создан')

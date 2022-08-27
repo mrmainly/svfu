@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const ParamsListItem = ({ param }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
@@ -23,7 +25,11 @@ const ParamsListItem = ({ param }) => {
                     letterSpacing: '0.005em',
                 }}
             >
-                {param.value}
+                {param.name === 'Дата рождения'
+                    ? param.value !== '-'
+                        ? moment(param.value).format('DD.MM.YYYY')
+                        : param.value
+                    : param.value}
             </div>
         </div>
     )
