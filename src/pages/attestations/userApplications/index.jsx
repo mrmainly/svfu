@@ -11,6 +11,8 @@ const { Option } = Select
 const UserApplications = () => {
     const { data, isFetching } = useGetApplicationQuery('')
 
+    console.log(data)
+
     return (
         <div>
             <Space style={{ marginBottom: 20 }}>

@@ -4,6 +4,7 @@ import { Button, Table } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import ROUTES from '../../../../routes'
+import { uaStatus } from '../../../../translation/StatusTranslation'
 
 const UserApplicationsTable = ({ data, loading }) => {
     const navigate = useNavigate()
@@ -36,6 +37,12 @@ const UserApplicationsTable = ({ data, loading }) => {
             dataIndex: 'user',
             key: 'total_experience',
             render: (user) => <div>{user?.total_experience}</div>,
+        },
+        {
+            title: 'Статус',
+            dataIndex: 'status',
+            key: 'status',
+            render: (status) => <div>{uaStatus(status)}</div>,
         },
         {
             title: 'Действие',
