@@ -24,14 +24,12 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
         if (active !== dataList[0]?.is_active) {
             putAttestationsQualificationId({ id: dataList[0].id }).then((res) => {
                 if (!res.data) {
                     message.error(res.error.data.errors[0])
                 }
-                console.log(res)
             })
         }
     }

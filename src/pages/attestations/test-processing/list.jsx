@@ -12,7 +12,7 @@ const { Search } = Input
 const TestProcessing = () => {
     const { data, isLoading } = useGetTestProcessingQuery()
     const onSearch = (value) => console.log(value)
-    console.log(data?.results)
+
     return (
         <div>
             <TestProcessingTable data={data?.results} loading={isLoading} />

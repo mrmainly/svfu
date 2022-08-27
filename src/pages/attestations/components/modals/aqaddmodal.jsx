@@ -13,8 +13,6 @@ const AQAddModal = ({ open, setOpen }) => {
     const [postAttestationsQualification] = usePostAttestationsQualificationMutation()
     const { data, isLoading } = useGetAttestationsTagQuery()
     const onSubmit = (data) => {
-        console.log(data)
-
         postAttestationsQualification(data).then((res) => {
             if (res.data) {
                 message.success('Квалификация создана')
@@ -25,7 +23,7 @@ const AQAddModal = ({ open, setOpen }) => {
             console.log(res)
         })
     }
-    const onSearch = (value) => console.log(value)
+    // const onSearch = (value) => console.log(value)
 
     return (
         <div>

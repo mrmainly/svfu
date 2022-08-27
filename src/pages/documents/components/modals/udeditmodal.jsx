@@ -31,7 +31,6 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
         },
     }
     const onEdit = () => {
-        console.log('edit', dataList)
         let formData = new FormData()
         if (file) {
             formData.append('file', file)

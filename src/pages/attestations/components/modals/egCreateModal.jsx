@@ -17,7 +17,6 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
 

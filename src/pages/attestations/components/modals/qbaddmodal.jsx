@@ -84,7 +84,7 @@ const QBAddModal = ({ open, setOpen }) => {
                 if (img) {
                     let formData = new FormData()
                     formData.append('image', img)
-                    console.log('id', res.data.question_id)
+                  
                     postAttestationsQuestionsBankImage({
                         id: res.data.question_id,
                         formData: formData,

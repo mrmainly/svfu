@@ -42,8 +42,6 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
     }, [dataList])
 
     const onSubmit = (data) => {
-        console.log('data', data)
-
         const minutes =
             parseInt(moment(data.test_time).format('HH') * 60) +
             parseInt(moment(data.test_time).format('mm'))
@@ -56,7 +54,6 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
     const onSearch = (value) => console.log(value)

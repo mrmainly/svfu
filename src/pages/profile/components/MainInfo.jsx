@@ -1,21 +1,21 @@
-import React from "react";
-import { Typography, Space, Form, Upload } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import React from 'react'
+import { Typography, Space, Form, Upload } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
-import { useProfilePostImageMutation } from "../../../services/ProfileService";
+import { useProfilePostImageMutation } from '../../../services/ProfileService'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 const MainInfo = ({ data }) => {
-    const [image, setImage] = React.useState("");
-    const [profilePostImage] = useProfilePostImageMutation();
+    const [image, setImage] = React.useState('')
+    const [profilePostImage] = useProfilePostImageMutation()
 
     const uploadButton = (
         <div>
             <PlusOutlined />
             <div style={{ marginTop: 8 }}>Upload</div>
         </div>
-    );
+    )
 
     // const normFile = (e) => {
     //     console.log("Upload event:", e);
@@ -26,67 +26,63 @@ const MainInfo = ({ data }) => {
     // };
 
     const handleImageChange = (e) => {
-        if (e.file.status === "done") {
-            console.log(e);
-            const image = e.file.originFileObj;
-            let formData = new FormData();
-            formData.append("photo", image);
+        if (e.file.status === 'done') {
+            const image = e.file.originFileObj
+            let formData = new FormData()
+            formData.append('photo', image)
             profilePostImage(formData).then((res) => {
-                console.log(res);
-            });
+                console.log(res)
+            })
         }
-    };
+    }
 
     const items = [
         {
-            label: "Логин:",
+            label: 'Логин:',
             value: data.username,
         },
         {
-            label: "Фамилия:",
+            label: 'Фамилия:',
             value: data.last_name,
         },
         {
-            label: "Имя:",
+            label: 'Имя:',
             value: data.first_name,
         },
         {
-            label: "Отчество:",
+            label: 'Отчество:',
             value: data.patronymic,
         },
         {
-            label: "Дата рождения:",
+            label: 'Дата рождения:',
             value: data.birth_date,
         },
         {
-            label: "Телефон:",
+            label: 'Телефон:',
             value: data.phone,
         },
         {
-            label: "Инн:",
+            label: 'Инн:',
             value: data.inn,
         },
         {
-            label: "СНИЛС:",
+            label: 'СНИЛС:',
             value: data.snils,
         },
-    ];
+    ]
 
     const defualtFileList = [
         {
-            uid: "-1",
-            name: "image.png",
-            status: "done",
+            uid: '-1',
+            name: 'image.png',
+            status: 'done',
             url: `${data.photo}`,
         },
-    ];
+    ]
 
     return (
         <>
-            <Space
-                size="middle"
-                style={{ display: "flex", alignItems: "start" }}
-            >
+            <Space size="middle" style={{ display: 'flex', alignItems: 'start' }}>
                 <div style={{ width: 200 }}>
                     <Text style={{ fontWeight: 600 }}>Фотография:</Text>
                 </div>
@@ -96,9 +92,7 @@ const MainInfo = ({ data }) => {
                     multiple={false}
                     maxCount={1}
                     // onPreview={handlePreview}
-                    defaultFileList={
-                        data.photo === null ? null : defualtFileList
-                    }
+                    defaultFileList={data.photo === null ? null : defualtFileList}
                     onChange={handleImageChange}
                 >
                     {uploadButton}
@@ -109,15 +103,11 @@ const MainInfo = ({ data }) => {
                     <div style={{ width: 200 }}>
                         <Text style={{ fontWeight: 600 }}>{item.label}</Text>
                     </div>
-                    <Text>
-                        {item.value === "" || item.value === null
-                            ? "-"
-                            : item.value}
-                    </Text>
+                    <Text>{item.value === '' || item.value === null ? '-' : item.value}</Text>
                 </Space>
             ))}
         </>
-    );
-};
+    )
+}
 
-export default MainInfo;
+export default MainInfo

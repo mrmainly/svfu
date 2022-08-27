@@ -8,7 +8,7 @@ import UDEditModal from '../modals/udeditmodal'
 const UploadDocumentsTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditDocs, setModalEditDocs] = useState(false)
-    console.log('data', data)
+
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const searchInput = useRef(null)

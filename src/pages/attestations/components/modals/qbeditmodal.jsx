@@ -144,7 +144,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         if (typeof img === 'object' && dataList?.question_images.length) {
             let formData = new FormData()
             formData.append('image', img)
-            console.log('Измененная картинка', img)
+
             patchAttestationsQuestionsBankImage({
                 id: dataList?.question_images[0].id,
                 formData: formData,
@@ -152,7 +152,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         } else if (dataList?.question_images.length === 0) {
             let formData = new FormData()
             formData.append('image', img)
-            console.log('Вставленная картинка', img)
+
             postAttestationsQuestionsBankImage({
                 id: dataList?.id,
                 formData: formData,

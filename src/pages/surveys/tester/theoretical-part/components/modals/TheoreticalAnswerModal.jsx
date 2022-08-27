@@ -14,7 +14,6 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
 
     const onFinishSubmit = () => {
         postSurvey({ body: postData, id: id }).then((res) => {
-            console.log(res)
             if (res.data) {
                 if (res.data.survey_status === 'ON_REVIEW') {
                     message.error('Вы не прошли тестовую часть')
@@ -24,7 +23,6 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                         state: { id: id },
                     })
                 }
-                console.log(res.data)
             }
         })
     }

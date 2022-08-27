@@ -13,7 +13,7 @@ import { useGetAttestationProtocolQuery } from '../../../services/AttestationPro
 
 const AttestationProtocol = () => {
     //  const [modalNewQuali, setModalNewQuali] = useState(false)
-    const onSearch = (value) => console.log(value)
+    // const onSearch = (value) => console.log(value)
     const [mode, setMode] = useState('INDIVIDUAL')
     const [type, setType] = useState('TEST')
     const { data, isLoading } = useGetAttestationProtocolQuery({ group_type: mode })

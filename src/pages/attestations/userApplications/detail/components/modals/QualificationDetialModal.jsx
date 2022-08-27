@@ -4,7 +4,6 @@ import moment from 'moment'
 import { MyButton } from '../../../../../../components'
 
 const QualificationDetailModal = ({ open, setOpen, data }) => {
-    console.log(data)
     const dataList = [
         {
             name: 'Выданный документ:',

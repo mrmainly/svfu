@@ -29,7 +29,6 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
     const onSearch = (value) => console.log(value)

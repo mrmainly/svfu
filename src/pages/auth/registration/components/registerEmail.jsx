@@ -1,45 +1,41 @@
-import React from "react";
-import { Form, Input, Button, Typography, Space, message } from "antd";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React from 'react'
+import { Form, Input, Button, Typography, Space, message } from 'antd'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import ROUTES from "../../../../routes";
-import { useRegisterEmailVersionMutation } from "../../../../services/LoginService";
-import { RegisterVersionSlice } from "../../../../reducers/RegisterVersionSlice";
+import ROUTES from '../../../../routes'
+import { useRegisterEmailVersionMutation } from '../../../../services/LoginService'
+import { RegisterVersionSlice } from '../../../../reducers/RegisterVersionSlice'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 const RegisterEmail = () => {
-    const [postRegisterEmail] = useRegisterEmailVersionMutation();
-    const { handleOpenEmailVersion, handleOpenVerifyVersion } =
-        RegisterVersionSlice.actions;
+    const [postRegisterEmail] = useRegisterEmailVersionMutation()
+    const { handleOpenEmailVersion, handleOpenVerifyVersion } = RegisterVersionSlice.actions
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const onSubmit = (data) => {
         postRegisterEmail(data).then((res) => {
             if (res.data) {
-                dispatch(handleOpenEmailVersion(false));
-                dispatch(handleOpenVerifyVersion(true));
+                dispatch(handleOpenEmailVersion(false))
+                dispatch(handleOpenVerifyVersion(true))
             } else {
-                message.error(res.error.data.errors[0]);
+                message.error(res.error.data.errors[0])
             }
-            console.log(res);
-        });
-    };
+        })
+    }
 
     return (
-        <Form style={{ width: "100%" }} onFinish={onSubmit}>
+        <Form style={{ width: '100%' }} onFinish={onSubmit}>
             <Form.Item
-                label={
-                    <Text style={{ fontWeight: 600, fontSize: 16 }}>Почта</Text>
-                }
+                label={<Text style={{ fontWeight: 600, fontSize: 16 }}>Почта</Text>}
                 name="email"
                 required
                 rules={[
                     {
                         required: true,
-                        message: "Пожалуйста введите почту",
+                        message: 'Пожалуйста введите почту',
                     },
                 ]}
                 labelCol={{ span: 24 }}
@@ -48,8 +44,8 @@ const RegisterEmail = () => {
             </Form.Item>
             <Button
                 style={{
-                    background: "#0D6EFD",
-                    width: "100%",
+                    background: '#0D6EFD',
+                    width: '100%',
                     borderRadius: 4,
                 }}
                 type="primary"
@@ -60,7 +56,7 @@ const RegisterEmail = () => {
             </Button>
             <Space
                 style={{
-                    marginBottom: "-12px",
+                    marginBottom: '-12px',
                     marginTop: 12,
                 }}
                 direction="vertical"
@@ -69,7 +65,7 @@ const RegisterEmail = () => {
                 <Link to="/">Восстановление пароля</Link>
             </Space>
         </Form>
-    );
-};
+    )
+}
 
-export default RegisterEmail;
+export default RegisterEmail

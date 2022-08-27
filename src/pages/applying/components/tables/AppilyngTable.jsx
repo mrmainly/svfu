@@ -14,9 +14,7 @@ const AppilyngTable = ({ data, loading }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log('res', res)
         })
-        console.log('data', data)
     }
 
     const columns = [

@@ -28,10 +28,7 @@ const PracticalPartExpert = () => {
         return <Spin />
     }
 
-    console.log(practical_data)
-
     const onSubmitFurther = (data) => {
-        console.log(data)
         let formData = new FormData()
         formData.append('file', data.file.file.originFileObj)
         formData.append('q_id', practical_data.surveyquest[0].id)

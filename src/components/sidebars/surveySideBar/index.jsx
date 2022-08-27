@@ -18,7 +18,6 @@ const SurveysSideBar = () => {
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('side_bar_data_expert'))
         setData(newData)
-        console.log('newData', newData)
     }, [localStorage.getItem('side_bar_data_expert')])
 
     return (
