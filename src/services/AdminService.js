@@ -10,6 +10,16 @@ export const Admin = api.injectEndpoints({
             query: ({ id }) => `admin/admin/users/${id}`,
             providesTags: ['Admin'],
         }),
+        postUser: build.mutation({
+            query({ body }) {
+                return {
+                    url: `admin/admin/users/`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Admin' }],
+        }),
         patchUser: build.mutation({
             query({ id, body }) {
                 return {
@@ -32,5 +42,10 @@ export const Admin = api.injectEndpoints({
     }),
 })
 
-export const { useGetUsersQuery, useGetUserIdQuery, usePatchUserMutation, usePutUserMutation } =
-    Admin
+export const {
+    useGetUsersQuery,
+    useGetUserIdQuery,
+    usePostUserMutation,
+    usePatchUserMutation,
+    usePutUserMutation,
+} = Admin

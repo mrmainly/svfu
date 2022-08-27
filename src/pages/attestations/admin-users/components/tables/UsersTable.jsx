@@ -6,10 +6,13 @@ import Table from 'antd/lib/table'
 import { Button, Input, Space } from 'antd'
 
 import { useGetUsersQuery } from '../../../../../services/AdminService'
+import UserAddModal from '../modals/UserAddModal'
+import { MyButton } from '../../../../../components'
 import ROUTES from '../../../../../routes'
 
 const UsersTable = () => {
     const navigate = useNavigate()
+    const [modalNewUser, setModalNewUser] = useState(false)
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const { data, isLoading } = useGetUsersQuery()
@@ -178,6 +181,8 @@ const UsersTable = () => {
 
     return (
         <>
+            <MyButton onClick={() => setModalNewUser(true)}>Создать пользователя</MyButton>
+            <UserAddModal open={modalNewUser} setOpen={setModalNewUser} />
             <Table columns={columns} dataSource={data?.results} rowKey="id" />
         </>
     )
