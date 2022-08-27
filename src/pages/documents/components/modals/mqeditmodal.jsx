@@ -26,21 +26,21 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
     }, [dataList])
 
     const onSubmit = (data) => {
-        console.log('submurt', data)
-        let formData = new FormData()
-        formData.append('name', data.name)
-        formData.append('doc_id', data.doc_id)
-        formData.append('date_start', date_start.toISOString())
-        formData.append('date_finish', date_finish.toISOString())
-        formData.append('file', file, file.name)
-        patchQualificationId({ id: data.doc_id, formData: formData }).then((res) => {
-            if (res.data) {
-                message.success('Документ изменен')
-                setOpen(false)
-            } else {
-                message.error(`error`)
-            }
-        })
+        console.log('submurt', file)
+        // let formData = new FormData()
+        // formData.append('name', data.name)
+        // formData.append('doc_id', data.doc_id)
+        // formData.append('date_start', date_start.toISOString())
+        // formData.append('date_finish', date_finish.toISOString())
+        // formData.append('file', file, file.name)
+        // patchQualificationId({ id: data.doc_id, formData: formData }).then((res) => {
+        //     if (res.data) {
+        //         message.success('Документ изменен')
+        //         setOpen(false)
+        //     } else {
+        //         message.error(`error`)
+        //     }
+        // })
     }
 
     function onChange(dates) {
@@ -51,6 +51,8 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
     const handleFile = (e) => {
         setFile(e.file)
     }
+
+    console.log(dataList)
 
     const props = {
         beforeUpload: (file) => {

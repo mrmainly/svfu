@@ -10,13 +10,15 @@ const MyQualification = () => {
     const { data, isLoading } = useGetQualificationsQuery('')
     const [modalNewQualification, setModalNewQualification] = useState(false)
 
+    console.log(data)
+
     return (
         <div>
             <MyButton style={{ marginBottom: 20 }} onClick={() => setModalNewQualification(true)}>
                 Загрузить мою квалификацию
             </MyButton>
             <MQAddModal open={modalNewQualification} setOpen={setModalNewQualification} />
-            <MyQualificationTable data={data?.result} loading={isLoading} />
+            <MyQualificationTable data={data?.results} loading={isLoading} />
         </div>
     )
 }

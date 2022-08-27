@@ -1,15 +1,12 @@
-import { useState, useRef } from 'react'
-import { Modal, Form, Input, message, Typography, Button, Upload } from 'antd'
-
-import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
-
-import Item from 'antd/lib/list/Item'
+import { Modal, Form, Input, message, Typography, DatePicker } from 'antd'
+import moment from 'moment'
 
 import { MyButton } from '../../../../components'
 import { usePostQualificationMutation } from '../../../../services/QualificationsService'
 
 const { TextArea } = Input
 const { Text } = Typography
+const { RangePicker } = DatePicker
 
 const MQAddModal = ({ open, setOpen }) => {
     const [postQualification] = usePostQualificationMutation()
@@ -26,17 +23,17 @@ const MQAddModal = ({ open, setOpen }) => {
             type: 'date',
         },
         {
-            title: 'Дата выдачи документа:',
+            title: 'Срок действия - Начало:',
             name: 'date_start',
-            text: 'Введите дату выдачи документа',
-            type: 'date',
-        },
-        {
-            title: 'Срок действия',
-            name: 'date_finish',
             text: 'Введите срок действия',
-            type: 'date',
+            type: 'range-picker',
         },
+        // {
+        //     title: 'Срок действия - Конец:',
+        //     name: 'date_finish',
+        //     text: 'Введите срок действия',
+        //     type: 'date',
+        // },
         {
             title: 'Выберите файл',
             name: 'file',
@@ -45,11 +42,12 @@ const MQAddModal = ({ open, setOpen }) => {
         },
     ]
     const onSubmit = (data) => {
+        const newDate = new Date()
         let formData = new FormData()
         formData.append('name', data.name)
         formData.append('date_of_issue', data.date_of_issue)
-        formData.append('date_start', data.date_start)
-        formData.append('date_finish', data.date_finish)
+        formData.append('date_start', moment(data.date_start[0]._d).format('YYYY-MM-DD'))
+        formData.append('date_finish', moment(data.date_start[1]._d).format('YYYY-MM-DD'))
         formData.append('file', document.getElementById('file').files[0], data.file)
 
         postQualification({ formData: formData }).then((res) => {
@@ -104,7 +102,15 @@ const MQAddModal = ({ open, setOpen }) => {
                             labelCol={{ span: 24 }}
                             style={{ width: 350 }}
                         >
-                            <Input placeholder={item.text} size="large" type={item.type} />
+                            {item.type === 'range-picker' ? (
+                                <RangePicker
+                                    format="YYYY-MM-DD"
+                                    size="large"
+                                    style={{ width: '100%' }}
+                                />
+                            ) : (
+                                <Input placeholder={item.text} size="large" type={item.type} />
+                            )}
                         </Form.Item>
                     ))}
                 </Form>

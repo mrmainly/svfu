@@ -16,8 +16,8 @@ const MyQualificationTable = ({ data, loading }) => {
         },
         {
             title: 'Дата выдачи',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'date_start',
+            key: 'date_start',
         },
         {
             title: 'Действие',
