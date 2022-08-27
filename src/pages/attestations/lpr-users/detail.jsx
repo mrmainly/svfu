@@ -141,6 +141,12 @@ const LprUsersDetail = () => {
             ? 'Аттестуемый'
             : ''
 
+    const lastName = data?.last_name ? data?.last_name + ' ' : ''
+
+    const fisrtName = data?.first_name ? data?.first_name + ' ' : ''
+
+    const patronymic = data?.patronymic ? data?.patronymic : ''
+
     return (
         <div>
             <div
@@ -167,7 +173,7 @@ const LprUsersDetail = () => {
                         lineHeight: '30px',
                     }}
                 >
-                    {role + ' ' + data?.last_name + ' ' + data?.first_name + ' ' + data?.patronymic}
+                    {role + ' ' + lastName + fisrtName + patronymic}
                 </span>
             </div>
             <hr />
