@@ -1,20 +1,25 @@
 import React from 'react'
 import { Form, Spin, message } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 import ProfileForm from './components/ProfileForm'
 import InfoForm from './components/InfoForm'
 import SocialForm from './components/SocialForm'
 import { Line, MyButton } from '../../../components'
 import { useGetProfileQuery, useProfilePatchMutation } from '../../../services/ProfileService'
+import ROUTES from '../../../routes'
 
 const ProfileDetail = () => {
     const { data, isFetching, error } = useGetProfileQuery('')
     const [patchProfile] = useProfilePatchMutation()
 
+    const navigate = useNavigate()
+
     const onSubmit = (data) => {
         patchProfile(data).then((res) => {
             if (res.data) {
                 message.success('Профиль изменен')
+                navigate(ROUTES.PROFILE)
             } else {
                 message.error(`${res.error.data.errors[0]} ${res.error.data.errors[1]}`)
             }

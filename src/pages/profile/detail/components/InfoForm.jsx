@@ -19,7 +19,7 @@ const InfoForm = () => {
         },
         {
             label: 'Достижения и поощрения',
-            name: 'scientific_interests',
+            name: 'rewards',
             required: false,
         },
         {

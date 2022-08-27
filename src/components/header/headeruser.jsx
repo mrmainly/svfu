@@ -35,7 +35,7 @@ const HeaderUser = () => {
                     <div
                         style={{
                             cursor: 'pointer',
-                            padding: 5,
+                            padding: '5px 10px 5px 10px',
                             boxShadow: '0px -2px 23px 0px rgba(34, 60, 80, 0.2)',
                         }}
                         onClick={() => navigate(ROUTES.PROFILE)}
