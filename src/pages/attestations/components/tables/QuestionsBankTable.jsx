@@ -8,6 +8,8 @@ const QuestionsBankTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
 
+    console.log(data)
+
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
         { title: 'Текст вопроса', dataIndex: 'description', key: 'description' },
@@ -50,7 +52,7 @@ const QuestionsBankTable = ({ data, loading }) => {
                 setOpen={setModalEditQuestionsBank}
                 dataList={currentData}
             />
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="description" />
+            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
         </>
     )
 }

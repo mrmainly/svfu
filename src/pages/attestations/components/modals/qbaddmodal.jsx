@@ -61,8 +61,8 @@ const QBAddModal = ({ open, setOpen }) => {
         fileList,
     }
     const children = [
-        { value: 'MULTIPLE_CHOICE', label: 'Checkbox' },
-        { value: 'ONE_CHOICE', label: 'Radiobutton' },
+        { value: 'MULTIPLE_CHOICE', label: 'Вопрос с множественными ответами' },
+        { value: 'ONE_CHOICE', label: 'Вопрос с одним ответом' },
         { value: 'DESCRIBE', label: 'Открытый вопрос' },
     ]
     const [postAttestationsQuestionsBank] = usePostAttestationsQuestionsBankMutation()
@@ -84,7 +84,7 @@ const QBAddModal = ({ open, setOpen }) => {
                 if (img) {
                     let formData = new FormData()
                     formData.append('image', img)
-                  
+
                     postAttestationsQuestionsBankImage({
                         id: res.data.question_id,
                         formData: formData,
@@ -134,9 +134,6 @@ const QBAddModal = ({ open, setOpen }) => {
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="qbadd-form">
-                    <Form.Item label="Название вопроса" name="name">
-                        <Input />
-                    </Form.Item>
                     <Form.Item label="Квалификация вопроса" name="direction">
                         <Select
                             mode="multiple"

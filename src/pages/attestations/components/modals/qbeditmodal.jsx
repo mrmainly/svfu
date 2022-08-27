@@ -100,8 +100,8 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         },
     }
     const children = [
-        { value: 'MULTIPLE_CHOICE', label: 'Checkbox' },
-        { value: 'ONE_CHOICE', label: 'Radiobutton' },
+        { value: 'MULTIPLE_CHOICE', label: 'Вопрос с множественными ответами' },
+        { value: 'ONE_CHOICE', label: 'Вопрос с одним ответом' },
         { value: 'DESCRIBE', label: 'Открытый вопрос' },
     ]
 
@@ -222,7 +222,6 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                 <Form
                     layout="vertical"
                     initialValues={{
-                        ['name']: dataList?.name,
                         ['direction']: dataList?.direction,
                         ['technique']: dataList?.technique,
                         ['description']: dataList?.description,
@@ -232,9 +231,6 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                     onFinish={onSubmit}
                     id="qbedit-form"
                 >
-                    <Form.Item label="Название вопроса" name="name">
-                        <Input />
-                    </Form.Item>
                     <Form.Item label="Квалификация вопроса" name="direction">
                         <Select
                             mode="multiple"
