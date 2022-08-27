@@ -18,8 +18,6 @@ const UsersTable = () => {
     const { data, isLoading } = useGetUsersQuery()
     const searchInput = useRef()
 
-    console.log(data)
-
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm()
         setSearchText(selectedKeys[0])
@@ -181,7 +179,9 @@ const UsersTable = () => {
 
     return (
         <>
-            <MyButton onClick={() => setModalNewUser(true)}>Создать пользователя</MyButton>
+            <MyButton style={{ marginBottom: '12px' }} onClick={() => setModalNewUser(true)}>
+                Создать пользователя
+            </MyButton>
             <UserAddModal open={modalNewUser} setOpen={setModalNewUser} />
             <Table columns={columns} dataSource={data?.results} rowKey="id" />
         </>

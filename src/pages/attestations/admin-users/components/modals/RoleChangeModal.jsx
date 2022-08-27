@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-import { Modal, message, Input, Select, Form } from 'antd'
+import { Modal, message, Select, Form, Typography } from 'antd'
 import Item from 'antd/lib/list/Item'
 import moment from 'moment'
 
@@ -9,6 +9,7 @@ import { MyButton } from '../../../../../components'
 import { usePatchUserMutation } from '../../../../../services/AdminService'
 
 const { Option } = Select
+const { Text } = Typography
 
 const QualificationModal = ({ open, setOpen, data }) => {
     const params = useParams()
@@ -41,7 +42,7 @@ const QualificationModal = ({ open, setOpen, data }) => {
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="qbadd-form">
+                    <MyButton key="submit" htmlType="submit" form="role-change-form">
                         Сохранить
                     </MyButton>,
                     <MyButton
@@ -54,10 +55,35 @@ const QualificationModal = ({ open, setOpen, data }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="qbadd-form">
-                    <Form.Item label="Роль *" name="role">
+                <Form
+                    layout="vertical"
+                    onFinish={onSubmit}
+                    id="role-change-form"
+                    initialValues={{
+                        ['role']: data,
+                    }}
+                >
+                    <Form.Item
+                        label={
+                            <Text
+                                style={{
+                                    fontWeight: 600,
+                                    fontSize: 16,
+                                }}
+                            >
+                                Роль
+                            </Text>
+                        }
+                        name="role"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Выберите роль',
+                            },
+                        ]}
+                        labelCol={{ span: 24 }}
+                    >
                         <Select
-                            defaultValue={data}
                             style={{
                                 width: '100%',
                             }}

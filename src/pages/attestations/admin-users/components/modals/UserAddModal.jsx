@@ -1,22 +1,8 @@
 import { useState } from 'react'
 
-import moment from 'moment'
-
 import { MyButton } from '../../../../../components'
 
-import {
-    Modal,
-    Form,
-    Input,
-    DatePicker,
-    Select,
-    Button,
-    Upload,
-    message,
-    Radio,
-    Checkbox,
-    Typography,
-} from 'antd'
+import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
 
 import { usePostUserMutation } from '../../../../../services/AdminService'
 
@@ -200,7 +186,6 @@ const UserAddModal = ({ open, setOpen }) => {
                 message.error(res.error.data.errors[0])
             }
         })
-        console.log(data)
     }
     return (
         <div>
