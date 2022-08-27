@@ -139,7 +139,7 @@ const UserAddModal = ({ open, setOpen }) => {
         },
         {
             label: 'Достижения и поощрения',
-            name: 'scientific_interests',
+            name: 'rewards',
             required: false,
         },
         {
