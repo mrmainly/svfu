@@ -10,23 +10,28 @@ import IndividualTable from './tables/IndividualTable'
 import GroupTable from './tables/GroupTable'
 
 import { useGetAttestationProtocolQuery } from '../../../services/AttestationProtocolService'
+import { useEffect } from 'react'
 
 const AttestationProtocol = () => {
     //  const [modalNewQuali, setModalNewQuali] = useState(false)
     // const onSearch = (value) => console.log(value)
     const [mode, setMode] = useState('INDIVIDUAL')
     const [type, setType] = useState('TEST')
+    const [secondColumn, setSecondColumn] = useState('user')
     const { data, isLoading } = useGetAttestationProtocolQuery({ group_type: mode })
     const handleModeChange = (e) => {
         setMode(e.target.value)
     }
+    useEffect(() => {
+        setSecondColumn(mode === 'INDIVIDUAL' ? 'user' : 'testgroup')
+    }, [mode])
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
         {
-            title: 'ФИО аттестуемого',
-            dataIndex: 'user',
-            key: 'user',
-            render: (user) => (user ? user : '-'),
+            title: mode === 'INDIVIDUAL' ? 'ФИО аттестуемого' : 'Группа',
+            dataIndex: secondColumn,
+            key: secondColumn,
+            render: (secondColumn) => (secondColumn ? secondColumn : '-'),
         },
         {
             title: 'Тип протокола',

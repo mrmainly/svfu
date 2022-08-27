@@ -88,7 +88,13 @@ const UsersTable = () => {
     })
 
     const columns = [
-        { title: 'ID', dataIndex: 'id', key: 'id' },
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.id - b.id,
+        },
         {
             title: 'ФИО',
             dataIndex: 'full_name',

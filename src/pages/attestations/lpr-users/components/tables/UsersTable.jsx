@@ -85,7 +85,13 @@ const UsersTable = () => {
     })
 
     const columns = [
-        { title: 'ID', dataIndex: 'id', key: 'id' },
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.id - b.id,
+        },
         {
             title: 'ФИО',
             dataIndex: 'full_name',
@@ -94,10 +100,10 @@ const UsersTable = () => {
         },
         {
             title: 'Текущая аттестация',
-            dataIndex: 'direction',
-            key: 'direction',
-            render: (direction) => (direction ? direction : '-'),
-            ...getColumnSearchProps('direction'),
+            dataIndex: 'active_application',
+            key: 'active_application',
+            render: (active_application) => (active_application ? active_application : '-'),
+            ...getColumnSearchProps('active_application'),
         },
         {
             title: 'Роль',
