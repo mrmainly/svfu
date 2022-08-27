@@ -22,7 +22,7 @@ const Test = () => {
     return (
         <div>
             <CerificationResultsTable
-                data={data}
+                data={data?.results}
                 routes={ROUTES.CERTIFICATION_RESULTS_DETAIL}
                 loading={isFetching}
             />

@@ -55,6 +55,7 @@ const MQAddModal = ({ open, setOpen }) => {
         postQualification({ formData: formData }).then((res) => {
             if (res.data) {
                 message.success('Документ изменен')
+                setOpen(false)
             } else {
                 message.error(`${res.error.data.errors[0]}`)
             }
@@ -85,7 +86,7 @@ const MQAddModal = ({ open, setOpen }) => {
                     </MyButton>,
                 ]}
             >
-                <Form onFinish={(inputs) => onSubmit(inputs)}>
+                <Form onFinish={(inputs) => onSubmit(inputs)} id="aq-form">
                     {inputs.map((item, index) => (
                         <Form.Item
                             key={index}
