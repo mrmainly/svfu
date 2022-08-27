@@ -12,7 +12,6 @@ const { Search } = Input
 const UploadDocuments = () => {
     const { data, isLoading } = useGetDocumentsQuery()
     const [modalNewDoc, setModalNewDoc] = useState(false)
-    console.log('datares', data)
     const onSearch = (value) => console.log(value)
     return (
         <div>
