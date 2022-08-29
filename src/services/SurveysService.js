@@ -16,6 +16,7 @@ export const surveys = api.injectEndpoints({
         }),
         getTestResultsID: build.query({
             query: ({ id }) => `tester/result/${id}`,
+            providesTags: ['Appeal'],
         }),
         getSurveysId: build.query({
             query: ({ id }) => `tester/survey/part-one/${id}`,
@@ -45,6 +46,16 @@ export const surveys = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'Appeal' }],
+        }),
+        appealPut: build.mutation({
+            query({ id }) {
+                return {
+                    url: `tester/result/${id}/appeal/`,
+                    method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'Appeal' }],
         }),
         surveyPatch: build.mutation({
             query({ id }) {
@@ -75,6 +86,7 @@ export const {
     useGetSurveysIdQuery,
     useSurveyPostMutation,
     useAppealPostMutation,
+    useAppealPutMutation,
     useSurveyPatchMutation,
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,

@@ -7,6 +7,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { useGetTestResultsIDQuery } from '../../../src/services/SurveysService'
 import { Line } from '../../components'
 import AppealModal from './components/modal/AppealModal'
+import CancelModal from './components/modal/CancelModal'
 import ROUTES from '../../routes'
 
 const { Text } = Typography
@@ -14,12 +15,14 @@ const { Text } = Typography
 const TestResult = () => {
     const params = useParams()
     const [appealModal, setAppealModal] = useState(false)
+    const [cancelModal, setCancelModal] = useState(false)
     const { data: dataResult, isFetching } = useGetTestResultsIDQuery({ id: params.id })
     let TEST_RESULT = dataResult?.protocol?.find((item) => item.type === 'TEST_RESULT')
     let CERTIFICATION_RESULT = dataResult?.protocol?.find(
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
     const navigate = useNavigate()
+    console.log('dataResult', dataResult)
     if (isFetching) {
         return (
             <div
@@ -108,16 +111,19 @@ const TestResult = () => {
                 <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
                     Итоги аттестации
                 </Text>
-                <Button
-                    type="primary"
-                    disabled={dataResult?.appeal[0]?.status === 'WAITING' ? true : false}
-                    danger
-                    onClick={() => setAppealModal(true)}
-                >
-                    Подать аппеляцию
-                </Button>
+
+                {dataResult?.appeal[dataResult?.appeal.length - 1]?.status === 'WAITING' ? (
+                    <Button type="primary" danger onClick={() => setCancelModal(true)}>
+                        Отменить аппеляцию
+                    </Button>
+                ) : (
+                    <Button type="primary" danger ghost onClick={() => setAppealModal(true)}>
+                        Подать аппеляцию
+                    </Button>
+                )}
             </div>
             <AppealModal open={appealModal} setOpen={setAppealModal} ID={dataResult?.id} />
+            <CancelModal open={cancelModal} setOpen={setCancelModal} ID={dataResult?.id} />
             {items.map((item, index) => (
                 <Space size="large" key={index} style={{ marginTop: index === 0 ? 0 : 15 }}>
                     <div style={{ fontWeight: 600 }}>{item.label}</div>
