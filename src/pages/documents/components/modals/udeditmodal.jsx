@@ -93,6 +93,7 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
                             deleteDocument({ id: dataList.id }).then((res) => {
                                 if (res.data) {
                                     message.success('Документ удален')
+                                    setOpen(false)
                                 } else {
                                     message.error('Документ не удален')
                                 }

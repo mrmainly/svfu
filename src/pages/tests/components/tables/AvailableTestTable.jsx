@@ -11,8 +11,15 @@ const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
     const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
+    console.log('data', data)
     const columns = [
-        { title: 'ID', dataIndex: 'id', key: 'id' },
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            defaultSortOrder: 'ascend',
+            sorter: (a, b) => a.id - b.id,
+        },
         { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
         {
             title: 'Начало аттестации',
@@ -54,6 +61,25 @@ const AvailableTestTable = ({ data, loading }) => {
                     : survey_status === 'REVIEWED'
                     ? 'Рассмотрен'
                     : 'Недоступно',
+            filters: [
+                {
+                    text: 'Ожидание',
+                    value: 'WAITING',
+                },
+                {
+                    text: 'На рассмотрении',
+                    value: 'ON_REVIEW',
+                },
+                {
+                    text: 'Рассмотрен',
+                    value: 'REVIEWED',
+                },
+                {
+                    text: 'Недоступно',
+                    value: 'UNAVAILABLE',
+                },
+            ],
+            onFilter: (value, record) => record.survey_status.indexOf(value) === 0,
         },
         {
             title: 'Действие',
