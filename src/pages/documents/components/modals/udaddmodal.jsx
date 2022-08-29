@@ -1,10 +1,7 @@
 import { useState, useRef } from 'react'
-import { Typography, Space, Spin, Form, Button, Modal, Select, Upload, Input, message } from 'antd'
-import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
+import { Typography, Button, Modal, Select, Upload, Input, message } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 
-import Item from 'antd/lib/list/Item'
-
-import { MyButton } from '../../../../components'
 import { usePostDocumentsMutation } from '../../../../services/DocumentsService'
 const { TextArea } = Input
 const { Option } = Select

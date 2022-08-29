@@ -1,22 +1,21 @@
 import { useState, useRef } from 'react'
-import { Typography, Space, Spin, Form, Button, Modal, Select, Upload, Input, message } from 'antd'
-import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
+import { Typography, Button, Modal, Select, Upload, Input, message } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 
-import Item from 'antd/lib/list/Item'
+import {
+    usePatchDocumentsMutation,
+    useDeleteDocumentMutation,
+} from '../../../../services/DocumentsService'
+import { udDocumentType } from '../../../../translation/DocumentTypeTranslation'
 
-import { MyButton } from '../../../../components'
-import { usePatchDocumentsMutation } from '../../../../services/DocumentsService'
-const { TextArea } = Input
-const { Option } = Select
 const { Text } = Typography
 
 const UDEditModal = ({ open, setOpen, dataList }) => {
     const [patchDocuments] = usePatchDocumentsMutation()
-    let valRef = useRef()
+    const [deleteDocument] = useDeleteDocumentMutation()
+
     let editRef = useRef()
-    const [value, setValue] = useState()
     const [file, setFile] = useState()
-    const [edit, setEdit] = useState([])
     const props = {
         beforeUpload: (file) => {
             setFile(file)
@@ -76,7 +75,6 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
 
         setOpen(false)
     }
-    const onSearch = (value) => console.log(value)
     return (
         <div>
             <Modal
@@ -89,6 +87,21 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
                 footer={[
+                    <Button
+                        key="delete"
+                        onClick={() =>
+                            deleteDocument({ id: dataList.id }).then((res) => {
+                                if (res.data) {
+                                    message.success('Документ удален')
+                                } else {
+                                    message.error('Документ не удален')
+                                }
+                            })
+                        }
+                        type="danger"
+                    >
+                        Удалить
+                    </Button>,
                     <Button key="back" onClick={() => setOpen(false)}>
                         Отмена
                     </Button>,
@@ -100,10 +113,10 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
                 <Text style={{ fontWeight: 600, fontSize: 16 }}>Тип документа</Text>
                 <div style={{ marginTop: '10px' }}>
                     <Typography style={{ fontWeight: 400, fontSize: 16 }}>
-                        {dataList.type}
+                        {udDocumentType(dataList.document_type)}
                     </Typography>
                 </div>
-                {dataList.type === 'Паспорт' ? (
+                {dataList.document_type === 'Паспорт' ? (
                     <></>
                 ) : (
                     <div style={{ marginTop: '10px' }}>

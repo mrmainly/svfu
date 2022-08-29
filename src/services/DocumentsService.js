@@ -27,8 +27,21 @@ export const documents = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Document' }],
         }),
+        deleteDocument: build.mutation({
+            query({ id }) {
+                return {
+                    url: `users/document/${id}`,
+                    method: 'DELETE',
+                }
+            },
+            invalidatesTags: [{ type: 'Document' }],
+        }),
     }),
 })
 
-export const { useGetDocumentsQuery, usePostDocumentsMutation, usePatchDocumentsMutation } =
-    documents
+export const {
+    useGetDocumentsQuery,
+    usePostDocumentsMutation,
+    usePatchDocumentsMutation,
+    useDeleteDocumentMutation,
+} = documents
