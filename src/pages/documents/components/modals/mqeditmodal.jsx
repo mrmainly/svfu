@@ -7,7 +7,10 @@ import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
 import Item from 'antd/lib/list/Item'
 
 import { MyButton } from '../../../../components'
-import { usePatchQualificationIdMutation } from '../../../../services/QualificationsService'
+import {
+    usePatchQualificationIdMutation,
+    useDeleteQualificationIdMutation,
+} from '../../../../services/QualificationsService'
 
 const { Text } = Typography
 const { RangePicker } = DatePicker
@@ -20,6 +23,8 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
     const [date_finish, setDate_finish] = useState(new Date())
 
     const [patchQualificationId] = usePatchQualificationIdMutation()
+    const [deleteQualification] = useDeleteQualificationIdMutation()
+
     useEffect(() => {
         setDate_start(new Date(dataList?.date_start))
         setDate_finish(new Date(dataList?.date_finish))
@@ -77,7 +82,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Изменить документ"
+                title="Изменить квалификацию"
                 style={{
                     top: 20,
                 }}
@@ -98,6 +103,23 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                     >
                         Отмена
                     </MyButton>,
+                    <Button
+                        size="large"
+                        key="delete"
+                        onClick={() =>
+                            deleteQualification({ id: dataList.id }).then((res) => {
+                                if (res.data) {
+                                    message.success('Квалификация удалена')
+                                    setOpen(false)
+                                } else {
+                                    message.error('Квалификация не удалена')
+                                }
+                            })
+                        }
+                        type="danger"
+                    >
+                        Удалить
+                    </Button>,
                 ]}
             >
                 <Form
