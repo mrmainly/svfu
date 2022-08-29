@@ -11,11 +11,14 @@ import {
     TimePicker,
     InputNumber,
     Typography,
+    Space,
+    Switch,
 } from 'antd'
 
 import { MyButton } from '../../../../components'
 import {
     usePatchAttestationsTestsBankIdMutation,
+    usePutAttestationsTestsBankIdMutation,
     useGetAttestationsQualificationQuery,
 } from '../../../../services/AttestationService'
 const { TextArea } = Input
@@ -29,8 +32,10 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
     const [aas, setAs] = useState(0)
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
-    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery()
+    const [active, setActive] = useState()
+    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery(true)
     const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
+    const [putAttestationsTestsBankId] = usePutAttestationsTestsBankIdMutation()
     useEffect(() => {
         setBc(dataList[0]?.beginner_count)
         setAc(dataList[0]?.advanced_count)
@@ -39,6 +44,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
         setAs(dataList[0]?.advanced_score)
         setEs(dataList[0]?.expert_score)
         setPro(dataList[0]?.passing_percent_score)
+        setActive(dataList[0]?.is_active)
     }, [dataList])
 
     const onSubmit = (data) => {
@@ -47,9 +53,16 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
             parseInt(moment(data.test_time).format('mm'))
 
         data.test_time = minutes
+        if (dataList[0]?.is_active !== active) {
+            putAttestationsTestsBankId({ id: dataList[0]?.id }).then((res) => {
+                if (!res.data) {
+                    message.error(res.error.data.errors[0])
+                }
+            })
+        }
         patchAttestationsTestsBankId({ id: dataList[0].id, body: data }).then((res) => {
             if (res.data) {
-                message.success('Квалификация изменена')
+                message.success('Тест изменен')
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -86,10 +99,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                     layout="vertical"
                     initialValues={{
                         ['name']: dataList[0]?.name,
-                        // ['direction']: {
-                        //     value: dataList[0]?.direction.tag_direction.id,
-                        //     label: dataList[0]?.direction.tag_direction.name,
-                        // },
+                        ['direction']: dataList[0]?.direction?.id,
                         ['test_time']: hhminuts,
                         ['beginner_count']: dataList[0]?.beginner_count,
                         ['advanced_count']: dataList[0]?.advanced_count,
@@ -111,9 +121,16 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             style={{
                                 width: '100%',
                             }}
-                            defaultValue={dataList[0]?.direction.tag_direction.id}
+                            //  defaultValue={dataList[0]?.direction.tag_direction.id}
                             // onChange={(value) => setValue(value)}
                         >
+                            {!dataList[0]?.direction?.is_active ? (
+                                <Option disabled value={dataList[0]?.direction?.id}>
+                                    {dataList[0]?.direction?.name}
+                                </Option>
+                            ) : (
+                                <></>
+                            )}
                             {dataDirection?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -178,7 +195,6 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                         <InputNumber
                             onChange={(value) => setPro(value)}
                             style={{ width: '100%' }}
-                            defaultValue="0"
                             min={0}
                             max={100}
                             formatter={(value) => `${value}%`}
@@ -198,6 +214,17 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             <Typography>{((bc * bs + aas * ac + es * ec) / 100) * pro}</Typography>
                         </Col>
                     </Row>
+                    <Space align="baseline">
+                        <Form.Item>
+                            <Switch
+                                defaultChecked={active}
+                                onChange={(e) => {
+                                    setActive(e)
+                                }}
+                            />
+                        </Form.Item>
+                        <Typography>Активность квалификации</Typography>
+                    </Space>
                 </Form>
             </Modal>
         </div>

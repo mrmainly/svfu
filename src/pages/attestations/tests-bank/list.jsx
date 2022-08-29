@@ -18,7 +18,7 @@ const TestsBank = () => {
                 <Col>
                     <MyButton onClick={() => setModalNewTest(true)}>Создать новый тест</MyButton>
                 </Col>
-                <Col>
+                {/* <Col>
                     <Search
                         size="large"
                         placeholder="Поиск..."
@@ -26,7 +26,7 @@ const TestsBank = () => {
                         enterButton
                         style={{ borderRadius: 4 }}
                     />
-                </Col>
+                </Col> */}
             </Row>
             <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />
             <TestsBankTable data={data?.results} loading={isLoading} />
