@@ -1,77 +1,80 @@
 import React from 'react'
+import moment from 'moment'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Modal, Spin, Space, Typography, message } from 'antd'
 // import moment from 'moment'
 import { BsArrowLeft } from 'react-icons/bs'
 
-// import { useGetSurveysIdQuery, useSurveyPatchMutation } from '../../../../services/SurveysService'
+import {
+    useGetSurveysIdQuery,
+    useSurveyPatchMutation,
+    useGetDirectionQuery,
+    useGetTestResultsIDQuery,
+} from '../../../src/services/SurveysService'
 import { Line, MyButton } from '../../components'
 import ROUTES from '../../routes'
 
 const { Text } = Typography
 
 const TestResult = () => {
-    // const { data, isFetching } = useGetSurveysIdQuery({ id: ID })
-    // const [surveyPatch] = useSurveyPatchMutation()
+    const params = useParams()
+    const { data: dataResult, isFetching } = useGetTestResultsIDQuery({ id: params.id })
+    console.log('dataResult', dataResult)
+    let TEST_RESULT = dataResult?.protocol?.find((item) => item.type == 'TEST_RESULT')
+    let CERTIFICATION_RESULT = dataResult?.protocol?.find(
+        (item) => item.type == 'CERTIFICATION_RESULT'
+    )
+
     const navigate = useNavigate()
-    // if (isFetching) {
-    //     return (
-    //         <div
-    //             style={{
-    //                 height: 210,
-    //                 display: 'flex',
-    //                 justifyContent: 'center',
-    //                 paddingTop: 100,
-    //             }}
-    //         >
-    //             <Spin />
-    //         </div>
-    //     )
-    // }
+    if (isFetching) {
+        return (
+            <div
+                style={{
+                    height: 210,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    paddingTop: 100,
+                }}
+            >
+                <Spin />
+            </div>
+        )
+    }
 
     const items = [
         {
             label: 'Квалификация',
-            value: 'квалификация ыыыыыыыы',
+            value: dataResult?.survey?.name,
         },
         {
             label: 'Тест был начат:',
-            value: 'sdsa',
-            // value: moment(data?.exam_date_start).format('DD.MM.YYYY, hh:mm'),
+            value: moment(dataResult?.survey?.exam?.date_start).format('DD.MM.YYYY, hh:mm'),
         },
         {
             label: 'Тест проверен:',
-            value: 'sfdgdghfdh',
-            // value: moment(data?.exam_date_finish).format('DD.MM.YYYY, hh:mm'),
+            value: moment(dataResult?.survey?.finish_survey).format('DD.MM.YYYY, hh:mm'),
         },
         {
             label: 'Итоговые балыы:',
             value: 'dafhgfh',
-            // value: `${data?.time_exam} мин`,
         },
         {
             label: 'Протокол о результатах тестирования:',
-            value: 'dafhgfh',
-            // value: `${data?.time_exam} мин`,
+            value: (
+                <a href={TEST_RESULT.file} target="_blank">
+                    document.pdf
+                </a>
+            ),
         },
         {
             label: 'Протокол о результатах аттестации:',
-            value: 'dafhgfh',
-            // value: `${data?.time_exam} мин`,
+            value: (
+                <a href={CERTIFICATION_RESULT.file} target="_blank">
+                    document.pdf
+                </a>
+            ),
         },
     ]
-
-    // const pathcSurvey = () => {
-    //     surveyPatch({ id: data.id }).then((res) => {
-    //         if (res.data) {
-    //             navigate(ROUTES.THEORETICAL_PART, {
-    //                 state: { surveyquest: data.surveyquest, id: data.id },
-    //             })
-    //         } else {
-    //             message.error('Вы уже прошли тестирование')
-    //         }
-    //     })
-    // }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -117,9 +120,7 @@ const TestResult = () => {
             </Text>
             <Space size="large">
                 <div style={{ width: 150, fontWeight: 600 }}>Рекомендация:</div>
-                <Text>
-                    Рассмотрев теоретическую часть, пришел к выводу, что вы - гений, так держать
-                </Text>
+                <Text>{dataResult?.main_expert_review_first_part}</Text>
             </Space>
             <Line />
             <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
@@ -127,10 +128,7 @@ const TestResult = () => {
             </Text>
             <Space size="large">
                 <div style={{ width: 150, fontWeight: 600 }}>Рекомендация:</div>
-                <Text>
-                    Рассмотрев ответ на практическую часть, пришел к выводу, что вы - гений, так
-                    держать
-                </Text>
+                <Text>{dataResult?.main_expert_review_second_part}</Text>
             </Space>
         </div>
     )
