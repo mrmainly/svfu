@@ -10,6 +10,7 @@ import RoleChangeModal from './components/modals/RoleChangeModal'
 import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
 
 import moment from 'moment'
+import { Line } from '../../../components'
 
 const AdminUsersDetail = () => {
     const params = useParams()
@@ -179,7 +180,7 @@ const AdminUsersDetail = () => {
                     {role + ' ' + lastName + fisrtName + patronymic}
                 </span>
             </div>
-            <hr />
+            <Line />
             <div style={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
                 <Radio.Group onChange={handleModeChange} value={mode}>
                     <Radio.Button value="info">Информация</Radio.Button>
@@ -202,7 +203,7 @@ const AdminUsersDetail = () => {
             {mode === 'classification' && (
                 <QualificationTable qualifications={data?.qualification_improvement} />
             )}
-            <hr style={{ display: mode === 'info' ? 'block' : 'none' }} />
+            {mode === 'info' ? <Line /> : <></>}
             <div
                 style={{
                     display: mode === 'info' ? 'block' : 'none',

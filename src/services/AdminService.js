@@ -39,6 +39,10 @@ export const Admin = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Admin' }],
         }),
+        getAdminExam: build.query({
+            query: () => `admin/admin/exam/`,
+            providesTags: ['Admin'],
+        }),
     }),
 })
 
@@ -48,4 +52,5 @@ export const {
     usePostUserMutation,
     usePatchUserMutation,
     usePutUserMutation,
+    useGetAdminExamQuery,
 } = Admin

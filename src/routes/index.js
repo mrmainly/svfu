@@ -39,6 +39,7 @@ const ROUTES = {
     PRACTICAL_PART_EXPERT: '/practical-part-expert',
     LPR_EXAM: '/lpr-exam',
     ADMIN_USERS: '/admin-users',
+    ADMIN_EXAM: '/admin-exam',
 }
 
 export default ROUTES

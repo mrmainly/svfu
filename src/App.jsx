@@ -42,6 +42,7 @@ import {
     LprExam,
     AdminUsers,
     AdminUsersDetail,
+    AdminExam,
 } from './pages'
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
                     <Route element={<Certified />} path={ROUTES.CERTIFIED} />
                     <Route element={<ExamSchedule />} path={ROUTES.EXAM_SCHEDULE} />
                     <Route element={<LprExam />} path={ROUTES.LPR_EXAM} />
+                    <Route element={<AdminExam />} path={ROUTES.ADMIN_EXAM} />
                     <Route
                         element={<UserApplicationsDetail />}
                         path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}

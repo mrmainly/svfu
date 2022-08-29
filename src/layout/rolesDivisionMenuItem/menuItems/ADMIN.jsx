@@ -10,11 +10,11 @@ const ADMIN = (navigate) => {
             key: 'submenu-1',
             icon: <BsPeople />,
             children: [
-                //  {
-                //      label: 'Расписание экзаменов',
-                //      key: 'submenu-item-1-1',
-                //      onClick: () => navigate(ROUTES.LPR_EXAM),
-                //  },
+                {
+                    label: 'Расписание экзаменов',
+                    key: 'submenu-item-1-1',
+                    onClick: () => navigate(ROUTES.ADMIN_EXAM),
+                },
                 //  {
                 //      label: 'Протоколы аттестации',
                 //      key: 'submenu-item-1-2',
