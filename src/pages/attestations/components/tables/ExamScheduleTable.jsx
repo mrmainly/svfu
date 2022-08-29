@@ -4,7 +4,7 @@ import { Button, Table } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import ROUTES from '../../../../routes'
-import ESAddModal from '../modals/ESAddModal'
+import ESEditModal from '../modals/ESEditModal'
 const ExamScheduleTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState()
     const [modal, setModal] = useState(false)
@@ -36,7 +36,7 @@ const ExamScheduleTable = ({ data, loading }) => {
             render: (date_start) => moment(date_start).format('DD.MM.YYYY, hh:mm'),
         },
         {
-            title: 'Конец-ых',
+            title: 'Конец',
             dataIndex: 'date_finish',
             key: 'date_finish',
             render: (date_finish) => moment(date_finish).format('DD.MM.YYYY, hh:mm'),
@@ -76,7 +76,7 @@ const ExamScheduleTable = ({ data, loading }) => {
 
     return (
         <>
-            <ESAddModal open={modal} setOpen={setModal} dataList={currentData} />
+            <ESEditModal open={modal} setOpen={setModal} dataList={currentData} />
             <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
         </>
     )

@@ -111,7 +111,7 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
                                     icon={<PlusOutlined />}
                                     style={{ width: 'max-content' }}
                                 >
-                                    Добавить вариант ответа
+                                    Добавить аттестуемого
                                 </Button>
                             </>
                         )}
