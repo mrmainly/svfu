@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
-import { Modal, Input, Typography, message, Form } from 'antd'
+import React from 'react'
+import { Modal, message } from 'antd'
 
-import { useAppealPostMutation } from '../../../../services/SurveysService'
+import { useAppealPutMutation } from '../../../../services/SurveysService'
 import { MyButton } from '../../../../components'
 
-const { Text } = Typography
-
-const AppealModal = ({ open, setOpen, ID }) => {
-    const [appealPost] = useAppealPostMutation()
-    const [confirmModal, setConfirmModal] = useState(false)
-    const onSubmit = (data) => {
-        appealPost({ id: ID, body: data }).then((res) => {
+const CancelModal = ({ open, setOpen, ID }) => {
+    const [appealPut] = useAppealPutMutation()
+    const onSubmit = () => {
+        appealPut({ id: ID }).then((res) => {
             if (res.data) {
                 Modal.success({
-                    content: 'Аппеляция подана!',
+                    content: 'Аппеляция отменена!',
                 })
                 setOpen(false)
             } else {
@@ -36,7 +33,7 @@ const AppealModal = ({ open, setOpen, ID }) => {
                     setOpen(false)
                 }}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="appeal-form">
+                    <MyButton key="submit" htmlType="submit" onClick={() => onSubmit()}>
                         Отправить
                     </MyButton>,
                     <MyButton
@@ -49,17 +46,10 @@ const AppealModal = ({ open, setOpen, ID }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="appeal-form">
-                    <Form.Item
-                        label="Пожалуйста, напишите причину подачи завяления."
-                        name="appeal_text"
-                    >
-                        <Input.TextArea rows={6}></Input.TextArea>
-                    </Form.Item>
-                </Form>
+                Вы уверены?
             </Modal>
         </div>
     )
 }
 
-export default AppealModal
+export default CancelModal
