@@ -40,7 +40,7 @@ export const surveys = api.injectEndpoints({
         appealPost: build.mutation({
             query({ body, id }) {
                 return {
-                    url: `tester/result/${id}/appeal`,
+                    url: `tester/result/${id}/appeal/`,
                     method: 'POST',
                     body,
                 }

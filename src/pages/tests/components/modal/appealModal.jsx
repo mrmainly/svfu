@@ -1,27 +1,20 @@
 import React, { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
 import { Modal, Input, Typography, message, Form } from 'antd'
-import moment from 'moment'
 
-import { useGetSurveysIdQuery, useAppealPostMutation } from '../../../../services/SurveysService'
-import { Line, MyButton } from '../../../../components'
-import ROUTES from '../../../../routes'
+import { useAppealPostMutation } from '../../../../services/SurveysService'
+import { MyButton } from '../../../../components'
 
 const { Text } = Typography
 
 const AppealModal = ({ open, setOpen, ID }) => {
-    const success = () => {
-        Modal.success({
-            content: 'Аппеляция отправлена!',
-        })
-    }
     const [appealPost] = useAppealPostMutation()
-    const navigate = useNavigate()
     const [confirmModal, setConfirmModal] = useState(false)
     const onSubmit = (data) => {
         appealPost({ id: ID, body: data }).then((res) => {
             if (res.data) {
-                message.success('Квалификация создана')
+                Modal.success({
+                    content: 'Аппеляция отправлена!',
+                })
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])

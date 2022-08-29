@@ -6,7 +6,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 
 import { useGetTestResultsIDQuery } from '../../../src/services/SurveysService'
 import { Line } from '../../components'
-import AppealModal from './components/modal/appealModal'
+import AppealModal from './components/modal/AppealModal'
 import ROUTES from '../../routes'
 
 const { Text } = Typography
@@ -19,6 +19,7 @@ const TestResult = () => {
     let CERTIFICATION_RESULT = dataResult?.protocol?.find(
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
+    console.log('data2', dataResult)
     const navigate = useNavigate()
     if (isFetching) {
         return (
@@ -108,7 +109,12 @@ const TestResult = () => {
                 <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
                     Итоги аттестации
                 </Text>
-                <Button type="primary" danger onClick={() => setAppealModal(true)}>
+                <Button
+                    type="primary"
+                    disabled={dataResult?.appeal[0]?.status === 'WAITING' ? true : false}
+                    danger
+                    onClick={() => setAppealModal(true)}
+                >
                     Подать аппеляцию
                 </Button>
             </div>
