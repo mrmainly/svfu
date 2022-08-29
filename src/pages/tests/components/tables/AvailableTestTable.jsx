@@ -3,9 +3,9 @@ import { Table, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
-import { MyButton } from '../../../../components'
 import TestDetail from '../modal/detail'
 import ROUTES from '../../../../routes'
+import { testResultStatus } from '../../../../translation/StatusTranslation'
 
 const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
@@ -52,14 +52,7 @@ const AvailableTestTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'survey_status',
             key: 'survey_status',
-            render: (survey_status) =>
-                survey_status === 'WAITING'
-                    ? 'Ожидание'
-                    : survey_status === 'ON_REVIEW'
-                    ? 'На рассмотрении'
-                    : survey_status === 'REVIEWED'
-                    ? 'Рассмотрен'
-                    : 'Недоступно',
+            render: (survey_status) => testResultStatus(survey_status),
             filters: [
                 {
                     text: 'Ожидание',
