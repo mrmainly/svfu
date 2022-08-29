@@ -58,8 +58,6 @@ const UserApplicationsDetail = () => {
         setMode(e.target.value)
     }
 
-    console.log(data)
-
     return (
         <>
             <RejectModal open={openRejectModal} setOpen={setOpenRejectModal} id={params.id} />
