@@ -37,6 +37,15 @@ export const surveys = api.injectEndpoints({
                 }
             },
         }),
+        appealPost: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `tester/result/${id}/appeal/`,
+                    method: 'POST',
+                    body,
+                }
+            },
+        }),
         surveyPatch: build.mutation({
             query({ id }) {
                 return {
@@ -65,6 +74,7 @@ export const {
     useGetDirectionQuery,
     useGetSurveysIdQuery,
     useSurveyPostMutation,
+    useAppealPostMutation,
     useSurveyPatchMutation,
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,
