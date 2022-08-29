@@ -26,21 +26,23 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
     }, [dataList])
 
     const onSubmit = (data) => {
-        console.log('submurt', file)
-        // let formData = new FormData()
-        // formData.append('name', data.name)
-        // formData.append('doc_id', data.doc_id)
-        // formData.append('date_start', date_start.toISOString())
-        // formData.append('date_finish', date_finish.toISOString())
-        // formData.append('file', file, file.name)
-        // patchQualificationId({ id: data.doc_id, formData: formData }).then((res) => {
-        //     if (res.data) {
-        //         message.success('Документ изменен')
-        //         setOpen(false)
-        //     } else {
-        //         message.error(`error`)
-        //     }
-        // })
+        console.log(data)
+        let formData = new FormData()
+        formData.append('name', data.name)
+        formData.append('doc_id', data.doc_id)
+        formData.append('date_start', moment(date_start).format('YYYY-MM-DD'))
+        formData.append('date_finish', moment(date_finish).format('YYYY-MM-DD'))
+        if (data.file?.fileList) {
+            formData.append('file', data.file.fileList[0]?.originFileObj)
+        }
+
+        patchQualificationId({ id: data.doc_id, formData: formData }).then((res) => {
+            if (res.data) {
+                message.success('Документ изменен')
+            } else {
+                message.error('Вы не ввели обязательные поля')
+            }
+        })
     }
 
     function onChange(dates) {
@@ -48,11 +50,14 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
         setDate_finish(dates[1])
     }
 
-    const handleFile = (e) => {
-        setFile(e.file)
-    }
-
-    console.log(dataList)
+    const defualtFileList = [
+        {
+            uid: '-1',
+            name: 'Документ',
+            status: 'done',
+            url: `${dataList?.file}`,
+        },
+    ]
 
     const props = {
         beforeUpload: (file) => {
@@ -61,8 +66,9 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
             if (!isPDF) {
                 message.error(`${file.name} не является pdf файлом`)
                 return isPDF || Upload.LIST_IGNORE
+            } else if (file.fileList.length) {
+                message.error(`вы не`)
             }
-
             return false
         },
     }
@@ -151,23 +157,29 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                             size="large"
                         ></RangePicker>
                     </Form.Item>
-                    <div
+
+                    <Form.Item
                         style={{
                             display: 'flex',
                             alignItems: 'center',
                             marginTop: 20,
                         }}
+                        name="file"
+                        labelCol={{ span: 24 }}
+                        required
+                        label={
+                            <Text style={{ fontWeight: 600, fontSize: 16 }}>Загрузить файл:</Text>
+                        }
                     >
                         <Upload
                             {...props}
-                            listType=""
                             multiple={false}
                             maxCount={1}
-                            onChange={handleFile}
+                            defaultFileList={dataList?.file === null ? null : defualtFileList}
                         >
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload>
-                    </div>
+                    </Form.Item>
                 </Form>
             </Modal>
         </div>
