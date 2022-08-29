@@ -89,7 +89,7 @@ const UserApplicationsDetail = () => {
                         <BsArrowLeft
                             style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
                             onClick={() => {
-                                navigate(ROUTES.ADMIN_USERS)
+                                navigate(ROUTES.USER_APPLICATIONS)
                             }}
                         />
                         <span
