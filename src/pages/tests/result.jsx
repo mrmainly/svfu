@@ -1,17 +1,11 @@
 import React from 'react'
 import moment from 'moment'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Modal, Spin, Space, Typography, message } from 'antd'
-// import moment from 'moment'
+import { Spin, Space, Typography } from 'antd'
 import { BsArrowLeft } from 'react-icons/bs'
 
-import {
-    useGetSurveysIdQuery,
-    useSurveyPatchMutation,
-    useGetDirectionQuery,
-    useGetTestResultsIDQuery,
-} from '../../../src/services/SurveysService'
-import { Line, MyButton } from '../../components'
+import { useGetTestResultsIDQuery } from '../../../src/services/SurveysService'
+import { Line } from '../../components'
 import ROUTES from '../../routes'
 
 const { Text } = Typography
@@ -19,10 +13,9 @@ const { Text } = Typography
 const TestResult = () => {
     const params = useParams()
     const { data: dataResult, isFetching } = useGetTestResultsIDQuery({ id: params.id })
-    console.log('dataResult', dataResult)
-    let TEST_RESULT = dataResult?.protocol?.find((item) => item.type == 'TEST_RESULT')
+    let TEST_RESULT = dataResult?.protocol?.find((item) => item.type === 'TEST_RESULT')
     let CERTIFICATION_RESULT = dataResult?.protocol?.find(
-        (item) => item.type == 'CERTIFICATION_RESULT'
+        (item) => item.type === 'CERTIFICATION_RESULT'
     )
 
     const navigate = useNavigate()
@@ -56,7 +49,8 @@ const TestResult = () => {
         },
         {
             label: 'Итоговые балыы:',
-            value: 'dafhgfh',
+            value: `${dataResult?.first_part_score}/${dataResult?.max_score} (${dataResult?.tester_percent_score}%)`,
+            color: '#219653',
         },
         {
             label: 'Протокол о результатах тестирования:',
@@ -111,7 +105,7 @@ const TestResult = () => {
             {items.map((item, index) => (
                 <Space size="large" key={index} style={{ marginTop: index === 0 ? 0 : 15 }}>
                     <div style={{ width: 150, fontWeight: 600 }}>{item.label}</div>
-                    <Text>{item.value}</Text>
+                    <Text style={{ color: item.color }}>{item.value}</Text>
                 </Space>
             ))}
             <Line />
