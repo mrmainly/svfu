@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Spin, Space, Typography } from 'antd'
+import { Spin, Space, Typography, Button } from 'antd'
 import { BsArrowLeft } from 'react-icons/bs'
 
 import { useGetTestResultsIDQuery } from '../../../src/services/SurveysService'
 import { Line } from '../../components'
+import AppealModal from './components/modal/appealModal'
 import ROUTES from '../../routes'
 
 const { Text } = Typography
 
 const TestResult = () => {
     const params = useParams()
+    const [appealModal, setAppealModal] = useState(false)
     const { data: dataResult, isFetching } = useGetTestResultsIDQuery({ id: params.id })
     let TEST_RESULT = dataResult?.protocol?.find((item) => item.type === 'TEST_RESULT')
     let CERTIFICATION_RESULT = dataResult?.protocol?.find(
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
-
     const navigate = useNavigate()
     if (isFetching) {
         return (
@@ -41,11 +42,11 @@ const TestResult = () => {
         },
         {
             label: 'Тест был начат:',
-            value: moment(dataResult?.survey?.exam?.date_start).format('DD.MM.YYYY, hh:mm'),
+            value: moment(dataResult?.survey?.start_survey).format('DD.MM.YYYY, HH:mm'),
         },
         {
             label: 'Тест проверен:',
-            value: moment(dataResult?.survey?.finish_survey).format('DD.MM.YYYY, hh:mm'),
+            value: moment(dataResult?.finish_date).format('DD.MM.YYYY, HH:mm'),
         },
         {
             label: 'Итоговые балыы:',
@@ -54,18 +55,22 @@ const TestResult = () => {
         },
         {
             label: 'Протокол о результатах тестирования:',
-            value: (
-                <a href={TEST_RESULT.file} target="_blank">
+            value: TEST_RESULT ? (
+                <a href={TEST_RESULT?.file} target="_blank">
                     document.pdf
                 </a>
+            ) : (
+                'Протокол составляется'
             ),
         },
         {
             label: 'Протокол о результатах аттестации:',
-            value: (
-                <a href={CERTIFICATION_RESULT.file} target="_blank">
+            value: CERTIFICATION_RESULT ? (
+                <a href={CERTIFICATION_RESULT?.file} target="_blank">
                     document.pdf
                 </a>
+            ) : (
+                'Протокол составляется'
             ),
         },
     ]
@@ -99,30 +104,43 @@ const TestResult = () => {
                 </span>
             </div>
             <Line />
-            <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
-                Итоги аттестации
-            </Text>
+            <div style={{ display: 'flex', marginBottom: '16px', justifyContent: 'space-between' }}>
+                <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
+                    Итоги аттестации
+                </Text>
+                <Button type="primary" danger onClick={() => setAppealModal(true)}>
+                    Подать аппеляцию
+                </Button>
+            </div>
+            <AppealModal open={appealModal} setOpen={setAppealModal} ID={dataResult?.id} />
             {items.map((item, index) => (
                 <Space size="large" key={index} style={{ marginTop: index === 0 ? 0 : 15 }}>
-                    <div style={{ width: 150, fontWeight: 600 }}>{item.label}</div>
+                    <div style={{ fontWeight: 600 }}>{item.label}</div>
                     <Text style={{ color: item.color }}>{item.value}</Text>
                 </Space>
             ))}
             <Line />
             <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
-                Заключение теоретической части
+                Заключение председателя экспертов
             </Text>
             <Space size="large">
                 <div style={{ width: 150, fontWeight: 600 }}>Рекомендация:</div>
-                <Text>{dataResult?.main_expert_review_first_part}</Text>
+                <div>
+                    <Typography.Paragraph>
+                        {dataResult?.main_expert_review_first_part}
+                    </Typography.Paragraph>
+                    <Typography.Paragraph>
+                        {dataResult?.main_expert_review_second_part}
+                    </Typography.Paragraph>
+                </div>
             </Space>
             <Line />
             <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
-                Заключение практической части
+                Заключение председателя модераторов
             </Text>
             <Space size="large">
                 <div style={{ width: 150, fontWeight: 600 }}>Рекомендация:</div>
-                <Text>{dataResult?.main_expert_review_second_part}</Text>
+                <Text>{dataResult?.main_moderator_review}</Text>
             </Space>
         </div>
     )

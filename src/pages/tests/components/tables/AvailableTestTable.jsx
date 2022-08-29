@@ -8,10 +8,11 @@ import TestDetail from '../modal/detail'
 import ROUTES from '../../../../routes'
 
 const AvailableTestTable = ({ data, loading }) => {
+    console.log('dataResult', data)
+
     const navigate = useNavigate()
     const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
-    console.log('data', data)
     const columns = [
         {
             title: 'ID',
