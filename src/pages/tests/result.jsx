@@ -112,7 +112,7 @@ const TestResult = () => {
                     Итоги аттестации
                 </Text>
 
-                {dataResult?.appeal[dataResult?.appeal.length - 1]?.status === 'WAITING' ? (
+                {dataResult?.appeal[dataResult?.appeal?.length - 1]?.status === 'WAITING' ? (
                     <Button type="primary" danger onClick={() => setCancelModal(true)}>
                         Отменить аппеляцию
                     </Button>
