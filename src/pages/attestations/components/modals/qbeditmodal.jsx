@@ -65,12 +65,6 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         )
         setActive(dataList?.is_active)
     }, [dataList])
-    //   console.log('dataList', dataList)
-    //   console.log('img', img)
-    //  console.log('files', fileList)
-    //  console.log('deleted id', deletedId)
-    //  console.log('uploadFiles', uploadFiles)
-    //  console.log('radioId', radioId)
 
     const uploadButton = (
         <div>

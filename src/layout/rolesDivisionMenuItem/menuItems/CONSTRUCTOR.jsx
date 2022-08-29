@@ -16,14 +16,14 @@ const CONSTRUCTOR = (navigate) => {
                     onClick: () => navigate(ROUTES.ATTESTATION_QUALI),
                 },
                 {
-                    label: 'Банк тестирований',
-                    key: 'submenu-item-1-2',
-                    onClick: () => navigate(ROUTES.ATTESTATION_TESTS_BANK),
-                },
-                {
                     label: 'Банк вопросов',
                     key: 'submenu-item-1-3',
                     onClick: () => navigate(ROUTES.ATTESTATION_QUESTIONS_BANK),
+                },
+                {
+                    label: 'Банк тестирований',
+                    key: 'submenu-item-1-2',
+                    onClick: () => navigate(ROUTES.ATTESTATION_TESTS_BANK),
                 },
             ],
         },
