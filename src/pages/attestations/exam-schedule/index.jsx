@@ -17,7 +17,7 @@ const ExamSchedule = () => {
     return (
         <div>
             <MyButton style={{ marginBottom: 20 }} onClick={() => setModalEditES(true)}>
-                Создать группу
+                Назначить экзамен
             </MyButton>
             <ESAddModal open={modalEditES} setOpen={setModalEditES} />
             <ExamScheduleTable data={data?.results} loading={isFetching} />

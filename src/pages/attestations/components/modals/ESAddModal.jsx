@@ -1,11 +1,24 @@
-import { Modal, message, Input, Select, Form, Row, Col, InputNumber, DatePicker, Space } from 'antd'
+import {
+    Modal,
+    message,
+    Input,
+    Select,
+    Form,
+    Row,
+    Col,
+    InputNumber,
+    DatePicker,
+    Space,
+    Button,
+} from 'antd'
+import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import Item from 'antd/lib/list/Item'
 import moment from 'moment'
 import { MyButton } from '../../../../components'
 import {
     useGetDirectionTuterQuery,
     useGetTestGroupQuery,
-    useGetTestExamQuery,
+    useGetUnitQuery,
     useGetUsersRoleQuery,
     usePostTestExamMutation,
 } from '../../../../services/TutorService'
@@ -15,13 +28,11 @@ const { Option } = Select
 const ESAddModal = ({ open, setOpen, dataList }) => {
     const { data: dataTutor } = useGetDirectionTuterQuery()
     const { data: dataTestGroup } = useGetTestGroupQuery()
-    const { data: dataTestExam } = useGetTestExamQuery()
+    const { data: dataUnit } = useGetUnitQuery()
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [postTestExam] = usePostTestExamMutation()
     const onSubmit = (data) => {
-        console.log(data)
-
         postTestExam(data).then((res) => {
             if (res.data) {
                 message.success('Квалификация создана')
@@ -58,7 +69,16 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="es-form">
-                    <Form.Item required label="Квалификация" name="direction">
+                    <Form.Item
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожайлуста выберите квалификацию!',
+                            },
+                        ]}
+                        label="Квалификация"
+                        name="direction"
+                    >
                         <Select placeholder="Выберите тег">
                             {dataTutor?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
@@ -67,16 +87,34 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item required label="Тестирование" name="unit">
+                    <Form.Item
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожайлуста выберите тестирование!',
+                            },
+                        ]}
+                        label="Тестирование"
+                        name="unit"
+                    >
                         <Select placeholder="Выберите тег">
-                            {dataTestExam?.results.map((item, index) => (
+                            {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item required label="Группа аттестуемых" name="test_group">
+                    <Form.Item
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожайлуста выберите группу аттестуемых!',
+                            },
+                        ]}
+                        label="Группа аттестуемых"
+                        name="test_group"
+                    >
                         <Select placeholder="Выберите тег">
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
@@ -87,7 +125,16 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                     </Form.Item>
                     <Row gutter={[16, 0]}>
                         <Col span={12}>
-                            <Form.Item required label="Дата начала тестирования" name="date_start">
+                            <Form.Item
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Пожайлуста выберите дату начала тестирования!',
+                                    },
+                                ]}
+                                label="Дата начала тестирования"
+                                name="date_start"
+                            >
                                 <DatePicker
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
@@ -101,7 +148,12 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                required
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Пожайлуста выберите дату окончания тестирования!',
+                                    },
+                                ]}
                                 label="Дата окончания тестирования"
                                 name="date_finish"
                             >
@@ -117,7 +169,69 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Form.Item required label="Эксперт 1" name={['experts', 0]}>
+                    <Form.List name="experts">
+                        {(fields, { add, remove }) => (
+                            <>
+                                {fields.map(({ key, name, ...restField }) => (
+                                    <div
+                                        key={key}
+                                        style={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <Form.Item
+                                            label={`Эксперт ${key + 1} `}
+                                            name={key}
+                                            style={{ width: '100%', marginRight: 20 }}
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Пожайлуста выберите эксперта!',
+                                                },
+                                            ]}
+                                        >
+                                            <Select placeholder="Выберите тег">
+                                                {dataExpert?.results.map((item, index) => (
+                                                    <Option key={index} value={item.id}>
+                                                        {item.username}
+                                                    </Option>
+                                                ))}
+                                            </Select>
+                                        </Form.Item>
+                                        <DeleteTwoTone
+                                            twoToneColor="#EB5757"
+                                            onClick={() => remove(name)}
+                                        />
+                                    </div>
+                                ))}
+                                <Form.Item>
+                                    <Button
+                                        onClick={() => add()}
+                                        block
+                                        type="primary"
+                                        ghost
+                                        icon={<PlusOutlined />}
+                                        style={{ width: 'max-content' }}
+                                    >
+                                        Добавить эксперта
+                                    </Button>
+                                </Form.Item>
+                            </>
+                        )}
+                    </Form.List>
+                    <Form.Item
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожайлуста выберите председателя экспертов!',
+                            },
+                        ]}
+                        label="Председатель экспертов"
+                        name="main_expert"
+                    >
                         <Select placeholder="Выберите тег">
                             {dataExpert?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
@@ -126,61 +240,70 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item required label="Эксперт 2" name={['experts', 1]}>
-                        <Select placeholder="Выберите тег">
-                            {dataExpert?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.username}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item required label="Эксперт 3" name={['experts', 2]}>
-                        <Select placeholder="Выберите тег">
-                            {dataExpert?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.username}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item required label="Председатель экспертов" name="main_expert">
-                        <Select placeholder="Выберите тег">
-                            {dataExpert?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.username}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item required label="Модератор 1" name={['moderators', 0]}>
-                        <Select placeholder="Выберите тег">
-                            {dataModerator?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.username}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item required label="Модератор 2" name={['moderators', 1]}>
-                        <Select placeholder="Выберите тег">
-                            {dataModerator?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.username}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item required label="Модератор 3" name={['moderators', 2]}>
-                        <Select placeholder="Выберите тег">
-                            {dataModerator?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.username}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item required label="Председатель модераторов" name="main_moderator">
+                    <Form.List name="moderators">
+                        {(fields, { add, remove }) => (
+                            <>
+                                {fields.map(({ key, name, ...restField }) => (
+                                    <div
+                                        key={key}
+                                        style={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <Form.Item
+                                            label={`Модератор ${key + 1} `}
+                                            name={key}
+                                            style={{ width: '100%', marginRight: 20 }}
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Пожайлуста выберите модератора!',
+                                                },
+                                            ]}
+                                        >
+                                            <Select placeholder="Выберите тег">
+                                                {dataModerator?.results.map((item, index) => (
+                                                    <Option key={index} value={item.id}>
+                                                        {item.username}
+                                                    </Option>
+                                                ))}
+                                            </Select>
+                                        </Form.Item>
+                                        <DeleteTwoTone
+                                            twoToneColor="#EB5757"
+                                            onClick={() => remove(name)}
+                                        />
+                                    </div>
+                                ))}
+                                <Form.Item>
+                                    <Button
+                                        onClick={() => add()}
+                                        block
+                                        type="primary"
+                                        ghost
+                                        icon={<PlusOutlined />}
+                                        style={{ width: 'max-content' }}
+                                    >
+                                        Добавить модератора
+                                    </Button>
+                                </Form.Item>
+                            </>
+                        )}
+                    </Form.List>
+
+                    <Form.Item
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Пожайлуста выберите председателя модераторов!',
+                            },
+                        ]}
+                        label="Председатель модераторов"
+                        name="main_moderator"
+                    >
                         <Select placeholder="Выберите тег">
                             {dataModerator?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>

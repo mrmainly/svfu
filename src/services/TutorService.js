@@ -13,6 +13,20 @@ export const Tutor = api.injectEndpoints({
             query: () => `tutor/exam`,
             providesTags: ['TestGroup'],
         }),
+        patchTestExam: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `tutor/exam/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
+        getUnit: build.query({
+            query: () => `tutor/unit`,
+            providesTags: ['TestGroup'],
+        }),
         getTestGroupId: build.query({
             query: (id) => ({
                 url: `tutor/testgroup/${id}`,
@@ -102,6 +116,7 @@ export const Tutor = api.injectEndpoints({
 
 export const {
     useGetTestGroupQuery,
+    useGetUnitQuery,
     useGetDirectionTuterQuery,
     useGetTestGroupIdQuery,
     useGetApplicationQuery,
@@ -112,6 +127,7 @@ export const {
     useDeleteTesterGroupMutation,
     useGetApplicationIdQuery,
     useGetTestExamQuery,
+    usePatchTestExamMutation,
     useGetUsersRoleQuery,
     useGetCertifiedIdQuery,
     usePostAcceptApplicationMutation,
