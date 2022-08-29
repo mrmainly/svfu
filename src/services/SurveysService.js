@@ -8,8 +8,14 @@ export const surveys = api.injectEndpoints({
         getSurveys: build.query({
             query: () => `tester/survey/`,
         }),
+        getDirection: build.query({
+            query: () => `tester/direction/`,
+        }),
         getTestResults: build.query({
             query: ({ id }) => `tester/result/`,
+        }),
+        getTestResultsID: build.query({
+            query: ({ id }) => `tester/result/${id}`,
         }),
         getSurveysId: build.query({
             query: ({ id }) => `tester/survey/part-one/${id}`,
@@ -56,10 +62,12 @@ export const surveys = api.injectEndpoints({
 
 export const {
     useGetSurveysQuery,
+    useGetDirectionQuery,
     useGetSurveysIdQuery,
     useSurveyPostMutation,
     useSurveyPatchMutation,
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,
     useGetTestResultsQuery,
+    useGetTestResultsIDQuery,
 } = surveys
