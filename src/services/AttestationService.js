@@ -7,7 +7,7 @@ export const attestation = api.injectEndpoints({
             providesTags: ['Attestation'],
         }),
         getAttestationsQualification: build.query({
-            query: () => `constructor/direction/`,
+            query: (is_active) => `constructor/direction/?is_active=${is_active}`,
             providesTags: ['Attestation'],
         }),
         postAttestationsQualification: build.mutation({
@@ -63,6 +63,15 @@ export const attestation = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        putAttestationsTestsBankId: build.mutation({
+            query({ id }) {
+                return {
+                    url: `/constructor/unit/${id}`,
+                    method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
         getAttestationsQuestionsBank: build.query({
             query: () => `constructor/question/`,
             providesTags: ['Attestation'],
@@ -83,6 +92,15 @@ export const attestation = api.injectEndpoints({
                     url: `constructor/question/${id}`,
                     method: 'PATCH',
                     body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        putAttestationsQuestionBankId: build.mutation({
+            query({ id }) {
+                return {
+                    url: `/constructor/question/${id}`,
+                    method: 'PUT',
                 }
             },
             invalidatesTags: [{ type: 'Attestation' }],
@@ -169,10 +187,12 @@ export const {
     usePostAttestationsQuestionsBankImageMutation,
     usePostAttestationsQuestionsBankFileMutation,
     usePatchAttestationsTestsBankIdMutation,
+    usePutAttestationsTestsBankIdMutation,
     usePatchAttestationsQualificationIdMutation,
     usePatchAttestationsQuestionsBankMutation,
     usePatchAttestationsQuestionsBankImageMutation,
     usePatchAttestationsQuestionsAnswerMutation,
+    usePutAttestationsQuestionBankIdMutation,
     usePutAttestationsQualificationIdMutation,
     useDeleteAttestationsQuestionsBankFileMutation,
     useDeleteAttestationsQuestionsBankImageMutation,

@@ -30,7 +30,7 @@ const TBAddModal = ({ open, setOpen }) => {
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
     const [postAttestationsTestsBankMutation] = usePostAttestationsTestsBankMutation()
-    const { data, isLoading } = useGetAttestationsQualificationQuery()
+    const { data, isLoading } = useGetAttestationsQualificationQuery(true)
 
     const onSubmit = (data) => {
         const hhminuts =
@@ -74,7 +74,7 @@ const TBAddModal = ({ open, setOpen }) => {
                 }}
                 style={{ top: 0 }}
                 footer={[
-                    <MyButton key="submit" onFinish={onSubmit} htmlType="submit" form="tbadd-form">
+                    <MyButton key="submit" htmlType="submit" form="tbadd-form">
                         Сохранить
                     </MyButton>,
                     <MyButton
@@ -96,7 +96,14 @@ const TBAddModal = ({ open, setOpen }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="tbadd-form">
+                <Form
+                    layout="vertical"
+                    onFinish={onSubmit}
+                    id="tbadd-form"
+                    initialValues={{
+                        ['passing_percent_score']: 0,
+                    }}
+                >
                     <Form.Item required label="Название теста" name="name">
                         <Input placeholder="Название теста" />
                     </Form.Item>
@@ -196,11 +203,9 @@ const TBAddModal = ({ open, setOpen }) => {
                         <InputNumber
                             onChange={(value) => setPro(value)}
                             style={{ width: '100%' }}
-                            defaultValue="0"
                             min={0}
                             max={100}
                             formatter={(value) => `${value}%`}
-                            //parser?????
                         />
                     </Form.Item>
                     <Row gutter={[10, 10]}>

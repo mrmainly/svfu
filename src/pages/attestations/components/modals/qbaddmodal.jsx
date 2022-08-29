@@ -28,8 +28,8 @@ import {
 const { Option } = Select
 const { TextArea } = Input
 const QBAddModal = ({ open, setOpen }) => {
-    const { data: imageId } = useGetAttestationsQuestionsBankQuery()
-    const { data } = useGetAttestationsQualificationQuery()
+    //  const { data: imageId } = useGetAttestationsQuestionsBankQuery()
+    const { data } = useGetAttestationsQualificationQuery(true)
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')

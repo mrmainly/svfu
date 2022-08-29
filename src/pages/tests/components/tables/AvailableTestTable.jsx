@@ -8,10 +8,11 @@ import ROUTES from '../../../../routes'
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
 const AvailableTestTable = ({ data, loading }) => {
+    console.log('dataResult', data)
+
     const navigate = useNavigate()
     const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
-    console.log('data', data)
     const columns = [
         {
             title: 'ID',

@@ -12,9 +12,12 @@ import {
     message,
     Radio,
     Checkbox,
+    Space,
+    Switch,
+    Typography,
 } from 'antd'
 
-import { MinusCircleOutlined, PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
+import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
 import {
@@ -22,7 +25,7 @@ import {
     usePostAttestationsQuestionsBankFileMutation,
     usePostAttestationsQuestionsBankMutation,
     useGetAttestationsQualificationQuery,
-    useGetAttestationsQuestionsBankQuery,
+    usePutAttestationsQuestionBankIdMutation,
     usePatchAttestationsQuestionsBankMutation,
     usePatchAttestationsQuestionsBankImageMutation,
     useDeleteAttestationsQuestionsBankFileMutation,
@@ -41,6 +44,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
     const [fileList, setFileList] = useState(null)
     const [deletedId, setDeletedId] = useState([])
     const [uploadFiles, setUploadFiles] = useState([])
+    const [active, setActive] = useState()
     useEffect(() => {
         setFileList(null)
         setDeletedId([])
@@ -59,13 +63,8 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                     })
             )
         )
+        setActive(dataList?.is_active)
     }, [dataList])
-    //   console.log('dataList', dataList)
-    //   console.log('img', img)
-    //  console.log('files', fileList)
-    //  console.log('deleted id', deletedId)
-    //  console.log('uploadFiles', uploadFiles)
-    //  console.log('radioId', radioId)
 
     const uploadButton = (
         <div>
@@ -120,6 +119,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
     const [patchAttestationsQuestionsBank] = usePatchAttestationsQuestionsBankMutation()
     const [patchAttestationsQuestionsBankImage] = usePatchAttestationsQuestionsBankImageMutation()
     const [patchAttestationsQuestionsAnswer] = usePatchAttestationsQuestionsAnswerMutation()
+    const [putAttestationsQuestionBankId] = usePutAttestationsQuestionBankIdMutation()
     const [deleteFile] = useDeleteAttestationsQuestionsBankFileMutation()
     const [deleteImage] = useDeleteAttestationsQuestionsBankImageMutation()
     const onSubmit = (data) => {
@@ -180,6 +180,10 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             data.difficulty = 'DESCRIBE'
         }
 
+        if (dataList?.is_active !== active) {
+            putAttestationsQuestionBankId({ id: dataList?.id })
+        }
+
         patchAttestationsQuestionsBank({ id: dataList?.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Вопрос изменен')
@@ -191,6 +195,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
 
         setOpen(false)
     }
+
     return (
         <div>
             <Modal
@@ -238,11 +243,24 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                                 width: '100%',
                             }}
                         >
-                            {globalData?.results.map((item, index) => (
-                                <Option value={item.id} key={index}>
-                                    {item.name}
-                                </Option>
-                            ))}
+                            {globalData?.results
+                                ?.filter(
+                                    (dir) =>
+                                        dataList?.direction.includes(dir.id) &&
+                                        dir.is_active === false
+                                )
+                                .map((item) => (
+                                    <Option value={item.id} key={item.id} disabled>
+                                        {item.name}
+                                    </Option>
+                                ))}
+                            {globalData?.results
+                                .filter((item) => item.is_active)
+                                .map((item) => (
+                                    <Option value={item.id} key={item.id}>
+                                        {item.name}
+                                    </Option>
+                                ))}
                         </Select>
                     </Form.Item>
                     <Form.Item label="Тип вопроса" name="technique">
@@ -418,6 +436,17 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload>
                     ) : null}
+                    <Space align="baseline">
+                        <Form.Item>
+                            <Switch
+                                defaultChecked={active}
+                                onChange={(e) => {
+                                    setActive(e)
+                                }}
+                            />
+                        </Form.Item>
+                        <Typography>Активность квалификации</Typography>
+                    </Space>
                 </Form>
             </Modal>
         </div>
