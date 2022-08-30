@@ -25,7 +25,6 @@ const TheoreticalPart = () => {
     console.log(surveyquest)
 
     const onSubmitFurther = (data) => {
-        console.log(data)
         const postData = {
             answers: [],
         }
@@ -67,6 +66,17 @@ const TheoreticalPart = () => {
                         >
                             <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
                             <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
+                            {item?.question?.question_images[0]?.image && (
+                                <img
+                                    src={item?.question?.question_images[0]?.image}
+                                    style={{
+                                        height: 200,
+                                        width: 300,
+                                        objectFit: 'cover',
+                                        marginTop: 20,
+                                    }}
+                                />
+                            )}
                             {item.question.technique === 'ONE_CHOICE' ? (
                                 <>
                                     <Form.Item

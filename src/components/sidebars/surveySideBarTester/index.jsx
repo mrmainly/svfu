@@ -26,7 +26,6 @@ const SurveysSideBar = () => {
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
         setData(newData)
-        // setTimer(moment('10:00:00', 'HH:mm:ss').format('HH:mm:ss'))
         clearTimer(getDeadTime(newData?.time_exam))
     }, [localStorage.getItem('survey-datas')])
 
