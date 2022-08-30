@@ -32,7 +32,9 @@ const PracticalPart = () => {
     const onSubmitFurther = (data) => {
         console.log(data)
         let formData = new FormData()
-        formData.append('file', data.file.file.originFileObj)
+        if (data.file) {
+            formData.append('file', data.file.file.originFileObj)
+        }
         formData.append('q_id', practical_data.surveyquest[0].question.id)
         formData.append('describe', data.describe)
         postPracticalPart({
@@ -65,7 +67,7 @@ const PracticalPart = () => {
                         <Title level={4}>Практический вопрос</Title>
                         <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
 
-                        {item?.question?.question_images[0]?.image && (
+                        {item?.question?.question_images.length && (
                             <div style={{ display: 'flex', flexDirection: ' column' }}>
                                 {item?.question?.question_images.map((itemImage, index) => (
                                     <div
