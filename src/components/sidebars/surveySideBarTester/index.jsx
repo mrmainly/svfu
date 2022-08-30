@@ -114,6 +114,7 @@ const SurveysSideBar = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
                     <Text>
+                        0
                         {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
                             ''
                         ) : (

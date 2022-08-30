@@ -23,6 +23,8 @@ const PracticalPart = () => {
 
     const navigate = useNavigate()
 
+    console.log(practical_data)
+
     if (isLoading) {
         return <Spin />
     }
@@ -56,28 +58,65 @@ const PracticalPart = () => {
                     <div
                         key={index}
                         style={{
+                            display: 'flex',
                             flexDirection: 'column',
                         }}
                     >
                         <Title level={4}>Практический вопрос</Title>
                         <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
+
+                        {item?.question?.question_images[0]?.image && (
+                            <div style={{ display: 'flex', flexDirection: ' column' }}>
+                                {item?.question?.question_images.map((itemImage, index) => (
+                                    <div
+                                        key={index}
+                                        style={{
+                                            height: 150,
+                                            objectFit: 'cover',
+                                            marginTop: 20,
+                                            background: `url(${itemImage.image})`,
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundSize: 'contain',
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                        {item.question?.question_files?.length && (
+                            <div
+                                style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}
+                            >
+                                <Text>Прикрепленныe файлы:</Text>
+                                <div style={{ display: 'flex', marginTop: 10 }}>
+                                    {item.question.question_files.map((itemFile, index) => (
+                                        <a
+                                            href={itemFile.file}
+                                            target="_blank"
+                                            key={index}
+                                            style={{ marginLeft: index === 0 ? 0 : 10 }}
+                                        >
+                                            {decodeURI(itemFile.file).split('/')[5]}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                         <Form.Item
                             name="describe"
                             labelCol={{ span: 24 }}
                             label={<Text style={{ fontSize: 16 }}>Ответ:</Text>}
-                            style={{ marginTop: 20 }}
+                            style={{ marginTop: 10 }}
                             required
                         >
                             <TextArea style={{ height: 134 }} />
                         </Form.Item>
                         <Form.Item
-                            required
                             label={<Text style={{ fontSize: 16 }}>Загрузить файл:</Text>}
                             style={{ marginTop: 20 }}
                             labelCol={{ span: 24 }}
                             name="file"
                         >
-                            <Dragger action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
+                            <Dragger>
                                 <p className="ant-upload-drag-icon">
                                     <InboxOutlined />
                                 </p>

@@ -22,8 +22,6 @@ const TheoreticalPart = () => {
 
     const { surveyquest, id } = state
 
-    console.log(surveyquest)
-
     const onSubmitFurther = (data) => {
         const postData = {
             answers: [],
