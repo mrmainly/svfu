@@ -21,9 +21,11 @@ const SocialNetworks = ({ data }) => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Title level={4}>Социальные сети</Title>
+            <Title level={5} italic>
+                Социальные сети
+            </Title>
             {items.map((item, index) => (
-                <Space key={index} size="middle" style={{ marginTop: 12 }}>
+                <Space key={index} size="middle" style={{ marginTop: index === 0 ? 0 : 12 }}>
                     <div style={{ width: 200 }}>
                         <Text style={{ fontWeight: 600 }}>{item.label}</Text>
                     </div>

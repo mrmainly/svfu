@@ -30,7 +30,7 @@ const UserApplicationsDetail = () => {
     const navigate = useNavigate()
 
     const { data, isLoading } = useGetApplicationIdQuery(params.id)
-
+    console.log('data', data)
     const role =
         data?.user.role === 'ADMIN'
             ? 'Администратор'

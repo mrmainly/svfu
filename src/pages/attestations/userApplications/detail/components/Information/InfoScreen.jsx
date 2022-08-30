@@ -50,7 +50,7 @@ const InfoScreen = ({ data }) => {
         <div style={{ marginTop: 32 }}>
             {items.map((item, index) => (
                 <div key={index} style={{ marginTop: index === 0 ? 0 : 32 }}>
-                    <Title level={4} style={{ fontWeight: 600 }}>
+                    <Title level={5} italic style={{ fontWeight: 600 }}>
                         {item.label}
                     </Title>
                     <Text>{item.value === '' || item.value === null ? '-' : item.value}</Text>

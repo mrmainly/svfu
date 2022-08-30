@@ -35,8 +35,8 @@ const MainInfo = ({ data }) => {
             value: data.inn,
         },
         {
-            label: 'КПП:',
-            value: '',
+            label: 'СНИЛС:',
+            value: data.snils,
         },
     ]
 

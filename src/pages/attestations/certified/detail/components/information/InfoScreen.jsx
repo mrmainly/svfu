@@ -7,50 +7,50 @@ const InfoScreen = ({ data }) => {
     const items = [
         {
             label: 'Мои обязанности:',
-            value: '',
+            value: data?.my_responsibilities,
         },
         {
             label: 'Достижения и поощрения',
-            value: '',
+            value: data?.rewards,
         },
         {
             label: 'Научные интересы',
-            value: '',
+            value: data?.scientific_interests,
         },
         {
             label: 'Научные гранты',
-            value: '',
+            value: data?.scientific_grants,
         },
         {
             label: 'Проведение конференций',
-            value: '',
+            value: data?.holding_conferences,
         },
         {
             label: 'Участие в конференциях, симпозиумах',
-            value: '',
+            value: data?.participation_conferences,
         },
         {
             label: 'Почетные звания',
-            value: '',
+            value: data?.honoured_title,
         },
         {
             label: 'Научно-общественная деятельность',
-            value: '',
+            value: data?.ssa,
         },
         {
             label: 'Общий стаж работы',
-            value: '',
+            value: data?.total_experience,
         },
         {
             label: 'Стаж работы по специальности',
-            value: '',
+            value: data?.specialty_experience,
         },
     ]
     return (
         <div style={{ marginTop: 32 }}>
             {items.map((item, index) => (
                 <div key={index} style={{ marginTop: index === 0 ? 0 : 32 }}>
-                    <Title level={4} style={{ fontWeight: 600 }}>
+                    <Title italic level={5} style={{ fontWeight: 600 }}>
                         {item.label}
                     </Title>
                     <Text>{item.value === '' || item.value === null ? '-' : item.value}</Text>

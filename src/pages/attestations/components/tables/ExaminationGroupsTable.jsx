@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Button, Table } from 'antd'
 
+import { testResultStatus } from '../../../../translation/StatusTranslation'
+
 const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupId }) => {
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
@@ -10,6 +12,12 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupI
             dataIndex: 'direction',
             key: 'direction',
             render: (direction) => <div>{direction?.name}</div>,
+            filters: data?.map((item) => ({
+                text: item.direction.name,
+                value: item.direction.name,
+            })),
+
+            onFilter: (value, record) => record.direction?.name.indexOf(value) === 0,
         },
         {
             title: 'Количество аттестуемых',
@@ -21,6 +29,26 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupI
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
+            render: (exam_status) => testResultStatus(exam_status),
+            filters: [
+                {
+                    text: 'Ожидание',
+                    value: 'WAITING',
+                },
+                {
+                    text: 'На рассмотрении',
+                    value: 'ON_REVIEW',
+                },
+                {
+                    text: 'Рассмотрен',
+                    value: 'REVIEWED',
+                },
+                {
+                    text: 'Недоступно',
+                    value: 'UNAVAILABLE',
+                },
+            ],
+            onFilter: (value, record) => record.exam_status.indexOf(value) === 0,
         },
         {
             title: 'Действие',

@@ -4,27 +4,27 @@ import { Space, Typography } from 'antd'
 
 const { Text } = Typography
 
-const MainInfo = () => {
+const MainInfo = ({ data }) => {
     const items = [
         {
             label: 'ID:',
-            value: '',
+            value: data?.id,
         },
         {
             label: 'Фамилия:',
-            value: '',
+            value: data?.last_name,
         },
         {
             label: 'Имя:',
-            value: '',
+            value: data?.first_name,
         },
         {
             label: 'Отчество:',
-            value: '',
+            value: data?.patronymic,
         },
         {
             label: 'Электронная почта:',
-            value: '',
+            value: data?.email,
         },
         {
             label: 'Телефон:',
@@ -32,11 +32,11 @@ const MainInfo = () => {
         },
         {
             label: 'Инн:',
-            value: '',
+            value: data?.inn,
         },
         {
-            label: 'КПП:',
-            value: '',
+            label: 'СНИЛС:',
+            value: data?.snils,
         },
     ]
 

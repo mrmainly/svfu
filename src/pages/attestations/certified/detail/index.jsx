@@ -18,7 +18,6 @@ const CertifiedDetail = () => {
     const [qualificationData, setQualificationData] = useState([])
     const [mode, setMode] = useState('info')
     const { data, isLoading } = useGetCertifiedIdQuery({ id: params.id })
-
     const handleModeChange = (e) => {
         setMode(e.target.value)
     }
