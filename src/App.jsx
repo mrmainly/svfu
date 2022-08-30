@@ -43,6 +43,7 @@ import {
     AdminUsers,
     AdminUsersDetail,
     AdminExam,
+    Expert,
 } from './pages'
 
 function App() {
@@ -108,6 +109,7 @@ function App() {
                         path={ROUTES.THEORETICAL_PART_EXPERT}
                     />
                     <Route element={<PracticalPartExpert />} path={ROUTES.PRACTICAL_PART_EXPERT} />
+                    <Route element={<Expert />} path={ROUTES.EXPERT} />
                 </Route>
             </Routes>
         </BrowserRouter>

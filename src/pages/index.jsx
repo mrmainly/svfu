@@ -36,6 +36,7 @@ import LprExam from './attestations/exam-schedule/lpr-exam'
 import AdminUsers from './attestations/admin-users/list'
 import AdminUsersDetail from './attestations/admin-users/detail'
 import AdminExam from './attestations/exam-schedule/admin-exam'
+import Expert from './surveys/expert'
 
 export {
     Login,
@@ -76,4 +77,5 @@ export {
     AdminUsers,
     AdminUsersDetail,
     AdminExam,
+    Expert,
 }

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Layout, Menu, Divider } from 'antd'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
-import { BsCardChecklist, BsPeople } from 'react-icons/bs'
-import { HiOutlineDocumentText } from 'react-icons/hi'
 
 import ROUTES from '../routes'
 import MainLayout from './layouts/MainLayout'

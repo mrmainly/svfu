@@ -5,46 +5,25 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Line, MyButton } from '../../../../components'
 import { SurveysSlice } from '../../../../reducers/SurveysSlice'
-// import TheoreticalAnswerModal from './components/modals/TheoreticalAnswerModal'
 
 const { Text, Title } = Typography
 
 const TheoreticalPartExpert = () => {
-    const [openModal, setOpenModal] = useState(false)
-    const [postList, setPostList] = useState([])
-
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
 
     const location = useLocation()
-    const state = location.state
     const dispatch = useDispatch()
 
-    const { surveyquest, id } = state
+    const state = location.state
 
-    // const onSubmitFurther = (data) => {
-    //     console.log(data)
-    //     const postData = {
-    //         answers: [],
-    //     }
-    //     const abjArr = Object.entries(data)
-    //     abjArr.forEach(([key, value]) => {
-    //         if (Array.isArray(value)) {
-    //             value.forEach((item) => {
-    //                 postData.answers.push({ q_id: Number(key), a_id: item })
-    //             })
-    //         } else {
-    //             postData.answers.push({ q_id: Number(key), a_id: value })
-    //         }
-    //     })
-    //     setOpenModal(true)
-    //     setPostList(postData)
-    // }
+    const { surveyquest } = state
+
+    console.log(surveyquest)
 
     const sum = (question_id, array) => {
         const newArray = array
             .map((itemAnswer) => {
-                // const total_score = this.answer[index]
                 if (itemAnswer.question_id === question_id) return itemAnswer.score
             })
             .filter((element) => element != undefined)
@@ -54,12 +33,6 @@ const TheoreticalPartExpert = () => {
 
     return (
         <div>
-            {/* <TheoreticalAnswerModal
-                open={openModal}
-                setOpen={setOpenModal}
-                id={id}
-                postData={postList}
-            /> */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {surveyquest?.survey?.surveyquest.map((item, index) => (
                     <div

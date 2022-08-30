@@ -7,6 +7,10 @@ const initialState = {
     modalOpenStatus: false,
     postData: [],
     timeStatus: false,
+    expertTheoreticalPartModalOpen: false,
+    subscribeCodeModal: false,
+    conclusion_first_part: '',
+    conclusion_second_part: '',
 }
 
 export const SurveysSlice = createSlice({
@@ -30,6 +34,16 @@ export const SurveysSlice = createSlice({
         },
         changeTimeStatus(state, action) {
             state.timeStatus = action.payload
+        },
+        openExpertTheoreticalPartOpen(state, action) {
+            state.expertTheoreticalPartModalOpen = action.payload
+        },
+        openSubscribeModal(state, action) {
+            state.subscribeCodeModal = action.payload
+        },
+        setTextAnswerExpert(state, action) {
+            state.conclusion_first_part = action.payload[0]
+            state.conclusion_second_part = action.payload[1]
         },
     },
 })

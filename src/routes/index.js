@@ -40,6 +40,7 @@ const ROUTES = {
     LPR_EXAM: '/lpr-exam',
     ADMIN_USERS: '/admin-users',
     ADMIN_EXAM: '/admin-exam',
+    EXPERT: '/expert',
 }
 
 export default ROUTES

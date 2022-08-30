@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import { Typography, Button } from 'antd'
+import { useNavigate, useLocation } from 'react-router-dom'
+
+import AnswerTheoreticalPartExpertModal from '../../../pages/surveys/expert/components/modals/AnswerTheoreticalPartExpertModal'
+import VerificationSubscribeModal from '../../../pages/surveys/expert/components/modals/VerificationSubscribeModal'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
+import ROUTES from '../../../routes'
 
 import '../surveySideBar.css'
 
@@ -12,8 +17,11 @@ const SurveysSideBar = () => {
     const [data, setData] = useState([])
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex, changeTimeStatus } = SurveysSlice.actions
+    const { handleArrayIndex, openExpertTheoreticalPartOpen } = SurveysSlice.actions
+
+    const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation()
 
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('side_bar_data_expert'))
@@ -39,6 +47,8 @@ const SurveysSideBar = () => {
 
     return (
         <div style={{ marginLeft: 28 }}>
+            <AnswerTheoreticalPartExpertModal id={data.id} />
+            <VerificationSubscribeModal id={data.id} />
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div
                 className="root"
@@ -66,9 +76,20 @@ const SurveysSideBar = () => {
                                                   ? 'white'
                                                   : colorSwitchDanger(item.question.id),
                                           borderColor: colorSwitchDanger(item.question.id),
-                                          cursor: 'pointer',
+                                          opacity:
+                                              location.pathname === ROUTES.PRACTICAL_PART_EXPERT
+                                                  ? 0.6
+                                                  : 1,
+                                          cursor:
+                                              location.pathname === ROUTES.PRACTICAL_PART_EXPERT
+                                                  ? 'text'
+                                                  : 'pointer',
                                       }}
-                                      onClick={() => dispatch(handleArrayIndex(index))}
+                                      onClick={() =>
+                                          location.pathname === ROUTES.PRACTICAL_PART_EXPERT
+                                              ? ''
+                                              : dispatch(handleArrayIndex(index))
+                                      }
                                   >
                                       {index + 1}
                                   </div>
@@ -76,32 +97,14 @@ const SurveysSideBar = () => {
                             : ''}
                     </div>
                 </div>
-                <div style={{ marginLeft: 8 }}>
-                    <Button
-                        type="default"
-                        style={{
-                            borderColor: '#0D6EFD',
-                            color: ' #0D6EFD',
-                            width: '100%',
-                            borderRadius: 3,
-                        }}
-                        size="large"
-                        htmlType="submit"
-                        form="my-form"
-                        className="theoretical-form-button"
-                    >
-                        Заключение
-                    </Button>
-                    <div
-                        style={{
-                            width: '100%',
-                            background: '#E6E6E6',
-                            height: 1,
-                            marginTop: 12,
-                            marginBottom: 12,
-                        }}
-                    />
-                    <Text>Практическая часть:</Text>
+            </div>
+            <div className="time-block" style={{ marginTop: 12 }}>
+                <div>
+                    <Text>
+                        {location.pathname === ROUTES.PRACTICAL_PART_EXPERT
+                            ? 'Теоретическая часть'
+                            : 'Практическая часть:'}
+                    </Text>
                     <Button
                         type="default"
                         style={{
@@ -112,11 +115,21 @@ const SurveysSideBar = () => {
                             marginTop: 5,
                         }}
                         size="large"
-                        htmlType="submit"
-                        form="my-form"
-                        className="theoretical-form-button"
+                        onClick={() =>
+                            navigate(
+                                location.pathname === ROUTES.PRACTICAL_PART_EXPERT
+                                    ? ROUTES.THEORETICAL_PART_EXPERT
+                                    : ROUTES.PRACTICAL_PART_EXPERT,
+                                {
+                                    state: {
+                                        surveyquest: data,
+                                        id: data.id,
+                                    },
+                                }
+                            )
+                        }
                     >
-                        Заключение
+                        Перейти
                     </Button>
                 </div>
             </div>
@@ -130,9 +143,7 @@ const SurveysSideBar = () => {
                     borderRadius: 3,
                 }}
                 size="large"
-                htmlType="submit"
-                form="my-form"
-                className="theoretical-form-button"
+                onClick={() => dispatch(openExpertTheoreticalPartOpen(true))}
             >
                 Завершить экспертизу
             </Button>

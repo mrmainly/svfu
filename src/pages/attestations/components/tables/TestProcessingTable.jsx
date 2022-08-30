@@ -2,7 +2,7 @@ import moment from 'moment'
 import { useState } from 'react'
 import TBEditModal from '../modals/tbeditmodal'
 import Table from 'antd/lib/table'
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../routes'
 
@@ -70,7 +70,7 @@ const TestProcessingTable = ({ data, loading }) => {
                         <Button
                             type="primary"
                             onClick={() => {
-                                navigate(ROUTES.THEORETICAL_PART_EXPERT, {
+                                navigate(ROUTES.EXPERT, {
                                     state: {
                                         surveyquest: record,
                                         id: record.id,
