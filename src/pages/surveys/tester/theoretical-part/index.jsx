@@ -65,15 +65,21 @@ const TheoreticalPart = () => {
                             <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
                             <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
                             {item?.question?.question_images[0]?.image && (
-                                <img
-                                    src={item?.question?.question_images[0]?.image}
-                                    style={{
-                                        height: 200,
-                                        width: 300,
-                                        objectFit: 'cover',
-                                        marginTop: 20,
-                                    }}
-                                />
+                                <div style={{ display: 'flex', flexDirection: ' column' }}>
+                                    {item?.question?.question_images.map((itemImage, index) => (
+                                        <div
+                                            key={index}
+                                            style={{
+                                                height: 150,
+                                                objectFit: 'cover',
+                                                marginTop: 20,
+                                                background: `url(${itemImage.image})`,
+                                                backgroundRepeat: 'no-repeat',
+                                                backgroundSize: 'contain',
+                                            }}
+                                        />
+                                    ))}
+                                </div>
                             )}
                             {item.question.technique === 'ONE_CHOICE' ? (
                                 <>
