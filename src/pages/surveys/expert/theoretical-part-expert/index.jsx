@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Typography, Radio, Space, Checkbox, Form } from 'antd'
+import { Typography, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Line, MyButton } from '../../../../components'
@@ -40,6 +40,18 @@ const TheoreticalPartExpert = () => {
     //     setOpenModal(true)
     //     setPostList(postData)
     // }
+
+    const sum = (question_id, array) => {
+        const newArray = array
+            .map((itemAnswer) => {
+                // const total_score = this.answer[index]
+                if (itemAnswer.question_id === question_id) return itemAnswer.score
+            })
+            .filter((element) => element != undefined)
+            .reduce((prev, curr) => prev + curr, 0)
+        return newArray
+    }
+
     return (
         <div>
             {/* <TheoreticalAnswerModal
@@ -109,13 +121,21 @@ const TheoreticalPartExpert = () => {
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <Space>
                                 <Text>Ответ аттестуемого:</Text>
-                                <Text style={{ fontWeight: 'bold' }}>Вариант 2</Text>
+                                {surveyquest.answers_first_part.map((itemAnswer, index) => {
+                                    if (itemAnswer.question_id === item.question.id)
+                                        return (
+                                            <Text style={{ fontWeight: 'bold' }} key={index}>
+                                                {itemAnswer.answer}
+                                            </Text>
+                                        )
+                                })}
                             </Space>
                             <Space style={{ marginTop: 10 }}>
                                 <Text>Балл:</Text>
-                                <Text style={{ fontWeight: 'bold' }}>4</Text>
+                                {sum(item.question.id, surveyquest.answers_first_part)}
                             </Space>
                         </div>
+
                         <Line />
                         <div
                             style={{

@@ -20,6 +20,23 @@ const SurveysSideBar = () => {
         setData(newData)
     }, [localStorage.getItem('side_bar_data_expert')])
 
+    const colorSwitchDanger = (id) => {
+        const newData = data.answers_first_part
+            .map((itemAnswer) => {
+                if (itemAnswer.question_id === id) {
+                    return itemAnswer.score
+                }
+            })
+            .filter((element) => element != undefined)
+            .reduce((prev, curr) => prev + curr, 0)
+
+        if (newData === 0) {
+            return '#FE5860'
+        } else {
+            return '#2f80ed'
+        }
+    }
+
     return (
         <div style={{ marginLeft: 28 }}>
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
@@ -40,8 +57,16 @@ const SurveysSideBar = () => {
                                       key={index}
                                       className="circul"
                                       style={{
-                                          background: arrayIndex === index ? '#2f80ed' : 'white',
-                                          color: arrayIndex === index ? 'white' : '#2f80ed',
+                                          background:
+                                              arrayIndex === index
+                                                  ? colorSwitchDanger(item.question.id)
+                                                  : 'white',
+                                          color:
+                                              arrayIndex === index
+                                                  ? 'white'
+                                                  : colorSwitchDanger(item.question.id),
+                                          borderColor: colorSwitchDanger(item.question.id),
+                                          cursor: 'pointer',
                                       }}
                                       onClick={() => dispatch(handleArrayIndex(index))}
                                   >
