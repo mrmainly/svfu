@@ -21,7 +21,7 @@ export const profile = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Profile' }],
         }),
-        profilePostImage: build.mutation({
+        profilePostPhoto: build.mutation({
             query(body) {
                 return {
                     url: `users/photo/`,
@@ -33,4 +33,4 @@ export const profile = api.injectEndpoints({
     }),
 })
 
-export const { useGetProfileQuery, useProfilePatchMutation, useProfilePostImageMutation } = profile
+export const { useGetProfileQuery, useProfilePatchMutation, useProfilePostPhotoMutation } = profile

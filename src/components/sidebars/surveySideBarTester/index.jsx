@@ -26,7 +26,7 @@ const SurveysSideBar = () => {
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
         setData(newData)
-        setTimer(moment(newData?.time_exam, 'mm:ss').format('mm:ss'))
+        // setTimer(moment('10:00:00', 'HH:mm:ss').format('HH:mm:ss'))
         clearTimer(getDeadTime(newData?.time_exam))
     }, [localStorage.getItem('survey-datas')])
 
@@ -34,18 +34,21 @@ const SurveysSideBar = () => {
         const total = Date.parse(e) - Date.parse(new Date())
         const seconds = Math.floor((total / 1000) % 60)
         const minutes = Math.floor((total / 1000 / 60) % 60)
+        const hours = Math.floor((total / 1000 / 60 / 60) % 24)
         return {
             total,
             minutes,
             seconds,
+            hours,
         }
     }
 
     const startTimer = (e) => {
-        let { total, minutes, seconds } = getTimeRemaining(e)
+        let { total, minutes, seconds, hours } = getTimeRemaining(e)
         if (total >= 0) {
             setTimer(
-                (minutes > 9 ? minutes : '0' + minutes) +
+                (hours === 0 ? '' : hours > 9 ? hours : '0' + hours + ':') +
+                    (minutes > 9 ? minutes : '0' + minutes) +
                     ':' +
                     (seconds > 9 ? seconds : '0' + seconds)
             )
@@ -73,7 +76,7 @@ const SurveysSideBar = () => {
         dispatch(changeTimeStatus(true))
     }
 
-    timer == '00:00' && TimerIsAp()
+    timer == '00:00:00' && TimerIsAp()
 
     return (
         <div style={{ marginLeft: 28 }}>
@@ -111,7 +114,14 @@ const SurveysSideBar = () => {
             <div className="time-block">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
-                    <Text>{data.time_exam}:00</Text>
+                    <Text>
+                        {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
+                            ''
+                        ) : (
+                            <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
+                        )}
+                        {moment.duration(data.time_exam, 'minutes').minutes()}:00
+                    </Text>
                 </div>
                 <div
                     style={{
@@ -121,7 +131,18 @@ const SurveysSideBar = () => {
                     }}
                 >
                     <Text>Осталось:</Text>
-                    <Text>{timer}</Text>
+                    {timer === 0 ? (
+                        <Text>
+                            {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
+                                ''
+                            ) : (
+                                <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
+                            )}
+                            {moment.duration(data.time_exam, 'minutes').minutes()}:00
+                        </Text>
+                    ) : (
+                        <Text>{timer}</Text>
+                    )}
                 </div>
             </div>
             {/* <Button onClick={onClickReset}>asd</Button> */}

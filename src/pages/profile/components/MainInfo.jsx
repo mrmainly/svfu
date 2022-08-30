@@ -2,13 +2,13 @@ import React from 'react'
 import { Typography, Space, Form, Upload } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
-import { useProfilePostImageMutation } from '../../../services/ProfileService'
+import { useProfilePostPhotoMutation } from '../../../services/ProfileService'
 
 const { Text } = Typography
 
 const MainInfo = ({ data }) => {
     const [image, setImage] = React.useState('')
-    const [profilePostImage] = useProfilePostImageMutation()
+    const [profilePostImage] = useProfilePostPhotoMutation()
 
     const uploadButton = (
         <div>
@@ -26,14 +26,13 @@ const MainInfo = ({ data }) => {
     // };
 
     const handleImageChange = (e) => {
-        if (e.file.status === 'done') {
-            const image = e.file.originFileObj
-            let formData = new FormData()
-            formData.append('photo', image)
-            profilePostImage(formData).then((res) => {
-                console.log(res)
-            })
-        }
+        console.log(e)
+        const image = e.file.originFileObj
+        let formData = new FormData()
+        formData.append('photo', image)
+        profilePostImage(formData).then((res) => {
+            console.log(res)
+        })
     }
 
     const items = [
@@ -87,7 +86,6 @@ const MainInfo = ({ data }) => {
                     <Text style={{ fontWeight: 600 }}>Фотография:</Text>
                 </div>
                 <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
                     multiple={false}
                     maxCount={1}
