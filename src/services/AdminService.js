@@ -6,6 +6,10 @@ export const Admin = api.injectEndpoints({
             query: () => `admin/admin/users/`,
             providesTags: ['Admin'],
         }),
+        getRole: build.query({
+            query: ({ role }) => `admin/admin/users/?role=${role}`,
+            providesTags: ['Admin'],
+        }),
         getUserId: build.query({
             query: ({ id }) => `admin/admin/users/${id}`,
             providesTags: ['Admin'],
@@ -30,6 +34,16 @@ export const Admin = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Admin' }],
         }),
+        patchExam: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `admin/admin/exam/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Admin' }],
+        }),
         putUser: build.mutation({
             query({ id }) {
                 return {
@@ -43,14 +57,21 @@ export const Admin = api.injectEndpoints({
             query: () => `admin/admin/exam/`,
             providesTags: ['Admin'],
         }),
+        getAdminExamID: build.query({
+            query: ({ id }) => `admin/admin/exam/${id}`,
+            providesTags: ['Admin'],
+        }),
     }),
 })
 
 export const {
     useGetUsersQuery,
+    useGetRoleQuery,
     useGetUserIdQuery,
     usePostUserMutation,
     usePatchUserMutation,
+    usePatchExamMutation,
     usePutUserMutation,
     useGetAdminExamQuery,
+    useGetAdminExamIDQuery,
 } = Admin

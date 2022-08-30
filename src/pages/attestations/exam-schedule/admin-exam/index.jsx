@@ -186,7 +186,7 @@ const AdminExam = () => {
     return (
         <div>
             <Table dataSource={data?.results} loading={isFetching} columns={columns} rowKey="id" />
-            <AdminExamModal open={open} setOpen={setOpen} data={modalData} />
+            <AdminExamModal open={open} setOpen={setOpen} dataList={modalData} />
         </div>
     )
 }

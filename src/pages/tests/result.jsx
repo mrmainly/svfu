@@ -22,7 +22,6 @@ const TestResult = () => {
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
     const navigate = useNavigate()
-    console.log('dataResult', dataResult)
     if (isFetching) {
         return (
             <div
