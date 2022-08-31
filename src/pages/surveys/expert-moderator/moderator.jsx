@@ -19,6 +19,7 @@ const Moderator = () => {
     const { id } = state
 
     const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
+
     const info = [
         {
             title: 'Заключение по теоретической части',
@@ -35,7 +36,6 @@ const Moderator = () => {
             },
         },
     ]
-    console.log(surveyquest)
     if (isLoading) {
         return (
             <div

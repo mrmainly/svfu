@@ -11,7 +11,7 @@ import { uaStatus } from '../../../../../translation/StatusTranslation'
 
 const AppealTable = ({ data, loading }) => {
     const navigate = useNavigate()
-    console.log('at', data)
+    console.log(data)
     const columns = [
         {
             title: 'ID',
@@ -63,7 +63,7 @@ const AppealTable = ({ data, loading }) => {
                             })
                             localStorage.setItem(
                                 'side_bar_data_ex_mo',
-                                JSON.stringify(record, null, '\t')
+                                JSON.stringify(record.result, null, '\t')
                             )
                         }}
                     >

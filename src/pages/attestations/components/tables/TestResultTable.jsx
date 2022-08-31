@@ -13,7 +13,6 @@ const TestResultTable = ({ data, loading }) => {
     const [modalEditTB, setModalEditTB] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
         {
@@ -25,6 +24,14 @@ const TestResultTable = ({ data, loading }) => {
             title: 'ID аттестуемого',
             dataIndex: 'user',
             key: 'user',
+        },
+        {
+            title: 'Роль',
+            dataIndex: 'main_moderator',
+            key: 'main_moderator',
+            render: (main_moderator) => (
+                <div>{main_moderator ? 'Предеседатель модераторов' : 'Модератор'}</div>
+            ),
         },
         {
             title: 'Дата выдачи теста',

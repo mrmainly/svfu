@@ -5,6 +5,7 @@ import TheoreticalPartExMo from './components/parts/theoretical_part_exmo'
 import PracticalPartExMo from './components/parts/practical_part_exmo'
 import AnswerExpertModal from './components/modals/AnswerExpertModal'
 import AnswerModeratorModal from './components/modals/AnswerModeratorModal'
+import AppealModeratorModal from './components/modals/AppealModeratorModal'
 import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
 
 const SurveysPart = () => {
@@ -12,13 +13,15 @@ const SurveysPart = () => {
 
     const state = location.state
 
-    const { surveyquest, id } = state
+    const { surveyquest, id, appeal } = state
     const { part } = useSelector((state) => state.survey_slice)
     const role = JSON.parse(localStorage.getItem('role'))
-
+    console.log(surveyquest)
     return (
         <div>
-            {role === 'MODERATOR' ? (
+            {role === 'MODERATOR' && appeal ? (
+                <AppealModeratorModal id={id} surveyquest={surveyquest} />
+            ) : role === 'MODERATOR' ? (
                 <AnswerModeratorModal id={id} surveyquest={surveyquest} />
             ) : (
                 <AnswerExpertModal
