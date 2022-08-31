@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Checkbox, message } from 'antd'
+import { Button, Modal, Form, Input, Checkbox, message, Select, Typography, Divider } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
@@ -7,7 +7,7 @@ import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertSe
 
 const { TextArea } = Input
 
-const AnswerTheoreticalPartExpertModal = ({ id }) => {
+const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
     const [subscribe, setSubscribe] = useState(false)
 
     const [sendSubscribeExpert] = useSendSubscribeExpertMutation()
@@ -19,7 +19,7 @@ const AnswerTheoreticalPartExpertModal = ({ id }) => {
     const dispatch = useDispatch()
 
     const onFinishSubmit = (data) => {
-        dispatch(setTextAnswerExpert([data.conclusion_first_part, data.conclusion_second_part]))
+        dispatch(setTextAnswerExpert([data.estimate, data.conclusion]))
         sendSubscribeExpert({ id: id }).then((res) => {
             if (res.data) {
                 dispatch(openExpertTheoreticalPartOpen(false))
@@ -74,28 +74,69 @@ const AnswerTheoreticalPartExpertModal = ({ id }) => {
                     </Button>,
                 ]}
             >
+                <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
+                    Заключение председателя экспертов по теоретической части
+                </Typography>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '10px',
+                        marginTop: '12px',
+                    }}
+                >
+                    <Typography>Дата проверки:</Typography>
+                    <Typography>?????????</Typography>
+                </div>
+                <div
+                    style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
+                >
+                    <Typography>Рекомендация:</Typography>
+                    <Typography>{surveyquest.main_expert_review_first_part}</Typography>
+                </div>
+                <Divider />
+                <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
+                    Заключение председателя экспертов по практической части
+                </Typography>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '10px',
+                        marginTop: '12px',
+                    }}
+                >
+                    <Typography>Дата проверки:</Typography>
+                    <Typography>????????????????????</Typography>
+                </div>
+                <div
+                    style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
+                >
+                    <Typography>Рекомендация:</Typography>
+                    <Typography>{surveyquest.main_expert_review_second_part}</Typography>
+                </div>
+                <Divider />
                 <Form id="form-expert-theoretical-part" onFinish={onFinishSubmit}>
-                    <Form.Item
-                        required
-                        label="Заключение по теоретической части"
-                        labelCol={{ span: 24 }}
-                        name="conclusion_first_part"
-                    >
-                        <TextArea
-                            placeholder="Напишите заключение по теоретической части"
-                            style={{ height: 200 }}
-                        />
+                    <Form.Item required label="Аттестация" labelCol={{ span: 24 }} name="estimate">
+                        <Select>
+                            <Select.Option value="WAITING">Ожидание</Select.Option>
+                            <Select.Option value="CERTIFIED">Aттестован</Select.Option>
+                            <Select.Option value="CERTIFIED_WITH_ENCOURAGEMENT">
+                                Аттестован с поощрением
+                            </Select.Option>
+                            <Select.Option value="CERTIFIED_UNDER_CERTAIN_CONDITIONS">
+                                Аттестован при определенных условиях
+                            </Select.Option>
+                            <Select.Option value="NOT_CERTIFIED ">Не аттестован</Select.Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item
                         required
-                        label="Заключение по практической части"
+                        label="Рекомендация"
                         labelCol={{ span: 24 }}
-                        name="conclusion_second_part"
+                        name="conclusion"
                     >
-                        <TextArea
-                            placeholder="Напишите заключение по теоретической части"
-                            style={{ height: 200 }}
-                        />
+                        <TextArea placeholder="Рекомендация" style={{ height: 200 }} />
                     </Form.Item>
                 </Form>
                 <Checkbox onChange={onChange}>Подписать протокол</Checkbox>

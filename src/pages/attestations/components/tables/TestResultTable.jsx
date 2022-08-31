@@ -68,7 +68,7 @@ const TestResultTable = ({ data, loading }) => {
                     <Button
                         type="primary"
                         onClick={() => {
-                            navigate(ROUTES.EXPERT, {
+                            navigate(ROUTES.MODERATOR, {
                                 state: {
                                     id: record.id,
                                 },
