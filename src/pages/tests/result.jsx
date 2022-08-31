@@ -21,7 +21,6 @@ const TestResult = () => {
     let CERTIFICATION_RESULT = dataResult?.protocol?.find(
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
-
     const navigate = useNavigate()
 
     if (isFetching) {

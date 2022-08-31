@@ -48,6 +48,7 @@ import {
     AttestedAppeal,
     ModeratorTestResult,
     SurveysPart,
+    ModeratorAppeal,
 } from './pages'
 
 function App() {
@@ -119,6 +120,7 @@ function App() {
                     <Route element={<Expert />} path={ROUTES.EXPERT} />
                     <Route element={<Moderator />} path={ROUTES.MODERATOR} />
                     <Route element={<ModeratorTestResult />} path={ROUTES.MODERATOR_TEST_RESULT} />
+                    <Route element={<ModeratorAppeal />} path={ROUTES.MODERATOR_APPEAL} />
                     <Route element={<AttestedAppeal />} path={ROUTES.ATTESTED_APPEAL} />
                     <Route element={<SurveysPart />} path={ROUTES.SURVEYS_PART} />
                 </Route>

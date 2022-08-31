@@ -42,6 +42,7 @@ const ROUTES = {
     ADMIN_EXAM: '/admin-exam',
     EXPERT: '/expert',
     MODERATOR: '/moderator',
+    MODERATOR_APPEAL: '/moderator-appeal',
     MODERATOR_TEST_RESULT: '/moderator-test-result',
     ATTESTED_APPEAL: '/attested-appeal',
     SURVEYS_PART: '/surveys-part',
