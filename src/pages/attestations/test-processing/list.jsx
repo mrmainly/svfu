@@ -5,6 +5,8 @@ import { useGetTestProcessingQuery } from '../../../services/TestProcessingServi
 const TestProcessing = () => {
     const { data, isLoading } = useGetTestProcessingQuery()
 
+    console.log(data)
+
     return (
         <div>
             <TestProcessingTable data={data?.results} loading={isLoading} />

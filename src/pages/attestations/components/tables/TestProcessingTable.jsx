@@ -24,6 +24,14 @@ const TestProcessingTable = ({ data, loading }) => {
             key: 'user',
         },
         {
+            title: 'Роль',
+            dataIndex: 'main_expert',
+            key: 'main_expert',
+            render: (main_expert) => (
+                <div>{main_expert ? 'Предеседатель экспертов' : 'Эксперт'}</div>
+            ),
+        },
+        {
             title: 'Дата выдачи теста',
             dataIndex: 'exam_date_start',
             key: 'exam_date_start',
