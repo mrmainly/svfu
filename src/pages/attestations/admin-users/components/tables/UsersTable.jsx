@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { SearchOutlined } from '@ant-design/icons'
 import Table from 'antd/lib/table'
@@ -8,9 +9,12 @@ import { Button, Input, Space } from 'antd'
 import { useGetUsersQuery } from '../../../../../services/AdminService'
 import UserAddModal from '../modals/UserAddModal'
 import { MyButton } from '../../../../../components'
+import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'
 import ROUTES from '../../../../../routes'
 
 const UsersTable = () => {
+    const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [modalNewUser, setModalNewUser] = useState(false)
     const [searchText, setSearchText] = useState('')
@@ -174,7 +178,15 @@ const UsersTable = () => {
                 <Button
                     type="primary"
                     onClick={() => {
-                        navigate(ROUTES.ADMIN_USERS + `/${id}`)
+                        navigate(ROUTES.ADMIN_USERS_DETAIL + `/${id}`)
+                        dispatch(handlePath(ROUTES.ADMIN_USERS))
+                        dispatch(handleRole(data?.results.filter((item) => item.id === id)[0].role))
+                        dispatch(
+                            handleFullName(
+                                data?.results.filter((item) => item.id === id)[0].full_name
+                            )
+                        )
+                        dispatch(handleCurrentPath(ROUTES.ADMIN_USERS_DETAIL + `/${id}`))
                     }}
                 >
                     Перейти
@@ -185,7 +197,12 @@ const UsersTable = () => {
 
     return (
         <>
-            <MyButton style={{ marginBottom: '12px' }} onClick={() => setModalNewUser(true)}>
+            <MyButton
+                style={{ marginBottom: '12px' }}
+                onClick={() => {
+                    setModalNewUser(true)
+                }}
+            >
                 Создать пользователя
             </MyButton>
             <UserAddModal open={modalNewUser} setOpen={setModalNewUser} />

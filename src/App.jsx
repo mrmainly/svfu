@@ -87,7 +87,10 @@ function App() {
                     <Route element={<UsersList />} path={ROUTES.USERS} />
                     <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />
                     <Route element={<AdminUsers />} path={ROUTES.ADMIN_USERS} />
-                    <Route element={<AdminUsersDetail />} path={ROUTES.ADMIN_USERS + '/:id'} />
+                    <Route
+                        element={<AdminUsersDetail />}
+                        path={ROUTES.ADMIN_USERS_DETAIL + '/:id'}
+                    />
                     <Route element={<LprUsersDetail />} path={ROUTES.LPR_USERS_DETAIL + '/:id'} />
                     <Route
                         element={<AttestationsQualifications />}

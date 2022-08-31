@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
-import { useGetSurveyExpertIdQuery } from '../../../services/ExpertService'
+import { useGetSurveyModeratorIdQuery } from '../../../services/ModeratorService'
 
 const { Title, Text } = Typography
 
@@ -18,8 +18,8 @@ const Moderator = () => {
 
     const { id } = state
 
-    const { data: surveyquest, isLoading } = useGetSurveyExpertIdQuery(id)
-
+    const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
+    console.log(surveyquest)
     if (isLoading) {
         return (
             <div
@@ -68,7 +68,7 @@ const Moderator = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.THEORETICAL_PART_EXPERT, {
+                    navigate(ROUTES.SURVEYS_PART, {
                         state: {
                             surveyquest: surveyquest,
                             id: id,
