@@ -7,6 +7,7 @@ import moment from 'moment'
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
 import { useGetSurveyExpertIdQuery } from '../../../services/ExpertService'
+import ExpertReviewCard from './components/cards/expert_review_card'
 
 const { Title, Text } = Typography
 
@@ -63,6 +64,38 @@ const Expert = () => {
                     <span style={{ marginLeft: 10 }}>{surveyquest.tester_percent_score}%</span>
                 </Title>
             </div>
+
+            {surveyquest.main_expert && (
+                <>
+                    <Line />
+                    <div>
+                        <Title level={5} style={{ marginBottom: 20 }}>
+                            Заключения по теоретической части
+                        </Title>
+                        {surveyquest.expert_review.length &&
+                            surveyquest.expert_review.map((item, index) => (
+                                <ExpertReviewCard
+                                    key={index}
+                                    expert_name={item.user}
+                                    recommendation={item.conclusion_first_part}
+                                />
+                            ))}
+                    </div>
+                    <div style={{ marginTop: 20 }}>
+                        <Title level={5} style={{ marginBottom: 20 }}>
+                            Заключения по практической части
+                        </Title>
+                        {surveyquest.expert_review.length &&
+                            surveyquest.expert_review.map((item, index) => (
+                                <ExpertReviewCard
+                                    key={index}
+                                    expert_name={item.user}
+                                    recommendation={item.conclusion_second_part}
+                                />
+                            ))}
+                    </div>
+                </>
+            )}
             <Line />
             <Button
                 type="primary"

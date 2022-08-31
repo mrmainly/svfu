@@ -4,7 +4,6 @@ import { useGetTestResultQuery } from '../../../services/ModeratorService'
 
 const ModeratorTestResult = () => {
     const { data, isLoading } = useGetTestResultQuery()
-
     return (
         <div>
             <TestResultTable data={data?.results} loading={isLoading} />

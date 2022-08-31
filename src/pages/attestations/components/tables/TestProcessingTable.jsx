@@ -83,7 +83,7 @@ const TestProcessingTable = ({ data, loading }) => {
                                 },
                             })
                             localStorage.setItem(
-                                'side_bar_data_expert',
+                                'side_bar_data_ex_mo',
                                 JSON.stringify(record, null, '\t')
                             )
                         }}
@@ -104,7 +104,7 @@ const TestProcessingTable = ({ data, loading }) => {
                                 },
                             })
                             localStorage.setItem(
-                                'side_bar_data_expert',
+                                'side_bar_data_ex_mo',
                                 JSON.stringify(record, null, '\t')
                             )
                         }}
