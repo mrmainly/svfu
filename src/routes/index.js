@@ -41,6 +41,8 @@ const ROUTES = {
     ADMIN_USERS: '/admin-users',
     ADMIN_EXAM: '/admin-exam',
     EXPERT: '/expert',
+    MODERATOR_TEST_RESULT: '/moderator-test-result',
+    ATTESTED_APPEAL: '/attested-appeal',
 }
 
 export default ROUTES

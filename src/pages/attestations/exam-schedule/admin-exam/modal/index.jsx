@@ -67,7 +67,13 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     id="admedit-form"
                 >
                     <Form.Item label="Квалификация" name="direction">
-                        <Select open={false} placeholder="Выберите тег">
+                        <Select
+                            style={{
+                                color: 'red!important',
+                            }}
+                            disabled
+                            placeholder="Выберите тег"
+                        >
                             <Option value={admData?.direction?.id}>
                                 {admData?.direction.name}
                             </Option>
@@ -103,7 +109,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                         <Col span={12}>
                             <Form.Item label="Дата окончания тестирования" name="date_finish">
                                 <DatePicker
-                                    open={false}
+                                    disabled
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
                                     secondStep={30}

@@ -37,7 +37,8 @@ import AdminUsers from './attestations/admin-users/list'
 import AdminUsersDetail from './attestations/admin-users/detail'
 import AdminExam from './attestations/exam-schedule/admin-exam'
 import Expert from './surveys/expert'
-
+import ModeratorTestResult from './attestations/test-result'
+import AttestedAppeal from './attestations/attested-appeal'
 export {
     Login,
     Registration,
@@ -78,4 +79,6 @@ export {
     AdminUsersDetail,
     AdminExam,
     Expert,
+    ModeratorTestResult,
+    AttestedAppeal,
 }

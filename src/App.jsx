@@ -44,6 +44,8 @@ import {
     AdminUsersDetail,
     AdminExam,
     Expert,
+    AttestedAppeal,
+    ModeratorTestResult,
 } from './pages'
 
 function App() {
@@ -110,6 +112,8 @@ function App() {
                     />
                     <Route element={<PracticalPartExpert />} path={ROUTES.PRACTICAL_PART_EXPERT} />
                     <Route element={<Expert />} path={ROUTES.EXPERT} />
+                    <Route element={<ModeratorTestResult />} path={ROUTES.MODERATOR_TEST_RESULT} />
+                    <Route element={<AttestedAppeal />} path={ROUTES.ATTESTED_APPEAL} />
                 </Route>
             </Routes>
         </BrowserRouter>
