@@ -1,10 +1,12 @@
 import React from 'react'
 
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Typography, Button } from 'antd'
+import { Typography, Button, Spin } from 'antd'
+import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
+import { useGetSurveyExpertIdQuery } from '../../../services/ExpertService'
 
 const { Title, Text } = Typography
 
@@ -14,9 +16,26 @@ const Expert = () => {
 
     const state = location.state
 
-    const { surveyquest, id } = state
+    const { id } = state
+
+    const { data: surveyquest, isLoading } = useGetSurveyExpertIdQuery(id)
 
     console.log(surveyquest)
+
+    if (isLoading) {
+        return (
+            <div
+                style={{
+                    height: 190,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <Spin />
+            </div>
+        )
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -25,11 +44,26 @@ const Expert = () => {
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>
-                    Тест был начат:<span> {surveyquest.exam_date_start}</span>
+                    Тест был начат:
+                    <span style={{ marginLeft: 10 }}>
+                        {' '}
+                        {moment(surveyquest.exam_date_start).format('DD-MM-YYYY HH:mm:ss')}
+                    </span>
                 </Title>
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title level={5}>Итоговые баллы: {surveyquest.first_part_score}</Title>
+                <Title
+                    level={5}
+                    style={{
+                        color:
+                            surveyquest.tester_percent_score < surveyquest.passing_percent_score
+                                ? 'red'
+                                : '#219653',
+                    }}
+                >
+                    Итоговые баллы: {surveyquest.first_part_score}/{surveyquest.max_score}
+                    <span style={{ marginLeft: 10 }}>{surveyquest.tester_percent_score}%</span>
+                </Title>
             </div>
             <Line />
             <Button

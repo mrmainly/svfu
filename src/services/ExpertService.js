@@ -11,6 +11,13 @@ export const expert = api.injectEndpoints({
                 }
             },
         }),
+        getSurveyExpertId: build.query({
+            query(id) {
+                return {
+                    url: `/expert/result/${id}`,
+                }
+            },
+        }),
         sendSubscribeExpert: build.mutation({
             query({ id }) {
                 return {
@@ -30,5 +37,9 @@ export const expert = api.injectEndpoints({
     }),
 })
 
-export const { useSendAnswerExpertMutation, useSendSubscribeExpertMutation, useSendCodeMutation } =
-    expert
+export const {
+    useSendAnswerExpertMutation,
+    useSendSubscribeExpertMutation,
+    useSendCodeMutation,
+    useGetSurveyExpertIdQuery,
+} = expert
