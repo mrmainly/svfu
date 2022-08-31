@@ -19,7 +19,6 @@ const AdminExam = () => {
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const { data, isFetching } = useGetAdminExamQuery()
-    console.log(data)
     const searchInput = useRef()
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -186,7 +185,7 @@ const AdminExam = () => {
     return (
         <div>
             <Table dataSource={data?.results} loading={isFetching} columns={columns} rowKey="id" />
-            <AdminExamModal open={open} setOpen={setOpen} dataList={modalData} />
+            {open && <AdminExamModal open={open} setOpen={setOpen} dataList={modalData} />}
         </div>
     )
 }
