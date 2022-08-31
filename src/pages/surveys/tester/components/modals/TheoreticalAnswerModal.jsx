@@ -1,6 +1,6 @@
 import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { MyButton } from '../../../../../components'
 import { useSurveyPostMutation } from '../../../../../services/SurveysService'
@@ -9,7 +9,6 @@ import ROUTES from '../../../../../routes'
 
 const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
-    const { timeStatus } = useSelector((state) => state.survey_slice)
     const { changePartTester } = SurveysSlice.actions
 
     const navigate = useNavigate()
@@ -41,7 +40,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                 onCancel={handleClose}
                 footer={[
                     <MyButton size="medium" onClick={onFinishSubmit} key="end">
-                        {timeStatus ? 'Ok' : 'Закончить тестирование'}
+                        Закончить тестирование
                     </MyButton>,
                     <Button
                         size="medium"
@@ -49,7 +48,6 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                             background: '#6C757D',
                             color: 'white',
                             borderRadius: 4,
-                            display: timeStatus ? 'none' : '',
                         }}
                         onClick={handleClose}
                         key="back"
@@ -58,11 +56,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                     </Button>,
                 ]}
             >
-                <p>
-                    {timeStatus
-                        ? 'Мы отправим вам результаты в ближайшее время'
-                        : 'Закончив тестовую часть, вы не сможете изменить свои ответы на вопросы'}
-                </p>
+                <p>Закончив тестовую часть, вы не сможете изменить свои ответы на вопросы</p>
             </Modal>
         </>
     )

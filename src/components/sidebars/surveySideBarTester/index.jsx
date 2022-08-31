@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Typography, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { useLocation } from 'react-router-dom'
+import moment from 'moment'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import moment from 'moment'
+import TimeIsUpModal from '../../../pages/surveys/tester/components/modals/TimeIsUpModal'
 
 import '../surveySideBar.css'
 
@@ -13,14 +13,14 @@ const { Text } = Typography
 
 const SurveysSideBar = () => {
     const Ref = useRef(null)
+    const [open, setOpen] = useState(true)
 
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
 
     const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex, changeTimeStatus, changePartTester } = SurveysSlice.actions
+    const { handleArrayIndex } = SurveysSlice.actions
     const dispatch = useDispatch()
-    const location = useLocation()
 
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
@@ -68,16 +68,9 @@ const SurveysSideBar = () => {
         return deadline
     }
 
-    const TimerIsAp = () => {
-        document.querySelector('.theoretical-form-button').click()
-        document.querySelector('.practical-form-button').click()
-        dispatch(changeTimeStatus(true))
-    }
-
-    timer == '00:00' && TimerIsAp()
-
     return (
         <div style={{ marginLeft: 28 }}>
+            {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div className="root">
                 <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
