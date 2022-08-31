@@ -1,29 +1,23 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Typography, Input, Form, Spin, Upload, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 
 import {
     useGetPracticalPartIdQuery,
     usePracticalPartPostMutation,
-} from '../../../../services/SurveysService'
-import ROUTES from '../../../../routes'
+} from '../../../../../services/SurveysService'
+import ROUTES from '../../../../../routes'
 
 const { Text, Title } = Typography
 const { Dragger } = Upload
 const { TextArea } = Input
 
-const PracticalPart = () => {
-    const location = useLocation()
-    const state = location.state
-    const { id } = state
-
+const PracticalPart = ({ id }) => {
     const { data: practical_data, isLoading } = useGetPracticalPartIdQuery({ id: id })
     const [postPracticalPart] = usePracticalPartPostMutation()
 
     const navigate = useNavigate()
-
-    console.log(practical_data)
 
     if (isLoading) {
         return (

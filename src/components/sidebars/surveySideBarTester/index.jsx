@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { useLocation } from 'react-router-dom'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import ROUTES from '../../../routes'
 import moment from 'moment'
 
 import '../surveySideBar.css'
@@ -18,8 +17,8 @@ const SurveysSideBar = () => {
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
 
-    const { arrayIndex } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex, changeTimeStatus } = SurveysSlice.actions
+    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
+    const { handleArrayIndex, changeTimeStatus, changePartTester } = SurveysSlice.actions
     const dispatch = useDispatch()
     const location = useLocation()
 
@@ -91,17 +90,11 @@ const SurveysSideBar = () => {
                                   style={{
                                       background: arrayIndex === index ? '#2f80ed' : 'white',
                                       color: arrayIndex === index ? 'white' : '#2f80ed',
-                                      opacity:
-                                          location.pathname === ROUTES.PRACTICAL_PART ? 0.6 : 1,
-                                      cursor:
-                                          location.pathname === ROUTES.PRACTICAL_PART
-                                              ? 'text'
-                                              : 'pointer',
+                                      opacity: part_tester === 'p-p' ? 0.6 : 1,
+                                      cursor: part_tester === 'p-p' ? 'text' : 'pointer',
                                   }}
                                   onClick={() =>
-                                      location.pathname === ROUTES.PRACTICAL_PART
-                                          ? ''
-                                          : dispatch(handleArrayIndex(index))
+                                      part_tester === 'p-p' ? '' : dispatch(handleArrayIndex(index))
                                   }
                               >
                                   {index + 1}
@@ -147,7 +140,7 @@ const SurveysSideBar = () => {
                 </div>
             </div>
             {/* <Button onClick={onClickReset}>asd</Button> */}
-            {location.pathname === ROUTES.PRACTICAL_PART ? (
+            {part_tester === 'p-p' ? (
                 <Button
                     type="default"
                     style={{
@@ -182,9 +175,6 @@ const SurveysSideBar = () => {
                     Завершить тестовую часть
                 </Button>
             )}
-            {/* <Button onClick={() => }>
-                asd
-            </Button> */}
         </div>
     )
 }

@@ -1,26 +1,21 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { Typography, Radio, Space, Checkbox, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Line, MyButton } from '../../../../components'
-import { SurveysSlice } from '../../../../reducers/SurveysSlice'
-import TheoreticalAnswerModal from './components/modals/TheoreticalAnswerModal'
+import { Line, MyButton } from '../../../../../components'
+import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
+import TheoreticalAnswerModal from '../modals/TheoreticalAnswerModal'
 
 const { Text, Title } = Typography
 
-const TheoreticalPart = () => {
+const TheoreticalPart = ({ surveyquest, id }) => {
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
 
-    const location = useLocation()
-    const state = location.state
     const dispatch = useDispatch()
-
-    const { surveyquest, id } = state
 
     const onSubmitFurther = (data) => {
         const postData = {

@@ -106,7 +106,7 @@ const AvailableTestTable = ({ data, loading }) => {
 
     return (
         <>
-            <TestDetail open={modalATT} setOpen={setModalATT} ID={ID} />
+            {modalATT && <TestDetail open={modalATT} setOpen={setModalATT} ID={ID} />}
             <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
         </>
     )

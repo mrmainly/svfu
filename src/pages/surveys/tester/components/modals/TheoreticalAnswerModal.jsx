@@ -1,27 +1,28 @@
 import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { MyButton } from '../../../../../../components'
-import { useSurveyPostMutation } from '../../../../../../services/SurveysService'
-import ROUTES from '../../../../../../routes'
+import { MyButton } from '../../../../../components'
+import { useSurveyPostMutation } from '../../../../../services/SurveysService'
+import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
+import ROUTES from '../../../../../routes'
 
 const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
     const { timeStatus } = useSelector((state) => state.survey_slice)
+    const { changePartTester } = SurveysSlice.actions
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const onFinishSubmit = () => {
         postSurvey({ body: postData, id: id }).then((res) => {
             if (res.data) {
                 if (res.data.survey_status === 'ON_REVIEW') {
                     message.error('Вы не прошли тестовую часть')
-                    navigate(ROUTES.PROFILE)
+                    navigate(ROUTES.AVAILABLE_TEST)
                 } else {
-                    navigate(ROUTES.PRACTICAL_PART, {
-                        state: { id: id },
-                    })
+                    dispatch(changePartTester('p-p'))
                 }
             }
         })

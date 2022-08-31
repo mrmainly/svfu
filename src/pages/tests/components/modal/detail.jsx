@@ -36,7 +36,7 @@ const TestDetail = ({ open, setOpen, ID }) => {
     const pathcSurvey = () => {
         surveyPatch({ id: data.id }).then((res) => {
             if (res.data) {
-                navigate(ROUTES.THEORETICAL_PART, {
+                navigate(ROUTES.TESTER_SURVEY_PART, {
                     state: { surveyquest: data.surveyquest, id: data.id },
                 })
             } else {
@@ -58,7 +58,9 @@ const TestDetail = ({ open, setOpen, ID }) => {
                     setOpen(false)
                 }}
                 footer={[
-                    <MyButton onClick={pathcSurvey}>Начать тестирование</MyButton>,
+                    <MyButton onClick={pathcSurvey} key="start">
+                        Начать тестирование
+                    </MyButton>,
                     <MyButton
                         key="back"
                         type="default"
