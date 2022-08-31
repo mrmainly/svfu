@@ -7,7 +7,7 @@ const { Text, Title } = Typography
 const PracticalPartExpert = () => {
     const location = useLocation()
     const state = location.state
-    const { id, surveyquest } = state
+    const { surveyquest } = state
 
     console.log(surveyquest)
 
@@ -86,7 +86,6 @@ const PracticalPartExpert = () => {
                         </div>
                     </div>
                 ))}
-                {/* <MyButton htmlType="submit">Завершить тест</MyButton> */}
             </Form>
         </div>
     )

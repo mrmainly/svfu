@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Typography, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -18,8 +17,6 @@ const TheoreticalPartExpert = () => {
     const state = location.state
 
     const { surveyquest } = state
-
-    console.log(surveyquest)
 
     const sum = (question_id, array) => {
         const newArray = array
