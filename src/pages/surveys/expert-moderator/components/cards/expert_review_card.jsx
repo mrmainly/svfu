@@ -7,7 +7,7 @@ const { Text } = Typography
 const ExpertReviewCard = ({ expert_name, recommendation }) => {
     return (
         <Card
-            title={expert_name}
+            title={<Text style={{ color: '#2F80ED' }}>{expert_name}</Text>}
             extra={<Text>Скопировать текст</Text>}
             style={{
                 width: '100%',

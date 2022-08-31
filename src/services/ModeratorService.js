@@ -6,37 +6,14 @@ export const moderator = api.injectEndpoints({
             query: () => `moderator/result/`,
             providesTags: ['Moderator'],
         }),
-        sendAnswerExpert: build.mutation({
-            query({ body, id }) {
+        getSurveyModeratorId: build.query({
+            query(id) {
                 return {
-                    url: `expert/result/${id}`,
-                    method: 'POST',
-                    body,
-                }
-            },
-        }),
-        sendSubscribeExpert: build.mutation({
-            query({ id }) {
-                return {
-                    url: `tools/signature/detail/${id}`,
-                    method: 'POST',
-                }
-            },
-        }),
-        sendCode: build.mutation({
-            query({ code }) {
-                return {
-                    url: `tools/signature/${code}`,
-                    method: 'POST',
+                    url: `/moderator/result/${id}`,
                 }
             },
         }),
     }),
 })
 
-export const {
-    useGetTestResultQuery,
-    useSendAnswerExpertMutation,
-    useSendSubscribeExpertMutation,
-    useSendCodeMutation,
-} = moderator
+export const { useGetTestResultQuery, useGetSurveyModeratorIdQuery } = moderator
