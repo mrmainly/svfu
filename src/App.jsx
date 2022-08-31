@@ -37,8 +37,8 @@ import {
     LprUsersDetail,
     CertifiedDetail,
     TestResult,
-    TheoreticalPartExpert,
-    PracticalPartExpert,
+    // TheoreticalPartExpert,
+    // PracticalPartExpert,
     LprExam,
     AdminUsers,
     AdminUsersDetail,
@@ -46,6 +46,7 @@ import {
     Expert,
     AttestedAppeal,
     ModeratorTestResult,
+    SurveysPart,
 } from './pages'
 
 function App() {
@@ -106,14 +107,15 @@ function App() {
                         path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}
                     />
                     <Route element={<CertifiedDetail />} path={`${ROUTES.CERTIFIED_DETAIL}/:id`} />
-                    <Route
+                    {/* <Route
                         element={<TheoreticalPartExpert />}
                         path={ROUTES.THEORETICAL_PART_EXPERT}
                     />
-                    <Route element={<PracticalPartExpert />} path={ROUTES.PRACTICAL_PART_EXPERT} />
+                    <Route element={<PracticalPartExpert />} path={ROUTES.PRACTICAL_PART_EXPERT} /> */}
                     <Route element={<Expert />} path={ROUTES.EXPERT} />
                     <Route element={<ModeratorTestResult />} path={ROUTES.MODERATOR_TEST_RESULT} />
                     <Route element={<AttestedAppeal />} path={ROUTES.ATTESTED_APPEAL} />
+                    <Route element={<SurveysPart />} path={ROUTES.SURVEYS_PART} />
                 </Route>
             </Routes>
         </BrowserRouter>

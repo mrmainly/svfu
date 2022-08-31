@@ -4,7 +4,7 @@ import { Typography, Form } from 'antd'
 
 const { Text, Title } = Typography
 
-const PracticalPartExpert = () => {
+const PracticalPartExMo = () => {
     const location = useLocation()
     const state = location.state
     const { surveyquest } = state
@@ -91,4 +91,4 @@ const PracticalPartExpert = () => {
     )
 }
 
-export default PracticalPartExpert
+export default PracticalPartExMo

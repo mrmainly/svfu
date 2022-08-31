@@ -11,6 +11,8 @@ const { Content } = Layout
 const SurveyLayout = () => {
     const params = useLocation()
 
+    console.log('asdasda')
+
     return (
         <Layout>
             <Content

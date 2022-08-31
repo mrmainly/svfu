@@ -30,15 +30,18 @@ import LprUsersDetail from './attestations/lpr-users/detail'
 import UserApplicationsDetail from './attestations/userApplications/detail'
 import CertifiedDetail from './attestations/certified/detail'
 import TestResult from './tests/result'
-import TheoreticalPartExpert from './surveys/expert/theoretical-part-expert'
-import PracticalPartExpert from './surveys/expert/practical-part-expert'
+// import TheoreticalPartExpert from './surveys/expert-moderator/theoretical-part-exmo'
+// import PracticalPartExpert from './surveys/expert-moderator/practical-part-exmo'
 import LprExam from './attestations/exam-schedule/lpr-exam'
 import AdminUsers from './attestations/admin-users/list'
 import AdminUsersDetail from './attestations/admin-users/detail'
 import AdminExam from './attestations/exam-schedule/admin-exam'
-import Expert from './surveys/expert'
+import Expert from './surveys/expert-moderator/expert'
+import Moderator from './surveys/expert-moderator/moderator'
 import ModeratorTestResult from './attestations/test-result'
 import AttestedAppeal from './attestations/attested-appeal'
+import SurveysPart from './surveys/expert-moderator/surveysPart'
+
 export {
     Login,
     Registration,
@@ -72,8 +75,8 @@ export {
     LprUsersDetail,
     CertifiedDetail,
     TestResult,
-    TheoreticalPartExpert,
-    PracticalPartExpert,
+    // TheoreticalPartExpert,
+    // PracticalPartExpert,
     LprExam,
     AdminUsers,
     AdminUsersDetail,
@@ -81,4 +84,6 @@ export {
     Expert,
     ModeratorTestResult,
     AttestedAppeal,
+    Moderator,
+    SurveysPart,
 }

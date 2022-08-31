@@ -3,11 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Typography, Button } from 'antd'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import AnswerTheoreticalPartExpertModal from '../../../pages/surveys/expert/components/modals/AnswerTheoreticalPartExpertModal'
-import VerificationSubscribeModal from '../../../pages/surveys/expert/components/modals/VerificationSubscribeModal'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import ROUTES from '../../../routes'
 
 import '../surveySideBar.css'
 
@@ -16,8 +13,9 @@ const { Text } = Typography
 const SurveysSideBar = () => {
     const [data, setData] = useState([])
 
-    const { arrayIndex } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex, openExpertTheoreticalPartOpen } = SurveysSlice.actions
+    const { arrayIndex, part } = useSelector((state) => state.survey_slice)
+    const { handleArrayIndex, openExpertTheoreticalPartOpen, changePartsStatus } =
+        SurveysSlice.actions
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -47,8 +45,6 @@ const SurveysSideBar = () => {
 
     return (
         <div style={{ marginLeft: 28 }}>
-            <AnswerTheoreticalPartExpertModal id={data.id} />
-            <VerificationSubscribeModal id={data.id} />
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div
                 className="root"
@@ -76,17 +72,11 @@ const SurveysSideBar = () => {
                                                   ? 'white'
                                                   : colorSwitchDanger(item.question.id),
                                           borderColor: colorSwitchDanger(item.question.id),
-                                          opacity:
-                                              location.pathname === ROUTES.PRACTICAL_PART_EXPERT
-                                                  ? 0.6
-                                                  : 1,
-                                          cursor:
-                                              location.pathname === ROUTES.PRACTICAL_PART_EXPERT
-                                                  ? 'text'
-                                                  : 'pointer',
+                                          opacity: part === 'practical-part' ? 0.6 : 1,
+                                          cursor: part === 'practical-part' ? 'text' : 'pointer',
                                       }}
                                       onClick={() =>
-                                          location.pathname === ROUTES.PRACTICAL_PART_EXPERT
+                                          part === 'practical-part'
                                               ? ''
                                               : dispatch(handleArrayIndex(index))
                                       }
@@ -101,9 +91,7 @@ const SurveysSideBar = () => {
             <div className="time-block" style={{ marginTop: 12 }}>
                 <div>
                     <Text>
-                        {location.pathname === ROUTES.PRACTICAL_PART_EXPERT
-                            ? 'Теоретическая часть'
-                            : 'Практическая часть:'}
+                        {part === 'practical-part' ? 'Теоретическая часть' : 'Практическая часть:'}
                     </Text>
                     <Button
                         type="default"
@@ -116,16 +104,12 @@ const SurveysSideBar = () => {
                         }}
                         size="large"
                         onClick={() =>
-                            navigate(
-                                location.pathname === ROUTES.PRACTICAL_PART_EXPERT
-                                    ? ROUTES.THEORETICAL_PART_EXPERT
-                                    : ROUTES.PRACTICAL_PART_EXPERT,
-                                {
-                                    state: {
-                                        surveyquest: data,
-                                        id: data.id,
-                                    },
-                                }
+                            dispatch(
+                                changePartsStatus(
+                                    part === 'theoretical-part'
+                                        ? 'practical-part'
+                                        : 'theoretical-part'
+                                )
                             )
                         }
                     >

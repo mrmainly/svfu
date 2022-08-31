@@ -11,6 +11,7 @@ const initialState = {
     subscribeCodeModal: false,
     conclusion_first_part: '',
     conclusion_second_part: '',
+    part: 'theoretical-part',
 }
 
 export const SurveysSlice = createSlice({
@@ -44,6 +45,9 @@ export const SurveysSlice = createSlice({
         setTextAnswerExpert(state, action) {
             state.conclusion_first_part = action.payload[0]
             state.conclusion_second_part = action.payload[1]
+        },
+        changePartsStatus(state, action) {
+            state.part = action.payload
         },
     },
 })

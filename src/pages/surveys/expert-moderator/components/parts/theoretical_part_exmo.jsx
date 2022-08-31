@@ -2,21 +2,16 @@ import { useLocation } from 'react-router-dom'
 import { Typography, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Line, MyButton } from '../../../../components'
-import { SurveysSlice } from '../../../../reducers/SurveysSlice'
+import { Line, MyButton } from '../../../../../components'
+import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 
 const { Text, Title } = Typography
 
-const TheoreticalPartExpert = () => {
+const TheoreticalPartExMo = ({ surveyquest }) => {
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
 
-    const location = useLocation()
     const dispatch = useDispatch()
-
-    const state = location.state
-
-    const { surveyquest } = state
 
     const sum = (question_id, array) => {
         const newArray = array
@@ -151,4 +146,4 @@ const TheoreticalPartExpert = () => {
     )
 }
 
-export default TheoreticalPartExpert
+export default TheoreticalPartExMo

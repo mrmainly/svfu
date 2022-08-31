@@ -73,48 +73,46 @@ const TestProcessingTable = ({ data, loading }) => {
             dataIndex: 'status_result',
             key: 'x',
             render: (status_result, record) =>
-                status_result === 'WAITING' ? (
-                    <>
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                navigate(ROUTES.EXPERT, {
-                                    state: {
-                                        surveyquest: record,
-                                        id: record.id,
-                                    },
-                                })
-                                localStorage.setItem(
-                                    'side_bar_data_expert',
-                                    JSON.stringify(record, null, '\t')
-                                )
-                            }}
-                        >
-                            Проверить
-                        </Button>
-                    </>
-                ) : status_result === 'FINISHED' ? (
+                status_result === 'WAITING' && record.main_expert === false ? (
                     <Button
                         type="primary"
-                        ghost
-                        // onClick={() => {
-                        //     const itemData = data?.filter((e) => e.id === id)
-                        //     setCurrentData(itemData)
-                        //     setModalEditTB(true)
-                        // }}
+                        onClick={() => {
+                            navigate(ROUTES.EXPERT, {
+                                state: {
+                                    id: record.id,
+                                },
+                            })
+                            localStorage.setItem(
+                                'side_bar_data_expert',
+                                JSON.stringify(record, null, '\t')
+                            )
+                        }}
                     >
+                        Проверить
+                    </Button>
+                ) : status_result === 'FINISHED' ? (
+                    <Button type="primary" ghost>
                         Проверено
                     </Button>
-                ) : (
+                ) : status_result === 'FINISHED_BY_EXPERTS' && record.main_expert === true ? (
                     <Button
                         type="primary"
-                        disabled
-                        // onClick={() => {
-                        //     const itemData = data?.filter((e) => e.id === id)
-                        //     setCurrentData(itemData)
-                        //     setModalEditTB(true)
-                        // }}
+                        onClick={() => {
+                            navigate(ROUTES.EXPERT, {
+                                state: {
+                                    id: record.id,
+                                },
+                            })
+                            localStorage.setItem(
+                                'side_bar_data_expert',
+                                JSON.stringify(record, null, '\t')
+                            )
+                        }}
                     >
+                        Начать
+                    </Button>
+                ) : (
+                    <Button type="primary" disabled>
                         Недоступно
                     </Button>
                 ),

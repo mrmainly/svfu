@@ -68,7 +68,7 @@ const Expert = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.THEORETICAL_PART_EXPERT, {
+                    navigate(ROUTES.SURVEYS_PART, {
                         state: {
                             surveyquest: surveyquest,
                             id: id,
