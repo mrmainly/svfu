@@ -1,14 +1,18 @@
 import moment from 'moment'
 import { useState } from 'react'
-import Table from 'antd/lib/table'
-import { Button } from 'antd'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Button } from 'antd'
+import Table from 'antd/lib/table'
 import ROUTES from '../../../../routes'
+import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
 
 const TestResultTable = ({ data, loading }) => {
+    const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
@@ -63,7 +67,7 @@ const TestResultTable = ({ data, loading }) => {
             title: 'Действие',
             dataIndex: 'status_result',
             key: 'x',
-            render: (status_result, record) =>
+            render: (status_result, record, direction) =>
                 status_result === 'WAITING' ? (
                     <Button
                         type="primary"
@@ -77,6 +81,10 @@ const TestResultTable = ({ data, loading }) => {
                                 'side_bar_data_ex_mo',
                                 JSON.stringify(record, null, '\t')
                             )
+                            dispatch(handlePath(ROUTES.MODERATOR_TEST_RESULT))
+                            dispatch(handleRole(''))
+                            dispatch(handleFullName(record.survey.name))
+                            dispatch(handleCurrentPath(ROUTES.MODERATOR))
                         }}
                     >
                         Проверить
@@ -98,6 +106,10 @@ const TestResultTable = ({ data, loading }) => {
                                 'side_bar_data_ex_mo',
                                 JSON.stringify(record, null, '\t')
                             )
+                            dispatch(handlePath(ROUTES.MODERATOR_TEST_RESULT))
+                            dispatch(handleRole(''))
+                            dispatch(handleFullName(record.survey.name))
+                            dispatch(handleCurrentPath(ROUTES.MODERATOR))
                         }}
                     >
                         Начать

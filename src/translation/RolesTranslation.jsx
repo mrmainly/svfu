@@ -21,5 +21,8 @@ export const roles = (role) => {
         case 'TESTER':
             return 'Аттестуемый'
             break
+        default:
+            return ''
+            break
     }
 }

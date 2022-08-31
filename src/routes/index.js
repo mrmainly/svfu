@@ -46,6 +46,7 @@ const ROUTES = {
     ATTESTED_APPEAL: '/attested-appeal',
     SURVEYS_PART: '/surveys-part',
     ADMIN_USERS_DETAIL: '/admin-users-detail',
+    MODERATOR_USERS_DETAIL: '/moderator-users-detail',
 }
 
 export default ROUTES

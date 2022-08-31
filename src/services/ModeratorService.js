@@ -13,6 +13,13 @@ export const moderator = api.injectEndpoints({
                 }
             },
         }),
+        getModeratorUserId: build.query({
+            query({ id }) {
+                return {
+                    url: `/moderator/result/${id}/user/`,
+                }
+            },
+        }),
         sendAnswerModerator: build.mutation({
             query({ body, id }) {
                 return {
@@ -28,5 +35,6 @@ export const moderator = api.injectEndpoints({
 export const {
     useGetTestResultQuery,
     useGetSurveyModeratorIdQuery,
+    useGetModeratorUserIdQuery,
     useSendAnswerModeratorMutation,
 } = moderator
