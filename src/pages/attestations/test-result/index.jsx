@@ -1,14 +1,13 @@
-// import TestProcessingTable from '../components/tables/TestProcessingTable'
+import TestResultTable from '../components/tables/TestResultTable'
 
-// import { useGetTestProcessingQuery } from '../../../services/TestProcessingService'
+import { useGetTestResultQuery } from '../../../services/ModeratorService'
 
 const ModeratorTestResult = () => {
-    // const { data, isLoading } = useGetTestProcessingQuery()
+    const { data, isLoading } = useGetTestResultQuery()
 
     return (
         <div>
-            moderatorTestResult
-            {/* <TestProcessingTable data={data?.results} loading={isLoading} /> */}
+            <TestResultTable data={data?.results} loading={isLoading} />
         </div>
     )
 }
