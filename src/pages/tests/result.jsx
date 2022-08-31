@@ -6,7 +6,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 
 import { useGetTestResultsIDQuery } from '../../../src/services/SurveysService'
 import { Line } from '../../components'
-import AppealModal from './components/modal/AppealModal'
+// import AppealModal from './components/modal/AppealModal'
 import CancelModal from './components/modal/CancelModal'
 import ROUTES from '../../routes'
 
@@ -121,7 +121,7 @@ const TestResult = () => {
                     </Button>
                 )}
             </div>
-            <AppealModal open={appealModal} setOpen={setAppealModal} ID={dataResult?.id} />
+            {/* <AppealModal open={appealModal} setOpen={setAppealModal} ID={dataResult?.id} /> */}
             <CancelModal open={cancelModal} setOpen={setCancelModal} ID={dataResult?.id} />
             {items.map((item, index) => (
                 <Space size="large" key={index} style={{ marginTop: index === 0 ? 0 : 15 }}>
