@@ -1,14 +1,13 @@
-// import TestProcessingTable from '../components/tables/TestProcessingTable'
+import AppealTable from './components/table'
 
-// import { useGetTestProcessingQuery } from '../../../services/TestProcessingService'
+import { useGetAppealQuery } from '../../../services/ModeratorService'
 
 const AttestedAppeal = () => {
-    // const { data, isLoading } = useGetTestProcessingQuery()
+    const { data, isLoading } = useGetAppealQuery()
 
     return (
         <div>
-            AttestedAppeal
-            {/* <TestProcessingTable data={data?.results} loading={isLoading} /> */}
+            <AppealTable data={data?.results} loading={isLoading} />
         </div>
     )
 }

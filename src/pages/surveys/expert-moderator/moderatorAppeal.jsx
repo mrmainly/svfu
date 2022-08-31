@@ -6,11 +6,11 @@ import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
-import { useGetSurveyModeratorIdQuery } from '../../../services/ModeratorService'
+import { useGetAppealIdQuery } from '../../../services/ModeratorService'
 
 const { Title, Text } = Typography
 
-const Moderator = () => {
+const ModeratorAppeal = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -18,7 +18,8 @@ const Moderator = () => {
 
     const { id } = state
 
-    const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
+    const { data: surveyquest, isLoading } = useGetAppealIdQuery(id)
+    console.log(surveyquest)
     if (isLoading) {
         return (
             <div
@@ -81,4 +82,4 @@ const Moderator = () => {
     )
 }
 
-export default Moderator
+export default ModeratorAppeal
