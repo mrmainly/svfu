@@ -12,10 +12,14 @@ import ROUTES from '../../../../../routes'
 
 const { TextArea } = Input
 
-const VerificationSubscribeModal = ({ id }) => {
-    const { subscribeCodeModal, conclusion_first_part, conclusion_second_part } = useSelector(
-        (state) => state.survey_slice
-    )
+const VerificationSubscribeModal = ({ id, main_expert }) => {
+    const {
+        subscribeCodeModal,
+        conclusion_first_part,
+        conclusion_second_part,
+        pass_practical_part,
+        pass_test_part,
+    } = useSelector((state) => state.survey_slice)
     const { openSubscribeModal } = SurveysSlice.actions
 
     const [sendCode] = useSendCodeMutation()
@@ -25,15 +29,22 @@ const VerificationSubscribeModal = ({ id }) => {
     const navigate = useNavigate()
 
     const onFinishSubmit = (data) => {
-        console.log(data)
+        const body = {
+            conclusion_first_part: conclusion_first_part,
+            conclusion_second_part: conclusion_second_part,
+        }
+
+        const bodyMainModerator = {
+            conclusion_first_part: conclusion_first_part,
+            conclusion_second_part: conclusion_second_part,
+            pass_practical_part: pass_practical_part,
+            pass_test_part: pass_test_part,
+        }
         sendCode(data).then((res) => {
             if (res.data) {
                 sendAnswerExpert({
                     id: id,
-                    body: {
-                        conclusion_first_part: conclusion_first_part,
-                        conclusion_second_part: conclusion_second_part,
-                    },
+                    body: main_expert ? bodyMainModerator : body,
                 }).then((res) => {
                     if (res.data) {
                         dispatch(openSubscribeModal(false))

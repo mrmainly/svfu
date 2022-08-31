@@ -34,6 +34,14 @@ export const expert = api.injectEndpoints({
                 }
             },
         }),
+        putMainExpert: build.mutation({
+            query({ id }) {
+                return {
+                    url: `expert/result/${id}`,
+                    method: 'PUT',
+                }
+            },
+        }),
     }),
 })
 
@@ -42,4 +50,5 @@ export const {
     useSendSubscribeExpertMutation,
     useSendCodeMutation,
     useGetSurveyExpertIdQuery,
+    usePutMainExpertMutation,
 } = expert

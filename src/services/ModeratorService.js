@@ -29,11 +29,25 @@ export const moderator = api.injectEndpoints({
                 }
             },
         }),
+        getAppeal: build.query({
+            query: () => `moderator/appeal/`,
+            providesTags: ['Moderator'],
+        }),
+        getAppealId: build.query({
+            query(id) {
+                return {
+                    url: `moderator/appeal/${id}`,
+                }
+            },
+            providesTags: ['Moderator'],
+        }),
     }),
 })
 
 export const {
     useGetTestResultQuery,
+    useGetAppealQuery,
+    useGetAppealIdQuery,
     useGetSurveyModeratorIdQuery,
     useGetModeratorUserIdQuery,
     useSendAnswerModeratorMutation,

@@ -22,6 +22,7 @@ const TestResult = () => {
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
     const navigate = useNavigate()
+
     if (isFetching) {
         return (
             <div
@@ -36,6 +37,8 @@ const TestResult = () => {
             </div>
         )
     }
+
+    console.log('data', dataResult)
 
     const items = [
         {
