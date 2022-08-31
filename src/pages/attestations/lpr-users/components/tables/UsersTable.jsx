@@ -1,15 +1,19 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { SearchOutlined } from '@ant-design/icons'
 import Table from 'antd/lib/table'
 import { Button, Input, Space } from 'antd'
 
 import { useGetAttestationUsersQuery } from '../../../../../services/AttestationProtocolService'
+import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'
 import ROUTES from '../../../../../routes'
 
 const UsersTable = () => {
+    const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const { data, isLoading } = useGetAttestationUsersQuery()
@@ -172,6 +176,14 @@ const UsersTable = () => {
                     type="primary"
                     onClick={() => {
                         navigate(ROUTES.LPR_USERS_DETAIL + `/${id}`)
+                        dispatch(handlePath(ROUTES.LPR_USERS))
+                        dispatch(handleRole(data?.results.filter((item) => item.id === id)[0].role))
+                        dispatch(
+                            handleFullName(
+                                data?.results.filter((item) => item.id === id)[0].full_name
+                            )
+                        )
+                        dispatch(handleCurrentPath(ROUTES.LPR_USERS_DETAIL + `/${id}`))
                     }}
                 >
                     Перейти

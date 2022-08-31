@@ -149,34 +149,6 @@ const LprUsersDetail = () => {
 
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'start',
-                    alignItems: 'center',
-                    marginBottom: '10px',
-                }}
-            >
-                <BsArrowLeft
-                    style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
-                    onClick={() => {
-                        navigate(ROUTES.LPR_USERS)
-                    }}
-                />
-                <span
-                    style={{
-                        fontFamily: 'Roboto',
-                        fontStyle: 'normal',
-                        fontWeight: '400',
-                        fontSize: '20px',
-                        lineHeight: '30px',
-                    }}
-                >
-                    {role + ' ' + lastName + fisrtName + patronymic}
-                </span>
-            </div>
-            <hr />
             <Radio.Group
                 onChange={handleModeChange}
                 value={mode}

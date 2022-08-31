@@ -1,6 +1,8 @@
 import ROUTES from '../routes'
+import { roles } from '../translation/RolesTranslation'
+import { BsArrowLeft } from 'react-icons/bs'
 
-export const pathname = (params) => {
+export const pathname = (params, path, role, full_name, navigate, current_path) => {
     switch (params.pathname) {
         case ROUTES.PROFILE:
             return 'Профиль'
@@ -64,5 +66,35 @@ export const pathname = (params) => {
             return 'Подтверждение экспертизы'
         case ROUTES.ATTESTED_APPEAL:
             return 'Апелляции'
+        case current_path:
+            return (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'start',
+                        alignItems: 'center',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <BsArrowLeft
+                        style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
+                        onClick={() => {
+                            navigate(path)
+                        }}
+                    />
+                    <span
+                        style={{
+                            fontFamily: 'Roboto',
+                            fontStyle: 'normal',
+                            fontWeight: '400',
+                            fontSize: '20px',
+                            lineHeight: '30px',
+                        }}
+                    >
+                        {roles(role) + ' ' + full_name}
+                    </span>
+                </div>
+            )
     }
 }
