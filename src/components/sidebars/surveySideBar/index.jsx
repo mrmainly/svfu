@@ -17,9 +17,7 @@ const SurveysSideBar = () => {
     const { handleArrayIndex, openExpertTheoreticalPartOpen, changePartsStatus } =
         SurveysSlice.actions
 
-    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const location = useLocation()
 
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('side_bar_data_ex_mo'))
@@ -45,7 +43,7 @@ const SurveysSideBar = () => {
 
     return (
         <div style={{ marginLeft: 28 }}>
-            <Text style={{ fontWeight: 600 }}>{data.name}</Text>
+            <Text style={{ fontWeight: 600 }}>{data?.direction}</Text>
             <div
                 className="root"
                 style={{
