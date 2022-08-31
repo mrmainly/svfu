@@ -39,7 +39,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                 onOk={handleClose}
                 onCancel={handleClose}
                 footer={[
-                    <MyButton size="medium" onClick={onFinishSubmit}>
+                    <MyButton size="medium" onClick={onFinishSubmit} key="end">
                         {timeStatus ? 'Ok' : 'Закончить тестирование'}
                     </MyButton>,
                     <Button
@@ -51,6 +51,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                             display: timeStatus ? 'none' : '',
                         }}
                         onClick={handleClose}
+                        key="back"
                     >
                         Отмена
                     </Button>,
@@ -59,7 +60,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                 <p>
                     {timeStatus
                         ? 'Мы отправим вам результаты в ближайшее время'
-                        : 'Закончив тестирование, вы не сможете изменить свои ответы на вопросы'}
+                        : 'Закончив тестовую часть, вы не сможете изменить свои ответы на вопросы'}
                 </p>
             </Modal>
         </>

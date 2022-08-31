@@ -26,11 +26,21 @@ const PracticalPart = () => {
     console.log(practical_data)
 
     if (isLoading) {
-        return <Spin />
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 600,
+                }}
+            >
+                <Spin />
+            </div>
+        )
     }
 
     const onSubmitFurther = (data) => {
-        console.log(data)
         let formData = new FormData()
         if (data.file) {
             formData.append('file', data.file.file.originFileObj)
@@ -42,7 +52,8 @@ const PracticalPart = () => {
             body: formData,
         }).then((res) => {
             if (res.data) {
-                navigate(ROUTES.PROFILE)
+                navigate(ROUTES.AVAILABLE_TESTS)
+                message.success('Мы отправим вам результаты в ближайшее время')
             } else {
                 message.error('что то пошло не так')
             }

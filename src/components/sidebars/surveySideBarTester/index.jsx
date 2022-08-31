@@ -75,7 +75,7 @@ const SurveysSideBar = () => {
         dispatch(changeTimeStatus(true))
     }
 
-    timer == '00:00:00' && TimerIsAp()
+    timer == '00:00' && TimerIsAp()
 
     return (
         <div style={{ marginLeft: 28 }}>
@@ -133,6 +133,7 @@ const SurveysSideBar = () => {
                     <Text>Осталось:</Text>
                     {timer === 0 ? (
                         <Text>
+                            0
                             {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
                                 ''
                             ) : (
