@@ -1,14 +1,17 @@
 import moment from 'moment'
 import { useState } from 'react'
-import TBEditModal from '../modals/tbeditmodal'
-import Table from 'antd/lib/table'
-import { Button } from 'antd'
+import { Button, Table, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+
 import ROUTES from '../../../../routes'
+import TBEditModal from '../modals/tbeditmodal'
+import { usePutMainExpertMutation } from '../../../../services/ExpertService'
 
 const TestProcessingTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
+    const [putMainExpert] = usePutMainExpertMutation()
+
     const navigate = useNavigate()
 
     const columns = [
@@ -98,15 +101,21 @@ const TestProcessingTable = ({ data, loading }) => {
                     <Button
                         type="primary"
                         onClick={() => {
-                            navigate(ROUTES.EXPERT, {
-                                state: {
-                                    id: record.id,
-                                },
+                            putMainExpert({ id: record.id }).then((res) => {
+                                if (res.data) {
+                                    navigate(ROUTES.EXPERT, {
+                                        state: {
+                                            id: record.id,
+                                        },
+                                    })
+                                    localStorage.setItem(
+                                        'side_bar_data_ex_mo',
+                                        JSON.stringify(record, null, '\t')
+                                    )
+                                } else {
+                                    message.error('Вы не являетесь председателем экспертов')
+                                }
                             })
-                            localStorage.setItem(
-                                'side_bar_data_ex_mo',
-                                JSON.stringify(record, null, '\t')
-                            )
                         }}
                     >
                         Начать

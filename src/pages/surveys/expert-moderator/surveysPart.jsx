@@ -15,7 +15,7 @@ const SurveysPart = () => {
     const { surveyquest, id } = state
     const { part } = useSelector((state) => state.survey_slice)
     const role = JSON.parse(localStorage.getItem('role'))
-    console.log('surveyquest', surveyquest)
+
     return (
         <div>
             {role === 'MODERATOR' ? (
@@ -27,7 +27,7 @@ const SurveysPart = () => {
                     main_expert={surveyquest.main_expert}
                 />
             )}
-            <VerificationSubscribeModal id={id} />
+            <VerificationSubscribeModal id={id} main_expert={surveyquest?.main_expert} />
             {part === 'theoretical-part' ? (
                 <TheoreticalPartExMo surveyquest={surveyquest} />
             ) : (

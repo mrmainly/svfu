@@ -22,7 +22,14 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
     const dispatch = useDispatch()
 
     const onFinishSubmit = (data) => {
-        dispatch(setTextAnswerExpert([data.conclusion_first_part, data.conclusion_second_part]))
+        dispatch(
+            setTextAnswerExpert([
+                data.conclusion_first_part,
+                data.conclusion_second_part,
+                data.pass_practical_part,
+                data.pass_test_part,
+            ])
+        )
         sendSubscribeExpert({ id: id }).then((res) => {
             if (res.data) {
                 dispatch(openExpertTheoreticalPartOpen(false))
@@ -31,7 +38,6 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                 message.error('Вы не оставили рекомендацию')
             }
         })
-        console.log(data)
     }
 
     const handleClose = () => {
@@ -58,7 +64,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                         key="save"
                         form="form-expert-theoretical-part"
                         type="primary"
-                        disabled={subscribe === false ? true : false}
+                        disabled={!subscribe ? true : false}
                         htmlType="submit"
                     >
                         Отправить
@@ -110,28 +116,70 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                 <Form id="form-expert-theoretical-part" onFinish={onFinishSubmit}>
                     <Form.Item
                         required
-                        label="Заключение по теоретической части"
+                        label={
+                            main_expert
+                                ? 'Рекомендация по теоретической части'
+                                : 'Заключение по теоретической части'
+                        }
                         labelCol={{ span: 24 }}
                         name="conclusion_first_part"
                     >
                         <TextArea
-                            placeholder="Напишите заключение по теоретической части"
-                            style={{ height: 200 }}
+                            placeholder={
+                                main_expert
+                                    ? 'Рекомендация к ответу'
+                                    : 'Напишите заключение по теоретической части'
+                            }
+                            style={{ height: 150 }}
                         />
                     </Form.Item>
                     <Form.Item
                         required
-                        label="Заключение по практической части"
+                        label={
+                            main_expert
+                                ? 'Рекомендация по практической части'
+                                : 'Заключение по практической части'
+                        }
                         labelCol={{ span: 24 }}
                         name="conclusion_second_part"
                     >
                         <TextArea
-                            placeholder="Напишите заключение по теоретической части"
-                            style={{ height: 200 }}
+                            placeholder={
+                                main_expert
+                                    ? 'Рекомендация к ответу'
+                                    : 'Напишите заключение по теоретической части'
+                            }
+                            style={{ height: 150 }}
                         />
                     </Form.Item>
+                    {main_expert ? (
+                        <>
+                            <Form.Item
+                                label="Результат практической части"
+                                labelCol={{ span: 24 }}
+                                name="pass_practical_part"
+                                valuePropName="checked"
+                            >
+                                <Checkbox>Сдано</Checkbox>
+                            </Form.Item>
+                            <Form.Item
+                                label="Результат экзамена"
+                                labelCol={{ span: 24 }}
+                                name="pass_test_part"
+                                valuePropName="checked"
+                            >
+                                <Checkbox>Сдано</Checkbox>
+                            </Form.Item>
+                        </>
+                    ) : (
+                        ''
+                    )}
                 </Form>
-                <Checkbox onChange={onChange}>Подписать протокол</Checkbox>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Checkbox onChange={onChange}>
+                        Подписать <span style={{ color: '#2F80ED' }}>протокол</span>
+                    </Checkbox>
+                </div>
             </Modal>
         </>
     )
