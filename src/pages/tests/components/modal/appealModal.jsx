@@ -13,7 +13,7 @@ const AppealModal = ({ open, setOpen, ID }) => {
         appealPost({ id: ID, body: data }).then((res) => {
             if (res.data) {
                 Modal.success({
-                    content: 'Аппеляция подана!',
+                    content: 'Апелляция подана!',
                 })
                 setOpen(false)
             } else {
@@ -27,7 +27,7 @@ const AppealModal = ({ open, setOpen, ID }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="АППЕЛЯЦИЯ"
+                title="АПЕЛЛЯЦИЯ"
                 visible={open}
                 onOk={() => {
                     setOpen(false)
@@ -51,7 +51,7 @@ const AppealModal = ({ open, setOpen, ID }) => {
             >
                 <Form layout="vertical" onFinish={onSubmit} id="appeal-form">
                     <Form.Item
-                        label="Пожалуйста, напишите причину подачи завяления."
+                        label="Пожалуйста, напишите причину подачи заявления."
                         name="appeal_text"
                     >
                         <Input.TextArea rows={6}></Input.TextArea>
