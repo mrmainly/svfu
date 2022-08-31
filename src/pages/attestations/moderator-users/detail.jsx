@@ -1,7 +1,7 @@
 import { BsArrowLeft } from 'react-icons/bs'
 import { Radio } from 'antd'
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import ROUTES from '../../../routes'
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
@@ -11,10 +11,15 @@ import { useGetModeratorUserIdQuery } from '../../../services/ModeratorService'
 import moment from 'moment'
 
 const ModeratorUsersDetail = () => {
-    const params = useParams()
-    const { data: userData, isLoading } = useGetModeratorUserIdQuery({ id: params.id })
-    const data = userData?.user
+    //  const params = useParams()
+    //  const { data: userData, isLoading } = useGetModeratorUserIdQuery({ id: params.id })
+    const location = useLocation()
     const navigate = useNavigate()
+
+    const state = location.state
+
+    const { userData: data } = state
+    //  const data = userData?.user
     const [mode, setMode] = useState('info')
     const handleModeChange = (e) => {
         setMode(e.target.value)

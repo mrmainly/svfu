@@ -14,6 +14,7 @@ const initialState = {
     pass_practical_part: false,
     pass_test_part: false,
     part: 'theoretical-part',
+    part_tester: 't-p',
 }
 
 export const SurveysSlice = createSlice({
@@ -52,6 +53,9 @@ export const SurveysSlice = createSlice({
         },
         changePartsStatus(state, action) {
             state.part = action.payload
+        },
+        changePartTester(state, action) {
+            state.part_tester = action.payload
         },
     },
 })

@@ -18,8 +18,9 @@ import {
     QualificationEdit,
     CertificationResultsDetial,
     Applying,
-    TheoreticalPart,
-    PracticalPart,
+    // TheoreticalPart,
+    // PracticalPart,
+    TesterSurveyPart,
     UsersDetail,
     UsersList,
     TestsBank,
@@ -77,14 +78,14 @@ function App() {
                         element={<QualificationEdit />}
                         path={`${ROUTES.QUALIFICATION_EDITING}/:id`}
                     />
-                    <Route element={<TheoreticalPart />} path={ROUTES.THEORETICAL_PART} />
+                    <Route element={<TesterSurveyPart />} path={ROUTES.TESTER_SURVEY_PART} />
                     <Route element={<Applying />} path={ROUTES.APPILYNG} />
                     <Route
                         element={<CertificationResultsDetial />}
                         path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
                     />
                     {/* <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} /> */}
-                    <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} />
+                    {/* <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} /> */}
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
                     <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />

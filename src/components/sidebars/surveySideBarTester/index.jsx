@@ -2,11 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { Typography, Button } from 'antd'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
-import { useLocation } from 'react-router-dom'
+import moment from 'moment'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import ROUTES from '../../../routes'
-import moment from 'moment'
+import TimeIsUpModal from '../../../pages/surveys/tester/components/modals/TimeIsUpModal'
 
 import '../surveySideBar.css'
 
@@ -14,14 +13,14 @@ const { Text } = Typography
 
 const SurveysSideBar = () => {
     const Ref = useRef(null)
+    const [open, setOpen] = useState(true)
 
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
 
-    const { arrayIndex } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex, changeTimeStatus } = SurveysSlice.actions
+    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
+    const { handleArrayIndex } = SurveysSlice.actions
     const dispatch = useDispatch()
-    const location = useLocation()
 
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
@@ -69,16 +68,9 @@ const SurveysSideBar = () => {
         return deadline
     }
 
-    const TimerIsAp = () => {
-        document.querySelector('.theoretical-form-button').click()
-        document.querySelector('.practical-form-button').click()
-        dispatch(changeTimeStatus(true))
-    }
-
-    timer == '00:00' && TimerIsAp()
-
     return (
         <div style={{ marginLeft: 28 }}>
+            {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div className="root">
                 <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
@@ -91,17 +83,11 @@ const SurveysSideBar = () => {
                                   style={{
                                       background: arrayIndex === index ? '#2f80ed' : 'white',
                                       color: arrayIndex === index ? 'white' : '#2f80ed',
-                                      opacity:
-                                          location.pathname === ROUTES.PRACTICAL_PART ? 0.6 : 1,
-                                      cursor:
-                                          location.pathname === ROUTES.PRACTICAL_PART
-                                              ? 'text'
-                                              : 'pointer',
+                                      opacity: part_tester === 'p-p' ? 0.6 : 1,
+                                      cursor: part_tester === 'p-p' ? 'text' : 'pointer',
                                   }}
                                   onClick={() =>
-                                      location.pathname === ROUTES.PRACTICAL_PART
-                                          ? ''
-                                          : dispatch(handleArrayIndex(index))
+                                      part_tester === 'p-p' ? '' : dispatch(handleArrayIndex(index))
                                   }
                               >
                                   {index + 1}
@@ -147,7 +133,7 @@ const SurveysSideBar = () => {
                 </div>
             </div>
             {/* <Button onClick={onClickReset}>asd</Button> */}
-            {location.pathname === ROUTES.PRACTICAL_PART ? (
+            {part_tester === 'p-p' ? (
                 <Button
                     type="default"
                     style={{
@@ -182,9 +168,6 @@ const SurveysSideBar = () => {
                     Завершить тестовую часть
                 </Button>
             )}
-            {/* <Button onClick={() => }>
-                asd
-            </Button> */}
         </div>
     )
 }

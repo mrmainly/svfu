@@ -10,8 +10,7 @@ import QualificationDetail from './qualifications/detail'
 import QualificationEdit from './qualifications/edit'
 import CertificationResultsDetial from './certification-results/detail'
 import Applying from './applying'
-import TheoreticalPart from './surveys/tester/theoretical-part'
-import PracticalPart from './surveys/tester/practical-part'
+import TesterSurveyPart from './surveys/tester'
 import UsersDetail from './users/detail'
 import UsersList from './users/list'
 import AttestationsQualifications from './attestations/attestations-qualification/list'
@@ -55,10 +54,9 @@ export {
     QualificationAdded,
     QualificationDetail,
     QualificationEdit,
-    TheoreticalPart,
+    TesterSurveyPart,
     CertificationResultsDetial,
     Applying,
-    PracticalPart,
     UsersDetail,
     UsersList,
     AttestationsQualifications,

@@ -1,27 +1,27 @@
 import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { MyButton } from '../../../../../../components'
-import { useSurveyPostMutation } from '../../../../../../services/SurveysService'
-import ROUTES from '../../../../../../routes'
+import { MyButton } from '../../../../../components'
+import { useSurveyPostMutation } from '../../../../../services/SurveysService'
+import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
+import ROUTES from '../../../../../routes'
 
 const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
     const [postSurvey] = useSurveyPostMutation()
-    const { timeStatus } = useSelector((state) => state.survey_slice)
+    const { changePartTester } = SurveysSlice.actions
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const onFinishSubmit = () => {
         postSurvey({ body: postData, id: id }).then((res) => {
             if (res.data) {
                 if (res.data.survey_status === 'ON_REVIEW') {
                     message.error('Вы не прошли тестовую часть')
-                    navigate(ROUTES.PROFILE)
+                    navigate(ROUTES.AVAILABLE_TEST)
                 } else {
-                    navigate(ROUTES.PRACTICAL_PART, {
-                        state: { id: id },
-                    })
+                    dispatch(changePartTester('p-p'))
                 }
             }
         })
@@ -40,7 +40,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                 onCancel={handleClose}
                 footer={[
                     <MyButton size="medium" onClick={onFinishSubmit} key="end">
-                        {timeStatus ? 'Ok' : 'Закончить тестирование'}
+                        Закончить тестирование
                     </MyButton>,
                     <Button
                         size="medium"
@@ -48,7 +48,6 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                             background: '#6C757D',
                             color: 'white',
                             borderRadius: 4,
-                            display: timeStatus ? 'none' : '',
                         }}
                         onClick={handleClose}
                         key="back"
@@ -57,11 +56,7 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
                     </Button>,
                 ]}
             >
-                <p>
-                    {timeStatus
-                        ? 'Мы отправим вам результаты в ближайшее время'
-                        : 'Закончив тестовую часть, вы не сможете изменить свои ответы на вопросы'}
-                </p>
+                <p>Закончив тестовую часть, вы не сможете изменить свои ответы на вопросы</p>
             </Modal>
         </>
     )

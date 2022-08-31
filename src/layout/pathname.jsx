@@ -80,7 +80,7 @@ export const pathname = (params, path, role, full_name, navigate, current_path) 
                     <BsArrowLeft
                         style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
                         onClick={() => {
-                            navigate(path)
+                            navigate(-1)
                         }}
                     />
                     <span

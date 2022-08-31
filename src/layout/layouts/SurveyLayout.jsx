@@ -33,8 +33,7 @@ const SurveyLayout = () => {
                 >
                     <Outlet />
                 </div>
-                {params.pathname === ROUTES.THEORETICAL_PART ||
-                params.pathname === ROUTES.PRACTICAL_PART ? (
+                {params.pathname === ROUTES.TESTER_SURVEY_PART ? (
                     <SurveysSideBarTester />
                 ) : (
                     <SurveysSideBar />

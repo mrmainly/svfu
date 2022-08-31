@@ -1,25 +1,35 @@
 import React from 'react'
-
+import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Typography, Button, Spin } from 'antd'
 import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
-import { useGetSurveyModeratorIdQuery } from '../../../services/ModeratorService'
+import {
+    useGetSurveyModeratorIdQuery,
+    useGetModeratorUserIdQuery,
+} from '../../../services/ModeratorService'
+import { DynamicPathSlice } from '../../../reducers/DynamicPathSlice'
 
 const { Title, Text } = Typography
 
 const Moderator = () => {
     const location = useLocation()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const state = location.state
 
     const { id } = state
+    const { handlePath, handleRole, handleCurrentPath, handleFullName } = DynamicPathSlice.actions
 
     const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
 
+    const { data: userData } = useGetModeratorUserIdQuery({ id: surveyquest?.id })
+    const last_name = userData?.user.last_name ? userData?.user.last_name + ' ' : ''
+    const first_name = userData?.user.first_name ? userData?.user.first_name + ' ' : ''
+    const patronymic = userData?.user.patronymic ? userData?.user.patronymic + ' ' : ''
     const info = [
         {
             title: 'Заключение по теоретической части',
@@ -125,11 +135,17 @@ const Moderator = () => {
                 ghost
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.MODERATOR_USERS_DETAIL + `/${surveyquest?.id}`)
-                    //   dispatch(handlePath(ROUTES.MODERATOR_USERS_DETAIL + `/${surveyquest?.id}`))
-                    //   dispatch(handleRole(surveyquest?.))
-                    //   dispatch(handleFullName(record.survey.name))
-                    //   dispatch(handleCurrentPath(ROUTES.MODERATOR))
+                    navigate(ROUTES.MODERATOR_USERS_DETAIL + `/${surveyquest?.id}`, {
+                        state: {
+                            userData: userData?.user,
+                        },
+                    })
+                    dispatch(handlePath(ROUTES.MODERATOR))
+                    dispatch(handleRole(userData?.user.role))
+                    dispatch(handleFullName(last_name + first_name + patronymic))
+                    dispatch(
+                        handleCurrentPath(ROUTES.MODERATOR_USERS_DETAIL + `/${surveyquest?.id}`)
+                    )
                 }}
             >
                 Профиль аттестуемого
