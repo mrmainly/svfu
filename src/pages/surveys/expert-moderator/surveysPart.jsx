@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 
 import TheoreticalPartExMo from './components/parts/theoretical_part_exmo'
 import PracticalPartExMo from './components/parts/practical_part_exmo'
-import AnswerTheoreticalPartExpertModal from './components/modals/AnswerTheoreticalPartExpertModal'
-import AnswerTheoreticalPartModeratorModal from './components/modals/AnswerTheoreticalPartModeratorModal'
+import AnswerExpertModal from './components/modals/AnswerExpertModal'
+import AnswerModeratorModal from './components/modals/AnswerModeratorModal'
 import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
 
 const SurveysPart = () => {
@@ -19,9 +19,9 @@ const SurveysPart = () => {
     return (
         <div>
             {role === 'MODERATOR' ? (
-                <AnswerTheoreticalPartModeratorModal id={id} surveyquest={surveyquest} />
+                <AnswerModeratorModal id={id} surveyquest={surveyquest} />
             ) : (
-                <AnswerTheoreticalPartExpertModal id={id} />
+                <AnswerExpertModal id={id} />
             )}
 
             <VerificationSubscribeModal id={id} />
