@@ -92,10 +92,6 @@ const ProfileForm = () => {
                             pattern: item.pattern ? item.pattern : '',
                             message: item.pattern_message ? item.pattern_message : '',
                         },
-                        {
-                            min: item.len ? item.len : '',
-                            message: item.len_message ? item.len_message : '',
-                        },
                     ]}
                     labelCol={{ span: 24 }}
                 >

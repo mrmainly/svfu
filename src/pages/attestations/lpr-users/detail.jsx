@@ -42,7 +42,7 @@ const LprUsersDetail = () => {
         },
         {
             name: 'Дата рождения',
-            value: data?.birth_date ? moment(data?.birth_date).format('DD.MM.YYYY, hh:mm') : '-',
+            value: data?.birth_date ? moment(data?.birth_date).format('DD.MM.YYYY') : '-',
         },
         {
             name: 'Электронная почта',

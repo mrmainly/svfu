@@ -6,7 +6,7 @@ import ROUTES from '../../../routes'
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
-import RoleChangeModal from './components/modals/RoleChangeModal'
+import UserChangeModal from './components/modals/UserChangeModal'
 import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
 
 import moment from 'moment'
@@ -46,7 +46,7 @@ const AdminUsersDetail = () => {
         },
         {
             name: 'Дата рождения',
-            value: data?.birth_date ? moment(data?.birth_date).format('DD.MM.YYYY, hh:mm') : '-',
+            value: data?.birth_date ? moment(data?.birth_date).format('DD.MM.YYYY') : '-',
         },
         {
             name: 'Электронная почта',
@@ -193,7 +193,7 @@ const AdminUsersDetail = () => {
                         setOpen(true)
                     }}
                 >
-                    Изменить роль пользователя
+                    Редактировать пользователя
                 </Button>
             </div>
             {mode === 'info' && (
@@ -230,7 +230,7 @@ const AdminUsersDetail = () => {
                     {data?.is_active ? 'Заблокировать' : 'Разблокировать'}
                 </Button>
             </div>
-            <RoleChangeModal open={open} setOpen={setOpen} data={data?.role} />
+            <UserChangeModal open={open} setOpen={setOpen} data={data} />
         </div>
     )
 }

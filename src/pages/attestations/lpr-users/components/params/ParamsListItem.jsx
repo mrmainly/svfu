@@ -25,11 +25,7 @@ const ParamsListItem = ({ param }) => {
                     letterSpacing: '0.005em',
                 }}
             >
-                {param.name === 'Дата рождения'
-                    ? param.value !== '-'
-                        ? moment(param.value).format('DD.MM.YYYY')
-                        : param.value
-                    : param.value}
+                {param.value}
             </div>
         </div>
     )
