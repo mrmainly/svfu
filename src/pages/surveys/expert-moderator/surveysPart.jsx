@@ -18,7 +18,11 @@ const SurveysPart = () => {
 
     return (
         <div>
-            <AnswerTheoreticalPartExpertModal id={id} />
+            <AnswerTheoreticalPartExpertModal
+                id={id}
+                expert_review={surveyquest?.expert_review}
+                main_expert={surveyquest.main_expert}
+            />
             <VerificationSubscribeModal id={id} />
             {part === 'theoretical-part' ? (
                 <TheoreticalPartExMo surveyquest={surveyquest} />

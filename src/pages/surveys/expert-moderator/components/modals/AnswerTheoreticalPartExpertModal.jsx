@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Checkbox, message } from 'antd'
+import { Button, Modal, Form, Input, Checkbox, message, Typography } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertService'
+import ExpertReviewCard from '../cards/expert_review_card'
 
 const { TextArea } = Input
 
-const AnswerTheoreticalPartExpertModal = ({ id }) => {
+const { Title } = Typography
+
+const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) => {
     const [subscribe, setSubscribe] = useState(false)
 
     const [sendSubscribeExpert] = useSendSubscribeExpertMutation()
@@ -74,6 +77,36 @@ const AnswerTheoreticalPartExpertModal = ({ id }) => {
                     </Button>,
                 ]}
             >
+                {main_expert && (
+                    <div style={{ marginBottom: 20 }}>
+                        <div>
+                            <Title level={5} style={{ marginBottom: 20 }}>
+                                Заключения по теоретической части
+                            </Title>
+                            {expert_review.length &&
+                                expert_review.map((item, index) => (
+                                    <ExpertReviewCard
+                                        key={index}
+                                        expert_name={item.user}
+                                        recommendation={item.conclusion_first_part}
+                                    />
+                                ))}
+                        </div>
+                        <div style={{ marginTop: 20 }}>
+                            <Title level={5} style={{ marginBottom: 20 }}>
+                                Заключения по практической части
+                            </Title>
+                            {expert_review.length &&
+                                expert_review.map((item, index) => (
+                                    <ExpertReviewCard
+                                        key={index}
+                                        expert_name={item.user}
+                                        recommendation={item.conclusion_second_part}
+                                    />
+                                ))}
+                        </div>
+                    </div>
+                )}
                 <Form id="form-expert-theoretical-part" onFinish={onFinishSubmit}>
                     <Form.Item
                         required
