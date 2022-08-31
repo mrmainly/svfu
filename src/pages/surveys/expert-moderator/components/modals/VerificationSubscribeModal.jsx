@@ -7,6 +7,7 @@ import {
     useSendCodeMutation,
     useSendAnswerExpertMutation,
 } from '../../../../../services/ExpertService'
+import { useSendAnswerModeratorMutation } from '../../../../../services/ModeratorService'
 import ROUTES from '../../../../../routes'
 
 const { TextArea } = Input

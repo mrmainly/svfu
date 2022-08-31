@@ -13,7 +13,20 @@ export const moderator = api.injectEndpoints({
                 }
             },
         }),
+        sendAnswerModerator: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `moderator/result/${id}`,
+                    method: 'POST',
+                    body,
+                }
+            },
+        }),
     }),
 })
 
-export const { useGetTestResultQuery, useGetSurveyModeratorIdQuery } = moderator
+export const {
+    useGetTestResultQuery,
+    useGetSurveyModeratorIdQuery,
+    useSendAnswerModeratorMutation,
+} = moderator
