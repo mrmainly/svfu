@@ -22,9 +22,9 @@ const SurveysSideBar = () => {
     const location = useLocation()
 
     useEffect(() => {
-        const newData = JSON.parse(localStorage.getItem('side_bar_data_expert'))
+        const newData = JSON.parse(localStorage.getItem('side_bar_data_ex_mo'))
         setData(newData)
-    }, [localStorage.getItem('side_bar_data_expert')])
+    }, [localStorage.getItem('side_bar_data_ex_mo')])
 
     const colorSwitchDanger = (id) => {
         const newData = data.answers_first_part

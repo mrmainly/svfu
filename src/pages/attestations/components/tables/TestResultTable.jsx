@@ -1,6 +1,5 @@
 import moment from 'moment'
 import { useState } from 'react'
-import TBEditModal from '../modals/tbeditmodal'
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -66,47 +65,45 @@ const TestResultTable = ({ data, loading }) => {
             key: 'x',
             render: (status_result, record) =>
                 status_result === 'WAITING' ? (
-                    <>
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                navigate(ROUTES.MODERATOR, {
-                                    state: {
-                                        surveyquest: record,
-                                        id: record.id,
-                                    },
-                                })
-                                localStorage.setItem(
-                                    'side_bar_data_moderator',
-                                    JSON.stringify(record, null, '\t')
-                                )
-                            }}
-                        >
-                            Проверить
-                        </Button>
-                    </>
-                ) : status_result === 'FINISHED' ? (
                     <Button
                         type="primary"
-                        ghost
-                        // onClick={() => {
-                        //     const itemData = data?.filter((e) => e.id === id)
-                        //     setCurrentData(itemData)
-                        //     setModalEditTB(true)
-                        // }}
+                        onClick={() => {
+                            navigate(ROUTES.EXPERT, {
+                                state: {
+                                    id: record.id,
+                                },
+                            })
+                            localStorage.setItem(
+                                'side_bar_data_ex_mo',
+                                JSON.stringify(record, null, '\t')
+                            )
+                        }}
                     >
+                        Проверить
+                    </Button>
+                ) : status_result === 'FINISHED' ? (
+                    <Button type="primary" ghost>
                         Проверено
                     </Button>
-                ) : (
+                ) : status_result === 'FINISHED_BY_EXPERTS' ? (
                     <Button
                         type="primary"
-                        disabled
-                        // onClick={() => {
-                        //     const itemData = data?.filter((e) => e.id === id)
-                        //     setCurrentData(itemData)
-                        //     setModalEditTB(true)
-                        // }}
+                        onClick={() => {
+                            navigate(ROUTES.MODERATOR, {
+                                state: {
+                                    id: record.id,
+                                },
+                            })
+                            localStorage.setItem(
+                                'side_bar_data_ex_mo',
+                                JSON.stringify(record, null, '\t')
+                            )
+                        }}
                     >
+                        Начать
+                    </Button>
+                ) : (
+                    <Button type="primary" disabled>
                         Недоступно
                     </Button>
                 ),
@@ -116,7 +113,6 @@ const TestResultTable = ({ data, loading }) => {
     return (
         <>
             <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
-            <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
         </>
     )
 }

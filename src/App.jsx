@@ -44,6 +44,7 @@ import {
     AdminUsersDetail,
     AdminExam,
     Expert,
+    Moderator,
     AttestedAppeal,
     ModeratorTestResult,
     SurveysPart,
@@ -113,6 +114,7 @@ function App() {
                     />
                     <Route element={<PracticalPartExpert />} path={ROUTES.PRACTICAL_PART_EXPERT} /> */}
                     <Route element={<Expert />} path={ROUTES.EXPERT} />
+                    <Route element={<Moderator />} path={ROUTES.MODERATOR} />
                     <Route element={<ModeratorTestResult />} path={ROUTES.MODERATOR_TEST_RESULT} />
                     <Route element={<AttestedAppeal />} path={ROUTES.ATTESTED_APPEAL} />
                     <Route element={<SurveysPart />} path={ROUTES.SURVEYS_PART} />
