@@ -35,7 +35,7 @@ const VerificationSubscribeModalModerator = ({ id }) => {
                 }).then((res) => {
                     if (res.data) {
                         dispatch(openSubscribeModalModerator(false))
-                        navigate(ROUTES.TEST_RESULT)
+                        navigate(ROUTES.MODERATOR_TEST_RESULT)
                         message.success(
                             'Вы подтвердили экспертизу и результаты экзамена отправлены!'
                         )
