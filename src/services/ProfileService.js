@@ -29,6 +29,7 @@ export const profile = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'Profile' }],
         }),
     }),
 })

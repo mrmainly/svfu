@@ -179,7 +179,7 @@ const UserAddModal = ({ open, setOpen }) => {
         if (data.birth_date) {
             data.birth_date = moment(data.birth_date._d).format('YYYY-MM-DD')
         }
-        console.log(data)
+
         postUser({ body: data }).then((res) => {
             if (res.data) {
                 message.success('Пользователь создан')

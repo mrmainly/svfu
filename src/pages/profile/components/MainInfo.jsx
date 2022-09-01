@@ -1,5 +1,5 @@
-import React from 'react'
-import { Typography, Space, Form, Upload } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Typography, Space, Upload, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
 import { useProfilePostPhotoMutation } from '../../../services/ProfileService'
@@ -7,8 +7,20 @@ import { useProfilePostPhotoMutation } from '../../../services/ProfileService'
 const { Text } = Typography
 
 const MainInfo = ({ data }) => {
-    const [image, setImage] = React.useState('')
-    const [profilePostImage] = useProfilePostPhotoMutation()
+    const [fileList, setFileList] = useState([])
+
+    const [profilePostImage] = useProfilePostPhotoMutation('')
+
+    useEffect(() => {
+        setFileList([
+            {
+                uid: '-1',
+                name: 'image.png',
+                status: 'done',
+                url: `${data.photo}`,
+            },
+        ])
+    }, [data.photo])
 
     const uploadButton = (
         <div>
@@ -17,21 +29,14 @@ const MainInfo = ({ data }) => {
         </div>
     )
 
-    // const normFile = (e) => {
-    //     console.log("Upload event:", e);
-    //     if (Array.isArray(e)) {
-    //         return e;
-    //     }
-    //     return e?.fileList;
-    // };
-
     const handleImageChange = (e) => {
-        console.log(e)
         const image = e.file.originFileObj
         let formData = new FormData()
         formData.append('photo', image)
         profilePostImage(formData).then((res) => {
-            console.log(res)
+            if (res.error) {
+                message.error('размер файла является слишком большим')
+            }
         })
     }
 
@@ -70,14 +75,7 @@ const MainInfo = ({ data }) => {
         },
     ]
 
-    const defualtFileList = [
-        {
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: `${data.photo}`,
-        },
-    ]
+    const defualtFileList = []
 
     return (
         <>
@@ -89,9 +87,9 @@ const MainInfo = ({ data }) => {
                     listType="picture-card"
                     multiple={false}
                     maxCount={1}
-                    // onPreview={handlePreview}
-                    defaultFileList={data.photo === null ? null : defualtFileList}
+                    fileList={data.photo === null ? null : fileList}
                     onChange={handleImageChange}
+                    action="/asd"
                 >
                     {uploadButton}
                 </Upload>

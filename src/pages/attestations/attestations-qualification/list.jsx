@@ -12,7 +12,7 @@ const { Search } = Input
 const AttestationsQualifications = () => {
     const { data, isLoading } = useGetAttestationsQualificationQuery()
     const [modalNewQuali, setModalNewQuali] = useState(false)
-    const onSearch = (value) => console.log(value)
+
     return (
         <div>
             <Row gutter={10} style={{ marginBottom: '10px' }}>
@@ -25,7 +25,6 @@ const AttestationsQualifications = () => {
                     <Search
                         size="large"
                         placeholder="Поиск..."
-                        onSearch={onSearch}
                         enterButton
                         style={{ borderRadius: 4 }}
                     />
