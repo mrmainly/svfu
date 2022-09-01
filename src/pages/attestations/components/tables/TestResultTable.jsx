@@ -128,12 +128,30 @@ const TestResultTable = ({ data, loading }) => {
                                     dispatch(handleFullName(record.survey.name))
                                     dispatch(handleCurrentPath(ROUTES.MODERATOR))
                                 } else {
-                                    message.error('Вы не являетесь председателем экспертов')
+                                    message.error('Вы не являетесь председателем модераторов')
                                 }
                             })
                         }}
                     >
                         Начать
+                    </Button>
+                ) : status_result === 'CHECKED_BY_MAIN_MODERATOR' &&
+                  record.main_moderator === true ? (
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            navigate(ROUTES.MODERATOR, {
+                                state: {
+                                    id: record.id,
+                                },
+                            })
+                            localStorage.setItem(
+                                'side_bar_data_ex_mo',
+                                JSON.stringify(record, null, '\t')
+                            )
+                        }}
+                    >
+                        Продолжить
                     </Button>
                 ) : (
                     <Button style={{ width: '100%' }} type="primary" disabled>

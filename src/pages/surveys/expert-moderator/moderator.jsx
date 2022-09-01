@@ -7,7 +7,7 @@ import { Typography, Button, Spin } from 'antd'
 import moment from 'moment'
 
 import { Line } from '../../../components'
-import ExpertReviewCard from './components/cards/expert_review_card'
+import ModeratorReviewCard from './components/cards/moderator_review_card'
 
 import ROUTES from '../../../routes'
 import {
@@ -28,7 +28,7 @@ const Moderator = () => {
     const { id } = state
 
     const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
-
+    console.log('surveyquest', surveyquest)
     const info = [
         {
             title: 'Заключение по теоретической части',
@@ -103,17 +103,21 @@ const Moderator = () => {
                 </Title>
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title
-                    level={5}
-                    style={{
-                        color:
-                            surveyquest?.tester_percent_score < surveyquest.passing_percent_score
-                                ? 'red'
-                                : '#219653',
-                    }}
-                >
-                    Итоговые баллы: {surveyquest?.first_part_score}/{surveyquest?.max_score}
-                    <span style={{ marginLeft: 10 }}>{surveyquest?.tester_percent_score}%</span>
+                <Title level={5}>
+                    Итоговые баллы:
+                    <span
+                        style={{
+                            marginLeft: 10,
+                            color:
+                                surveyquest?.tester_percent_score <
+                                surveyquest.passing_percent_score
+                                    ? 'red'
+                                    : '#219653',
+                        }}
+                    >
+                        {surveyquest?.first_part_score}/{surveyquest?.max_score} (
+                        {surveyquest?.tester_percent_score}%)
+                    </span>
                 </Title>
             </div>
             <Line />
@@ -169,12 +173,13 @@ const Moderator = () => {
                 >
                     Решения модераторов
                 </Typography>
-                {surveyquest?.result?.moderator_review?.length &&
+                {surveyquest?.moderator_review?.length &&
                     surveyquest.moderator_review.map((item, index) => (
-                        <ExpertReviewCard
+                        <ModeratorReviewCard
                             key={index}
-                            expert_name={item.user}
-                            recommendation={item.conclusion_second_part}
+                            moderator_name={item.user_id}
+                            recommendation={item.conclusion}
+                            estimate={item.estimate}
                         />
                     ))}
             </div>

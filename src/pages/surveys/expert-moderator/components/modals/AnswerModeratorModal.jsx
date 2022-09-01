@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertService'
-
+import ModeratorReviewCard from '../cards/moderator_review_card'
 const { TextArea } = Input
 
 const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
@@ -38,7 +38,22 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
     const onChange = (e) => {
         setSubscribe(e.target.checked)
     }
-
+    const info = [
+        {
+            title: 'Заключение по теоретической части',
+            recomendation: {
+                name: 'Рекомендация:',
+                label: surveyquest?.main_expert_review_first_part,
+            },
+        },
+        {
+            title: 'Заключение практической части',
+            recomendation: {
+                name: 'Рекомендация:',
+                label: surveyquest?.main_expert_review_second_part,
+            },
+        },
+    ]
     return (
         <>
             <Modal
@@ -74,30 +89,68 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
                     </Button>,
                 ]}
             >
-                <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
-                    Заключение председателя экспертов по теоретической части
-                </Typography>
-                <div
-                    style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
-                >
-                    <Typography>Рекомендация:</Typography>
-                    <Typography>{surveyquest.main_expert_review_first_part}</Typography>
-                </div>
-                <Divider />
-                <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
-                    Заключение председателя экспертов по практической части
-                </Typography>
-                <div
-                    style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
-                >
-                    <Typography>Рекомендация:</Typography>
-                    <Typography>{surveyquest.main_expert_review_second_part}</Typography>
-                </div>
-                {surveyquest.main_moderator && (
-                    <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
-                        Заключения модераторов
+                {info.map((item, index) => (
+                    <div key={index}>
+                        <Typography.Text
+                            style={{
+                                marginBottom: '16px',
+                                fontFamily: 'Roboto',
+                                fontWeight: '400',
+                                fontStyle: 'italic',
+                                fontSize: '18px',
+                                lineHeight: '27px',
+                            }}
+                        >
+                            {item.title}
+                        </Typography.Text>
+                        <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                            <Typography.Text
+                                style={{
+                                    width: '120px',
+                                    fontFamily: 'Roboto',
+                                    fontWeight: '500',
+                                    fontSize: '16px',
+                                    lineHeight: '24px',
+                                }}
+                            >
+                                {item.recomendation.name}
+                            </Typography.Text>
+                            <Typography.Text
+                                style={{
+                                    fontFamily: 'Roboto',
+                                    fontWeight: '500',
+                                    fontSize: '16px',
+                                    lineHeight: '24px',
+                                }}
+                            >
+                                {item.recomendation.label}
+                            </Typography.Text>
+                        </div>
+                    </div>
+                ))}
+                <div style={{ marginTop: '8px' }}>
+                    <Typography
+                        style={{
+                            marginBottom: '16px',
+                            fontFamily: 'Roboto',
+                            fontWeight: '400',
+                            fontStyle: 'italic',
+                            fontSize: '18px',
+                            lineHeight: '27px',
+                        }}
+                    >
+                        Решения модераторов
                     </Typography>
-                )}
+                    {surveyquest?.moderator_review?.length &&
+                        surveyquest.moderator_review.map((item, index) => (
+                            <ModeratorReviewCard
+                                key={index}
+                                moderator_name={item.user_id}
+                                recommendation={item.conclusion}
+                                estimate={item.estimate}
+                            />
+                        ))}
+                </div>
 
                 <Divider />
                 <Form id="form-moderator-theoretical-part" onFinish={onFinishSubmit}>
