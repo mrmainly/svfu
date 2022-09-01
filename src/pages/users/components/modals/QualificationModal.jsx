@@ -1,7 +1,7 @@
 import { Modal } from 'antd'
 import moment from 'moment'
 
-import { MyButton } from '../../../../../components'
+import { MyButton } from '../../../../components'
 
 const QualificationModal = ({ open, setOpen, data }) => {
     const dataList = [

@@ -1,8 +1,6 @@
 import ROUTES from '../routes'
-import { roles } from '../translation/RolesTranslation'
-import { BsArrowLeft } from 'react-icons/bs'
 
-export const pathname = (params, path, role, full_name, navigate, current_path) => {
+export const pathname = (params) => {
     switch (params.pathname) {
         case ROUTES.PROFILE:
             return 'Профиль'
@@ -52,8 +50,6 @@ export const pathname = (params, path, role, full_name, navigate, current_path) 
             return 'Аттестационные протоколы'
         case ROUTES.LPR_USERS:
             return 'Пользователи'
-        case ROUTES.LPR_USERS_DETAIL:
-            return ''
         case ROUTES.TEST_RESULT:
             return 'Пользователи'
         case ROUTES.LPR_EXAM:
@@ -66,35 +62,7 @@ export const pathname = (params, path, role, full_name, navigate, current_path) 
             return 'Подтверждение экспертизы'
         case ROUTES.ATTESTED_APPEAL:
             return 'Апелляции'
-        case current_path:
-            return (
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'start',
-                        alignItems: 'center',
-                        marginBottom: '10px',
-                    }}
-                >
-                    <BsArrowLeft
-                        style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
-                        onClick={() => {
-                            navigate(-1)
-                        }}
-                    />
-                    <span
-                        style={{
-                            fontFamily: 'Roboto',
-                            fontStyle: 'normal',
-                            fontWeight: '400',
-                            fontSize: '20px',
-                            lineHeight: '30px',
-                        }}
-                    >
-                        {roles(role) + ' ' + full_name}
-                    </span>
-                </div>
-            )
+        default:
+            return ''
     }
 }
