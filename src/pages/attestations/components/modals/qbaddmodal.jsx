@@ -70,7 +70,7 @@ const QBAddModal = ({ open, setOpen }) => {
     const [postAttestationsQuestionsBankFile] = usePostAttestationsQuestionsBankFileMutation()
 
     const onSubmit = (data) => {
-        if (data.technique === 'ONE_CHOICE') {
+        if (data.technique === 'ONE_CHOICE' || data.technique === 'MULTIPLE_CHOICE') {
             data.variant = data.variant.map(
                 (item, index) =>
                     (item = { name: item.name, is_true: radioId === index ? true : false })
