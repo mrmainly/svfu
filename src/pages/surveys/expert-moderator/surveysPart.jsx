@@ -17,7 +17,7 @@ const SurveysPart = () => {
     const { surveyquest, id, appeal } = state
     const { part } = useSelector((state) => state.survey_slice)
     const role = JSON.parse(localStorage.getItem('role'))
-    console.log(surveyquest)
+    console.log('sp', surveyquest)
     return (
         <div>
             {role === 'MODERATOR' && appeal ? (

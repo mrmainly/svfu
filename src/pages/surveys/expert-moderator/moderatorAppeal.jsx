@@ -7,9 +7,8 @@ import moment from 'moment'
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
 import { useGetAppealIdQuery } from '../../../services/ModeratorService'
-import { uaStatus } from '../../../translation/StatusTranslation'
-import ExpertReviewCard from './components/cards/expert_review_card'
-
+import ModeratorReviewCard from './components/cards/moderator_review_card'
+import { udEstimate } from '../../../translation/EstimateTransation'
 const { Title, Text } = Typography
 
 const ModeratorAppeal = () => {
@@ -19,9 +18,23 @@ const ModeratorAppeal = () => {
     const state = location.state
 
     const { id } = state
-    console.log('id', id)
-    const { data: surveyquest, isLoading } = useGetAppealIdQuery(id)
-
+    const { data: surveyquest, isLoading } = useGetAppealIdQuery({ id: id })
+    const info = [
+        {
+            title: 'Заключение по теоретической части',
+            recomendation: {
+                name: 'Рекомендация:',
+                label: surveyquest?.result.main_expert_review_first_part,
+            },
+        },
+        {
+            title: 'Заключение практической части',
+            recomendation: {
+                name: 'Рекомендация:',
+                label: surveyquest?.result.main_expert_review_second_part,
+            },
+        },
+    ]
     if (isLoading) {
         return (
             <div
@@ -79,86 +92,141 @@ const ModeratorAppeal = () => {
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>
                     Сообщение аттестуемого:
-                    <span style={{ marginLeft: 10 }}>{surveyquest?.result.appeal_text}</span>
+                    <span style={{ marginLeft: 10 }}>{surveyquest?.appeal_text}</span>
                 </Title>
             </div>
+
             <Line />
-            <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
-                Заключение председателя экспертов по теоретической части
-            </Typography>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '10px',
-                    marginTop: '12px',
-                }}
-            >
-                <Typography>Дата проверки:</Typography>
-                <Typography.Text strong>?????????</Typography.Text>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
-                <Typography>Рекомендация:</Typography>
-                <Typography.Text strong>
-                    {surveyquest?.result.main_expert_review_first_part}
-                </Typography.Text>
-            </div>
-            <Line />
-            <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
-                Заключение председателя экспертов по практической части
-            </Typography>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '10px',
-                    marginTop: '12px',
-                }}
-            >
-                <Typography>Дата проверки:</Typography>
-                <Typography.Text strong>????????????????????</Typography.Text>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
-                <Typography>Рекомендация:</Typography>
-                <Typography.Text strong>
-                    {surveyquest?.result.main_expert_review_second_part}
-                </Typography.Text>
-            </div>
-            <Line />
+            {info.map((item, index) => (
+                <div style={{ margin: '12px 0 16px 0' }} key={index}>
+                    <Text
+                        style={{
+                            marginBottom: '16px',
+                            fontFamily: 'Roboto',
+                            fontWeight: '400',
+                            fontStyle: 'italic',
+                            fontSize: '18px',
+                            lineHeight: '27px',
+                        }}
+                    >
+                        {item.title}
+                    </Text>
+                    <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                        <Text
+                            style={{
+                                width: '120px',
+                                fontFamily: 'Roboto',
+                                fontWeight: '500',
+                                fontSize: '16px',
+                                lineHeight: '24px',
+                                marginTop: '8px',
+                            }}
+                        >
+                            {item.recomendation.name}
+                        </Text>
+                        <Text
+                            style={{
+                                fontFamily: 'Roboto',
+                                fontWeight: '500',
+                                fontSize: '16px',
+                                lineHeight: '24px',
+                                marginTop: '8px',
+                            }}
+                        >
+                            {item.recomendation.label}
+                        </Text>
+                    </div>
+                </div>
+            ))}
             <div style={{ marginTop: '8px' }}>
-                <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
+                <Typography
+                    style={{
+                        marginBottom: '16px',
+                        fontFamily: 'Roboto',
+                        fontWeight: '400',
+                        fontStyle: 'italic',
+                        fontSize: '18px',
+                        lineHeight: '27px',
+                    }}
+                >
                     Решения модераторов
                 </Typography>
                 {surveyquest?.result?.moderator_review?.length &&
-                    surveyquest?.moderator_review.map((item, index) => (
-                        <ExpertReviewCard
+                    surveyquest?.result.moderator_review.map((item, index) => (
+                        <ModeratorReviewCard
                             key={index}
-                            expert_name={item.user}
-                            recommendation={item.conclusion_second_part}
+                            moderator_name={item.user_id}
+                            recommendation={item.conclusion}
+                            estimate={item.estimate}
                         />
                     ))}
             </div>
             <Line />
-            <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
-                Ваше заключение аттестации
-            </Typography>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '10px',
-                    marginTop: '12px',
-                }}
-            >
-                <Typography>Аттестация:</Typography>
-                <Typography.Text strong>{uaStatus(surveyquest?.result_estimate)}</Typography.Text>
+            <div style={{ margin: '12px 0 16px 0' }}>
+                <Text
+                    style={{
+                        marginBottom: '16px',
+                        fontFamily: 'Roboto',
+                        fontWeight: '400',
+                        fontStyle: 'italic',
+                        fontSize: '18px',
+                        lineHeight: '27px',
+                    }}
+                >
+                    Ваше заключение аттестации
+                </Text>
+                <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                    <Text
+                        style={{
+                            width: '120px',
+                            fontFamily: 'Roboto',
+                            fontWeight: '500',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            marginTop: '8px',
+                        }}
+                    >
+                        Аттестация:
+                    </Text>
+                    <Text
+                        style={{
+                            fontFamily: 'Roboto',
+                            fontWeight: '500',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            marginTop: '8px',
+                        }}
+                    >
+                        {udEstimate(surveyquest?.result.estimate)}
+                    </Text>
+                </div>
+                <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                    <Text
+                        style={{
+                            width: '120px',
+                            fontFamily: 'Roboto',
+                            fontWeight: '500',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            marginTop: '8px',
+                        }}
+                    >
+                        Рекомендация:
+                    </Text>
+                    <Text
+                        style={{
+                            fontFamily: 'Roboto',
+                            fontWeight: '500',
+                            fontSize: '16px',
+                            lineHeight: '24px',
+                            marginTop: '8px',
+                        }}
+                    >
+                        {surveyquest?.result.main_moderator_review}
+                    </Text>
+                </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
-                <Typography>Рекомендация:</Typography>
-                <Typography.Text strong>
-                    {surveyquest?.result.main_moderator_review}
-                </Typography.Text>
-            </div>
+
             <Line />
             <Button
                 type="primary"

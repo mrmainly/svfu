@@ -16,7 +16,16 @@ export const direction = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Direction' }],
         }),
+        putDirection: build.mutation({
+            query(id) {
+                return {
+                    url: `tester/application/${id}`,
+                    method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'Direction' }],
+        }),
     }),
 })
 
-export const { useGetDirectionQuery, usePostDirectionMutation } = direction
+export const { useGetDirectionQuery, usePostDirectionMutation, usePutDirectionMutation } = direction

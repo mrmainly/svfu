@@ -8,7 +8,7 @@ import moment from 'moment'
 
 import { Line } from '../../../components'
 import ModeratorReviewCard from './components/cards/moderator_review_card'
-
+import { udEstimate } from '../../../translation/EstimateTransation'
 import ROUTES from '../../../routes'
 import {
     useGetSurveyModeratorIdQuery,
@@ -28,7 +28,6 @@ const Moderator = () => {
     const { id } = state
 
     const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
-    console.log('surveyquest', surveyquest)
     const info = [
         {
             title: 'Заключение по теоретической части',
