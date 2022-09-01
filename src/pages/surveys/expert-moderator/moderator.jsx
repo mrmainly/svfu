@@ -5,11 +5,14 @@ import { Typography, Button, Spin } from 'antd'
 import moment from 'moment'
 
 import { Line } from '../../../components'
+import ExpertReviewCard from './components/cards/expert_review_card'
+
 import ROUTES from '../../../routes'
 import {
     useGetSurveyModeratorIdQuery,
     useGetModeratorUserIdQuery,
 } from '../../../services/ModeratorService'
+
 import { DynamicPathSlice } from '../../../reducers/DynamicPathSlice'
 
 const { Title, Text } = Typography
@@ -129,6 +132,28 @@ const Moderator = () => {
                     </div>
                 </div>
             ))}
+            <div style={{ marginTop: '8px' }}>
+                <Typography
+                    style={{
+                        marginBottom: '16px',
+                        fontFamily: 'Roboto',
+                        fontWeight: '400',
+                        fontStyle: 'italic',
+                        fontSize: '18px',
+                        lineHeight: '27px',
+                    }}
+                >
+                    Решения модераторов
+                </Typography>
+                {surveyquest?.result?.moderator_review?.length &&
+                    surveyquest.moderator_review.map((item, index) => (
+                        <ExpertReviewCard
+                            key={index}
+                            expert_name={item.user}
+                            recommendation={item.conclusion_second_part}
+                        />
+                    ))}
+            </div>
             <Line />
             <Button
                 type="primary"

@@ -7,6 +7,7 @@ import AnswerExpertModal from './components/modals/AnswerExpertModal'
 import AnswerModeratorModal from './components/modals/AnswerModeratorModal'
 import AppealModeratorModal from './components/modals/AppealModeratorModal'
 import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
+import VerificationSubscribeModalModerator from './components/modals/VerificationSubscribeModalModerator'
 
 const SurveysPart = () => {
     const location = useLocation()
@@ -22,15 +23,21 @@ const SurveysPart = () => {
             {role === 'MODERATOR' && appeal ? (
                 <AppealModeratorModal id={id} surveyquest={surveyquest} />
             ) : role === 'MODERATOR' ? (
-                <AnswerModeratorModal id={id} surveyquest={surveyquest} />
+                <>
+                    <AnswerModeratorModal id={id} surveyquest={surveyquest} />
+                    <VerificationSubscribeModalModerator id={id} />
+                </>
             ) : (
-                <AnswerExpertModal
-                    id={id}
-                    expert_review={surveyquest?.expert_review}
-                    main_expert={surveyquest.main_expert}
-                />
+                <>
+                    <AnswerExpertModal
+                        id={id}
+                        expert_review={surveyquest?.expert_review}
+                        main_expert={surveyquest.main_expert}
+                    />
+                    <VerificationSubscribeModal id={id} main_expert={surveyquest?.main_expert} />
+                </>
             )}
-            <VerificationSubscribeModal id={id} main_expert={surveyquest?.main_expert} />
+
             {part === 'theoretical-part' ? (
                 <TheoreticalPartExMo surveyquest={surveyquest} />
             ) : (

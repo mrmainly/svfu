@@ -31,7 +31,7 @@ export const moderator = api.injectEndpoints({
         }),
         getAppeal: build.query({
             query: () => `moderator/appeal/`,
-            providesTags: ['Moderator'],
+            providesTags: ['ModeratorAppeal'],
         }),
         getAppealId: build.query({
             query(id) {
@@ -40,6 +40,32 @@ export const moderator = api.injectEndpoints({
                 }
             },
             providesTags: ['Moderator'],
+        }),
+        putAppealRejectId: build.mutation({
+            query({ id }) {
+                return {
+                    url: `/moderator/appeal/${id}`,
+                    method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'ModeratorAppeal' }],
+        }),
+        putAppealAcceptId: build.mutation({
+            query({ id }) {
+                return {
+                    url: `/moderator/appeal/${id}`,
+                    method: 'PATCH',
+                }
+            },
+            invalidatesTags: [{ type: 'ModeratorAppeal' }],
+        }),
+        putMainModerator: build.mutation({
+            query({ id }) {
+                return {
+                    url: `moderator/result/${id}`,
+                    method: 'PUT',
+                }
+            },
         }),
     }),
 })
@@ -51,4 +77,7 @@ export const {
     useGetSurveyModeratorIdQuery,
     useGetModeratorUserIdQuery,
     useSendAnswerModeratorMutation,
+    usePutAppealRejectIdMutation,
+    usePutAppealAcceptIdMutation,
+    usePutMainModeratorMutation,
 } = moderator

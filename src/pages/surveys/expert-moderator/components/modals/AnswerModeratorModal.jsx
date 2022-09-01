@@ -7,23 +7,23 @@ import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertSe
 
 const { TextArea } = Input
 
-const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
+const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
     const [subscribe, setSubscribe] = useState(false)
 
     const [sendSubscribeExpert] = useSendSubscribeExpertMutation()
 
     const { expertTheoreticalPartModalOpen } = useSelector((state) => state.survey_slice)
-    const { openExpertTheoreticalPartOpen, openSubscribeModal, setTextAnswerExpert } =
+    const { openExpertTheoreticalPartOpen, openSubscribeModalModerator, setTextAnswerModerator } =
         SurveysSlice.actions
 
     const dispatch = useDispatch()
 
     const onFinishSubmit = (data) => {
-        dispatch(setTextAnswerExpert([data.estimate, data.conclusion]))
+        dispatch(setTextAnswerModerator([data.estimate, data.conclusion]))
         sendSubscribeExpert({ id: id }).then((res) => {
             if (res.data) {
                 dispatch(openExpertTheoreticalPartOpen(false))
-                dispatch(openSubscribeModal(true))
+                dispatch(openSubscribeModalModerator(true))
             } else {
                 message.error('Вы не оставили рекомендацию')
             }
@@ -42,7 +42,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
     return (
         <>
             <Modal
-                title="Вы уверены?"
+                title="Вы уверены??"
                 visible={expertTheoreticalPartModalOpen}
                 onOk={handleClose}
                 onCancel={handleClose}
@@ -53,9 +53,9 @@ const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
                             borderRadius: 4,
                         }}
                         key="save"
-                        form="form-expert-theoretical-part"
+                        form="form-moderator-theoretical-part"
                         type="primary"
-                        disabled={subscribe === false ? true : false}
+                        disabled={!subscribe ? true : false}
                         htmlType="submit"
                     >
                         Отправить
@@ -78,17 +78,6 @@ const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
                     Заключение председателя экспертов по теоретической части
                 </Typography>
                 <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '10px',
-                        marginTop: '12px',
-                    }}
-                >
-                    <Typography>Дата проверки:</Typography>
-                    <Typography>?????????</Typography>
-                </div>
-                <div
                     style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
                 >
                     <Typography>Рекомендация:</Typography>
@@ -99,24 +88,19 @@ const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
                     Заключение председателя экспертов по практической части
                 </Typography>
                 <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '10px',
-                        marginTop: '12px',
-                    }}
-                >
-                    <Typography>Дата проверки:</Typography>
-                    <Typography>????????????????????</Typography>
-                </div>
-                <div
                     style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
                 >
                     <Typography>Рекомендация:</Typography>
                     <Typography>{surveyquest.main_expert_review_second_part}</Typography>
                 </div>
+                {surveyquest.main_moderator && (
+                    <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
+                        Заключения модераторов
+                    </Typography>
+                )}
+
                 <Divider />
-                <Form id="form-expert-theoretical-part" onFinish={onFinishSubmit}>
+                <Form id="form-moderator-theoretical-part" onFinish={onFinishSubmit}>
                     <Form.Item required label="Аттестация" labelCol={{ span: 24 }} name="estimate">
                         <Select>
                             <Select.Option value="WAITING">Ожидание</Select.Option>
@@ -145,4 +129,4 @@ const AnswerTheoreticalPartExpertModal = ({ id, surveyquest }) => {
     )
 }
 
-export default AnswerTheoreticalPartExpertModal
+export default AnswerTheoreticalPartModeratorModal

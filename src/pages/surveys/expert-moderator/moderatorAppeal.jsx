@@ -7,6 +7,7 @@ import moment from 'moment'
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
 import { useGetAppealIdQuery } from '../../../services/ModeratorService'
+import { uaStatus } from '../../../translation/StatusTranslation'
 import ExpertReviewCard from './components/cards/expert_review_card'
 
 const { Title, Text } = Typography
@@ -34,7 +35,7 @@ const ModeratorAppeal = () => {
             </div>
         )
     }
-
+    console.log('surveyquest', surveyquest)
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', marginTop: 10 }}>
@@ -42,29 +43,41 @@ const ModeratorAppeal = () => {
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>
+                    Квалификация:
+                    <span style={{ marginLeft: 10 }}>{surveyquest?.survey_name}</span>
+                </Title>
+            </div>
+            <div style={{ display: 'flex', marginTop: 10 }}>
+                <Title level={5}>
                     Тест был начат:
                     <span style={{ marginLeft: 10 }}>
                         {' '}
-                        {moment(surveyquest?.result.exam_date_start).format('DD-MM-YYYY HH:mm:ss')}
+                        {moment(surveyquest?.result.exam_date_start).format('DD.MM.YYYY HH:mm:ss')}
                     </span>
                 </Title>
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title
-                    level={5}
-                    style={{
-                        color:
-                            surveyquest?.result.tester_percent_score <
-                            surveyquest?.result.passing_percent_score
-                                ? 'red'
-                                : '#219653',
-                    }}
-                >
-                    Итоговые баллы: {surveyquest?.result.first_part_score}/
-                    {surveyquest?.result.max_score}
-                    <span style={{ marginLeft: 10 }}>
-                        {surveyquest?.result.tester_percent_score}%
+                <Title level={5}>
+                    Итоговые баллы:
+                    <span
+                        style={{
+                            marginLeft: 10,
+                            color:
+                                surveyquest?.result.tester_percent_score <
+                                surveyquest?.result.passing_percent_score
+                                    ? 'red'
+                                    : '#219653',
+                        }}
+                    >
+                        {surveyquest?.result.first_part_score}/{surveyquest?.result.max_score} (
+                        {surveyquest?.result.tester_percent_score})%
                     </span>
+                </Title>
+            </div>
+            <div style={{ display: 'flex', marginTop: 10 }}>
+                <Title level={5}>
+                    Сообщение аттестуемого:
+                    <span style={{ marginLeft: 10 }}>{surveyquest?.result.appeal_text}</span>
                 </Title>
             </div>
             <Line />
@@ -80,11 +93,13 @@ const ModeratorAppeal = () => {
                 }}
             >
                 <Typography>Дата проверки:</Typography>
-                <Typography>?????????</Typography>
+                <Typography.Text strong>?????????</Typography.Text>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
                 <Typography>Рекомендация:</Typography>
-                <Typography>{surveyquest.result.main_expert_review_first_part}</Typography>
+                <Typography.Text strong>
+                    {surveyquest.result.main_expert_review_first_part}
+                </Typography.Text>
             </div>
             <Line />
             <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
@@ -99,11 +114,13 @@ const ModeratorAppeal = () => {
                 }}
             >
                 <Typography>Дата проверки:</Typography>
-                <Typography>????????????????????</Typography>
+                <Typography.Text strong>????????????????????</Typography.Text>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
                 <Typography>Рекомендация:</Typography>
-                <Typography>{surveyquest.result.main_expert_review_second_part}</Typography>
+                <Typography.Text strong>
+                    {surveyquest.result.main_expert_review_second_part}
+                </Typography.Text>
             </div>
             <Line />
             <div style={{ marginTop: '8px' }}>
@@ -118,6 +135,25 @@ const ModeratorAppeal = () => {
                             recommendation={item.conclusion_second_part}
                         />
                     ))}
+            </div>
+            <Line />
+            <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
+                Ваше заключение аттестации
+            </Typography>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '10px',
+                    marginTop: '12px',
+                }}
+            >
+                <Typography>Аттестация:</Typography>
+                <Typography.Text strong>{uaStatus(surveyquest.result_estimate)}</Typography.Text>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
+                <Typography>Рекомендация:</Typography>
+                <Typography.Text strong>{surveyquest.result.main_moderator_review}</Typography.Text>
             </div>
             <Line />
             <Button

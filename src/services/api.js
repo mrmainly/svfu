@@ -30,6 +30,7 @@ export const api = createApi({
         'AttestationProtocol',
         'Admin',
         'Appeal',
+        'ModeratorAppeal',
     ],
 
     endpoints: () => ({}),

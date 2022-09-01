@@ -3,56 +3,44 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
-import {
-    useSendCodeMutation,
-    useSendAnswerExpertMutation,
-} from '../../../../../services/ExpertService'
+import { useSendCodeMutation } from '../../../../../services/ExpertService'
 import { useSendAnswerModeratorMutation } from '../../../../../services/ModeratorService'
 import ROUTES from '../../../../../routes'
 
 const { TextArea } = Input
 
-const VerificationSubscribeModal = ({ id, main_expert }) => {
-    const {
-        subscribeCodeModal,
-        conclusion_first_part,
-        conclusion_second_part,
-        pass_practical_part,
-        pass_test_part,
-    } = useSelector((state) => state.survey_slice)
-    const { openSubscribeModal } = SurveysSlice.actions
+const VerificationSubscribeModalModerator = ({ id }) => {
+    const { estimate, conclusion, subscribeCodeModalModerator } = useSelector(
+        (state) => state.survey_slice
+    )
+
+    const { openSubscribeModalModerator } = SurveysSlice.actions
 
     const [sendCode] = useSendCodeMutation()
-    const [sendAnswerExpert] = useSendAnswerExpertMutation()
+    const [sendAnswerModerator] = useSendAnswerModeratorMutation()
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const onFinishSubmit = (data) => {
         const body = {
-            conclusion_first_part: conclusion_first_part,
-            conclusion_second_part: conclusion_second_part,
+            estimate: estimate,
+            conclusion: conclusion,
         }
 
-        const bodyMainModerator = {
-            conclusion_first_part: conclusion_first_part,
-            conclusion_second_part: conclusion_second_part,
-            pass_practical_part: pass_practical_part,
-            pass_test_part: pass_test_part,
-        }
         sendCode(data).then((res) => {
             if (res.data) {
-                sendAnswerExpert({
+                sendAnswerModerator({
                     id: id,
-                    body: main_expert ? bodyMainModerator : body,
+                    body: body,
                 }).then((res) => {
                     if (res.data) {
-                        dispatch(openSubscribeModal(false))
-                        navigate(ROUTES.TEST_PROCESSING)
+                        dispatch(openSubscribeModalModerator(false))
+                        navigate(ROUTES.TEST_RESULT)
                         message.success(
                             'Вы подтвердили экспертизу и результаты экзамена отправлены!'
                         )
                     } else {
-                        message.error('Вы не подтвердили')
+                        message.error('Вы не подтвердили2')
                     }
                 })
             } else {
@@ -62,14 +50,14 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
     }
 
     const handleClose = () => {
-        dispatch(openSubscribeModal(false))
+        dispatch(openSubscribeModalModerator(false))
     }
 
     return (
         <>
             <Modal
                 title="Подтверждение"
-                visible={subscribeCodeModal}
+                visible={subscribeCodeModalModerator}
                 onOk={handleClose}
                 onCancel={handleClose}
                 footer={[
@@ -79,7 +67,7 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
                             borderRadius: 4,
                         }}
                         key="save"
-                        form="subscribe-code-form"
+                        form="subscribe-code-form-moderator"
                         type="primary"
                         htmlType="submit"
                     >
@@ -87,7 +75,7 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
                     </Button>,
                 ]}
             >
-                <Form id="subscribe-code-form" onFinish={onFinishSubmit}>
+                <Form id="subscribe-code-form-moderator" onFinish={onFinishSubmit}>
                     <Form.Item
                         required
                         label="Мы отправили письмо с кодом подтверждения Вам на почту."
@@ -102,4 +90,4 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
     )
 }
 
-export default VerificationSubscribeModal
+export default VerificationSubscribeModalModerator

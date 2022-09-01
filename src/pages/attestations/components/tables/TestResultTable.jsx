@@ -2,15 +2,17 @@ import moment from 'moment'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Button } from 'antd'
-import Table from 'antd/lib/table'
+import { Button, Table, message } from 'antd'
 import ROUTES from '../../../../routes'
 import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
+import { usePutMainModeratorMutation } from '../../../../services/ModeratorService'
 
 const TestResultTable = ({ data, loading }) => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
+    const [putMainModerator] = usePutMainModeratorMutation()
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const columns = [
@@ -75,8 +77,11 @@ const TestResultTable = ({ data, loading }) => {
             dataIndex: 'status_result',
             key: 'x',
             render: (status_result, record, direction) =>
-                status_result === 'WAITING' ? (
+                (status_result === 'FINISHED_BY_MAIN_EXPERT' ||
+                    status_result === 'CHECKED_BY_MODERATORS') &&
+                record.main_moderator === false ? (
                     <Button
+                        style={{ width: '100%' }}
                         type="primary"
                         onClick={() => {
                             navigate(ROUTES.MODERATOR, {
@@ -97,32 +102,40 @@ const TestResultTable = ({ data, loading }) => {
                         Проверить
                     </Button>
                 ) : status_result === 'FINISHED' ? (
-                    <Button type="primary" ghost>
+                    <Button style={{ width: '100%' }} type="text">
                         Проверено
                     </Button>
-                ) : status_result === 'FINISHED_BY_EXPERTS' ? (
+                ) : status_result === 'FINISHED_BY_MODERATORS' && record.main_moderator === true ? (
                     <Button
+                        style={{ width: '100%' }}
                         type="primary"
+                        ghost
                         onClick={() => {
-                            navigate(ROUTES.MODERATOR, {
-                                state: {
-                                    id: record.id,
-                                },
+                            putMainModerator({ id: record.id }).then((res) => {
+                                if (res.data) {
+                                    navigate(ROUTES.MODERATOR, {
+                                        state: {
+                                            id: record.id,
+                                        },
+                                    })
+                                    localStorage.setItem(
+                                        'side_bar_data_ex_mo',
+                                        JSON.stringify(record, null, '\t')
+                                    )
+                                    dispatch(handlePath(ROUTES.MODERATOR_TEST_RESULT))
+                                    dispatch(handleRole(''))
+                                    dispatch(handleFullName(record.survey.name))
+                                    dispatch(handleCurrentPath(ROUTES.MODERATOR))
+                                } else {
+                                    message.error('Вы не являетесь председателем экспертов')
+                                }
                             })
-                            localStorage.setItem(
-                                'side_bar_data_ex_mo',
-                                JSON.stringify(record, null, '\t')
-                            )
-                            dispatch(handlePath(ROUTES.MODERATOR_TEST_RESULT))
-                            dispatch(handleRole(''))
-                            dispatch(handleFullName(record.survey.name))
-                            dispatch(handleCurrentPath(ROUTES.MODERATOR))
                         }}
                     >
                         Начать
                     </Button>
                 ) : (
-                    <Button type="primary" disabled>
+                    <Button style={{ width: '100%' }} type="primary" disabled>
                         Недоступно
                     </Button>
                 ),

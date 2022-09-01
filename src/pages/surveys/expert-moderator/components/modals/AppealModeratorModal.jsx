@@ -1,59 +1,73 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, Modal, message, Typography, Divider } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
-import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertService'
+import {
+    usePutAppealRejectIdMutation,
+    usePutAppealAcceptIdMutation,
+} from '../../../../../services/ModeratorService'
+import ROUTES from '../../../../../routes'
 
 const { Title } = Typography
 
 const AppealModeratorModal = ({ id, surveyquest }) => {
     const [subscribe, setSubscribe] = useState(false)
 
-    const [sendSubscribeExpert] = useSendSubscribeExpertMutation()
+    const [AppealReject] = usePutAppealRejectIdMutation()
+    const [AppealAccept] = usePutAppealAcceptIdMutation()
 
     const { expertTheoreticalPartModalOpen } = useSelector((state) => state.survey_slice)
     const { openExpertTheoreticalPartOpen, openSubscribeModal, setTextAnswerExpert } =
         SurveysSlice.actions
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const onFinishSubmit = (data) => {
-        sendSubscribeExpert({ id: id }).then((res) => {
+    const onFinishSubmit = () => {
+        AppealAccept({ id: id }).then((res) => {
             if (res.data) {
+                Modal.success({
+                    title: 'Принято',
+                    content: 'Апелляция принята!',
+                })
                 dispatch(openExpertTheoreticalPartOpen(false))
-                dispatch(openSubscribeModal(true))
+                navigate(ROUTES.ATTESTED_APPEAL)
             } else {
                 message.error('Вы не оставили рекомендацию')
             }
         })
-        console.log(data)
     }
 
     const handleClose = () => {
-        dispatch(openExpertTheoreticalPartOpen(false))
+        AppealReject({ id: id }).then((res) => {
+            if (res.data) {
+                Modal.info({
+                    title: 'Отклонено',
+                    content: 'Апелляция отклонена!',
+                })
+                dispatch(openExpertTheoreticalPartOpen(false))
+                navigate(ROUTES.ATTESTED_APPEAL)
+            } else {
+                message.error('Вы не оставили рекомендацию')
+            }
+        })
     }
-    console.log(surveyquest)
 
     return (
         <>
             <Modal
-                title="Вы уверены?"
+                title="Заключение"
                 visible={expertTheoreticalPartModalOpen}
                 onOk={handleClose}
-                onCancel={handleClose}
+                onCancel={() => dispatch(openExpertTheoreticalPartOpen(false))}
                 footer={[
-                    <Button
-                        size="medium"
-                        key="save"
-                        form="form-expert-theoretical-part"
-                        type="primary"
-                        htmlType="submit"
-                    >
+                    <Button size="medium" type="primary" onClick={onFinishSubmit}>
                         Принять апелляцию
                     </Button>,
-                    <Button size="medium" danger onClick={handleClose} key="back">
+                    <Button size="medium" danger onClick={handleClose}>
                         Отклонить
                     </Button>,
                 ]}
@@ -90,17 +104,6 @@ const AppealModeratorModal = ({ id, surveyquest }) => {
                     Заключение председателя экспертов по теоретической части
                 </Typography>
                 <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '10px',
-                        marginTop: '12px',
-                    }}
-                >
-                    <Typography>Дата проверки:</Typography>
-                    <Typography>?????????</Typography>
-                </div>
-                <div
                     style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
                 >
                     <Typography>Рекомендация:</Typography>
@@ -110,17 +113,6 @@ const AppealModeratorModal = ({ id, surveyquest }) => {
                 <Typography style={{ fontStyle: 'italic', fontSize: '16px' }}>
                     Заключение председателя экспертов по практической части
                 </Typography>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '10px',
-                        marginTop: '12px',
-                    }}
-                >
-                    <Typography>Дата проверки:</Typography>
-                    <Typography>????????????????????</Typography>
-                </div>
                 <div
                     style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}
                 >
