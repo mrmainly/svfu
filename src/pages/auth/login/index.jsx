@@ -31,18 +31,9 @@ const Login = () => {
 
     return (
         <div>
-            {/* <div
-                style={{
-                    background: "url(/img/Frame1138.png)",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    height: 40,
-                    width: "100%",
-                }}
-            /> */}
             <div className="background_style">
                 <div className="form">
-                    <img src="/img/image11.svg" />
+                    <img src="/img/image11.svg" alt="" />
                     <Text
                         style={{
                             fontWeight: 400,
@@ -59,7 +50,7 @@ const Login = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your login!',
+                                    message: 'Введите ваш логин',
                                 },
                             ]}
                             labelCol={{ span: 24 }}
@@ -79,7 +70,7 @@ const Login = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your password!',
+                                    message: 'Введите ваш пароль',
                                 },
                             ]}
                         >

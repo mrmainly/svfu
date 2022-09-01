@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 const ParamsListItem = ({ param }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>

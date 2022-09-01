@@ -6,8 +6,6 @@ import { Radio, Spin } from 'antd'
 
 import moment from 'moment'
 
-import ROUTES from '../../routes'
-
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Layout, Typography } from 'antd'
 import { Outlet } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 
 import '../layout.css'
 import { pathname } from '../pathname'
@@ -11,7 +10,6 @@ const { Text } = Typography
 
 const MainLayout = ({ params }) => {
     const path = pathname(params)
-    const navigate = useNavigate()
     return (
         <Layout>
             <Content style={{ margin: '24px 24px 24px' }}>

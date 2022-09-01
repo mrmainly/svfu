@@ -7,7 +7,7 @@ import AppilyngTable from './components/tables/AppilyngTable'
 const { Search } = Input
 
 const Applying = () => {
-    const { data, isLoading, error } = useGetDirectionQuery('')
+    const { data, isLoading } = useGetDirectionQuery('')
     return (
         <div>
             <Search placeholder="Поиск..." enterButton style={{ width: 300, marginBottom: 20 }} />

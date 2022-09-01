@@ -2,7 +2,6 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { Radio, Button, message } from 'antd'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import ROUTES from '../../../routes'
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
@@ -14,7 +13,7 @@ import { Line } from '../../../components'
 
 const AdminUsersDetail = () => {
     const params = useParams()
-    const { data, isLoading } = useGetUserIdQuery({ id: params.id })
+    const { data } = useGetUserIdQuery({ id: params.id })
     const [putUser] = usePutUserMutation()
     const navigate = useNavigate()
     const [mode, setMode] = useState('info')
