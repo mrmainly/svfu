@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../routes'
 import TBEditModal from '../modals/tbeditmodal'
 import { usePutMainExpertMutation } from '../../../../services/ExpertService'
+import { tableProcessingStatusResult } from '../../../../translation/StatusTranslation'
 
 const TestProcessingTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
@@ -44,32 +45,7 @@ const TestProcessingTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status_result',
             key: 'status_result',
-            render: (status_result) =>
-                status_result === 'WAITING'
-                    ? 'Ожидает проверки'
-                    : status_result === 'REJECTED'
-                    ? 'Отклонено'
-                    : status_result === 'CANCELLED'
-                    ? 'Отменено'
-                    : status_result === 'CHECKED_BY_EXPERTS'
-                    ? 'Проверяется экспертами'
-                    : status_result === 'FINISHED_BY_EXPERTS'
-                    ? 'Проверено экспертами'
-                    : status_result === 'CHECKED_BY_MAIN_EXPERT'
-                    ? 'Эксперт (пред.) проверяет'
-                    : status_result === 'FINISHED_BY_MAIN_EXPERT'
-                    ? 'Проверено экспертом (пред.)'
-                    : status_result === 'CHECKED_BY_MODERATORS'
-                    ? 'Проверяется модераторами'
-                    : status_result === 'FINISHED_BY_MODERATORS'
-                    ? 'Проверено модераторами'
-                    : status_result === 'CHECKED_BY_MAIN_MODERATOR'
-                    ? 'Модератор (пред.) проверяет'
-                    : status_result === 'FINISHED_BY_MAIN_MODERATOR'
-                    ? 'Проверено модератором (пред.)'
-                    : status_result === 'FINISHED'
-                    ? 'Проверено'
-                    : null,
+            render: (status_result) => tableProcessingStatusResult(status_result),
         },
         {
             title: 'Действие',
