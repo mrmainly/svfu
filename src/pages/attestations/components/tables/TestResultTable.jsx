@@ -79,6 +79,7 @@ const TestResultTable = ({ data, loading }) => {
             render: (status_result, record, direction) =>
                 (status_result === 'FINISHED_BY_MAIN_EXPERT' ||
                     status_result === 'CHECKED_BY_MODERATORS') &&
+                record.is_reviewed === false &&
                 record.main_moderator === false ? (
                     <Button
                         style={{ width: '100%' }}

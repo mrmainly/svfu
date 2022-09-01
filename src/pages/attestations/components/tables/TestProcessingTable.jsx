@@ -76,7 +76,10 @@ const TestProcessingTable = ({ data, loading }) => {
             dataIndex: 'status_result',
             key: 'x',
             render: (status_result, record) =>
-                status_result === 'WAITING' && record.main_expert === false ? (
+                (status_result === 'WAITING' ||
+                    status_result === 'CHECKED_BY_FINISHED_BY_EXPERTS') &&
+                record.is_reviewed === false &&
+                record.main_expert === false ? (
                     <Button
                         type="primary"
                         onClick={() => {
