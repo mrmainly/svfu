@@ -172,7 +172,6 @@ const UsersTable = ({ data, isLoading }) => {
                         navigate(ROUTES.USERS_DETAIL + `/${id}`, {
                             state: {
                                 type: 'LPR',
-                                url: 'useGetModeratorUserIdQuery',
                             },
                         })
                     }}
