@@ -121,7 +121,24 @@ const TestProcessingTable = ({ data, loading }) => {
                             })
                         }}
                     >
-                        Начать
+                        Проверить
+                    </Button>
+                ) : status_result === 'CHECKED_BY_MAIN_EXPERT' && record.main_expert === true ? (
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            navigate(ROUTES.EXPERT, {
+                                state: {
+                                    id: record.id,
+                                },
+                            })
+                            localStorage.setItem(
+                                'side_bar_data_ex_mo',
+                                JSON.stringify(record, null, '\t')
+                            )
+                        }}
+                    >
+                        Продолжить
                     </Button>
                 ) : (
                     <Button type="primary" disabled>
