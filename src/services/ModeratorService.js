@@ -67,6 +67,14 @@ export const moderator = api.injectEndpoints({
                 }
             },
         }),
+        sendAnswerMainModerator: build.mutation({
+            query({ id }) {
+                return {
+                    url: `moderator/result/finished/${id}`,
+                    method: 'POST',
+                }
+            },
+        }),
     }),
 })
 
@@ -77,6 +85,7 @@ export const {
     useGetSurveyModeratorIdQuery,
     useGetModeratorUserIdQuery,
     useSendAnswerModeratorMutation,
+    useSendAnswerMainModeratorMutation,
     usePutAppealRejectIdMutation,
     usePutAppealAcceptIdMutation,
     usePutMainModeratorMutation,
