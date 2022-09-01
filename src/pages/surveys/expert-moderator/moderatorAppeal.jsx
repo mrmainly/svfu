@@ -19,8 +19,9 @@ const ModeratorAppeal = () => {
     const state = location.state
 
     const { id } = state
-
+    console.log('id', id)
     const { data: surveyquest, isLoading } = useGetAppealIdQuery(id)
+
     if (isLoading) {
         return (
             <div
@@ -35,6 +36,7 @@ const ModeratorAppeal = () => {
             </div>
         )
     }
+
     console.log('surveyquest', surveyquest)
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -98,7 +100,7 @@ const ModeratorAppeal = () => {
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
                 <Typography>Рекомендация:</Typography>
                 <Typography.Text strong>
-                    {surveyquest.result.main_expert_review_first_part}
+                    {surveyquest?.result.main_expert_review_first_part}
                 </Typography.Text>
             </div>
             <Line />
@@ -119,7 +121,7 @@ const ModeratorAppeal = () => {
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
                 <Typography>Рекомендация:</Typography>
                 <Typography.Text strong>
-                    {surveyquest.result.main_expert_review_second_part}
+                    {surveyquest?.result.main_expert_review_second_part}
                 </Typography.Text>
             </div>
             <Line />
@@ -128,7 +130,7 @@ const ModeratorAppeal = () => {
                     Решения модераторов
                 </Typography>
                 {surveyquest?.result?.moderator_review?.length &&
-                    surveyquest.moderator_review.map((item, index) => (
+                    surveyquest?.moderator_review.map((item, index) => (
                         <ExpertReviewCard
                             key={index}
                             expert_name={item.user}
@@ -149,11 +151,13 @@ const ModeratorAppeal = () => {
                 }}
             >
                 <Typography>Аттестация:</Typography>
-                <Typography.Text strong>{uaStatus(surveyquest.result_estimate)}</Typography.Text>
+                <Typography.Text strong>{uaStatus(surveyquest?.result_estimate)}</Typography.Text>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', marginTop: '8px' }}>
                 <Typography>Рекомендация:</Typography>
-                <Typography.Text strong>{surveyquest.result.main_moderator_review}</Typography.Text>
+                <Typography.Text strong>
+                    {surveyquest?.result.main_moderator_review}
+                </Typography.Text>
             </div>
             <Line />
             <Button

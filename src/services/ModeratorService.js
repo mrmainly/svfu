@@ -34,12 +34,11 @@ export const moderator = api.injectEndpoints({
             providesTags: ['ModeratorAppeal'],
         }),
         getAppealId: build.query({
-            query(id) {
+            query({ id }) {
                 return {
                     url: `moderator/appeal/${id}`,
                 }
             },
-            providesTags: ['Moderator'],
         }),
         putAppealRejectId: build.mutation({
             query({ id }) {
