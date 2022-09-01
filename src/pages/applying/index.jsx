@@ -8,6 +8,9 @@ const { Search } = Input
 
 const Applying = () => {
     const { data, isLoading } = useGetDirectionQuery('')
+
+    console.log(data)
+
     return (
         <div>
             <Search placeholder="Поиск..." enterButton style={{ width: 300, marginBottom: 20 }} />

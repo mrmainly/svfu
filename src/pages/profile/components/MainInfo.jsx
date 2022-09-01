@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { Typography, Space, Upload, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
-import { useProfilePostPhotoMutation } from '../../../services/ProfileService'
+import {
+    useProfilePostPhotoMutation,
+    useProfileDeletePhotoMutation,
+} from '../../../services/ProfileService'
 
 const { Text } = Typography
 
 const MainInfo = ({ data }) => {
     const [fileList, setFileList] = useState([])
 
-    const [profilePostImage] = useProfilePostPhotoMutation('')
+    const [profilePostImage] = useProfilePostPhotoMutation()
+    const [deletePhotoProfile] = useProfileDeletePhotoMutation()
 
     useEffect(() => {
         setFileList([
@@ -33,11 +37,15 @@ const MainInfo = ({ data }) => {
         const image = e.file.originFileObj
         let formData = new FormData()
         formData.append('photo', image)
-        profilePostImage(formData).then((res) => {
-            if (res.error) {
-                message.error('размер файла является слишком большим')
-            }
-        })
+        if (e.fileList.length) {
+            profilePostImage(formData).then((res) => {
+                if (res.error) {
+                    message.error('размер файла является слишком большим')
+                }
+            })
+        } else {
+            deletePhotoProfile()
+        }
     }
 
     const items = [
@@ -75,8 +83,6 @@ const MainInfo = ({ data }) => {
         },
     ]
 
-    const defualtFileList = []
-
     return (
         <>
             <Space size="middle" style={{ display: 'flex', alignItems: 'start' }}>
@@ -89,7 +95,6 @@ const MainInfo = ({ data }) => {
                     maxCount={1}
                     fileList={data.photo === null ? null : fileList}
                     onChange={handleImageChange}
-                    action="/asd"
                 >
                     {uploadButton}
                 </Upload>
