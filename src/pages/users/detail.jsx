@@ -6,6 +6,8 @@ import { Radio, Spin } from 'antd'
 
 import moment from 'moment'
 
+import ROUTES from '../../routes'
+
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
@@ -27,21 +29,18 @@ const UsersDetail = () => {
     const state = location.state
     const { type } = state
 
-    const { data: lprUserData, isloading: lprIsLoading } = useGetAttestationUserIdQuery({
-        id: params.id,
-    })
-    const { data: moderatorUserData, isloading: moderatorIsLoading } = useGetModeratorUserIdQuery({
-        id: params.id,
-    })
-
-    //  const data =
-    //      type === 'LPR'
-    //          ? useGetAttestationUserIdQuery({
-    //                id: params.id,
-    //            })
-    //          : useGetModeratorUserIdQuery({
-    //                id: params.id,
-    //            })
+    const { data: lprUserData, isloading: lprIsLoading } = useGetAttestationUserIdQuery(
+        {
+            id: params.id,
+        },
+        { skip: type === 'LPR' ? false : true }
+    )
+    const { data: moderatorUserData, isloading: moderatorIsLoading } = useGetModeratorUserIdQuery(
+        {
+            id: params.id,
+        },
+        { skip: type === 'moderator' ? false : true }
+    )
 
     const data =
         type === 'LPR'
