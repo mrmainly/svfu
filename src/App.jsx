@@ -94,11 +94,6 @@ function App() {
                         element={<AdminUsersDetail />}
                         path={ROUTES.ADMIN_USERS_DETAIL + '/:id'}
                     />
-                    <Route element={<LprUsersDetail />} path={ROUTES.LPR_USERS_DETAIL + '/:id'} />
-                    <Route
-                        element={<ModeratorUsersDetail />}
-                        path={ROUTES.MODERATOR_USERS_DETAIL + '/:id'}
-                    />
                     <Route
                         element={<AttestationsQualifications />}
                         path={ROUTES.ATTESTATION_QUALI}

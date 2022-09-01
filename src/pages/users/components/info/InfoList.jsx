@@ -1,6 +1,6 @@
-import InfoListItem from "./InfoListItem"
+import InfoListItem from './InfoListItem'
 
-const InfoList = ({params}) => {
+const InfoList = ({ params }) => {
     return (
         <>
             {params.map((param) => (

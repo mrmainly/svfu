@@ -1,35 +1,27 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { BsArrowLeft } from 'react-icons/bs'
+
 import { Typography, Button, Spin } from 'antd'
+
 import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
-import {
-    useGetSurveyModeratorIdQuery,
-    useGetModeratorUserIdQuery,
-} from '../../../services/ModeratorService'
-import { DynamicPathSlice } from '../../../reducers/DynamicPathSlice'
+import { useGetSurveyModeratorIdQuery } from '../../../services/ModeratorService'
 
 const { Title, Text } = Typography
 
 const Moderator = () => {
     const location = useLocation()
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const state = location.state
 
     const { id } = state
-    const { handlePath, handleRole, handleCurrentPath, handleFullName } = DynamicPathSlice.actions
 
     const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
 
-    const { data: userData } = useGetModeratorUserIdQuery({ id: surveyquest?.id })
-    const last_name = userData?.user.last_name ? userData?.user.last_name + ' ' : ''
-    const first_name = userData?.user.first_name ? userData?.user.first_name + ' ' : ''
-    const patronymic = userData?.user.patronymic ? userData?.user.patronymic + ' ' : ''
     const info = [
         {
             title: 'Заключение по теоретической части',
@@ -63,6 +55,34 @@ const Moderator = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                    marginBottom: '10px',
+                }}
+            >
+                <BsArrowLeft
+                    style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
+                    onClick={() => {
+                        navigate(-1)
+                    }}
+                />
+                <span
+                    style={{
+                        fontFamily: 'Roboto',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        fontSize: '20px',
+                        lineHeight: '30px',
+                    }}
+                >
+                    {surveyquest?.survey.name}
+                </span>
+            </div>
+            <Line />
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>Аттестуемый {surveyquest?.user}</Title>
             </div>
@@ -135,17 +155,11 @@ const Moderator = () => {
                 ghost
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.MODERATOR_USERS_DETAIL + `/${surveyquest?.id}`, {
+                    navigate(ROUTES.USERS_DETAIL + `/${surveyquest?.id}`, {
                         state: {
-                            userData: userData?.user,
+                            type: 'moderator',
                         },
                     })
-                    dispatch(handlePath(ROUTES.MODERATOR))
-                    dispatch(handleRole(userData?.user.role))
-                    dispatch(handleFullName(last_name + first_name + patronymic))
-                    dispatch(
-                        handleCurrentPath(ROUTES.MODERATOR_USERS_DETAIL + `/${surveyquest?.id}`)
-                    )
                 }}
             >
                 Профиль аттестуемого
