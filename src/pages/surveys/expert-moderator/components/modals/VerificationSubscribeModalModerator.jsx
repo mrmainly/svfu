@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import { useSendCodeMutation } from '../../../../../services/ExpertService'
-import { useSendAnswerModeratorMutation } from '../../../../../services/ModeratorService'
+import {
+    useSendAnswerModeratorMutation,
+    useSendAnswerMainModeratorMutation,
+} from '../../../../../services/ModeratorService'
 import ROUTES from '../../../../../routes'
 
 const { TextArea } = Input
 
-const VerificationSubscribeModalModerator = ({ id }) => {
+const VerificationSubscribeModalModerator = ({ id, main_moderator }) => {
     const { estimate, conclusion, subscribeCodeModalModerator } = useSelector(
         (state) => state.survey_slice
     )
@@ -18,6 +21,7 @@ const VerificationSubscribeModalModerator = ({ id }) => {
 
     const [sendCode] = useSendCodeMutation()
     const [sendAnswerModerator] = useSendAnswerModeratorMutation()
+    const [sendAnswerMainModerator] = useSendAnswerMainModeratorMutation()
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -34,6 +38,11 @@ const VerificationSubscribeModalModerator = ({ id }) => {
                     body: body,
                 }).then((res) => {
                     if (res.data) {
+                        if (main_moderator) {
+                            sendAnswerMainModerator({
+                                id: id,
+                            })
+                        }
                         dispatch(openSubscribeModalModerator(false))
                         navigate(ROUTES.MODERATOR_TEST_RESULT)
                         message.success(

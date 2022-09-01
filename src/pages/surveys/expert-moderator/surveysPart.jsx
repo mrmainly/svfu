@@ -25,7 +25,10 @@ const SurveysPart = () => {
             ) : role === 'MODERATOR' ? (
                 <>
                     <AnswerModeratorModal id={id} surveyquest={surveyquest} />
-                    <VerificationSubscribeModalModerator id={id} />
+                    <VerificationSubscribeModalModerator
+                        id={id}
+                        main_moderator={surveyquest?.main_moderator}
+                    />
                 </>
             ) : (
                 <>
