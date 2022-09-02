@@ -68,10 +68,7 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                     initialValues={{
                         ['name']: dataList[0]?.name,
                         ['description']: dataList[0]?.description,
-                        ['tag_direction']: {
-                            value: dataList[0]?.tag_direction.id,
-                            label: dataList[0]?.tag_direction.name,
-                        },
+                        ['tag_direction']: dataList[0]?.tag_direction.id,
                     }}
                     onFinish={onSubmit}
                     id="aqedit-form"
