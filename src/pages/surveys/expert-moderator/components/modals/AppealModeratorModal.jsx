@@ -16,7 +16,7 @@ import ROUTES from '../../../../../routes'
 
 const { Title, Text } = Typography
 
-const AppealModeratorModal = ({ id, surveyquest }) => {
+const AppealModeratorModal = ({ id, surveyquest, appeal_text }) => {
     const [subscribe, setSubscribe] = useState(false)
 
     const [AppealReject] = usePutAppealRejectIdMutation()
@@ -74,7 +74,6 @@ const AppealModeratorModal = ({ id, surveyquest }) => {
             },
         },
     ]
-    console.log('surveyquest2', surveyquest)
     return (
         <>
             <Modal
@@ -127,13 +126,12 @@ const AppealModeratorModal = ({ id, surveyquest }) => {
                         </span>
                     </Title>
                 </div>
-                {/* <div style={{ display: 'flex', marginTop: 10 }}>
+                <div style={{ display: 'flex', marginTop: 10 }}>
                     <Title level={5}>
                         Сообщение аттестуемого:
-                        <span style={{ marginLeft: 10 }}>{surveyquest?.appeal_text}</span>
+                        <span style={{ marginLeft: 10 }}>{appeal_text}</span>
                     </Title>
-                </div> */}
-
+                </div>
                 {info.map((item, index) => (
                     <div style={{ margin: '12px 0 16px 0' }} key={index}>
                         <Text

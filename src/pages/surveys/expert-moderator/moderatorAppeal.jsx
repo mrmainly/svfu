@@ -237,6 +237,7 @@ const ModeratorAppeal = () => {
                             surveyquest: surveyquest?.result,
                             id: id,
                             appeal: true,
+                            appeal_text: surveyquest?.appeal_text,
                         },
                     })
                 }}

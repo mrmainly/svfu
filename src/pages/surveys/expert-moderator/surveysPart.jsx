@@ -14,14 +14,13 @@ const SurveysPart = () => {
 
     const state = location.state
 
-    const { surveyquest, id, appeal } = state
+    const { surveyquest, id, appeal, appeal_text } = state
     const { part } = useSelector((state) => state.survey_slice)
     const role = JSON.parse(localStorage.getItem('role'))
-    console.log('sp', surveyquest)
     return (
         <div>
             {role === 'MODERATOR' && appeal ? (
-                <AppealModeratorModal id={id} surveyquest={surveyquest} />
+                <AppealModeratorModal id={id} surveyquest={surveyquest} appeal_text={appeal_text} />
             ) : role === 'MODERATOR' ? (
                 <>
                     <AnswerModeratorModal id={id} surveyquest={surveyquest} />
