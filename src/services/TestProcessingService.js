@@ -3,7 +3,7 @@ import { api } from './api'
 export const testProcessing = api.injectEndpoints({
     endpoints: (build) => ({
         getTestProcessing: build.query({
-            query: () => `expert/result/`,
+            query: ({ currentPage }) => `expert/result/?page=${currentPage}`,
             providesTags: ['TestProcessing'],
         }),
     }),

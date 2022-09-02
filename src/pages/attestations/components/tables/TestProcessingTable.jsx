@@ -125,8 +125,16 @@ const TestProcessingTable = ({ data, loading }) => {
 
     return (
         <>
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
-            <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                loading={loading}
+                rowKey="id"
+                pagination={false}
+            />
+            {modalEditTB && (
+                <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
+            )}
         </>
     )
 }
