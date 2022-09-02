@@ -9,15 +9,15 @@ import {
 
 const { Text } = Typography
 
-const AppilyngTable = ({ data, loading }) => {
+const AppilyngTable = ({ data, loading, refetchFunc }) => {
     const [postDirection] = usePostDirectionMutation()
     const [putDirection] = usePutDirectionMutation()
 
     const onSubmit = (data) => {
-        console.log(data)
         postDirection({ direction: data }).then((res) => {
             if (res.data) {
                 message.success('Заявление подано')
+                refetchFunc()
             } else {
                 message.error(res.error.data.errors[0])
             }
@@ -61,6 +61,7 @@ const AppilyngTable = ({ data, loading }) => {
                         onClick={() => {
                             putDirection(id).then((res) => {
                                 if (res.data) {
+                                    refetchFunc()
                                     message.success('Заявление отменено')
                                 } else {
                                     message.error(res.error.data.errors[0])

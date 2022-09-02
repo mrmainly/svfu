@@ -7,12 +7,12 @@ import AppilyngTable from './components/tables/AppilyngTable'
 const { Search } = Input
 
 const Applying = () => {
-    const { data, isLoading } = useGetDirectionQuery()
+    const { data, isLoading, refetch } = useGetDirectionQuery()
 
     return (
         <div>
             <Search placeholder="Поиск..." enterButton style={{ width: 300, marginBottom: 20 }} />
-            <AppilyngTable data={data?.results} loading={isLoading} />
+            <AppilyngTable data={data?.results} loading={isLoading} refetchFunc={refetch} />
         </div>
     )
 }
