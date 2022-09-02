@@ -10,46 +10,55 @@ const InfoForm = () => {
         {
             label: 'Моя биография',
             name: 'my_biography',
+            placeholder: 'Напишите биографию',
             required: false,
         },
         {
             label: 'Мои обязанности',
             name: 'my_responsibilities',
+            placeholder: 'Напишите о своих обязанностях',
             required: false,
         },
         {
             label: 'Достижения и поощрения',
             name: 'rewards',
+            placeholder: 'Напишите о своих достижениях и поощрениях',
             required: false,
         },
         {
             label: 'Научные интересы',
             name: 'scientific_interests',
+            placeholder: 'Напишите о научных интересах',
             required: false,
         },
         {
             label: 'Научные гранты',
             name: 'scientific_grants',
+            placeholder: 'Напишите о научных грантах',
             required: false,
         },
         {
             label: 'Проведение конференций',
             name: 'holding_conferences',
+            placeholder: 'Напишите о проведении конференций',
             required: false,
         },
         {
             label: 'Участие в конференциях, симпозиумах',
             name: 'participation_conferences',
+            placeholder: 'Напишите о своих участиях в конференциях, симпозиумах',
             required: false,
         },
         {
             label: 'Почетные звания',
             name: 'honoured_title',
+            placeholder: 'Напишите о своих почетных званиях',
             required: false,
         },
         {
             label: 'Научно-общественная деятельность',
             name: 'ssa',
+            placeholder: 'Напишите о научно-общественной деятельности',
             required: false,
         },
     ]
@@ -79,7 +88,7 @@ const InfoForm = () => {
                     labelCol={{ span: 24 }}
                 >
                     <TextArea
-                        placeholder="Комментарий к вопросу"
+                        placeholder={item.placeholder}
                         rows={4}
                         type={item.type ? item.type : ''}
                     />
@@ -100,7 +109,7 @@ const InfoForm = () => {
                 labelCol={{ span: 24 }}
                 style={{ width: 350 }}
             >
-                <Input placeholder="Общий стаж работы" size="medium" type="number" />
+                <Input min={0} placeholder="Общий стаж работы" size="medium" type="number" />
             </Form.Item>
             <Form.Item
                 label={
@@ -117,7 +126,12 @@ const InfoForm = () => {
                 labelCol={{ span: 24 }}
                 style={{ width: 350 }}
             >
-                <Input placeholder="Стаж работы по специальности" size="medium" type="number" />
+                <Input
+                    min={0}
+                    placeholder="Стаж работы по специальности"
+                    size="medium"
+                    type="number"
+                />
             </Form.Item>
         </div>
     )
