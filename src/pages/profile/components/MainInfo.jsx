@@ -14,7 +14,7 @@ const MainInfo = ({ data }) => {
 
     const [profilePostImage] = useProfilePostPhotoMutation()
     const [deletePhotoProfile] = useProfileDeletePhotoMutation()
-    console.log(data)
+
     useEffect(() => {
         setFileList([
             {
@@ -29,23 +29,19 @@ const MainInfo = ({ data }) => {
     const uploadButton = (
         <div>
             <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+            <div style={{ marginTop: 8 }}>Загрузить</div>
         </div>
     )
 
     const handleImageChange = (e) => {
-        const image = e.file.originFileObj
+        const image = e.file
         let formData = new FormData()
         formData.append('photo', image)
-        if (e.fileList.length) {
-            profilePostImage(formData).then((res) => {
-                if (res.error) {
-                    message.error('размер файла является слишком большим')
-                }
-            })
-        } else {
-            deletePhotoProfile()
-        }
+        profilePostImage(formData).then((res) => {
+            if (res.error) {
+                message.error('размер файла является слишком большим')
+            }
+        })
     }
 
     const items = [
@@ -94,11 +90,15 @@ const MainInfo = ({ data }) => {
                     <Text style={{ fontWeight: 600 }}>Фотография:</Text>
                 </div>
                 <Upload
+                    customRequest={handleImageChange}
+                    onRemove={() => {
+                        deletePhotoProfile()
+                    }}
                     listType="picture-card"
                     multiple={false}
                     maxCount={1}
                     fileList={data.photo === null ? null : fileList}
-                    onChange={handleImageChange}
+                    //   onChange={handleImageChange}
                 >
                     {uploadButton}
                 </Upload>
