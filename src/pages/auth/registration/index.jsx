@@ -1,18 +1,16 @@
-import React from "react";
-import { Typography } from "antd";
-import "./registration.css";
-import { useSelector } from "react-redux";
+import React from 'react'
+import { Typography } from 'antd'
+import './registration.css'
+import { useSelector } from 'react-redux'
 
-import RegisterEmail from "./components/registerEmail";
-import RegisterVerify from "./components/registerVerify";
-import RegisterProfile from "./components/registerProfile";
+import RegisterEmail from './components/registerEmail'
+import RegisterVerify from './components/registerVerify'
+import RegisterProfile from './components/registerProfile'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 const Registration = () => {
-    const { email, verify, profile } = useSelector(
-        (state) => state.register_verison_slice
-    );
+    const { email, verify, profile } = useSelector((state) => state.register_verison_slice)
 
     return (
         <div>
@@ -31,7 +29,7 @@ const Registration = () => {
                         style={{
                             fontWeight: 600,
                             fontSize: 18,
-                            fontStyle: "normal",
+                            fontStyle: 'normal',
                         }}
                     >
                         РЕГИСТРАЦИЯ
@@ -42,7 +40,7 @@ const Registration = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Registration;
+export default Registration

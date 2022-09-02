@@ -62,7 +62,7 @@ const RegisterEmail = () => {
                 direction="vertical"
             >
                 <Link to={ROUTES.LOGIN}>Есть аккаунт? Войти</Link>
-                <Link to="/">Восстановление пароля</Link>
+                <Link to={ROUTES.FORGOT_PASSWORD}>Восстановление пароля</Link>
             </Space>
         </Form>
     )
