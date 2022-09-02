@@ -11,7 +11,6 @@ const ROUTES = {
     MY_QUALIFICATIONS: '/my-qualifications',
     QUALIFICATION_EDITING: '/qualification-editing',
     QUALIFICATION_DETAIL: '/qualification-detail',
-    CERTIFICATION_RESULTS: '/certification-results',
     TEST_DETAIL: '/test-detail',
     QUALIFICATION_ADDED: '/qualification-added',
     CERTIFICATION_RESULTS_DETAIL: '/certification-results_detail',

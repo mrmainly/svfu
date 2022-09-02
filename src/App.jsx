@@ -12,7 +12,6 @@ import {
     ProfileDetail,
     Test,
     MyQualification,
-    CertificationResults,
     QualificationAdded,
     QualificationDetail,
     QualificationEdit,
@@ -63,7 +62,6 @@ function App() {
                     <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route element={<TestResult />} path={`${ROUTES.TEST_RESULT}/:id`} />
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
-                    <Route element={<CertificationResults />} path={ROUTES.CERTIFICATION_RESULTS} />
                     <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
                     <Route
                         element={<QualificationDetail />}

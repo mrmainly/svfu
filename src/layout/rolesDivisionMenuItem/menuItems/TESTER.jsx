@@ -20,11 +20,6 @@ const TESTER = (navigate) => {
                     key: 'submenu-item-1-2',
                     onClick: () => navigate(ROUTES.AVAILABLE_TESTS),
                 },
-                {
-                    label: 'Итоги аттестации',
-                    key: 'submenu-item-1-3',
-                    onClick: () => navigate(ROUTES.CERTIFICATION_RESULTS),
-                },
             ],
         },
         {
