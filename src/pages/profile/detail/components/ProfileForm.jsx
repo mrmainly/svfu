@@ -65,6 +65,12 @@ const ProfileForm = () => {
             pattern: /^(([0-9]{3}\-[0-9]{3}\-[0-9]{3}\-[0-9]{2})|([0-9]{11}))$/,
             pattern_message: 'Проверьте правильность СНИЛСа',
         },
+        {
+            label: 'Должность',
+            name: 'post',
+            required: true,
+            requiredText: 'Введите вашу должность',
+        },
     ]
 
     return (

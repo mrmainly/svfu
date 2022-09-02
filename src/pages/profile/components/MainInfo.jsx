@@ -14,7 +14,7 @@ const MainInfo = ({ data }) => {
 
     const [profilePostImage] = useProfilePostPhotoMutation()
     const [deletePhotoProfile] = useProfileDeletePhotoMutation()
-
+    console.log(data)
     useEffect(() => {
         setFileList([
             {
@@ -80,6 +80,10 @@ const MainInfo = ({ data }) => {
         {
             label: 'СНИЛС:',
             value: data.snils,
+        },
+        {
+            label: 'Должность:',
+            value: data.post,
         },
     ]
 

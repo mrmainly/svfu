@@ -49,6 +49,7 @@ const ProfileDetail = () => {
                         ['patronymic']: data.patronymic,
                         ['snils']: data.snils,
                         ['inn']: data.inn,
+                        ['post']: data.post,
                         ['birth_date']: data.birth_date,
                         ['total_experience']: data.total_experience,
                         ['youtube']: data.youtube,
