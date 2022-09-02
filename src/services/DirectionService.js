@@ -19,7 +19,7 @@ export const direction = api.injectEndpoints({
         putDirection: build.mutation({
             query(id) {
                 return {
-                    url: `tester/application/${id}`,
+                    url: `/tester/application/${id}/cancel/`,
                     method: 'PUT',
                 }
             },

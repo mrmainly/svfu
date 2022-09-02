@@ -22,15 +22,15 @@ const AvailableTestTable = ({ data, loading }) => {
         { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
         {
             title: 'Начало аттестации',
-            dataIndex: 'created',
-            key: 'created',
-            render: (created) => moment(created).format('DD.MM.YYYY, hh:mm'),
+            dataIndex: 'exam',
+            key: 'exam',
+            render: (exam) => moment(exam.date_start).format('DD.MM.YYYY, hh:mm'),
         },
         {
             title: 'Конец аттестации',
-            dataIndex: 'created',
-            key: 'created',
-            render: (created) => moment(created).format('DD.MM.YYYY, hh:mm'),
+            dataIndex: 'exam',
+            key: 'exam',
+            render: (exam) => moment(exam.date_finish).format('DD.MM.YYYY, hh:mm'),
         },
         {
             title: 'Время',

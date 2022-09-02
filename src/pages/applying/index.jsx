@@ -7,9 +7,7 @@ import AppilyngTable from './components/tables/AppilyngTable'
 const { Search } = Input
 
 const Applying = () => {
-    const { data, isLoading } = useGetDirectionQuery('')
-
-    console.log(data)
+    const { data, isLoading } = useGetDirectionQuery()
 
     return (
         <div>

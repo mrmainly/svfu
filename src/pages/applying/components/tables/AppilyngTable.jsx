@@ -14,6 +14,7 @@ const AppilyngTable = ({ data, loading }) => {
     const [putDirection] = usePutDirectionMutation()
 
     const onSubmit = (data) => {
+        console.log(data)
         postDirection({ direction: data }).then((res) => {
             if (res.data) {
                 message.success('Заявление подано')
@@ -24,7 +25,13 @@ const AppilyngTable = ({ data, loading }) => {
     }
 
     const columns = [
-        { title: 'ID', dataIndex: 'id', key: 'id' },
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.id - b.id,
+        },
         {
             title: 'Название квалификации',
             dataIndex: 'name',
@@ -44,7 +51,23 @@ const AppilyngTable = ({ data, loading }) => {
             key: 'x',
             render: (id, { status_application }) =>
                 status_application ? (
-                    <Button disabled onClick={() => putDirection(id)}>
+                    <Button
+                        style={{
+                            width: 'max-content',
+                            border: 4,
+                        }}
+                        size="large"
+                        type="danger"
+                        onClick={() => {
+                            putDirection(id).then((res) => {
+                                if (res.data) {
+                                    message.success('Заявление отменено')
+                                } else {
+                                    message.error(res.error.data.errors[0])
+                                }
+                            })
+                        }}
+                    >
                         Отмена
                     </Button>
                 ) : (
