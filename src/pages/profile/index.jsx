@@ -35,6 +35,7 @@ const Profile = () => {
             <MainInfo data={data} />
             <Line />
             <SocialNetworks data={data} />
+            <Line />
             <InfoScreen data={data} />
             <Line />
             <Button
