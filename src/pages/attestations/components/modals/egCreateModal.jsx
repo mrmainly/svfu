@@ -1,13 +1,22 @@
+import { useState } from 'react'
 import { Modal, message, Select, Form, Button } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
-import { usePostTesterGroupMutation } from '../../../../services/TutorService'
+import {
+    usePostTesterGroupMutation,
+    useGetApplicationUserQuery,
+} from '../../../../services/TutorService'
 
 const { Option } = Select
 
-const EgCreateModal = ({ open, setOpen, tester, direction }) => {
+const EgCreateModal = ({ open, setOpen, direction }) => {
     const [postTestGroup] = usePostTesterGroupMutation()
+    const [id, setId] = useState(0)
+    const { data: tester } = useGetApplicationUserQuery(
+        { id: id },
+        { skip: id === 0 ? true : false }
+    )
 
     const onSubmit = (data) => {
         postTestGroup(data).then((res) => {
@@ -19,7 +28,6 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
             }
         })
     }
-
     return (
         <div>
             <Modal
@@ -46,7 +54,7 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
             >
                 <Form layout="vertical" onFinish={onSubmit} id="egCreate-form">
                     <Form.Item label="Квалификация" name="direction">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите тег" onChange={(e) => setId(e)}>
                             {direction
                                 ? direction.map((item, index) => (
                                       <Option key={index} value={item.id}>
@@ -88,10 +96,11 @@ const EgCreateModal = ({ open, setOpen, tester, direction }) => {
                                         >
                                             <Select placeholder="Выберите аттестуемого">
                                                 {tester
-                                                    ? tester.map((item, index) => (
-                                                          <Option key={index} value={item.id}>
-                                                              {item.last_name} {item.first_name}{' '}
-                                                              {item.patronymic}
+                                                    ? tester.results?.map((item, index) => (
+                                                          <Option key={index} value={item.user.id}>
+                                                              {item.user.last_name}{' '}
+                                                              {item.user.first_name}{' '}
+                                                              {item.user.patronymic}
                                                           </Option>
                                                       ))
                                                     : ''}

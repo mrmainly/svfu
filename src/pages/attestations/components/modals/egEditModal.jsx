@@ -1,22 +1,40 @@
+import { useState, useEffect } from 'react'
 import { Modal, message, Select, Form, Button, Spin } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
 import {
     usePatchTesterGroupMutation,
-    useGetTestGroupIdQuery,
+    // useGetTestGroupIdQuery,
     useDeleteTesterGroupMutation,
+    useGetApplicationUserQuery,
 } from '../../../../services/TutorService'
 
 const { Option } = Select
 
-const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
+const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
     const [patchTestGroup] = usePatchTesterGroupMutation()
     const [deleteTestGroup] = useDeleteTesterGroupMutation()
-    const { data: getTestGroupId, isFetching, isLoading } = useGetTestGroupIdQuery(id)
-
+    const [testerId, setTesterId] = useState(0)
+    const [testGroupId, setTestGroupId] = useState(0)
+    // const {
+    //     data: getTestGroupId,
+    //     isFetching,
+    //     isLoading,
+    // } = useGetTestGroupIdQuery(id, {
+    //     skip: id,
+    // })
+    const { data: tester } = useGetApplicationUserQuery(
+        { id: testerId },
+        { skip: testerId === 0 ? true : false }
+    )
+    useEffect(() => {
+        setTesterId(testGroup?.direction.id)
+        setTestGroupId(testGroup?.id)
+    }, [testGroup])
     const onSubmit = (data) => {
-        patchTestGroup({ body: data, id: id }).then((res) => {
+        console.log(data)
+        patchTestGroup({ body: data, id: testGroupId }).then((res) => {
             if (res.data) {
                 message.success('Группа обновлена')
                 setOpen(false)
@@ -25,11 +43,6 @@ const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
             }
         })
     }
-
-    if (isLoading) {
-        return <></>
-    }
-
     return (
         <div>
             <Modal
@@ -60,7 +73,7 @@ const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
                             borderColor: '#DC3545',
                         }}
                         onClick={() =>
-                            deleteTestGroup(id).then((res) => {
+                            deleteTestGroup(testGroup?.id).then((res) => {
                                 setOpen(false)
                                 message.success('Группа удалена')
                             })
@@ -76,14 +89,14 @@ const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
                     id="egEdit-form"
                     name="dynamic_form_item"
                     initialValues={{
-                        direction: getTestGroupId?.direction?.id,
-                        testers: getTestGroupId?.testers.map((item) => {
+                        ['direction']: testGroup?.direction?.id,
+                        ['testers']: testGroup?.testers.map((item) => {
                             return item.id
                         }),
                     }}
                 >
                     <Form.Item label="Квалификация" name="direction">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите тег" onChange={(e) => setTesterId(e)}>
                             {direction
                                 ? direction.map((item, index) => (
                                       <Option key={index} value={item.id}>
@@ -114,10 +127,11 @@ const EgEditModal = ({ open, setOpen, tester, direction, id }) => {
                                         >
                                             <Select placeholder="Выберите аттестуемого">
                                                 {tester
-                                                    ? tester.map((item, index) => (
-                                                          <Option key={index} value={item.id}>
-                                                              {item.last_name} {item.first_name}{' '}
-                                                              {item.patronymic}
+                                                    ? tester.results?.map((item, index) => (
+                                                          <Option key={index} value={item.user.id}>
+                                                              {item.user.last_name}{' '}
+                                                              {item.user.first_name}{' '}
+                                                              {item.user.patronymic}
                                                           </Option>
                                                       ))
                                                     : ''}

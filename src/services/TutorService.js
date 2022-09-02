@@ -111,6 +111,9 @@ export const Tutor = api.injectEndpoints({
         getCertifiedId: build.query({
             query: ({ id }) => `tutor/tester/${id}`,
         }),
+        getApplicationUser: build.query({
+            query: ({ id }) => `tutor/application/user/?direction=${id}`,
+        }),
     }),
 })
 
@@ -132,4 +135,5 @@ export const {
     useGetCertifiedIdQuery,
     usePostAcceptApplicationMutation,
     usePutUserApplicationRejectMutation,
+    useGetApplicationUserQuery,
 } = Tutor

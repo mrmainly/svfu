@@ -4,7 +4,7 @@ import { Button, Table } from 'antd'
 
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
-const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupId }) => {
+const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup }) => {
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id' },
         {
@@ -54,12 +54,12 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroupI
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => (
+            render: (id, record) => (
                 <Button
                     type="primary"
                     onClick={() => {
                         setOpenEditModal(true)
-                        setTestGroupId(id)
+                        setTestGroup(record)
                     }}
                 >
                     Перейти
