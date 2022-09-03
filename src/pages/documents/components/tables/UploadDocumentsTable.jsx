@@ -152,7 +152,13 @@ const UploadDocumentsTable = ({ data, loading }) => {
     ]
     return (
         <>
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
+            <Table
+                columns={columns}
+                dataSource={data}
+                loading={loading}
+                rowKey="id"
+                pagination={false}
+            />
             <UDEditModal open={modalEditDocs} setOpen={setModalEditDocs} dataList={currentData} />
         </>
     )

@@ -39,7 +39,13 @@ const MyQualificationTable = ({ data, loading }) => {
     return (
         <>
             <MQEditModal open={modalEditMQ} setOpen={setModalEditMQ} dataList={currentData} />
-            <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+                loading={loading}
+                pagination={false}
+            />
         </>
     )
 }
