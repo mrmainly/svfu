@@ -83,7 +83,6 @@ const AppealTable = ({ data, loading }) => {
             }
         },
     })
-    console.log(data)
     const columns = [
         {
             title: 'ID',
