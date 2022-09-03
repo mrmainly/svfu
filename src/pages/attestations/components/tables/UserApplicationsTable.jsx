@@ -24,9 +24,6 @@ const UserApplicationsTable = ({ data, loading }) => {
         setSearchText('')
     }
 
-    console.log(searchedColumn)
-    console.log(searchText)
-
     const getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div

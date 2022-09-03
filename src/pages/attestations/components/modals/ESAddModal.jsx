@@ -32,8 +32,9 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [postTestExam] = usePostTestExamMutation()
-    console.log(dataTestGroup)
     const onSubmit = (data) => {
+        data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
+        data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
         postTestExam(data).then((res) => {
             if (res.data) {
                 message.success('Экзамен создан')

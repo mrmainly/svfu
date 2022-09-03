@@ -1,7 +1,4 @@
 import { api } from './api'
-import { SurveysSlice } from '../reducers/SurveysSlice'
-
-const { getData } = SurveysSlice.actions
 
 export const Tutor = api.injectEndpoints({
     endpoints: (build) => ({
