@@ -35,6 +35,8 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [patchTestExam] = usePatchTestExamMutation()
     const onSubmit = (data) => {
+        data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
+        data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
         patchTestExam({ id: dataList.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Экзамен отредактирован')
@@ -42,7 +44,6 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
     const onSearch = (value) => console.log(value)
