@@ -11,7 +11,7 @@ const Applying = () => {
 
     return (
         <div>
-            <Search placeholder="Поиск..." enterButton style={{ width: 300, marginBottom: 20 }} />
+            {/* <Search placeholder="Поиск..." enterButton style={{ width: 300, marginBottom: 20 }} /> */}
             <AppilyngTable data={data?.results} loading={isLoading} refetchFunc={refetch} />
         </div>
     )

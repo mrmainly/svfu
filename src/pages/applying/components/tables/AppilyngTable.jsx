@@ -77,7 +77,17 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
         },
     ]
 
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return (
+        <div>
+            <Table
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+                loading={loading}
+                style={{ overflow: 'auto' }}
+            />
+        </div>
+    )
 }
 
 export default AppilyngTable
