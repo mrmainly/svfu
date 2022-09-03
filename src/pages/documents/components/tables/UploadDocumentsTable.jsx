@@ -158,6 +158,7 @@ const UploadDocumentsTable = ({ data, loading }) => {
                 loading={loading}
                 rowKey="id"
                 pagination={false}
+                scroll={{ x: true }}
             />
             <UDEditModal open={modalEditDocs} setOpen={setModalEditDocs} dataList={currentData} />
         </>

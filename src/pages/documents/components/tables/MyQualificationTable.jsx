@@ -45,6 +45,8 @@ const MyQualificationTable = ({ data, loading }) => {
                 rowKey="id"
                 loading={loading}
                 pagination={false}
+                scroll={{ x: true }}
+                // style={{ overflow: 'scroll' }}
             />
         </>
     )

@@ -113,7 +113,7 @@ const AvailableTestTable = ({ data, loading }) => {
                 rowKey="id"
                 loading={loading}
                 pagination={false}
-                style={{ overflow: 'auto' }}
+                scroll={{ x: true }}
             />
         </>
     )
