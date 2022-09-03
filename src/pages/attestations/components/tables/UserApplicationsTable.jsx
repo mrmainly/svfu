@@ -105,8 +105,6 @@ const UserApplicationsTable = ({ data, loading }) => {
         },
     ]
 
-    console.log(data)
-
     const columns = [
         {
             title: 'ID',

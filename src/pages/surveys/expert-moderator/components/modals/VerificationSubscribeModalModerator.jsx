@@ -37,6 +37,7 @@ const VerificationSubscribeModalModerator = ({ id, main_moderator }) => {
                     id: id,
                     body: body,
                 }).then((res) => {
+                    console.log(res)
                     if (res.data) {
                         if (main_moderator) {
                             sendAnswerMainModerator({

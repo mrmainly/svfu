@@ -6,10 +6,10 @@ export const attestationProtocol = api.injectEndpoints({
             query: ({ group_type }) => `lpr/protocol/?group_type=${group_type}`,
             providesTags: ['AttestationProtocol'],
         }),
-        getAttestationUsers: build.query({
-            query: () => `lpr/user/`,
-            providesTags: ['AttestationProtocol'],
-        }),
+        // getAttestationUsers: build.query({
+        //     query: () => `lpr/user/`,
+        //     providesTags: ['AttestationProtocol'],
+        // }),
         getAttestationUserId: build.query({
             query: ({ id }) => `lpr/user/${id}`,
             providesTags: ['AttestationProtocol'],
@@ -23,7 +23,7 @@ export const attestationProtocol = api.injectEndpoints({
 
 export const {
     useGetAttestationProtocolQuery,
-    useGetAttestationUsersQuery,
+    // useGetAttestationUsersQuery,
     useGetAttestationUserIdQuery,
     useGetLprExamListQuery,
 } = attestationProtocol

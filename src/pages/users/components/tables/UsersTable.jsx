@@ -184,7 +184,13 @@ const UsersTable = ({ data, isLoading }) => {
 
     return (
         <>
-            <Table columns={columns} dataSource={data?.results} loading={isLoading} rowKey="id" />
+            <Table
+                columns={columns}
+                dataSource={data?.results}
+                loading={isLoading}
+                rowKey="id"
+                pagination={false}
+            />
         </>
     )
 }

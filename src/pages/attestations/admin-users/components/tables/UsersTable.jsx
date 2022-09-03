@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux'
 
 import { SearchOutlined } from '@ant-design/icons'
 import Table from 'antd/lib/table'
-import { Button, Input, Space } from 'antd'
+import { Button, Input, Space, Pagination } from 'antd'
 
-import { useGetUsersQuery } from '../../../../../services/AdminService'
+import { useGetAdminUserQuery } from '../../../../../services/PaginationService'
 import UserAddModal from '../modals/UserAddModal'
 import { MyButton } from '../../../../../components'
 import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'
@@ -19,7 +19,8 @@ const UsersTable = () => {
     const [modalNewUser, setModalNewUser] = useState(false)
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
-    const { data, isLoading } = useGetUsersQuery()
+    const [currentPage, setCurrentPage] = useState(1)
+    const { data, isLoading } = useGetAdminUserQuery({ currentPage: currentPage })
     const searchInput = useRef()
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -195,6 +196,10 @@ const UsersTable = () => {
         },
     ]
 
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+
     return (
         <>
             <MyButton
@@ -206,7 +211,16 @@ const UsersTable = () => {
                 Создать пользователя
             </MyButton>
             <UserAddModal open={modalNewUser} setOpen={setModalNewUser} />
-            <Table columns={columns} dataSource={data?.results} rowKey="id" />
+            <Table columns={columns} dataSource={data?.results} rowKey="id" pagination={false} />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={data?.count}
+                    pageSize={20}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </>
     )
 }

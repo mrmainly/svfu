@@ -31,6 +31,9 @@ export const api = createApi({
         'Admin',
         'Appeal',
         'ModeratorAppeal',
+        'TestResult',
+        'LprUser',
+        'AdminUser',
     ],
 
     endpoints: () => ({}),

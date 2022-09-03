@@ -2,10 +2,10 @@ import { api } from './api'
 
 export const moderator = api.injectEndpoints({
     endpoints: (build) => ({
-        getTestResult: build.query({
-            query: () => `moderator/result/`,
-            providesTags: ['Moderator'],
-        }),
+        // getTestResult: build.query({
+        //     query: () => `moderator/result/`,
+        //     providesTags: ['Moderator'],
+        // }),
         getSurveyModeratorId: build.query({
             query(id) {
                 return {
@@ -78,7 +78,7 @@ export const moderator = api.injectEndpoints({
 })
 
 export const {
-    useGetTestResultQuery,
+    // useGetTestResultQuery,
     useGetAppealQuery,
     useGetAppealIdQuery,
     useGetSurveyModeratorIdQuery,
