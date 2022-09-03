@@ -32,10 +32,11 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [postTestExam] = usePostTestExamMutation()
+    console.log(dataTestGroup)
     const onSubmit = (data) => {
         postTestExam(data).then((res) => {
             if (res.data) {
-                message.success('Квалификация создана')
+                message.success('Экзамен создан')
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -48,7 +49,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
             <Modal
                 style={{ top: 0 }}
                 destroyOnClose={true}
-                title="Создание квалификации"
+                title="Создание экзамена"
                 visible={open}
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
@@ -73,7 +74,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Пожайлуста выберите квалификацию!',
+                                message: 'Пожайлуста, выберите квалификацию!',
                             },
                         ]}
                         label="Квалификация"
@@ -91,7 +92,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Пожайлуста выберите тестирование!',
+                                message: 'Пожайлуста, выберите тестирование!',
                             },
                         ]}
                         label="Тестирование"
@@ -109,7 +110,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Пожайлуста выберите группу аттестуемых!',
+                                message: 'Пожайлуста, выберите группу аттестуемых!',
                             },
                         ]}
                         label="Группа аттестуемых"
@@ -118,7 +119,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         <Select placeholder="Выберите тег">
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
-                                    {item.name}
+                                    {item.id} {item.name}
                                 </Option>
                             ))}
                         </Select>
@@ -129,7 +130,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Пожайлуста выберите дату начала тестирования!',
+                                        message: 'Пожайлуста, выберите дату начала тестирования!',
                                     },
                                 ]}
                                 label="Дата начала тестирования"
@@ -151,7 +152,8 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Пожайлуста выберите дату окончания тестирования!',
+                                        message:
+                                            'Пожайлуста, выберите дату окончания тестирования!',
                                     },
                                 ]}
                                 label="Дата окончания тестирования"
@@ -189,7 +191,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Пожайлуста выберите эксперта!',
+                                                    message: 'Пожайлуста, выберите эксперта!',
                                                 },
                                             ]}
                                         >
@@ -226,7 +228,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Пожайлуста выберите председателя экспертов!',
+                                message: 'Пожайлуста, выберите председателя экспертов!',
                             },
                         ]}
                         label="Председатель экспертов"
@@ -260,7 +262,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Пожайлуста выберите модератора!',
+                                                    message: 'Пожайлуста, выберите модератора!',
                                                 },
                                             ]}
                                         >
@@ -298,7 +300,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Пожайлуста выберите председателя модераторов!',
+                                message: 'Пожайлуста, выберите председателя модераторов!',
                             },
                         ]}
                         label="Председатель модераторов"

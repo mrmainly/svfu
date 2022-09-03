@@ -5,18 +5,30 @@ import { Button, Table } from 'antd'
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
 const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup }) => {
+    const directionData = data?.map((item, index) => {
+        return (item = item.direction.name)
+    })
     const columns = [
-        { title: '№', dataIndex: 'id', key: 'id' },
+        {
+            title: '№',
+            dataIndex: 'id',
+            key: 'id',
+            sorter: (a, b) => a.id - b.id,
+            defaultSortOrder: 'ascend',
+        },
         {
             title: 'Название квалификации',
             dataIndex: 'direction',
             key: 'direction',
             render: (direction) => <div>{direction?.name}</div>,
-            filters: data?.map((item) => ({
-                text: item.direction.name,
-                value: item.direction.name,
-            })),
-
+            filters: directionData
+                ?.filter((item, index) => {
+                    return directionData?.indexOf(item) === index
+                })
+                .map((item) => ({
+                    text: item,
+                    value: item,
+                })),
             onFilter: (value, record) => record.direction?.name.indexOf(value) === 0,
         },
         {
