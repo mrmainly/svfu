@@ -17,14 +17,7 @@ const HeaderUser = ({ setToggled, isToggled }) => {
 
     return (
         <div>
-            <div
-                className="header-mobile"
-                // style={{
-                //     background: 'url(./img/header_up.svg)',
-                //     backgroundRepeat: 'no-repeat',
-                //     backgroundPositionX: 'center',
-                // }}
-            >
+            <div className="header-mobile">
                 <div className="header-mobile-body">
                     <div style={{ marginRight: 15 }} onClick={() => setToggled(true)}>
                         <Hamburger color="#2371B9" toggled={isToggled} />

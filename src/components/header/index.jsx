@@ -6,7 +6,7 @@ const Header = ({ setToggled, isToggled }) => {
     const params = useLocation()
     return (
         <>
-            {params.pathname == '/' ||
+            {params.pathname == '/login' ||
             params.pathname == '/registration' ||
             params.pathname == '/forgot-password' ? (
                 <HeaderLogin />

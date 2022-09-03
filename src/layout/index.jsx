@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Layout, Menu, Divider, Drawer } from 'antd'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
@@ -24,17 +24,25 @@ const MyLayout = () => {
     const navigate = useNavigate()
     const params = useLocation()
 
+    const token = cookie.get('token')
+
+    useEffect(() => {
+        if (token === '' || token === undefined || token === null || !token) {
+            navigate(ROUTES.LOGIN)
+        }
+    }, [token])
+
     return (
         <>
             <Header setToggled={setToggled} isToggled={isToggled} />
-            {params.pathname == '/' ||
+            {params.pathname == '/login' ||
             params.pathname == '/registration' ||
             params.pathname == '/forgot-password' ? (
                 <div>
                     <Outlet />
                 </div>
             ) : (
-                <Layout style={{ minHeight: 950 }}>
+                <Layout style={{ minHeight: 950, overflow: 'hidden' }}>
                     <Sider
                         width={250}
                         breakpoint="lg"
@@ -57,7 +65,7 @@ const MyLayout = () => {
                         visible={isToggled}
                         className="hideOnMobile"
                         width={250}
-                        bodyStyle={{ backgroundColor: '#001529', padding: '0' }}
+                        bodyStyle={{ backgroundColor: '#09304A', padding: '0' }}
                     >
                         <Menu
                             mode="inline"

@@ -1,8 +1,8 @@
 const ROUTES = {
-    LOGIN: '/',
+    LOGIN: '/login',
     REGISTRATION: '/registration',
     FORGOT_PASSWORD: '/forgot-password',
-    PROFILE: '/profile',
+    PROFILE: '/',
     PROFILE_EDITING: '/profile-editing',
     AVAILABLE_TESTS: '/available-tests',
     AVAILABLE_TEST: '/available-test',
