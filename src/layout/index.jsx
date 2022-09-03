@@ -35,9 +35,9 @@ const MyLayout = () => {
     return (
         <>
             <Header setToggled={setToggled} isToggled={isToggled} />
-            {params.pathname == '/login' ||
-            params.pathname == '/registration' ||
-            params.pathname == '/forgot-password' ? (
+            {params.pathname == ROUTES.LOGIN ||
+            params.pathname == ROUTES.REGISTRATION ||
+            params.pathname == ROUTES.FORGOT_PASSWORD ? (
                 <div>
                     <Outlet />
                 </div>
