@@ -203,7 +203,7 @@ const UsersTable = () => {
     return (
         <>
             <MyButton
-                style={{ marginBottom: '12px' }}
+                style={{ marginBottom: '16px' }}
                 onClick={() => {
                     setModalNewUser(true)
                 }}
@@ -211,7 +211,13 @@ const UsersTable = () => {
                 Создать пользователя
             </MyButton>
             <UserAddModal open={modalNewUser} setOpen={setModalNewUser} />
-            <Table columns={columns} dataSource={data?.results} rowKey="id" pagination={false} />
+            <Table
+                columns={columns}
+                dataSource={data?.results}
+                rowKey="id"
+                loading={isLoading}
+                pagination={false}
+            />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}

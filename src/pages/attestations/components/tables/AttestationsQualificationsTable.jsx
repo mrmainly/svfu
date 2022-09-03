@@ -147,7 +147,13 @@ const AttestationsQualificationsTable = ({ data, loading }) => {
     ]
     return (
         <>
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
+            <Table
+                columns={columns}
+                dataSource={data}
+                loading={loading}
+                rowKey="id"
+                pagination={false}
+            />
             <AQEditModal open={modalEditQuali} setOpen={setModalEditQuali} dataList={currentData} />
         </>
     )

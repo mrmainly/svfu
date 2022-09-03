@@ -10,10 +10,6 @@ export const pagination = api.injectEndpoints({
             query: ({ currentPage }) => `moderator/result/?page=${currentPage}`,
             providesTags: ['TestResult'],
         }),
-        getLprUser: build.query({
-            query: ({ currentPage }) => `lpr/user/?page=${currentPage}`,
-            providesTags: ['LprUser'],
-        }),
         getAdminUser: build.query({
             query: ({ currentPage }) => `admin/admin/users/?page=${currentPage}`,
             providesTags: ['AdminUser'],
@@ -41,7 +37,6 @@ export const pagination = api.injectEndpoints({
 export const {
     useGetTestProcessingQuery,
     useGetTestResultQuery,
-    useGetLprUserQuery,
     useGetAdminUserQuery,
     useGetAppealQuery,
     useGetDirectionQuery,

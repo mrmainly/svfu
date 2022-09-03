@@ -54,7 +54,7 @@ export const Admin = api.injectEndpoints({
             invalidatesTags: [{ type: 'Admin' }],
         }),
         getAdminExam: build.query({
-            query: () => `admin/admin/exam/`,
+            query: ({ currentPage }) => `admin/admin/exam/?page=${currentPage}`,
             providesTags: ['Admin'],
         }),
         getAdminExamID: build.query({
