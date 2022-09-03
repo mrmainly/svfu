@@ -6,11 +6,11 @@ const { getData } = SurveysSlice.actions
 export const Tutor = api.injectEndpoints({
     endpoints: (build) => ({
         getTestGroup: build.query({
-            query: () => `tutor/testgroup`,
+            query: ({ currentPage }) => `tutor/testgroup/?page=${currentPage}`,
             providesTags: ['TestGroup'],
         }),
         getTestExam: build.query({
-            query: () => `tutor/exam`,
+            query: ({ currentPage }) => `tutor/exam/?page=${currentPage}`,
             providesTags: ['TestGroup'],
         }),
         patchTestExam: build.mutation({
@@ -66,15 +66,15 @@ export const Tutor = api.injectEndpoints({
         getDirectionTuter: build.query({
             query: () => `tutor/direction`,
         }),
-        getApplication: build.query({
-            query: () => `tutor/application/`,
-        }),
+        // getApplication: build.query({
+        //     query: () => `tutor/application/`,
+        // }),
         getApplicationId: build.query({
             query: (id) => `tutor/application/${id}`,
         }),
-        getTester: build.query({
-            query: () => `tutor/tester`,
-        }),
+        // getTester: build.query({
+        //     query: () => `tutor/tester`,
+        // }),
         getUsersRole: build.query({
             query: ({ role }) => ({
                 url: `tutor/users?role=${role}`,
@@ -122,8 +122,8 @@ export const {
     useGetUnitQuery,
     useGetDirectionTuterQuery,
     useGetTestGroupIdQuery,
-    useGetApplicationQuery,
-    useGetTesterQuery,
+    // useGetApplicationQuery,
+    // useGetTesterQuery,
     usePostTesterGroupMutation,
     usePostTestExamMutation,
     usePatchTesterGroupMutation,

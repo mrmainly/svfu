@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Pagination } from 'antd'
 
 import { MyButton } from '../../../components'
 import ExaminationGroupsTable from '../components/tables/ExaminationGroupsTable'
-import {
-    useGetTestGroupQuery,
-    useGetDirectionTuterQuery,
-    useGetTestGroupIdQuery,
-    useGetTesterQuery,
-} from '../../../services/TutorService'
+import { useGetTestGroupQuery, useGetDirectionTuterQuery } from '../../../services/TutorService'
 import EgCreateModal from '../components/modals/egCreateModal'
 import EgEditModal from '../components/modals/egEditModal'
 
@@ -15,10 +11,16 @@ const ExaminationGroups = () => {
     const [open, setOpen] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [testGroup, setTestGroup] = useState()
-
-    const { data, isFetching } = useGetTestGroupQuery('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
+    const { data, isFetching } = useGetTestGroupQuery({ currentPage: currentPage })
     const { data: direction } = useGetDirectionTuterQuery('')
-
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
     return (
         <div>
             <EgCreateModal open={open} setOpen={setOpen} direction={direction?.results} />
@@ -37,6 +39,15 @@ const ExaminationGroups = () => {
                 setOpenEditModal={setOpenEditModal}
                 setTestGroup={setTestGroup}
             />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={totalPage}
+                    pageSize={30}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

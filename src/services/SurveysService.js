@@ -5,9 +5,9 @@ const { getData } = SurveysSlice.actions
 
 export const surveys = api.injectEndpoints({
     endpoints: (build) => ({
-        getSurveys: build.query({
-            query: () => `tester/survey/`,
-        }),
+        // getSurveys: build.query({
+        //     query: () => `tester/survey/`,
+        // }),
         getDirection: build.query({
             query: () => `tester/direction/`,
         }),
@@ -81,7 +81,7 @@ export const surveys = api.injectEndpoints({
 })
 
 export const {
-    useGetSurveysQuery,
+    // useGetSurveysQuery,
     useGetDirectionQuery,
     useGetSurveysIdQuery,
     useSurveyPostMutation,

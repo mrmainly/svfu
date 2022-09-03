@@ -113,7 +113,15 @@ const CerifiedTable = ({ data, loading }) => {
         },
     ]
 
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return (
+        <Table
+            columns={columns}
+            dataSource={data}
+            rowKey="id"
+            loading={loading}
+            pagination={false}
+        />
+    )
 }
 
 export default CerifiedTable

@@ -80,7 +80,15 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
         },
     ]
 
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return (
+        <Table
+            columns={columns}
+            dataSource={data}
+            rowKey="id"
+            loading={loading}
+            pagination={false}
+        />
+    )
 }
 
 export default ExaminationGroupsTable
