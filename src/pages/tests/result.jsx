@@ -38,8 +38,6 @@ const TestResult = () => {
         )
     }
 
-    console.log('data', dataResult)
-
     const items = [
         {
             label: 'Квалификация',

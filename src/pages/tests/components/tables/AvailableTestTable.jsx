@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { Table, Button } from 'antd'
+import { useState, useRef } from 'react'
+import { Button, Table, Input, Space } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
@@ -11,6 +12,78 @@ const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
     const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
+    const [searchText, setSearchText] = useState('')
+    const [searchedColumn, setSearchedColumn] = useState('')
+    const searchInput = useRef()
+
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm()
+        setSearchText(selectedKeys[0])
+        setSearchedColumn(dataIndex)
+    }
+
+    const handleReset = (clearFilters) => {
+        clearFilters()
+        setSearchText('')
+    }
+
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+            >
+                <Input
+                    ref={searchInput}
+                    placeholder={`Поиск...`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Поиск
+                    </Button>
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Очистить
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100)
+            }
+        },
+    })
     const columns = [
         {
             title: 'ID',
@@ -19,18 +92,25 @@ const AvailableTestTable = ({ data, loading }) => {
             defaultSortOrder: 'ascend',
             sorter: (a, b) => a.id - b.id,
         },
-        { title: 'Название квалификации', dataIndex: 'name', key: 'name' },
+        {
+            title: 'Название квалификации',
+            dataIndex: 'name',
+            key: 'name',
+            ...getColumnSearchProps('name'),
+        },
         {
             title: 'Начало аттестации',
-            dataIndex: 'exam',
-            key: 'exam',
+            dataIndex: ['exam', 'date_start'],
+            key: 'date_start',
             render: (exam) => moment(exam.date_start).format('DD.MM.YYYY, hh:mm'),
+            sorter: (a, b) => moment(a.exam.date_start) - moment(b.exam.date_start),
         },
         {
             title: 'Конец аттестации',
-            dataIndex: 'exam',
-            key: 'exam',
+            dataIndex: ['exam', 'date_finish'],
+            key: 'date_finish',
             render: (exam) => moment(exam.date_finish).format('DD.MM.YYYY, hh:mm'),
+            sorter: (a, b) => moment(a.exam.date_finish) - moment(b.exam.date_finish),
         },
         {
             title: 'Время',
@@ -47,6 +127,7 @@ const AvailableTestTable = ({ data, loading }) => {
                     <div>{time_exam} мин</div>
                 </div>
             ),
+            sorter: (a, b) => a.time_exam - b.time_exam,
         },
         {
             title: 'Статус',
