@@ -107,7 +107,13 @@ const AvailableTestTable = ({ data, loading }) => {
     return (
         <>
             {modalATT && <TestDetail open={modalATT} setOpen={setModalATT} ID={ID} />}
-            <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+                loading={loading}
+                pagination={false}
+            />
         </>
     )
 }

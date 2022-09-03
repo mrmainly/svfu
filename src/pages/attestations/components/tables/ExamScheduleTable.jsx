@@ -173,7 +173,13 @@ const ExamScheduleTable = ({ data, loading }) => {
     return (
         <>
             <ESEditModal open={modal} setOpen={setModal} dataList={currentData} />
-            <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                rowKey="id"
+                loading={loading}
+                pagination={false}
+            />
         </>
     )
 }

@@ -2,10 +2,10 @@ import { api } from './api'
 
 export const direction = api.injectEndpoints({
     endpoints: (build) => ({
-        getDirection: build.query({
-            query: () => `tester/direction/`,
-            providesTags: ['Direction'],
-        }),
+        // getDirection: build.query({
+        //     query: () => `tester/direction/`,
+        //     providesTags: ['Direction'],
+        // }),
         postDirection: build.mutation({
             query(body) {
                 return {
@@ -28,4 +28,8 @@ export const direction = api.injectEndpoints({
     }),
 })
 
-export const { useGetDirectionQuery, usePostDirectionMutation, usePutDirectionMutation } = direction
+export const {
+    // useGetDirectionQuery,
+    usePostDirectionMutation,
+    usePutDirectionMutation,
+} = direction

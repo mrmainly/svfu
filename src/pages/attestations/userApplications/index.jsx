@@ -1,26 +1,31 @@
-import React from 'react'
-import { Input, Space, Select } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Pagination } from 'antd'
 
 import UserApplicationsTable from '../components/tables/UserApplicationsTable'
-import { useGetApplicationQuery } from '../../../services/TutorService'
-
-const { Search } = Input
-
-const { Option } = Select
+import { useGetApplicationQuery } from '../../../services/PaginationService'
 
 const UserApplications = () => {
-    const { data, isFetching } = useGetApplicationQuery('')
-
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
+    const { data, isFetching } = useGetApplicationQuery({ currentPage: currentPage })
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
     return (
         <div>
-            {/* <Space style={{ marginBottom: 20 }}>
-                <Search size="large" enterButton placeholder="Поиск..." />
-                <Select style={{ width: 220 }} size="large" placeholder="Выберите направление">
-                    <Option value="jack">Jack</Option>
-                </Select>
-            </Space> */}
-
             <UserApplicationsTable data={data?.results} loading={isFetching} />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={totalPage}
+                    pageSize={30}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

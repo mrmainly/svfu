@@ -1,18 +1,30 @@
-import React from 'react'
-import { Input } from 'antd'
-
-import { useGetDirectionQuery } from '../../services/DirectionService'
+import React, { useState, useEffect } from 'react'
+import { Pagination } from 'antd'
+import { useGetDirectionQuery } from '../../services/PaginationService'
 import AppilyngTable from './components/tables/AppilyngTable'
 
-const { Search } = Input
-
 const Applying = () => {
-    const { data, isLoading, refetch } = useGetDirectionQuery()
-
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
+    const { data, isLoading, refetch } = useGetDirectionQuery({ currentPage: currentPage })
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
     return (
         <div>
-            {/* <Search placeholder="Поиск..." enterButton style={{ width: 300, marginBottom: 20 }} /> */}
             <AppilyngTable data={data?.results} loading={isLoading} refetchFunc={refetch} />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={totalPage}
+                    pageSize={30}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

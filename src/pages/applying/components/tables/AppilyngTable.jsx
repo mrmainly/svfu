@@ -78,15 +78,13 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
     ]
 
     return (
-        <div>
-            <Table
-                columns={columns}
-                dataSource={data}
-                rowKey="id"
-                loading={loading}
-                style={{ overflow: 'auto' }}
-            />
-        </div>
+        <Table
+            columns={columns}
+            dataSource={data}
+            rowKey="id"
+            loading={loading}
+            style={{ overflow: 'auto' }}
+        />
     )
 }
 

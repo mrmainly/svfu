@@ -78,7 +78,13 @@ const AppealTable = ({ data, loading }) => {
     ]
     return (
         <>
-            <Table columns={columns} dataSource={data} loading={loading} rowKey="id" />
+            <Table
+                columns={columns}
+                dataSource={data}
+                loading={loading}
+                rowKey="id"
+                pagination={false}
+            />
         </>
     )
 }
