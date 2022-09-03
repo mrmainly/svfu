@@ -6,6 +6,7 @@ import { Button, Input, Space } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
 import ROUTES from '../../../../routes'
+import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
 
 const UsersTable = ({ data, isLoading }) => {
     const navigate = useNavigate()
@@ -138,22 +139,7 @@ const UsersTable = ({ data, isLoading }) => {
                 },
             ],
             onFilter: (value, record) => record.role === value,
-            render: (role) =>
-                role === 'ADMIN'
-                    ? 'Администратор'
-                    : role === 'MODERATOR'
-                    ? 'Модератор'
-                    : role === 'EXPERT'
-                    ? 'Эксперт'
-                    : role === 'TUTOR'
-                    ? 'Тьютор'
-                    : role === 'CONSTRUCTOR'
-                    ? 'Менеджер оценочных средств'
-                    : role === 'LPR'
-                    ? 'Лицо принимающее решение'
-                    : role === 'TESTER'
-                    ? 'Аттестуемый'
-                    : '',
+            render: (role) => adminUserStatusTrans(role),
         },
         {
             title: 'Блокировка',
@@ -190,6 +176,7 @@ const UsersTable = ({ data, isLoading }) => {
                 loading={isLoading}
                 rowKey="id"
                 pagination={false}
+                scroll={{ x: true }}
             />
         </>
     )

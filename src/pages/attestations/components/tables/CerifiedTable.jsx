@@ -120,6 +120,7 @@ const CerifiedTable = ({ data, loading }) => {
             rowKey="id"
             loading={loading}
             pagination={false}
+            scroll={{ x: true }}
         />
     )
 }

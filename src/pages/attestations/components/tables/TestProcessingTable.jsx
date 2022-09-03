@@ -277,6 +277,7 @@ const TestProcessingTable = ({ data, loading }) => {
                 loading={loading}
                 rowKey="id"
                 pagination={false}
+                scroll={{ x: true }}
             />
             {modalEditTB && (
                 <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />

@@ -179,6 +179,7 @@ const ExamScheduleTable = ({ data, loading }) => {
                 rowKey="id"
                 loading={loading}
                 pagination={false}
+                scroll={{ x: true }}
             />
         </>
     )

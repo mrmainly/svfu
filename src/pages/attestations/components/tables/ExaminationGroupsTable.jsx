@@ -87,6 +87,7 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
             rowKey="id"
             loading={loading}
             pagination={false}
+            scroll={{ x: true }}
         />
     )
 }
