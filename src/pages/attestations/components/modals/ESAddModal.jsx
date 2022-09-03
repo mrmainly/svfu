@@ -81,7 +81,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Квалификация"
                         name="direction"
                     >
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите квалификацию">
                             {dataTutor?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -99,7 +99,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Тестирование"
                         name="unit"
                     >
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите тестирование">
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -117,7 +117,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Группа аттестуемых"
                         name="test_group"
                     >
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите группу аттестуемых">
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.id} {item.name}
@@ -138,6 +138,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                 name="date_start"
                             >
                                 <DatePicker
+                                    placeholder="Выберите дату начала тестирования"
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
                                     secondStep={30}
@@ -161,6 +162,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                 name="date_finish"
                             >
                                 <DatePicker
+                                    placeholder="Выберите дату окончания тестирования"
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
                                     secondStep={30}
@@ -196,7 +198,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                                 },
                                             ]}
                                         >
-                                            <Select placeholder="Выберите тег">
+                                            <Select placeholder="Выберите эксперта">
                                                 {dataExpert?.results.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
@@ -235,7 +237,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Председатель экспертов"
                         name="main_expert"
                     >
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите председателя экспертов">
                             {dataExpert?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
@@ -267,7 +269,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                                                 },
                                             ]}
                                         >
-                                            <Select placeholder="Выберите тег">
+                                            <Select placeholder="Выберите модератора">
                                                 {dataModerator?.results.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
@@ -307,7 +309,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Председатель модераторов"
                         name="main_moderator"
                     >
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите председателя модераторов">
                             {dataModerator?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
