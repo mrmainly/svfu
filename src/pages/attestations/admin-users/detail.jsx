@@ -1,12 +1,15 @@
-import { BsArrowLeft } from 'react-icons/bs'
-import { Radio, Button, message } from 'antd'
 import { useState } from 'react'
+import { BsArrowLeft } from 'react-icons/bs'
+
+import { Radio, Button, message } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
+
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import UserChangeModal from './components/modals/UserChangeModal'
 import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
+import { roles } from '../../../translation/RolesTranslation'
 
 import moment from 'moment'
 import { Line } from '../../../components'
@@ -127,23 +130,6 @@ const AdminUsersDetail = () => {
         },
     ]
 
-    const role =
-        data?.role === 'ADMIN'
-            ? 'Администратор'
-            : data?.role === 'MODERATOR'
-            ? 'Модератор'
-            : data?.role === 'EXPERT'
-            ? 'Эксперт'
-            : data?.role === 'TUTOR'
-            ? 'Тьютор'
-            : data?.role === 'CONSTRUCTOR'
-            ? 'Менеджер оценочных средств'
-            : data?.role === 'LPR'
-            ? 'Лицо принимающее решение'
-            : data?.role === 'TESTER'
-            ? 'Аттестуемый'
-            : ''
-
     const lastName = data?.last_name ? data?.last_name + ' ' : ''
 
     const fisrtName = data?.first_name ? data?.first_name + ' ' : ''
@@ -176,7 +162,7 @@ const AdminUsersDetail = () => {
                         lineHeight: '30px',
                     }}
                 >
-                    {role + ' ' + lastName + fisrtName + patronymic}
+                    {roles(data?.role) + ' ' + lastName + fisrtName + patronymic}
                 </span>
             </div>
             <Line />
