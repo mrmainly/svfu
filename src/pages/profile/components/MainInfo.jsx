@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, Space, Upload, message } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { Typography, Space } from 'antd'
 
-import {
-    useProfilePostPhotoMutation,
-    useProfileDeletePhotoMutation,
-} from '../../../services/ProfileService'
+import PhotoUpload from './PhotoUpload'
 
 const { Text } = Typography
 
 const MainInfo = ({ data }) => {
     const [fileList, setFileList] = useState([])
-
-    const [profilePostImage] = useProfilePostPhotoMutation()
-    const [deletePhotoProfile] = useProfileDeletePhotoMutation()
 
     useEffect(() => {
         setFileList([
@@ -25,24 +18,6 @@ const MainInfo = ({ data }) => {
             },
         ])
     }, [data.photo])
-
-    const uploadButton = (
-        <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Загрузить</div>
-        </div>
-    )
-
-    const handleImageChange = (e) => {
-        const image = e.file
-        let formData = new FormData()
-        formData.append('photo', image)
-        profilePostImage(formData).then((res) => {
-            if (res.error) {
-                message.error('размер файла является слишком большим')
-            }
-        })
-    }
 
     const items = [
         {
@@ -85,24 +60,7 @@ const MainInfo = ({ data }) => {
 
     return (
         <>
-            <Space size="middle" style={{ display: 'flex', alignItems: 'start' }}>
-                <div style={{ width: 200 }}>
-                    <Text style={{ fontWeight: 600 }}>Фотография:</Text>
-                </div>
-                <Upload
-                    customRequest={handleImageChange}
-                    onRemove={() => {
-                        deletePhotoProfile()
-                    }}
-                    listType="picture-card"
-                    multiple={false}
-                    maxCount={1}
-                    fileList={data.photo === null ? null : fileList}
-                    //   onChange={handleImageChange}
-                >
-                    {uploadButton}
-                </Upload>
-            </Space>
+            <PhotoUpload fileList={fileList} dataPhoto={data?.photo} />
             {items.map((item, index) => (
                 <Space key={index} size="middle" style={{ marginTop: 12 }}>
                     <div style={{ width: 200 }}>
