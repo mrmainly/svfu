@@ -82,13 +82,13 @@ const Login = () => {
                                 size="large"
                             />
                         </Form.Item>
-                        <Form.Item name="checkbox" labelCol={{ span: 24 }}>
+                        {/* <Form.Item name="checkbox" labelCol={{ span: 24 }}>
                             <Checkbox checked={false}>
                                 <Text style={{ fontWeight: 600, fontSize: 16 }}>
                                     Запомнить логин
                                 </Text>
                             </Checkbox>
-                        </Form.Item>
+                        </Form.Item> */}
                         <Button
                             style={{
                                 background: '#0D6EFD',
