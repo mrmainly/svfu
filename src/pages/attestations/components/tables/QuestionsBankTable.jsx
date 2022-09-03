@@ -9,9 +9,7 @@ import QBEditModal from '../modals/qbeditmodal'
 import { useGetAttestationsQualificationQuery } from '../../../../services/AttestationService'
 
 const QuestionsBankTable = ({ data, loading }) => {
-    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery({
-        is_active: '',
-    })
+    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery()
     const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
     const [searchText, setSearchText] = useState('')
