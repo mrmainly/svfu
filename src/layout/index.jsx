@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Divider, Drawer } from 'antd'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
+import { UserOutlined } from '@ant-design/icons'
+import cookie from 'js-cookie'
 
 import ROUTES from '../routes'
 import MainLayout from './layouts/MainLayout'
@@ -59,7 +61,29 @@ const MyLayout = () => {
                     >
                         <Menu
                             mode="inline"
-                            items={RolesDivisionMenuItem(navigate)}
+                            items={[
+                                {
+                                    label: 'Иванов Иван',
+                                    key: 'submenu-100',
+                                    icon: <UserOutlined />,
+                                    children: [
+                                        {
+                                            label: 'Настройка профиля',
+                                            key: 'submenu-item-8-1',
+                                            onClick: () => navigate(ROUTES.PROFILE),
+                                        },
+                                        {
+                                            label: 'Выйти из системы',
+                                            key: 'submenu-item-8-2',
+                                            onClick: () => {
+                                                navigate(ROUTES.LOGIN)
+                                                cookie.remove('token')
+                                            },
+                                        },
+                                    ],
+                                },
+                                ...RolesDivisionMenuItem(navigate),
+                            ]}
                             style={{ background: '#09304A', color: 'white', marginTop: 20 }}
                             theme="dark"
                         />

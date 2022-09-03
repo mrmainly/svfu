@@ -61,13 +61,14 @@ const MainInfo = ({ data }) => {
     return (
         <>
             <PhotoUpload fileList={fileList} dataPhoto={data?.photo} />
+
             {items.map((item, index) => (
-                <Space key={index} size="middle" style={{ marginTop: 12 }}>
+                <div className="info-field" key={index}>
                     <div style={{ width: 200 }}>
                         <Text style={{ fontWeight: 600 }}>{item.label}</Text>
                     </div>
                     <Text>{item.value === '' || item.value === null ? '-' : item.value}</Text>
-                </Space>
+                </div>
             ))}
         </>
     )
