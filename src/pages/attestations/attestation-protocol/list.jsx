@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Modal, Input, Row, Col, Form, Radio, Button } from 'antd'
+import { Modal, Input, Row, Col, Form, Radio, Button, Pagination } from 'antd'
 import Table from 'antd/lib/table'
 
 import moment from 'moment'
@@ -13,18 +13,27 @@ import { useGetAttestationProtocolQuery } from '../../../services/AttestationPro
 import { useEffect } from 'react'
 
 const AttestationProtocol = () => {
-    //  const [modalNewQuali, setModalNewQuali] = useState(false)
-    // const onSearch = (value) => console.log(value)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
     const [mode, setMode] = useState('INDIVIDUAL')
     const [type, setType] = useState('TEST')
     const [secondColumn, setSecondColumn] = useState('user')
-    const { data, isLoading } = useGetAttestationProtocolQuery({ group_type: mode })
+    const { data, isLoading } = useGetAttestationProtocolQuery({
+        group_type: mode,
+        currentPage: currentPage,
+    })
     const handleModeChange = (e) => {
         setMode(e.target.value)
     }
     useEffect(() => {
         setSecondColumn(mode === 'INDIVIDUAL' ? 'user' : 'testgroup')
     }, [mode])
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
     const columns = [
         { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
         {
@@ -84,7 +93,22 @@ const AttestationProtocol = () => {
                 <Radio.Button value="INDIVIDUAL">Индивидульные</Radio.Button>
                 <Radio.Button value="GROUP">Групповые</Radio.Button>
             </Radio.Group>
-            <Table dataSource={data?.results} columns={columns} rowKey="id" />
+            <Table
+                dataSource={data?.results}
+                columns={columns}
+                rowKey="id"
+                pagination={false}
+                loading={isLoading}
+            />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={totalPage}
+                    pageSize={30}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

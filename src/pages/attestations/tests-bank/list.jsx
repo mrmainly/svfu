@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import { Row, Col, Input } from 'antd'
+import { useState, useEffect } from 'react'
+import { Pagination } from 'antd'
 
 import TBAddModal from '../components/modals/tbaddmodal'
 import { useGetAttestationsTestsBankQuery } from '../../../services/AttestationService'
 
 import TestsBankTable from '../components/tables/TestsBankTable'
 import { MyButton } from '../../../components'
-const { Search } = Input
 
 const TestsBank = () => {
-    const { data, isLoading } = useGetAttestationsTestsBankQuery()
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
+    const { data, isLoading } = useGetAttestationsTestsBankQuery({ currentPage: currentPage })
     const [modalNewTest, setModalNewTest] = useState(false)
-    const onSearch = (value) => console.log(value)
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
     return (
         <div>
-            <Row gutter={10} style={{ marginBottom: '10px' }}>
-                <Col>
-                    <MyButton onClick={() => setModalNewTest(true)}>Создать новый тест</MyButton>
-                </Col>
-                {/* <Col>
-                    <Search
-                        size="large"
-                        placeholder="Поиск..."
-                        onSearch={onSearch}
-                        enterButton
-                        style={{ borderRadius: 4 }}
-                    />
-                </Col> */}
-            </Row>
+            <MyButton onClick={() => setModalNewTest(true)}>Создать новый тест</MyButton>
             <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />
             <TestsBankTable data={data?.results} loading={isLoading} />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={totalPage}
+                    pageSize={30}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

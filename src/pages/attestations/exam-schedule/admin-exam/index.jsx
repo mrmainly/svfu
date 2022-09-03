@@ -1,24 +1,20 @@
-import React, { useRef, useState } from 'react'
-import { Input, Space, Select, Button, Table } from 'antd'
+import React, { useRef, useState, useEffect } from 'react'
+import { Input, Space, Button, Table, Pagination } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
 import moment from 'moment'
 
-import ROUTES from '../../../../routes'
-
 import { useGetAdminExamQuery } from '../../../../services/AdminService'
 import AdminExamModal from './modal'
 
-const { Search } = Input
-
-const { Option } = Select
-
 const AdminExam = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
     const [open, setOpen] = React.useState(false)
     const [modalData, setModalData] = React.useState()
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
-    const { data, isFetching } = useGetAdminExamQuery()
+    const { data, isFetching } = useGetAdminExamQuery({ currentPage: currentPage })
     const searchInput = useRef()
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -181,11 +177,31 @@ const AdminExam = () => {
             ),
         },
     ]
-
+    const onChange = (page) => {
+        setCurrentPage(page)
+    }
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
     return (
         <div>
-            <Table dataSource={data?.results} loading={isFetching} columns={columns} rowKey="id" />
+            <Table
+                dataSource={data?.results}
+                loading={isFetching}
+                columns={columns}
+                rowKey="id"
+                pagination={false}
+            />
             {open && <AdminExamModal open={open} setOpen={setOpen} dataList={modalData} />}
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Pagination
+                    defaultCurrent={1}
+                    total={totalPage}
+                    pageSize={30}
+                    style={{ marginTop: 20 }}
+                    onChange={onChange}
+                />
+            </div>
         </div>
     )
 }

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import UsersTable from '../../users/components/tables/UsersTable'
 import { Pagination } from 'antd'
 
-import { useGetLprUserQuery } from '../../../services/PaginationService'
+import { useGetAttestationUsersQuery } from '../../../services/AttestationProtocolService'
 
 const LprUsers = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
 
-    const { data, isLoading } = useGetLprUserQuery({ currentPage: currentPage })
+    const { data, isLoading } = useGetAttestationUsersQuery({ currentPage: currentPage })
 
     const onChange = (page) => {
         setCurrentPage(page)

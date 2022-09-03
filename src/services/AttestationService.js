@@ -7,7 +7,8 @@ export const attestation = api.injectEndpoints({
             providesTags: ['Attestation'],
         }),
         getAttestationsQualification: build.query({
-            query: (is_active) => `constructor/direction/?is_active=${is_active}`,
+            query: ({ is_active, currentPage }) =>
+                `constructor/direction/?is_active=${is_active}&page=${currentPage}`,
             providesTags: ['Attestation'],
         }),
         postAttestationsQualification: build.mutation({
@@ -40,7 +41,7 @@ export const attestation = api.injectEndpoints({
             invalidatesTags: [{ type: 'Attestation' }],
         }),
         getAttestationsTestsBank: build.query({
-            query: () => `constructor/unit/`,
+            query: ({ currentPage }) => `constructor/unit/?page=${currentPage}`,
             providesTags: ['Attestation'],
         }),
         postAttestationsTestsBank: build.mutation({
