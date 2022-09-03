@@ -24,6 +24,9 @@ const UserApplicationsTable = ({ data, loading }) => {
         setSearchText('')
     }
 
+    console.log(searchedColumn)
+    console.log(searchText)
+
     const getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div
@@ -73,8 +76,15 @@ const UserApplicationsTable = ({ data, loading }) => {
                 }}
             />
         ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
+        onFilter: (value, record) => {
+            record.user.full_name?.toString().toLowerCase().includes(value.toLowerCase())
+            console.log(
+                record.user.full_name?.toString().toLowerCase().includes(value.toLowerCase())
+            )
+            console.log(record.user.full_name)
+            console.log(record)
+            console.log(value)
+        },
         onFilterDropdownVisibleChange: (visible) => {
             if (visible) {
                 setTimeout(() => searchInput.current?.select(), 100)
