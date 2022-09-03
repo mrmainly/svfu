@@ -15,11 +15,6 @@ const ADMIN = (navigate) => {
                     key: 'submenu-item-1-1',
                     onClick: () => navigate(ROUTES.ADMIN_EXAM),
                 },
-                //  {
-                //      label: 'Протоколы аттестации',
-                //      key: 'submenu-item-1-2',
-                //      onClick: () => navigate(ROUTES.ATTESTATION_PROTOCOL),
-                //  },
                 {
                     label: 'Пользователи',
                     key: 'submenu-item-1-3',
@@ -27,23 +22,23 @@ const ADMIN = (navigate) => {
                 },
             ],
         },
-        //   {
-        //       label: 'Документы',
-        //       key: 'submenu-2',
-        //       icon: <HiOutlineDocumentText />,
-        //       children: [
-        //           {
-        //               label: 'Загрузить документы',
-        //               key: 'submenu-item-2-1',
-        //               onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
-        //           },
-        //           {
-        //               label: 'Мои квалификации',
-        //               key: 'submenu-item-2-3',
-        //               onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),
-        //           },
-        //       ],
-        //   },
+        {
+            label: 'Документы',
+            key: 'submenu-2',
+            icon: <HiOutlineDocumentText />,
+            children: [
+                {
+                    label: 'Загрузить документы',
+                    key: 'submenu-item-2-1',
+                    onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
+                },
+                {
+                    label: 'Мои квалификации',
+                    key: 'submenu-item-2-3',
+                    onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),
+                },
+            ],
+        },
     ]
 }
 

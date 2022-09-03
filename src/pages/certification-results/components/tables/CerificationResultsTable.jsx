@@ -28,7 +28,15 @@ const CerificationResultsTable = ({ data, loading, routes }) => {
             ),
         },
     ]
-    return <Table columns={columns} dataSource={data} rowKey="id" loading={loading} />
+    return (
+        <Table
+            columns={columns}
+            dataSource={data}
+            rowKey="id"
+            loading={loading}
+            scroll={{ x: true }}
+        />
+    )
 }
 
 export default CerificationResultsTable

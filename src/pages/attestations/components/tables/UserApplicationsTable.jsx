@@ -183,6 +183,7 @@ const UserApplicationsTable = ({ data, loading }) => {
             rowKey="id"
             loading={loading}
             pagination={false}
+            scroll={{ x: true }}
         />
     )
 }

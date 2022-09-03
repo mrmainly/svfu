@@ -153,6 +153,7 @@ const AttestationsQualificationsTable = ({ data, loading }) => {
                 loading={loading}
                 rowKey="id"
                 pagination={false}
+                scroll={{ x: true }}
             />
             <AQEditModal open={modalEditQuali} setOpen={setModalEditQuali} dataList={currentData} />
         </>

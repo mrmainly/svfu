@@ -152,6 +152,7 @@ const TestsBankTable = ({ data, loading }) => {
                 loading={loading}
                 rowKey="id"
                 pagination={false}
+                scroll={{ x: true }}
             />
             <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
         </>

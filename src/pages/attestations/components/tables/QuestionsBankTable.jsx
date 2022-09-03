@@ -191,6 +191,7 @@ const QuestionsBankTable = ({ data, loading }) => {
                 loading={loading}
                 rowKey="id"
                 pagination={false}
+                scroll={{ x: true }}
             />
         </>
     )

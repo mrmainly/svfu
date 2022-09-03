@@ -83,7 +83,7 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
             dataSource={data}
             rowKey="id"
             loading={loading}
-            style={{ overflow: 'auto' }}
+            scroll={{ x: true }}
             pagination={false}
         />
     )
