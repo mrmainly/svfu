@@ -3,11 +3,11 @@ import { api } from './api'
 export const Tutor = api.injectEndpoints({
     endpoints: (build) => ({
         getTestGroup: build.query({
-            query: ({ currentPage }) => `tutor/testgroup/?page=${currentPage}`,
+            query: ({ currentPage }) => `tutor/testgroup?page=${currentPage}`,
             providesTags: ['TestGroup'],
         }),
         getTestExam: build.query({
-            query: ({ currentPage }) => `tutor/exam/?page=${currentPage}`,
+            query: ({ currentPage }) => `tutor/exam?page=${currentPage}`,
             providesTags: ['TestGroup'],
         }),
         patchTestExam: build.mutation({
