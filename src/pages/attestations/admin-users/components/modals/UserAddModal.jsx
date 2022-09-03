@@ -5,6 +5,7 @@ import { MyButton } from '../../../../../components'
 import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
 
 import { usePostUserMutation } from '../../../../../services/AdminService'
+import { roles } from './UserChangeModalData'
 import moment from 'moment'
 
 const { Text } = Typography
@@ -13,36 +14,6 @@ const { TextArea } = Input
 
 const UserAddModal = ({ open, setOpen }) => {
     const [postUser] = usePostUserMutation()
-    const roles = [
-        {
-            text: 'Администратор',
-            value: 'ADMIN',
-        },
-        {
-            text: 'Модератор',
-            value: 'MODERATOR',
-        },
-        {
-            text: 'Эксперт',
-            value: 'EXPERT',
-        },
-        {
-            text: 'Тьютор',
-            value: 'TUTOR',
-        },
-        {
-            text: 'Менеджер оценочных средств',
-            value: 'CONSTRUCTOR',
-        },
-        {
-            text: 'Лицо принимающее решение',
-            value: 'LPR',
-        },
-        {
-            text: 'Аттестуемый',
-            value: 'TESTER',
-        },
-    ]
 
     const inputs = [
         {
@@ -100,12 +71,17 @@ const UserAddModal = ({ open, setOpen }) => {
             name: 'inn',
             required: false,
             requiredText: 'Введите ваш ИНН',
+            pattern:
+                /^(([0-9]{10}([0-9]{2})?)|([0-9]{4}\-[0-9]{5}\-[0-9]{1})|([0-9]{4}\-[0-9]{6}\-[0-9]{2}))$/,
+            pattern_message: 'Проверьте правильность ИНН',
         },
         {
             label: 'СНИЛС',
             name: 'snils',
             required: false,
             requiredText: 'Введите ваш СНИЛС',
+            pattern: /^(([0-9]{3}\-[0-9]{3}\-[0-9]{3}\-[0-9]{2})|([0-9]{11}))$/,
+            pattern_message: 'Проверьте правильность СНИЛСа',
         },
         {
             label: 'VK',
@@ -132,46 +108,55 @@ const UserAddModal = ({ open, setOpen }) => {
             label: 'Моя биография',
             name: 'my_biography',
             required: false,
+            placeholder: 'Напишите биографию',
         },
         {
             label: 'Мои обязанности',
             name: 'my_responsibilities',
             required: false,
+            placeholder: 'Напишите о своих обязанностях',
         },
         {
             label: 'Достижения и поощрения',
             name: 'rewards',
             required: false,
+            placeholder: 'Напишите о своих достижениях и поощрениях',
         },
         {
             label: 'Научные интересы',
             name: 'scientific_interests',
             required: false,
+            placeholder: 'Напишите о научных интересах',
         },
         {
             label: 'Научные гранты',
             name: 'scientific_grants',
             required: false,
+            placeholder: 'Напишите о научных грантах',
         },
         {
             label: 'Проведение конференций',
             name: 'holding_conferences',
             required: false,
+            placeholder: 'Напишите о проведении конференций',
         },
         {
             label: 'Участие в конференциях, симпозиумах',
             name: 'participation_conferences',
             required: false,
+            placeholder: 'Напишите о своих участиях в конференциях, симпозиумах',
         },
         {
             label: 'Почетные звания',
             name: 'honoured_title',
             required: false,
+            placeholder: 'Напишите о своих почетных званиях',
         },
         {
             label: 'Научно-общественная деятельность',
             name: 'ssa',
             required: false,
+            placeholder: 'Напишите о научно-общественной деятельности',
         },
     ]
 
@@ -238,12 +223,25 @@ const UserAddModal = ({ open, setOpen }) => {
                                 </Text>
                             }
                             name={item.name}
-                            rules={[
-                                {
-                                    required: item.required,
-                                    message: item.requiredText ? item.requiredText : '',
-                                },
-                            ]}
+                            rules={
+                                item?.pattern
+                                    ? [
+                                          {
+                                              pattern: item.pattern,
+                                              message: item.pattern_message,
+                                          },
+                                          {
+                                              required: item.required,
+                                              message: item.requiredText ? item.requiredText : '',
+                                          },
+                                      ]
+                                    : [
+                                          {
+                                              required: item.required,
+                                              message: item.requiredText ? item.requiredText : '',
+                                          },
+                                      ]
+                            }
                             labelCol={{ span: 24 }}
                         >
                             {item.type !== 'date' ? (
@@ -284,7 +282,7 @@ const UserAddModal = ({ open, setOpen }) => {
                             labelCol={{ span: 24 }}
                         >
                             <TextArea
-                                placeholder="Комментарий к вопросу"
+                                placeholder={item.placeholder}
                                 rows={4}
                                 type={item.type ? item.type : ''}
                             />

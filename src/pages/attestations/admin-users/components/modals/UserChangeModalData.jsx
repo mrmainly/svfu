@@ -96,38 +96,56 @@ const bioInput = [
     {
         label: 'Моя биография',
         name: 'my_biography',
+        required: false,
+        placeholder: 'Напишите биографию',
     },
     {
         label: 'Мои обязанности',
         name: 'my_responsibilities',
+        required: false,
+        placeholder: 'Напишите о своих обязанностях',
     },
     {
         label: 'Достижения и поощрения',
         name: 'rewards',
+        required: false,
+        placeholder: 'Напишите о своих достижениях и поощрениях',
     },
     {
         label: 'Научные интересы',
         name: 'scientific_interests',
+        required: false,
+        placeholder: 'Напишите о научных интересах',
     },
     {
         label: 'Научные гранты',
         name: 'scientific_grants',
+        required: false,
+        placeholder: 'Напишите о научных грантах',
     },
     {
         label: 'Проведение конференций',
         name: 'holding_conferences',
+        required: false,
+        placeholder: 'Напишите о проведении конференций',
     },
     {
         label: 'Участие в конференциях, симпозиумах',
         name: 'participation_conferences',
+        required: false,
+        placeholder: 'Напишите о своих участиях в конференциях, симпозиумах',
     },
     {
         label: 'Почетные звания',
         name: 'honoured_title',
+        required: false,
+        placeholder: 'Напишите о своих почетных званиях',
     },
     {
         label: 'Научно-общественная деятельность',
         name: 'ssa',
+        required: false,
+        placeholder: 'Напишите о научно-общественной деятельности',
     },
 ]
 const options = [

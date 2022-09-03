@@ -80,12 +80,12 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                         </Select>
                     </Form.Item>
                     <Form.Item label="Тестирование" name="unit">
-                        <Select open={false} placeholder="Выберите тег">
+                        <Select open={false} disabled placeholder="Выберите тег">
                             <Option value={admData?.unit?.id}>{admData?.unit?.name}</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item label="Группа аттестуемых" name="test_group">
-                        <Select open={false} placeholder="Выберите тег">
+                        <Select open={false} disabled placeholder="Выберите тег">
                             <Option value={admData?.test_group?.id}>
                                 {admData?.test_group?.name}
                             </Option>
@@ -95,6 +95,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                         <Col span={12}>
                             <Form.Item label="Дата начала тестирования" name="date_start">
                                 <DatePicker
+                                    disabled
                                     open={false}
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
@@ -140,7 +141,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
-                                            <Select placeholder="Выберите тег">
+                                            <Select placeholder="Выберите эксперта">
                                                 {expertData?.results?.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.full_name}
@@ -171,7 +172,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     </Form.List>
 
                     <Form.Item required label="Председатель экспертов" name="main_expert_id">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите председателя экспертов">
                             {expertData?.results?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.full_name}
@@ -199,7 +200,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
-                                            <Select placeholder="Выберите тег">
+                                            <Select placeholder="Выберите модератора">
                                                 {moderatorData?.results.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.full_name}
@@ -230,7 +231,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     </Form.List>
 
                     <Form.Item required label="Председатель модераторов" name="main_moderator_id">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите председателя модераторов">
                             {moderatorData?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.full_name}

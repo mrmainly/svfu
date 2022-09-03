@@ -141,7 +141,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                             labelCol={{ span: 24 }}
                         >
                             <TextArea
-                                placeholder="Комментарий к вопросу"
+                                placeholder={item.placeholder}
                                 rows={4}
                                 type={item.type ? item.type : ''}
                             />
