@@ -1,0 +1,13 @@
+.info-field {
+    display: flex;
+    margin-top: 12px;
+}
+
+@media only screen and (max-width: 500px) {
+    .info-field {
+        flex-direction: column;
+    }
+    .upload-photo {
+        margin-top: 12px;
+    }
+}

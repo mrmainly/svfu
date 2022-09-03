@@ -53,24 +53,26 @@ const PhotoUpload = ({ fileList, dataPhoto }) => {
 
     return (
         <div>
-            <Space size="middle" style={{ display: 'flex', alignItems: 'start' }}>
+            <div className="info-field">
                 <div style={{ width: 200 }}>
                     <Text style={{ fontWeight: 600 }}>Фотография:</Text>
                 </div>
-                <Upload
-                    customRequest={handleImageChange}
-                    onRemove={() => {
-                        deletePhotoProfile()
-                    }}
-                    listType="picture-card"
-                    multiple={false}
-                    maxCount={1}
-                    fileList={dataPhoto === null ? null : fileList}
-                    onPreview={handlePreviewImg}
-                >
-                    {uploadButton}
-                </Upload>
-            </Space>
+                <div className="upload-photo">
+                    <Upload
+                        customRequest={handleImageChange}
+                        onRemove={() => {
+                            deletePhotoProfile()
+                        }}
+                        listType="picture-card"
+                        multiple={false}
+                        maxCount={1}
+                        fileList={dataPhoto === null ? null : fileList}
+                        onPreview={handlePreviewImg}
+                    >
+                        {uploadButton}
+                    </Upload>
+                </div>
+            </div>
             <Modal visible={previewVisible} footer={null} onCancel={() => setPreviewVisible(false)}>
                 <img alt="example" style={{ width: '100%' }} src={previewImg} />
             </Modal>

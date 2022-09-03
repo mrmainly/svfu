@@ -9,6 +9,8 @@ import { Line } from '../../components'
 import ROUTES from '../../routes'
 import { useGetProfileQuery } from '../../services/ProfileService'
 
+import './profile.css'
+
 const Profile = () => {
     const { data, isFetching } = useGetProfileQuery('')
 
