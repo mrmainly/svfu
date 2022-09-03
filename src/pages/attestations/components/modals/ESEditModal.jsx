@@ -89,7 +89,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     id="ese-form"
                 >
                     <Form.Item required label="Квалификация" name="direction">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите квалификацию">
                             {dataTutor?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -98,7 +98,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         </Select>
                     </Form.Item>
                     <Form.Item required label="Тестирование" name="unit">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите тестирование">
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -107,7 +107,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         </Select>
                     </Form.Item>
                     <Form.Item required label="Группа аттестуемых" name="test_group">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите группу аттестуемых">
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -119,6 +119,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         <Col span={12}>
                             <Form.Item required label="Дата начала тестирования" name="date_start">
                                 <DatePicker
+                                    placeholder="Выберите дату начала тестирования"
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
                                     secondStep={30}
@@ -136,6 +137,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                                 name="date_finish"
                             >
                                 <DatePicker
+                                    placeholder="Выберите дату окончания тестирования"
                                     format="YYYY-MM-DD HH:mm:ss"
                                     minuteStep={15}
                                     secondStep={30}
@@ -166,7 +168,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
-                                            <Select placeholder="Выберите тег">
+                                            <Select placeholder="Выберите эксперта">
                                                 {dataExpert?.results.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
@@ -197,7 +199,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     </Form.List>
 
                     <Form.Item required label="Председатель экспертов" name="main_expert">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите председателя экспертов">
                             {dataExpert?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
@@ -225,7 +227,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
-                                            <Select placeholder="Выберите тег">
+                                            <Select placeholder="Выберите модератора">
                                                 {dataModerator?.results.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
@@ -256,7 +258,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     </Form.List>
 
                     <Form.Item required label="Председатель модераторов" name="main_moderator">
-                        <Select placeholder="Выберите тег">
+                        <Select placeholder="Выберите прдеседателя модераторов">
                             {dataModerator?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
