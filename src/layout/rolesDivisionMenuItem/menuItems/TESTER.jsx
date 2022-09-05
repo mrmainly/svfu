@@ -11,11 +11,13 @@ const TESTER = (navigate) => {
             icon: <BsCardChecklist />,
             children: [
                 {
+                    icon: <div>ПЗ</div>,
                     label: 'Подача заявления',
                     key: 'submenu-item-1-1',
                     onClick: () => navigate(ROUTES.APPILYNG),
                 },
                 {
+                    icon: <div>ДТ</div>,
                     label: 'Доступные тесты',
                     key: 'submenu-item-1-2',
                     onClick: () => navigate(ROUTES.AVAILABLE_TESTS),
@@ -28,11 +30,13 @@ const TESTER = (navigate) => {
             icon: <HiOutlineDocumentText />,
             children: [
                 {
+                    icon: <div>ЗД</div>,
                     label: 'Загрузить документы',
                     key: 'submenu-item-2-1',
                     onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
                 },
                 {
+                    icon: <div>МК</div>,
                     label: 'Мои квалификации',
                     key: 'submenu-item-2-3',
                     onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),

@@ -100,12 +100,13 @@ const SurveysSideBar = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
                     <Text>
-                        0
+                        {moment.duration(data.time_exam, 'minutes').hours() > 9 ? 0 : ''}
                         {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
                             ''
                         ) : (
                             <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
                         )}
+                        {moment.duration(data.time_exam, 'minutes').minutes() > 9 ? '' : 0}
                         {moment.duration(data.time_exam, 'minutes').minutes()}:00
                     </Text>
                 </div>
@@ -119,12 +120,13 @@ const SurveysSideBar = () => {
                     <Text>Осталось:</Text>
                     {timer === 0 ? (
                         <Text>
-                            0
+                            {moment.duration(data.time_exam, 'minutes').hours() > 9 ? 0 : ''}
                             {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
                                 ''
                             ) : (
                                 <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
                             )}
+                            {moment.duration(data.time_exam, 'minutes').minutes() > 9 ? '' : 0}
                             {moment.duration(data.time_exam, 'minutes').minutes()}:00
                         </Text>
                     ) : (

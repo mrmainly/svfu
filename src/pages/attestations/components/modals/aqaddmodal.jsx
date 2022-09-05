@@ -50,7 +50,16 @@ const AQAddModal = ({ open, setOpen }) => {
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="aq-form">
-                    <Form.Item label="Название квалификации" name="name">
+                    <Form.Item
+                        label="Название квалификации"
+                        name="name"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Введите название квалификации',
+                            },
+                        ]}
+                    >
                         <Input />
                     </Form.Item>
                     <Form.Item label="Описание" name="description">

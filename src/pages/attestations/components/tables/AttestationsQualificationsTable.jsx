@@ -100,7 +100,7 @@ const AttestationsQualificationsTable = ({ data, loading }) => {
             title: 'Тег',
             dataIndex: 'tag_direction',
             key: 'tag_direction',
-            render: (tag_direction) => <>{tag_direction.name}</>,
+            render: (tag_direction) => <>{tag_direction?.name}</>,
         },
         {
             title: 'Описание',

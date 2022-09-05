@@ -4,7 +4,7 @@ import HeaderLogin from './headerlogin'
 import HeaderUser from './headeruser'
 
 import ROUTES from '../../routes'
-const Header = ({ setToggled, isToggled }) => {
+const Header = ({ setToggled, isToggled, data }) => {
     const params = useLocation()
     return (
         <>
@@ -13,7 +13,7 @@ const Header = ({ setToggled, isToggled }) => {
             params.pathname == ROUTES.FORGOT_PASSWORD ? (
                 <HeaderLogin />
             ) : (
-                <HeaderUser setToggled={setToggled} isToggled={isToggled} />
+                <HeaderUser setToggled={setToggled} isToggled={isToggled} data={data} />
             )}
         </>
     )

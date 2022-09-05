@@ -9,13 +9,17 @@ import MainLayout from './layouts/MainLayout'
 import SurveyLayout from './layouts/SurveyLayout'
 import RolesDivisionMenuItem from './rolesDivisionMenuItem'
 import Header from '../components/header'
+import { useGetProfileQuery } from '../services/ProfileService'
 
 import './layout.css'
 
 const { Sider } = Layout
 
 const MyLayout = () => {
+    const [skip, setSkip] = useState(true)
     const [isToggled, setToggled] = useState(false)
+    // const [data, setData] = useState([])
+    const { data } = useGetProfileQuery('', { skip: skip })
 
     const onClose = () => {
         setToggled(false)
@@ -29,12 +33,18 @@ const MyLayout = () => {
     useEffect(() => {
         if (token === '' || token === undefined || token === null || !token) {
             navigate(ROUTES.LOGIN)
+        } else {
+            setSkip(false)
         }
     }, [token])
 
+    // useEffect(() => {
+    //     setData(JSON.parse(localStorage.getItem('profile')))
+    // }, [])
+
     return (
         <>
-            <Header setToggled={setToggled} isToggled={isToggled} />
+            <Header setToggled={setToggled} isToggled={isToggled} data={data} />
             {params.pathname == ROUTES.LOGIN ||
             params.pathname == ROUTES.REGISTRATION ||
             params.pathname == ROUTES.FORGOT_PASSWORD ? (
@@ -65,24 +75,42 @@ const MyLayout = () => {
                         visible={isToggled}
                         className="hideOnMobile"
                         width={250}
-                        bodyStyle={{ backgroundColor: '#09304A', padding: '0' }}
+                        bodyStyle={{ backgroundColor: '#09304A', padding: 0 }}
                     >
                         <Menu
                             mode="inline"
+                            onClick={onClose}
+                            style={{
+                                background: '#09304A',
+                                color: 'white',
+                                marginTop: 20,
+                            }}
                             items={[
                                 {
-                                    label: 'Иванов Иван',
+                                    label:
+                                        data?.last_name === null || data?.first_name === null ? (
+                                            <div>Ваш профиль</div>
+                                        ) : (
+                                            <div>
+                                                {data?.last_name} {data?.first_name}
+                                            </div>
+                                        ),
                                     key: 'submenu-100',
                                     icon: <UserOutlined />,
+                                    className: 'submenu-style',
                                     children: [
                                         {
                                             label: 'Настройка профиля',
                                             key: 'submenu-item-8-1',
+                                            icon: <div>НП</div>,
                                             onClick: () => navigate(ROUTES.PROFILE),
+                                            className: 'first',
                                         },
                                         {
                                             label: 'Выйти из системы',
                                             key: 'submenu-item-8-2',
+                                            icon: <div>ВС</div>,
+                                            className: 'first',
                                             onClick: () => {
                                                 navigate(ROUTES.LOGIN)
                                                 cookie.remove('token')
@@ -92,7 +120,6 @@ const MyLayout = () => {
                                 },
                                 ...RolesDivisionMenuItem(navigate),
                             ]}
-                            style={{ background: '#09304A', color: 'white', marginTop: 20 }}
                             theme="dark"
                         />
                         <Divider style={{ background: 'white' }} />

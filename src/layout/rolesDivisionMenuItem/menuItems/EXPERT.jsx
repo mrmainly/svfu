@@ -11,6 +11,7 @@ const EXPERT = (navigate) => {
             icon: <BsPeople />,
             children: [
                 {
+                    icon: <div>ОТ</div>,
                     label: 'Обработка тестов',
                     key: 'submenu-item-1-5',
                     onClick: () => navigate(ROUTES.TEST_PROCESSING),
@@ -23,11 +24,13 @@ const EXPERT = (navigate) => {
             icon: <HiOutlineDocumentText />,
             children: [
                 {
+                    icon: <div>ЗД</div>,
                     label: 'Загрузить документы',
                     key: 'submenu-item-2-1',
                     onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
                 },
                 {
+                    icon: <div>МК</div>,
                     label: 'Мои квалификации',
                     key: 'submenu-item-2-3',
                     onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),

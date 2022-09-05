@@ -68,7 +68,7 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                     initialValues={{
                         ['name']: dataList[0]?.name,
                         ['description']: dataList[0]?.description,
-                        ['tag_direction']: dataList[0]?.tag_direction.id,
+                        ['tag_direction']: dataList[0]?.tag_direction?.id,
                     }}
                     onFinish={onSubmit}
                     id="aqedit-form"
@@ -82,8 +82,8 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                     <Form.Item label="Тег квалификации" name="tag_direction">
                         <Select placeholder="Выберите тег">
                             {data?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.name}
+                                <Option key={index} value={item?.id}>
+                                    {item?.name}
                                 </Option>
                             ))}
                         </Select>

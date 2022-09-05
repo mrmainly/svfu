@@ -3,17 +3,15 @@ import { Typography, Button, Modal, Select, Upload, Input, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
 import { usePostDocumentsMutation } from '../../../../services/DocumentsService'
-const { TextArea } = Input
+
 const { Option } = Select
 const { Text } = Typography
 
 const UDAddModal = ({ open, setOpen }) => {
     const [postDocuments] = usePostDocumentsMutation()
     let valRef = useRef()
-    let editRef = useRef()
     const [value, setValue] = useState()
     const [file, setFile] = useState()
-    const [edit, setEdit] = useState([])
     const props = {
         beforeUpload: (file) => {
             setFile(file)
@@ -27,7 +25,7 @@ const UDAddModal = ({ open, setOpen }) => {
             return false
         },
     }
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         let formData = new FormData()
         switch (value) {
             case 'Паспорт':
@@ -73,7 +71,6 @@ const UDAddModal = ({ open, setOpen }) => {
 
         setOpen(false)
     }
-    const onSearch = (value) => console.log(value)
 
     return (
         <div>
@@ -90,7 +87,12 @@ const UDAddModal = ({ open, setOpen }) => {
                     <Button key="back" onClick={() => setOpen(false)}>
                         Отмена
                     </Button>,
-                    <Button key="submit" type="primary" onClick={onSubmit}>
+                    <Button
+                        key="submit"
+                        type="primary"
+                        onClick={onSubmit}
+                        disabled={value ? false : true}
+                    >
                         Сохранить
                     </Button>,
                 ]}

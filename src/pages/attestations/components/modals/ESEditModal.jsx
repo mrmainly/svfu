@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+
 import { Modal, message, Input, Select, Form, Row, Col, Button, DatePicker } from 'antd'
+
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
-import Item from 'antd/lib/list/Item'
 import moment from 'moment'
 
 import { MyButton } from '../../../../components'
@@ -275,7 +276,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     </Form.List>
 
                     <Form.Item required label="Председатель модераторов" name="main_moderator">
-                        <Select placeholder="Выберите прдеседателя модераторов">
+                        <Select placeholder="Выберите председателя модераторов">
                             {dataModerator?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}

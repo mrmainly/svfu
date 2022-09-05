@@ -20,7 +20,9 @@ const TestsBank = () => {
     }, [data])
     return (
         <div>
-            <MyButton onClick={() => setModalNewTest(true)}>Создать новый тест</MyButton>
+            <MyButton onClick={() => setModalNewTest(true)} style={{ marginBottom: 20 }}>
+                Создать новый тест
+            </MyButton>
             <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />
             <TestsBankTable data={data?.results} loading={isLoading} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

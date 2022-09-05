@@ -8,7 +8,14 @@ export const profile = api.injectEndpoints({
                     url: `users/me/`,
                 }
             },
-
+            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled
+                    window.localStorage.setItem('profile', JSON.stringify(data, null, '\t'))
+                } catch (err) {
+                    console.log(err)
+                }
+            },
             providesTags: ['Profile'],
         }),
         profilePatch: build.mutation({

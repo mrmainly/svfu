@@ -5,7 +5,6 @@ const ROUTES = {
     PROFILE: '/',
     PROFILE_EDITING: '/profile-editing',
     AVAILABLE_TESTS: '/available-tests',
-    AVAILABLE_TEST: '/available-test',
     UPLOAD_DOCUMENTS: '/upload-documents',
     DOCUMENTS_EDITING: '/documents-editing',
     MY_QUALIFICATIONS: '/my-qualifications',
