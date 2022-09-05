@@ -6,14 +6,11 @@ import {
     Form,
     Row,
     Col,
-    InputNumber,
     Button,
     DatePicker,
-    Space,
 } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
-import Item from 'antd/lib/list/Item'
 import moment from 'moment'
 
 import { MyButton } from '../../../../components'
@@ -24,7 +21,6 @@ import {
     useGetUsersRoleQuery,
     usePatchTestExamMutation,
 } from '../../../../services/TutorService'
-const { TextArea } = Input
 const { Option } = Select
 
 const ESEditModal = ({ open, setOpen, dataList }) => {

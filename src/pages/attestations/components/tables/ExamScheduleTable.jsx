@@ -10,7 +10,7 @@ import ESEditModal from '../modals/ESEditModal'
 
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
-const ExamScheduleTable = ({ data, loading }) => {
+const ExamScheduleTable = ({ data, loading, setViewSurveyModalOpen }) => {
     const [currentData, setCurrentData] = useState()
     const [modal, setModal] = useState(false)
     const [searchText, setSearchText] = useState('')
@@ -99,6 +99,11 @@ const ExamScheduleTable = ({ data, loading }) => {
             title: 'Название тестирования',
             dataIndex: 'name',
             key: 'name',
+            render: (name) => (
+                <div style={{ color: '#2F80ED', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setViewSurveyModalOpen(true)}>
+                    {name}
+                </div>
+            ),
             ...getColumnSearchProps('name'),
         },
         {
