@@ -10,10 +10,13 @@ import ESEditModal from '../modals/ESEditModal'
 
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
-const ExamScheduleTable = ({ data, loading, setOpenEditModal, setCurrentData }) => {
-    const [currentData, setCurrentData] = useState()
-    const [modal, setModal] = useState(false)
-
+const ExamScheduleTable = ({
+    data,
+    loading,
+    setOpenEditModal,
+    setCurrentData,
+    setViewSurveyModalOpen,
+}) => {
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const searchInput = useRef()
