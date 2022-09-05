@@ -3,7 +3,6 @@ import { Layout, Menu, Divider, Drawer } from 'antd'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import cookie from 'js-cookie'
-import { useGetProfileQuery } from '../services/ProfileService'
 
 import ROUTES from '../routes'
 import MainLayout from './layouts/MainLayout'
@@ -17,7 +16,7 @@ const { Sider } = Layout
 
 const MyLayout = () => {
     const [isToggled, setToggled] = useState(false)
-    const { data } = useGetProfileQuery('')
+    const [data, setData] = useState([])
 
     const onClose = () => {
         setToggled(false)
@@ -33,6 +32,10 @@ const MyLayout = () => {
             navigate(ROUTES.LOGIN)
         }
     }, [token])
+
+    useEffect(() => {
+        setData(JSON.parse(localStorage.getItem('profile')))
+    }, [])
 
     return (
         <>

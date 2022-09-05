@@ -77,7 +77,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Создание тестирования"
+                title="Редактирование тестирования"
                 visible={open}
                 onCancel={() => setOpen(false)}
                 style={{ top: 0 }}

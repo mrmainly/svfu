@@ -1,21 +1,13 @@
-import React from "react";
+import React from 'react'
 
-import { Button } from "antd";
+import { Button } from 'antd'
+
+import './button.css'
 
 const MyButton = ({ children, ...props }) => (
-  <Button
-    style={{
-      background: "#0D6EFD",
-      width: "100%",
-      borderRadius: 4,
-      width: "max-content",
-    }}
-    type="primary"
-    size="large"
-    {...props}
-  >
-    {children}
-  </Button>
-);
+    <Button type="primary" size="large" {...props} className="btn">
+        {children}
+    </Button>
+)
 
-export default MyButton;
+export default MyButton
