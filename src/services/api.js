@@ -33,6 +33,7 @@ export const api = createApi({
         'LprUser',
         'AdminUser',
         'SURVEYS_TESTER',
+        'Application',
     ],
 
     endpoints: () => ({}),

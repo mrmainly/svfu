@@ -81,11 +81,7 @@ const TheoreticalPart = ({ surveyquest, id }) => {
                                     htmlFor={item.id}
                                     style={{ marginTop: 20 }}
                                     labelCol={{ span: 24 }}
-                                    label={
-                                        <Text style={{ fontSize: 16 }}>
-                                            Выберите несколько ответов
-                                        </Text>
-                                    }
+                                    label={<Text style={{ fontSize: 16 }}>Выберите ответ</Text>}
                                 >
                                     <Radio.Group style={{ marginTop: '-10px' }}>
                                         <Space direction="vertical">

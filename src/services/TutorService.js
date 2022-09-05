@@ -67,15 +67,12 @@ export const Tutor = api.injectEndpoints({
         getDirectionTuter: build.query({
             query: () => `tutor/direction`,
         }),
-        // getApplication: build.query({
-        //     query: () => `tutor/application/`,
-        // }),
+
         getApplicationId: build.query({
             query: (id) => `tutor/application/${id}`,
+            providesTags: ['Application'],
         }),
-        // getTester: build.query({
-        //     query: () => `tutor/tester`,
-        // }),
+
         getUsersRole: build.query({
             query: ({ role }) => ({
                 url: `tutor/users?role=${role}`,
@@ -99,6 +96,7 @@ export const Tutor = api.injectEndpoints({
                     method: 'POST',
                 }
             },
+            invalidatesTags: [{ type: 'Application' }],
         }),
         putUserApplicationReject: build.mutation({
             query({ id, data }) {

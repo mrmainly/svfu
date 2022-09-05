@@ -100,16 +100,18 @@ const AvailableTestTable = ({ data, loading }) => {
         },
         {
             title: 'Начало аттестации',
-            dataIndex: ['exam', 'date_start'],
+            dataIndex: 'date_start',
             key: 'date_start',
-            render: (exam) => moment(exam.date_start).format('DD.MM.YYYY, hh:mm'),
+            render: (date_start, record) =>
+                moment(record.exam.date_start).format('DD.MM.YYYY, hh:mm'),
             sorter: (a, b) => moment(a.exam.date_start) - moment(b.exam.date_start),
         },
         {
             title: 'Конец аттестации',
             dataIndex: ['exam', 'date_finish'],
             key: 'date_finish',
-            render: (exam) => moment(exam.date_finish).format('DD.MM.YYYY, hh:mm'),
+            render: (date_finish, record) =>
+                moment(record.exam.date_finish).format('DD.MM.YYYY, hh:mm'),
             sorter: (a, b) => moment(a.exam.date_finish) - moment(b.exam.date_finish),
         },
         {

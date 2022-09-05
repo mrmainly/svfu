@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
 import { Radio, Typography, Button, Spin, message } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
-import ROUTES from '../../../../routes'
 
+import ROUTES from '../../../../routes'
 import { Line } from '../../../../components'
 import QualificationTable from './components/tables/QualificationTable'
 import DocumentsTable from './components/tables/DocumentsTable'
@@ -15,6 +15,7 @@ import {
     useGetApplicationIdQuery,
     usePostAcceptApplicationMutation,
 } from '../../../../services/TutorService'
+import { roles } from '../../../../translation/RolesTranslation'
 
 const { Text } = Typography
 
@@ -30,23 +31,8 @@ const UserApplicationsDetail = () => {
     const navigate = useNavigate()
 
     const { data, isLoading } = useGetApplicationIdQuery(params.id)
-    console.log('data', data)
-    const role =
-        data?.user.role === 'ADMIN'
-            ? 'Администратор'
-            : data?.user.role === 'MODERATOR'
-            ? 'Модератор'
-            : data?.user.role === 'EXPERT'
-            ? 'Эксперт'
-            : data?.user.role === 'TUTOR'
-            ? 'Тьютор'
-            : data?.user.role === 'CONSTRUCTOR'
-            ? 'Менеджер оценочных средств'
-            : data?.user.role === 'LPR'
-            ? 'Лицо принимающее решение'
-            : data?.user.role === 'TESTER'
-            ? 'Аттестуемый'
-            : ''
+
+    const role = roles(data?.user.role)
 
     const lastName = data?.user.last_name ? data?.user.last_name + ' ' : ''
 
