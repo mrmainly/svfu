@@ -1,16 +1,12 @@
 import { Modal, Typography } from 'antd'
 import moment from 'moment'
 
-import { MyButton } from '../../../../components'
 import { useGetUnitIdQuery } from '../../../../services/TutorService'
 
 const { Text } = Typography
 
 const ViewSurveyModal = ({ open, setOpen, currentSurveyId }) => {
     const { data } = useGetUnitIdQuery({ id: currentSurveyId })
-    // const { data: dataDiraction } = useGetAttestationsQualificationQuery(true)
-
-    console.log(data)
 
     return (
         <div>
@@ -43,7 +39,7 @@ const ViewSurveyModal = ({ open, setOpen, currentSurveyId }) => {
                     <Text style={{ marginTop: 20 }}>
                         Создано:
                         <span style={{ marginLeft: 5 }}>
-                            {moment(data.date_start).format('DD.MM.YYYY, hh:mm')}
+                            {moment(data?.date_start).format('DD.MM.YYYY, hh:mm')}
                         </span>
                     </Text>
                     <div
