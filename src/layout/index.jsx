@@ -9,14 +9,17 @@ import MainLayout from './layouts/MainLayout'
 import SurveyLayout from './layouts/SurveyLayout'
 import RolesDivisionMenuItem from './rolesDivisionMenuItem'
 import Header from '../components/header'
+import { useGetProfileQuery } from '../services/ProfileService'
 
 import './layout.css'
 
 const { Sider } = Layout
 
 const MyLayout = () => {
+    const [skip, setSkip] = useState(true)
     const [isToggled, setToggled] = useState(false)
-    const [data, setData] = useState([])
+    // const [data, setData] = useState([])
+    const { data } = useGetProfileQuery('', { skip: skip })
 
     const onClose = () => {
         setToggled(false)
@@ -30,12 +33,14 @@ const MyLayout = () => {
     useEffect(() => {
         if (token === '' || token === undefined || token === null || !token) {
             navigate(ROUTES.LOGIN)
+        } else {
+            setSkip(false)
         }
     }, [token])
 
-    useEffect(() => {
-        setData(JSON.parse(localStorage.getItem('profile')))
-    }, [])
+    // useEffect(() => {
+    //     setData(JSON.parse(localStorage.getItem('profile')))
+    // }, [])
 
     return (
         <>
@@ -75,12 +80,10 @@ const MyLayout = () => {
                         <Menu
                             mode="inline"
                             onClick={onClose}
-                            inlineIndent={0}
                             style={{
                                 background: '#09304A',
                                 color: 'white',
                                 marginTop: 20,
-                                paddingLeft: 20,
                             }}
                             items={[
                                 {

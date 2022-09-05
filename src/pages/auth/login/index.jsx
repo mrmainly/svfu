@@ -24,8 +24,8 @@ const Login = () => {
             } else {
                 cookie.set('token', res.data.token)
                 localStorage.setItem('role', JSON.stringify(res.data.role, null, '\t'))
-                navigate(ROUTES.PROFILE)
-                // window.location.href = ROUTES.PROFILE
+                // navigate(ROUTES.PROFILE)
+                window.location.href = ROUTES.PROFILE
             }
         })
     }

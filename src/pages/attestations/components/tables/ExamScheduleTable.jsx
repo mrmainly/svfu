@@ -100,7 +100,10 @@ const ExamScheduleTable = ({ data, loading, setViewSurveyModalOpen }) => {
             dataIndex: 'name',
             key: 'name',
             render: (name) => (
-                <div style={{ color: '#2F80ED', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setViewSurveyModalOpen(true)}>
+                <div
+                    style={{ color: '#2F80ED', textDecoration: 'underline', cursor: 'pointer' }}
+                    onClick={() => setViewSurveyModalOpen(true)}
+                >
                     {name}
                 </div>
             ),
