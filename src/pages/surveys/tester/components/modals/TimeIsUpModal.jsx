@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom'
 
 import { MyButton } from '../../../../../components'
 import {
-    useSurveyPostMutation,
+    usePostResultPartOneMutation,
     usePracticalPartPostMutation,
     useGetPracticalPartIdQuery,
 } from '../../../../../services/SurveysService'
 import ROUTES from '../../../../../routes'
 
 const TimeIsUpModal = ({ open, setOpen, id }) => {
-    const [postSurvey] = useSurveyPostMutation()
+    const [postResultPartOne] = usePostResultPartOneMutation()
     const [practicalPartPost] = usePracticalPartPostMutation()
 
     const { data: practical_data } = useGetPracticalPartIdQuery({ id: id })
@@ -21,7 +21,7 @@ const TimeIsUpModal = ({ open, setOpen, id }) => {
         let formData = new FormData()
         formData.append('q_id', practical_data?.surveyquest[0]?.question.id)
         formData.append('describe', '')
-        postSurvey({ body: { answers: [] }, id: id })
+        postResultPartOne({ body: { answers: [] }, id: id })
         practicalPartPost({ body: formData, id: id })
         navigate(ROUTES.AVAILABLE_TESTS)
     }

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
 import AvailableTestTable from './components/tables/AvailableTestTable'
-import { useGetSurveysQuery } from '../../services/PaginationService'
+import { useGetAvailableTestQuery } from '../../services/SurveysService'
 import { Pagination } from 'antd'
 
 const Test = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
-    const { data, isLoading } = useGetSurveysQuery({ currentPage: currentPage })
+    const { data, isLoading } = useGetAvailableTestQuery({ currentPage: currentPage })
     const onChange = (page) => {
         setCurrentPage(page)
     }

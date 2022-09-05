@@ -1,19 +1,17 @@
 import React from 'react'
 
-import { Divider, Typography, Layout } from 'antd'
+import { Divider, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
 import { Sling as Hamburger } from 'hamburger-react'
 
 import './header.css'
-import { useGetProfileQuery } from '../../services/ProfileService'
 import ROUTES from '../../routes'
 
 const { Text } = Typography
 
-const HeaderUser = ({ setToggled, isToggled }) => {
+const HeaderUser = ({ setToggled, isToggled, data }) => {
     const navigate = useNavigate()
-    const { data } = useGetProfileQuery('')
 
     return (
         <div>

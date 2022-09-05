@@ -8,7 +8,6 @@ export const profile = api.injectEndpoints({
                     url: `users/me/`,
                 }
             },
-
             providesTags: ['Profile'],
         }),
         profilePatch: build.mutation({

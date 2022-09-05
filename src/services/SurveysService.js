@@ -1,13 +1,11 @@
 import { api } from './api'
-import { SurveysSlice } from '../reducers/SurveysSlice'
-
-const { getData } = SurveysSlice.actions
 
 export const surveys = api.injectEndpoints({
     endpoints: (build) => ({
-        // getSurveys: build.query({
-        //     query: () => `tester/survey/`,
-        // }),
+        getAvailableTest: build.query({
+            query: ({ currentPage }) => `tester/survey/?page=${currentPage}`,
+            providesTags: ['SURVEYS_TESTER'],
+        }),
         getDirection: build.query({
             query: () => `tester/direction/`,
         }),
@@ -29,7 +27,7 @@ export const surveys = api.injectEndpoints({
                 }
             },
         }),
-        surveyPost: build.mutation({
+        postResultPartOne: build.mutation({
             query({ body, id }) {
                 return {
                     url: `tester/survey/part-one/${id}`,
@@ -37,6 +35,7 @@ export const surveys = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
         appealPost: build.mutation({
             query({ body, id }) {
@@ -76,15 +75,16 @@ export const surveys = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
     }),
 })
 
 export const {
-    // useGetSurveysQuery,
+    useGetAvailableTestQuery,
     useGetDirectionQuery,
     useGetSurveysIdQuery,
-    useSurveyPostMutation,
+    usePostResultPartOneMutation,
     useAppealPostMutation,
     useAppealPutMutation,
     useSurveyPatchMutation,

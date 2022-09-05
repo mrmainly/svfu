@@ -12,8 +12,6 @@ const baseQuery = fetchBaseQuery({
     },
 })
 
-// const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 });
-
 export const api = createApi({
     reducerPath: 'splitApi',
 
@@ -34,6 +32,7 @@ export const api = createApi({
         'TestResult',
         'LprUser',
         'AdminUser',
+        'SURVEYS_TESTER',
     ],
 
     endpoints: () => ({}),
