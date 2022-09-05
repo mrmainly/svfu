@@ -1,17 +1,35 @@
-import React from 'react'
-import { Layout } from 'antd'
+import React, { useState } from 'react'
+import { Layout, Drawer, Button } from 'antd'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import '../layout.css'
-import { SurveysSideBar, SurveysSideBarTester } from '../../components'
+import { MyButton, SurveysSideBar, SurveysSideBarTester } from '../../components'
+import { SurveysSlice } from '../../reducers/SurveysSlice'
 import ROUTES from '../../routes'
 
 const { Content } = Layout
 
 const SurveyLayout = () => {
-    const params = useLocation()
+    const [drawerState, setDrawerState] = useState(true)
+    const { mobileDrawer } = useSelector((state) => state.survey_slice)
+    const { changeDrawerMobileOpen } = SurveysSlice.actions
 
-    console.log('asdasda')
+    const params = useLocation()
+    const dispatch = useDispatch()
+
+    React.useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth < 760) {
+                setDrawerState(true)
+            }
+            if (window.innerWidth > 760) {
+                setDrawerState(false)
+            }
+        }
+        handleResize()
+        window.addEventListener('resize', handleResize)
+    }, [])
 
     return (
         <Layout>
@@ -20,8 +38,25 @@ const SurveyLayout = () => {
                     margin: '24px 24px 24px',
                     display: 'flex',
                     alignItems: 'start',
+                    flexDirection: drawerState ? 'column' : 'row',
                 }}
             >
+                {drawerState && (
+                    <Button
+                        style={{
+                            width: '100%',
+                            marginBottom: 16,
+                            height: 40,
+                            borderColor: '#0D6EFD',
+                            color: '#0D6EFD',
+                            fontSize: 20,
+                            borderRadius: 5,
+                        }}
+                        onClick={() => dispatch(changeDrawerMobileOpen(true))}
+                    >
+                        Навигация по тесту
+                    </Button>
+                )}
                 <div
                     className="site-layout-background"
                     style={{
@@ -34,7 +69,19 @@ const SurveyLayout = () => {
                     <Outlet />
                 </div>
                 {params.pathname === ROUTES.TESTER_SURVEY_PART ? (
-                    <SurveysSideBarTester />
+                    <div>
+                        {drawerState ? (
+                            <Drawer
+                                visible={mobileDrawer}
+                                onClose={() => dispatch(changeDrawerMobileOpen(false))}
+                                width={300}
+                            >
+                                <SurveysSideBarTester />
+                            </Drawer>
+                        ) : (
+                            <SurveysSideBarTester />
+                        )}
+                    </div>
                 ) : (
                     <SurveysSideBar />
                 )}

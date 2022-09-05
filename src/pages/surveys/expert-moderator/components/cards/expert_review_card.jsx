@@ -8,7 +8,6 @@ const ExpertReviewCard = ({ expert_name, recommendation }) => {
     return (
         <Card
             title={<Text style={{ color: '#2F80ED' }}>{expert_name}</Text>}
-            extra={<Text>Скопировать текст</Text>}
             style={{
                 width: '100%',
             }}

@@ -69,7 +69,7 @@ const SurveysSideBar = () => {
     }
 
     return (
-        <div style={{ marginLeft: 28 }}>
+        <div className="survey-sidebar">
             {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div className="root">
@@ -100,7 +100,7 @@ const SurveysSideBar = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
                     <Text>
-                        {moment.duration(data.time_exam, 'minutes').hours() > 9 ? 0 : ''}
+                        {moment.duration(data.time_exam, 'minutes').hours() > 9 ? '' : 0}
                         {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
                             ''
                         ) : (
@@ -120,7 +120,7 @@ const SurveysSideBar = () => {
                     <Text>Осталось:</Text>
                     {timer === 0 ? (
                         <Text>
-                            {moment.duration(data.time_exam, 'minutes').hours() > 9 ? 0 : ''}
+                            {moment.duration(data.time_exam, 'minutes').hours() > 9 ? '' : 0}
                             {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
                                 ''
                             ) : (

@@ -18,6 +18,7 @@ const initialState = {
     pass_test_part: false,
     part: 'theoretical-part',
     part_tester: 't-p',
+    mobileDrawer: false,
 }
 
 export const SurveysSlice = createSlice({
@@ -66,6 +67,9 @@ export const SurveysSlice = createSlice({
         },
         changePartTester(state, action) {
             state.part_tester = action.payload
+        },
+        changeDrawerMobileOpen(state, action) {
+            state.mobileDrawer = action.payload
         },
     },
 })
