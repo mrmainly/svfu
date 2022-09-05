@@ -3,23 +3,23 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { MyButton } from '../../../../../components'
-import { useSurveyPostMutation } from '../../../../../services/SurveysService'
+import { usePostResultPartOneMutation } from '../../../../../services/SurveysService'
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import ROUTES from '../../../../../routes'
 
 const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
-    const [postSurvey] = useSurveyPostMutation()
+    const [postResultPartOne] = usePostResultPartOneMutation()
     const { changePartTester } = SurveysSlice.actions
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const onFinishSubmit = () => {
-        postSurvey({ body: postData, id: id }).then((res) => {
+        postResultPartOne({ body: postData, id: id }).then((res) => {
             if (res.data) {
                 if (res.data.survey_status === 'ON_REVIEW') {
                     message.error('Вы не прошли тестовую часть')
-                    navigate(ROUTES.AVAILABLE_TEST)
+                    navigate(ROUTES.AVAILABLE_TESTS)
                 } else {
                     dispatch(changePartTester('p-p'))
                 }
