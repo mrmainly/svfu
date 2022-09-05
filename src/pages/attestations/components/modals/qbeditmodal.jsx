@@ -40,7 +40,6 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
-    const [form] = Form.useForm()
     const [fileList, setFileList] = useState(null)
     const [deletedId, setDeletedId] = useState([])
     const [uploadFiles, setUploadFiles] = useState([])
@@ -187,7 +186,6 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         patchAttestationsQuestionsBank({ id: dataList?.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Вопрос изменен')
-                form.resetFields()
             } else {
                 message.error(res.error.data.errors[0])
             }
@@ -201,14 +199,13 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             <Modal
                 style={{ top: 0 }}
                 destroyOnClose={true}
-                title="Создание вопроса"
+                title="Изменение вопроса"
                 visible={open}
                 onOk={() => {
                     setOpen(false)
                 }}
                 onCancel={() => {
                     setOpen(false)
-                    form.resetFields()
                 }}
                 footer={[
                     <MyButton key="submit" htmlType="submit" form="qbedit-form">
@@ -231,7 +228,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                         ['technique']: dataList?.technique,
                         ['description']: dataList?.description,
                         ['difficulty']: dataList?.difficulty,
-                        ['variant']: dataList?.variant,
+                        ['variant']: [dataList?.variant],
                     }}
                     onFinish={onSubmit}
                     id="qbedit-form"

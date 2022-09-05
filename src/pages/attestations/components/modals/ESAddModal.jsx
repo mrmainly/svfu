@@ -1,33 +1,25 @@
-import {
-    Modal,
-    message,
-    Input,
-    Select,
-    Form,
-    Row,
-    Col,
-    InputNumber,
-    DatePicker,
-    Space,
-    Button,
-} from 'antd'
+import { useState } from 'react'
+import { Modal, message, Input, Select, Form, Row, Col, DatePicker, Button } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
-import Item from 'antd/lib/list/Item'
 import moment from 'moment'
 import { MyButton } from '../../../../components'
 import {
     useGetDirectionTuterQuery,
-    useGetTestGroupQuery,
+    useGetTestGroupDirectionQuery,
     useGetUnitQuery,
     useGetUsersRoleQuery,
     usePostTestExamMutation,
 } from '../../../../services/TutorService'
-const { TextArea } = Input
 const { Option } = Select
 
 const ESAddModal = ({ open, setOpen, dataList }) => {
+    const [form] = Form.useForm()
+    const [direction, setDirection] = useState(0)
     const { data: dataTutor } = useGetDirectionTuterQuery()
-    const { data: dataTestGroup } = useGetTestGroupQuery()
+    const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
+        { direction: direction },
+        { skip: direction === 0 ? true : false }
+    )
     const { data: dataUnit } = useGetUnitQuery()
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
@@ -38,13 +30,13 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
         postTestExam(data).then((res) => {
             if (res.data) {
                 message.success('Экзамен создан')
+                form.resetFields()
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
             }
         })
     }
-    const onSearch = (value) => console.log(value)
     return (
         <div>
             <Modal
@@ -70,7 +62,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="es-form">
+                <Form layout="vertical" onFinish={onSubmit} id="es-form" form={form}>
                     <Form.Item
                         rules={[
                             {
@@ -99,7 +91,13 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Тестирование"
                         name="unit"
                     >
-                        <Select placeholder="Выберите тестирование">
+                        <Select
+                            placeholder="Выберите тестирование"
+                            onChange={(e) => {
+                                setDirection(e)
+                                form.setFieldsValue({ test_group: [] })
+                            }}
+                        >
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}

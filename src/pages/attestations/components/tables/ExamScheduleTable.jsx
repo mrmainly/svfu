@@ -10,9 +10,7 @@ import ESEditModal from '../modals/ESEditModal'
 
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
-const ExamScheduleTable = ({ data, loading }) => {
-    const [currentData, setCurrentData] = useState()
-    const [modal, setModal] = useState(false)
+const ExamScheduleTable = ({ data, loading, setOpenEditModal, setCurrentData }) => {
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const searchInput = useRef()
@@ -161,7 +159,7 @@ const ExamScheduleTable = ({ data, loading }) => {
                     type="primary"
                     onClick={() => {
                         setCurrentData(record)
-                        setModal(true)
+                        setOpenEditModal(true)
                     }}
                 >
                     Просмотр
@@ -170,9 +168,10 @@ const ExamScheduleTable = ({ data, loading }) => {
         },
     ]
 
+    // console.log('currentData', currentData)
+
     return (
         <>
-            <ESEditModal open={modal} setOpen={setModal} dataList={currentData} />
             <Table
                 columns={columns}
                 dataSource={data}

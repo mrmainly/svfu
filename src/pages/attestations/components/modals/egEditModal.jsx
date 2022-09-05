@@ -13,6 +13,7 @@ import {
 const { Option } = Select
 
 const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
+    const [form] = Form.useForm()
     const [patchTestGroup] = usePatchTesterGroupMutation()
     const [deleteTestGroup] = useDeleteTesterGroupMutation()
     const [testerId, setTesterId] = useState(0)
@@ -24,19 +25,16 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
     // } = useGetTestGroupIdQuery(id, {
     //     skip: id,
     // })
-    const { data: tester } = useGetApplicationUserQuery(
-        { id: testerId },
-        { skip: testerId === 0 ? true : false }
-    )
+    const { data: tester } = useGetApplicationUserQuery({ id: testerId }, { skip: !testerId })
     useEffect(() => {
         setTesterId(testGroup?.direction.id)
         setTestGroupId(testGroup?.id)
     }, [testGroup])
     const onSubmit = (data) => {
-        console.log(data)
         patchTestGroup({ body: data, id: testGroupId }).then((res) => {
             if (res.data) {
                 message.success('Группа обновлена')
+                form.resetFields()
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -66,7 +64,7 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                         Отмена
                     </MyButton>,
                     <MyButton
-                        key="back"
+                        key="delete"
                         type="primary"
                         style={{
                             background: ' #DC3545',
@@ -84,6 +82,7 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                 ]}
             >
                 <Form
+                    form={form}
                     layout="vertical"
                     onFinish={onSubmit}
                     id="egEdit-form"
@@ -96,7 +95,15 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                     }}
                 >
                     <Form.Item label="Квалификация" name="direction">
-                        <Select placeholder="Выберите тег" onChange={(e) => setTesterId(e)}>
+                        <Select
+                            placeholder="Выберите тег"
+                            onChange={(e) => {
+                                setTesterId(e)
+                                form.setFieldsValue({
+                                    testers: '',
+                                })
+                            }}
+                        >
                             {direction
                                 ? direction.map((item, index) => (
                                       <Option key={index} value={item.id}>

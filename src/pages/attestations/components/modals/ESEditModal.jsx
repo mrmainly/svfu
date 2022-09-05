@@ -1,16 +1,5 @@
-import {
-    Modal,
-    message,
-    Input,
-    Select,
-    Form,
-    Row,
-    Col,
-    InputNumber,
-    Button,
-    DatePicker,
-    Space,
-} from 'antd'
+import { useState, useEffect } from 'react'
+import { Modal, message, Input, Select, Form, Row, Col, Button, DatePicker } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import Item from 'antd/lib/list/Item'
@@ -19,21 +8,31 @@ import moment from 'moment'
 import { MyButton } from '../../../../components'
 import {
     useGetDirectionTuterQuery,
-    useGetTestGroupQuery,
+    useGetTestGroupDirectionQuery,
     useGetUnitQuery,
     useGetUsersRoleQuery,
     usePatchTestExamMutation,
 } from '../../../../services/TutorService'
-const { TextArea } = Input
+import { direction } from '../../../../services/DirectionService'
 const { Option } = Select
 
 const ESEditModal = ({ open, setOpen, dataList }) => {
+    const [unit, setUnit] = useState(dataList?.unit)
     const { data: dataTutor } = useGetDirectionTuterQuery()
-    const { data: dataTestGroup } = useGetTestGroupQuery()
+    const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
+        { direction: unit },
+        { skip: !unit }
+    )
     const { data: dataUnit } = useGetUnitQuery()
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [patchTestExam] = usePatchTestExamMutation()
+    useEffect(() => {
+        setUnit(dataList?.unit)
+    }, [dataList])
+    useEffect(() => {
+        console.log('Fsadf')
+    }, [dataList])
     const onSubmit = (data) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
@@ -46,7 +45,11 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
             }
         })
     }
-    const onSearch = (value) => console.log(value)
+    const close = () => {
+        setOpen(false)
+    }
+
+    console.log('dataList', dataList)
 
     return (
         <div>
@@ -54,8 +57,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                 destroyOnClose={true}
                 title="Редактирование запланированного экзамена"
                 visible={open}
-                onOk={() => setOpen(false)}
-                onCancel={() => setOpen(false)}
+                onCancel={() => close()}
                 footer={[
                     <MyButton key="submit" htmlType="submit" form="ese-form">
                         Сохранить
@@ -66,7 +68,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         style={{
                             background: '#FFF',
                         }}
-                        onClick={() => setOpen(false)}
+                        onClick={() => close()}
                     >
                         Отмена
                     </MyButton>,
@@ -81,7 +83,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         ['moderators']: dataList?.moderators,
                         ['direction']: dataList?.direction,
                         ['unit']: dataList?.unit,
-                        ['test_group']: dataList?.test_group,
+                        ['test_group']: dataList?.test_group_id,
                         ['main_expert']: dataList?.main_expert,
                         ['main_moderator']: dataList?.main_moderator,
                     }}
@@ -98,7 +100,12 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         </Select>
                     </Form.Item>
                     <Form.Item required label="Тестирование" name="unit">
-                        <Select placeholder="Выберите тестирование">
+                        <Select
+                            placeholder="Выберите тестирование"
+                            onChange={(e) => {
+                                setUnit(e)
+                            }}
+                        >
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -106,7 +113,17 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item required label="Группа аттестуемых" name="test_group">
+                    <Form.Item
+                        dependencies={['unit']}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please confirm your password!',
+                            },
+                        ]}
+                        label="Группа аттестуемых"
+                        name="test_group"
+                    >
                         <Select placeholder="Выберите группу аттестуемых">
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>

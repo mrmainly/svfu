@@ -11,17 +11,16 @@ import {
 const { Option } = Select
 
 const EgCreateModal = ({ open, setOpen, direction }) => {
+    const [form] = Form.useForm()
     const [postTestGroup] = usePostTesterGroupMutation()
     const [id, setId] = useState(0)
-    const { data: tester } = useGetApplicationUserQuery(
-        { id: id },
-        { skip: id === 0 ? true : false }
-    )
+    const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
 
     const onSubmit = (data) => {
         postTestGroup(data).then((res) => {
             if (res.data) {
                 message.success('Группа создана')
+                form.resetFields()
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -32,7 +31,7 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Редактирование квалификации"
+                title="Создание группы"
                 visible={open}
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
@@ -52,9 +51,17 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="egCreate-form">
+                <Form form={form} layout="vertical" onFinish={onSubmit} id="egCreate-form">
                     <Form.Item label="Квалификация" name="direction">
-                        <Select placeholder="Выберите тег" onChange={(e) => setId(e)}>
+                        <Select
+                            placeholder="Выберите тег"
+                            onChange={(e) => {
+                                setId(e)
+                                form.setFieldsValue({
+                                    testers: '',
+                                })
+                            }}
+                        >
                             {direction
                                 ? direction.map((item, index) => (
                                       <Option key={index} value={item.id}>
@@ -75,6 +82,7 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                 : ''}
                         </Select>
                     </Form.Item> */}
+
                     <Form.List name="testers">
                         {(fields, { add, remove }) => (
                             <>

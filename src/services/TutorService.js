@@ -6,6 +6,10 @@ export const Tutor = api.injectEndpoints({
             query: ({ currentPage }) => `tutor/testgroup?page=${currentPage}`,
             providesTags: ['TestGroup'],
         }),
+        getTestGroupDirection: build.query({
+            query: ({ direction }) => `tutor/testgroup?direction=${direction}`,
+            providesTags: ['TestGroup'],
+        }),
         getTestExam: build.query({
             query: ({ currentPage }) => `tutor/exam?page=${currentPage}`,
             providesTags: ['TestGroup'],
@@ -116,6 +120,7 @@ export const Tutor = api.injectEndpoints({
 
 export const {
     useGetTestGroupQuery,
+    useGetTestGroupDirectionQuery,
     useGetUnitQuery,
     useGetDirectionTuterQuery,
     useGetTestGroupIdQuery,
