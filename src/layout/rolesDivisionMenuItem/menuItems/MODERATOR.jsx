@@ -11,12 +11,13 @@ const MODERATOR = (navigate) => {
             icon: <BsPeople />,
             children: [
                 {
+                    icon: <div>РТ</div>,
                     label: 'Результаты тестирования',
                     key: 'submenu-item-1-9',
                     onClick: () => navigate(ROUTES.MODERATOR_TEST_RESULT),
                 },
                 {
-                    label: 'Апелляция аттестуемых',
+                    label: 'Апелляции аттестуемых',
                     key: 'submenu-item-1-10',
                     onClick: () => navigate(ROUTES.ATTESTED_APPEAL),
                 },

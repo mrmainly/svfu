@@ -71,6 +71,7 @@ const MyLayout = () => {
                     >
                         <Menu
                             mode="inline"
+                            onClick={onClose}
                             inlineIndent={0}
                             style={{
                                 background: '#09304A',
