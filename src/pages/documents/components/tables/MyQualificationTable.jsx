@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
+import moment from 'moment'
+
 import MQEditModal from '../modals/mqeditmodal'
 
 const MyQualificationTable = ({ data, loading }) => {
@@ -8,7 +10,7 @@ const MyQualificationTable = ({ data, loading }) => {
     const [modalEditMQ, setModalEditMQ] = useState(false)
 
     const columns = [
-        { title: '№ документа', dataIndex: 'name', key: 'name' },
+        { title: '№ документа', dataIndex: 'id', key: 'id' },
         {
             title: 'Название квалификации',
             dataIndex: 'name',
@@ -18,6 +20,7 @@ const MyQualificationTable = ({ data, loading }) => {
             title: 'Дата выдачи',
             dataIndex: 'date_start',
             key: 'date_start',
+            render: (date_start) => moment(date_start).format('DD.MM.YYYY, hh:mm'),
         },
         {
             title: 'Действие',

@@ -16,6 +16,7 @@ const ExamScheduleTable = ({
     setOpenEditModal,
     setCurrentData,
     setViewSurveyModalOpen,
+    setCurrentSurveyId,
 }) => {
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
@@ -103,10 +104,13 @@ const ExamScheduleTable = ({
             title: 'Название тестирования',
             dataIndex: 'name',
             key: 'name',
-            render: (name) => (
+            render: (name, record) => (
                 <div
                     style={{ color: '#2F80ED', textDecoration: 'underline', cursor: 'pointer' }}
-                    onClick={() => setViewSurveyModalOpen(true)}
+                    onClick={() => {
+                        setCurrentSurveyId(record.unit)
+                        setViewSurveyModalOpen(true)
+                    }}
                 >
                     {name}
                 </div>
@@ -181,8 +185,6 @@ const ExamScheduleTable = ({
             ),
         },
     ]
-
-    // console.log('currentData', currentData)
 
     return (
         <>

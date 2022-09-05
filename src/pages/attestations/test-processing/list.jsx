@@ -7,7 +7,7 @@ import { useGetTestProcessingQuery } from '../../../services/PaginationService'
 const TestProcessing = () => {
     const [currentPage, setCurrentPage] = useState(1)
 
-    const { data, isLoading } = useGetTestProcessingQuery({ currentPage: currentPage })
+    const { data, isFetching } = useGetTestProcessingQuery({ currentPage: currentPage })
 
     const onChange = (page) => {
         setCurrentPage(page)
@@ -15,7 +15,7 @@ const TestProcessing = () => {
 
     return (
         <div>
-            <TestProcessingTable data={data?.results} loading={isLoading} />
+            <TestProcessingTable data={data?.results} loading={isFetching} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}

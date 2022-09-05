@@ -31,9 +31,6 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
     useEffect(() => {
         setUnit(dataList?.unit)
     }, [dataList])
-    useEffect(() => {
-        console.log('Fsadf')
-    }, [dataList])
     const onSubmit = (data) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
@@ -49,8 +46,6 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
     const close = () => {
         setOpen(false)
     }
-
-    console.log('dataList', dataList)
 
     return (
         <div>

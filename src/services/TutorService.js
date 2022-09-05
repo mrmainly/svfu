@@ -113,6 +113,9 @@ export const Tutor = api.injectEndpoints({
         getApplicationUser: build.query({
             query: ({ id }) => `tutor/application/user/?direction=${id}`,
         }),
+        getUnitId: build.query({
+            query: ({ id }) => `tutor/unit/${id}`,
+        }),
     }),
 })
 
@@ -122,8 +125,6 @@ export const {
     useGetUnitQuery,
     useGetDirectionTuterQuery,
     useGetTestGroupIdQuery,
-    // useGetApplicationQuery,
-    // useGetTesterQuery,
     usePostTesterGroupMutation,
     usePostTestExamMutation,
     usePatchTesterGroupMutation,
@@ -136,4 +137,5 @@ export const {
     usePostAcceptApplicationMutation,
     usePutUserApplicationRejectMutation,
     useGetApplicationUserQuery,
+    useGetUnitIdQuery,
 } = Tutor

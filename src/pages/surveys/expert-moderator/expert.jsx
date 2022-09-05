@@ -9,7 +9,7 @@ import ROUTES from '../../../routes'
 import { useGetSurveyExpertIdQuery } from '../../../services/ExpertService'
 import ExpertReviewCard from './components/cards/expert_review_card'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 const Expert = () => {
     const location = useLocation()
