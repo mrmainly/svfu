@@ -9,22 +9,9 @@ import { uaStatus } from '../../../../translation/StatusTranslation'
 
 const UserApplicationsTable = ({ data, loading }) => {
     const navigate = useNavigate()
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
     const searchInput = useRef()
 
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
-
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-
-    const getColumnSearchProps = (dataIndex) => ({
+    const getColumnSearchProps = () => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
             <div
                 style={{
@@ -36,7 +23,7 @@ const UserApplicationsTable = ({ data, loading }) => {
                     placeholder={`Поиск...`}
                     value={selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    onPressEnter={() => confirm()}
                     style={{
                         marginBottom: 8,
                         display: 'block',
@@ -45,7 +32,7 @@ const UserApplicationsTable = ({ data, loading }) => {
                 <Space>
                     <Button
                         type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        onClick={() => confirm()}
                         icon={<SearchOutlined />}
                         size="small"
                         style={{
@@ -55,7 +42,7 @@ const UserApplicationsTable = ({ data, loading }) => {
                         Поиск
                     </Button>
                     <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        onClick={() => clearFilters()}
                         size="small"
                         style={{
                             width: 90,
@@ -73,15 +60,6 @@ const UserApplicationsTable = ({ data, loading }) => {
                 }}
             />
         ),
-        onFilter: (value, record) => {
-            record.user.full_name?.toString().toLowerCase().includes(value.toLowerCase())
-            console.log(
-                record.user.full_name?.toString().toLowerCase().includes(value.toLowerCase())
-            )
-            console.log(record.user.full_name)
-            console.log(record)
-            console.log(value)
-        },
         onFilterDropdownVisibleChange: (visible) => {
             if (visible) {
                 setTimeout(() => searchInput.current?.select(), 100)
@@ -124,29 +102,36 @@ const UserApplicationsTable = ({ data, loading }) => {
             title: 'ФИО',
             dataIndex: ['user', 'full_name'],
             key: 'full_name',
-            // render: (user) => <div>{user.full_name}</div>,
-            ...getColumnSearchProps(['user', 'full_name']),
+            ...getColumnSearchProps(),
+            onFilter: (value, record) =>
+                record.user.full_name?.toString().toLowerCase().includes(value.toLowerCase()),
         },
         {
             title: 'Название квалификации',
             dataIndex: ['direction', 'name'],
             key: 'direction',
-            // render: (direction) => <div>{direction.name}</div>,
-            ...getColumnSearchProps(['direction', 'name']),
+            ...getColumnSearchProps(),
+            onFilter: (value, record) =>
+                record.direction.name?.toString().toLowerCase().includes(value.toLowerCase()),
         },
         {
             title: 'Должность',
             dataIndex: ['user', 'post'],
             key: 'post',
-            // render: (user) => <div>{user?.post}</div>,
-            ...getColumnSearchProps(['user', 'post']),
+            ...getColumnSearchProps(),
+            onFilter: (value, record) =>
+                record.user.post?.toString().toLowerCase().includes(value.toLowerCase()),
         },
         {
             title: 'Стаж работы',
             dataIndex: ['user', 'total_experience'],
             key: 'total_experience',
-            // render: (user) => <div>{user?.total_experience}</div>,
-            ...getColumnSearchProps(['user', 'total_experience']),
+            ...getColumnSearchProps(),
+            onFilter: (value, record) =>
+                record.user.total_experience
+                    ?.toString()
+                    .toLowerCase()
+                    .includes(value.toLowerCase()),
         },
         {
             title: 'Статус',

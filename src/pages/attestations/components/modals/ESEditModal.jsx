@@ -258,7 +258,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     </Form.List>
 
                     <Form.Item required label="Председатель модераторов" name="main_moderator">
-                        <Select placeholder="Выберите прдеседателя модераторов">
+                        <Select placeholder="Выберите председателя модераторов">
                             {dataModerator?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
