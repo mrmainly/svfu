@@ -16,11 +16,12 @@ const AttestationProtocol = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [mode, setMode] = useState('INDIVIDUAL')
-    const [type, setType] = useState('TEST')
+    const [type, setType] = useState('')
     const [secondColumn, setSecondColumn] = useState('user')
-    const { data, isLoading } = useGetAttestationProtocolQuery({
+    const { data, isLoading, refetch } = useGetAttestationProtocolQuery({
         group_type: mode,
         currentPage: currentPage,
+        type: type,
     })
     const handleModeChange = (e) => {
         setMode(e.target.value)
@@ -30,6 +31,13 @@ const AttestationProtocol = () => {
     }, [mode])
     const onChange = (page) => {
         setCurrentPage(page)
+    }
+    const onTableChange = (filters, sorter) => {
+        if (sorter?.type?.length === 1) {
+            setType(sorter?.type[0])
+        } else {
+            setType('')
+        }
     }
     useEffect(() => {
         setTotalPage(data?.count)
@@ -56,13 +64,13 @@ const AttestationProtocol = () => {
                     value: 'CERTIFICATION_RESULT',
                 },
             ],
-            onFilter: (value, record) => record.type === value,
             render: (type) =>
                 type === 'TEST_RESULT'
                     ? 'Экзаменационный протокол'
                     : type === 'CERTIFICATION_RESULT'
                     ? 'Аттестационный протокол'
                     : '-',
+            filterMultiple: false,
         },
         {
             title: 'Дата формирования',
@@ -99,6 +107,7 @@ const AttestationProtocol = () => {
                 rowKey="id"
                 pagination={false}
                 loading={isLoading}
+                onChange={onTableChange}
             />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
