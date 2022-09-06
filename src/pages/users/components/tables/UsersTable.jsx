@@ -8,8 +8,10 @@ import { SearchOutlined } from '@ant-design/icons'
 import ROUTES from '../../../../routes'
 import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
 
-const UsersTable = ({ data, isLoading }) => {
+const UsersTable = ({ data, isLoading, setRole, setId, name, setName }) => {
     const navigate = useNavigate()
+    const [value, setValue] = useState('')
+
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
     const searchInput = useRef()
@@ -24,85 +26,46 @@ const UsersTable = ({ data, isLoading }) => {
         clearFilters()
         setSearchText('')
     }
-
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (filters?.role?.length > 0) {
+            {
+                setRole(filters?.role[0])
             }
-        },
-    })
+        } else {
+            setRole('')
+        }
+        if (sorter?.order === 'descend') {
+            {
+                setId('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setId('id')
+            }
+        } else {
+            {
+                setId('')
+            }
+        }
+    }
 
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'descend',
             sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'ФИО',
             dataIndex: 'full_name',
             key: 'full_name',
-            ...getColumnSearchProps('full_name'),
         },
         {
             title: 'Текущая аттестация',
             dataIndex: 'active_application',
             key: 'active_application',
             render: (active_application) => (active_application ? active_application : '-'),
-            ...getColumnSearchProps('active_application'),
         },
         {
             title: 'Роль',
@@ -138,8 +101,8 @@ const UsersTable = ({ data, isLoading }) => {
                     value: 'TESTER',
                 },
             ],
-            onFilter: (value, record) => record.role === value,
             render: (role) => adminUserStatusTrans(role),
+            filterMultiple: false,
         },
         {
             title: 'Блокировка',
@@ -170,6 +133,16 @@ const UsersTable = ({ data, isLoading }) => {
 
     return (
         <>
+            <Input.Search
+                placeholder="ФИО"
+                enterButton
+                onSearch={(value) => {
+                    const currValue = value
+                    setName(currValue)
+                }}
+                style={{ marginBottom: 16, width: '50%' }}
+            />
+
             <Table
                 columns={columns}
                 dataSource={data?.results}
@@ -177,6 +150,7 @@ const UsersTable = ({ data, isLoading }) => {
                 rowKey="id"
                 pagination={false}
                 scroll={{ x: true }}
+                onChange={onTableChange}
             />
         </>
     )
