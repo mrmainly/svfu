@@ -164,7 +164,7 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
                             <Select.Option value="CERTIFIED_UNDER_CERTAIN_CONDITIONS">
                                 Аттестован при определенных условиях
                             </Select.Option>
-                            <Select.Option value="NOT_CERTIFIED ">Не аттестован</Select.Option>
+                            <Select.Option value="NOT_CERTIFIED">Не аттестован</Select.Option>
                         </Select>
                     </Form.Item>
                     <Form.Item
