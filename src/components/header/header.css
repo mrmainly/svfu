@@ -49,6 +49,14 @@
         display: flex;
         overflow: hidden;
     }
+    .sticky-header-mobile {
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        z-index: 1;
+        background-color: white;
+    }
+
     /* .user-button {
         display: none;
     }

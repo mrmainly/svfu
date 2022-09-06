@@ -53,7 +53,7 @@ const MyLayout = () => {
                     <Outlet />
                 </div>
             ) : (
-                <Layout style={{ minHeight: 950, overflow: 'hidden' }}>
+                <Layout className="layout-main-block">
                     <Sider
                         width={250}
                         breakpoint="lg"

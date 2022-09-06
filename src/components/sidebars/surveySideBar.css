@@ -53,4 +53,11 @@
     .survey-sidebar {
         margin-left: 0px;
     }
+    .root {
+        padding-left: 0px;
+        margin-left: -5px;
+    }
+    .time-block {
+        padding: 0px;
+    }
 }

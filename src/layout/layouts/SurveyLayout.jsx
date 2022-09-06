@@ -83,7 +83,19 @@ const SurveyLayout = () => {
                         )}
                     </div>
                 ) : (
-                    <SurveysSideBar />
+                    <div>
+                        {drawerState ? (
+                            <Drawer
+                                visible={mobileDrawer}
+                                onClose={() => dispatch(changeDrawerMobileOpen(false))}
+                                width={300}
+                            >
+                                <SurveysSideBar />
+                            </Drawer>
+                        ) : (
+                            <SurveysSideBar />
+                        )}
+                    </div>
                 )}
             </Content>
         </Layout>

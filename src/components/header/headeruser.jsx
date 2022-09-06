@@ -14,7 +14,7 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className="sticky-header-mobile">
             <div className="header-mobile">
                 <div className="header-mobile-body">
                     <div style={{ marginRight: 15 }} onClick={() => setToggled(true)}>

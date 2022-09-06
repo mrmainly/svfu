@@ -42,7 +42,7 @@ const SurveysSideBar = () => {
     }
 
     return (
-        <div style={{ marginLeft: 28 }}>
+        <div className="survey-sidebar">
             <Text style={{ fontWeight: 600 }}>{data?.direction}</Text>
             <div
                 className="root"
