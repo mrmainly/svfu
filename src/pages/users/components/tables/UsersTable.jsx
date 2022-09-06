@@ -8,9 +8,8 @@ import { SearchOutlined } from '@ant-design/icons'
 import ROUTES from '../../../../routes'
 import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
 
-const UsersTable = ({ data, isLoading, setRole, setId, name, setName }) => {
+const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
     const navigate = useNavigate()
-    const [value, setValue] = useState('')
 
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')

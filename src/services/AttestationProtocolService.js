@@ -3,8 +3,8 @@ import { api } from './api'
 export const attestationProtocol = api.injectEndpoints({
     endpoints: (build) => ({
         getAttestationProtocol: build.query({
-            query: ({ type, group_type, currentPage }) =>
-                `lpr/protocol/?type=${type}&group_type=${group_type}&ordering=id&page=${currentPage}`,
+            query: ({ type, group_type, currentPage, id }) =>
+                `lpr/protocol/?type=${type}&group_type=${group_type}&ordering=${id}&page=${currentPage}`,
             providesTags: ['AttestationProtocol'],
         }),
         getAttestationUsers: build.query({
@@ -17,7 +17,8 @@ export const attestationProtocol = api.injectEndpoints({
             providesTags: ['AttestationProtocol'],
         }),
         getLprExamList: build.query({
-            query: ({ currentPage }) => `lpr/exam/?page=${currentPage}`,
+            query: ({ unit, order, currentPage, status }) =>
+                `lpr/exam/?page=${currentPage}&ordering=${order}&unit=${unit}&exam_status=${status}`,
             providesTags: ['AttestationProtocol'],
         }),
     }),

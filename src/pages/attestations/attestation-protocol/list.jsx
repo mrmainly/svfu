@@ -17,8 +17,10 @@ const AttestationProtocol = () => {
     const [totalPage, setTotalPage] = useState(30)
     const [mode, setMode] = useState('INDIVIDUAL')
     const [type, setType] = useState('')
+    const [id, setId] = useState('')
     const [secondColumn, setSecondColumn] = useState('user')
-    const { data, isLoading, refetch } = useGetAttestationProtocolQuery({
+    const { data, isLoading } = useGetAttestationProtocolQuery({
+        id: id,
         group_type: mode,
         currentPage: currentPage,
         type: type,
@@ -32,18 +34,31 @@ const AttestationProtocol = () => {
     const onChange = (page) => {
         setCurrentPage(page)
     }
-    const onTableChange = (filters, sorter) => {
-        if (sorter?.type?.length === 1) {
-            setType(sorter?.type[0])
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (filters?.type?.length > 0) {
+            setType(filters?.type[0])
         } else {
             setType('')
+        }
+        if (sorter?.order === 'descend') {
+            {
+                setId('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setId('id')
+            }
+        } else {
+            {
+                setId('')
+            }
         }
     }
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
     const columns = [
-        { title: '№', dataIndex: 'id', key: 'id', render: (id) => (id ? id : '-') },
+        { title: '№', dataIndex: 'id', key: 'id', sorter: (a, b) => a.id - b.id },
         {
             title: mode === 'INDIVIDUAL' ? 'ФИО аттестуемого' : 'Группа',
             dataIndex: secondColumn,
@@ -101,6 +116,7 @@ const AttestationProtocol = () => {
                 <Radio.Button value="INDIVIDUAL">Индивидульные</Radio.Button>
                 <Radio.Button value="GROUP">Групповые</Radio.Button>
             </Radio.Group>
+
             <Table
                 dataSource={data?.results}
                 columns={columns}
