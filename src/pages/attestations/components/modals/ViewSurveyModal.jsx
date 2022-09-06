@@ -1,6 +1,6 @@
 import { Modal, Typography } from 'antd'
-import moment from 'moment'
 
+import moment from 'moment'
 import { useGetUnitIdQuery } from '../../../../services/TutorService'
 
 const { Text } = Typography
@@ -12,7 +12,7 @@ const ViewSurveyModal = ({ open, setOpen, currentSurveyId }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Создание тестирования"
+                title="Просмотр тестирования"
                 visible={open}
                 onCancel={() => setOpen(false)}
                 footer={[]}
