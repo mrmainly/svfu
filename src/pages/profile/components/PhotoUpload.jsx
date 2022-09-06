@@ -68,6 +68,7 @@ const PhotoUpload = ({ fileList, dataPhoto }) => {
                         maxCount={1}
                         fileList={dataPhoto === null ? null : fileList}
                         onPreview={handlePreviewImg}
+                        accept=".jpg,.jpeg,.png"
                     >
                         {uploadButton}
                     </Upload>

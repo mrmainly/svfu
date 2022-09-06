@@ -26,7 +26,7 @@ const ExamSchedule = () => {
 
     return (
         <div>
-            <MyButton style={{ marginBottom: 20 }} onClick={() => setModalEditES(true)}>
+            <MyButton style={{ marginBottom: 20 }} onClick={() => setModalAddES(true)}>
                 Назначить экзамен
             </MyButton>
             <ESAddModal open={modalAddES} setOpen={setModalAddES} />

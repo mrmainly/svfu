@@ -13,7 +13,6 @@ import {
 const { Option } = Select
 
 const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
-    const [form] = Form.useForm()
     const [patchTestGroup] = usePatchTesterGroupMutation()
     const [deleteTestGroup] = useDeleteTesterGroupMutation()
     const [testerId, setTesterId] = useState(0)
@@ -34,7 +33,6 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
         patchTestGroup({ body: data, id: testGroupId }).then((res) => {
             if (res.data) {
                 message.success('Группа обновлена')
-                form.resetFields()
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -45,7 +43,7 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Редактирование квалификации"
+                title="Редактирование группы"
                 visible={open}
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
@@ -82,7 +80,6 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                 ]}
             >
                 <Form
-                    form={form}
                     layout="vertical"
                     onFinish={onSubmit}
                     id="egEdit-form"
@@ -99,9 +96,6 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                             placeholder="Выберите тег"
                             onChange={(e) => {
                                 setTesterId(e)
-                                form.setFieldsValue({
-                                    testers: '',
-                                })
                             }}
                         >
                             {direction

@@ -19,6 +19,7 @@ const { Option } = Select
 
 const ESEditModal = ({ open, setOpen, dataList }) => {
     const [unit, setUnit] = useState(dataList?.unit)
+    const [testGroup, setTestGroup] = useState(dataList?.test_group)
     const { data: dataTutor } = useGetDirectionTuterQuery()
     const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
         { direction: unit },
@@ -30,10 +31,12 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
     const [patchTestExam] = usePatchTestExamMutation()
     useEffect(() => {
         setUnit(dataList?.unit)
+        setTestGroup(dataList?.test_group)
     }, [dataList])
     const onSubmit = (data) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
+        data.test_group = testGroup
         patchTestExam({ id: dataList.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Экзамен отредактирован')
@@ -79,7 +82,6 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         ['moderators']: dataList?.moderators,
                         ['direction']: dataList?.direction,
                         ['unit']: dataList?.unit,
-                        ['test_group']: dataList?.test_group_id,
                         ['main_expert']: dataList?.main_expert,
                         ['main_moderator']: dataList?.main_moderator,
                     }}
@@ -100,6 +102,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                             placeholder="Выберите тестирование"
                             onChange={(e) => {
                                 setUnit(e)
+                                setTestGroup()
                             }}
                         >
                             {dataUnit?.results.map((item, index) => (
@@ -110,7 +113,6 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         </Select>
                     </Form.Item>
                     <Form.Item
-                        dependencies={['unit']}
                         rules={[
                             {
                                 required: true,
@@ -118,9 +120,12 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                             },
                         ]}
                         label="Группа аттестуемых"
-                        name="test_group"
                     >
-                        <Select placeholder="Выберите группу аттестуемых">
+                        <Select
+                            placeholder="Выберите группу аттестуемых"
+                            onChange={(e) => setTestGroup(e)}
+                            value={testGroup}
+                        >
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}

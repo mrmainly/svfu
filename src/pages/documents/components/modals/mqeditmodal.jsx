@@ -199,6 +199,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                             multiple={false}
                             maxCount={1}
                             defaultFileList={dataList?.file === null ? null : defualtFileList}
+                            accept=".pdf"
                         >
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload>

@@ -1,4 +1,7 @@
-import { Modal, Form, Input, message, Typography, DatePicker } from 'antd'
+import { useState } from 'react'
+
+import { Modal, Form, Input, message, Typography, DatePicker, Upload, Button } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 import moment from 'moment'
 
 import { MyButton } from '../../../../components'
@@ -9,12 +12,15 @@ const { Text } = Typography
 const { RangePicker } = DatePicker
 
 const MQAddModal = ({ open, setOpen }) => {
+    const [file, setFile] = useState()
+
     const [postQualification] = usePostQualificationMutation()
     const inputs = [
         {
             title: 'Название квалификации:',
             name: 'name',
-            text: 'Введите номер квалификации',
+            text: 'Введите название квалификации',
+            type: 'text',
         },
         {
             title: 'Дата выдачи документа:',
@@ -41,6 +47,20 @@ const MQAddModal = ({ open, setOpen }) => {
             type: 'file',
         },
     ]
+
+    const props = {
+        beforeUpload: (file) => {
+            setFile(file)
+            const isPDF = file.type === 'application/pdf'
+
+            if (!isPDF) {
+                message.error(`${file.name} не является pdf файлом`)
+                return isPDF || Upload.LIST_IGNORE
+            }
+
+            return false
+        },
+    }
     const onSubmit = (data) => {
         const newDate = new Date()
         let formData = new FormData()
@@ -48,7 +68,7 @@ const MQAddModal = ({ open, setOpen }) => {
         formData.append('date_of_issue', data.date_of_issue)
         formData.append('date_start', moment(data.date_start[0]._d).format('YYYY-MM-DD'))
         formData.append('date_finish', moment(data.date_start[1]._d).format('YYYY-MM-DD'))
-        formData.append('file', document.getElementById('file').files[0], data.file)
+        formData.append('file', file)
 
         postQualification({ formData: formData }).then((res) => {
             if (res.data) {
@@ -108,8 +128,25 @@ const MQAddModal = ({ open, setOpen }) => {
                                     size="large"
                                     style={{ width: '100%' }}
                                 />
+                            ) : item.type === 'file' ? (
+                                <Upload
+                                    action="none"
+                                    {...props}
+                                    name="passport"
+                                    multiple={false}
+                                    maxCount={1}
+                                    labelCol={{ span: 24 }}
+                                    accept=".pdf"
+                                >
+                                    <Button icon={<UploadOutlined />}>Загрузить документ</Button>
+                                </Upload>
                             ) : (
-                                <Input placeholder={item.text} size="large" type={item.type} />
+                                <Input
+                                    placeholder={item.text}
+                                    size="large"
+                                    type={item.type}
+                                    accept=".pdf"
+                                />
                             )}
                         </Form.Item>
                     ))}

@@ -13,12 +13,12 @@ import {
 const { Option } = Select
 
 const ESAddModal = ({ open, setOpen, dataList }) => {
-    const [form] = Form.useForm()
     const [direction, setDirection] = useState(0)
+    const [testGroup, setTestGroup] = useState()
     const { data: dataTutor } = useGetDirectionTuterQuery()
     const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
         { direction: direction },
-        { skip: direction === 0 ? true : false }
+        { skip: !direction }
     )
     const { data: dataUnit } = useGetUnitQuery()
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
@@ -27,10 +27,10 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
     const onSubmit = (data) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
+        data.test_group = testGroup
         postTestExam(data).then((res) => {
             if (res.data) {
                 message.success('Экзамен создан')
-                form.resetFields()
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
@@ -62,7 +62,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                     </MyButton>,
                 ]}
             >
-                <Form layout="vertical" onFinish={onSubmit} id="es-form" form={form}>
+                <Form layout="vertical" onFinish={onSubmit} id="es-form">
                     <Form.Item
                         rules={[
                             {
@@ -95,7 +95,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                             placeholder="Выберите тестирование"
                             onChange={(e) => {
                                 setDirection(e)
-                                form.setFieldsValue({ test_group: [] })
+                                setTestGroup()
                             }}
                         >
                             {dataUnit?.results.map((item, index) => (
@@ -113,9 +113,12 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                             },
                         ]}
                         label="Группа аттестуемых"
-                        name="test_group"
                     >
-                        <Select placeholder="Выберите группу аттестуемых">
+                        <Select
+                            placeholder="Выберите группу аттестуемых"
+                            onChange={(e) => setTestGroup(e)}
+                            value={testGroup}
+                        >
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.id} {item.name}

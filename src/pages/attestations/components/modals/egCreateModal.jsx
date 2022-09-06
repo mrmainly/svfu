@@ -11,21 +11,22 @@ import {
 const { Option } = Select
 
 const EgCreateModal = ({ open, setOpen, direction }) => {
-    const [form] = Form.useForm()
     const [postTestGroup] = usePostTesterGroupMutation()
     const [id, setId] = useState(0)
+    const [testers, setTesters] = useState()
     const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
 
     const onSubmit = (data) => {
-        postTestGroup(data).then((res) => {
-            if (res.data) {
-                message.success('Группа создана')
-                form.resetFields()
-                setOpen(false)
-            } else {
-                message.error(res.error.data.errors[0])
-            }
-        })
+        // postTestGroup(data).then((res) => {
+        //     if (res.data) {
+        //         message.success('Группа создана')
+        //         setOpen(false)
+        //     } else {
+        //         message.error(res.error.data.errors[0])
+        //     }
+        // })
+        console.log(testers)
+        console.log(data)
     }
     return (
         <div>
@@ -51,15 +52,12 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                     </MyButton>,
                 ]}
             >
-                <Form form={form} layout="vertical" onFinish={onSubmit} id="egCreate-form">
+                <Form layout="vertical" onFinish={onSubmit} id="egCreate-form">
                     <Form.Item label="Квалификация" name="direction">
                         <Select
                             placeholder="Выберите тег"
                             onChange={(e) => {
                                 setId(e)
-                                form.setFieldsValue({
-                                    testers: '',
-                                })
                             }}
                         >
                             {direction
@@ -71,17 +69,6 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                 : ''}
                         </Select>
                     </Form.Item>
-                    {/* <Form.Item label={`Аттестуемый 1`} name={`tester_1`} required>
-                        <Select placeholder="Выберите аттестуемого">
-                            {tester
-                                ? tester[0]?.testers?.map((item, index) => (
-                                      <Option key={index} value={item.id}>
-                                          {item.last_name} {item.first_name} {item.patronymic}
-                                      </Option>
-                                  ))
-                                : ''}
-                        </Select>
-                    </Form.Item> */}
 
                     <Form.List name="testers">
                         {(fields, { add, remove }) => (
@@ -102,7 +89,10 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
-                                            <Select placeholder="Выберите аттестуемого">
+                                            <Select
+                                                placeholder="Выберите аттестуемого"
+                                                onChange={(e) => setTesters(e)}
+                                            >
                                                 {tester
                                                     ? tester.results?.map((item, index) => (
                                                           <Option key={index} value={item.user.id}>

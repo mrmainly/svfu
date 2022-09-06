@@ -141,7 +141,13 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
                     }}
                 >
                     <Text style={{ fontWeight: 600, fontSize: 16 }}>Документ</Text>
-                    <Upload {...props} multiple={false} maxCount={1} labelCol={{ span: 24 }}>
+                    <Upload
+                        {...props}
+                        multiple={false}
+                        maxCount={1}
+                        labelCol={{ span: 24 }}
+                        accept=".pdf"
+                    >
                         <Button icon={<UploadOutlined />}>Загрузить документ</Button>
                     </Upload>
                 </div>

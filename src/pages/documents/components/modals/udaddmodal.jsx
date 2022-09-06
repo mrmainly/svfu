@@ -143,6 +143,7 @@ const UDAddModal = ({ open, setOpen }) => {
                         multiple={false}
                         maxCount={1}
                         labelCol={{ span: 24 }}
+                        accept=".pdf"
                     >
                         <Button icon={<UploadOutlined />}>Загрузить документ</Button>
                     </Upload>
