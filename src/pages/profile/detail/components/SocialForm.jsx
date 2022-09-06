@@ -1,6 +1,6 @@
-import React from "react";
-
 import { Form, Input, Typography } from "antd";
+
+import React from "react";
 
 const { Text, Title } = Typography;
 
@@ -24,7 +24,7 @@ const SocialForm = () => {
     ];
 
     return (
-        <div style={{ width: 350 }}>
+        <div style={{ width: "100%" }}>
             <Title level={4}>Социальные сети</Title>
             {data.map((item, index) => (
                 <Form.Item

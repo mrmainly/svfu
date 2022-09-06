@@ -1,13 +1,13 @@
-import React from 'react'
 import { Form, Spin, message } from 'antd'
-import { useNavigate } from 'react-router-dom'
-
-import ProfileForm from './components/ProfileForm'
-import InfoForm from './components/InfoForm'
-import SocialForm from './components/SocialForm'
 import { Line, MyButton } from '../../../components'
 import { useGetProfileQuery, useProfilePatchMutation } from '../../../services/ProfileService'
+
+import InfoForm from './components/InfoForm'
+import ProfileForm from './components/ProfileForm'
 import ROUTES from '../../../routes'
+import React from 'react'
+import SocialForm from './components/SocialForm'
+import { useNavigate } from 'react-router-dom'
 
 const ProfileDetail = () => {
     const { data, isFetching, error } = useGetProfileQuery('')
@@ -70,6 +70,7 @@ const ProfileDetail = () => {
                     <ProfileForm />
                     <Line />
                     <SocialForm />
+                    <Line />
                     <InfoForm />
                     <Line />
                     <MyButton htmlType="submit">Сохранить</MyButton>

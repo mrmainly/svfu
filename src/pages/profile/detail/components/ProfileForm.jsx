@@ -1,6 +1,5 @@
+import { Form, Input, Typography, Upload, message } from 'antd'
 import React, { useState } from 'react'
-
-import { Form, Typography, Input, Upload, message } from 'antd'
 
 const { Text } = Typography
 
@@ -74,7 +73,7 @@ const ProfileForm = () => {
     ]
 
     return (
-        <div style={{ width: 350 }}>
+        <div style={{ width: "100%" }}>
             {inputs.map((item, index) => (
                 <Form.Item
                     key={index}
