@@ -107,7 +107,7 @@ const InfoForm = () => {
                 }
                 name={'total_experience'}
                 labelCol={{ span: 24 }}
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
             >
                 <Input min={0} placeholder="Общий стаж работы" size="medium" type="number" />
             </Form.Item>
@@ -124,7 +124,7 @@ const InfoForm = () => {
                 }
                 name={'specialty_experience'}
                 labelCol={{ span: 24 }}
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
             >
                 <Input
                     min={0}

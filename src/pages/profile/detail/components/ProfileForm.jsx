@@ -73,7 +73,7 @@ const ProfileForm = () => {
     ]
 
     return (
-        <div style={{ width: "100%" }}>
+        <div style={{ width: '100%' }}>
             {inputs.map((item, index) => (
                 <Form.Item
                     key={index}
@@ -104,6 +104,7 @@ const ProfileForm = () => {
                         placeholder={item.requiredText}
                         size="medium"
                         type={item.type ? item.type : ''}
+                        className="input_edit_profile"
                     />
                 </Form.Item>
             ))}

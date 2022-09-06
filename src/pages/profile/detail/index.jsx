@@ -8,6 +8,7 @@ import ROUTES from '../../../routes'
 import React from 'react'
 import SocialForm from './components/SocialForm'
 import { useNavigate } from 'react-router-dom'
+import './profile_edit.css'
 
 const ProfileDetail = () => {
     const { data, isFetching, error } = useGetProfileQuery('')
