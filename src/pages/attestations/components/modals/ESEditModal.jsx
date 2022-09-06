@@ -18,25 +18,28 @@ import { direction } from '../../../../services/DirectionService'
 const { Option } = Select
 
 const ESEditModal = ({ open, setOpen, dataList }) => {
-    const [unit, setUnit] = useState(dataList?.unit)
+    const [direction, setDirection] = useState(dataList?.direction)
     const [testGroup, setTestGroup] = useState(dataList?.test_group)
+    const [unit, setUnit] = useState(dataList?.unit)
     const { data: dataTutor } = useGetDirectionTuterQuery()
     const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
-        { direction: unit },
-        { skip: !unit }
+        { direction: direction },
+        { skip: !direction }
     )
-    const { data: dataUnit } = useGetUnitQuery()
+    const { data: dataUnit } = useGetUnitQuery({ direction: direction }, { skip: !direction })
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [patchTestExam] = usePatchTestExamMutation()
     useEffect(() => {
-        setUnit(dataList?.unit)
+        setDirection(dataList?.direction)
         setTestGroup(dataList?.test_group)
+        setUnit(dataList?.unit)
     }, [dataList])
     const onSubmit = (data) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
         data.test_group = testGroup
+        data.unit = unit
         patchTestExam({ id: dataList.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Экзамен отредактирован')
@@ -81,7 +84,6 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         ['experts']: dataList?.experts,
                         ['moderators']: dataList?.moderators,
                         ['direction']: dataList?.direction,
-                        ['unit']: dataList?.unit,
                         ['main_expert']: dataList?.main_expert,
                         ['main_moderator']: dataList?.main_moderator,
                     }}
@@ -89,7 +91,14 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     id="ese-form"
                 >
                     <Form.Item required label="Квалификация" name="direction">
-                        <Select placeholder="Выберите квалификацию">
+                        <Select
+                            placeholder="Выберите квалификацию"
+                            onChange={(e) => {
+                                setDirection(e)
+                                setTestGroup()
+                                setUnit()
+                            }}
+                        >
                             {dataTutor?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -97,13 +106,11 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item required label="Тестирование" name="unit">
+                    <Form.Item required label="Тестирование">
                         <Select
                             placeholder="Выберите тестирование"
-                            onChange={(e) => {
-                                setUnit(e)
-                                setTestGroup()
-                            }}
+                            onChange={(e) => setUnit(e)}
+                            value={unit}
                         >
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
@@ -128,7 +135,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         >
                             {dataTestGroup?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
-                                    {item.name}
+                                    {item.id} {item.name}
                                 </Option>
                             ))}
                         </Select>

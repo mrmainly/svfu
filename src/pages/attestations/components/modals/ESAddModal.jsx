@@ -15,12 +15,13 @@ const { Option } = Select
 const ESAddModal = ({ open, setOpen, dataList }) => {
     const [direction, setDirection] = useState(0)
     const [testGroup, setTestGroup] = useState()
+    const [unit, setUnit] = useState()
     const { data: dataTutor } = useGetDirectionTuterQuery()
     const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
         { direction: direction },
         { skip: !direction }
     )
-    const { data: dataUnit } = useGetUnitQuery()
+    const { data: dataUnit } = useGetUnitQuery({ direction: direction }, { skip: !direction })
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [postTestExam] = usePostTestExamMutation()
@@ -73,7 +74,14 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                         label="Квалификация"
                         name="direction"
                     >
-                        <Select placeholder="Выберите квалификацию">
+                        <Select
+                            placeholder="Выберите квалификацию"
+                            onChange={(e) => {
+                                setDirection(e)
+                                setTestGroup()
+                                setUnit()
+                            }}
+                        >
                             {dataTutor?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
@@ -89,14 +97,11 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                             },
                         ]}
                         label="Тестирование"
-                        name="unit"
                     >
                         <Select
                             placeholder="Выберите тестирование"
-                            onChange={(e) => {
-                                setDirection(e)
-                                setTestGroup()
-                            }}
+                            onChange={(e) => setUnit(e)}
+                            value={unit}
                         >
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>

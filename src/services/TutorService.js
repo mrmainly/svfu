@@ -25,7 +25,7 @@ export const Tutor = api.injectEndpoints({
             invalidatesTags: [{ type: 'TestGroup' }],
         }),
         getUnit: build.query({
-            query: () => `tutor/unit`,
+            query: ({ direction }) => `tutor/unit?direction=${direction}`,
             providesTags: ['TestGroup'],
         }),
         getTestGroupId: build.query({

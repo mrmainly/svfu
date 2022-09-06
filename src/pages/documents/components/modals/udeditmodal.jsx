@@ -117,7 +117,7 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
                         {udDocumentType(dataList.document_type)}
                     </Typography>
                 </div>
-                {dataList.document_type === 'Паспорт' ? (
+                {dataList.document_type === 'PASSPORT' ? (
                     <></>
                 ) : (
                     <div style={{ marginTop: '10px' }}>
