@@ -49,16 +49,6 @@ const UsersTable = ({ data, isLoading, setRole, setId, name, setName }) => {
         }
     }
 
-    const FilterByNameInput = (
-        <Input.Search
-            placeholder="ФИО"
-            enterButton
-            onSearch={(value) => {
-                const currValue = value
-                setName(currValue)
-            }}
-        />
-    )
     const columns = [
         {
             title: 'ID',
@@ -67,7 +57,7 @@ const UsersTable = ({ data, isLoading, setRole, setId, name, setName }) => {
             sorter: (a, b) => a.id - b.id,
         },
         {
-            title: FilterByNameInput,
+            title: 'ФИО',
             dataIndex: 'full_name',
             key: 'full_name',
         },
@@ -143,6 +133,16 @@ const UsersTable = ({ data, isLoading, setRole, setId, name, setName }) => {
 
     return (
         <>
+            <Input.Search
+                placeholder="ФИО"
+                enterButton
+                onSearch={(value) => {
+                    const currValue = value
+                    setName(currValue)
+                }}
+                style={{ marginBottom: 16, width: '50%' }}
+            />
+
             <Table
                 columns={columns}
                 dataSource={data?.results}
