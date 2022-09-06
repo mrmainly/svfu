@@ -12,78 +12,14 @@ const LprExam = () => {
     const [totalPage, setTotalPage] = useState(30)
     const [open, setOpen] = React.useState(false)
     const [modalData, setModalData] = React.useState()
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const { data, isFetching } = useGetLprExamListQuery({ currentPage: currentPage })
-    const searchInput = useRef()
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
-
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
+    const [order, setOrder] = useState('')
+    const [status, setStatus] = useState('')
+    const [unit, setUnit] = useState('')
+    const { data, isFetching } = useGetLprExamListQuery({
+        status: status,
+        order: order,
+        currentPage: currentPage,
+        unit: unit,
     })
 
     const onChange = (page) => {
@@ -93,19 +29,63 @@ const LprExam = () => {
         setTotalPage(data?.count)
     }, [data])
 
+    const orderSelect = [
+        {
+            text: 'По номеру (возрастание)',
+            value: 'id',
+        },
+        {
+            text: 'По номеру (убывание)',
+            value: '-id',
+        },
+        {
+            text: 'начало (возрастание)',
+            value: 'date_start',
+        },
+        {
+            text: 'начало (убывание)',
+            value: '-date_start',
+        },
+        {
+            text: 'конец (возрастание)',
+            value: 'date_finish',
+        },
+        {
+            text: 'конец (убывание)',
+            value: '-date_finish',
+        },
+    ]
+
+    const statusSelect = [
+        {
+            text: 'Ожидает',
+            value: 'WAITING',
+        },
+        {
+            text: 'Идет тест',
+            value: 'IN_PROGRESS',
+        },
+        {
+            text: 'Завершен',
+            value: 'COMPLETED',
+        },
+        {
+            text: 'Отменен',
+            value: 'CANCELLED',
+        },
+    ]
+
     const columns = [
         {
             title: '№',
             dataIndex: 'id',
             key: 'id',
-            render: (id) => (id ? id : '-'),
         },
         {
             title: 'Название тестирования',
             dataIndex: 'name',
             key: 'name',
             render: (name) => (name ? name : '-'),
-            ...getColumnSearchProps('name'),
         },
         {
             title: 'Группа',
@@ -138,25 +118,6 @@ const LprExam = () => {
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
-            filters: [
-                {
-                    text: 'Ожидает',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'Идет тест',
-                    value: 'IN_PROGRESS',
-                },
-                {
-                    text: 'Завершен',
-                    value: 'COMPLETED',
-                },
-                {
-                    text: 'Отменен',
-                    value: 'CANCELLED',
-                },
-            ],
-            onFilter: (value, record) => record.exam_status === value,
             render: (exam_status) =>
                 exam_status === 'WAITING'
                     ? 'Ожидает'
@@ -188,6 +149,53 @@ const LprExam = () => {
 
     return (
         <div>
+            <div
+                style={{
+                    display: 'flex',
+                    marginBottom: 16,
+                    justifyContent: 'space-between',
+                    gap: 16,
+                }}
+            >
+                <Input.Search
+                    placeholder="Тестирование"
+                    enterButton
+                    onSearch={(value) => {
+                        const currValue = value
+                        setUnit(currValue)
+                    }}
+                    style={{
+                        width: '33%',
+                    }}
+                />
+                <Select
+                    placeholder="Сортировка"
+                    style={{
+                        width: '33%',
+                    }}
+                    onChange={(value) => setOrder(value)}
+                >
+                    {orderSelect.map((item, index) => (
+                        <Select.Option value={item.value} key={index}>
+                            {item.text}
+                        </Select.Option>
+                    ))}
+                </Select>
+                <Select
+                    placeholder="Статус"
+                    style={{
+                        width: '33%',
+                    }}
+                    onChange={(value) => setStatus(value)}
+                >
+                    {statusSelect.map((item, index) => (
+                        <Select.Option value={item.value} key={index}>
+                            {item.text}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </div>
+
             <Table
                 dataSource={data?.results}
                 loading={isFetching}
