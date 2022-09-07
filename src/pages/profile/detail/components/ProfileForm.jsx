@@ -1,21 +1,9 @@
-import { Form, Input, Typography, Upload, message } from 'antd'
-import React, { useState } from 'react'
+import { Form, Input, Typography } from 'antd'
+import React from 'react'
 
 const { Text } = Typography
 
-const getBase64 = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-
-        reader.onload = () => resolve(reader.result)
-
-        reader.onerror = (error) => reject(error)
-    })
-
 const ProfileForm = () => {
-    const [fileList, setFileList] = useState([])
-
     const inputs = [
         {
             label: 'Фамилия',

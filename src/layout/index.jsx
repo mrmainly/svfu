@@ -18,7 +18,6 @@ const { Sider } = Layout
 const MyLayout = () => {
     const [skip, setSkip] = useState(true)
     const [isToggled, setToggled] = useState(false)
-    // const [data, setData] = useState([])
     const { data } = useGetProfileQuery('', { skip: skip })
 
     const onClose = () => {
@@ -38,10 +37,6 @@ const MyLayout = () => {
             setSkip(false)
         }
     }, [token])
-
-    // useEffect(() => {
-    //     setData(JSON.parse(localStorage.getItem('profile')))
-    // }, [])
 
     return (
         <>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Modal, Button } from 'antd'
+import { Button } from 'antd'
 import Table from 'antd/lib/table'
 
 import DocumentsModal from '../components/modals/DocumentsModal'

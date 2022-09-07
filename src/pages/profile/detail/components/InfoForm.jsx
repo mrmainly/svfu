@@ -2,7 +2,7 @@ import { Form, Input, Typography } from 'antd'
 
 import React from 'react'
 
-const { Text, Title } = Typography
+const { Text } = Typography
 const { TextArea } = Input
 
 const InfoForm = () => {

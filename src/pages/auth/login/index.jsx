@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Form, Input, Button, Checkbox, Divider, message } from 'antd'
+import { Typography, Form, Input, Button, Divider, message } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
 import './login.css'

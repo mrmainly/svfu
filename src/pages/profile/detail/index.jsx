@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import './profile_edit.css'
 
 const ProfileDetail = () => {
-    const { data, isFetching, error } = useGetProfileQuery('')
+    const { data, isFetching } = useGetProfileQuery('')
     const [patchProfile] = useProfilePatchMutation()
 
     const navigate = useNavigate()

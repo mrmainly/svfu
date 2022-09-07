@@ -3,7 +3,7 @@ import cookie from 'js-cookie'
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://notalone.medic.fun/api/v1/',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
         const token = cookie.get('token')
         if (token) {
             headers.set('authorization', `Token ${token}`)
