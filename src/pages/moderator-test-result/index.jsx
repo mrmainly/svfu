@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import TestResultTable from '../components/tables/TestResultTable'
+import TestResultTable from './components/tables/TestResultsTable'
 import { Pagination } from 'antd'
 
-import { useGetTestResultQuery } from '../../../services/PaginationService'
+import { useGetTestResultQuery } from '../../services/PaginationService'
 
 const ModeratorTestResult = () => {
     const [currentPage, setCurrentPage] = useState(1)

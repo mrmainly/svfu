@@ -1,13 +1,8 @@
 import React from 'react'
 
 import { Button, Table } from 'antd'
-import { useNavigate } from 'react-router-dom'
-
-import ROUTES from '../../../../../../routes'
 
 const QualificationTable = ({ data, setOpen, setQualificationData }) => {
-    const navigate = useNavigate()
-
     const columns = [
         {
             title: '№',

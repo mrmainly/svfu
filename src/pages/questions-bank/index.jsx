@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import QuestionsBankTable from '../components/tables/QuestionsBankTable'
-import QBAddModal from '../components/modals/qbaddmodal'
-import { useGetAttestationsQuestionsBankQuery } from '../../../services/AttestationService'
+import QuestionsBankTable from './compoents/tables/QuestionsBankTable'
+import QBAddModal from './compoents/modals/qbaddmodal'
+import { useGetAttestationsQuestionsBankQuery } from '../../services/AttestationService'
 
-import { MyButton } from '../../../components'
+import { MyButton } from '../../components'
 
 const QuestionsBank = () => {
     const [currentPage, setCurrentPage] = useState(1)

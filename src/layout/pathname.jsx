@@ -55,7 +55,7 @@ export const pathname = (params) => {
         case ROUTES.ADMIN_EXAM:
             return 'Расписание экзаменов'
         case ROUTES.MODERATOR_TEST_RESULT:
-            return 'Подтверждение экспертизы'
+            return 'Результаты тестирования'
         case ROUTES.ATTESTED_APPEAL:
             return 'Апелляции'
         default:

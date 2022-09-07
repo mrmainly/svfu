@@ -11,8 +11,6 @@ import { tableProcessingStatusResult } from '../../../../translation/StatusTrans
 
 const TestResultTable = ({ data, loading }) => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
-    const [currentData, setCurrentData] = useState([])
-    const [modalEditTB, setModalEditTB] = useState(false)
     const [putMainModerator] = usePutMainModeratorMutation()
     const [searchText, setSearchText] = useState('')
     const [searchedColumn, setSearchedColumn] = useState('')
@@ -195,7 +193,7 @@ const TestResultTable = ({ data, loading }) => {
             title: 'Действие',
             dataIndex: 'status_result',
             key: 'x',
-            render: (status_result, record, direction) =>
+            render: (status_result, record) =>
                 (status_result === 'FINISHED_BY_MAIN_EXPERT' ||
                     status_result === 'CHECKED_BY_MODERATORS') &&
                 record.is_reviewed === false &&

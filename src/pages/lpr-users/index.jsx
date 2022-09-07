@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import UsersTable from '../../users/components/tables/UsersTable'
+import UsersTable from '../users/components/tables/UsersTable'
 import { Pagination } from 'antd'
 
-import { useGetAttestationUsersQuery } from '../../../services/AttestationProtocolService'
+import { useGetAttestationUsersQuery } from '../../services/AttestationProtocolService'
 
 const LprUsers = () => {
     const [currentPage, setCurrentPage] = useState(1)

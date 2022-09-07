@@ -10,7 +10,7 @@ const MODERATOR = (navigate) => {
                 'РТ',
                 'Результаты тестирования',
                 'submenu-item-1-1',
-                ROUTES.APPILYNG,
+                ROUTES.MODERATOR_TEST_RESULT,
                 navigate
             ),
             SubMenuItem(

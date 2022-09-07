@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import { MyButton } from '../../../components'
-import ExaminationGroupsTable from '../components/tables/ExaminationGroupsTable'
-import { useGetTestGroupQuery, useGetDirectionTuterQuery } from '../../../services/TutorService'
-import EgCreateModal from '../components/modals/egCreateModal'
-import EgEditModal from '../components/modals/egEditModal'
+import { MyButton } from '../../components'
+import ExaminationGroupsTable from './compoents/tables/ExaminationGroupsTable'
+import { useGetTestGroupQuery, useGetDirectionTuterQuery } from '../../services/TutorService'
+import EgCreateModal from './compoents/modals/egCreateModal'
+import EgEditModal from './compoents/modals/egEditModal'
 
 const ExaminationGroups = () => {
     const [open, setOpen] = useState(false)

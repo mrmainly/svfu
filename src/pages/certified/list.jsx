@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import CerifiedTable from '../components/tables/CerifiedTable'
-import { useGetTesterQuery } from '../../../services/PaginationService'
+import CerifiedTable from './components/tables/CerifiedTable'
+import { useGetTesterQuery } from '../../services/PaginationService'
 
 const Certified = () => {
     const [currentPage, setCurrentPage] = useState(1)

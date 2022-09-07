@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Radio, Typography, Spin } from 'antd'
+import { Radio, Spin } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { BsArrowLeft } from 'react-icons/bs'
@@ -8,12 +8,10 @@ import { BsArrowLeft } from 'react-icons/bs'
 import QualificationTable from './components/tables/QualificationTable'
 import DocumentsTable from './components/tables/DocumentsTable'
 import Information from './components/information'
-import { useGetCertifiedIdQuery } from '../../../../services/TutorService'
+import { useGetCertifiedIdQuery } from '../../services/TutorService'
 import QualificationModal from './components/modals/QualificationModal'
-import { roles } from '../../../../translation/RolesTranslation'
-import { Line } from '../../../../components'
-
-const { Text } = Typography
+import { roles } from '../../translation/RolesTranslation'
+import { Line } from '../../components'
 
 const CertifiedDetail = () => {
     const params = useParams()

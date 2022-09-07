@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import TestProcessingTable from '../components/tables/TestProcessingTable'
+import TestProcessingTable from './compoents/tables/TestProcessingTable'
 import { Pagination } from 'antd'
 
-import { useGetTestProcessingQuery } from '../../../services/PaginationService'
+import { useGetTestProcessingQuery } from '../../services/PaginationService'
 
 const TestProcessing = () => {
     const [currentPage, setCurrentPage] = useState(1)
