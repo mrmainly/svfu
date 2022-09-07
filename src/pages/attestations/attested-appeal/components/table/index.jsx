@@ -7,7 +7,7 @@ import moment from 'moment'
 import { Button, Table, Input, Space } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
-import { uaStatus } from '../../../../../translation/StatusTranslation'
+import { userAppilicationStatus } from '../../../../../translation/StatusTranslation'
 
 const AppealTable = ({ data, loading }) => {
     const navigate = useNavigate()
@@ -114,7 +114,7 @@ const AppealTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status',
             key: 'status',
-            render: (status) => <div>{uaStatus(status)}</div>,
+            render: (status) => <div>{userAppilicationStatus(status)}</div>,
             filters: [
                 {
                     text: 'Принято',

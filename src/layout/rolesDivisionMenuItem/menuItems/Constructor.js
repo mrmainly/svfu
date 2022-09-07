@@ -1,26 +1,32 @@
 import ROUTES from '../../../routes'
 
-import { BsCardChecklist, BsPeople } from 'react-icons/bs'
+import { BsPeople } from 'react-icons/bs'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 
-const TESTER = (navigate) => {
+const CONSTRUCTOR = (navigate) => {
     return [
         {
-            label: 'Тестирование',
+            label: 'Аттестация',
             key: 'submenu-1',
-            icon: <BsCardChecklist />,
+            icon: <BsPeople />,
             children: [
                 {
-                    icon: <div>ПЗ</div>,
-                    label: 'Подача заявления',
+                    icon: <div>КА</div>,
+                    label: 'Квалификация аттестаций',
                     key: 'submenu-item-1-1',
-                    onClick: () => navigate(ROUTES.APPILYNG),
+                    onClick: () => navigate(ROUTES.ATTESTATION_QUALI),
                 },
                 {
-                    icon: <div>ДТ</div>,
-                    label: 'Доступные тесты',
+                    icon: <div>БВ</div>,
+                    label: 'Банк вопросов',
+                    key: 'submenu-item-1-3',
+                    onClick: () => navigate(ROUTES.ATTESTATION_QUESTIONS_BANK),
+                },
+                {
+                    icon: <div>БТ</div>,
+                    label: 'Банк тестирований',
                     key: 'submenu-item-1-2',
-                    onClick: () => navigate(ROUTES.AVAILABLE_TESTS),
+                    onClick: () => navigate(ROUTES.ATTESTATION_TESTS_BANK),
                 },
             ],
         },
@@ -43,19 +49,7 @@ const TESTER = (navigate) => {
                 },
             ],
         },
-        // {
-        //     label: 'Пользователи',
-        //     key: 'submenu-3',
-        //     icon: <BsPeople />,
-        //     children: [
-        //         {
-        //             label: 'Пользователи',
-        //             key: 'submenu-item-3-1',
-        //             onClick: () => navigate(ROUTES.USERS),
-        //         },
-        //     ],
-        // },
     ]
 }
 
-export default TESTER
+export default CONSTRUCTOR

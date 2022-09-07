@@ -48,8 +48,6 @@ export const pathname = (params) => {
             return 'Аттестационные протоколы'
         case ROUTES.LPR_USERS:
             return 'Пользователи'
-        case ROUTES.TEST_RESULT:
-            return 'Пользователи'
         case ROUTES.LPR_EXAM:
             return 'Расписание экзаменов'
         case ROUTES.ADMIN_USERS:
@@ -61,6 +59,6 @@ export const pathname = (params) => {
         case ROUTES.ATTESTED_APPEAL:
             return 'Апелляции'
         default:
-            return ''
+            new Error()
     }
 }

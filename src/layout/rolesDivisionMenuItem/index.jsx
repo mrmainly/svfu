@@ -1,10 +1,10 @@
-import TESTER from './menuItems/TESTER'
-import TUTOR from './menuItems/TUTOR'
-import CONSTRUCTOR from './menuItems/CONSTRUCTOR'
-import EXPERT from './menuItems/EXPERT'
-import LPR from './menuItems/LPR'
-import ADMIN from './menuItems/ADMIN'
-import MODERATOR from './menuItems/MODERATOR'
+import TESTER from './menuItems/Tester'
+import TUTOR from './menuItems/Tutor'
+import CONSTRUCTOR from './menuItems/Constructor'
+import EXPERT from './menuItems/Expert'
+import LPR from './menuItems/Lpr'
+import ADMIN from './menuItems/Admin'
+import MODERATOR from './menuItems/Moderator'
 
 const RolesDivisionMenuItem = (navigate) => {
     const role = JSON.parse(localStorage.getItem('role'))

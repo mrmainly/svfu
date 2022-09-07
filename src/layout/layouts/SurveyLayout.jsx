@@ -4,7 +4,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import '../layout.css'
-import { MyButton, SurveysSideBar, SurveysSideBarTester } from '../../components'
+import { SurveysSideBar, SurveysSideBarTester } from '../../components'
 import { SurveysSlice } from '../../reducers/SurveysSlice'
 import ROUTES from '../../routes'
 

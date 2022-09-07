@@ -4,7 +4,7 @@ import { SearchOutlined } from '@ant-design/icons'
 
 import { useNavigate } from 'react-router-dom'
 
-import ROUTES from '"../../../.."/routes'
+import ROUTES from '../../../../routes'
 import { userAppilicationStatus } from '../../../../translation/StatusTranslation'
 
 const UserApplicationsTable = ({ data, loading }) => {
