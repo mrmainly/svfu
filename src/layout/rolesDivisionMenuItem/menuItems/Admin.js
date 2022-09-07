@@ -1,48 +1,21 @@
-import ROUTES from '../../../routes'
-
 import { BsPeople } from 'react-icons/bs'
-import { HiOutlineDocumentText } from 'react-icons/hi'
+
+import ROUTES from '../../../routes'
+import { MenuSection, SubMenuItem, ReusableMenu } from './compoents'
 
 const ADMIN = (navigate) => {
     return [
-        {
-            label: 'Аттестация',
-            key: 'submenu-1',
-            icon: <BsPeople />,
-            children: [
-                {
-                    icon: <div>РП</div>,
-                    label: 'Расписание экзаменов',
-                    key: 'submenu-item-1-1',
-                    onClick: () => navigate(ROUTES.ADMIN_EXAM),
-                },
-                {
-                    icon: <div>П</div>,
-                    label: 'Пользователи',
-                    key: 'submenu-item-1-3',
-                    onClick: () => navigate(ROUTES.ADMIN_USERS),
-                },
-            ],
-        },
-        {
-            label: 'Документы',
-            key: 'submenu-2',
-            icon: <HiOutlineDocumentText />,
-            children: [
-                {
-                    icon: <div>ЗД</div>,
-                    label: 'Загрузить документы',
-                    key: 'submenu-item-2-1',
-                    onClick: () => navigate(ROUTES.UPLOAD_DOCUMENTS),
-                },
-                {
-                    icon: <div>МК</div>,
-                    label: 'Мои квалификации',
-                    key: 'submenu-item-2-3',
-                    onClick: () => navigate(ROUTES.MY_QUALIFICATIONS),
-                },
-            ],
-        },
+        MenuSection('Аттестация', 'submenu-1', <BsPeople />, [
+            SubMenuItem(
+                'РП',
+                'Расписание экзаменов',
+                'submenu-item-1-1',
+                ROUTES.ADMIN_EXAM,
+                navigate
+            ),
+            SubMenuItem('П', 'Пользователи', 'submenu-item-1-2', ROUTES.ADMIN_USERS, navigate),
+        ]),
+        ReusableMenu(navigate, 2),
     ]
 }
 

@@ -1,8 +1,7 @@
 import { BsPeople } from 'react-icons/bs'
 
 import ROUTES from '../../../routes'
-import { MenuSection, SubMenuItem } from './compoents'
-import ReusableMenuItem from './reusableMenuItem'
+import { MenuSection, SubMenuItem, ReusableMenu } from './compoents'
 
 const MODERATOR = (navigate) => {
     return [
@@ -22,7 +21,7 @@ const MODERATOR = (navigate) => {
                 navigate
             ),
         ]),
-        ReusableMenuItem(navigate),
+        ReusableMenu(navigate, 2),
     ]
 }
 

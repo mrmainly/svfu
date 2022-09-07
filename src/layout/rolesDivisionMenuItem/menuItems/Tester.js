@@ -1,6 +1,5 @@
 import ROUTES from '../../../routes'
-import ReusableMenuItem from './reusableMenuItem'
-import { SubMenuItem, MenuSection } from './compoents'
+import { SubMenuItem, MenuSection, ReusableMenu } from './compoents'
 
 import { BsCardChecklist } from 'react-icons/bs'
 
@@ -16,7 +15,7 @@ const TESTER = (navigate) => {
                 navigate
             ),
         ]),
-        ReusableMenuItem(navigate),
+        ReusableMenu(navigate, 2),
     ]
 }
 
