@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Input, Pagination, Select } from 'antd'
 
-import AttestationsQualificationsTable from '../components/tables/AttestationsQualificationsTable'
-import AQAddModal from '../components/modals/aqaddmodal'
-import { MyButton } from '../../../components'
+import AttestationsQualificationsTable from './compoents/tables/AttestationsQualificationsTable'
+import AQAddModal from './compoents/modals/aqaddmodal'
+import { MyButton } from '../../components'
 
 import {
     useGetAttestationsQualificationQuery,
     useGetAttestationsTagQuery,
-} from '../../../services/AttestationService'
+} from '../../services/AttestationService'
 
 const AttestationsQualifications = () => {
     const [currentPage, setCurrentPage] = useState(1)

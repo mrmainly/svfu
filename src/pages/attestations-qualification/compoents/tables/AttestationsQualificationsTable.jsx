@@ -1,15 +1,13 @@
-import { useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 import AQEditModal from '../modals/aqeditmodal'
 import Table from 'antd/lib/table'
-import { Button, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 
 const AttestationsQualificationsTable = ({ data, loading, setId }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditQuali, setModalEditQuali] = useState(false)
-    const onTableChange = (newPagination, filters, sorter) => {
+    const onTableChange = (sorter) => {
         if (sorter?.order === 'descend') {
             {
                 setId('-id')

@@ -1,13 +1,8 @@
 import { useState } from 'react'
-import { Modal, Input, Row, Col, Form, Radio, Button, Pagination } from 'antd'
+import { Radio, Button, Pagination } from 'antd'
 import Table from 'antd/lib/table'
 
 import moment from 'moment'
-
-import AQAddModal from '../components/modals/aqaddmodal'
-import { MyButton } from '../../../components'
-import IndividualTable from './tables/IndividualTable'
-import GroupTable from './tables/GroupTable'
 
 import { useGetAttestationProtocolQuery } from '../../../services/AttestationProtocolService'
 import { useEffect } from 'react'
@@ -34,7 +29,7 @@ const AttestationProtocol = () => {
     const onChange = (page) => {
         setCurrentPage(page)
     }
-    const onTableChange = (newPagination, filters, sorter) => {
+    const onTableChange = (filters, sorter) => {
         if (filters?.type?.length > 0) {
             setType(filters?.type[0])
         } else {

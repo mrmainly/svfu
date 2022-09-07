@@ -1,5 +1,4 @@
 import { Modal, message, Input, Select, Form } from 'antd'
-import Item from 'antd/lib/list/Item'
 
 import { MyButton } from '../../../../components'
 import {
@@ -11,7 +10,7 @@ const { Option } = Select
 
 const AQAddModal = ({ open, setOpen }) => {
     const [postAttestationsQualification] = usePostAttestationsQualificationMutation()
-    const { data, isLoading } = useGetAttestationsTagQuery()
+    const { data } = useGetAttestationsTagQuery()
     const onSubmit = (data) => {
         postAttestationsQualification(data).then((res) => {
             if (res.data) {
@@ -23,7 +22,6 @@ const AQAddModal = ({ open, setOpen }) => {
             console.log(res)
         })
     }
-    // const onSearch = (value) => console.log(value)
 
     return (
         <div>

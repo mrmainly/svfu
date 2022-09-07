@@ -14,7 +14,7 @@ const { Option } = Select
 const AQEditModal = ({ open, setOpen, dataList }) => {
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
     const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
-    const { data, isLoading } = useGetAttestationsTagQuery()
+    const { data } = useGetAttestationsTagQuery()
 
     const onSubmit = (data) => {
         patchAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
