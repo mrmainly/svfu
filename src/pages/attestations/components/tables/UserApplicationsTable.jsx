@@ -4,8 +4,8 @@ import { SearchOutlined } from '@ant-design/icons'
 
 import { useNavigate } from 'react-router-dom'
 
-import ROUTES from '../../../../routes'
-import { uaStatus } from '../../../../translation/StatusTranslation'
+import ROUTES from '"../../../.."/routes'
+import { userAppilicationStatus } from '../../../../translation/StatusTranslation'
 
 const UserApplicationsTable = ({ data, loading }) => {
     const navigate = useNavigate()
@@ -137,7 +137,7 @@ const UserApplicationsTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status',
             key: 'status',
-            render: (status) => <div>{uaStatus(status)}</div>,
+            render: (status) => <div>{userAppilicationStatus(status)}</div>,
 
             filters: statusData?.map((item) => ({
                 text: item.text,

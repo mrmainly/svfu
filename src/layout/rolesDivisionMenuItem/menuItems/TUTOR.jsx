@@ -3,6 +3,34 @@ import ROUTES from '../../../routes'
 import { BsPeople } from 'react-icons/bs'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 
+const MenuItem = (icon, label, key, route, navigate) => {
+    return {
+        icon: icon,
+        label: label,
+        key: key,
+        onclick: () => {
+            navigate(route)
+        },
+    }
+}
+
+const MenuSection = (label, key, icon, menu) => {
+    return {
+        label,
+        key,
+        icon,
+        children: menu,
+    }
+}
+
+const tutorMenu = (navigate) => {
+    return [
+        MenuSection('Аттестация', 'submenu-1', <BsPeople />, [
+            MenuItem('A', 'Аттестируемые', 'submenu-item-1-1', ROUTES.CERTIFIED, navigate),
+        ]),
+    ]
+}
+
 const TUTOR = (navigate) => {
     return [
         {
@@ -10,12 +38,7 @@ const TUTOR = (navigate) => {
             key: 'submenu-1',
             icon: <BsPeople />,
             children: [
-                {
-                    icon: <div>А</div>,
-                    label: 'Аттестуемые',
-                    key: 'submenu-item-1-1',
-                    onClick: () => navigate(ROUTES.CERTIFIED),
-                },
+                MenuItem('A', 'Аттестируемые', 'submenu-item-1-1', ROUTES.CERTIFIED, navigate),
                 {
                     icon: <div>ЗП</div>,
                     label: 'Заявки пользователей',

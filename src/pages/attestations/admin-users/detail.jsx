@@ -21,8 +21,13 @@ const AdminUsersDetail = () => {
     const navigate = useNavigate()
     const [mode, setMode] = useState('info')
     const [open, setOpen] = useState(false)
+
     const handleModeChange = (e) => {
         setMode(e.target.value)
+    }
+
+    const handleChangeModalVision = () => {
+        setOpen(true)
     }
 
     const profileData = [
@@ -174,9 +179,7 @@ const AdminUsersDetail = () => {
                 </Radio.Group>
                 <Button
                     style={{ display: mode === 'info' ? 'block' : 'none' }}
-                    onClick={() => {
-                        setOpen(true)
-                    }}
+                    onClick={handleChangeModalVision}
                 >
                     Редактировать пользователя
                 </Button>
