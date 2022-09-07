@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Modal, Input, Form, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import { MyButton } from '../../../../../../components'
-import { usePutUserApplicationRejectMutation } from '../../../../../../services/TutorService'
-import ROUTES from '../../../../../../routes'
+import { MyButton } from '../../../../components'
+import { usePutUserApplicationRejectMutation } from '../../../../services/TutorService'
+import ROUTES from '../../../../routes'
 
 const { TextArea } = Input
 
 const RejectModal = ({ open, setOpen, id }) => {
-    const [value, setValue] = useState('')
-
     const navigate = useNavigate()
 
     const [putUserApplicationReject] = usePutUserApplicationRejectMutation()

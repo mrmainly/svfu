@@ -4,8 +4,8 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { Radio, Typography, Button, Spin, message } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import ROUTES from '../../../../routes'
-import { Line } from '../../../../components'
+import ROUTES from '../../routes'
+import { Line } from '../../components'
 import QualificationTable from './components/tables/QualificationTable'
 import DocumentsTable from './components/tables/DocumentsTable'
 import Information from './components/Information'
@@ -14,8 +14,8 @@ import QualificationDetailModal from './components/modals/QualificationDetialMod
 import {
     useGetApplicationIdQuery,
     usePostAcceptApplicationMutation,
-} from '../../../../services/TutorService'
-import { roles } from '../../../../translation/RolesTranslation'
+} from '../../services/TutorService'
+import { roles } from '../../translation/RolesTranslation'
 
 const { Text } = Typography
 

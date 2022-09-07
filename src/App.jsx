@@ -42,7 +42,6 @@ import {
     AttestedAppeal,
     ModeratorTestResult,
     SurveysPart,
-    ModeratorUsersDetail,
     ModeratorAppeal,
 } from './pages'
 

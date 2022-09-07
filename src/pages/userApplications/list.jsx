@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import UserApplicationsTable from '../components/tables/UserApplicationsTable'
-import { useGetApplicationQuery } from '../../../services/PaginationService'
+import UserApplicationsTable from './components/tables/UserApplicationTable'
+import { useGetApplicationQuery } from '../../services/PaginationService'
 
 const UserApplications = () => {
     const [currentPage, setCurrentPage] = useState(1)

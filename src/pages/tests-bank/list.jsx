@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
-import TBAddModal from '../components/modals/tbaddmodal'
+import TBAddModal from '../attestations/components/modals/tbaddmodal'
 import {
     useGetAttestationsTestsBankQuery,
     useGetAttestationsQualificationQuery,
-} from '../../../services/AttestationService'
+} from '../../services/AttestationService'
 
-import TestsBankTable from '../components/tables/TestsBankTable'
-import { MyButton } from '../../../components'
+import TestsBankTable from './components/tables/TestBankTable'
+import { MyButton } from '../../components'
 
 const TestsBank = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -32,10 +32,11 @@ const TestsBank = () => {
     const onChange = (page) => {
         setCurrentPage(page)
     }
+
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
-    console.log(directionSelect)
+
     return (
         <div>
             <MyButton onClick={() => setModalNewTest(true)} style={{ marginBottom: 20 }}>

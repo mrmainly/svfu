@@ -1,5 +1,4 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-// import productReducer from "../reducer/product_slice";
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { api } from '../services/api'
 
 import register_verison_slice from '../reducers/RegisterVersionSlice'

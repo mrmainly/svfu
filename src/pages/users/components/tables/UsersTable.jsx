@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 import Table from 'antd/lib/table'
 import { Button, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
 
 import ROUTES from '../../../../routes'
 import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
