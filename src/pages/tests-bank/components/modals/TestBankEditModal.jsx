@@ -21,7 +21,6 @@ import {
     usePutAttestationsTestsBankIdMutation,
     useGetAttestationsQualificationQuery,
 } from '../../../../services/AttestationService'
-const { TextArea } = Input
 const { Option } = Select
 
 const TBEditModal = ({ open, setOpen, dataList }) => {

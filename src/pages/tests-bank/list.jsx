@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
-import TBAddModal from '../attestations/components/modals/tbaddmodal'
+import TBAddModal from './components/modals/TestBankAddModal'
 import {
     useGetAttestationsTestsBankQuery,
     useGetAttestationsQualificationQuery,
