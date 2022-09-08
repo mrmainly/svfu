@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Button } from 'antd'
 
@@ -9,5 +10,9 @@ const MyButton = ({ children, ...props }) => (
         {children}
     </Button>
 )
+
+MyButton.propTypes = {
+    children: PropTypes.any,
+}
 
 export default MyButton

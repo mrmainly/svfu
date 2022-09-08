@@ -26,7 +26,7 @@ import {
     usePostAttestationsQuestionsBankFileMutation,
     useGetAttestationsQualificationQuery,
     usePutAttestationsQuestionBankIdMutation,
-    usePatchAttestationsQuestionsBankMutation,
+    usePatchAttestationsQualificationIdMutation,
     usePatchAttestationsQuestionsBankImageMutation,
     useDeleteAttestationsQuestionsBankFileMutation,
     useDeleteAttestationsQuestionsBankImageMutation,
@@ -113,7 +113,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
     ]
     const [postAttestationsQuestionsBankImage] = usePostAttestationsQuestionsBankImageMutation()
     const [postAttestationsQuestionsBankFile] = usePostAttestationsQuestionsBankFileMutation()
-    const [patchAttestationsQuestionsBank] = usePatchAttestationsQuestionsBankMutation()
+    const [patchAttestationsQuestionsBank] = usePatchAttestationsQualificationIdMutation()
     const [patchAttestationsQuestionsBankImage] = usePatchAttestationsQuestionsBankImageMutation()
     const [patchAttestationsQuestionsAnswer] = usePatchAttestationsQuestionsAnswerMutation()
     const [putAttestationsQuestionBankId] = usePutAttestationsQuestionBankIdMutation()

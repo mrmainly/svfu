@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { Modal, message, Input, Select, Form, Row, Col, DatePicker, Button } from 'antd'
+import { Modal, message, Select, Form, Row, Col, DatePicker, Button } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import moment from 'moment'
+import PropTypes from 'prop-types'
+
 import { MyButton } from '../../../../components'
 import {
     useGetDirectionTuterQuery,
@@ -12,7 +14,7 @@ import {
 } from '../../../../services/TutorService'
 const { Option } = Select
 
-const ESAddModal = ({ open, setOpen, dataList }) => {
+const ESAddModal = ({ open, setOpen }) => {
     const [direction, setDirection] = useState(0)
     const [testGroup, setTestGroup] = useState()
     const [unit, setUnit] = useState()
@@ -183,7 +185,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="experts">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -254,7 +256,7 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="moderators">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -327,6 +329,11 @@ const ESAddModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+ESAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default ESAddModal
