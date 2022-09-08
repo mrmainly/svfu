@@ -5,7 +5,7 @@ import { Button, Input } from 'antd'
 import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
-import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
+import { rolesChoises } from '../../../../constants'
 
 const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
     const navigate = useNavigate()
@@ -98,7 +98,7 @@ const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
                     value: 'TESTER',
                 },
             ],
-            render: (role) => adminUserStatusTrans(role),
+            render: (role) => rolesChoises[role],
             filterMultiple: false,
         },
         {

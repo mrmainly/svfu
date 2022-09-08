@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { Button, Table } from 'antd'
 
-import { testResultStatus } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 
 const ExamScheduleTable = ({
     data,
@@ -66,7 +66,7 @@ const ExamScheduleTable = ({
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
-            render: (exam_status) => testResultStatus(exam_status),
+            render: (exam_status) => statusChoices[exam_status],
             filters: [
                 {
                     text: 'Ожидание',

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
-import { userAppilicationStatus } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 
 const UserApplicationsTable = ({ data, loading }) => {
     const navigate = useNavigate()
@@ -138,7 +138,7 @@ const UserApplicationsTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status',
             key: 'status',
-            render: (status) => <div>{userAppilicationStatus(status)}</div>,
+            render: (status) => <div>{statusChoices[status]}</div>,
 
             filters: statusData?.map((item) => ({
                 text: item.text,

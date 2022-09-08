@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import ROUTES from '../../../../routes'
 import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
 import { usePutMainModeratorMutation } from '../../../../services/ModeratorService'
-import { tableProcessingStatusResult } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 
 const TestResultTable = ({ data, loading }) => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
@@ -64,7 +64,7 @@ const TestResultTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status_result',
             key: 'status_result',
-            render: (status_result) => tableProcessingStatusResult(status_result),
+            render: (status_result) => statusChoices[status_result],
             filters: [
                 {
                     text: 'Ожидает проверки',

@@ -10,7 +10,7 @@ import {
     usePutAppealRejectIdMutation,
     usePutAppealAcceptIdMutation,
 } from '../../../../../services/ModeratorService'
-import { udEstimate } from '../../../../../translation/EstimateTransation'
+import { statusChoices } from '../../../../../constants'
 import ModeratorReviewCard from '../cards/moderator_review_card'
 
 import ROUTES from '../../../../../routes'
@@ -229,7 +229,7 @@ const AppealModeratorModal = ({ id, surveyquest, appeal_text }) => {
                                 marginTop: '8px',
                             }}
                         >
-                            {udEstimate(surveyquest?.estimate)}
+                            {statusChoices[surveyquest?.estimate]}
                         </Text>
                     </div>
                     <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>

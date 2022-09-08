@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
 import { usePutMainExpertMutation } from '../../../../services/ExpertService'
-import { tableProcessingStatusResult } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 
 const TestProcessingTable = ({ data, loading }) => {
     const [putMainExpert] = usePutMainExpertMutation()
@@ -58,7 +58,7 @@ const TestProcessingTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status_result',
             key: 'status_result',
-            render: (status_result) => tableProcessingStatusResult(status_result),
+            render: (status_result) => statusChoices[status_result],
         },
         {
             title: 'Действие',

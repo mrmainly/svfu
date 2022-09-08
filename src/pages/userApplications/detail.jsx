@@ -15,7 +15,7 @@ import {
     useGetApplicationIdQuery,
     usePostAcceptApplicationMutation,
 } from '../../services/TutorService'
-import { roles } from '../../translation/RolesTranslation'
+import { rolesChoises } from '../../constants'
 
 const { Text } = Typography
 
@@ -32,7 +32,7 @@ const UserApplicationsDetail = () => {
 
     const { data, isLoading } = useGetApplicationIdQuery(params.id)
 
-    const role = roles(data?.user.role)
+    const role = rolesChoises[data?.user.role]
 
     const lastName = data?.user.last_name ? data?.user.last_name + ' ' : ''
 

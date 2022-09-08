@@ -31,6 +31,7 @@ const ESAddModal = ({ open, setOpen }) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
         data.test_group = testGroup
+        data.unit = unit
         postTestExam(data).then((res) => {
             if (res.data) {
                 message.success('Экзамен создан')

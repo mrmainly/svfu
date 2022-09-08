@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import TestDetail from '../modal/detail'
 import ROUTES from '../../../../routes'
-import { testResultStatus } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 
 const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
@@ -64,7 +64,7 @@ const AvailableTestTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'survey_status',
             key: 'survey_status',
-            render: (survey_status) => testResultStatus(survey_status),
+            render: (survey_status) => statusChoices[survey_status],
             filters: [
                 {
                     text: 'Ожидание',

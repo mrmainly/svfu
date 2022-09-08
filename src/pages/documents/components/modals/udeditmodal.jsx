@@ -7,7 +7,7 @@ import {
     usePatchDocumentsMutation,
     useDeleteDocumentMutation,
 } from '../../../../services/DocumentsService'
-import { udDocumentType } from '../../../../translation/DocumentTypeTranslation'
+import { documentsChoises } from '../../../../constants'
 
 const { Text } = Typography
 
@@ -115,7 +115,7 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
                 <Text style={{ fontWeight: 600, fontSize: 16 }}>Тип документа</Text>
                 <div style={{ marginTop: '10px' }}>
                     <Typography style={{ fontWeight: 400, fontSize: 16 }}>
-                        {udDocumentType(dataList.document_type)}
+                        {documentsChoises[dataList.document_type]}
                     </Typography>
                 </div>
                 {dataList.document_type === 'PASSPORT' ? (

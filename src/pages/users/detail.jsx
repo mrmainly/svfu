@@ -10,7 +10,7 @@ import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import { Line } from '../../components'
-import { roles } from '../../translation/RolesTranslation'
+import { rolesChoises } from '../../constants'
 
 import { useGetAttestationUserIdQuery } from '../../services/AttestationProtocolService'
 import { useGetModeratorUserIdQuery } from '../../services/ModeratorService'
@@ -203,7 +203,7 @@ const UsersDetail = () => {
                         lineHeight: '30px',
                     }}
                 >
-                    {roles(data?.role) + ' ' + lastName + fisrtName + patronymic}
+                    {rolesChoises[data?.role] + ' ' + lastName + fisrtName + patronymic}
                 </span>
             </div>
             <Line />

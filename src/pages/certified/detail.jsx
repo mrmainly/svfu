@@ -10,7 +10,7 @@ import DocumentsTable from './components/tables/DocumentsTable'
 import Information from './components/information'
 import { useGetCertifiedIdQuery } from '../../services/TutorService'
 import QualificationModal from './components/modals/QualificationModal'
-import { roles } from '../../translation/RolesTranslation'
+import { rolesChoises } from '../../constants'
 import { Line } from '../../components'
 
 const CertifiedDetail = () => {
@@ -71,7 +71,7 @@ const CertifiedDetail = () => {
                                 lineHeight: '30px',
                             }}
                         >
-                            {roles(data?.role) + ' ' + lastName + fisrtName + patronymic}
+                            {rolesChoises[data?.role] + ' ' + lastName + fisrtName + patronymic}
                         </span>
                     </div>
                     <Line />

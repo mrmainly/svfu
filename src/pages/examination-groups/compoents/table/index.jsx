@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Table } from 'antd'
 import PropTypes from 'prop-types'
 
-import { testResultStatus } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 
 const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup }) => {
     const directionData = data?.map((item) => {
@@ -42,7 +42,7 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
-            render: (exam_status) => testResultStatus(exam_status),
+            render: (exam_status) => statusChoices(exam_status),
             filters: [
                 {
                     text: 'Ожидание',

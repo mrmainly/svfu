@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import { Button, Table } from 'antd'
 
-import { userAppilicationStatus } from '../../../../translation/StatusTranslation'
+import { statusChoices } from '../../../../constants'
 import ROUTES from '../../../../routes'
 
 const AppealTable = ({ data, loading }) => {
@@ -40,7 +40,7 @@ const AppealTable = ({ data, loading }) => {
             title: 'Статус',
             dataIndex: 'status',
             key: 'status',
-            render: (status) => <div>{userAppilicationStatus(status)}</div>,
+            render: (status) => <div>{statusChoices[status]}</div>,
             filters: [
                 {
                     text: 'Принято',

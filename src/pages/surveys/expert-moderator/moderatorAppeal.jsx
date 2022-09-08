@@ -8,7 +8,7 @@ import { Line } from '../../../components'
 import ROUTES from '../../../routes'
 import { useGetAppealIdQuery } from '../../../services/ModeratorService'
 import ModeratorReviewCard from './components/cards/moderator_review_card'
-import { udEstimate } from '../../../translation/EstimateTransation'
+import { statusChoices } from '../../../constants'
 const { Title, Text } = Typography
 
 const ModeratorAppeal = () => {
@@ -197,7 +197,7 @@ const ModeratorAppeal = () => {
                             marginTop: '8px',
                         }}
                     >
-                        {udEstimate(surveyquest?.result.estimate)}
+                        {statusChoices[surveyquest?.result.estimate]}
                     </Text>
                 </div>
                 <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>

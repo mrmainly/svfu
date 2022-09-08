@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Typography } from 'antd'
-import { udEstimate } from '../../../../../translation/EstimateTransation'
+import { statusChoices } from '../../../../../constants'
 
 const { Text } = Typography
 
@@ -41,7 +41,7 @@ const ModeratorReviewCard = ({ moderator_name, recommendation, estimate }) => {
                         lineHeight: '24px',
                     }}
                 >
-                    {udEstimate(estimate)}
+                    {statusChoices[estimate]}
                 </Text>
             </div>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
