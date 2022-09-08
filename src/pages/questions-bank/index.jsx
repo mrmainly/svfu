@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import QuestionsBankTable from './compoents/tables/QuestionsBankTable'
+import QuestionsBankTable from './compoents/table'
 import QBAddModal from './compoents/modals/qbaddmodal'
 import { useGetAttestationsQuestionsBankQuery } from '../../services/AttestationService'
 

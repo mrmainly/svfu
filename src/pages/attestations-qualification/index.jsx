@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Input, Pagination, Select } from 'antd'
 
-import AttestationsQualificationsTable from './compoents/tables/AttestationsQualificationsTable'
+import AttestationsQualificationsTable from './compoents/table'
 import AQAddModal from './compoents/modals/aqaddmodal'
 import { MyButton } from '../../components'
 

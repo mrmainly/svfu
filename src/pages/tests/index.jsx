@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import AvailableTestTable from './components/tables/AvailableTestTable'
+import AvailableTestTable from './components/table'
 import { useGetAvailableTestQuery } from '../../services/SurveysService'
 import { Pagination } from 'antd'
 

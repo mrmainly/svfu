@@ -7,7 +7,7 @@ import {
     useGetAttestationsQualificationQuery,
 } from '../../services/AttestationService'
 
-import TestsBankTable from './components/tables/TestBankTable'
+import TestsBankTable from './components/table/TestBankTable'
 import { MyButton } from '../../components'
 
 const TestsBank = () => {

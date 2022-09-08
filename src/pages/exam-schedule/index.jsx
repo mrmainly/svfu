@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import ExamScheduleTable from './components/tables/ExamSchuduleTable'
+import ExamScheduleTable from './components/table'
 import ESAddModal from './components/modals/ESAddModal'
 import ESEditModal from './components/modals/ESEditModal'
 import { useGetTestExamQuery } from '../../services/TutorService'

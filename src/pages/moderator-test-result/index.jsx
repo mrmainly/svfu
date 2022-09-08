@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import TestResultTable from './components/tables/TestResultsTable'
+import TestResultTable from './components/table'
 import { Pagination } from 'antd'
 
 import { useGetTestResultQuery } from '../../services/PaginationService'

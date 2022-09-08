@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import TestProcessingTable from './compoents/tables/TestProcessingTable'
+import TestProcessingTable from './compoents/table'
 import { Pagination } from 'antd'
 
 import { useGetTestProcessingQuery } from '../../services/PaginationService'

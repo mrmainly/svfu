@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
 import { MyButton } from '../../components'
-import ExaminationGroupsTable from './compoents/tables/ExaminationGroupsTable'
+import ExaminationGroupsTable from './compoents/table'
 import { useGetTestGroupQuery, useGetDirectionTuterQuery } from '../../services/TutorService'
 import EgCreateModal from './compoents/modals/egCreateModal'
 import EgEditModal from './compoents/modals/egEditModal'

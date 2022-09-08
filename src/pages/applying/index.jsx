@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 import { useGetDirectionQuery } from '../../services/PaginationService'
-import AppilyngTable from './components/tables/AppilyngTable'
+import AppilyngTable from './components/table'
 
 const Applying = () => {
     const [currentPage, setCurrentPage] = useState(1)
