@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 
-const useTimer = (Time) => {
+export const useTimer = (Time) => {
     const Ref = useRef(null)
     const [timer, setTimer] = useState(0)
 
@@ -50,5 +50,3 @@ const useTimer = (Time) => {
 
     return { timer, start }
 }
-
-export default useTimer
