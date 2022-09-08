@@ -50,7 +50,7 @@ const TestDetail = ({ open, setOpen, ID }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Создание вопроса"
+                title={data?.name}
                 visible={open}
                 onOk={() => {
                     setOpen(false)
