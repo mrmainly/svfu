@@ -11,6 +11,21 @@ import '../surveySideBar.css'
 
 const { Text } = Typography
 
+const timerView = (data) => {
+    return (
+        <Text>
+            {moment.duration(data.time_exam, 'minutes').hours() > 9 ? '' : 0}
+            {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
+                ''
+            ) : (
+                <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
+            )}
+            {moment.duration(data.time_exam, 'minutes').minutes() > 9 ? '' : 0}
+            {moment.duration(data.time_exam, 'minutes').minutes()}:00
+        </Text>
+    )
+}
+
 const SurveysSideBar = () => {
     const Ref = useRef(null)
     const [open, setOpen] = useState(true)
@@ -99,16 +114,7 @@ const SurveysSideBar = () => {
             <div className="time-block">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
-                    <Text>
-                        {moment.duration(data.time_exam, 'minutes').hours() > 9 ? '' : 0}
-                        {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
-                            ''
-                        ) : (
-                            <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
-                        )}
-                        {moment.duration(data.time_exam, 'minutes').minutes() > 9 ? '' : 0}
-                        {moment.duration(data.time_exam, 'minutes').minutes()}:00
-                    </Text>
+                    {timerView(data)}
                 </div>
                 <div
                     style={{
@@ -118,20 +124,7 @@ const SurveysSideBar = () => {
                     }}
                 >
                     <Text>Осталось:</Text>
-                    {timer === 0 ? (
-                        <Text>
-                            {moment.duration(data.time_exam, 'minutes').hours() > 9 ? '' : 0}
-                            {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
-                                ''
-                            ) : (
-                                <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
-                            )}
-                            {moment.duration(data.time_exam, 'minutes').minutes() > 9 ? '' : 0}
-                            {moment.duration(data.time_exam, 'minutes').minutes()}:00
-                        </Text>
-                    ) : (
-                        <Text>{timer}</Text>
-                    )}
+                    {timer === 0 ? timerView(data) : <Text>{timer}</Text>}
                 </div>
             </div>
             {/* <Button onClick={onClickReset}>asd</Button> */}
