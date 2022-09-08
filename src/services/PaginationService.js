@@ -22,12 +22,6 @@ export const pagination = api.injectEndpoints({
             query: ({ currentPage }) => `tester/direction/?page=${currentPage}`,
             providesTags: ['Direction'],
         }),
-        getTester: build.query({
-            query: ({ currentPage }) => `tutor/tester?page=${currentPage}`,
-        }),
-        getApplication: build.query({
-            query: ({ currentPage }) => `tutor/application/?page=${currentPage}`,
-        }),
     }),
 })
 
@@ -37,6 +31,4 @@ export const {
     useGetAdminUserQuery,
     useGetAppealQuery,
     useGetDirectionQuery,
-    useGetTesterQuery,
-    useGetApplicationQuery,
 } = pagination

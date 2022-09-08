@@ -6,16 +6,29 @@ import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
 
-const CerifiedTable = ({ data, loading }) => {
+const CerifiedTable = ({ data, loading, setOrdering }) => {
     const navigate = useNavigate()
-
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
-            defaultSortOrder: 'ascend',
+            sorter: true,
         },
         {
             title: 'ФИО',
@@ -47,6 +60,7 @@ const CerifiedTable = ({ data, loading }) => {
             loading={loading}
             pagination={false}
             scroll={{ x: true }}
+            onChange={onTableChange}
         />
     )
 }
@@ -54,6 +68,7 @@ const CerifiedTable = ({ data, loading }) => {
 CerifiedTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
+    setOrdering: PropTypes.func,
 }
 
 export default CerifiedTable

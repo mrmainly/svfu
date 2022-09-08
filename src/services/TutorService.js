@@ -116,6 +116,18 @@ export const Tutor = api.injectEndpoints({
         getUnitId: build.query({
             query: ({ id }) => `tutor/unit/${id}`,
         }),
+
+        //аттестуемые
+        getTutorTester: build.query({
+            query: ({ currentPage, ordering, fullName, application }) =>
+                `tutor/tester?page=${currentPage}&ordering=${ordering}&full_name=${fullName}&application=${application}`,
+        }),
+
+        //заявки пользователей
+        getTutorApplication: build.query({
+            query: ({ currentPage, ordering, status, fullName, directionName, post }) =>
+                `tutor/application/?page=${currentPage}&ordering=${ordering}&status=${status}&full_name=${fullName}&direction_name=${directionName}&post=${post}`,
+        }),
     }),
 })
 
@@ -138,4 +150,10 @@ export const {
     usePutUserApplicationRejectMutation,
     useGetApplicationUserQuery,
     useGetUnitIdQuery,
+
+    //аттестуемые
+    useGetTutorTesterQuery,
+
+    //заявки пользователей
+    useGetTutorApplicationQuery,
 } = Tutor
