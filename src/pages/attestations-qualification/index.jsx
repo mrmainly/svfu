@@ -4,6 +4,7 @@ import { Input, Pagination, Select } from 'antd'
 import AttestationsQualificationsTable from './compoents/table'
 import AQAddModal from './compoents/modals/aqaddmodal'
 import { MyButton } from '../../components'
+import './attestations-qualification.css'
 
 import {
     useGetAttestationsQualificationQuery,
@@ -37,14 +38,7 @@ const AttestationsQualifications = () => {
             <MyButton style={{ marginBottom: 16 }} onClick={() => setModalNewQuali(true)}>
                 Создать новую квалификацию
             </MyButton>
-            <div
-                style={{
-                    display: 'flex',
-                    marginBottom: 16,
-                    justifyContent: 'start',
-                    gap: 16,
-                }}
-            >
+            <div className="inputs-container">
                 <Input.Search
                     placeholder="Квалификация"
                     enterButton
@@ -52,18 +46,14 @@ const AttestationsQualifications = () => {
                         const currValue = value
                         setName(currValue)
                     }}
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                 ></Input.Search>
                 <Select
                     placeholder="Тег"
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                     onChange={(value) => setTag(value)}
                 >
-                    <Select.Option value="">все теги</Select.Option>
+                    <Select.Option value=""> Все теги</Select.Option>
                     {directionTag?.results?.map((item, index) => (
                         <Select.Option value={item.name} key={index}>
                             {item.name}
@@ -72,9 +62,7 @@ const AttestationsQualifications = () => {
                 </Select>
                 <Select
                     placeholder="Статус"
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                     onChange={(value) => setStatus(value)}
                 >
                     <Select.Option value="">Все статусы</Select.Option>

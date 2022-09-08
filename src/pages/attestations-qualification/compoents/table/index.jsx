@@ -8,7 +8,7 @@ import { Button } from 'antd'
 const AttestationsQualificationsTable = ({ data, loading, setId }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditQuali, setModalEditQuali] = useState(false)
-    const onTableChange = (sorter) => {
+    const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
             {
                 setId('-id')
@@ -28,7 +28,7 @@ const AttestationsQualificationsTable = ({ data, loading, setId }) => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
+            sorter: true,
         },
         {
             title: 'Название квалификации',
@@ -51,8 +51,6 @@ const AttestationsQualificationsTable = ({ data, loading, setId }) => {
             dataIndex: 'is_active',
             key: 'is_active',
             render: (is_active) => (is_active ? 'Активна' : 'Не активна'),
-            // render: (is_active) =>
-            //     is_active === true ? 'Активна' : is_active === false ? 'Не активна' : '',
         },
         {
             title: 'Действие',

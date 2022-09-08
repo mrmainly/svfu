@@ -5,109 +5,53 @@ import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
 import QBEditModal from '../modals/qbeditmodal'
-import { useGetAttestationsQualificationQuery } from '../../../../services/AttestationService'
+import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 
-const QuestionsBankTable = ({ data, loading }) => {
-    const { data: dataDirection } = useGetAttestationsQualificationQuery()
+const QuestionsBankTable = ({ data, loading, setId }) => {
+    const { data: dataDirection } = useGetToolsDirectionQuery()
     const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
-    // const [searchText, setSearchText] = useState('')
-    // const [searchedColumn, setSearchedColumn] = useState('')
-    // const searchInput = useRef()
-
-    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    //     confirm()
-    //     setSearchText(selectedKeys[0])
-    //     setSearchedColumn(dataIndex)
-    // }
-    // const handleReset = (clearFilters) => {
-    //     clearFilters()
-    //     setSearchText('')
-    // }
-    // const getColumnSearchProps = (dataIndex) => ({
-    //     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-    //         <div
-    //             style={{
-    //                 padding: 8,
-    //             }}
-    //         >
-    //             <Input
-    //                 ref={searchInput}
-    //                 placeholder={`Поиск...`}
-    //                 value={selectedKeys[0]}
-    //                 onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-    //                 onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-    //                 style={{
-    //                     marginBottom: 8,
-    //                     display: 'block',
-    //                 }}
-    //             />
-    //             <Space>
-    //                 <Button
-    //                     type="primary"
-    //                     onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-    //                     icon={<SearchOutlined />}
-    //                     size="small"
-    //                     style={{
-    //                         width: 90,
-    //                     }}
-    //                 >
-    //                     Поиск
-    //                 </Button>
-    //                 <Button
-    //                     onClick={() => clearFilters && handleReset(clearFilters)}
-    //                     size="small"
-    //                     style={{
-    //                         width: 90,
-    //                     }}
-    //                 >
-    //                     Очистить
-    //                 </Button>
-    //             </Space>
-    //         </div>
-    //     ),
-    //     filterIcon: (filtered) => (
-    //         <SearchOutlined
-    //             style={{
-    //                 color: filtered ? '#1890ff' : undefined,
-    //             }}
-    //         />
-    //     ),
-    //     onFilter: (value, record) =>
-    //         record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible) => {
-    //         if (visible) {
-    //             setTimeout(() => searchInput.current?.select(), 100)
-    //         }
-    //     },
-    // })
-
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setId('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setId('id')
+            }
+        } else {
+            {
+                setId('')
+            }
+        }
+    }
     const columns = [
         {
             title: '№',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'ascend',
-            sorter: (a, b) => a.id - b.id,
+            sorter: true,
         },
         {
             title: 'Текст вопроса',
             dataIndex: 'description',
             key: 'description',
-            // ...getColumnSearchProps('description'),
         },
         {
             title: 'Квалификации',
             dataIndex: 'direction',
             key: 'direction',
             render: (direction) =>
-                (direction = direction
-                    .map(
-                        (item) =>
-                            (item = dataDirection?.results?.filter((dir) => dir.id === item)[0]
-                                .name)
-                    )
-                    .join(', ')),
+                direction
+                    .map((item) => {
+                        return dataDirection
+                            ?.filter((dir) => dir.id === item)
+                            ?.map((item) => {
+                                return item?.name
+                            })
+                    })
+                    .join(', '),
         },
         {
             title: 'Сложность',
@@ -191,6 +135,7 @@ const QuestionsBankTable = ({ data, loading }) => {
                 rowKey="id"
                 pagination={false}
                 scroll={{ x: true }}
+                onChange={onTableChange}
             />
         </>
     )
@@ -199,6 +144,7 @@ const QuestionsBankTable = ({ data, loading }) => {
 QuestionsBankTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
+    setId: PropTypes.func,
 }
 
 export default QuestionsBankTable

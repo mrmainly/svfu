@@ -24,7 +24,6 @@ import { MyButton } from '../../../../components'
 import {
     usePostAttestationsQuestionsBankImageMutation,
     usePostAttestationsQuestionsBankFileMutation,
-    useGetAttestationsQualificationQuery,
     usePutAttestationsQuestionBankIdMutation,
     usePatchAttestationsQualificationIdMutation,
     usePatchAttestationsQuestionsBankImageMutation,
@@ -32,11 +31,12 @@ import {
     useDeleteAttestationsQuestionsBankImageMutation,
     usePatchAttestationsQuestionsAnswerMutation,
 } from '../../../../services/AttestationService'
+import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 
 const { Option } = Select
 const { TextArea } = Input
 const QBAddModal = ({ open, setOpen, dataList }) => {
-    const { data: globalData } = useGetAttestationsQualificationQuery()
+    const { data: globalData } = useGetToolsDirectionQuery()
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
@@ -226,7 +226,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                         ['technique']: dataList?.technique,
                         ['description']: dataList?.description,
                         ['difficulty']: dataList?.difficulty,
-                        ['variant']: [dataList?.variant],
+                        ['variant']: dataList?.variant,
                     }}
                     onFinish={onSubmit}
                     id="qbedit-form"
@@ -238,24 +238,11 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                                 width: '100%',
                             }}
                         >
-                            {globalData?.results
-                                ?.filter(
-                                    (dir) =>
-                                        dataList?.direction.includes(dir.id) &&
-                                        dir.is_active === false
-                                )
-                                .map((item) => (
-                                    <Option value={item.id} key={item.id} disabled>
-                                        {item.name}
-                                    </Option>
-                                ))}
-                            {globalData?.results
-                                .filter((item) => item.is_active)
-                                .map((item) => (
-                                    <Option value={item.id} key={item.id}>
-                                        {item.name}
-                                    </Option>
-                                ))}
+                            {globalData?.map((item) => (
+                                <Option value={item.id} key={item.id}>
+                                    {item.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                     <Form.Item label="Тип вопроса" name="technique">

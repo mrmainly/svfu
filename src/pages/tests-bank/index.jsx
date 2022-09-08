@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
 import TBAddModal from './components/modals/TestBankAddModal'
-import {
-    useGetAttestationsTestsBankQuery,
-    useGetAttestationsQualificationQuery,
-} from '../../services/AttestationService'
+import { useGetAttestationsTestsBankQuery } from '../../services/AttestationService'
+import { useGetToolsDirectionQuery } from '../../services/ToolsService'
 
 import TestsBankTable from './components/table/TestBankTable'
 import { MyButton } from '../../components'
+import './test-bank.css'
 
 const TestsBank = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -16,18 +15,15 @@ const TestsBank = () => {
     const [name, setName] = useState('')
     const [status, setStatus] = useState('')
     const [directionName, setDirectionName] = useState('')
+    const [id, setId] = useState('')
     const { data, isLoading } = useGetAttestationsTestsBankQuery({
         currentPage: currentPage,
         name: name,
         is_active: status,
         direction_name: directionName,
+        id: id,
     })
-    const { data: directionSelect } = useGetAttestationsQualificationQuery({
-        is_active: '',
-        name: '',
-        tag: '',
-        id: '',
-    })
+    const { data: directionSelect } = useGetToolsDirectionQuery()
     const [modalNewTest, setModalNewTest] = useState(false)
     const onChange = (page) => {
         setCurrentPage(page)
@@ -36,20 +32,12 @@ const TestsBank = () => {
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
-
     return (
         <div>
             <MyButton onClick={() => setModalNewTest(true)} style={{ marginBottom: 20 }}>
                 Создать новый тест
             </MyButton>
-            <div
-                style={{
-                    display: 'flex',
-                    marginBottom: 16,
-                    justifyContent: 'start',
-                    gap: 16,
-                }}
-            >
+            <div className="inputs-container">
                 <Input.Search
                     placeholder="Название квалификации"
                     enterButton
@@ -57,16 +45,12 @@ const TestsBank = () => {
                         const currValue = value
                         setName(currValue)
                     }}
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                 ></Input.Search>
                 <Select
                     showSearch
-                    style={{
-                        width: 200,
-                    }}
-                    placeholder="Search to Select"
+                    className="input-search"
+                    placeholder="Квалификация"
                     optionFilterProp="children"
                     filterOption={(input, option) => option.children.includes(input)}
                     filterSort={(optionA, optionB) =>
@@ -74,7 +58,7 @@ const TestsBank = () => {
                     }
                     onChange={(value) => setDirectionName(value)}
                 >
-                    {directionSelect?.results?.map((item, index) => (
+                    {directionSelect?.map((item, index) => (
                         <Select.Option value={item.name} key={index}>
                             {item.name}
                         </Select.Option>
@@ -82,9 +66,7 @@ const TestsBank = () => {
                 </Select>
                 <Select
                     placeholder="Статус"
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                     onChange={(value) => setStatus(value)}
                 >
                     <Select.Option value="">Все статусы</Select.Option>
@@ -93,7 +75,7 @@ const TestsBank = () => {
                 </Select>
             </div>
             <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />
-            <TestsBankTable data={data?.results} loading={isLoading} />
+            <TestsBankTable data={data?.results} loading={isLoading} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}

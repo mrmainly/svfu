@@ -22,13 +22,13 @@ import {
     usePostAttestationsQuestionsBankImageMutation,
     usePostAttestationsQuestionsBankFileMutation,
     usePostAttestationsQuestionsBankMutation,
-    useGetAttestationsQualificationQuery,
 } from '../../../../services/AttestationService'
 
+import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 const { Option } = Select
 const { TextArea } = Input
 const QBAddModal = ({ open, setOpen }) => {
-    const { data } = useGetAttestationsQualificationQuery(true)
+    const { data } = useGetToolsDirectionQuery()
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
@@ -39,7 +39,6 @@ const QBAddModal = ({ open, setOpen }) => {
             <div style={{ marginTop: 8 }}>Upload</div>
         </div>
     )
-
     const props = {
         beforeUpload: (file) => {
             const isPNG = file.type === 'image/png' || file.type === 'image/jpeg'
@@ -140,7 +139,7 @@ const QBAddModal = ({ open, setOpen }) => {
                                 width: '100%',
                             }}
                         >
-                            {data?.results.map((item, index) => (
+                            {data?.map((item, index) => (
                                 <Option value={item.id} key={index}>
                                     {item.name}
                                 </Option>
@@ -311,149 +310,6 @@ const QBAddModal = ({ open, setOpen }) => {
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload>
                     ) : null}
-                    {/* <Form.Item
-                        noStyle
-                        shouldUpdate={(prevValues, currentValues) =>
-                            prevValues.gender !== currentValues.gender
-                        }
-                    >
-                        {({ getFieldValue }) =>
-                            (getFieldValue('technique') === 'MULTIPLE_CHOICE' && (
-                                <Form.List name="variant">
-                                    {(fields, { add, remove }) => (
-                                        <>
-                                            {fields.map(({ key, name, ...restField }) => (
-                                                <Row
-                                                    key={key}
-                                                    justify="space-between"
-                                                    style={{ width: '80%' }}
-                                                    align=""
-                                                >
-                                                    <Col span={18}>
-                                                        <Form.Item
-                                                            {...restField}
-                                                            name={[name, 'name']}
-                                                            rules={[
-                                                                {
-                                                                    required: true,
-                                                                    message:
-                                                                        'Заполните вариант ответа или удалите поле',
-                                                                },
-                                                            ]}
-                                                        >
-                                                            <Input placeholder="Вариант ответа" />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Form.Item
-                                                        {...restField}
-                                                        name={[name, 'is_true']}
-                                                        valuePropName="checked"
-                                                        initialValue={false}
-                                                    >
-                                                        <Checkbox></Checkbox>
-                                                    </Form.Item>
-                                                    <Form.Item>
-                                                        {fields.length > 2 ? (
-                                                            <DeleteTwoTone
-                                                                twoToneColor="#EB5757"
-                                                                onClick={() => remove(name)}
-                                                            />
-                                                        ) : null}
-                                                    </Form.Item>
-                                                </Row>
-                                            ))}
-                                            <Form.Item>
-                                                <Button
-                                                    onClick={() => add()}
-                                                    block
-                                                    type="primary"
-                                                    ghost
-                                                    icon={<PlusOutlined />}
-                                                >
-                                                    Добавить вариант ответа
-                                                </Button>
-                                            </Form.Item>
-                                        </>
-                                    )}
-                                </Form.List>
-                            )) ||
-                            (getFieldValue('technique') === 'ONE_CHOICE' && (
-                                <Form.List name="variant">
-                                    {(fields, { add, remove }, { errors }) => (
-                                        <>
-                                            {fields.map((field, index) => (
-                                                <Row
-                                                    key={field.key}
-                                                    justify="space-between"
-                                                    style={{ width: '80%' }}
-                                                >
-                                                    <Col span={18}>
-                                                        <Form.Item
-                                                            {...field}
-                                                            name={[field.name, 'name']}
-                                                            validateTrigger={['onChange', 'onBlur']}
-                                                            rules={[
-                                                                {
-                                                                    required: true,
-                                                                    message:
-                                                                        'Заполните вариант ответа или удалите поле',
-                                                                },
-                                                            ]}
-                                                            noStyle
-                                                        >
-                                                            <Input placeholder="Вариант ответа" />
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col>
-                                                        <Form.Item>
-                                                            <Radio
-                                                                checked={index === radioId}
-                                                                onChange={() => setRadioId(index)}
-                                                            ></Radio>
-                                                        </Form.Item>
-                                                    </Col>
-                                                    <Col>
-                                                        {fields.length > 2 ? (
-                                                            <Form.Item>
-                                                                <DeleteTwoTone
-                                                                    twoToneColor="#EB5757"
-                                                                    onClick={() =>
-                                                                        remove(field.name)
-                                                                    }
-                                                                />
-                                                            </Form.Item>
-                                                        ) : null}
-                                                    </Col>
-                                                </Row>
-                                            ))}
-                                            <Form.Item>
-                                                <Button
-                                                    onClick={() => add()}
-                                                    block
-                                                    type="primary"
-                                                    ghost
-                                                    icon={<PlusOutlined />}
-                                                >
-                                                    Добавить вариант ответа
-                                                </Button>
-                                                <Form.ErrorList errors={errors} />
-                                            </Form.Item>
-                                        </>
-                                    )}
-                                </Form.List>
-                            )) ||
-                            (getFieldValue('technique') === 'DESCRIBE' && (
-                                <Upload
-                                    action="none"
-                                    {...props2}
-                                    multiple={true}
-                                    labelCol={{ span: 24 }}
-                                >
-                                    <Button icon={<UploadOutlined />}>Upload</Button>
-                                </Upload>
-                            ))
-                        }
-                    </Form.Item> */}
                 </Form>
             </Modal>
         </div>
