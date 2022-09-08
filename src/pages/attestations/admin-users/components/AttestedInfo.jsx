@@ -1,4 +1,5 @@
-import { Button } from 'antd'
+import PropTypes from 'prop-types'
+
 import ParamsList from './params/ParamsList'
 import InfoList from './info/InfoList'
 
@@ -29,4 +30,10 @@ export const AttestedInfo = ({ contacts, profileData, bio }) => {
             </div>
         </>
     )
+}
+
+AttestedInfo.propTypes = {
+    contacts: PropTypes.any,
+    profileData: PropTypes.array,
+    bio: PropTypes.array,
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 import HeaderLogin from './headerlogin'
 import HeaderUser from './headeruser'
 
@@ -17,6 +19,12 @@ const Header = ({ setToggled, isToggled, data }) => {
             )}
         </>
     )
+}
+
+Header.propTypes = {
+    setToggled: PropTypes.func,
+    isToggled: PropTypes.bool,
+    data: PropTypes.any,
 }
 
 export default Header

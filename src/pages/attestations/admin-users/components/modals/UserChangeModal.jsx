@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { Modal, message, Select, Form, Typography, Input, DatePicker } from 'antd'
 import moment from 'moment'
@@ -9,8 +10,8 @@ import { MyButton } from '../../../../../components'
 import { usePatchUserMutation } from '../../../../../services/AdminService'
 
 const { Option } = Select
-const { Text } = Typography
 const { TextArea } = Input
+const { Text } = Typography
 
 const UserChangeModal = ({ open, setOpen, data }) => {
     const params = useParams()
@@ -233,6 +234,12 @@ const UserChangeModal = ({ open, setOpen, data }) => {
             </Modal>
         </div>
     )
+}
+
+UserChangeModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    data: PropTypes.object,
 }
 
 export default UserChangeModal

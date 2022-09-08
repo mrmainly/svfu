@@ -1,9 +1,7 @@
-import { useState, useRef } from 'react'
-import { Table, message, Typography, Button, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Table, message, Typography, Button } from 'antd'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
-
 import {
     usePostDirectionMutation,
     usePutDirectionMutation,
@@ -14,78 +12,6 @@ const { Text } = Typography
 const AppilyngTable = ({ data, loading, refetchFunc }) => {
     const [postDirection] = usePostDirectionMutation()
     const [putDirection] = usePutDirectionMutation()
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const searchInput = useRef()
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
-
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
-    })
 
     const onSubmit = (data) => {
         postDirection({ direction: data }).then((res) => {
@@ -110,7 +36,6 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
             title: 'Название квалификации',
             dataIndex: 'name',
             key: 'name',
-            ...getColumnSearchProps('name'),
         },
         {
             title: 'Статус',
@@ -173,6 +98,12 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
             pagination={false}
         />
     )
+}
+
+AppilyngTable.propTypes = {
+    loading: PropTypes.bool,
+    data: PropTypes.array,
+    refetchFunc: PropTypes.func,
 }
 
 export default AppilyngTable

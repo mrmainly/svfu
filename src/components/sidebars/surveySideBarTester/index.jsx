@@ -18,16 +18,6 @@ const SurveysSideBar = () => {
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
 
-    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex } = SurveysSlice.actions
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        const newData = JSON.parse(localStorage.getItem('survey-datas'))
-        setData(newData)
-        clearTimer(getDeadTime(newData?.time_exam))
-    }, [localStorage.getItem('survey-datas')])
-
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date())
         const seconds = Math.floor((total / 1000) % 60)
@@ -42,7 +32,7 @@ const SurveysSideBar = () => {
     }
 
     const startTimer = (e) => {
-        let { total, minutes, seconds, hours } = getTimeRemaining(e)
+        const { total, minutes, seconds, hours } = getTimeRemaining(e)
         if (total >= 0) {
             setTimer(
                 (hours === 0 ? '' : hours > 9 ? hours : '0' + hours + ':') +
@@ -62,11 +52,21 @@ const SurveysSideBar = () => {
     }
 
     const getDeadTime = (newTime) => {
-        let deadline = new Date()
+        const deadline = new Date()
 
         deadline.setSeconds(deadline.getSeconds() + newTime * 60)
         return deadline
     }
+
+    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
+    const { handleArrayIndex } = SurveysSlice.actions
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const newData = JSON.parse(localStorage.getItem('survey-datas'))
+        setData(newData)
+        clearTimer(getDeadTime(newData?.time_exam))
+    }, [localStorage.getItem('survey-datas')])
 
     return (
         <div className="survey-sidebar">

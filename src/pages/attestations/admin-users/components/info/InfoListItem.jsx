@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const InfoListItem = ({ param }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px 0' }}>
@@ -28,6 +30,10 @@ const InfoListItem = ({ param }) => {
             </div>
         </div>
     )
+}
+
+InfoListItem.propTypes = {
+    param: PropTypes.object,
 }
 
 export default InfoListItem

@@ -1,4 +1,5 @@
 import ParamsListItem from './ParamsListItem'
+import PropTypes from 'prop-types'
 
 const ParamsList = ({ params }) => {
     return (
@@ -8,6 +9,10 @@ const ParamsList = ({ params }) => {
             ))}
         </div>
     )
+}
+
+ParamsList.propTypes = {
+    params: PropTypes.array,
 }
 
 export default ParamsList

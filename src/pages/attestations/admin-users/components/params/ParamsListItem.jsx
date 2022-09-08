@@ -1,4 +1,4 @@
-import moment from 'moment'
+import PropTypes from 'prop-types'
 
 const ParamsListItem = ({ param }) => {
     return (
@@ -30,4 +30,9 @@ const ParamsListItem = ({ param }) => {
         </div>
     )
 }
+
+ParamsListItem.propTypes = {
+    param: PropTypes.any,
+}
+
 export default ParamsListItem

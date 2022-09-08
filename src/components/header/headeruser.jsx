@@ -4,6 +4,7 @@ import { Divider, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
 import { Sling as Hamburger } from 'hamburger-react'
+import PropTypes from 'prop-types'
 
 import './header.css'
 import ROUTES from '../../routes'
@@ -93,6 +94,12 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
             ></div>
         </div>
     )
+}
+
+HeaderUser.propTypes = {
+    setToggled: PropTypes.func,
+    isToggled: PropTypes.bool,
+    data: PropTypes.any,
 }
 
 export default HeaderUser

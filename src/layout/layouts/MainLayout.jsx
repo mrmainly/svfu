@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, Typography } from 'antd'
 import { Outlet } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import '../layout.css'
 import { pathname } from '../pathname'
@@ -43,6 +44,10 @@ const MainLayout = ({ params }) => {
             </Content>
         </Layout>
     )
+}
+
+MainLayout.propTypes = {
+    params: PropTypes.any,
 }
 
 export default MainLayout

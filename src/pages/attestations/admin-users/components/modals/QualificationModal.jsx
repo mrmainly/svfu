@@ -1,6 +1,6 @@
-import { Modal, message, Input, Select, Form } from 'antd'
-import Item from 'antd/lib/list/Item'
+import { Modal } from 'antd'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 
@@ -94,6 +94,12 @@ const QualificationModal = ({ open, setOpen, data }) => {
             </Modal>
         </div>
     )
+}
+
+QualificationModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    data: PropTypes.object,
 }
 
 export default QualificationModal

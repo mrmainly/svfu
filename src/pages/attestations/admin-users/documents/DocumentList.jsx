@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Button } from 'antd'
 import Table from 'antd/lib/table'
+import PropTypes from 'prop-types'
 
 import DocumentsModal from '../components/modals/DocumentsModal'
 
@@ -79,6 +80,10 @@ const DocumentList = ({ docs }) => {
             <DocumentsModal open={open} setOpen={setOpen} data={data} />
         </div>
     )
+}
+
+DocumentList.propTypes = {
+    docs: PropTypes.array,
 }
 
 export default DocumentList

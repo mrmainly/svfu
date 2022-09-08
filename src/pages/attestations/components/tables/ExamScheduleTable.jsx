@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import moment from 'moment'
-import { Button, Table, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
+import { Button, Table } from 'antd'
 
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
@@ -15,80 +14,6 @@ const ExamScheduleTable = ({
     setViewSurveyModalOpen,
     setCurrentSurveyId,
 }) => {
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const searchInput = useRef()
-    const navigate = useNavigate()
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
-
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
-    })
-
     const columns = [
         {
             title: '№',
@@ -112,19 +37,16 @@ const ExamScheduleTable = ({
                     {name}
                 </div>
             ),
-            ...getColumnSearchProps('name'),
         },
         {
             title: 'Группа',
             dataIndex: 'test_group',
             key: 'test_group',
-            ...getColumnSearchProps('test_group'),
         },
         {
             title: 'Аттес-ых',
             dataIndex: 'testers_count',
             key: 'testers_count',
-            ...getColumnSearchProps('testers_count'),
         },
         {
             title: 'Начало',
@@ -195,6 +117,15 @@ const ExamScheduleTable = ({
             />
         </>
     )
+}
+
+ExamScheduleTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
+    setOpenEditModal: PropTypes.func,
+    setCurrentData: PropTypes.func,
+    setViewSurveyModalOpen: PropTypes.func,
+    setCurrentSurveyId: PropTypes.func,
 }
 
 export default ExamScheduleTable

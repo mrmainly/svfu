@@ -1,8 +1,7 @@
-import { useState } from 'react'
-
 import { MyButton } from '../../../../../components'
 
 import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
+import PropTypes from 'prop-types'
 
 import { usePostUserMutation } from '../../../../../services/AdminService'
 import { roles } from './UserChangeModalData'
@@ -72,7 +71,7 @@ const UserAddModal = ({ open, setOpen }) => {
             required: false,
             requiredText: 'Введите ваш ИНН',
             pattern:
-                /^(([0-9]{10}([0-9]{2})?)|([0-9]{4}\-[0-9]{5}\-[0-9]{1})|([0-9]{4}\-[0-9]{6}\-[0-9]{2}))$/,
+                /^(([0-9]{10}([0-9]{2})?)|([0-9]{4}-[0-9]{5}-[0-9]{1})|([0-9]{4}-[0-9]{6}-[0-9]{2}))$/,
             pattern_message: 'Проверьте правильность ИНН',
         },
         {
@@ -80,7 +79,7 @@ const UserAddModal = ({ open, setOpen }) => {
             name: 'snils',
             required: false,
             requiredText: 'Введите ваш СНИЛС',
-            pattern: /^(([0-9]{3}\-[0-9]{3}\-[0-9]{3}\-[0-9]{2})|([0-9]{11}))$/,
+            pattern: /^(([0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{2})|([0-9]{11}))$/,
             pattern_message: 'Проверьте правильность СНИЛСа',
         },
         {
@@ -375,6 +374,11 @@ const UserAddModal = ({ open, setOpen }) => {
             </Modal>
         </div>
     )
+}
+
+UserAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default UserAddModal

@@ -1,10 +1,9 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { SearchOutlined } from '@ant-design/icons'
 import Table from 'antd/lib/table'
-import { Button, Input, Space, Pagination } from 'antd'
+import { Button, Pagination } from 'antd'
 
 import { useGetAdminUserQuery } from '../../../../../services/PaginationService'
 import UserAddModal from '../modals/UserAddModal'
@@ -17,80 +16,8 @@ const UsersTable = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [modalNewUser, setModalNewUser] = useState(false)
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const { data, isLoading } = useGetAdminUserQuery({ currentPage: currentPage })
-    const searchInput = useRef()
-
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
-
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
-    })
 
     const columns = [
         {
@@ -104,14 +31,12 @@ const UsersTable = () => {
             title: 'ФИО',
             dataIndex: 'full_name',
             key: 'full_name',
-            ...getColumnSearchProps('full_name'),
         },
         {
             title: 'Текущая аттестация',
             dataIndex: 'active_application',
             key: 'active_application',
             render: (active_application) => (active_application ? active_application : '-'),
-            ...getColumnSearchProps('active_application'),
         },
         {
             title: 'Роль',
