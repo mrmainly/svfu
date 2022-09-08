@@ -9,6 +9,8 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
     const directionData = data?.map((item) => {
         return (item = item.direction.name)
     })
+
+    console.log(data)
     const columns = [
         {
             title: '№',
@@ -42,7 +44,7 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
-            render: (exam_status) => statusChoices(exam_status),
+            render: (exam_status) => (exam_status ? statusChoices[exam_status] : '-'),
             filters: [
                 {
                     text: 'Ожидание',

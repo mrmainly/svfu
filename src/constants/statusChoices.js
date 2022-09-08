@@ -19,6 +19,7 @@ const statusChoices = {
     CERTIFIED_UNDER_CERTAIN_CONDITIONS: 'Аттестован при определенных условиях',
     NOT_CERTIFIED: 'Не аттестован',
     IN_PROGRESS: 'Идет тест',
+    COMPLETED: 'Завершен',
 }
 
 export default statusChoices

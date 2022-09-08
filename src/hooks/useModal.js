@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const ModalHooks = () => {
+const useModal = () => {
     const [open, setOpen] = useState(false)
 
     const handleClose = () => {
@@ -14,4 +14,4 @@ const ModalHooks = () => {
     return { open, handleClose, handleOpen }
 }
 
-export default ModalHooks
+export default useModal
