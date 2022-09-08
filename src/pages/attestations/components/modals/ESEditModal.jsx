@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-
-import { Modal, message, Input, Select, Form, Row, Col, Button, DatePicker } from 'antd'
-
+import { Modal, message, Select, Form, Row, Col, Button, DatePicker } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
-
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
@@ -14,7 +12,7 @@ import {
     useGetUsersRoleQuery,
     usePatchTestExamMutation,
 } from '../../../../services/TutorService'
-import { direction } from '../../../../services/DirectionService'
+
 const { Option } = Select
 
 const ESEditModal = ({ open, setOpen, dataList }) => {
@@ -177,7 +175,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="experts">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -236,7 +234,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="moderators">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -295,6 +293,12 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+ESEditModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    dataList: PropTypes.object,
 }
 
 export default ESEditModal

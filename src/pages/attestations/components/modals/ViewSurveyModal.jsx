@@ -1,7 +1,9 @@
 import { Modal, Typography } from 'antd'
 
-import moment from 'moment'
 import { useGetUnitIdQuery } from '../../../../services/TutorService'
+
+import moment from 'moment'
+import PropTypes from 'prop-types'
 
 const { Text } = Typography
 
@@ -97,6 +99,12 @@ const ViewSurveyModal = ({ open, setOpen, currentSurveyId }) => {
             </Modal>
         </div>
     )
+}
+
+ViewSurveyModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    currentSurveyId: PropTypes.number,
 }
 
 export default ViewSurveyModal
