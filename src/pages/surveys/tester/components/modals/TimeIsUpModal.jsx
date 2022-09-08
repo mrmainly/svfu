@@ -1,5 +1,6 @@
 import { Modal } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
@@ -18,7 +19,7 @@ const TimeIsUpModal = ({ open, setOpen, id }) => {
     const navigate = useNavigate()
 
     const onFinishSubmit = () => {
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('q_id', practical_data?.surveyquest[0]?.question.id)
         formData.append('describe', '')
         postResultPartOne({ body: { answers: [] }, id: id })
@@ -47,6 +48,12 @@ const TimeIsUpModal = ({ open, setOpen, id }) => {
             </Modal>
         </>
     )
+}
+
+TimeIsUpModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    id: PropTypes.number,
 }
 
 export default TimeIsUpModal

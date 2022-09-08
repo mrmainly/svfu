@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Input, Pagination } from 'antd'
+import { Pagination } from 'antd'
 
 import UploadDocumentsTable from '../components/tables/UploadDocumentsTable'
 import UDAddModal from '../components/modals/udaddmodal'
 import { MyButton } from '../../../components'
 
 import { useGetDocumentsQuery } from '../../../services/DocumentsService'
-
-const { Search } = Input
 
 const UploadDocuments = () => {
     const [currentPage, setCurrentPage] = useState(1)

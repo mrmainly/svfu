@@ -15,6 +15,7 @@ import {
 } from 'antd'
 
 import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
@@ -80,7 +81,7 @@ const QBAddModal = ({ open, setOpen }) => {
             if (res.data) {
                 message.success('Вопрос создан')
                 if (img) {
-                    let formData = new FormData()
+                    const formData = new FormData()
                     formData.append('image', img)
 
                     postAttestationsQuestionsBankImage({
@@ -457,6 +458,11 @@ const QBAddModal = ({ open, setOpen }) => {
             </Modal>
         </div>
     )
+}
+
+QBAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default QBAddModal

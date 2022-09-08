@@ -24,7 +24,7 @@ const QualificationModal = ({ open, setOpen, data }) => {
         {
             name: 'Документ:',
             label: data?.file ? (
-                <a href={data?.file} target="_blank">
+                <a href={data?.file} target="_blank" rel="noopener noreferrer">
                     {decodeURI(data?.file).split('/')[5]}
                 </a>
             ) : (

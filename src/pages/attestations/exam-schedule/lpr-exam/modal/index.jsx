@@ -1,6 +1,6 @@
-import { Modal, message, Input, Select, Form } from 'antd'
-import Item from 'antd/lib/list/Item'
+import { Modal } from 'antd'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 
@@ -101,6 +101,12 @@ const LprExamModal = ({ open, setOpen, data }) => {
             </Modal>
         </div>
     )
+}
+
+LprExamModal.propTypes = {
+    data: PropTypes.object,
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default LprExamModal

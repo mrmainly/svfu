@@ -9,8 +9,6 @@ const PracticalPartExMo = () => {
     const state = location.state
     const { surveyquest } = state
 
-    console.log(surveyquest)
-
     return (
         <div>
             <Form style={{ display: 'flex', flexDirection: 'column' }}>
@@ -52,6 +50,7 @@ const PracticalPartExMo = () => {
                                             target="_blank"
                                             key={index}
                                             style={{ marginLeft: index === 0 ? 0 : 10 }}
+                                            rel="noopener noreferrer"
                                         >
                                             {decodeURI(itemFile.file).split('/')[5]}
                                         </a>
@@ -77,6 +76,7 @@ const PracticalPartExMo = () => {
                                                 target="_blank"
                                                 key={index}
                                                 style={{ marginLeft: index === 0 ? 0 : 10 }}
+                                                rel="noopener noreferrer"
                                             >
                                                 {decodeURI(itemAnswer.file).split('/')[5]}
                                             </a>

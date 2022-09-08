@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import MainInfo from './MainInfo'
 import { Line } from '../../../../components'
@@ -16,6 +17,10 @@ const Information = ({ data }) => {
             </>
         </div>
     )
+}
+
+Information.propTypes = {
+    data: PropTypes.any,
 }
 
 export default Information

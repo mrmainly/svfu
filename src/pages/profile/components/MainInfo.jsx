@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, Space } from 'antd'
+import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 
 import PhotoUpload from './PhotoUpload'
 
@@ -72,6 +73,10 @@ const MainInfo = ({ data }) => {
             ))}
         </>
     )
+}
+
+MainInfo.propTypes = {
+    data: PropTypes.object,
 }
 
 export default MainInfo

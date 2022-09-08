@@ -1,10 +1,11 @@
 import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Modal, Spin, Space, Typography, message } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { Modal, Space, Typography, message } from 'antd'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { useGetSurveysIdQuery, useSurveyPatchMutation } from '../../../../services/SurveysService'
-import { Line, MyButton } from '../../../../components'
+import { MyButton } from '../../../../components'
 import ROUTES from '../../../../routes'
 
 const { Text } = Typography
@@ -80,6 +81,12 @@ const TestDetail = ({ open, setOpen, ID }) => {
             </Modal>
         </div>
     )
+}
+
+TestDetail.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    ID: PropTypes.number,
 }
 
 export default TestDetail

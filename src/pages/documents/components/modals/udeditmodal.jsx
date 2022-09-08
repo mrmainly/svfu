@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
-import { Typography, Button, Modal, Select, Upload, Input, message } from 'antd'
+import { Typography, Button, Modal, Upload, Input, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import {
     usePatchDocumentsMutation,
@@ -14,7 +15,7 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
     const [patchDocuments] = usePatchDocumentsMutation()
     const [deleteDocument] = useDeleteDocumentMutation()
 
-    let editRef = useRef()
+    const editRef = useRef()
     const [file, setFile] = useState()
     const props = {
         beforeUpload: (file) => {
@@ -30,7 +31,7 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
         },
     }
     const onEdit = () => {
-        let formData = new FormData()
+        const formData = new FormData()
         if (file) {
             formData.append('file', file)
         }
@@ -154,6 +155,12 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+UDEditModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    dataList: PropTypes.object,
 }
 
 export default UDEditModal

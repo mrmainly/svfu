@@ -44,7 +44,7 @@ const QualificationEdit = () => {
     }
 
     const onSubmit = (data) => {
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('name', data.name)
         formData.append('doc_id', data.doc_id)
         formData.append('date_start', date_start.toISOString())
@@ -151,7 +151,12 @@ const QualificationEdit = () => {
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>
                     {file === '' ? (
-                        <a href={data.file} target="_blank" style={{ marginLeft: 20 }}>
+                        <a
+                            href={data.file}
+                            target="_blank"
+                            style={{ marginLeft: 20 }}
+                            rel="noopener noreferrer"
+                        >
                             {data.file.split('/')[5]}
                         </a>
                     ) : (

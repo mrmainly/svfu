@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, Form, Input, Checkbox, message, Typography } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertService'
@@ -183,6 +184,12 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
             </Modal>
         </>
     )
+}
+
+AnswerTheoreticalPartExpertModal.propTypes = {
+    id: PropTypes.number,
+    expert_review: PropTypes.array,
+    main_expert: PropTypes.bool,
 }
 
 export default AnswerTheoreticalPartExpertModal

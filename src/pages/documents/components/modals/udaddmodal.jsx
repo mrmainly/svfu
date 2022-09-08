@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { Typography, Button, Modal, Select, Upload, Input, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import { usePostDocumentsMutation } from '../../../../services/DocumentsService'
 
@@ -9,7 +10,7 @@ const { Text } = Typography
 
 const UDAddModal = ({ open, setOpen }) => {
     const [postDocuments] = usePostDocumentsMutation()
-    let valRef = useRef()
+    const valRef = useRef()
     const [value, setValue] = useState()
     const [file, setFile] = useState()
     const props = {
@@ -26,7 +27,7 @@ const UDAddModal = ({ open, setOpen }) => {
         },
     }
     const onSubmit = () => {
-        let formData = new FormData()
+        const formData = new FormData()
         switch (value) {
             case 'Паспорт':
                 formData.append('file', file)
@@ -151,6 +152,11 @@ const UDAddModal = ({ open, setOpen }) => {
             </Modal>
         </div>
     )
+}
+
+UDAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default UDAddModal

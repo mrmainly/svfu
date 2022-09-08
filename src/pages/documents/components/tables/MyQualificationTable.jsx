@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import MQEditModal from '../modals/mqeditmodal'
 
@@ -53,6 +54,11 @@ const MyQualificationTable = ({ data, loading }) => {
             />
         </>
     )
+}
+
+MyQualificationTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
 }
 
 export default MyQualificationTable

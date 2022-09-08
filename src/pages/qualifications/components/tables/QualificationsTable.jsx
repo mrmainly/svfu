@@ -1,5 +1,6 @@
 import { Table } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 
@@ -36,6 +37,12 @@ const QualificationsTable = ({ data, loading, routes }) => {
             scroll={{ x: true }}
         />
     )
+}
+
+QualificationsTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
+    routes: PropTypes.any,
 }
 
 export default QualificationsTable

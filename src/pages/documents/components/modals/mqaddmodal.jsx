@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { Modal, Form, Input, message, Typography, DatePicker, Upload, Button } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import { usePostQualificationMutation } from '../../../../services/QualificationsService'
 
-const { TextArea } = Input
 const { Text } = Typography
 const { RangePicker } = DatePicker
 
@@ -62,8 +62,7 @@ const MQAddModal = ({ open, setOpen }) => {
         },
     }
     const onSubmit = (data) => {
-        const newDate = new Date()
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('name', data.name)
         formData.append('date_of_issue', data.date_of_issue)
         formData.append('date_start', moment(data.date_start[0]._d).format('YYYY-MM-DD'))
@@ -154,6 +153,11 @@ const MQAddModal = ({ open, setOpen }) => {
             </Modal>
         </div>
     )
+}
+
+MQAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default MQAddModal

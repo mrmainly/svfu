@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react'
-import { Button, Table, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { useState } from 'react'
+import { Button, Table } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import TestDetail from '../modal/detail'
 import ROUTES from '../../../../routes'
@@ -12,78 +12,77 @@ const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
     const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const searchInput = useRef()
+    // const [searchText, setSearchText] = useState('')
+    // const [searchedColumn, setSearchedColumn] = useState('')
 
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
+    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    //     confirm()
+    //     setSearchText(selectedKeys[0])
+    //     setSearchedColumn(dataIndex)
+    // }
 
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
+    // const handleReset = (clearFilters) => {
+    //     clearFilters()
+    //     setSearchText('')
+    // }
 
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
-    })
+    // const getColumnSearchProps = (dataIndex) => ({
+    //     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    //         <div
+    //             style={{
+    //                 padding: 8,
+    //             }}
+    //         >
+    //             <Input
+    //                 ref={searchInput}
+    //                 placeholder={`Поиск...`}
+    //                 value={selectedKeys[0]}
+    //                 onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+    //                 onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+    //                 style={{
+    //                     marginBottom: 8,
+    //                     display: 'block',
+    //                 }}
+    //             />
+    //             <Space>
+    //                 <Button
+    //                     type="primary"
+    //                     onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+    //                     icon={<SearchOutlined />}
+    //                     size="small"
+    //                     style={{
+    //                         width: 90,
+    //                     }}
+    //                 >
+    //                     Поиск
+    //                 </Button>
+    //                 <Button
+    //                     onClick={() => clearFilters && handleReset(clearFilters)}
+    //                     size="small"
+    //                     style={{
+    //                         width: 90,
+    //                     }}
+    //                 >
+    //                     Очистить
+    //                 </Button>
+    //             </Space>
+    //         </div>
+    //     ),
+    //     filterIcon: (filtered) => (
+    //         <SearchOutlined
+    //             style={{
+    //                 color: filtered ? '#1890ff' : undefined,
+    //             }}
+    //         />
+    //     ),
+    //     onFilter: (value, record) =>
+    //         record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
+    //     onFilterDropdownVisibleChange: (visible) => {
+    //         if (visible) {
+    //             setTimeout(() => searchInput.current?.select(), 100)
+    //         }
+    //     },
+    // })
     const columns = [
         {
             title: 'ID',
@@ -96,7 +95,7 @@ const AvailableTestTable = ({ data, loading }) => {
             title: 'Название квалификации',
             dataIndex: 'name',
             key: 'name',
-            ...getColumnSearchProps('name'),
+            // ...getColumnSearchProps('name'),
         },
         {
             title: 'Начало аттестации',
@@ -200,6 +199,11 @@ const AvailableTestTable = ({ data, loading }) => {
             />
         </>
     )
+}
+
+AvailableTestTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
 }
 
 export default AvailableTestTable

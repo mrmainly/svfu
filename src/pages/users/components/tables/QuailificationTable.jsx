@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
+import PropTypes from 'prop-types'
 
 import QualificationModal from '../modals/QualificationModal'
 
@@ -48,6 +49,10 @@ const QualificationTable = ({ qualifications }) => {
             <QualificationModal open={open} setOpen={setOpen} data={data} />
         </>
     )
+}
+
+QualificationTable.propTypes = {
+    qualifications: PropTypes.array,
 }
 
 export default QualificationTable

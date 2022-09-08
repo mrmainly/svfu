@@ -17,8 +17,8 @@ const TestResult = () => {
     const [appealModal, setAppealModal] = useState(false)
     const [cancelModal, setCancelModal] = useState(false)
     const { data: dataResult, isFetching } = useGetTestResultsIDQuery({ id: params.id })
-    let TEST_RESULT = dataResult?.protocol?.find((item) => item.type === 'TEST_RESULT')
-    let CERTIFICATION_RESULT = dataResult?.protocol?.find(
+    const TEST_RESULT = dataResult?.protocol?.find((item) => item.type === 'TEST_RESULT')
+    const CERTIFICATION_RESULT = dataResult?.protocol?.find(
         (item) => item.type === 'CERTIFICATION_RESULT'
     )
     const navigate = useNavigate()
@@ -59,7 +59,7 @@ const TestResult = () => {
         {
             label: 'Протокол о результатах тестирования:',
             value: TEST_RESULT ? (
-                <a href={TEST_RESULT?.file} target="_blank">
+                <a href={TEST_RESULT?.file} target="_blank" rel="noopener noreferrer">
                     document.pdf
                 </a>
             ) : (
@@ -69,7 +69,7 @@ const TestResult = () => {
         {
             label: 'Протокол о результатах аттестации:',
             value: CERTIFICATION_RESULT ? (
-                <a href={CERTIFICATION_RESULT?.file} target="_blank">
+                <a href={CERTIFICATION_RESULT?.file} target="_blank" rel="noopener noreferrer">
                     document.pdf
                 </a>
             ) : (

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Space, Typography } from 'antd'
+import PropTypes from 'prop-types'
 
 const { Text } = Typography
 
@@ -52,6 +53,10 @@ const MainInfo = ({ data }) => {
             ))}
         </div>
     )
+}
+
+MainInfo.propTypes = {
+    data: PropTypes.object,
 }
 
 export default MainInfo

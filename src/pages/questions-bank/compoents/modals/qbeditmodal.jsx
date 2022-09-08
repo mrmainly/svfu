@@ -16,6 +16,7 @@ import {
     Switch,
     Typography,
 } from 'antd'
+import PropTypes from 'prop-types'
 
 import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 
@@ -23,7 +24,6 @@ import { MyButton } from '../../../../components'
 import {
     usePostAttestationsQuestionsBankImageMutation,
     usePostAttestationsQuestionsBankFileMutation,
-    usePostAttestationsQuestionsBankMutation,
     useGetAttestationsQualificationQuery,
     usePutAttestationsQuestionBankIdMutation,
     usePatchAttestationsQuestionsBankMutation,
@@ -111,8 +111,6 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             url: `${img}`,
         },
     ]
-
-    const [postAttestationsQuestionsBank] = usePostAttestationsQuestionsBankMutation()
     const [postAttestationsQuestionsBankImage] = usePostAttestationsQuestionsBankImageMutation()
     const [postAttestationsQuestionsBankFile] = usePostAttestationsQuestionsBankFileMutation()
     const [patchAttestationsQuestionsBank] = usePatchAttestationsQuestionsBankMutation()
@@ -141,7 +139,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         }
 
         if (typeof img === 'object' && dataList?.question_images.length) {
-            let formData = new FormData()
+            const formData = new FormData()
             formData.append('image', img)
 
             patchAttestationsQuestionsBankImage({
@@ -149,7 +147,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                 formData: formData,
             })
         } else if (dataList?.question_images.length === 0) {
-            let formData = new FormData()
+            const formData = new FormData()
             formData.append('image', img)
 
             postAttestationsQuestionsBankImage({
@@ -448,6 +446,12 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+QBAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    dataList: PropTypes.object,
 }
 
 export default QBAddModal

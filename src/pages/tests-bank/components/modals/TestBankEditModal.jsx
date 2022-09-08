@@ -14,6 +14,7 @@ import {
     Space,
     Switch,
 } from 'antd'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
@@ -32,7 +33,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
     const [active, setActive] = useState()
-    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery(true)
+    const { data: dataDirection } = useGetAttestationsQualificationQuery(true)
     const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
     const [putAttestationsTestsBankId] = usePutAttestationsTestsBankIdMutation()
     useEffect(() => {
@@ -68,7 +69,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
             }
         })
     }
-    const onSearch = (value) => console.log(value)
+
     const hours = Math.floor(dataList[0]?.test_time / 60) + ':' + (dataList[0]?.test_time % 60)
     const hhminuts = moment(hours, 'HH:mm')
 
@@ -228,6 +229,12 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+TBEditModal.propTypes = {
+    dataList: PropTypes.array,
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default TBEditModal

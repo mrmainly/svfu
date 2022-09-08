@@ -12,6 +12,7 @@ import {
     message,
 } from 'antd'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
@@ -30,7 +31,7 @@ const TBAddModal = ({ open, setOpen }) => {
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
     const [postAttestationsTestsBankMutation] = usePostAttestationsTestsBankMutation()
-    const { data, isLoading } = useGetAttestationsQualificationQuery(true)
+    const { data } = useGetAttestationsQualificationQuery(true)
 
     const onSubmit = (data) => {
         const hhminuts =
@@ -55,7 +56,7 @@ const TBAddModal = ({ open, setOpen }) => {
             }
         })
     }
-    const onSearch = (value) => console.log(value)
+
     return (
         <div>
             <Modal
@@ -226,6 +227,11 @@ const TBAddModal = ({ open, setOpen }) => {
             </Modal>
         </div>
     )
+}
+
+TBAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default TBAddModal

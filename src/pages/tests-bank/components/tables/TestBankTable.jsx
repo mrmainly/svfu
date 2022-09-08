@@ -1,85 +1,85 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 import Table from 'antd/lib/table'
-import { Button, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
+
+import PropTypes from 'prop-types'
 
 import TBEditModal from '../modals/TestBankEditModal'
 
 const TestsBankTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const searchInput = useRef()
+    // const [searchText, setSearchText] = useState('')
+    // const [searchedColumn, setSearchedColumn] = useState('')
 
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
+    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    //     confirm()
+    //     setSearchText(selectedKeys[0])
+    //     setSearchedColumn(dataIndex)
+    // }
 
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
-    })
+    // const handleReset = (clearFilters) => {
+    //     clearFilters()
+    //     setSearchText('')
+    // }
+    // const getColumnSearchProps = (dataIndex) => ({
+    //     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    //         <div
+    //             style={{
+    //                 padding: 8,
+    //             }}
+    //         >
+    //             <Input
+    //                 ref={searchInput}
+    //                 placeholder={`Поиск...`}
+    //                 value={selectedKeys[0]}
+    //                 onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+    //                 onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+    //                 style={{
+    //                     marginBottom: 8,
+    //                     display: 'block',
+    //                 }}
+    //             />
+    //             <Space>
+    //                 <Button
+    //                     type="primary"
+    //                     onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+    //                     icon={<SearchOutlined />}
+    //                     size="small"
+    //                     style={{
+    //                         width: 90,
+    //                     }}
+    //                 >
+    //                     Поиск
+    //                 </Button>
+    //                 <Button
+    //                     onClick={() => clearFilters && handleReset(clearFilters)}
+    //                     size="small"
+    //                     style={{
+    //                         width: 90,
+    //                     }}
+    //                 >
+    //                     Очистить
+    //                 </Button>
+    //             </Space>
+    //         </div>
+    //     ),
+    //     filterIcon: (filtered) => (
+    //         <SearchOutlined
+    //             style={{
+    //                 color: filtered ? '#1890ff' : undefined,
+    //             }}
+    //         />
+    //     ),
+    //     onFilter: (value, record) =>
+    //         record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
+    //     onFilterDropdownVisibleChange: (visible) => {
+    //         if (visible) {
+    //             setTimeout(() => searchInput.current?.select(), 100)
+    //         }
+    //     },
+    // })
     const columns = [
         {
             title: '№',
@@ -92,13 +92,13 @@ const TestsBankTable = ({ data, loading }) => {
             title: 'Название квалификации',
             dataIndex: 'name',
             key: 'name',
-            ...getColumnSearchProps('name'),
+            // ...getColumnSearchProps('name'),
         },
         {
             title: 'Квалификация',
             dataIndex: 'direction',
             key: 'direction',
-            ...getColumnSearchProps('direction'),
+            // ...getColumnSearchProps('direction'),
             render: (direction) => <>{direction?.name}</>,
         },
         {
@@ -156,6 +156,11 @@ const TestsBankTable = ({ data, loading }) => {
             <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
         </>
     )
+}
+
+TestsBankTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
 }
 
 export default TestsBankTable

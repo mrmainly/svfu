@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Input, Form, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import { usePutUserApplicationRejectMutation } from '../../../../services/TutorService'
@@ -57,6 +58,12 @@ const RejectModal = ({ open, setOpen, id }) => {
             </Modal>
         </div>
     )
+}
+
+RejectModal.propTypes = {
+    id: PropTypes.number,
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default RejectModal

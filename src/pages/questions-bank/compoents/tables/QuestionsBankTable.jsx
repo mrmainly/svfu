@@ -1,87 +1,86 @@
-import { useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 import Table from 'antd/lib/table'
-import { Button, Input, Space } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
+import PropTypes from 'prop-types'
 
 import QBEditModal from '../modals/qbeditmodal'
 import { useGetAttestationsQualificationQuery } from '../../../../services/AttestationService'
 
 const QuestionsBankTable = ({ data, loading }) => {
-    const { data: dataDirection, isLoading } = useGetAttestationsQualificationQuery()
+    const { data: dataDirection } = useGetAttestationsQualificationQuery()
     const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const searchInput = useRef()
+    // const [searchText, setSearchText] = useState('')
+    // const [searchedColumn, setSearchedColumn] = useState('')
+    // const searchInput = useRef()
 
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div
-                style={{
-                    padding: 8,
-                }}
-            >
-                <Input
-                    ref={searchInput}
-                    placeholder={`Поиск...`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{
-                        marginBottom: 8,
-                        display: 'block',
-                    }}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Поиск
-                    </Button>
-                    <Button
-                        onClick={() => clearFilters && handleReset(clearFilters)}
-                        size="small"
-                        style={{
-                            width: 90,
-                        }}
-                    >
-                        Очистить
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1890ff' : undefined,
-                }}
-            />
-        ),
-        onFilter: (value, record) =>
-            record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: (visible) => {
-            if (visible) {
-                setTimeout(() => searchInput.current?.select(), 100)
-            }
-        },
-    })
+    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    //     confirm()
+    //     setSearchText(selectedKeys[0])
+    //     setSearchedColumn(dataIndex)
+    // }
+    // const handleReset = (clearFilters) => {
+    //     clearFilters()
+    //     setSearchText('')
+    // }
+    // const getColumnSearchProps = (dataIndex) => ({
+    //     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    //         <div
+    //             style={{
+    //                 padding: 8,
+    //             }}
+    //         >
+    //             <Input
+    //                 ref={searchInput}
+    //                 placeholder={`Поиск...`}
+    //                 value={selectedKeys[0]}
+    //                 onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+    //                 onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+    //                 style={{
+    //                     marginBottom: 8,
+    //                     display: 'block',
+    //                 }}
+    //             />
+    //             <Space>
+    //                 <Button
+    //                     type="primary"
+    //                     onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+    //                     icon={<SearchOutlined />}
+    //                     size="small"
+    //                     style={{
+    //                         width: 90,
+    //                     }}
+    //                 >
+    //                     Поиск
+    //                 </Button>
+    //                 <Button
+    //                     onClick={() => clearFilters && handleReset(clearFilters)}
+    //                     size="small"
+    //                     style={{
+    //                         width: 90,
+    //                     }}
+    //                 >
+    //                     Очистить
+    //                 </Button>
+    //             </Space>
+    //         </div>
+    //     ),
+    //     filterIcon: (filtered) => (
+    //         <SearchOutlined
+    //             style={{
+    //                 color: filtered ? '#1890ff' : undefined,
+    //             }}
+    //         />
+    //     ),
+    //     onFilter: (value, record) =>
+    //         record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
+    //     onFilterDropdownVisibleChange: (visible) => {
+    //         if (visible) {
+    //             setTimeout(() => searchInput.current?.select(), 100)
+    //         }
+    //     },
+    // })
 
     const columns = [
         {
@@ -95,7 +94,7 @@ const QuestionsBankTable = ({ data, loading }) => {
             title: 'Текст вопроса',
             dataIndex: 'description',
             key: 'description',
-            ...getColumnSearchProps('description'),
+            // ...getColumnSearchProps('description'),
         },
         {
             title: 'Квалификации',
@@ -104,7 +103,7 @@ const QuestionsBankTable = ({ data, loading }) => {
             render: (direction) =>
                 (direction = direction
                     .map(
-                        (item, index) =>
+                        (item) =>
                             (item = dataDirection?.results?.filter((dir) => dir.id === item)[0]
                                 .name)
                     )
@@ -195,6 +194,11 @@ const QuestionsBankTable = ({ data, loading }) => {
             />
         </>
     )
+}
+
+QuestionsBankTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
 }
 
 export default QuestionsBankTable

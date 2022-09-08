@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import { Modal, message, Select, Form, Button } from 'antd'
+import { Modal, Select, Form, Button } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
-    usePostTesterGroupMutation,
+    // usePostTesterGroupMutation,
     useGetApplicationUserQuery,
 } from '../../../../services/TutorService'
 
 const { Option } = Select
 
 const EgCreateModal = ({ open, setOpen, direction }) => {
-    const [postTestGroup] = usePostTesterGroupMutation()
+    // const [postTestGroup] = usePostTesterGroupMutation()
     const [id, setId] = useState(0)
     const [testers, setTesters] = useState()
     const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
@@ -73,7 +74,7 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                     <Form.List name="testers">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -127,6 +128,12 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
             </Modal>
         </div>
     )
+}
+
+EgCreateModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    direction: PropTypes.array,
 }
 
 export default EgCreateModal

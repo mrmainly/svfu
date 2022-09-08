@@ -1,5 +1,6 @@
 import { Modal } from 'antd'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 
@@ -32,7 +33,7 @@ const QualificationModal = ({ open, setOpen, data }) => {
         {
             name: 'Документ:',
             label: data?.file ? (
-                <a href={data?.file} target="_blank">
+                <a href={data?.file} target="_blank" rel="noopener noreferrer">
                     {decodeURI(data?.file).split('/')[5]}
                 </a>
             ) : (
@@ -93,6 +94,12 @@ const QualificationModal = ({ open, setOpen, data }) => {
             </Modal>
         </div>
     )
+}
+
+QualificationModal.propTypes = {
+    data: PropTypes.array,
+    setOpen: PropTypes.func,
+    open: PropTypes.bool,
 }
 
 export default QualificationModal

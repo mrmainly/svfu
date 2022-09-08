@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { Button, Table } from 'antd'
+import PropTypes from 'prop-types'
 
 import { testResultStatus } from '../../../../translation/StatusTranslation'
 
 const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup }) => {
-    const directionData = data?.map((item, index) => {
+    const directionData = data?.map((item) => {
         return (item = item.direction.name)
     })
     const columns = [
@@ -90,6 +91,13 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
             scroll={{ x: true }}
         />
     )
+}
+
+ExaminationGroupsTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
+    setOpenEditModal: PropTypes.func,
+    setTestGroup: PropTypes.func,
 }
 
 export default ExaminationGroupsTable

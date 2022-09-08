@@ -1,5 +1,6 @@
 import { Table, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const CerificationResultsTable = ({ data, loading, routes }) => {
     const navigate = useNavigate()
@@ -37,6 +38,12 @@ const CerificationResultsTable = ({ data, loading, routes }) => {
             scroll={{ x: true }}
         />
     )
+}
+
+CerificationResultsTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
+    routes: PropTypes.any,
 }
 
 export default CerificationResultsTable

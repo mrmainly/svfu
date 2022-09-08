@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Card, Typography } from 'antd'
 
@@ -22,6 +23,11 @@ const ExpertReviewCard = ({ expert_name, recommendation }) => {
             </div>
         </Card>
     )
+}
+
+ExpertReviewCard.propTypes = {
+    expert_name: PropTypes.string,
+    recommendation: PropTypes.string,
 }
 
 export default ExpertReviewCard

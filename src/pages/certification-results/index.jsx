@@ -6,18 +6,7 @@ import { useGetTestResultsQuery } from '../../services/SurveysService'
 import ROUTES from '../../routes'
 
 const Test = () => {
-    const { data, isFetching, error } = useGetTestResultsQuery('')
-
-    // const data = [
-    //     {
-    //         qualification: 'Название_квалификации',
-    //         date: '20.08.2022, 14:00',
-    //         id: 1,
-    //         status: 'Не проверено',
-    //         time: '1 час 30 минут',
-    //         points: 25,
-    //     },
-    // ]
+    const { data, isFetching } = useGetTestResultsQuery('')
 
     return (
         <div>

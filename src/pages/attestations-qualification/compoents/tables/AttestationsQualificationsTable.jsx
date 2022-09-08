@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import AQEditModal from '../modals/aqeditmodal'
 import Table from 'antd/lib/table'
@@ -50,8 +51,8 @@ const AttestationsQualificationsTable = ({ data, loading, setId }) => {
             dataIndex: 'is_active',
             key: 'is_active',
             render: (is_active) => (is_active ? 'Активна' : 'Не активна'),
-            render: (is_active) =>
-                is_active === true ? 'Активна' : is_active === false ? 'Не активна' : '',
+            // render: (is_active) =>
+            //     is_active === true ? 'Активна' : is_active === false ? 'Не активна' : '',
         },
         {
             title: 'Действие',
@@ -85,6 +86,12 @@ const AttestationsQualificationsTable = ({ data, loading, setId }) => {
             <AQEditModal open={modalEditQuali} setOpen={setModalEditQuali} dataList={currentData} />
         </>
     )
+}
+
+AttestationsQualificationsTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
+    setId: PropTypes.func,
 }
 
 export default AttestationsQualificationsTable

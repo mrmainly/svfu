@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { PlusOutlined } from '@ant-design/icons'
-import { Space, message, Upload, Typography, Modal } from 'antd'
+import { message, Upload, Typography, Modal } from 'antd'
+import PropTypes from 'prop-types'
 
 import {
     useProfilePostPhotoMutation,
@@ -34,7 +35,7 @@ const PhotoUpload = ({ fileList, dataPhoto }) => {
 
     const handleImageChange = (e) => {
         const image = e.file
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('photo', image)
         profilePostImage(formData).then((res) => {
             if (res.error) {
@@ -79,6 +80,11 @@ const PhotoUpload = ({ fileList, dataPhoto }) => {
             </Modal>
         </div>
     )
+}
+
+PhotoUpload.propTypes = {
+    dataPhoto: PropTypes.any,
+    fileList: PropTypes.any,
 }
 
 export default PhotoUpload

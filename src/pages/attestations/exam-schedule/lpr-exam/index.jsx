@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Input, Space, Select, Button, Table, Pagination } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import React, { useState, useEffect } from 'react'
+import { Input, Select, Button, Table, Pagination } from 'antd'
 
 import moment from 'moment'
 

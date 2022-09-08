@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const ParamsListItem = ({ param }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
@@ -28,4 +30,9 @@ const ParamsListItem = ({ param }) => {
         </div>
     )
 }
+
+ParamsListItem.propTypes = {
+    param: PropTypes.any,
+}
+
 export default ParamsListItem

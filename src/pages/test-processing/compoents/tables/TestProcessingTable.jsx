@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { Button, Table, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
 import { usePutMainExpertMutation } from '../../../../services/ExpertService'
@@ -271,6 +272,11 @@ const TestProcessingTable = ({ data, loading }) => {
             />
         </>
     )
+}
+
+TestProcessingTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
 }
 
 export default TestProcessingTable

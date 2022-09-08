@@ -1,6 +1,7 @@
 import { Button, Modal, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import { usePostResultPartOneMutation } from '../../../../../services/SurveysService'
@@ -60,6 +61,13 @@ const TheoreticalAnswerModal = ({ open, setOpen, id, postData }) => {
             </Modal>
         </>
     )
+}
+
+TheoreticalAnswerModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    id: PropTypes.number,
+    postData: PropTypes.any,
 }
 
 export default TheoreticalAnswerModal

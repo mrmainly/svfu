@@ -1,4 +1,5 @@
 import { Modal, message, Input, Select, Form } from 'antd'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
@@ -76,6 +77,11 @@ const AQAddModal = ({ open, setOpen }) => {
             </Modal>
         </div>
     )
+}
+
+AQAddModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default AQAddModal

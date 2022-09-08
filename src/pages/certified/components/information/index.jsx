@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin } from 'antd'
+import PropTypes from 'prop-types'
 
 import MainInfo from './MainInfo'
 import { Line } from '../../../../components'
@@ -17,6 +17,10 @@ const Information = ({ data }) => {
             </>
         </div>
     )
+}
+
+Information.propTypes = {
+    data: PropTypes.object,
 }
 
 export default Information

@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import { Modal, Input, Typography, message, Form } from 'antd'
+import React from 'react'
+import { Modal, Input, message, Form } from 'antd'
+import PropTypes from 'prop-types'
 
 import { useAppealPostMutation } from '../../../../services/SurveysService'
 import { MyButton } from '../../../../components'
 
-const { Text } = Typography
-
 const AppealModal = ({ open, setOpen, ID }) => {
     const [appealPost] = useAppealPostMutation()
-    const [confirmModal, setConfirmModal] = useState(false)
+
     const onSubmit = (data) => {
         appealPost({ id: ID, body: data }).then((res) => {
             if (res.data) {
@@ -60,6 +59,12 @@ const AppealModal = ({ open, setOpen, ID }) => {
             </Modal>
         </div>
     )
+}
+
+AppealModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    ID: PropTypes.number,
 }
 
 export default AppealModal

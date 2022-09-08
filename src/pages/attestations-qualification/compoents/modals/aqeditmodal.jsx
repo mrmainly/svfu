@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Modal, message, Input, Select, Form, Switch, Typography, Space } from 'antd'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
@@ -15,6 +16,7 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
     const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
     const { data } = useGetAttestationsTagQuery()
+    const [active, setActive] = useState()
 
     const onSubmit = (data) => {
         patchAttestationsQualificationId({ id: dataList[0].id, body: data }).then((res) => {
@@ -33,8 +35,6 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
             })
         }
     }
-    const onSearch = (value) => console.log(value)
-    const [active, setActive] = useState()
 
     useEffect(() => {
         setActive(dataList[0]?.is_active)
@@ -98,6 +98,12 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+AQEditModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    dataList: PropTypes.array,
 }
 
 export default AQEditModal

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Typography } from 'antd'
 import { udEstimate } from '../../../../../translation/EstimateTransation'
@@ -68,6 +69,12 @@ const ModeratorReviewCard = ({ moderator_name, recommendation, estimate }) => {
             </div>
         </div>
     )
+}
+
+ModeratorReviewCard.propTypes = {
+    moderator_name: PropTypes.string,
+    recommendation: PropTypes.string,
+    estimate: PropTypes.any,
 }
 
 export default ModeratorReviewCard

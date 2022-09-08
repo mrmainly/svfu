@@ -10,15 +10,26 @@ export const surveys = api.injectEndpoints({
             query: () => `tester/direction/`,
         }),
         getTestResults: build.query({
-            query: ({ id }) => `tester/result/`,
+            query: () => `tester/result/`,
         }),
         getTestResultsID: build.query({
             query: ({ id }) => `tester/result/${id}`,
             providesTags: ['Appeal'],
         }),
+        // getSurveysId: build.query({
+        //     query: ({ id }) => `tester/survey/part-one/${id}`,
+        //     async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
+        //         try {
+        //             const { data } = await queryFulfilled
+        //             window.localStorage.setItem('survey-datas', JSON.stringify(data, null, '\t'))
+        //         } catch (err) {
+        //             console.log(err)
+        //         }
+        //     },
+        // }),
         getSurveysId: build.query({
             query: ({ id }) => `tester/survey/part-one/${id}`,
-            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
+            async onQueryStarted(undefiend, { queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled
                     window.localStorage.setItem('survey-datas', JSON.stringify(data, null, '\t'))

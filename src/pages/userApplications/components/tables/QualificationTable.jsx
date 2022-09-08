@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Button, Table } from 'antd'
+import PropTypes from 'prop-types'
 
 const QualificationTable = ({ data, setOpen, setQualificationData }) => {
     const columns = [
@@ -38,6 +39,12 @@ const QualificationTable = ({ data, setOpen, setQualificationData }) => {
     ]
 
     return <Table columns={columns} dataSource={data} rowKey="id" />
+}
+
+QualificationTable.propTypes = {
+    data: PropTypes.array,
+    setOpen: PropTypes.func,
+    setQualificationData: PropTypes.func,
 }
 
 export default QualificationTable

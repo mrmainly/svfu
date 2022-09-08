@@ -3,6 +3,7 @@ import { Input, Space, Button, Table } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
 import { userAppilicationStatus } from '../../../../translation/StatusTranslation'
@@ -171,6 +172,11 @@ const UserApplicationsTable = ({ data, loading }) => {
             scroll={{ x: true }}
         />
     )
+}
+
+UserApplicationsTable.propTypes = {
+    data: PropTypes.array,
+    loading: PropTypes.bool,
 }
 
 export default UserApplicationsTable

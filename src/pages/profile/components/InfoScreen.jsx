@@ -1,5 +1,6 @@
 import React from 'react'
-import { Typography, Space } from 'antd'
+import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 
 const { Text, Title } = Typography
 
@@ -58,6 +59,10 @@ const InfoScreen = ({ data }) => {
             ))}
         </div>
     )
+}
+
+InfoScreen.propTypes = {
+    data: PropTypes.object,
 }
 
 export default InfoScreen

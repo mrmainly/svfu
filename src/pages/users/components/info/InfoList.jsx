@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import InfoListItem from './InfoListItem'
 
 const InfoList = ({ params }) => {
@@ -8,6 +10,10 @@ const InfoList = ({ params }) => {
             ))}
         </>
     )
+}
+
+InfoList.propTypes = {
+    params: PropTypes.array,
 }
 
 export default InfoList

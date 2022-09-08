@@ -1,6 +1,8 @@
 import { Modal, message, Select, Form, Row, Col, Button, DatePicker } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import moment from 'moment'
+import PropTypes from 'prop-types'
+
 import {
     useGetAdminExamIDQuery,
     useGetRoleQuery,
@@ -11,7 +13,7 @@ const { Option } = Select
 
 const AdminExamModal = ({ open, setOpen, dataList }) => {
     const [patchExam] = usePatchExamMutation()
-    const { data: admData, isLoading } = useGetAdminExamIDQuery({ id: dataList?.id })
+    const { data: admData } = useGetAdminExamIDQuery({ id: dataList?.id })
     const { data: expertData } = useGetRoleQuery({ role: 'EXPERT' })
     const { data: moderatorData } = useGetRoleQuery({ role: 'MODERATOR' })
 
@@ -125,7 +127,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="experts">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -184,7 +186,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="moderators">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -243,6 +245,12 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+AdminExamModal.propTypes = {
+    dataList: PropTypes.object,
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
 }
 
 export default AdminExamModal

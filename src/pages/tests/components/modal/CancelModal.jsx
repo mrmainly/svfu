@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, message } from 'antd'
+import PropTypes from 'prop-types'
 
 import { useAppealPutMutation } from '../../../../services/SurveysService'
 import { MyButton } from '../../../../components'
@@ -50,6 +51,12 @@ const CancelModal = ({ open, setOpen, ID }) => {
             </Modal>
         </div>
     )
+}
+
+CancelModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    ID: PropTypes.number,
 }
 
 export default CancelModal

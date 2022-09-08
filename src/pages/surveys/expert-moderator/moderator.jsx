@@ -8,14 +8,8 @@ import moment from 'moment'
 
 import { Line } from '../../../components'
 import ModeratorReviewCard from './components/cards/moderator_review_card'
-import { udEstimate } from '../../../translation/EstimateTransation'
 import ROUTES from '../../../routes'
-import {
-    useGetSurveyModeratorIdQuery,
-    useGetModeratorUserIdQuery,
-} from '../../../services/ModeratorService'
-
-import { DynamicPathSlice } from '../../../reducers/DynamicPathSlice'
+import { useGetSurveyModeratorIdQuery } from '../../../services/ModeratorService'
 
 const { Title, Text } = Typography
 

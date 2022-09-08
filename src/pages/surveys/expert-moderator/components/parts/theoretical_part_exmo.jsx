@@ -1,6 +1,6 @@
-import { useLocation } from 'react-router-dom'
 import { Typography, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Line, MyButton } from '../../../../../components'
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
@@ -144,6 +144,10 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
             </div>
         </div>
     )
+}
+
+TheoreticalPartExMo.propTypes = {
+    surveyquest: PropTypes.array,
 }
 
 export default TheoreticalPartExMo

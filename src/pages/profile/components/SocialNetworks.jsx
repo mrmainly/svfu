@@ -1,5 +1,6 @@
 import React from 'react'
-import { Typography, Space } from 'antd'
+import { Typography } from 'antd'
+import PropTypes from 'prop-types'
 
 const { Text, Title } = Typography
 
@@ -32,6 +33,10 @@ const SocialNetworks = ({ data }) => {
             ))}
         </>
     )
+}
+
+SocialNetworks.propTypes = {
+    data: PropTypes.object,
 }
 
 export default SocialNetworks

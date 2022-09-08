@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Table from 'antd/lib/table'
-import { Button, Input, Space } from 'antd'
+import { Button, Input } from 'antd'
+import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
 import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
@@ -10,20 +10,19 @@ import { adminUserStatusTrans } from '../../../../translation/StatusTranslation'
 const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
     const navigate = useNavigate()
 
-    const [searchText, setSearchText] = useState('')
-    const [searchedColumn, setSearchedColumn] = useState('')
-    const searchInput = useRef()
+    // const [searchText, setSearchText] = useState('')
+    // const [searchedColumn, setSearchedColumn] = useState('')
 
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm()
-        setSearchText(selectedKeys[0])
-        setSearchedColumn(dataIndex)
-    }
+    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    //     confirm()
+    //     setSearchText(selectedKeys[0])
+    //     setSearchedColumn(dataIndex)
+    // }
 
-    const handleReset = (clearFilters) => {
-        clearFilters()
-        setSearchText('')
-    }
+    // const handleReset = (clearFilters) => {
+    //     clearFilters()
+    //     setSearchText('')
+    // }
     const onTableChange = (newPagination, filters, sorter) => {
         if (filters?.role?.length > 0) {
             {
@@ -112,7 +111,7 @@ const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id, record) => (
+            render: (id) => (
                 <Button
                     type="primary"
                     onClick={() => {
@@ -152,6 +151,14 @@ const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
             />
         </>
     )
+}
+
+UsersTable.propTypes = {
+    data: PropTypes.array,
+    isLoading: PropTypes.bool,
+    setRole: PropTypes.func,
+    setId: PropTypes.func,
+    setName: PropTypes.func,
 }
 
 export default UsersTable

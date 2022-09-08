@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Typography, Radio, Space, Checkbox, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Line, MyButton } from '../../../../../components'
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
@@ -173,6 +174,11 @@ const TheoreticalPart = ({ surveyquest, id }) => {
             </Form>
         </div>
     )
+}
+
+TheoreticalPart.propTypes = {
+    surveyquest: PropTypes.array,
+    id: PropTypes.number,
 }
 
 export default TheoreticalPart

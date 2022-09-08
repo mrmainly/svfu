@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { Modal, Button } from 'antd'
+import { Button } from 'antd'
 import Table from 'antd/lib/table'
+import PropTypes from 'prop-types'
 
 import DocumentsModal from '../modals/DocumentsModal'
 
@@ -15,7 +16,7 @@ const DocumentTable = ({ docs }) => {
             key: 'file',
             render: (file) =>
                 file ? (
-                    <a href={file} target="_blank">
+                    <a href={file} target="_blank" rel="noopener noreferrer">
                         {decodeURI(file).split('/')[5]}
                     </a>
                 ) : (
@@ -79,6 +80,10 @@ const DocumentTable = ({ docs }) => {
             <DocumentsModal open={open} setOpen={setOpen} data={data} />
         </div>
     )
+}
+
+DocumentTable.propTypes = {
+    docs: PropTypes.array,
 }
 
 export default DocumentTable

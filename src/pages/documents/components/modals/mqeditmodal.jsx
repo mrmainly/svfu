@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
-import { Modal, Form, Typography, Spin, Input, message, DatePicker, Upload, Button } from 'antd'
-import { FileTwoTone, EditOutlined, UploadOutlined } from '@ant-design/icons'
-import Item from 'antd/lib/list/Item'
+import { Modal, Form, Typography, Input, message, DatePicker, Upload, Button } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
 import {
@@ -16,9 +15,6 @@ const { Text } = Typography
 const { RangePicker } = DatePicker
 
 const MQEditModal = ({ open, setOpen, dataList }) => {
-    const params = useParams()
-
-    const [file, setFile] = useState('')
     const [date_start, setDate_start] = useState(new Date())
     const [date_finish, setDate_finish] = useState(new Date())
 
@@ -32,7 +28,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
 
     const onSubmit = (data) => {
         console.log(data)
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('name', data.name)
         formData.append('doc_id', data.doc_id)
         formData.append('date_start', moment(date_start).format('YYYY-MM-DD'))
@@ -208,6 +204,12 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
             </Modal>
         </div>
     )
+}
+
+MQEditModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    dataList: PropTypes.object,
 }
 
 export default MQEditModal

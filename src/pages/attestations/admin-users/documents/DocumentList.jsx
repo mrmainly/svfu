@@ -15,7 +15,7 @@ const DocumentList = ({ docs }) => {
             key: 'file',
             render: (file) =>
                 file ? (
-                    <a href={file} target="_blank">
+                    <a href={file} target="_blank" rel="noopener noreferrer">
                         {decodeURI(file).split('/')[5]}
                     </a>
                 ) : (

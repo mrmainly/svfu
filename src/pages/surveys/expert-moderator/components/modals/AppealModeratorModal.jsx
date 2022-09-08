@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Modal, message, Typography, Divider } from 'antd'
+import { Button, Modal, message, Typography } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import {
@@ -17,14 +18,11 @@ import ROUTES from '../../../../../routes'
 const { Title, Text } = Typography
 
 const AppealModeratorModal = ({ id, surveyquest, appeal_text }) => {
-    const [subscribe, setSubscribe] = useState(false)
-
     const [AppealReject] = usePutAppealRejectIdMutation()
     const [AppealAccept] = usePutAppealAcceptIdMutation()
 
     const { expertTheoreticalPartModalOpen } = useSelector((state) => state.survey_slice)
-    const { openExpertTheoreticalPartOpen, openSubscribeModal, setTextAnswerExpert } =
-        SurveysSlice.actions
+    const { openExpertTheoreticalPartOpen } = SurveysSlice.actions
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -82,10 +80,10 @@ const AppealModeratorModal = ({ id, surveyquest, appeal_text }) => {
                 onOk={handleClose}
                 onCancel={() => dispatch(openExpertTheoreticalPartOpen(false))}
                 footer={[
-                    <Button size="medium" type="primary" onClick={onFinishSubmit}>
+                    <Button key="appeal" size="medium" type="primary" onClick={onFinishSubmit}>
                         Принять апелляцию
                     </Button>,
-                    <Button size="medium" danger onClick={handleClose}>
+                    <Button key="back" size="medium" danger onClick={handleClose}>
                         Отклонить
                     </Button>,
                 ]}
@@ -263,6 +261,12 @@ const AppealModeratorModal = ({ id, surveyquest, appeal_text }) => {
             </Modal>
         </>
     )
+}
+
+AppealModeratorModal.propTypes = {
+    surveyquest: PropTypes.array,
+    id: PropTypes.number,
+    appeal_text: PropTypes.string,
 }
 
 export default AppealModeratorModal

@@ -8,7 +8,7 @@ export const profile = api.injectEndpoints({
                     url: `users/me/`,
                 }
             },
-            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
+            async onQueryStarted(undefiend, { queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled
                     window.localStorage.setItem('profile', JSON.stringify(data, null, '\t'))

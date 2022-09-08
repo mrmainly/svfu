@@ -1,6 +1,5 @@
 import React from 'react'
-import { Form, Input, message, Typography, Button, Upload } from 'antd'
-import { UploadOutlined } from '@ant-design/icons'
+import { Form, Input, message, Typography } from 'antd'
 
 import { MyButton, Line } from '../../components'
 import { usePostQualificationMutation } from '../../services/QualificationsService'
@@ -41,7 +40,7 @@ const QualificationAdded = () => {
         },
     ]
     const onSubmit = (data) => {
-        let formData = new FormData()
+        const formData = new FormData()
         formData.append('name', data.name)
         formData.append('date_of_issue', data.date_of_issue)
         formData.append('date_start', data.date_start)

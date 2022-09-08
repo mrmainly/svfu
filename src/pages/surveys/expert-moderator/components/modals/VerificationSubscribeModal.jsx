@@ -1,16 +1,14 @@
 import { Button, Modal, Form, Input, message } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import {
     useSendCodeMutation,
     useSendAnswerExpertMutation,
 } from '../../../../../services/ExpertService'
-import { useSendAnswerModeratorMutation } from '../../../../../services/ModeratorService'
 import ROUTES from '../../../../../routes'
-
-const { TextArea } = Input
 
 const VerificationSubscribeModal = ({ id, main_expert }) => {
     const {
@@ -100,6 +98,11 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
             </Modal>
         </>
     )
+}
+
+VerificationSubscribeModal.propTypes = {
+    id: PropTypes.number,
+    main_expert: PropTypes.any,
 }
 
 export default VerificationSubscribeModal

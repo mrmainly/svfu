@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Typography, Input, Form, Spin, Upload, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import {
     useGetPracticalPartIdQuery,
@@ -35,7 +36,7 @@ const PracticalPart = ({ id }) => {
     }
 
     const onSubmitFurther = (data) => {
-        let formData = new FormData()
+        const formData = new FormData()
         if (data.file) {
             formData.append('file', data.file.file.originFileObj)
         }
@@ -101,6 +102,7 @@ const PracticalPart = ({ id }) => {
                                             target="_blank"
                                             key={index}
                                             style={{ marginLeft: index === 0 ? 0 : 10 }}
+                                            rel="noopener noreferrer"
                                         >
                                             {decodeURI(itemFile.file).split('/')[5]}
                                         </a>
@@ -141,6 +143,10 @@ const PracticalPart = ({ id }) => {
             </Form>
         </div>
     )
+}
+
+PracticalPart.propTypes = {
+    id: PropTypes.number,
 }
 
 export default PracticalPart

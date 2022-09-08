@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Modal, message, Select, Form, Button, Spin } from 'antd'
+import { Modal, message, Select, Form, Button } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
     usePatchTesterGroupMutation,
-    // useGetTestGroupIdQuery,
     useDeleteTesterGroupMutation,
     useGetApplicationUserQuery,
 } from '../../../../services/TutorService'
@@ -17,13 +17,6 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
     const [deleteTestGroup] = useDeleteTesterGroupMutation()
     const [testerId, setTesterId] = useState(0)
     const [testGroupId, setTestGroupId] = useState(0)
-    // const {
-    //     data: getTestGroupId,
-    //     isFetching,
-    //     isLoading,
-    // } = useGetTestGroupIdQuery(id, {
-    //     skip: id,
-    // })
     const { data: tester } = useGetApplicationUserQuery({ id: testerId }, { skip: !testerId })
     useEffect(() => {
         setTesterId(testGroup?.direction.id)
@@ -69,7 +62,7 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                             borderColor: '#DC3545',
                         }}
                         onClick={() =>
-                            deleteTestGroup(testGroup?.id).then((res) => {
+                            deleteTestGroup(testGroup?.id).then(() => {
                                 setOpen(false)
                                 message.success('Группа удалена')
                             })
@@ -110,7 +103,7 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                     <Form.List name="testers">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name, ...restField }) => (
+                                {fields.map(({ key, name }) => (
                                     <div
                                         key={key}
                                         style={{
@@ -161,6 +154,13 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
             </Modal>
         </div>
     )
+}
+
+EgEditModal.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    direction: PropTypes.array,
+    testGroup: PropTypes.object,
 }
 
 export default EgEditModal
