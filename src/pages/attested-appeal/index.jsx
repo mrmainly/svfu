@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AppealTable from './components/table'
 import { Pagination } from 'antd'
 
-import { useGetAppealQuery } from '../../../services/PaginationService'
+import { useGetAppealQuery } from '../../services/PaginationService'
 
 const AttestedAppeal = () => {
     const [currentPage, setCurrentPage] = useState(1)

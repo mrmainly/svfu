@@ -1,35 +1,178 @@
-import { useParams } from 'react-router-dom'
+import { MyButton } from '../../../../components'
+
+import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
 import PropTypes from 'prop-types'
 
-import { Modal, message, Select, Form, Typography, Input, DatePicker } from 'antd'
+import { usePostUserMutation } from '../../../../services/AdminService'
+import { roles } from './UserChangeModalData'
 import moment from 'moment'
 
-import { inputs, bioInput, roles } from './UserChangeModalData'
-import { MyButton } from '../../../../../components'
-
-import { usePatchUserMutation } from '../../../../../services/AdminService'
-
+const { Text } = Typography
 const { Option } = Select
 const { TextArea } = Input
-const { Text } = Typography
 
-const UserChangeModal = ({ open, setOpen, data }) => {
-    const params = useParams()
-    const [patchUser] = usePatchUserMutation()
+const UserAddModal = ({ open, setOpen }) => {
+    const [postUser] = usePostUserMutation()
+
+    const inputs = [
+        {
+            label: 'Логин',
+            name: 'username',
+            required: true,
+            requiredText: 'Введите логин',
+        },
+        {
+            label: 'Пароль',
+            name: 'password',
+            required: true,
+            requiredText: 'Введите пароль',
+        },
+        {
+            label: 'Телефон',
+            name: 'phone',
+            required: true,
+            requiredText: 'Введите ваш телефон',
+        },
+        {
+            label: 'Электронная почта',
+            name: 'email',
+            required: true,
+            requiredText: 'Введите электронную почту',
+        },
+        {
+            label: 'Фамилия',
+            name: 'last_name',
+            required: false,
+            requiredText: 'Введите фамилию',
+        },
+        {
+            label: 'Имя',
+            name: 'first_name',
+            required: false,
+            requiredText: 'Введите имя',
+        },
+        {
+            label: 'Отчество',
+            name: 'patronymic',
+            required: false,
+            requiredText: 'Введите отчество',
+        },
+        {
+            label: 'Дата рождения',
+            name: 'birth_date',
+            required: false,
+            type: 'date',
+            requiredText: 'Введите дату рождения',
+            format: 'DD.MM.YYYY',
+        },
+        {
+            label: 'ИНН',
+            name: 'inn',
+            required: false,
+            requiredText: 'Введите ваш ИНН',
+            pattern:
+                /^(([0-9]{10}([0-9]{2})?)|([0-9]{4}-[0-9]{5}-[0-9]{1})|([0-9]{4}-[0-9]{6}-[0-9]{2}))$/,
+            pattern_message: 'Проверьте правильность ИНН',
+        },
+        {
+            label: 'СНИЛС',
+            name: 'snils',
+            required: false,
+            requiredText: 'Введите ваш СНИЛС',
+            pattern: /^(([0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{2})|([0-9]{11}))$/,
+            pattern_message: 'Проверьте правильность СНИЛСа',
+        },
+        {
+            label: 'VK',
+            name: 'vk',
+            required: false,
+            requiredText: 'Введите профиль VK',
+        },
+        {
+            label: 'Одноклассники',
+            name: 'ok',
+            required: false,
+            requiredText: 'Введите профиль Одноклассники',
+        },
+        {
+            label: 'Youtube',
+            name: 'youtube',
+            required: false,
+            requiredText: 'Введите профиль YouTube',
+        },
+    ]
+
+    const bioInput = [
+        {
+            label: 'Моя биография',
+            name: 'my_biography',
+            required: false,
+            placeholder: 'Напишите биографию',
+        },
+        {
+            label: 'Мои обязанности',
+            name: 'my_responsibilities',
+            required: false,
+            placeholder: 'Напишите о своих обязанностях',
+        },
+        {
+            label: 'Достижения и поощрения',
+            name: 'rewards',
+            required: false,
+            placeholder: 'Напишите о своих достижениях и поощрениях',
+        },
+        {
+            label: 'Научные интересы',
+            name: 'scientific_interests',
+            required: false,
+            placeholder: 'Напишите о научных интересах',
+        },
+        {
+            label: 'Научные гранты',
+            name: 'scientific_grants',
+            required: false,
+            placeholder: 'Напишите о научных грантах',
+        },
+        {
+            label: 'Проведение конференций',
+            name: 'holding_conferences',
+            required: false,
+            placeholder: 'Напишите о проведении конференций',
+        },
+        {
+            label: 'Участие в конференциях, симпозиумах',
+            name: 'participation_conferences',
+            required: false,
+            placeholder: 'Напишите о своих участиях в конференциях, симпозиумах',
+        },
+        {
+            label: 'Почетные звания',
+            name: 'honoured_title',
+            required: false,
+            placeholder: 'Напишите о своих почетных званиях',
+        },
+        {
+            label: 'Научно-общественная деятельность',
+            name: 'ssa',
+            required: false,
+            placeholder: 'Напишите о научно-общественной деятельности',
+        },
+    ]
+
     const onSubmit = (data) => {
         if (data.birth_date) {
             data.birth_date = moment(data.birth_date._d).format('YYYY-MM-DD')
         }
-        patchUser({ id: params.id, body: data }).then((res) => {
+
+        postUser({ body: data }).then((res) => {
             if (res.data) {
-                message.success('Пользователь изменен')
+                message.success('Пользователь создан')
                 setOpen(false)
             } else {
                 message.error(res.error.data.errors[0])
             }
         })
     }
-
     return (
         <div>
             <Modal
@@ -44,7 +187,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                     setOpen(false)
                 }}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="userchange-form">
+                    <MyButton key="submit" htmlType="submit" form="useradd-form">
                         Сохранить
                     </MyButton>,
                     <MyButton
@@ -59,30 +202,11 @@ const UserChangeModal = ({ open, setOpen, data }) => {
             >
                 <Form
                     initialValues={{
-                        ['last_name']: data?.last_name,
-                        ['first_name']: data?.first_name,
-                        ['patronymic']: data?.patronymic,
-                        ['phone']: data?.phone,
-                        ['email']: data?.email,
-                        ['birth_date']: moment(data?.birth_date),
-                        ['inn']: data?.inn,
-                        ['snils']: data?.snils,
-                        ['vk']: data?.vk,
-                        ['ok']: data?.ok,
-                        ['my_biography']: data?.my_biography,
-                        ['my_responsibilities']: data?.my_responsibilities,
-                        ['rewards']: data?.rewards,
-                        ['scientific_interests']: data?.scientific_interests,
-                        ['scientific_grants']: data?.scientific_grants,
-                        ['holding_conferences']: data?.holding_conferences,
-                        ['participation_conferences']: data?.participation_conferences,
-                        ['honoured_title']: data?.honoured_title,
-                        ['ssa']: data?.ssa,
-                        ['role']: data?.role ? data?.role : '',
+                        ['role']: '',
                     }}
                     layout="vertical"
                     onFinish={onSubmit}
-                    id="userchange-form"
+                    id="useradd-form"
                 >
                     {inputs.map((item, index) => (
                         <Form.Item
@@ -105,8 +229,17 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                                               pattern: item.pattern,
                                               message: item.pattern_message,
                                           },
+                                          {
+                                              required: item.required,
+                                              message: item.requiredText ? item.requiredText : '',
+                                          },
                                       ]
-                                    : []
+                                    : [
+                                          {
+                                              required: item.required,
+                                              message: item.requiredText ? item.requiredText : '',
+                                          },
+                                      ]
                             }
                             labelCol={{ span: 24 }}
                         >
@@ -139,6 +272,12 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                                 </Text>
                             }
                             name={item.name}
+                            rules={[
+                                {
+                                    required: item.required,
+                                    message: item.requiredText,
+                                },
+                            ]}
                             labelCol={{ span: 24 }}
                         >
                             <TextArea
@@ -214,6 +353,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                         name={'role'}
                         rules={[
                             {
+                                required: true,
                                 message: 'Выберите роль',
                             },
                         ]}
@@ -236,10 +376,9 @@ const UserChangeModal = ({ open, setOpen, data }) => {
     )
 }
 
-UserChangeModal.propTypes = {
+UserAddModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
-    data: PropTypes.object,
 }
 
-export default UserChangeModal
+export default UserAddModal

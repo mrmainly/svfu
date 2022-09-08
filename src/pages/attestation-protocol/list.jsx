@@ -4,7 +4,7 @@ import Table from 'antd/lib/table'
 
 import moment from 'moment'
 
-import { useGetAttestationProtocolQuery } from '../../../services/AttestationProtocolService'
+import { useGetAttestationProtocolQuery } from '../../services/AttestationProtocolService'
 import { useEffect } from 'react'
 
 const AttestationProtocol = () => {

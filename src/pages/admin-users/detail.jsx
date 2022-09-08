@@ -8,11 +8,11 @@ import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import UserChangeModal from './components/modals/UserChangeModal'
-import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
-import { roles } from '../../../translation/RolesTranslation'
+import { useGetUserIdQuery, usePutUserMutation } from '../../services/AdminService'
+import { roles } from '../../translation/RolesTranslation'
 
 import moment from 'moment'
-import { Line } from '../../../components'
+import { Line } from '../../components'
 
 const AdminUsersDetail = () => {
     const params = useParams()

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination } from 'antd'
 
-import ExamScheduleTable from '../components/tables/ExamScheduleTable'
-import ESAddModal from '../components/modals/ESAddModal'
-import ESEditModal from '../components/modals/ESEditModal'
-import { useGetTestExamQuery } from '../../../services/TutorService'
-import { MyButton } from '../../../components'
-import ViewSurveyModal from '../components/modals/ViewSurveyModal'
+import ExamScheduleTable from './components/tables/ExamSchuduleTable'
+import ESAddModal from './components/modals/ESAddModal'
+import ESEditModal from './components/modals/ESEditModal'
+import { useGetTestExamQuery } from '../../services/TutorService'
+import { MyButton } from '../../components'
+import ViewSurveyModal from './components/modals/ViewSurveyModal'
 
 const ExamSchedule = () => {
     const [currentPage, setCurrentPage] = useState(1)

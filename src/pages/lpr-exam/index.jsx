@@ -3,7 +3,7 @@ import { Input, Select, Button, Table, Pagination } from 'antd'
 
 import moment from 'moment'
 
-import { useGetLprExamListQuery } from '../../../../services/AttestationProtocolService'
+import { useGetLprExamListQuery } from '../../services/AttestationProtocolService'
 import LprExamModal from './modal'
 
 const LprExam = () => {

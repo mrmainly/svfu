@@ -3,7 +3,7 @@ import { Button, Table, Pagination } from 'antd'
 
 import moment from 'moment'
 
-import { useGetAdminExamQuery } from '../../../../services/AdminService'
+import { useGetAdminExamQuery } from '../../services/AdminService'
 import AdminExamModal from './modal'
 
 const AdminExam = () => {

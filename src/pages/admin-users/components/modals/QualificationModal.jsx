@@ -1,24 +1,34 @@
 import { Modal } from 'antd'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../../components'
+import { MyButton } from '../../../../components'
 
-const DocumentsModal = ({ open, setOpen, data }) => {
+const QualificationModal = ({ open, setOpen, data }) => {
     const dataList = [
         {
-            name: 'Тип документа:',
-            label:
-                data?.document_type === 'DIPLOMA'
-                    ? 'Диплом'
-                    : data?.document_type === 'TITLESDEGREES'
-                    ? 'Образование, ученая степень'
-                    : data?.document_type === 'PASSPORT'
-                    ? 'Паспорт'
-                    : '-',
+            name: 'Выданный документ:',
+            label: data?.name ? data?.name : '-',
         },
         {
-            name: 'Описание:',
-            label: data?.name ? data?.name : '-',
+            name: 'Номер документа:',
+            label: data?.id ? data?.id : '-',
+        },
+        {
+            name: 'Название курса:',
+            label: data?.direction ? data?.direction : '-',
+        },
+        {
+            name: 'Дата выдачи документа:',
+            label: data?.date_of_issue ? moment(data?.date_of_issue).format('hh.mm.yyyy') : '-',
+        },
+        {
+            name: 'Начало срока:',
+            label: data?.date_start ? moment(data?.date_start).format('hh.mm.yyyy') : '-',
+        },
+        {
+            name: 'Окончание срока:',
+            label: data?.date_finish ? moment(data?.date_finish).format('hh.mm.yyyy') : '-',
         },
         {
             name: 'Документ:',
@@ -34,7 +44,7 @@ const DocumentsModal = ({ open, setOpen, data }) => {
     return (
         <div>
             <Modal
-                title="Документ"
+                title="Название квалификации"
                 visible={open}
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
@@ -86,10 +96,10 @@ const DocumentsModal = ({ open, setOpen, data }) => {
     )
 }
 
-DocumentsModal.propTypes = {
+QualificationModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
     data: PropTypes.object,
 }
 
-export default DocumentsModal
+export default QualificationModal

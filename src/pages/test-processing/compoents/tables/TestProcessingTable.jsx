@@ -10,75 +10,6 @@ import { tableProcessingStatusResult } from '../../../../translation/StatusTrans
 const TestProcessingTable = ({ data, loading }) => {
     const [putMainExpert] = usePutMainExpertMutation()
 
-    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    //     confirm()
-    //     setSearchText(selectedKeys[0])
-    //     setSearchedColumn(dataIndex)
-    // }
-
-    // const handleReset = (clearFilters) => {
-    //     clearFilters()
-    //     setSearchText('')
-    // }
-
-    // const getColumnSearchProps = (dataIndex) => ({
-    //     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-    //         <div
-    //             style={{
-    //                 padding: 8,
-    //             }}
-    //         >
-    //             <Input
-    //                 ref={searchInput}
-    //                 placeholder={`Поиск...`}
-    //                 value={selectedKeys[0]}
-    //                 onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-    //                 onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-    //                 style={{
-    //                     marginBottom: 8,
-    //                     display: 'block',
-    //                 }}
-    //             />
-    //             <Space>
-    //                 <Button
-    //                     type="primary"
-    //                     onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-    //                     icon={<SearchOutlined />}
-    //                     size="small"
-    //                     style={{
-    //                         width: 90,
-    //                     }}
-    //                 >
-    //                     Поиск
-    //                 </Button>
-    //                 <Button
-    //                     onClick={() => clearFilters && handleReset(clearFilters)}
-    //                     size="small"
-    //                     style={{
-    //                         width: 90,
-    //                     }}
-    //                 >
-    //                     Очистить
-    //                 </Button>
-    //             </Space>
-    //         </div>
-    //     ),
-    //     filterIcon: (filtered) => (
-    //         <SearchOutlined
-    //             style={{
-    //                 color: filtered ? '#1890ff' : undefined,
-    //             }}
-    //         />
-    //     ),
-    //     onFilter: (value, record) =>
-    //         record[dataIndex]?.toString().toLowerCase().includes(value.toLowerCase()),
-    //     onFilterDropdownVisibleChange: (visible) => {
-    //         if (visible) {
-    //             setTimeout(() => searchInput.current?.select(), 100)
-    //         }
-    //     },
-    // })
-
     const navigate = useNavigate()
 
     const columns = [
@@ -93,13 +24,11 @@ const TestProcessingTable = ({ data, loading }) => {
             title: 'Название тестирования',
             dataIndex: 'direction',
             key: 'direction',
-            // ...getColumnSearchProps('direction'),
         },
         {
             title: 'ID аттестуемого',
             dataIndex: 'user',
             key: 'user',
-            // ...getColumnSearchProps('user'),
         },
         {
             title: 'Роль',
@@ -118,71 +47,18 @@ const TestProcessingTable = ({ data, loading }) => {
                     value: false,
                 },
             ],
-            // onFilter: (value, record) => record.main_expert === value,
         },
         {
             title: 'Дата выдачи теста',
             dataIndex: 'exam_date_start',
             key: 'exam_date_start',
             render: (exam_date_start) => moment(exam_date_start).format('DD.MM.YYYY, hh:mm'),
-            // sorter: (a, b) => moment(a.exam_date_start) - moment(b.exam_date_start),
         },
         {
             title: 'Статус',
             dataIndex: 'status_result',
             key: 'status_result',
             render: (status_result) => tableProcessingStatusResult(status_result),
-            // filters: [
-            //     {
-            //         text: 'Ожидает проверки',
-            //         value: 'WAITING',
-            //     },
-            //     {
-            //         text: 'Отклонено',
-            //         value: 'REJECTED',
-            //     },
-            //     {
-            //         text: 'Отменено',
-            //         value: 'CANCELLED',
-            //     },
-            //     {
-            //         text: 'Проверяется экспертами',
-            //         value: 'CHECKED_BY_EXPERTS',
-            //     },
-            //     {
-            //         text: 'Проверено экспертами',
-            //         value: 'FINISHED_BY_EXPERTS',
-            //     },
-            //     {
-            //         text: 'Проверено экспертами',
-            //         value: 'CHECKED_BY_MAIN_EXPERT',
-            //     },
-            //     {
-            //         text: 'Эксперт (пред.) проверяет',
-            //         value: 'FINISHED_BY_MAIN_EXPERT',
-            //     },
-            //     {
-            //         text: 'Проверяется модераторами',
-            //         value: 'CHECKED_BY_MODERATORS',
-            //     },
-            //     {
-            //         text: 'Проверено модераторами',
-            //         value: 'FINISHED_BY_MODERATORS',
-            //     },
-            //     {
-            //         text: 'Модератор (пред.) проверяет',
-            //         value: 'CHECKED_BY_MAIN_MODERATOR',
-            //     },
-            //     {
-            //         text: 'Проверено модератором (пред.)',
-            //         value: 'FINISHED_BY_MAIN_MODERATOR',
-            //     },
-            //     {
-            //         text: 'Проверено',
-            //         value: 'FINISHED',
-            //     },
-            // ],
-            // onFilter: (value, record) => record.status_result.indexOf(value) === 0,
         },
         {
             title: 'Действие',

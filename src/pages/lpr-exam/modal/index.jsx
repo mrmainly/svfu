@@ -2,49 +2,56 @@ import { Modal } from 'antd'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../../components'
+import { MyButton } from '../../../components'
 
-const QualificationModal = ({ open, setOpen, data }) => {
+const LprExamModal = ({ open, setOpen, data }) => {
     const dataList = [
         {
-            name: 'Выданный документ:',
-            label: data?.name ? data?.name : '-',
-        },
-        {
-            name: 'Номер документа:',
+            name: '№',
             label: data?.id ? data?.id : '-',
         },
         {
-            name: 'Название курса:',
+            name: 'Статус:',
+            label:
+                data?.exam_status === 'WAITING'
+                    ? 'Ожидает'
+                    : data?.exam_status === 'IN_PROGRESS'
+                    ? 'Идет тест'
+                    : data?.exam_status === 'COMPLETED'
+                    ? 'Завершен'
+                    : data?.exam_status === 'CANCELLED'
+                    ? 'Отменен'
+                    : '-',
+        },
+        {
+            name: 'Квалификация:',
             label: data?.direction ? data?.direction : '-',
         },
         {
-            name: 'Дата выдачи документа:',
-            label: data?.date_of_issue ? moment(data?.date_of_issue).format('hh.mm.yyyy') : '-',
+            name: 'Тестирование:',
+            label: data?.name ? data?.name : '-',
         },
         {
-            name: 'Начало срока:',
-            label: data?.date_start ? moment(data?.date_start).format('hh.mm.yyyy') : '-',
+            name: 'Группа аттестуемых:',
+            label: data?.test_group_id ? data?.test_group_id : '-',
         },
         {
-            name: 'Окончание срока:',
-            label: data?.date_finish ? moment(data?.date_finish).format('hh.mm.yyyy') : '-',
+            name: 'Количество аттестуемых:',
+            label: data?.testers_count_from_group ? data?.testers_count_from_group : '-',
         },
         {
-            name: 'Документ:',
-            label: data?.file ? (
-                <a href={data?.file} target="_blank" rel="noopener noreferrer">
-                    {decodeURI(data?.file).split('/')[5]}
-                </a>
-            ) : (
-                '-'
-            ),
+            name: 'Дата начала',
+            label: data?.date_start ? moment(data?.date_start).format('DD.MM.YYYY, hh:mm') : '-',
+        },
+        {
+            name: 'Дата окончания',
+            label: data?.date_finish ? moment(data?.date_finish).format('DD.MM.YYYY, hh:mm') : '-',
         },
     ]
     return (
         <div>
             <Modal
-                title="Название квалификации"
+                title="Экзамен"
                 visible={open}
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
@@ -96,10 +103,10 @@ const QualificationModal = ({ open, setOpen, data }) => {
     )
 }
 
-QualificationModal.propTypes = {
+LprExamModal.propTypes = {
+    data: PropTypes.object,
     open: PropTypes.bool,
     setOpen: PropTypes.func,
-    data: PropTypes.object,
 }
 
-export default QualificationModal
+export default LprExamModal

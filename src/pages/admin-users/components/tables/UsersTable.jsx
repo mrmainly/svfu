@@ -5,11 +5,11 @@ import { useDispatch } from 'react-redux'
 import Table from 'antd/lib/table'
 import { Button, Pagination } from 'antd'
 
-import { useGetAdminUserQuery } from '../../../../../services/PaginationService'
+import { useGetAdminUserQuery } from '../../../../services/PaginationService'
 import UserAddModal from '../modals/UserAddModal'
-import { MyButton } from '../../../../../components'
-import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'
-import ROUTES from '../../../../../routes'
+import { MyButton } from '../../../../components'
+import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
+import ROUTES from '../../../../routes'
 
 const UsersTable = () => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
