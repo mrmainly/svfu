@@ -20,8 +20,9 @@ import { MyButton } from '../../../../components'
 import {
     usePatchAttestationsTestsBankIdMutation,
     usePutAttestationsTestsBankIdMutation,
-    useGetAttestationsQualificationQuery,
 } from '../../../../services/AttestationService'
+import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
+
 const { Option } = Select
 
 const TBEditModal = ({ open, setOpen, dataList }) => {
@@ -33,7 +34,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
     const [active, setActive] = useState()
-    const { data: dataDirection } = useGetAttestationsQualificationQuery(true)
+    const { data: dataDirection } = useGetToolsDirectionQuery()
     const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
     const [putAttestationsTestsBankId] = usePutAttestationsTestsBankIdMutation()
     useEffect(() => {
@@ -69,7 +70,6 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
             }
         })
     }
-
     const hours = Math.floor(dataList[0]?.test_time / 60) + ':' + (dataList[0]?.test_time % 60)
     const hhminuts = moment(hours, 'HH:mm')
 
@@ -121,17 +121,13 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             style={{
                                 width: '100%',
                             }}
-                            //  defaultValue={dataList[0]?.direction.tag_direction.id}
-                            // onChange={(value) => setValue(value)}
                         >
-                            {!dataList[0]?.direction?.is_active ? (
-                                <Option disabled value={dataList[0]?.direction?.id}>
+                            {!dataList[0]?.direction?.is_active && (
+                                <Option disabled value={dataList[0]?.direction?.id} key="qwe">
                                     {dataList[0]?.direction?.name}
                                 </Option>
-                            ) : (
-                                <></>
                             )}
-                            {dataDirection?.results.map((item, index) => (
+                            {dataDirection?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>

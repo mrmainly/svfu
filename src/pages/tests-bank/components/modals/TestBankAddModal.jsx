@@ -15,11 +15,9 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
-import {
-    usePostAttestationsTestsBankMutation,
-    useGetAttestationsQualificationQuery,
-} from '../../../../services/AttestationService'
+import { usePostAttestationsTestsBankMutation } from '../../../../services/AttestationService'
 
+import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 const { Option } = Select
 
 const TBAddModal = ({ open, setOpen }) => {
@@ -31,7 +29,7 @@ const TBAddModal = ({ open, setOpen }) => {
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
     const [postAttestationsTestsBankMutation] = usePostAttestationsTestsBankMutation()
-    const { data } = useGetAttestationsQualificationQuery(true)
+    const { data } = useGetToolsDirectionQuery()
 
     const onSubmit = (data) => {
         const hhminuts =
@@ -39,7 +37,6 @@ const TBAddModal = ({ open, setOpen }) => {
             parseInt(moment(data.test_time).format('mm'))
 
         data.test_time = hhminuts
-        // .toString()
         postAttestationsTestsBankMutation(data).then((res) => {
             if (res.data) {
                 message.success('Тестирование создано')
@@ -115,7 +112,7 @@ const TBAddModal = ({ open, setOpen }) => {
                                 width: '100%',
                             }}
                         >
-                            {data?.results.map((item, index) => (
+                            {data?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>

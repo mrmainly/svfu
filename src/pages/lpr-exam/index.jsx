@@ -5,6 +5,7 @@ import moment from 'moment'
 
 import { useGetLprExamListQuery } from '../../services/AttestationProtocolService'
 import LprExamModal from './modal'
+import './lpr-exam.css'
 
 const LprExam = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -38,19 +39,19 @@ const LprExam = () => {
             value: '-id',
         },
         {
-            text: 'начало (возрастание)',
+            text: 'Начало (возрастание)',
             value: 'date_start',
         },
         {
-            text: 'начало (убывание)',
+            text: 'Начало (убывание)',
             value: '-date_start',
         },
         {
-            text: 'конец (возрастание)',
+            text: 'Конец (возрастание)',
             value: 'date_finish',
         },
         {
-            text: 'конец (убывание)',
+            text: 'Конец (убывание)',
             value: '-date_finish',
         },
     ]
@@ -148,14 +149,7 @@ const LprExam = () => {
 
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    marginBottom: 16,
-                    justifyContent: 'space-between',
-                    gap: 16,
-                }}
-            >
+            <div className="inputs-container">
                 <Input.Search
                     placeholder="Тестирование"
                     enterButton
@@ -163,15 +157,11 @@ const LprExam = () => {
                         const currValue = value
                         setUnit(currValue)
                     }}
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                 />
                 <Select
                     placeholder="Сортировка"
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                     onChange={(value) => setOrder(value)}
                 >
                     {orderSelect.map((item, index) => (
@@ -182,9 +172,7 @@ const LprExam = () => {
                 </Select>
                 <Select
                     placeholder="Статус"
-                    style={{
-                        width: '33%',
-                    }}
+                    className="input-search"
                     onChange={(value) => setStatus(value)}
                 >
                     {statusSelect.map((item, index) => (
@@ -194,7 +182,6 @@ const LprExam = () => {
                     ))}
                 </Select>
             </div>
-
             <Table
                 dataSource={data?.results}
                 loading={isFetching}

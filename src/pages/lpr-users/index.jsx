@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import UsersTable from '../users/components/tables/UsersTable'
-import { Pagination } from 'antd'
+import { Pagination, Input } from 'antd'
 
 import { useGetAttestationUsersQuery } from '../../services/AttestationProtocolService'
+import './lpr-users.css'
 
 const LprUsers = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -26,6 +27,18 @@ const LprUsers = () => {
     }, [data])
     return (
         <div>
+            <div className="inputs-container">
+                <Input.Search
+                    placeholder="ФИО"
+                    enterButton
+                    onSearch={(value) => {
+                        const currValue = value
+                        setName(currValue)
+                    }}
+                    className="input-search"
+                />
+            </div>
+
             <UsersTable
                 data={data}
                 isLoading={isLoading}

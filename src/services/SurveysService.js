@@ -2,10 +2,6 @@ import { api } from './api'
 
 export const surveys = api.injectEndpoints({
     endpoints: (build) => ({
-        getAvailableTest: build.query({
-            query: ({ currentPage }) => `tester/survey/?page=${currentPage}`,
-            providesTags: ['SURVEYS_TESTER'],
-        }),
         getDirection: build.query({
             query: () => `tester/direction/`,
         }),
@@ -16,17 +12,7 @@ export const surveys = api.injectEndpoints({
             query: ({ id }) => `tester/result/${id}`,
             providesTags: ['Appeal'],
         }),
-        // getSurveysId: build.query({
-        //     query: ({ id }) => `tester/survey/part-one/${id}`,
-        //     async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
-        //         try {
-        //             const { data } = await queryFulfilled
-        //             window.localStorage.setItem('survey-datas', JSON.stringify(data, null, '\t'))
-        //         } catch (err) {
-        //             console.log(err)
-        //         }
-        //     },
-        // }),
+
         getSurveysId: build.query({
             query: ({ id }) => `tester/survey/part-one/${id}`,
             async onQueryStarted(undefiend, { queryFulfilled }) {

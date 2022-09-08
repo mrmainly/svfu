@@ -74,7 +74,7 @@ const TestsBank = () => {
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
             </div>
-            <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />
+            {modalNewTest && <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />}
             <TestsBankTable data={data?.results} loading={isLoading} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination

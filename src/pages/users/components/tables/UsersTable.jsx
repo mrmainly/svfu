@@ -1,28 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 
 import Table from 'antd/lib/table'
-import { Button, Input } from 'antd'
+import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../routes'
 import { rolesChoises } from '../../../../constants'
 
-const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
+const UsersTable = ({ data, isLoading, setRole, setId }) => {
     const navigate = useNavigate()
 
-    // const [searchText, setSearchText] = useState('')
-    // const [searchedColumn, setSearchedColumn] = useState('')
-
-    // const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    //     confirm()
-    //     setSearchText(selectedKeys[0])
-    //     setSearchedColumn(dataIndex)
-    // }
-
-    // const handleReset = (clearFilters) => {
-    //     clearFilters()
-    //     setSearchText('')
-    // }
     const onTableChange = (newPagination, filters, sorter) => {
         if (filters?.role?.length > 0) {
             {
@@ -51,7 +38,7 @@ const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
+            sorter: true,
         },
         {
             title: 'ФИО',
@@ -130,16 +117,6 @@ const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
 
     return (
         <>
-            <Input.Search
-                placeholder="ФИО"
-                enterButton
-                onSearch={(value) => {
-                    const currValue = value
-                    setName(currValue)
-                }}
-                style={{ marginBottom: 16, width: '50%' }}
-            />
-
             <Table
                 columns={columns}
                 dataSource={data?.results}
@@ -154,7 +131,7 @@ const UsersTable = ({ data, isLoading, setRole, setId, setName }) => {
 }
 
 UsersTable.propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.object,
     isLoading: PropTypes.bool,
     setRole: PropTypes.func,
     setId: PropTypes.func,

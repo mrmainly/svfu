@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Pagination } from 'antd'
-import { useGetDirectionQuery } from '../../services/PaginationService'
+import { Pagination, Input } from 'antd'
+import { useGetTesterDirectionQuery } from '../../services/TesterService'
 import AppilyngTable from './components/table'
-
+import './applying.css'
 const Applying = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
-    const { data, isLoading, refetch } = useGetDirectionQuery({ currentPage: currentPage })
+    const [ordering, setOrdering] = useState('')
+    const [name, setName] = useState('')
+    const { data, isFetching } = useGetTesterDirectionQuery({
+        currentPage: currentPage,
+        name: name,
+        ordering: ordering,
+    })
     const onChange = (page) => {
         setCurrentPage(page)
     }
@@ -15,7 +21,17 @@ const Applying = () => {
     }, [data])
     return (
         <div>
-            <AppilyngTable data={data?.results} loading={isLoading} refetchFunc={refetch} />
+            <Input.Search
+                placeholder="Квалификация"
+                enterButton
+                onSearch={(value) => {
+                    const currValue = value
+                    setName(currValue)
+                }}
+                className="input-search"
+                style={{ marginBottom: 16 }}
+            ></Input.Search>
+            <AppilyngTable data={data?.results} loading={isFetching} setOrdering={setOrdering} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}

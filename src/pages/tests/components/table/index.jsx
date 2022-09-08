@@ -20,14 +20,11 @@ const AvailableTestTable = ({ data, loading }) => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'ascend',
-            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Название квалификации',
             dataIndex: 'name',
             key: 'name',
-            // ...getColumnSearchProps('name'),
         },
         {
             title: 'Начало аттестации',
@@ -35,7 +32,6 @@ const AvailableTestTable = ({ data, loading }) => {
             key: 'date_start',
             render: (date_start, record) =>
                 moment(record.exam.date_start).format('DD.MM.YYYY, hh:mm'),
-            sorter: (a, b) => moment(a.exam.date_start) - moment(b.exam.date_start),
         },
         {
             title: 'Конец аттестации',
@@ -43,7 +39,6 @@ const AvailableTestTable = ({ data, loading }) => {
             key: 'date_finish',
             render: (date_finish, record) =>
                 moment(record.exam.date_finish).format('DD.MM.YYYY, hh:mm'),
-            sorter: (a, b) => moment(a.exam.date_finish) - moment(b.exam.date_finish),
         },
         {
             title: 'Время',
@@ -60,32 +55,12 @@ const AvailableTestTable = ({ data, loading }) => {
                     <div>{time_exam} мин</div>
                 </div>
             ),
-            sorter: (a, b) => a.time_exam - b.time_exam,
         },
         {
             title: 'Статус',
             dataIndex: 'survey_status',
             key: 'survey_status',
             render: (survey_status) => statusChoices[survey_status],
-            filters: [
-                {
-                    text: 'Ожидание',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'На рассмотрении',
-                    value: 'ON_REVIEW',
-                },
-                {
-                    text: 'Рассмотрен',
-                    value: 'REVIEWED',
-                },
-                {
-                    text: 'Недоступно',
-                    value: 'UNAVAILABLE',
-                },
-            ],
-            onFilter: (value, record) => record.survey_status.indexOf(value) === 0,
         },
         {
             title: 'Действие',

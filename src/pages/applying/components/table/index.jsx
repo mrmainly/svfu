@@ -2,22 +2,35 @@ import { Table, message, Typography, Button } from 'antd'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
-import {
-    usePostDirectionMutation,
-    usePutDirectionMutation,
-} from '../../../../services/DirectionService'
 
+import {
+    usePostTesterApplicationMutation,
+    usePutTesterApplicationMutation,
+} from '../../../../services/TesterService'
 const { Text } = Typography
 
-const AppilyngTable = ({ data, loading, refetchFunc }) => {
-    const [postDirection] = usePostDirectionMutation()
-    const [putDirection] = usePutDirectionMutation()
-
+const AppilyngTable = ({ data, loading, setOrdering }) => {
+    const [postDirection] = usePostTesterApplicationMutation()
+    const [putDirection] = usePutTesterApplicationMutation()
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     const onSubmit = (data) => {
         postDirection({ direction: data }).then((res) => {
             if (res.data) {
                 message.success('Заявление подано')
-                refetchFunc()
             } else {
                 message.error(res.error.data.errors[0])
             }
@@ -29,8 +42,7 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.id - b.id,
+            sorter: true,
         },
         {
             title: 'Название квалификации',
@@ -72,7 +84,6 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
                         onClick={() => {
                             putDirection(id).then((res) => {
                                 if (res.data) {
-                                    refetchFunc()
                                     message.success('Заявление отменено')
                                 } else {
                                     message.error(res.error.data.errors[0])
@@ -96,6 +107,7 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
             loading={loading}
             scroll={{ x: true }}
             pagination={false}
+            onChange={onTableChange}
         />
     )
 }
@@ -103,7 +115,7 @@ const AppilyngTable = ({ data, loading, refetchFunc }) => {
 AppilyngTable.propTypes = {
     loading: PropTypes.bool,
     data: PropTypes.array,
-    refetchFunc: PropTypes.func,
+    setOrdering: PropTypes.func,
 }
 
 export default AppilyngTable

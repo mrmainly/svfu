@@ -18,6 +18,7 @@ const statusChoices = {
     CERTIFIED_WITH_ENCOURAGEMENT: 'Аттестован с поощрением',
     CERTIFIED_UNDER_CERTAIN_CONDITIONS: 'Аттестован при определенных условиях',
     NOT_CERTIFIED: 'Не аттестован',
+    IN_PROGRESS: 'Идет тест',
 }
 
 export default statusChoices

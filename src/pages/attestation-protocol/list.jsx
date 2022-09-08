@@ -29,7 +29,7 @@ const AttestationProtocol = () => {
     const onChange = (page) => {
         setCurrentPage(page)
     }
-    const onTableChange = (filters, sorter) => {
+    const onTableChange = (newPagination, filters, sorter) => {
         if (filters?.type?.length > 0) {
             setType(filters?.type[0])
         } else {
@@ -53,7 +53,7 @@ const AttestationProtocol = () => {
         setTotalPage(data?.count)
     }, [data])
     const columns = [
-        { title: '№', dataIndex: 'id', key: 'id', sorter: (a, b) => a.id - b.id },
+        { title: '№', dataIndex: 'id', key: 'id', sorter: true },
         {
             title: mode === 'INDIVIDUAL' ? 'ФИО аттестуемого' : 'Группа',
             dataIndex: secondColumn,

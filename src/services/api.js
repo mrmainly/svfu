@@ -21,7 +21,6 @@ export const api = createApi({
         'Profile',
         'Qualification',
         'Document',
-        'Direction',
         'Attestation',
         'TestProcessing',
         'TestGroup',
@@ -34,6 +33,10 @@ export const api = createApi({
         'AdminUser',
         'SURVEYS_TESTER',
         'Application',
+
+        //tester
+        'Applying',
+        'Tests',
     ],
 
     endpoints: () => ({}),
