@@ -10,6 +10,7 @@ import UserAddModal from '../modals/UserAddModal'
 import { MyButton } from '../../../../components'
 import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
 import ROUTES from '../../../../routes'
+import { rolesChoises } from '../../../../constants'
 
 const UsersTable = () => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
@@ -17,7 +18,7 @@ const UsersTable = () => {
     const navigate = useNavigate()
     const [modalNewUser, setModalNewUser] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
-    const { data, isLoading } = useGetAdminUserQuery({ currentPage: currentPage })
+    const { data, isFetching } = useGetAdminUserQuery({ currentPage: currentPage })
 
     const columns = [
         {
@@ -73,22 +74,7 @@ const UsersTable = () => {
                 },
             ],
             onFilter: (value, record) => record.role === value,
-            render: (role) =>
-                role === 'ADMIN'
-                    ? 'Администратор'
-                    : role === 'MODERATOR'
-                    ? 'Модератор'
-                    : role === 'EXPERT'
-                    ? 'Эксперт'
-                    : role === 'TUTOR'
-                    ? 'Тьютор'
-                    : role === 'CONSTRUCTOR'
-                    ? 'Менеджер оценочных средств'
-                    : role === 'LPR'
-                    ? 'Лицо принимающее решение'
-                    : role === 'TESTER'
-                    ? 'Аттестуемый'
-                    : '',
+            render: (role) => rolesChoises[role],
         },
         {
             title: 'Блокировка',
@@ -140,7 +126,7 @@ const UsersTable = () => {
                 columns={columns}
                 dataSource={data?.results}
                 rowKey="id"
-                loading={isLoading}
+                loading={isFetching}
                 pagination={false}
             />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

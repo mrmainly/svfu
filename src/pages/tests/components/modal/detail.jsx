@@ -10,7 +10,7 @@ import ROUTES from '../../../../routes'
 
 const { Text } = Typography
 
-const TestDetail = ({ open, setOpen, ID }) => {
+const TestDetail = ({ open, handleClose, ID }) => {
     const { data } = useGetSurveysIdQuery({ id: ID })
     const [surveyPatch] = useSurveyPatchMutation()
     const navigate = useNavigate()
@@ -52,12 +52,8 @@ const TestDetail = ({ open, setOpen, ID }) => {
                 destroyOnClose={true}
                 title={data?.name}
                 visible={open}
-                onOk={() => {
-                    setOpen(false)
-                }}
-                onCancel={() => {
-                    setOpen(false)
-                }}
+                onOk={handleClose}
+                onCancel={handleClose}
                 footer={[
                     <MyButton onClick={pathcSurvey} key="start">
                         Начать тестирование
@@ -66,7 +62,7 @@ const TestDetail = ({ open, setOpen, ID }) => {
                         key="back"
                         type="default"
                         style={{ background: '#FFF' }}
-                        onClick={() => setOpen(false)}
+                        onClick={handleClose}
                     >
                         Отмена
                     </MyButton>,
@@ -85,7 +81,7 @@ const TestDetail = ({ open, setOpen, ID }) => {
 
 TestDetail.propTypes = {
     open: PropTypes.bool,
-    setOpen: PropTypes.func,
+    handleClose: PropTypes.func,
     ID: PropTypes.number,
 }
 

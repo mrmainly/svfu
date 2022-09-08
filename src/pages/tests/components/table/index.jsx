@@ -7,11 +7,13 @@ import PropTypes from 'prop-types'
 import TestDetail from '../modal/detail'
 import ROUTES from '../../../../routes'
 import { statusChoices } from '../../../../constants'
+import useModal from '../../../../hooks/useModal'
 
 const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()
-    const [modalATT, setModalATT] = useState(false)
     const [ID, setID] = useState()
+
+    const { open, handleClose, handleOpen } = useModal()
 
     const columns = [
         {
@@ -95,7 +97,7 @@ const AvailableTestTable = ({ data, loading }) => {
                         type="primary"
                         onClick={() => {
                             setID(id)
-                            setModalATT(true)
+                            handleOpen()
                         }}
                     >
                         Начать
@@ -118,7 +120,7 @@ const AvailableTestTable = ({ data, loading }) => {
 
     return (
         <>
-            {modalATT && <TestDetail open={modalATT} setOpen={setModalATT} ID={ID} />}
+            {open && <TestDetail open={open} handleClose={handleClose} ID={ID} />}
             <Table
                 columns={columns}
                 dataSource={data}
