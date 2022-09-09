@@ -42,7 +42,7 @@ export const surveys = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'Appeal' }],
+            invalidatesTags: [{ type: 'Tests' }],
         }),
         appealPut: build.mutation({
             query({ id }) {
@@ -51,7 +51,7 @@ export const surveys = api.injectEndpoints({
                     method: 'PUT',
                 }
             },
-            invalidatesTags: [{ type: 'Appeal' }],
+            invalidatesTags: [{ type: 'Tests' }],
         }),
         surveyPatch: build.mutation({
             query({ id }) {
