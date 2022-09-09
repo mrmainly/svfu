@@ -15,6 +15,7 @@ export const expert = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'TestProcessing' }],
         }),
         getSurveyExpertId: build.query({
             query(id) {
@@ -30,6 +31,7 @@ export const expert = api.injectEndpoints({
                     method: 'POST',
                 }
             },
+            invalidatesTags: [{ type: 'TestProcessing' }],
         }),
         sendCode: build.mutation({
             query({ code }) {
@@ -38,6 +40,7 @@ export const expert = api.injectEndpoints({
                     method: 'POST',
                 }
             },
+            invalidatesTags: [{ type: 'TestProcessing' }],
         }),
         putMainExpert: build.mutation({
             query({ id }) {
@@ -46,6 +49,7 @@ export const expert = api.injectEndpoints({
                     method: 'PUT',
                 }
             },
+            invalidatesTags: [{ type: 'TestProcessing' }],
         }),
     }),
 })
