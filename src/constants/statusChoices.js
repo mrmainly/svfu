@@ -20,6 +20,7 @@ const statusChoices = {
     NOT_CERTIFIED: 'Не аттестован',
     IN_PROGRESS: 'Идет тест',
     COMPLETED: 'Завершен',
+    UNAVAILABLE: 'Недоступен',
 }
 
 export default statusChoices

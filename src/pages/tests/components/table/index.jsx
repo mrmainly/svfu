@@ -14,7 +14,7 @@ const AvailableTestTable = ({ data, loading }) => {
     const [ID, setID] = useState()
 
     const { open, handleClose, handleOpen } = useModal()
-
+    console.log(data)
     const columns = [
         {
             title: 'ID',
@@ -31,14 +31,14 @@ const AvailableTestTable = ({ data, loading }) => {
             dataIndex: 'date_start',
             key: 'date_start',
             render: (date_start, record) =>
-                moment(record.exam.date_start).format('DD.MM.YYYY, hh:mm'),
+                moment(record.exam.date_start).format('DD.MM.YYYY, HH:mm'),
         },
         {
             title: 'Конец аттестации',
             dataIndex: ['exam', 'date_finish'],
             key: 'date_finish',
             render: (date_finish, record) =>
-                moment(record.exam.date_finish).format('DD.MM.YYYY, hh:mm'),
+                moment(record.exam.date_finish).format('DD.MM.YYYY, HH:mm'),
         },
         {
             title: 'Время',

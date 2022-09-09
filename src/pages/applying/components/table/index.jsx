@@ -36,7 +36,6 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
             }
         })
     }
-    console.log(data)
     const columns = [
         {
             title: 'ID',
@@ -53,8 +52,14 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
             title: 'Статус',
             dataIndex: 'status_application',
             key: 'status_application',
-            render: (status_application) =>
-                status_application ? <Text>На рассмотрении</Text> : <Text>Не отправлен</Text>,
+            render: (status_application, { status_approved }) =>
+                status_approved && !status_application ? (
+                    <Text>Принят</Text>
+                ) : !status_approved && status_application ? (
+                    <Text>На рассмотрении</Text>
+                ) : (
+                    <Text>Не отправлен</Text>
+                ),
         },
 
         {
@@ -82,6 +87,8 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
                     >
                         Отмена
                     </Button>
+                ) : status_approved && !status_application ? (
+                    <MyButton disabled>Недоступно</MyButton>
                 ) : (
                     <MyButton onClick={() => onSubmit(id)}>Подать заявление</MyButton>
                 ),
