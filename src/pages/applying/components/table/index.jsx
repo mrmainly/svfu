@@ -55,17 +55,6 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
             key: 'status_application',
             render: (status_application) =>
                 status_application ? <Text>На рассмотрении</Text> : <Text>Не отправлен</Text>,
-            filters: [
-                {
-                    text: 'На рассмотрении',
-                    value: true,
-                },
-                {
-                    text: 'Не отправлен',
-                    value: false,
-                },
-            ],
-            onFilter: (value, record) => record.status_application === value,
         },
 
         {

@@ -35,9 +35,13 @@ const AttestationsQualifications = () => {
     }, [data])
     return (
         <div>
-            <MyButton style={{ marginBottom: 16 }} onClick={() => setModalNewQuali(true)}>
-                Создать новую квалификацию
-            </MyButton>
+            <div className="inputs-container">
+                <MyButton onClick={() => setModalNewQuali(true)}>
+                    Создать новую квалификацию
+                </MyButton>
+                <MyButton>Теги</MyButton>
+            </div>
+
             <div className="inputs-container">
                 <Input.Search
                     placeholder="Квалификация"

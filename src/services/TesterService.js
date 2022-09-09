@@ -2,12 +2,6 @@ import { api } from './api'
 
 export const tester = api.injectEndpoints({
     endpoints: (build) => ({
-        //подача заявления
-        getTesterDirection: build.query({
-            query: ({ currentPage, ordering, name }) =>
-                `tester/direction/?page=${currentPage}&ordering=${ordering}&name=${name}`,
-            providesTags: ['Applying'],
-        }),
         postTesterApplication: build.mutation({
             query(body) {
                 return {
@@ -26,6 +20,13 @@ export const tester = api.injectEndpoints({
                 }
             },
             invalidatesTags: [{ type: 'Applying' }],
+        }),
+
+        //подача заявления
+        getTesterDirection: build.query({
+            query: ({ currentPage, ordering, name }) =>
+                `tester/direction/?page=${currentPage}&ordering=${ordering}&name=${name}`,
+            providesTags: ['Applying'],
         }),
 
         //доступные тесты

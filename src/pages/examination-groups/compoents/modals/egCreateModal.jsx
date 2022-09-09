@@ -1,31 +1,31 @@
 import { useState } from 'react'
-import { Modal, Select, Form, Button } from 'antd'
+import { Modal, Select, Form, Button, message } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
 import {
-    // usePostTesterGroupMutation,
+    usePostTesterGroupMutation,
     useGetApplicationUserQuery,
 } from '../../../../services/TutorService'
 
 const { Option } = Select
 
 const EgCreateModal = ({ open, setOpen, direction }) => {
-    // const [postTestGroup] = usePostTesterGroupMutation()
+    const [postTestGroup] = usePostTesterGroupMutation()
     const [id, setId] = useState(0)
     const [testers, setTesters] = useState()
     const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
 
     const onSubmit = (data) => {
-        // postTestGroup(data).then((res) => {
-        //     if (res.data) {
-        //         message.success('Группа создана')
-        //         setOpen(false)
-        //     } else {
-        //         message.error(res.error.data.errors[0])
-        //     }
-        // })
+        postTestGroup(data).then((res) => {
+            if (res.data) {
+                message.success('Группа создана')
+                setOpen(false)
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+        })
         console.log(testers)
         console.log(data)
     }
