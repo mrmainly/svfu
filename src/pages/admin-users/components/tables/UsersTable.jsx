@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import Table from 'antd/lib/table'
-import { Button, Pagination } from 'antd'
+import { Button, Pagination, Input, Select } from 'antd'
 
-import { useGetAdminUserQuery } from '../../../../services/PaginationService'
+import { useGetAdminUsersQuery } from '../../../../services/AdminService'
 import UserAddModal from '../modals/UserAddModal'
 import { MyButton } from '../../../../components'
 import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
 import ROUTES from '../../../../routes'
 import { rolesChoises } from '../../../../constants'
+import './admin-users.css'
 
 const UsersTable = () => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
@@ -18,15 +19,56 @@ const UsersTable = () => {
     const navigate = useNavigate()
     const [modalNewUser, setModalNewUser] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
-    const { data, isFetching } = useGetAdminUserQuery({ currentPage: currentPage })
+    const [role, setRole] = useState('')
+    const [ordering, setOrdering] = useState('')
+    const [fullName, setFullName] = useState('')
+    const [application, setApplication] = useState('')
+    const [isActive, setIsActive] = useState('')
 
+    const { data, isFetching } = useGetAdminUsersQuery({
+        currentPage: currentPage,
+        role: role,
+        ordering: ordering,
+        fullName: fullName,
+        application: application,
+        isActive: isActive,
+    })
+    const selectRole = [
+        {
+            text: 'Администратор',
+            value: 'ADMIN',
+        },
+        {
+            text: 'Модератор',
+            value: 'MODERATOR',
+        },
+        {
+            text: 'Эксперт',
+            value: 'EXPERT',
+        },
+        {
+            text: 'Тьютор',
+            value: 'TUTOR',
+        },
+        {
+            text: 'Менеджер оценочных средств',
+            value: 'CONSTRUCTOR',
+        },
+        {
+            text: 'Лицо принимающее решение',
+            value: 'LPR',
+        },
+        {
+            text: 'Аттестуемый',
+            value: 'TESTER',
+        },
+    ]
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.id - b.id,
+            sorter: true,
         },
         {
             title: 'ФИО',
@@ -43,44 +85,13 @@ const UsersTable = () => {
             title: 'Роль',
             dataIndex: 'role',
             key: 'role',
-            filters: [
-                {
-                    text: 'Администратор',
-                    value: 'ADMIN',
-                },
-                {
-                    text: 'Модератор',
-                    value: 'MODERATOR',
-                },
-                {
-                    text: 'Эксперт',
-                    value: 'EXPERT',
-                },
-                {
-                    text: 'Тьютор',
-                    value: 'TUTOR',
-                },
-                {
-                    text: 'Менеджер оценочных средств',
-                    value: 'CONSTRUCTOR',
-                },
-                {
-                    text: 'Лицо принимающее решение',
-                    value: 'LPR',
-                },
-                {
-                    text: 'Аттестуемый',
-                    value: 'TESTER',
-                },
-            ],
-            onFilter: (value, record) => record.role === value,
             render: (role) => rolesChoises[role],
         },
         {
-            title: 'Блокировка',
+            title: 'Статус',
             dataIndex: 'is_active',
             key: 'is_active',
-            render: (is_active) => (is_active ? '-' : 'Заблокирован'),
+            render: (is_active) => (is_active ? 'Активен' : 'Заблокирован'),
         },
         {
             title: 'Действие',
@@ -110,7 +121,21 @@ const UsersTable = () => {
     const onChange = (page) => {
         setCurrentPage(page)
     }
-
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     return (
         <>
             <MyButton
@@ -122,12 +147,54 @@ const UsersTable = () => {
                 Создать пользователя
             </MyButton>
             <UserAddModal open={modalNewUser} setOpen={setModalNewUser} />
+            <div className="inputs-container">
+                <Input.Search
+                    placeholder="ФИО"
+                    enterButton
+                    onSearch={(value) => {
+                        const currValue = value
+                        setFullName(currValue)
+                    }}
+                    className="input-search"
+                ></Input.Search>
+                <Input.Search
+                    placeholder="Текущая аттестация"
+                    enterButton
+                    onSearch={(value) => {
+                        const currValue = value
+                        setApplication(currValue)
+                    }}
+                    className="input-search"
+                ></Input.Search>
+                <Select
+                    placeholder="Роль"
+                    className="input-search"
+                    onChange={(value) => setRole(value)}
+                >
+                    <Select.Option value=""> Все роли</Select.Option>
+                    {selectRole?.map((item, index) => (
+                        <Select.Option value={item.value} key={index}>
+                            {item.text}
+                        </Select.Option>
+                    ))}
+                </Select>
+                <Select
+                    placeholder="Блокировка"
+                    className="input-search"
+                    onChange={(value) => setIsActive(value)}
+                >
+                    <Select.Option value="">Все статусы</Select.Option>
+                    <Select.Option value="true">Активен</Select.Option>
+                    <Select.Option value="false">Заблокирован</Select.Option>
+                </Select>
+            </div>
             <Table
                 columns={columns}
                 dataSource={data?.results}
                 rowKey="id"
                 loading={isFetching}
                 pagination={false}
+                onChange={onTableChange}
             />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination

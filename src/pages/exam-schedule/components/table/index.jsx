@@ -19,8 +19,6 @@ const ExamScheduleTable = ({
             title: '№',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
-            defaultSortOrder: 'ascend',
         },
         {
             title: 'Название тестирования',
@@ -53,39 +51,18 @@ const ExamScheduleTable = ({
             dataIndex: 'date_start',
             key: 'date_start',
             render: (date_start) => moment(date_start).format('DD.MM.YYYY, hh:mm'),
-            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Конец',
             dataIndex: 'date_finish',
             key: 'date_finish',
             render: (date_finish) => moment(date_finish).format('DD.MM.YYYY, hh:mm'),
-            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
             render: (exam_status) => statusChoices[exam_status],
-            filters: [
-                {
-                    text: 'Ожидание',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'На рассмотрении',
-                    value: 'ON_REVIEW',
-                },
-                {
-                    text: 'Рассмотрен',
-                    value: 'REVIEWED',
-                },
-                {
-                    text: 'Недоступно',
-                    value: 'UNAVAILABLE',
-                },
-            ],
-            onFilter: (value, record) => record.exam_status.indexOf(value) === 0,
         },
         {
             title: 'Действие',

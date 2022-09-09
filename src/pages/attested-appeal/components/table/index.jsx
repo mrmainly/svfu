@@ -8,16 +8,29 @@ import { Button, Table } from 'antd'
 import { statusChoices } from '../../../../constants'
 import ROUTES from '../../../../routes'
 
-const AppealTable = ({ data, loading }) => {
+const AppealTable = ({ data, loading, setOrdering }) => {
     const navigate = useNavigate()
-
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'ascend',
-            sorter: (a, b) => a.id - b.id,
+            sorter: true,
         },
         {
             title: 'Название тестирования',
@@ -34,36 +47,12 @@ const AppealTable = ({ data, loading }) => {
             dataIndex: 'date_start',
             key: 'date_start',
             render: (date_start) => moment(date_start).format('DD.MM.YYYY, hh:mm'),
-            sorter: (a, b) => moment(a.date_start) - moment(b.date_start),
         },
         {
             title: 'Статус',
             dataIndex: 'status',
             key: 'status',
             render: (status) => <div>{statusChoices[status]}</div>,
-            filters: [
-                {
-                    text: 'Принято',
-                    value: 'APPROVED',
-                },
-                {
-                    text: 'Ожидание',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'Отклонен',
-                    value: 'REJECTED',
-                },
-                {
-                    text: 'Завершен',
-                    value: 'FINISHED',
-                },
-                {
-                    text: 'Отменен',
-                    value: 'CANCELLED',
-                },
-            ],
-            onFilter: (value, record) => record.status.indexOf(value) === 0,
         },
         {
             title: 'Баллы',
@@ -107,6 +96,7 @@ const AppealTable = ({ data, loading }) => {
                 loading={loading}
                 rowKey="id"
                 pagination={false}
+                onChange={onTableChange}
             />
         </>
     )
@@ -115,6 +105,7 @@ const AppealTable = ({ data, loading }) => {
 AppealTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
+    setOrdering: PropTypes.func,
 }
 
 export default AppealTable

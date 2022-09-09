@@ -2,18 +2,11 @@ import { api } from './api'
 
 export const Tutor = api.injectEndpoints({
     endpoints: (build) => ({
-        getTestGroup: build.query({
-            query: ({ currentPage }) => `tutor/testgroup?page=${currentPage}`,
-            providesTags: ['TestGroup'],
-        }),
         getTestGroupDirection: build.query({
             query: ({ direction }) => `tutor/testgroup?direction=${direction}`,
             providesTags: ['TestGroup'],
         }),
-        getTestExam: build.query({
-            query: ({ currentPage }) => `tutor/exam?page=${currentPage}`,
-            providesTags: ['TestGroup'],
-        }),
+
         patchTestExam: build.mutation({
             query({ id, body }) {
                 return {
@@ -128,11 +121,24 @@ export const Tutor = api.injectEndpoints({
             query: ({ currentPage, ordering, status, fullName, directionName, post }) =>
                 `tutor/application/?page=${currentPage}&ordering=${ordering}&status=${status}&full_name=${fullName}&direction_name=${directionName}&post=${post}`,
         }),
+
+        //экзаменационные группы
+        getTutorTestgroup: build.query({
+            query: ({ currentPage, ordering, examStatus, directionName }) =>
+                `tutor/testgroup?page=${currentPage}&ordering=${ordering}&direction_name=${directionName}&exam_status=${examStatus}`,
+            providesTags: ['TestGroup'],
+        }),
+
+        //расписание экзаменов
+        getTutorExam: build.query({
+            query: ({ currentPage, unit, testGroup, testers, examStatus, ordering }) =>
+                `tutor/exam?page=${currentPage}&unit=${unit}&test_group=${testGroup}&testers=${testers}&exam_status=${examStatus}&ordering=${ordering}`,
+            providesTags: ['TestGroup'],
+        }),
     }),
 })
 
 export const {
-    useGetTestGroupQuery,
     useGetTestGroupDirectionQuery,
     useGetUnitQuery,
     useGetDirectionTuterQuery,
@@ -142,7 +148,7 @@ export const {
     usePatchTesterGroupMutation,
     useDeleteTesterGroupMutation,
     useGetApplicationIdQuery,
-    useGetTestExamQuery,
+
     usePatchTestExamMutation,
     useGetUsersRoleQuery,
     useGetCertifiedIdQuery,
@@ -156,4 +162,10 @@ export const {
 
     //заявки пользователей
     useGetTutorApplicationQuery,
+
+    //экзаменационные группы
+    useGetTutorTestgroupQuery,
+
+    //расписание экзаменов
+    useGetTutorExamQuery,
 } = Tutor

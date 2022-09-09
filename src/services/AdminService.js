@@ -53,13 +53,24 @@ export const Admin = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Admin' }],
         }),
-        getAdminExam: build.query({
-            query: ({ currentPage }) => `admin/admin/exam/?page=${currentPage}`,
-            providesTags: ['Admin'],
-        }),
+
         getAdminExamID: build.query({
             query: ({ id }) => `admin/admin/exam/${id}`,
             providesTags: ['Admin'],
+        }),
+
+        //расписание экзаменов
+        getAdminExam: build.query({
+            query: ({ currentPage, unit, testGroup, testers, examStatus, ordering }) =>
+                `admin/admin/exam/?page=${currentPage}&unit=${unit}&test_group=${testGroup}&testers=${testers}&exam_status=${examStatus}&ordering=${ordering}`,
+            providesTags: ['Admin'],
+        }),
+
+        //пользователи
+        getAdminUsers: build.query({
+            query: ({ currentPage, role, ordering, fullName, application, isActive }) =>
+                `admin/admin/users/?page=${currentPage}&role=${role}&ordering=${ordering}&full_name=${fullName}&application=${application}&is_active=${isActive}`,
+            providesTags: ['AdminUser'],
         }),
     }),
 })
@@ -72,6 +83,11 @@ export const {
     usePatchUserMutation,
     usePatchExamMutation,
     usePutUserMutation,
-    useGetAdminExamQuery,
     useGetAdminExamIDQuery,
+
+    //расписание экзаменов
+    useGetAdminExamQuery,
+
+    //пользователи
+    useGetAdminUsersQuery,
 } = Admin

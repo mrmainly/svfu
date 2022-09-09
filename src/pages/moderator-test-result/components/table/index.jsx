@@ -10,19 +10,33 @@ import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
 import { usePutMainModeratorMutation } from '../../../../services/ModeratorService'
 import { statusChoices } from '../../../../constants'
 
-const TestResultTable = ({ data, loading }) => {
+const TestResultTable = ({ data, loading, setOrdering }) => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions
     const [putMainModerator] = usePutMainModeratorMutation()
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     const columns = [
         {
             title: '№',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
-            defaultSortOrder: 'ascend',
+            sorter: true,
         },
         {
             title: 'Название тестирования',
@@ -41,81 +55,18 @@ const TestResultTable = ({ data, loading }) => {
             render: (main_moderator) => (
                 <div>{main_moderator ? 'Предеседатель модераторов' : 'Модератор'}</div>
             ),
-            filters: [
-                {
-                    text: 'Модератор',
-                    value: false,
-                },
-                {
-                    text: 'Предеседатель модераторов',
-                    value: true,
-                },
-            ],
-            onFilter: (value, record) => record.main_moderator === value,
         },
         {
             title: 'Дата выдачи теста',
             dataIndex: 'exam_date_start',
             key: 'exam_date_start',
             render: (exam_date_start) => moment(exam_date_start).format('DD.MM.YYYY, hh:mm'),
-            sorter: (a, b) => moment(a.exam_date_start) - moment(b.exam_date_start),
         },
         {
             title: 'Статус',
             dataIndex: 'status_result',
             key: 'status_result',
             render: (status_result) => statusChoices[status_result],
-            filters: [
-                {
-                    text: 'Ожидает проверки',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'Отклонено',
-                    value: 'REJECTED',
-                },
-                {
-                    text: 'Отменено',
-                    value: 'CANCELLED',
-                },
-                {
-                    text: 'Проверяется экспертами',
-                    value: 'CHECKED_BY_EXPERTS',
-                },
-                {
-                    text: 'Проверено экспертами',
-                    value: 'FINISHED_BY_EXPERTS',
-                },
-                {
-                    text: 'Проверено экспертами',
-                    value: 'CHECKED_BY_MAIN_EXPERT',
-                },
-                {
-                    text: 'Эксперт (пред.) проверяет',
-                    value: 'FINISHED_BY_MAIN_EXPERT',
-                },
-                {
-                    text: 'Проверяется модераторами',
-                    value: 'CHECKED_BY_MODERATORS',
-                },
-                {
-                    text: 'Проверено модераторами',
-                    value: 'FINISHED_BY_MODERATORS',
-                },
-                {
-                    text: 'Модератор (пред.) проверяет',
-                    value: 'CHECKED_BY_MAIN_MODERATOR',
-                },
-                {
-                    text: 'Проверено модератором (пред.)',
-                    value: 'FINISHED_BY_MAIN_MODERATOR',
-                },
-                {
-                    text: 'Проверено',
-                    value: 'FINISHED',
-                },
-            ],
-            onFilter: (value, record) => record.status_result.indexOf(value) === 0,
         },
         {
             title: 'Действие',
@@ -215,6 +166,7 @@ const TestResultTable = ({ data, loading }) => {
                 rowKey="id"
                 pagination={false}
                 scroll={{ x: true }}
+                onChange={onTableChange}
             />
         </>
     )
@@ -223,6 +175,7 @@ const TestResultTable = ({ data, loading }) => {
 TestResultTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
+    setOrdering: PropTypes.func,
 }
 
 export default TestResultTable

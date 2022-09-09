@@ -2,6 +2,11 @@ import { api } from './api'
 
 export const expert = api.injectEndpoints({
     endpoints: (build) => ({
+        getExpertResult: build.query({
+            query: ({ currentPage, direction, userId, statusResult, ordering }) =>
+                `expert/result/?page=${currentPage}&direction=${direction}&user_id=${userId}&status_result=${statusResult}&ordering=${ordering}`,
+            providesTags: ['TestProcessing'],
+        }),
         sendAnswerExpert: build.mutation({
             query({ body, id }) {
                 return {
@@ -46,6 +51,7 @@ export const expert = api.injectEndpoints({
 })
 
 export const {
+    useGetExpertResultQuery,
     useSendAnswerExpertMutation,
     useSendSubscribeExpertMutation,
     useSendCodeMutation,

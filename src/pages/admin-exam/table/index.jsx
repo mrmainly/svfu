@@ -14,9 +14,9 @@ const AdminExamTable = ({ data, loading, setOpen, setModalData }) => {
         },
         {
             title: 'Название тестирования',
-            dataIndex: 'direction',
-            key: 'direction',
-            render: (direction) => (direction ? direction : '-'),
+            dataIndex: 'name',
+            key: 'name',
+            render: (name) => (name ? name : '-'),
         },
         {
             title: 'Группа',
@@ -26,9 +26,10 @@ const AdminExamTable = ({ data, loading, setOpen, setModalData }) => {
         },
         {
             title: 'Аттес-ых',
-            dataIndex: 'unit',
-            key: 'unit',
-            render: (unit) => (unit ? unit : '-'),
+            dataIndex: 'testers_count_from_group',
+            key: 'testers_count_from_group',
+            render: (testers_count_from_group) =>
+                testers_count_from_group ? testers_count_from_group : '0',
         },
         {
             title: 'Начало',
@@ -48,25 +49,7 @@ const AdminExamTable = ({ data, loading, setOpen, setModalData }) => {
             title: 'Статус',
             dataIndex: 'exam_status',
             key: 'exam_status',
-            filters: [
-                {
-                    text: 'Ожидает',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'Идет тест',
-                    value: 'IN_PROGRESS',
-                },
-                {
-                    text: 'Завершен',
-                    value: 'COMPLETED',
-                },
-                {
-                    text: 'Отменен',
-                    value: 'CANCELLED',
-                },
-            ],
-            onFilter: (value, record) => record.exam_status === value,
+
             render: (exam_status) =>
                 exam_status === 'WAITING'
                     ? 'Ожидает'
@@ -107,7 +90,7 @@ const AdminExamTable = ({ data, loading, setOpen, setModalData }) => {
 }
 
 AdminExamTable.propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.object,
     loading: PropTypes.bool,
     setOpen: PropTypes.func,
     setModalData: PropTypes.func,

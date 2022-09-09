@@ -66,6 +66,20 @@ export const moderator = api.injectEndpoints({
                 }
             },
         }),
+
+        //результаты тестирования
+        getModeratorResult: build.query({
+            query: ({ currentPage, direction, userId, statusResult, ordering }) =>
+                `moderator/result/?page=${currentPage}&direction=${direction}&user_id=${userId}&status_result=${statusResult}&ordering=${ordering}`,
+            providesTags: ['TestResult'],
+        }),
+
+        //апелляции аттестуемого
+        getModeratorAppeal: build.query({
+            query: ({ currentPage, ordering, direction, userId, status, score }) =>
+                `moderator/appeal/?page=${currentPage}&ordering=${ordering}&direction=${direction}&user_id=${userId}&status=${status}&score=${score}`,
+            providesTags: ['ModeratorAppeal'],
+        }),
     }),
 })
 
@@ -78,4 +92,10 @@ export const {
     usePutAppealRejectIdMutation,
     usePutAppealAcceptIdMutation,
     usePutMainModeratorMutation,
+
+    //результаты тестирования
+    useGetModeratorResultQuery,
+
+    //апелляции аттестуемого
+    useGetModeratorAppealQuery,
 } = moderator

@@ -7,18 +7,31 @@ import ROUTES from '../../../../routes'
 import { usePutMainExpertMutation } from '../../../../services/ExpertService'
 import { statusChoices } from '../../../../constants'
 
-const TestProcessingTable = ({ data, loading }) => {
+const TestProcessingTable = ({ data, loading, setOrdering }) => {
     const [putMainExpert] = usePutMainExpertMutation()
 
     const navigate = useNavigate()
-
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     const columns = [
         {
             title: '№',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
-            defaultSortOrder: 'ascend',
+            sorter: true,
         },
         {
             title: 'Название тестирования',
@@ -37,16 +50,6 @@ const TestProcessingTable = ({ data, loading }) => {
             render: (main_expert) => (
                 <div>{main_expert ? 'Предеседатель экспертов' : 'Эксперт'}</div>
             ),
-            filters: [
-                {
-                    text: 'Предеседатель экспертов',
-                    value: true,
-                },
-                {
-                    text: 'Эксперт',
-                    value: false,
-                },
-            ],
         },
         {
             title: 'Дата выдачи теста',
@@ -145,6 +148,7 @@ const TestProcessingTable = ({ data, loading }) => {
                 rowKey="id"
                 pagination={false}
                 scroll={{ x: true }}
+                onChange={onTableChange}
             />
         </>
     )
@@ -153,6 +157,7 @@ const TestProcessingTable = ({ data, loading }) => {
 TestProcessingTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
+    setOrdering: PropTypes.func,
 }
 
 export default TestProcessingTable

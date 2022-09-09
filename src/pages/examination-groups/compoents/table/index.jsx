@@ -5,34 +5,34 @@ import PropTypes from 'prop-types'
 
 import { statusChoices } from '../../../../constants'
 
-const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup }) => {
-    const directionData = data?.map((item) => {
-        return (item = item.direction.name)
-    })
-
-    console.log(data)
+const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup, setOrdering }) => {
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setOrdering('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setOrdering('id')
+            }
+        } else {
+            {
+                setOrdering('')
+            }
+        }
+    }
     const columns = [
         {
             title: '№',
             dataIndex: 'id',
             key: 'id',
-            sorter: (a, b) => a.id - b.id,
-            defaultSortOrder: 'ascend',
+            sorter: true,
         },
         {
             title: 'Название квалификации',
             dataIndex: 'direction',
             key: 'direction',
             render: (direction) => <div>{direction?.name}</div>,
-            filters: directionData
-                ?.filter((item, index) => {
-                    return directionData?.indexOf(item) === index
-                })
-                .map((item) => ({
-                    text: item,
-                    value: item,
-                })),
-            onFilter: (value, record) => record.direction?.name.indexOf(value) === 0,
         },
         {
             title: 'Количество аттестуемых',
@@ -45,25 +45,6 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
             dataIndex: 'exam_status',
             key: 'exam_status',
             render: (exam_status) => (exam_status ? statusChoices[exam_status] : '-'),
-            filters: [
-                {
-                    text: 'Ожидание',
-                    value: 'WAITING',
-                },
-                {
-                    text: 'На рассмотрении',
-                    value: 'ON_REVIEW',
-                },
-                {
-                    text: 'Рассмотрен',
-                    value: 'REVIEWED',
-                },
-                {
-                    text: 'Недоступно',
-                    value: 'UNAVAILABLE',
-                },
-            ],
-            onFilter: (value, record) => record.exam_status.indexOf(value) === 0,
         },
         {
             title: 'Действие',
@@ -91,6 +72,7 @@ const ExaminationGroupsTable = ({ data, loading, setOpenEditModal, setTestGroup 
             loading={loading}
             pagination={false}
             scroll={{ x: true }}
+            onChange={onTableChange}
         />
     )
 }
@@ -100,6 +82,7 @@ ExaminationGroupsTable.propTypes = {
     loading: PropTypes.bool,
     setOpenEditModal: PropTypes.func,
     setTestGroup: PropTypes.func,
+    setOrdering: PropTypes.func,
 }
 
 export default ExaminationGroupsTable
