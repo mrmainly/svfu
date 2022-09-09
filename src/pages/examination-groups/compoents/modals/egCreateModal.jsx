@@ -14,7 +14,7 @@ const { Option } = Select
 const EgCreateModal = ({ open, setOpen, direction }) => {
     const [postTestGroup] = usePostTesterGroupMutation()
     const [id, setId] = useState(0)
-    const [testers, setTesters] = useState()
+    // const [testers, setTesters] = useState()
     const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
 
     const onSubmit = (data) => {
@@ -26,8 +26,6 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                 message.error(res.error.data.errors[0])
             }
         })
-        console.log(testers)
-        console.log(data)
     }
     return (
         <div>
@@ -92,7 +90,7 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                         >
                                             <Select
                                                 placeholder="Выберите аттестуемого"
-                                                onChange={(e) => setTesters(e)}
+                                                // onChange={(e) => setTesters(e)}
                                             >
                                                 {tester
                                                     ? tester.results?.map((item, index) => (

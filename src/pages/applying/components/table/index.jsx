@@ -36,7 +36,7 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
             }
         })
     }
-
+    console.log(data)
     const columns = [
         {
             title: 'ID',
@@ -61,8 +61,8 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id, { status_application }) =>
-                status_application ? (
+            render: (id, { status_approved, status_application }) =>
+                !status_approved && status_application ? (
                     <Button
                         style={{
                             width: 'max-content',
