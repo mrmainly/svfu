@@ -29,6 +29,28 @@ const ExaminationGroups = () => {
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
+    const selectStatus = [
+        {
+            text: 'Все статусы',
+            value: '',
+        },
+        {
+            text: 'Ожидание',
+            value: 'WAITING',
+        },
+        {
+            text: 'Идет тест',
+            value: 'IN_PROGRESS',
+        },
+        {
+            text: 'Завершен',
+            value: 'COMPLETED',
+        },
+        {
+            text: 'Отменен',
+            value: 'CANCELLED',
+        },
+    ]
     return (
         <div>
             <EgCreateModal open={open} setOpen={setOpen} direction={direction?.results} />
@@ -56,12 +78,11 @@ const ExaminationGroups = () => {
                     className="input-search"
                     onChange={(value) => setExamStatus(value)}
                 >
-                    <Select.Option value=""> Все статусы</Select.Option>
-                    {/* {directionTag?.results?.map((item, index) => (
-                        <Select.Option value={item.name} key={index}>
-                            {item.name}
+                    {selectStatus?.map((item, index) => (
+                        <Select.Option value={item.value} key={index}>
+                            {item.text}
                         </Select.Option>
-                    ))} */}
+                    ))}
                 </Select>
             </div>
             <ExaminationGroupsTable

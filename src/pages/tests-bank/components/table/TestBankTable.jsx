@@ -52,17 +52,7 @@ const TestsBankTable = ({ data, loading, setId }) => {
             title: 'Статус',
             dataIndex: 'is_active',
             key: 'is_active',
-            filters: [
-                {
-                    text: 'Активна',
-                    value: true,
-                },
-                {
-                    text: 'Не активна',
-                    value: false,
-                },
-            ],
-            onFilter: (value, record) => record.is_active === value,
+
             render: (is_active) =>
                 is_active === true ? 'Активна' : is_active === false ? 'Не активна' : '',
         },

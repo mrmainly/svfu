@@ -14,7 +14,6 @@ const AvailableTestTable = ({ data, loading }) => {
     const [ID, setID] = useState()
 
     const { open, handleClose, handleOpen } = useModal()
-    console.log(data)
     const columns = [
         {
             title: 'ID',

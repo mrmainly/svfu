@@ -86,6 +86,10 @@ const Test = () => {
             text: 'Отменен',
             value: 'CANCELLED',
         },
+        {
+            text: 'Недоступен',
+            value: 'UNAVAILABLE',
+        },
     ]
     return (
         <div>
