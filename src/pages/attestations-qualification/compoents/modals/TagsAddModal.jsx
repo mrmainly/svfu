@@ -10,11 +10,11 @@ const TagsAddModal = ({ open, handleClose }) => {
 
     const onSubmit = (data) => {
         postAttestationsTag(data).then((res) => {
-            if (res) {
+            if (res.data) {
                 handleClose()
                 message.success('Тег создан')
             } else {
-                message.success('Тег не создан')
+                message.error('Такой тег уже создан')
             }
         })
     }
