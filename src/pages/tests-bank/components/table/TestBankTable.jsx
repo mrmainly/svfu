@@ -33,7 +33,7 @@ const TestsBankTable = ({ data, loading, setId }) => {
             sorter: true,
         },
         {
-            title: 'Название квалификации',
+            title: 'Название тестов',
             dataIndex: 'name',
             key: 'name',
         },
