@@ -33,7 +33,7 @@ export const tester = api.injectEndpoints({
         getTesterSurvey: build.query({
             query: ({ currentPage, name, ordering, survey_status }) =>
                 `tester/survey/?page=${currentPage}&name=${name}&ordering=${ordering}&survey_status=${survey_status}`,
-            providesTags: ['Tests'],
+            providesTags: ['SURVEYS_TESTER'],
         }),
     }),
 })

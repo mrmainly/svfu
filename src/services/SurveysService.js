@@ -23,6 +23,7 @@ export const surveys = api.injectEndpoints({
                     console.log(err)
                 }
             },
+            providesTags: ['SURVEYS_TESTER'],
         }),
         postResultPartOne: build.mutation({
             query({ body, id }) {
@@ -42,7 +43,7 @@ export const surveys = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'Tests' }],
+            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
         appealPut: build.mutation({
             query({ id }) {
@@ -51,7 +52,7 @@ export const surveys = api.injectEndpoints({
                     method: 'PUT',
                 }
             },
-            invalidatesTags: [{ type: 'Tests' }],
+            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
         surveyPatch: build.mutation({
             query({ id }) {
@@ -60,6 +61,7 @@ export const surveys = api.injectEndpoints({
                     method: 'PATCH',
                 }
             },
+            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
         getPracticalPartId: build.query({
             query: ({ id }) => `tester/survey/part-two/${id}`,
@@ -78,7 +80,7 @@ export const surveys = api.injectEndpoints({
 })
 
 export const {
-    useGetAvailableTestQuery,
+    // useGetAvailableTestQuery,
     useGetDirectionQuery,
     useGetSurveysIdQuery,
     usePostResultPartOneMutation,

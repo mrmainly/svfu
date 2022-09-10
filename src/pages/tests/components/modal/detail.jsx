@@ -15,8 +15,6 @@ const TestDetail = ({ open, handleClose, ID }) => {
     const [surveyPatch] = useSurveyPatchMutation()
     const navigate = useNavigate()
 
-    console.log(data)
-
     const items = [
         {
             label: 'Квалификация',
@@ -36,7 +34,7 @@ const TestDetail = ({ open, handleClose, ID }) => {
         },
     ]
 
-    const pathcSurvey = () => {
+    const patchSurvey = () => {
         surveyPatch({ id: data.id }).then((res) => {
             if (res.data) {
                 navigate(ROUTES.TESTER_SURVEY_PART, {
@@ -63,7 +61,7 @@ const TestDetail = ({ open, handleClose, ID }) => {
                                 ? navigate(ROUTES.TESTER_SURVEY_PART, {
                                       state: { surveyquest: data.surveyquest, id: data.id },
                                   })
-                                : pathcSurvey()
+                                : patchSurvey()
                         }
                         key="start"
                     >

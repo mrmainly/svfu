@@ -31,12 +31,12 @@ export const api = createApi({
         'TestResult',
         'LprUser',
         'AdminUser',
-        'SURVEYS_TESTER',
+
         'Application',
 
         //tester
         'Applying',
-        'Tests',
+        'SURVEYS_TESTER',
     ],
 
     endpoints: () => ({}),

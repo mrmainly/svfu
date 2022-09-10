@@ -20,7 +20,7 @@ const AttestationsQualifications = () => {
     const [tag, setTag] = useState('')
     const [status, setStatus] = useState('')
     const [id, setId] = useState('')
-    const { data, isLoading } = useGetAttestationsQualificationQuery({
+    const { data, isFetching } = useGetAttestationsQualificationQuery({
         currentPage: currentPage,
         name: name,
         tag: tag,
@@ -82,7 +82,7 @@ const AttestationsQualifications = () => {
             <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
             <AttestationsQualificationsTable
                 data={data?.results}
-                loading={isLoading}
+                loading={isFetching}
                 setId={setId}
             />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
