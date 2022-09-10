@@ -11,7 +11,7 @@ const Test = () => {
     const [survey_status, setSurvey_status] = useState('')
     const [ordering, setOrdering] = useState('')
     const [name, setName] = useState('')
-    const { data, isLoading } = useGetTesterSurveyQuery({
+    const { data, isFetching } = useGetTesterSurveyQuery({
         currentPage: currentPage,
         survey_status: survey_status,
         name: name,
@@ -128,7 +128,7 @@ const Test = () => {
                     ))}
                 </Select>
             </div>
-            <AvailableTestTable data={data?.results} loading={isLoading} />
+            <AvailableTestTable data={data?.results} loading={isFetching} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
