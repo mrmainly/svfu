@@ -38,6 +38,7 @@ import ModeratorTestResult from './moderator-test-result'
 import AttestedAppeal from './attested-appeal'
 import SurveysPart from './surveys/expert-moderator/surveysPart'
 import ModeratorAppeal from './surveys/expert-moderator/moderatorAppeal'
+import TagsList from './attestations-qualification/tagsList'
 
 export {
     Login,
@@ -82,4 +83,5 @@ export {
     Moderator,
     SurveysPart,
     ModeratorAppeal,
+    TagsList,
 }

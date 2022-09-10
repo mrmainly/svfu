@@ -37,7 +37,6 @@ const TimeIsUpModal = ({ open, setOpen, id }) => {
                 title="Время истекло!"
                 visible={open}
                 onOk={handleClose}
-                onCancel={handleClose}
                 footer={[
                     <MyButton size="medium" onClick={onFinishSubmit} key="end">
                         Перейти к остальным тестам

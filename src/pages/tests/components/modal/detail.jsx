@@ -15,6 +15,8 @@ const TestDetail = ({ open, handleClose, ID }) => {
     const [surveyPatch] = useSurveyPatchMutation()
     const navigate = useNavigate()
 
+    console.log(data)
+
     const items = [
         {
             label: 'Квалификация',
@@ -55,7 +57,16 @@ const TestDetail = ({ open, handleClose, ID }) => {
                 onOk={handleClose}
                 onCancel={handleClose}
                 footer={[
-                    <MyButton onClick={pathcSurvey} key="start">
+                    <MyButton
+                        onClick={() =>
+                            data?.survey_status === 'IN_PROGRESS'
+                                ? navigate(ROUTES.TESTER_SURVEY_PART, {
+                                      state: { surveyquest: data.surveyquest, id: data.id },
+                                  })
+                                : pathcSurvey()
+                        }
+                        key="start"
+                    >
                         Начать тестирование
                     </MyButton>,
                     <MyButton

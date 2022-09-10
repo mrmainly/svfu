@@ -45,6 +45,7 @@ const ROUTES = {
     SURVEYS_PART: '/surveys-part',
     ADMIN_USERS_DETAIL: '/admin-users-detail',
     MODERATOR_USERS_DETAIL: '/moderator-users-detail',
+    TAGS_LIST: '/tags-list',
 }
 
 export default ROUTES

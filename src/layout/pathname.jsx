@@ -58,6 +58,8 @@ export const pathname = (params) => {
             return 'Результаты тестирования'
         case ROUTES.ATTESTED_APPEAL:
             return 'Апелляции'
+        case ROUTES.TAGS_LIST:
+            return 'Теги'
         default:
             new Error()
     }

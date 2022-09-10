@@ -66,7 +66,7 @@ const AvailableTestTable = ({ data, loading }) => {
             dataIndex: 'id',
             key: 'x',
             render: (id, record) =>
-                record.survey_status === 'WAITING' ? (
+                record.survey_status === 'WAITING' || record.survey_status === 'IN_PROGRESS' ? (
                     <Button
                         type="primary"
                         onClick={() => {

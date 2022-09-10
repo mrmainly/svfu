@@ -6,6 +6,35 @@ export const attestation = api.injectEndpoints({
             query: () => `constructor/direction/tag`,
             providesTags: ['Attestation'],
         }),
+        postAttestationsTag: build.mutation({
+            query(body) {
+                return {
+                    url: `constructor/direction/tag`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        patchAttestationsTag: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `constructor/direction/tag/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        deleteAttestationsTag: build.mutation({
+            query({ id }) {
+                return {
+                    url: `constructor/direction/tag/${id}`,
+                    method: 'DELETE',
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
         getAttestationsQualification: build.query({
             query: ({ is_active, name, tag, currentPage, id }) =>
                 `constructor/direction/?is_active=${is_active}&name=${name}&tag=${tag}&page=${currentPage}&ordering=${id}`,
@@ -199,4 +228,7 @@ export const {
     usePutAttestationsQualificationIdMutation,
     useDeleteAttestationsQuestionsBankFileMutation,
     useDeleteAttestationsQuestionsBankImageMutation,
+    usePostAttestationsTagMutation,
+    usePatchAttestationsTagMutation,
+    useDeleteAttestationsTagMutation,
 } = attestation

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Input, Pagination, Select } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 import AttestationsQualificationsTable from './compoents/table'
 import AQAddModal from './compoents/modals/aqaddmodal'
 import { MyButton } from '../../components'
 import './attestations-qualification.css'
+import ROUTES from '../../routes'
 
 import {
     useGetAttestationsQualificationQuery,
@@ -33,13 +35,16 @@ const AttestationsQualifications = () => {
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
+
+    const navigate = useNavigate()
+
     return (
         <div>
             <div className="inputs-container">
                 <MyButton onClick={() => setModalNewQuali(true)}>
                     Создать новую квалификацию
                 </MyButton>
-                <MyButton>Теги</MyButton>
+                <MyButton onClick={() => navigate(ROUTES.TAGS_LIST)}>Теги</MyButton>
             </div>
 
             <div className="inputs-container">
