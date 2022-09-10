@@ -44,7 +44,7 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
             </div>
             <div
                 style={{
-                    background: 'url(./img/header_up.svg)',
+                    background: 'url(/img/header_up.png)',
                     backgroundRepeat: 'no-repeat',
                     backgroundPositionX: 'center',
                 }}
