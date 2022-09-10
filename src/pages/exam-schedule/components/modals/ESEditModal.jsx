@@ -58,6 +58,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                 title="Редактирование запланированного экзамена"
                 visible={open}
                 onCancel={() => close()}
+                style={{ top: 20 }}
                 footer={[
                     <MyButton key="submit" htmlType="submit" form="ese-form">
                         Сохранить

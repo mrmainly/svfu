@@ -31,7 +31,6 @@ export const api = createApi({
         'TestResult',
         'LprUser',
         'AdminUser',
-
         'Application',
 
         //tester

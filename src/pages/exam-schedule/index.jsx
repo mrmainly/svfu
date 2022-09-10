@@ -7,6 +7,8 @@ import ESEditModal from './components/modals/ESEditModal'
 import { useGetTutorExamQuery } from '../../services/TutorService'
 import { MyButton } from '../../components'
 import ViewSurveyModal from './components/modals/ViewSurveyModal'
+import ViewExamModal from './components/modals/ViewExamModal'
+import { useModal } from '../../hooks'
 import './exam-schedule.css'
 
 const ExamSchedule = () => {
@@ -30,6 +32,8 @@ const ExamSchedule = () => {
     const [modalAddES, setModalAddES] = useState(false)
     const [currentSurveyId, setCurrentSurveyId] = useState()
     const [viewSurveyModalOpen, setViewSurveyModalOpen] = useState(false)
+    const { open, handleOpen, handleClose } = useModal()
+
     const onChange = (page) => {
         setCurrentPage(page)
     }
@@ -76,6 +80,7 @@ const ExamSchedule = () => {
                     currentSurveyId={currentSurveyId}
                 />
             )}
+            <ViewExamModal open={open} handleClose={handleClose} data={currentData} />
             <div className="inputs-container">
                 <Input.Search
                     placeholder="Тестирование"
@@ -135,7 +140,9 @@ const ExamSchedule = () => {
                 setOpenEditModal={setModalEditES}
                 setCurrentData={setCurrentData}
                 setViewSurveyModalOpen={setViewSurveyModalOpen}
+                handleExamViewOpen={handleOpen}
             />
+
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
