@@ -3,7 +3,8 @@ import { api } from './api'
 export const documents = api.injectEndpoints({
     endpoints: (build) => ({
         getDocuments: build.query({
-            query: ({ currentPage }) => `users/document/?page=${currentPage}`,
+            query: ({ currentPage, documentType, name, ordering }) =>
+                `users/document/?page=${currentPage}&document_type=${documentType}&name=${name}&ordering=${ordering}`,
             providesTags: ['Document'],
         }),
         postDocuments: build.mutation({

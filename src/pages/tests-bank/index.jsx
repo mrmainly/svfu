@@ -58,6 +58,7 @@ const TestsBank = () => {
                     }
                     onChange={(value) => setDirectionName(value)}
                 >
+                    <Select.Option value=""> Все квалификации</Select.Option>
                     {directionSelect?.map((item, index) => (
                         <Select.Option value={item.name} key={index}>
                             {item.name}

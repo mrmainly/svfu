@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -19,6 +19,7 @@ const UsersTable = () => {
     const navigate = useNavigate()
     const [modalNewUser, setModalNewUser] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(30)
     const [role, setRole] = useState('')
     const [ordering, setOrdering] = useState('')
     const [fullName, setFullName] = useState('')
@@ -121,6 +122,11 @@ const UsersTable = () => {
     const onChange = (page) => {
         setCurrentPage(page)
     }
+
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
+
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
             {
@@ -199,8 +205,8 @@ const UsersTable = () => {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
-                    total={data?.count}
-                    pageSize={20}
+                    total={totalPage}
+                    pageSize={30}
                     style={{ marginTop: 20 }}
                     onChange={onChange}
                 />

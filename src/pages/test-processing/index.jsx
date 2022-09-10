@@ -25,7 +25,7 @@ const TestProcessing = () => {
     }
     const statusSelect = [
         {
-            text: '',
+            text: 'Все статусы',
             value: '',
         },
         {

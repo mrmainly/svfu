@@ -25,7 +25,7 @@ const Test = () => {
     }, [data])
     const orderSelect = [
         {
-            text: '-',
+            text: 'Без сортировки',
             value: '',
         },
         {
@@ -63,7 +63,7 @@ const Test = () => {
     ]
     const statusSelect = [
         {
-            text: '-',
+            text: 'Все статусы',
             value: '',
         },
         {

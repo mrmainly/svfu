@@ -19,7 +19,6 @@ const MainInfo = ({ data }) => {
             },
         ])
     }, [data.photo])
-
     const items = [
         {
             label: 'Логин:',
@@ -40,6 +39,10 @@ const MainInfo = ({ data }) => {
         {
             label: 'Дата рождения:',
             value: data.birth_date,
+        },
+        {
+            label: 'Электронная почта:',
+            value: data.email,
         },
         {
             label: 'Телефон:',

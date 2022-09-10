@@ -24,23 +24,7 @@ const UploadDocumentsTable = ({ data, loading }) => {
             title: 'Тип документа',
             dataIndex: 'document_type',
             key: 'document_type',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => a.document_type.length - b.document_type.length,
-            filters: [
-                {
-                    text: 'Диплом',
-                    value: 'DIPLOMA',
-                },
-                {
-                    text: 'Паспорт',
-                    value: 'PASSPORT',
-                },
-                {
-                    text: 'Образование, ученое звание и учёные степени',
-                    value: 'TITLESDEGREES',
-                },
-            ],
-            onFilter: (value, record) => record.document_type === value,
+
             render: (document_type) =>
                 document_type === 'DIPLOMA'
                     ? 'Диплом'

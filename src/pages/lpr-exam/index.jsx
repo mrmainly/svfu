@@ -31,6 +31,10 @@ const LprExam = () => {
 
     const orderSelect = [
         {
+            text: '-',
+            value: '',
+        },
+        {
             text: 'По номеру (возрастание)',
             value: 'id',
         },
@@ -57,6 +61,10 @@ const LprExam = () => {
     ]
 
     const statusSelect = [
+        {
+            text: 'Все статусы',
+            value: '',
+        },
         {
             text: 'Ожидает',
             value: 'WAITING',

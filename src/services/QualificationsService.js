@@ -3,7 +3,8 @@ import { api } from './api'
 export const qualifications = api.injectEndpoints({
     endpoints: (build) => ({
         getQualifications: build.query({
-            query: ({ currentPage }) => `users/qualification_improvement/?page=${currentPage}`,
+            query: ({ currentPage, ordering, name }) =>
+                `users/qualification_improvement/?page=${currentPage}&ordering=${ordering}&name=${name}`,
             providesTags: ['Qualification'],
         }),
         getQualificationsId: build.query({

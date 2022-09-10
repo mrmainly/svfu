@@ -80,7 +80,7 @@ const QuestionsBank = () => {
                     className="input-search"
                     onChange={(value) => setDifficulty(value)}
                 >
-                    <Select.Option value="">-</Select.Option>
+                    <Select.Option value="">Все уровни сложности</Select.Option>
                     <Select.Option value="BEGINNER">Легкий</Select.Option>
                     <Select.Option value="ADVANCED">Средний</Select.Option>
                     <Select.Option value="EXPERT">Сложный</Select.Option>
