@@ -10,7 +10,6 @@ import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import { Line } from '../../components'
-import { rolesChoises } from '../../constants'
 
 import { useGetAttestationUserIdQuery } from '../../services/AttestationProtocolService'
 import { useGetModeratorUserIdQuery } from '../../services/ModeratorService'
@@ -176,7 +175,7 @@ const UsersDetail = () => {
             </div>
         )
     }
-
+    console.log(data)
     return (
         <div>
             <div
@@ -203,7 +202,7 @@ const UsersDetail = () => {
                         lineHeight: '30px',
                     }}
                 >
-                    {rolesChoises[data?.role] + ' ' + lastName + fisrtName + patronymic}
+                    {lastName + fisrtName + patronymic}
                 </span>
             </div>
             <Line />

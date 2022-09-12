@@ -75,6 +75,7 @@ const UploadDocuments = () => {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
+                    current={currentPage}
                     total={totalPage}
                     pageSize={30}
                     style={{ marginTop: 20 }}

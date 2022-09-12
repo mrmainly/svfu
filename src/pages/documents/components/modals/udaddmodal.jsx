@@ -36,8 +36,10 @@ const UDAddModal = ({ open, setOpen }) => {
                 postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
                         message.success('Паспорт загружен')
+                        setOpen(false)
                     } else {
-                        message.error(`${res.error.data.errors[0]}`)
+                        message.error(res.error.data.file[0])
+                        console.log(res)
                     }
                 })
                 setFile()
@@ -49,8 +51,9 @@ const UDAddModal = ({ open, setOpen }) => {
                 postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
                         message.success('Диплом загружен')
+                        setOpen(false)
                     } else {
-                        message.error(`${res.error.data.errors[0]}`)
+                        message.error(res.error.data.file[0])
                     }
                 })
                 setFile()
@@ -62,15 +65,14 @@ const UDAddModal = ({ open, setOpen }) => {
                 postDocuments({ formData: formData }).then((res) => {
                     if (res.data) {
                         message.success('Документ об образовании загружен')
+                        setOpen(false)
                     } else {
-                        message.error(`${res.error.data.errors[0]}`)
+                        message.error(res.error.data.file[0])
                     }
                 })
                 setFile()
                 break
         }
-
-        setOpen(false)
     }
 
     return (

@@ -140,7 +140,6 @@ const AdminUsersDetail = () => {
     const fisrtName = data?.first_name ? data?.first_name + ' ' : ''
 
     const patronymic = data?.patronymic ? data?.patronymic : ''
-
     return (
         <div>
             <div
