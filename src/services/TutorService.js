@@ -81,6 +81,7 @@ export const Tutor = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'TestGroup' }],
         }),
         postAcceptApplication: build.mutation({
             query({ id }) {

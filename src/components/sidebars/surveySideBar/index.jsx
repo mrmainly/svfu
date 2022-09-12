@@ -53,35 +53,39 @@ const SurveysSideBar = () => {
             >
                 <div>
                     <Text style={{ marginLeft: 7 }}>Теоретическая часть:</Text>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', minHeight: 200 }}>
-                        {data?.survey?.surveyquest?.length
-                            ? data.survey.surveyquest.map((item, index) => (
-                                  <div
-                                      key={index}
-                                      className="circul"
-                                      style={{
-                                          background:
-                                              arrayIndex === index
-                                                  ? colorSwitchDanger(item.question.id)
-                                                  : 'white',
-                                          color:
-                                              arrayIndex === index
-                                                  ? 'white'
-                                                  : colorSwitchDanger(item.question.id),
-                                          borderColor: colorSwitchDanger(item.question.id),
-                                          opacity: part === 'practical-part' ? 0.6 : 1,
-                                          cursor: part === 'practical-part' ? 'text' : 'pointer',
-                                      }}
-                                      onClick={() =>
-                                          part === 'practical-part'
-                                              ? ''
-                                              : dispatch(handleArrayIndex(index))
-                                      }
-                                  >
-                                      {index + 1}
-                                  </div>
-                              ))
-                            : ''}
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                        }}
+                    >
+                        {data?.survey?.surveyquest?.length &&
+                            data.survey.surveyquest.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="circul"
+                                    style={{
+                                        background:
+                                            arrayIndex === index
+                                                ? colorSwitchDanger(item.question.id)
+                                                : 'white',
+                                        color:
+                                            arrayIndex === index
+                                                ? 'white'
+                                                : colorSwitchDanger(item.question.id),
+                                        borderColor: colorSwitchDanger(item.question.id),
+                                        opacity: part === 'practical-part' ? 0.6 : 1,
+                                        cursor: part === 'practical-part' ? 'text' : 'pointer',
+                                    }}
+                                    onClick={() =>
+                                        part === 'practical-part'
+                                            ? ''
+                                            : dispatch(handleArrayIndex(index))
+                                    }
+                                >
+                                    {index + 1}
+                                </div>
+                            ))}
                     </div>
                 </div>
             </div>
