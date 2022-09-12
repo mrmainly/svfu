@@ -40,11 +40,11 @@ const MyQualification = () => {
         },
         {
             text: 'По дате выдачи(возрастание)',
-            value: 'date_start',
+            value: 'date_of_issue',
         },
         {
             text: 'По дате выдачи(убывание)',
-            value: '-date_start',
+            value: '-date_of_issue',
         },
     ]
     return (

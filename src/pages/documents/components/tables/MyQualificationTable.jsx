@@ -9,7 +9,6 @@ import MQEditModal from '../modals/mqeditmodal'
 const MyQualificationTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState()
     const [modalEditMQ, setModalEditMQ] = useState(false)
-    console.log(data)
     const columns = [
         { title: '№ документа', dataIndex: 'id', key: 'id' },
         {
