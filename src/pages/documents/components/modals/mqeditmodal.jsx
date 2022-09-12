@@ -39,7 +39,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
 
         patchQualificationId({ id: data.doc_id, formData: formData }).then((res) => {
             if (res.data) {
-                message.success('Документ изменен')
+                message.success('Квалификация изменена')
                 setOpen(false)
             } else {
                 message.error('Вы не ввели обязательные поля')

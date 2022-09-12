@@ -68,6 +68,7 @@ const ProfileDetail = () => {
                         ['holding_conferences']: data.holding_conferences,
                         ['honoured_title']: data.honoured_title,
                     }}
+                    scrollToFirstError
                 >
                     <ProfileForm />
                     <Line />

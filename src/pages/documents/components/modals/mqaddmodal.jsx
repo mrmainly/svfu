@@ -71,7 +71,7 @@ const MQAddModal = ({ open, setOpen }) => {
 
         postQualification({ formData: formData }).then((res) => {
             if (res.data) {
-                message.success('Документ изменен')
+                message.success('Квалификация добавлена')
                 setOpen(false)
             } else {
                 message.error(`${res.error.data.errors[0]}`)
@@ -83,7 +83,7 @@ const MQAddModal = ({ open, setOpen }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Создание квалификации"
+                title="Добавление квалификации"
                 visible={open}
                 onOk={() => setOpen(false)}
                 onCancel={() => setOpen(false)}
