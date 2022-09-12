@@ -5,7 +5,7 @@
 .inputs-container {
     display: flex;
     margin-bottom: 16px;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 16px;
 }
 
