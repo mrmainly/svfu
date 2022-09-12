@@ -12,18 +12,33 @@ import '../surveySideBar.css'
 const { Text } = Typography
 
 const timerView = (data) => {
-    return (
-        <Text>
-            {moment.duration(data.time_exam, 'minutes').hours() > 9 ? '' : 0}
-            {moment.duration(data.time_exam, 'minutes').hours() === 0 ? (
-                ''
-            ) : (
-                <span>{moment.duration(data.time_exam, 'minutes').hours()}:</span>
-            )}
-            {moment.duration(data.time_exam, 'minutes').minutes() < 9 && ''}
-            {moment.duration(data.time_exam, 'minutes').minutes()}:00
-        </Text>
-    )
+    const hours =
+        moment.duration(data, 'minutes').hours() === 0
+            ? ''
+            : moment.duration(data, 'minutes').hours() + ':'
+
+    const minutes = moment.duration(data, 'minutes').minutes()
+
+    return hours + minutes
+}
+
+const subtractionTime = (first_time, second_time) => {
+    const getDate = (string) => new Date(0, 0, 0, string.split(':')[0], string.split(':')[1])
+    const different = getDate(second_time) - getDate(first_time)
+
+    const minutes = Math.round((different % 86400000) / 60000)
+    const result = minutes
+
+    return result
+}
+
+const localDate = (start_survey) => {
+    const today = new Date()
+
+    const now = today.toTimeString('en-US').substr(0, 5)
+    const survey_start_format = moment(start_survey).format('HH:mm').toLocaleString()
+
+    return subtractionTime(survey_start_format, now)
 }
 
 const SurveysSideBar = () => {
@@ -80,7 +95,8 @@ const SurveysSideBar = () => {
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
         setData(newData)
-        clearTimer(getDeadTime(newData?.time_exam))
+
+        clearTimer(getDeadTime(newData?.time_exam - localDate(newData.start_survey)))
     }, [localStorage.getItem('survey-datas')])
 
     return (
@@ -114,7 +130,7 @@ const SurveysSideBar = () => {
             <div className="time-block">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
-                    {timerView(data)}
+                    {timerView(data.time_exam)}:00
                 </div>
                 <div
                     style={{
@@ -124,7 +140,11 @@ const SurveysSideBar = () => {
                     }}
                 >
                     <Text>Осталось:</Text>
-                    {timer === 0 ? timerView(data) : <Text>{timer}</Text>}
+                    {timer === 0 ? (
+                        timerView(data?.time_exam - localDate(data?.start_survey)) + ':00'
+                    ) : (
+                        <Text>{timer}</Text>
+                    )}
                 </div>
             </div>
             {/* <Button onClick={onClickReset}>asd</Button> */}

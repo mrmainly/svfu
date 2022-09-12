@@ -35,6 +35,9 @@ const TheoreticalPart = ({ surveyquest, id }) => {
         setOpenModal(true)
         setPostList(postData)
     }
+
+    console.log(surveyquest)
+
     return (
         <div>
             <TheoreticalAnswerModal

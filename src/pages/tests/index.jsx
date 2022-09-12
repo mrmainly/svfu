@@ -24,6 +24,8 @@ const Test = () => {
         setTotalPage(data?.count)
     }, [data])
 
+    console.log(data)
+
     const orderSelect = [
         {
             text: 'Без сортировки',
