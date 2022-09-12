@@ -13,7 +13,7 @@ const ExamScheduleTable = ({
     setCurrentData,
     setViewSurveyModalOpen,
     setCurrentSurveyId,
-    handleExamViewOpen,
+    // handleExamViewOpen,
 }) => {
     const columns = [
         {
@@ -71,26 +71,15 @@ const ExamScheduleTable = ({
             key: 'x',
             render: (text, record) => (
                 <>
-                    {record.exam_status === 'WAITING' ? (
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                setCurrentData(record)
-                                setOpenEditModal(true)
-                            }}
-                        >
-                            Редактирование
-                        </Button>
-                    ) : (
-                        <Button
-                            onClick={() => {
-                                setCurrentData(record)
-                                handleExamViewOpen()
-                            }}
-                        >
-                            Просмотр
-                        </Button>
-                    )}
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            setCurrentData(record)
+                            setOpenEditModal(true)
+                        }}
+                    >
+                        {data?.exam_status === 'WAITING' ? 'Редактирование' : 'Просмотр'}
+                    </Button>
                 </>
             ),
         },
@@ -117,7 +106,6 @@ ExamScheduleTable.propTypes = {
     setCurrentData: PropTypes.func,
     setViewSurveyModalOpen: PropTypes.func,
     setCurrentSurveyId: PropTypes.func,
-    handleExamViewOpen: PropTypes.func,
 }
 
 export default ExamScheduleTable

@@ -60,9 +60,15 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                 onCancel={() => close()}
                 style={{ top: 20 }}
                 footer={[
-                    <MyButton key="submit" htmlType="submit" form="ese-form">
+                    <Button
+                        key="submit"
+                        htmlType="submit"
+                        form="ese-form"
+                        type="primary"
+                        disabled={dataList?.exam_status === 'WAITING' ? false : true}
+                    >
                         Сохранить
-                    </MyButton>,
+                    </Button>,
                     <MyButton
                         key="back"
                         type="default"
@@ -88,6 +94,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                     }}
                     onFinish={onSubmit}
                     id="ese-form"
+                    disabled={dataList?.exam_status === 'WAITING' ? false : true}
                 >
                     <Form.Item required label="Квалификация" name="direction">
                         <Select
@@ -195,7 +202,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                                             <Select placeholder="Выберите эксперта">
                                                 {dataExpert?.results.map((item, index) => (
                                                     <Option key={index} value={item.id}>
-                                                        {item.username}
+                                                        {item.username} {item.full_name}
                                                     </Option>
                                                 ))}
                                             </Select>
