@@ -9,7 +9,7 @@ import MQEditModal from '../modals/mqeditmodal'
 const MyQualificationTable = ({ data, loading }) => {
     const [currentData, setCurrentData] = useState()
     const [modalEditMQ, setModalEditMQ] = useState(false)
-
+    console.log(data)
     const columns = [
         { title: '№ документа', dataIndex: 'id', key: 'id' },
         {
@@ -19,9 +19,9 @@ const MyQualificationTable = ({ data, loading }) => {
         },
         {
             title: 'Дата выдачи',
-            dataIndex: 'date_start',
-            key: 'date_start',
-            render: (date_start) => moment(date_start).format('DD.MM.YYYY, hh:mm'),
+            dataIndex: 'date_of_issue',
+            key: 'date_of_issue',
+            render: (date_of_issue) => moment(date_of_issue).format('DD.MM.YYYY'),
         },
         {
             title: 'Действие',

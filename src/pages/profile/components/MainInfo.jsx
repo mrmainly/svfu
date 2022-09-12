@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Typography } from 'antd'
+import moment from 'moment/moment'
 import PropTypes from 'prop-types'
 
 import PhotoUpload from './PhotoUpload'
@@ -37,7 +38,7 @@ const MainInfo = ({ data }) => {
         },
         {
             label: 'Дата рождения:',
-            value: data?.birth_date,
+            value: moment(data?.birth_date).format('DD.MM.YYYY'),
         },
         {
             label: 'Электронная почта:',

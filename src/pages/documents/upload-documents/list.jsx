@@ -46,7 +46,7 @@ const UploadDocuments = () => {
     return (
         <div>
             <MyButton style={{ marginBottom: 20 }} onClick={() => setModalNewDoc(true)}>
-                Создать новый документ
+                Добавить документ
             </MyButton>
             <div className="inputs-container">
                 <Input.Search
