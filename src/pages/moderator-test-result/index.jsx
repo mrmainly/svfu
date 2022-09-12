@@ -107,8 +107,8 @@ const ModeratorTestResult = () => {
                     onChange={(value) => setStatusResult(value)}
                 >
                     {statusSelect?.map((item, index) => (
-                        <Select.Option value={item.name} key={index}>
-                            {item.name}
+                        <Select.Option value={item.value} key={index}>
+                            {item.text}
                         </Select.Option>
                     ))}
                 </Select>

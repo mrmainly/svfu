@@ -8,43 +8,43 @@ const InfoScreen = ({ data }) => {
     const items = [
         {
             label: 'Мои обязанности:',
-            value: data.my_biography,
+            value: data?.my_biography,
         },
         {
             label: 'Достижения и поощрения',
-            value: data.rewards,
+            value: data?.rewards,
         },
         {
             label: 'Научные интересы',
-            value: data.scientific_interests,
+            value: data?.scientific_interests,
         },
         {
             label: 'Научные гранты',
-            value: data.rewards,
+            value: data?.rewards,
         },
         {
             label: 'Проведение конференций',
-            value: data.scientific_grants,
+            value: data?.scientific_grants,
         },
         {
             label: 'Участие в конференциях, симпозиумах',
-            value: data.participation_conferences,
+            value: data?.participation_conferences,
         },
         {
             label: 'Почетные звания',
-            value: data.honoured_title,
+            value: data?.honoured_title,
         },
         {
             label: 'Научно-общественная деятельность',
-            value: data.ssa,
+            value: data?.ssa,
         },
         {
             label: 'Общий стаж работы',
-            value: data.total_experience,
+            value: data?.total_experience,
         },
         {
             label: 'Стаж работы по специальности',
-            value: data.specialty_experience,
+            value: data?.specialty_experience,
         },
     ]
     return (

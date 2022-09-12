@@ -33,7 +33,6 @@ const Profile = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            фывыфв
             <MainInfo data={data} />
             <Line />
             <SocialNetworks data={data} />

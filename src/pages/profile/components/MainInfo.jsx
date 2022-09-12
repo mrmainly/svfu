@@ -8,57 +8,56 @@ const { Text } = Typography
 
 const MainInfo = ({ data }) => {
     const [fileList, setFileList] = useState([])
-
     useEffect(() => {
         setFileList([
             {
                 uid: '-1',
                 name: 'image.png',
                 status: 'done',
-                url: `${data.photo}`,
+                url: `${data?.photo}`,
             },
         ])
-    }, [data.photo])
+    }, [data?.photo])
     const items = [
         {
             label: 'Логин:',
-            value: data.username,
+            value: data?.username,
         },
         {
             label: 'Фамилия:',
-            value: data.last_name,
+            value: data?.last_name,
         },
         {
             label: 'Имя:',
-            value: data.first_name,
+            value: data?.first_name,
         },
         {
             label: 'Отчество:',
-            value: data.patronymic,
+            value: data?.patronymic,
         },
         {
             label: 'Дата рождения:',
-            value: data.birth_date,
+            value: data?.birth_date,
         },
         {
             label: 'Электронная почта:',
-            value: data.email,
+            value: data?.email,
         },
         {
             label: 'Телефон:',
-            value: data.phone,
+            value: data?.phone,
         },
         {
             label: 'Инн:',
-            value: data.inn,
+            value: data?.inn,
         },
         {
             label: 'СНИЛС:',
-            value: data.snils,
+            value: data?.snils,
         },
         {
             label: 'Должность:',
-            value: data.post,
+            value: data?.post,
         },
     ]
 

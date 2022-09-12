@@ -160,7 +160,7 @@ const UDEditModal = ({ open, setOpen, dataList }) => {
 UDEditModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
-    dataList: PropTypes.object,
+    dataList: PropTypes.array,
 }
 
 export default UDEditModal

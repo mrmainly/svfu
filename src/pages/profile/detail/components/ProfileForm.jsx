@@ -36,6 +36,12 @@ const ProfileForm = () => {
             requiredText: 'Введите ваш телефон',
         },
         {
+            label: 'Электронная почта',
+            name: 'email',
+            required: true,
+            requiredText: 'Введите вашу электронную почту',
+        },
+        {
             label: 'ИНН',
             name: 'inn',
             required: false,
