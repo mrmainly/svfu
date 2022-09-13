@@ -6,12 +6,15 @@ import PropTypes from 'prop-types'
 import { Line, MyButton } from '../../../../../components'
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import TheoreticalAnswerModal from '../modals/TheoreticalAnswerModal'
+import FailedModal from '../modals/FailedModal'
+import { useModal } from '../../../../../hooks'
 
 const { Text, Title } = Typography
 
 const TheoreticalPart = ({ surveyquest, id }) => {
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])
+    const { open, handleClose, handleOpen } = useModal()
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
@@ -43,7 +46,9 @@ const TheoreticalPart = ({ surveyquest, id }) => {
                 setOpen={setOpenModal}
                 id={id}
                 postData={postList}
+                handleOpenFailedModal={handleOpen}
             />
+            <FailedModal open={open} handleClose={handleClose} />
             <Form
                 style={{ display: 'flex', flexDirection: 'column' }}
                 onFinish={onSubmitFurther}
