@@ -23,19 +23,21 @@ import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 import { MyButton } from '../../../../components'
 import {
     usePostConstructorQuestionFileMutation,
+    usePostConstructorQuestionImageMutation,
+    usePostConstructorAnswerQuestionMutation,
     usePutConstructorQuestionMutation,
     usePatchConstructorQuestionMutation,
     usePatchConstructorQuestionIdImageMutation,
     usePatchConstructorAnswerMutation,
     useDeleteConstructorQuestionIdFileMutation,
     useDeleteConstructorQuestionIdImageMutation,
+    useDeleteConstructorAnswerMutation,
 } from '../../../../services/ManagerService'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
-import { usePostConstructorQuestionImageMutation } from '../../../../services/ManagerService'
 
 const { Option } = Select
 const { TextArea } = Input
-const QBAddModal = ({ open, setOpen, dataList }) => {
+const QBEditModal = ({ open, setOpen, dataList }) => {
     const { data: globalData } = useGetToolsDirectionQuery()
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
@@ -113,12 +115,14 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
     ]
     const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
     const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
+    const [postConstructorAnswerQuestion] = usePostConstructorAnswerQuestionMutation()
     const [patchConstructorQuestion] = usePatchConstructorQuestionMutation()
     const [patchConstructorQuestionIdImage] = usePatchConstructorQuestionIdImageMutation()
     const [patchConstructorAnswer] = usePatchConstructorAnswerMutation()
     const [putConstructorQuestion] = usePutConstructorQuestionMutation()
     const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
     const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
+    const [deleteAnswer] = useDeleteConstructorAnswerMutation()
     const onSubmit = (data) => {
         if (data.technique === 'DESCRIBE') {
             deletedId.forEach((element) => {
@@ -146,7 +150,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
                 id: dataList?.question_images[0].id,
                 formData: formData,
             })
-        } else if (dataList?.question_images.length === 0) {
+        } else if (dataList?.question_images.length === 0 && typeof img === 'object') {
             const formData = new FormData()
             formData.append('image', img)
 
@@ -159,12 +163,23 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         }
 
         if (data.technique === 'ONE_CHOICE') {
-            console.log(data.variant)
+            for (let i = 0; i < dataList?.variant?.length; i++) {
+                if (
+                    data.variant.find((item2) => item2.id === dataList?.variant[i].id) === undefined
+                ) {
+                    deleteAnswer(dataList?.variant[i].id)
+                }
+            }
             data.variant.forEach((item, index) => {
-                patchConstructorAnswer({
-                    id: item.id,
-                    body: { name: item.name, is_true: radioId === index ? true : false },
-                })
+                item.id
+                    ? patchConstructorAnswer({
+                          id: item.id,
+                          body: { name: item.name, is_true: radioId === index ? true : false },
+                      })
+                    : postConstructorAnswerQuestion({
+                          id: dataList?.id,
+                          body: { name: item.name, is_true: radioId === index ? true : false },
+                      })
             })
         } else if (data.technique === 'MULTIPLE_CHOICE') {
             data.variant.forEach((item) => {
@@ -435,10 +450,10 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
     )
 }
 
-QBAddModal.propTypes = {
+QBEditModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
     dataList: PropTypes.object,
 }
 
-export default QBAddModal
+export default QBEditModal

@@ -38,6 +38,16 @@ export const manager = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
         }),
+        postConstructorAnswerQuestion: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `constructor/answer/question/${id}`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+        }),
         putConstructorQuestion: build.mutation({
             query({ id }) {
                 return {
@@ -95,6 +105,15 @@ export const manager = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
         }),
+        deleteConstructorAnswer: build.mutation({
+            query(id) {
+                return {
+                    url: `constructor/answer/${id}`,
+                    method: 'DELETE',
+                }
+            },
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+        }),
     }),
 })
 
@@ -105,6 +124,7 @@ export const {
     usePostConstructorQuestionImageMutation,
     usePostConstructorQuestionMutation,
     usePostConstructorQuestionFileMutation,
+    usePostConstructorAnswerQuestionMutation,
 
     usePutConstructorQuestionMutation,
 
@@ -114,4 +134,5 @@ export const {
 
     useDeleteConstructorQuestionIdFileMutation,
     useDeleteConstructorQuestionIdImageMutation,
+    useDeleteConstructorAnswerMutation,
 } = manager
