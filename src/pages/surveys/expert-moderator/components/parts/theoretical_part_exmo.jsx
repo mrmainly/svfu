@@ -93,7 +93,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                               <div style={{ display: 'flex', flexDirection: 'column' }}>
                                   <Space>
                                       <Text>Ответ аттестуемого:</Text>
-                                      {surveyquest.answers_first_part.map((itemAnswer, index) => {
+                                      {surveyquest?.answers_first_part?.map((itemAnswer, index) => {
                                           if (itemAnswer.question_id === item.question.id)
                                               return (
                                                   <Text style={{ fontWeight: 'bold' }} key={index}>

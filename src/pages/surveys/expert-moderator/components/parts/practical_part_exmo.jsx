@@ -12,8 +12,8 @@ const PracticalPartExMo = () => {
     return (
         <div>
             <Form style={{ display: 'flex', flexDirection: 'column' }}>
-                {surveyquest.survey.surveyquest_part_two.length
-                    ? surveyquest.survey.surveyquest_part_two.map((item, index) => (
+                {surveyquest?.survey?.surveyquest_part_two?.length
+                    ? surveyquest?.survey?.surveyquest_part_two.map((item, index) => (
                           <div
                               key={index}
                               style={{
@@ -65,7 +65,7 @@ const PracticalPartExMo = () => {
                               )}
                               <div style={{ marginTop: 10 }}>
                                   <Title level={5}>Ответ аттестуемого:</Title>
-                                  {surveyquest.answers_second_part.map((itemAnswer, index) => {
+                                  {surveyquest?.answers_second_part?.map((itemAnswer, index) => {
                                       if (itemAnswer.question_id === item.question.id)
                                           return <Text key={index}>{itemAnswer.answer}</Text>
                                   })}
