@@ -97,6 +97,7 @@ const AppealTable = ({ data, loading, setOrdering }) => {
                 rowKey="id"
                 pagination={false}
                 onChange={onTableChange}
+                scroll={{ x: true }}
             />
         </>
     )

@@ -84,6 +84,7 @@ const AdminExamTable = ({ data, loading, setOpen, setModalData }) => {
             loading={loading}
             columns={columns}
             rowKey="id"
+            scroll={{ x: true }}
             pagination={false}
         />
     )

@@ -38,7 +38,7 @@ const QualificationTable = ({ data, setOpen, setQualificationData }) => {
         },
     ]
 
-    return <Table columns={columns} dataSource={data} rowKey="id" />
+    return <Table columns={columns} dataSource={data} rowKey="id" scroll={{ x: true }} />
 }
 
 QualificationTable.propTypes = {

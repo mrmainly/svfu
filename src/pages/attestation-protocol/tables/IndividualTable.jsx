@@ -7,7 +7,7 @@ const IndividualTable = (props) => {
 
     return (
         <>
-            <Table columns={columns} dataSource={data} rowKey="id" />
+            <Table columns={columns} dataSource={data} rowKey="id" scroll={{ x: true }} />
         </>
     )
 }

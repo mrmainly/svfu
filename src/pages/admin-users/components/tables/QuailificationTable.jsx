@@ -45,7 +45,7 @@ const QualificationTable = ({ qualifications }) => {
 
     return (
         <>
-            <Table columns={columns} dataSource={qualifications} rowKey="id" />
+            <Table columns={columns} dataSource={qualifications} rowKey="id" scroll={{ x: true }} />
             <QualificationModal open={open} setOpen={setOpen} data={data} />
         </>
     )

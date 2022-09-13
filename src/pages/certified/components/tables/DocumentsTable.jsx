@@ -76,7 +76,7 @@ const DocumentTable = ({ docs }) => {
     ]
     return (
         <div>
-            <Table dataSource={docs} columns={columns} rowKey="id" />
+            <Table dataSource={docs} columns={columns} rowKey="id" scroll={{ x: true }} />
             <DocumentsModal open={open} setOpen={setOpen} data={data} />
         </div>
     )

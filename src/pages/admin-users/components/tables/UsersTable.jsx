@@ -202,6 +202,7 @@ const UsersTable = () => {
                 loading={isFetching}
                 pagination={false}
                 onChange={onTableChange}
+                scroll={{ x: true }}
             />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
