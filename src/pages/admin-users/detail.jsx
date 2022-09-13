@@ -133,6 +133,10 @@ const AdminUsersDetail = () => {
             name: 'Стаж работы по специальности',
             value: data?.specialty_experience ? data?.specialty_experience : '-',
         },
+        {
+            name: 'Должность',
+            value: data?.post ? data?.post : '-',
+        },
     ]
 
     const lastName = data?.last_name ? data?.last_name + ' ' : ''

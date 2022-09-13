@@ -122,6 +122,7 @@ const TestProcessing = () => {
                     pageSize={20}
                     style={{ marginTop: 20 }}
                     onChange={onChange}
+                    showSizeChanger={false}
                 />
             </div>
         </div>

@@ -22,16 +22,16 @@ import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
 import {
-    usePostAttestationsQuestionsBankImageMutation,
-    usePostAttestationsQuestionsBankFileMutation,
-    usePutAttestationsQuestionBankIdMutation,
-    usePatchAttestationsQualificationIdMutation,
-    usePatchAttestationsQuestionsBankImageMutation,
-    useDeleteAttestationsQuestionsBankFileMutation,
-    useDeleteAttestationsQuestionsBankImageMutation,
-    usePatchAttestationsQuestionsAnswerMutation,
-} from '../../../../services/AttestationService'
+    usePostConstructorQuestionFileMutation,
+    usePutConstructorQuestionMutation,
+    usePatchConstructorQuestionMutation,
+    usePatchConstructorQuestionIdImageMutation,
+    usePatchConstructorAnswerMutation,
+    useDeleteConstructorQuestionIdFileMutation,
+    useDeleteConstructorQuestionIdImageMutation,
+} from '../../../../services/ManagerService'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
+import { usePostConstructorQuestionImageMutation } from '../../../../services/ManagerService'
 
 const { Option } = Select
 const { TextArea } = Input
@@ -111,14 +111,14 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             url: `${img}`,
         },
     ]
-    const [postAttestationsQuestionsBankImage] = usePostAttestationsQuestionsBankImageMutation()
-    const [postAttestationsQuestionsBankFile] = usePostAttestationsQuestionsBankFileMutation()
-    const [patchAttestationsQuestionsBank] = usePatchAttestationsQualificationIdMutation()
-    const [patchAttestationsQuestionsBankImage] = usePatchAttestationsQuestionsBankImageMutation()
-    const [patchAttestationsQuestionsAnswer] = usePatchAttestationsQuestionsAnswerMutation()
-    const [putAttestationsQuestionBankId] = usePutAttestationsQuestionBankIdMutation()
-    const [deleteFile] = useDeleteAttestationsQuestionsBankFileMutation()
-    const [deleteImage] = useDeleteAttestationsQuestionsBankImageMutation()
+    const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
+    const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
+    const [patchConstructorQuestion] = usePatchConstructorQuestionMutation()
+    const [patchConstructorQuestionIdImage] = usePatchConstructorQuestionIdImageMutation()
+    const [patchConstructorAnswer] = usePatchConstructorAnswerMutation()
+    const [putConstructorQuestion] = usePutConstructorQuestionMutation()
+    const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
+    const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
     const onSubmit = (data) => {
         if (data.technique === 'DESCRIBE') {
             deletedId.forEach((element) => {
@@ -131,7 +131,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             uploadFiles.forEach((item) => {
                 const formData = new FormData()
                 formData.append('file', item)
-                postAttestationsQuestionsBankFile({
+                postConstructorQuestionFile({
                     id: dataList?.id,
                     formData: formData,
                 })
@@ -142,7 +142,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             const formData = new FormData()
             formData.append('image', img)
 
-            patchAttestationsQuestionsBankImage({
+            patchConstructorQuestionIdImage({
                 id: dataList?.question_images[0].id,
                 formData: formData,
             })
@@ -150,7 +150,7 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
             const formData = new FormData()
             formData.append('image', img)
 
-            postAttestationsQuestionsBankImage({
+            postConstructorQuestionImage({
                 id: dataList?.id,
                 formData: formData,
             })
@@ -161,14 +161,14 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         if (data.technique === 'ONE_CHOICE') {
             console.log(data.variant)
             data.variant.forEach((item, index) => {
-                patchAttestationsQuestionsAnswer({
+                patchConstructorAnswer({
                     id: item.id,
                     body: { name: item.name, is_true: radioId === index ? true : false },
                 })
             })
         } else if (data.technique === 'MULTIPLE_CHOICE') {
             data.variant.forEach((item) => {
-                patchAttestationsQuestionsAnswer({
+                patchConstructorAnswer({
                     id: item.id,
                     body: { name: item.name, is_true: item.is_true },
                 })
@@ -178,10 +178,10 @@ const QBAddModal = ({ open, setOpen, dataList }) => {
         }
 
         if (dataList?.is_active !== active) {
-            putAttestationsQuestionBankId({ id: dataList?.id })
+            putConstructorQuestion({ id: dataList?.id })
         }
 
-        patchAttestationsQuestionsBank({ id: dataList?.id, body: data }).then((res) => {
+        patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Вопрос изменен')
             } else {

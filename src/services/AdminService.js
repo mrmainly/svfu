@@ -22,7 +22,7 @@ export const Admin = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'Admin' }],
+            invalidatesTags: [{ type: 'AdminUser' }],
         }),
         patchUser: build.mutation({
             query({ id, body }) {
@@ -32,7 +32,7 @@ export const Admin = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'Admin' }],
+            invalidatesTags: [{ type: 'AdminUser' }],
         }),
         patchExam: build.mutation({
             query({ id, body }) {

@@ -207,6 +207,7 @@ const UserAddModal = ({ open, setOpen }) => {
                     layout="vertical"
                     onFinish={onSubmit}
                     id="useradd-form"
+                    scrollToFirstError
                 >
                     {inputs.map((item, index) => (
                         <Form.Item
