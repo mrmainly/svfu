@@ -36,8 +36,6 @@ const TheoreticalPart = ({ surveyquest, id }) => {
         setPostList(postData)
     }
 
-    console.log(surveyquest)
-
     return (
         <div>
             <TheoreticalAnswerModal

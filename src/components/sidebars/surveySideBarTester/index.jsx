@@ -18,8 +18,9 @@ const timerView = (data) => {
             : moment.duration(data, 'minutes').hours() + ':'
 
     const minutes = moment.duration(data, 'minutes').minutes()
+    const zerominute = moment.duration(data, 'minutes').minutes() < 9 ? 0 : ''
 
-    return hours + minutes
+    return hours + zerominute + minutes
 }
 
 const subtractionTime = (first_time, second_time) => {
@@ -39,6 +40,16 @@ const localDate = (start_survey) => {
     const survey_start_format = moment(start_survey).format('HH:mm').toLocaleString()
 
     return subtractionTime(survey_start_format, now)
+}
+
+const subtractionExamTime = (first, second) => {
+    const sub_value = second - first
+
+    if (first > second) {
+        return 0
+    } else {
+        return sub_value
+    }
 }
 
 const SurveysSideBar = () => {
@@ -95,8 +106,13 @@ const SurveysSideBar = () => {
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('survey-datas'))
         setData(newData)
-
-        clearTimer(getDeadTime(newData?.time_exam - localDate(newData.start_survey)))
+        clearTimer(
+            getDeadTime(
+                localDate(newData?.start_survey) <= 0
+                    ? newData?.time_exam
+                    : subtractionExamTime(localDate(newData?.start_survey), newData?.time_exam)
+            )
+        )
     }, [localStorage.getItem('survey-datas')])
 
     return (
@@ -141,13 +157,12 @@ const SurveysSideBar = () => {
                 >
                     <Text>Осталось:</Text>
                     {timer === 0 ? (
-                        timerView(data?.time_exam - localDate(data?.start_survey)) + ':00'
+                        subtractionExamTime(localDate(data?.start_survey), data?.time_exam) + ':00'
                     ) : (
                         <Text>{timer}</Text>
                     )}
                 </div>
             </div>
-            {/* <Button onClick={onClickReset}>asd</Button> */}
             {part_tester === 'p-p' ? (
                 <Button
                     type="default"

@@ -22,7 +22,7 @@ const TimeIsUpModal = ({ open, setOpen, id }) => {
         const formData = new FormData()
         formData.append('q_id', practical_data?.surveyquest[0]?.question.id)
         formData.append('describe', '')
-        postResultPartOne({ body: { answers: [] }, id: id })
+        postResultPartOne({ body: { answers: null }, id: id })
         practicalPartPost({ body: formData, id: id })
         navigate(ROUTES.AVAILABLE_TESTS)
     }
