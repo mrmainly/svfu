@@ -39,6 +39,7 @@ const Applying = () => {
                     pageSize={30}
                     style={{ marginTop: 20 }}
                     onChange={onChange}
+                    showSizeChanger={false}
                 />
             </div>
         </div>
