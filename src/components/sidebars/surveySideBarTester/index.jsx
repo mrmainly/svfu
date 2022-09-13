@@ -117,7 +117,10 @@ const SurveysSideBar = () => {
 
     return (
         <div className="survey-sidebar">
-            {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
+            {timer == '00:00' ||
+                (subtractionExamTime(localDate(data?.start_survey), data?.time_exam) === 0 && (
+                    <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />
+                ))}
             <Text style={{ fontWeight: 600 }}>{data.name}</Text>
             <div className="root">
                 <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
