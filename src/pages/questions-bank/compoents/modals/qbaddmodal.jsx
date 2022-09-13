@@ -18,12 +18,12 @@ import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
-import {
-    usePostAttestationsQuestionsBankImageMutation,
-    usePostAttestationsQuestionsBankFileMutation,
-    usePostAttestationsQuestionsBankMutation,
-} from '../../../../services/AttestationService'
 
+import {
+    usePostConstructorQuestionImageMutation,
+    usePostConstructorQuestionMutation,
+    usePostConstructorQuestionFileMutation,
+} from '../../../../services/ManagerService'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 const { Option } = Select
 const { TextArea } = Input
@@ -63,9 +63,9 @@ const QBAddModal = ({ open, setOpen }) => {
         { value: 'ONE_CHOICE', label: 'Вопрос с одним ответом' },
         { value: 'DESCRIBE', label: 'Открытый вопрос' },
     ]
-    const [postAttestationsQuestionsBank] = usePostAttestationsQuestionsBankMutation()
-    const [postAttestationsQuestionsBankImage] = usePostAttestationsQuestionsBankImageMutation()
-    const [postAttestationsQuestionsBankFile] = usePostAttestationsQuestionsBankFileMutation()
+    const [postConstructorQuestion] = usePostConstructorQuestionMutation()
+    const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
+    const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
 
     const onSubmit = (data) => {
         if (data.technique === 'ONE_CHOICE' || data.technique === 'MULTIPLE_CHOICE') {
@@ -76,14 +76,14 @@ const QBAddModal = ({ open, setOpen }) => {
         } else {
             data.difficulty = 'DESCRIBE'
         }
-        postAttestationsQuestionsBank(data).then((res) => {
+        postConstructorQuestion(data).then((res) => {
             if (res.data) {
                 message.success('Вопрос создан')
                 if (img) {
                     const formData = new FormData()
                     formData.append('image', img)
 
-                    postAttestationsQuestionsBankImage({
+                    postConstructorQuestionImage({
                         id: res.data.question_id,
                         formData: formData,
                     })
@@ -92,7 +92,7 @@ const QBAddModal = ({ open, setOpen }) => {
                     fileList.forEach((file) => {
                         const formData = new FormData()
                         formData.append('file', file)
-                        postAttestationsQuestionsBankFile({
+                        postConstructorQuestionFile({
                             id: res.data.question_id,
                             formData: formData,
                         })

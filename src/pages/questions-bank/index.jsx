@@ -3,7 +3,7 @@ import { Pagination, Select, Input } from 'antd'
 
 import QuestionsBankTable from './compoents/table'
 import QBAddModal from './compoents/modals/qbaddmodal'
-import { useGetAttestationsQuestionsBankQuery } from '../../services/AttestationService'
+import { useGetConstructorQuestionQuery } from '../../services/ManagerService'
 import { useGetToolsDirectionQuery } from '../../services/ToolsService'
 
 import { MyButton } from '../../components'
@@ -17,7 +17,7 @@ const QuestionsBank = () => {
     const [is_active, setIs_active] = useState('')
     const [description, setDescription] = useState('')
     const [direction, setDirection] = useState('')
-    const { data, isLoading } = useGetAttestationsQuestionsBankQuery({
+    const { data, isFetching } = useGetConstructorQuestionQuery({
         currentPage: currentPage,
         id: id,
         difficulty: difficulty,
@@ -88,7 +88,7 @@ const QuestionsBank = () => {
                 </Select>
             </div>
             <QBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
-            <QuestionsBankTable data={data?.results} loading={isLoading} setId={setId} />
+            <QuestionsBankTable data={data?.results} loading={isFetching} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}

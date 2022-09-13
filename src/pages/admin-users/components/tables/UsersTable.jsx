@@ -21,7 +21,7 @@ const UsersTable = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [role, setRole] = useState('')
-    const [ordering, setOrdering] = useState('')
+    const [ordering, setOrdering] = useState('-id')
     const [fullName, setFullName] = useState('')
     const [application, setApplication] = useState('')
     const [isActive, setIsActive] = useState('')
@@ -69,6 +69,7 @@ const UsersTable = () => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
+            defaultSortOrder: 'descend',
             sorter: true,
         },
         {

@@ -29,7 +29,6 @@ const UserChangeModal = ({ open, setOpen, data }) => {
             }
         })
     }
-
     return (
         <div>
             <Modal
@@ -76,8 +75,11 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                         ['scientific_grants']: data?.scientific_grants,
                         ['holding_conferences']: data?.holding_conferences,
                         ['participation_conferences']: data?.participation_conferences,
+                        ['specialty_experience']: data?.specialty_experience,
                         ['honoured_title']: data?.honoured_title,
+                        ['total_experience']: data?.total_experience,
                         ['ssa']: data?.ssa,
+                        ['post']: data?.post,
                         ['role']: data?.role ? data?.role : '',
                     }}
                     layout="vertical"

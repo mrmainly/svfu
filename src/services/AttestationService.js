@@ -108,97 +108,11 @@ export const attestation = api.injectEndpoints({
                 `constructor/question/?page=${currentPage}&ordering=${id}&difficulty=${difficulty}&is_active=${is_active}&description=${description}&direction=${direction}`,
             providesTags: ['Attestation'],
         }),
-        postAttestationsQuestionsBank: build.mutation({
-            query(body) {
-                return {
-                    url: `constructor/question/`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
+
         patchAttestationsQuestionsBank: build.mutation({
             query({ id, body }) {
                 return {
                     url: `constructor/question/${id}`,
-                    method: 'PATCH',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        putAttestationsQuestionBankId: build.mutation({
-            query({ id }) {
-                return {
-                    url: `/constructor/question/${id}`,
-                    method: 'PUT',
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        postAttestationsQuestionsBankImage: build.mutation({
-            query({ id, formData }) {
-                return {
-                    url: `constructor/question/image/${id}`,
-                    method: 'POST',
-                    body: formData,
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        patchAttestationsQuestionsBankImage: build.mutation({
-            query({ id, formData }) {
-                return {
-                    url: `constructor/question/${id}/image/`,
-                    method: 'PATCH',
-                    body: formData,
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        deleteAttestationsQuestionsBankImage: build.mutation({
-            query(id) {
-                return {
-                    url: `constructor/question/${id}/image/`,
-                    method: 'DELETE',
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        postAttestationsQuestionsBankFile: build.mutation({
-            query({ id, formData }) {
-                return {
-                    url: `constructor/question/file/${id}`,
-                    method: 'POST',
-                    body: formData,
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        deleteAttestationsQuestionsBankFile: build.mutation({
-            query(id) {
-                return {
-                    url: `constructor/question/${id}/file/`,
-                    method: 'DELETE',
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        patchAttestationsQuestionsBankI: build.mutation({
-            query({ id, body }) {
-                return {
-                    url: `constructor/question/${id}`,
-                    method: 'PATCH',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'Attestation' }],
-        }),
-        patchAttestationsQuestionsAnswer: build.mutation({
-            query({ id, body }) {
-                return {
-                    url: `constructor/answer/${id}`,
                     method: 'PATCH',
                     body,
                 }
@@ -216,18 +130,12 @@ export const {
     usePostAttestationsTestsBankMutation,
     usePostAttestationsQualificationMutation,
     usePostAttestationsQuestionsBankMutation,
-    usePostAttestationsQuestionsBankImageMutation,
-    usePostAttestationsQuestionsBankFileMutation,
     usePatchAttestationsTestsBankIdMutation,
     usePutAttestationsTestsBankIdMutation,
     usePatchAttestationsQualificationIdMutation,
-    usePatchAttestationsQuestionsBankIMutation,
-    usePatchAttestationsQuestionsBankImageMutation,
-    usePatchAttestationsQuestionsAnswerMutation,
-    usePutAttestationsQuestionBankIdMutation,
+
     usePutAttestationsQualificationIdMutation,
-    useDeleteAttestationsQuestionsBankFileMutation,
-    useDeleteAttestationsQuestionsBankImageMutation,
+
     usePostAttestationsTagMutation,
     usePatchAttestationsTagMutation,
     useDeleteAttestationsTagMutation,

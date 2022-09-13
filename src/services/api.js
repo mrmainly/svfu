@@ -36,6 +36,9 @@ export const api = createApi({
         //tester
         'Applying',
         'SURVEYS_TESTER',
+
+        //manager
+        'ManagerConstructorQuestion',
     ],
 
     endpoints: () => ({}),
