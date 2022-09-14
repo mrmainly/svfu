@@ -30,6 +30,7 @@ const { TextArea } = Input
 const QBAddModal = ({ open, setOpen }) => {
     const { data } = useGetToolsDirectionQuery()
     const [img, setImg] = useState()
+    const [variantTrueFalse, setVariantTrueFalse] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
     const [fileList, setFileList] = useState([])
@@ -68,7 +69,7 @@ const QBAddModal = ({ open, setOpen }) => {
     const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
 
     const onSubmit = (data) => {
-        if (data.technique === 'ONE_CHOICE' || data.technique === 'MULTIPLE_CHOICE') {
+        if (data.technique === 'ONE_CHOICE') {
             data.variant = data.variant.map(
                 (item, index) =>
                     (item = { name: item.name, is_true: radioId === index ? true : false })
@@ -76,33 +77,38 @@ const QBAddModal = ({ open, setOpen }) => {
         } else {
             data.difficulty = 'DESCRIBE'
         }
-        postConstructorQuestion(data).then((res) => {
-            if (res.data) {
-                message.success('Вопрос создан')
-                if (img) {
-                    const formData = new FormData()
-                    formData.append('image', img)
-
-                    postConstructorQuestionImage({
-                        id: res.data.question_id,
-                        formData: formData,
-                    })
-                }
-                if (data.technique === 'DESCRIBE') {
-                    fileList.forEach((file) => {
+        setVariantTrueFalse(data.variant.find((item) => item.is_true === true))
+        if (variantTrueFalse === undefined) {
+            message.error('Минимум 1 правильный вариант ответа')
+        } else {
+            postConstructorQuestion(data).then((res) => {
+                if (res.data) {
+                    message.success('Вопрос создан')
+                    if (img) {
                         const formData = new FormData()
-                        formData.append('file', file)
-                        postConstructorQuestionFile({
+                        formData.append('image', img)
+
+                        postConstructorQuestionImage({
                             id: res.data.question_id,
                             formData: formData,
                         })
-                    })
+                    }
+                    if (data.technique === 'DESCRIBE') {
+                        fileList.forEach((file) => {
+                            const formData = new FormData()
+                            formData.append('file', file)
+                            postConstructorQuestionFile({
+                                id: res.data.question_id,
+                                formData: formData,
+                            })
+                        })
+                    }
+                    setOpen(false)
+                } else {
+                    message.error(res.error.data.errors[0])
                 }
-                setOpen(false)
-            } else {
-                message.error(res.error.data.errors[0])
-            }
-        })
+            })
+        }
     }
     return (
         <div>
@@ -132,7 +138,16 @@ const QBAddModal = ({ open, setOpen }) => {
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="qbadd-form">
-                    <Form.Item label="Квалификация вопроса" name="direction">
+                    <Form.Item
+                        label="Квалификация вопроса"
+                        name="direction"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Выберите квалификацию',
+                            },
+                        ]}
+                    >
                         <Select
                             mode="multiple"
                             style={{
@@ -146,7 +161,16 @@ const QBAddModal = ({ open, setOpen }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Тип вопроса" name="technique">
+                    <Form.Item
+                        label="Тип вопроса"
+                        name="technique"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Выберите тип вопроса',
+                            },
+                        ]}
+                    >
                         <Select
                             style={{
                                 width: '100%',
@@ -171,11 +195,29 @@ const QBAddModal = ({ open, setOpen }) => {
                             {uploadButton}
                         </Upload>
                     </Form.Item>
-                    <Form.Item label="Текст вопроса" name="description">
+                    <Form.Item
+                        label="Текст вопроса"
+                        name="description"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Напишите текст вопроса',
+                            },
+                        ]}
+                    >
                         <TextArea />
                     </Form.Item>
                     {componentTech === 'ONE_CHOICE' || componentTech === 'MULTIPLE_CHOICE' ? (
-                        <Form.Item label="Сложность вопроса" name="difficulty">
+                        <Form.Item
+                            label="Сложность вопроса"
+                            name="difficulty"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Выберите сложность вопроса',
+                                },
+                            ]}
+                        >
                             <Select>
                                 <Option value="BEGINNER">Легкая</Option>
                                 <Option value="ADVANCED">Средняя</Option>
@@ -184,8 +226,21 @@ const QBAddModal = ({ open, setOpen }) => {
                         </Form.Item>
                     ) : null}
                     {componentTech === 'MULTIPLE_CHOICE' ? (
-                        <Form.List name="variant">
-                            {(fields, { add, remove }) => (
+                        <Form.List
+                            name="variant"
+                            rules={[
+                                {
+                                    validator: async (_, names) => {
+                                        if (!names || names.length < 2) {
+                                            return Promise.reject(
+                                                new Error('Не менее 2 вариантов ответа')
+                                            )
+                                        }
+                                    },
+                                },
+                            ]}
+                        >
+                            {(fields, { add, remove }, { errors }) => (
                                 <>
                                     {fields.map(({ key, name, ...restField }) => (
                                         <Row
@@ -237,13 +292,27 @@ const QBAddModal = ({ open, setOpen }) => {
                                         >
                                             Добавить вариант ответа
                                         </Button>
+                                        <Form.ErrorList errors={errors} />
                                     </Form.Item>
                                 </>
                             )}
                         </Form.List>
                     ) : null}
                     {componentTech === 'ONE_CHOICE' ? (
-                        <Form.List name="variant">
+                        <Form.List
+                            name="variant"
+                            rules={[
+                                {
+                                    validator: async (_, names) => {
+                                        if (!names || names.length < 2) {
+                                            return Promise.reject(
+                                                new Error('Не менее 2 вариантов ответа')
+                                            )
+                                        }
+                                    },
+                                },
+                            ]}
+                        >
                             {(fields, { add, remove }, { errors }) => (
                                 <>
                                     {fields.map((field, index) => (
