@@ -150,7 +150,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                 id: dataList?.question_images[0].id,
                 formData: formData,
             })
-        } else if (dataList?.question_images.length === 0 && typeof img === 'object') {
+        } else if (dataList?.question_images.length === 0) {
             const formData = new FormData()
             formData.append('image', img)
 
@@ -300,7 +300,20 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                         </Form.Item>
                     ) : null}
                     {componentTech === 'MULTIPLE_CHOICE' ? (
-                        <Form.List name="variant">
+                        <Form.List
+                            name="variant"
+                            rules={[
+                                {
+                                    validator: async (_, names) => {
+                                        if (!names || names.length < 2) {
+                                            return Promise.reject(
+                                                new Error('Не менее 2 вариантов ответа')
+                                            )
+                                        }
+                                    },
+                                },
+                            ]}
+                        >
                             {(fields, { add, remove }) => (
                                 <>
                                     {fields.map(({ key, name, ...restField }) => (
@@ -359,7 +372,20 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                         </Form.List>
                     ) : null}
                     {componentTech === 'ONE_CHOICE' ? (
-                        <Form.List name="variant">
+                        <Form.List
+                            name="variant"
+                            rules={[
+                                {
+                                    validator: async (_, names) => {
+                                        if (!names || names.length < 2) {
+                                            return Promise.reject(
+                                                new Error('Не менее 2 вариантов ответа')
+                                            )
+                                        }
+                                    },
+                                },
+                            ]}
+                        >
                             {(fields, { add, remove }, { errors }) => (
                                 <>
                                     {fields.map((field, index) => (
