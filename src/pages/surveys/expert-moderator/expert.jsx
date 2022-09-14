@@ -72,19 +72,20 @@ const Expert = () => {
                     <Line />
                     <div>
                         <Title level={5} style={{ marginBottom: 20 }}>
-                            Заключения по теоретической части
+                            Заключения по тестам
                         </Title>
                         {surveyquest.expert_review.length &&
                             surveyquest.expert_review.map((item, index) => (
                                 <ExpertReviewCard
                                     key={index}
                                     expert_name={item.user}
-                                    recommendation={item.conclusion_first_part}
+                                    recommendationPartOne={item.conclusion_first_part}
+                                    recommendationPartTwo={item.conclusion_second_part}
                                     id={item.id}
                                 />
                             ))}
                     </div>
-                    <div style={{ marginTop: 20 }}>
+                    {/* <div style={{ marginTop: 20 }}>
                         <Title level={5} style={{ marginBottom: 20 }}>
                             Заключения по практической части
                         </Title>
@@ -97,7 +98,7 @@ const Expert = () => {
                                     id={item.id}
                                 />
                             ))}
-                    </div>
+                    </div> */}
                 </>
             )}
             <Line />

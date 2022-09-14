@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TestProcessingTable from './compoents/table'
 import { Pagination, Input, Select } from 'antd'
 
@@ -11,6 +11,7 @@ const TestProcessing = () => {
     const [userId, setUserId] = useState('')
     const [statusResult, setStatusResult] = useState('')
     const [ordering, setOrdering] = useState('')
+    const [totalPage, setTotalPage] = useState(30)
 
     const { data, isFetching } = useGetExpertResultQuery({
         currentPage: currentPage,
@@ -19,6 +20,10 @@ const TestProcessing = () => {
         statusResult: statusResult,
         ordering: ordering,
     })
+
+    useEffect(() => {
+        setTotalPage(data?.count)
+    }, [data])
 
     const onChange = (page) => {
         setCurrentPage(page)
@@ -118,7 +123,7 @@ const TestProcessing = () => {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
-                    total={data?.count}
+                    total={totalPage}
                     pageSize={20}
                     style={{ marginTop: 20 }}
                     onChange={onChange}

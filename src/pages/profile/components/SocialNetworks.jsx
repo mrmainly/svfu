@@ -28,7 +28,11 @@ const SocialNetworks = ({ data }) => {
                     <div style={{ width: 200 }}>
                         <Text style={{ fontWeight: 600 }}>{item.label}</Text>
                     </div>
-                    <Text> {item.value === '' || item.value === null ? '-' : item.value}</Text>
+                    {item.value === '' || item.value === null ? (
+                        '-'
+                    ) : (
+                        <a href={item.value}>{item.value}</a>
+                    )}
                 </div>
             ))}
         </>
