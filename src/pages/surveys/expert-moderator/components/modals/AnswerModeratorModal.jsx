@@ -58,7 +58,7 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
     return (
         <>
             <Modal
-                title="Вы уверены??"
+                title="Заключение"
                 visible={expertTheoreticalPartModalOpen}
                 onOk={handleClose}
                 onCancel={handleClose}

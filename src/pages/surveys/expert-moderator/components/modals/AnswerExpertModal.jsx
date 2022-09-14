@@ -52,7 +52,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
     return (
         <>
             <Modal
-                title="Вы уверены?"
+                title="Заключение"
                 visible={expertTheoreticalPartModalOpen}
                 onOk={handleClose}
                 onCancel={handleClose}
@@ -96,6 +96,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                                         key={index}
                                         expert_name={item.user}
                                         recommendation={item.conclusion_first_part}
+                                        id={item.id}
                                     />
                                 ))}
                         </div>
@@ -109,6 +110,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                                         key={index}
                                         expert_name={item.user}
                                         recommendation={item.conclusion_second_part}
+                                        id={item.id}
                                     />
                                 ))}
                         </div>

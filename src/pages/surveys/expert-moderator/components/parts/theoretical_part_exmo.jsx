@@ -155,7 +155,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
 }
 
 TheoreticalPartExMo.propTypes = {
-    surveyquest: PropTypes.array,
+    surveyquest: PropTypes.object,
 }
 
 export default TheoreticalPartExMo

@@ -17,11 +17,16 @@ const timerView = (data) => {
         moment.duration(data, 'minutes').hours() === 0
             ? ''
             : moment.duration(data, 'minutes').hours() + ':'
+    const hoursZero =
+        moment.duration(data, 'minutes').hours() < 9 &&
+        moment.duration(data, 'minutes').hours() != 0
+            ? 0
+            : ''
 
     const minutes = moment.duration(data, 'minutes').minutes()
-    const zerominute = moment.duration(data, 'minutes').minutes() < 9 ? 0 : ''
+    const zerominute = moment.duration(data, 'minutes').minutes() < 9 && !0 ? 0 : ''
 
-    return hours + zerominute + minutes
+    return hoursZero + hours + zerominute + minutes
 }
 
 const subtractionTime = (first_time, second_time) => {
@@ -62,7 +67,7 @@ const SurveysSideBar = () => {
     const [open, setOpen] = useState(true)
 
     const [data, setData] = useState([])
-    const [timer, setTimer] = useState()
+    const [timer, setTimer] = useState(0)
 
     const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
@@ -140,8 +145,7 @@ const SurveysSideBar = () => {
 
     return (
         <div className="survey-sidebar">
-            {timer == '00:00' ||
-                (timer === 0 && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />)}
+            {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
             <Text style={{ fontWeight: 600 }}>{data?.name}</Text>
 
             <div className="root">
@@ -182,12 +186,13 @@ const SurveysSideBar = () => {
                     }}
                 >
                     <Text>Осталось:</Text>
-                    {timer === undefined ? (
-                        subtractionExamTime(localDate(data?.start_survey), data?.time_exam) + ':00'
+                    {timer === 0 ? (
+                        timerView(
+                            subtractionExamTime(localDate(data?.start_survey), data?.time_exam)
+                        ) + ':00'
                     ) : (
                         <Text>{timer}</Text>
                     )}
-                    {/* {timer === 0 ? timerView(data.time_exam) + ':00' : timer} */}
                 </div>
             </div>
             {part_tester === 'p-p' ? (

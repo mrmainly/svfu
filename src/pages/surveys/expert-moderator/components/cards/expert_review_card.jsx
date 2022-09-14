@@ -5,12 +5,13 @@ import { Card, Typography } from 'antd'
 
 const { Text } = Typography
 
-const ExpertReviewCard = ({ expert_name, recommendation }) => {
+const ExpertReviewCard = ({ recommendation, id }) => {
     return (
         <Card
-            title={<Text style={{ color: '#2F80ED' }}>{expert_name}</Text>}
+            title={<Text style={{ color: '#2F80ED' }}>id: {id}</Text>}
             style={{
                 width: '100%',
+                marginTop: 10,
             }}
         >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -26,7 +27,7 @@ const ExpertReviewCard = ({ expert_name, recommendation }) => {
 }
 
 ExpertReviewCard.propTypes = {
-    expert_name: PropTypes.string,
+    id: PropTypes.number,
     recommendation: PropTypes.string,
 }
 
