@@ -36,6 +36,10 @@ const AdminUsersDetail = () => {
             value: data?.id ? data?.id : '-',
         },
         {
+            name: 'Логин',
+            value: data?.username ? data?.username : '-',
+        },
+        {
             name: 'Фамилия',
             value: data?.last_name ? data?.last_name : '-',
         },
