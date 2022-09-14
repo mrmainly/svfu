@@ -62,7 +62,7 @@ const SurveysSideBar = () => {
     const [open, setOpen] = useState(true)
 
     const [data, setData] = useState([])
-    const [timer, setTimer] = useState(0)
+    const [timer, setTimer] = useState()
 
     const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
@@ -122,7 +122,6 @@ const SurveysSideBar = () => {
                 )
             )
         }
-        console.log(dataList)
     }, [dataList])
 
     if (isFetching) {
@@ -141,7 +140,8 @@ const SurveysSideBar = () => {
 
     return (
         <div className="survey-sidebar">
-            {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
+            {timer == '00:00' ||
+                (timer === 0 && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />)}
             <Text style={{ fontWeight: 600 }}>{data?.name}</Text>
 
             <div className="root">
@@ -182,7 +182,7 @@ const SurveysSideBar = () => {
                     }}
                 >
                     <Text>Осталось:</Text>
-                    {timer === 0 ? (
+                    {timer === undefined ? (
                         subtractionExamTime(localDate(data?.start_survey), data?.time_exam) + ':00'
                     ) : (
                         <Text>{timer}</Text>
