@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-import { Typography, Button } from 'antd'
+import { Typography, Button, Skeleton } from 'antd'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import moment from 'moment'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
 import TimeIsUpModal from '../../../pages/surveys/tester/components/modals/TimeIsUpModal'
+import { useGetSurveysIdQuery } from '../../../services/SurveysService'
 
 import '../surveySideBar.css'
 
@@ -53,11 +54,19 @@ const subtractionExamTime = (first, second) => {
 }
 
 const SurveysSideBar = () => {
+    const { data: dataList, isFetching } = useGetSurveysIdQuery({
+        id: JSON.parse(localStorage.getItem('survey-datas')).id,
+    })
+
     const Ref = useRef(null)
     const [open, setOpen] = useState(true)
 
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
+
+    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
+    const { handleArrayIndex } = SurveysSlice.actions
+    const dispatch = useDispatch()
 
     const getTimeRemaining = (e) => {
         const total = Date.parse(e) - Date.parse(new Date())
@@ -99,29 +108,42 @@ const SurveysSideBar = () => {
         return deadline
     }
 
-    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
-    const { handleArrayIndex } = SurveysSlice.actions
-    const dispatch = useDispatch()
-
     useEffect(() => {
-        const newData = JSON.parse(localStorage.getItem('survey-datas'))
-        setData(newData)
-        clearTimer(
-            getDeadTime(
-                localDate(newData?.start_survey) <= 0
-                    ? newData?.time_exam
-                    : subtractionExamTime(localDate(newData?.start_survey), newData?.time_exam)
+        setData(dataList)
+        if (dataList?.start_survey) {
+            clearTimer(
+                getDeadTime(
+                    localDate(dataList?.start_survey) <= 0
+                        ? dataList?.time_exam
+                        : subtractionExamTime(
+                              localDate(dataList?.start_survey),
+                              dataList?.time_exam
+                          )
+                )
             )
+        }
+        console.log(dataList)
+    }, [dataList])
+
+    if (isFetching) {
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Skeleton.Button style={{ width: 240, height: 320, marginLeft: 12 }} />
+                <Skeleton.Button
+                    style={{ width: 240, height: 50, marginLeft: 12, marginTop: 12 }}
+                />
+                <Skeleton.Button
+                    style={{ width: 240, height: 50, marginLeft: 12, marginTop: 12 }}
+                />
+            </div>
         )
-    }, [localStorage.getItem('survey-datas')])
+    }
 
     return (
         <div className="survey-sidebar">
-            {timer == '00:00' ||
-                (subtractionExamTime(localDate(data?.start_survey), data?.time_exam) === 0 && (
-                    <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />
-                ))}
-            <Text style={{ fontWeight: 600 }}>{data.name}</Text>
+            {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
+            <Text style={{ fontWeight: 600 }}>{data?.name}</Text>
+
             <div className="root">
                 <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -146,10 +168,11 @@ const SurveysSideBar = () => {
                         : ''}
                 </div>
             </div>
+
             <div className="time-block">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
-                    {timerView(data.time_exam)}:00
+                    {timerView(data?.time_exam)}:00
                 </div>
                 <div
                     style={{
@@ -164,6 +187,7 @@ const SurveysSideBar = () => {
                     ) : (
                         <Text>{timer}</Text>
                     )}
+                    {/* {timer === 0 ? timerView(data.time_exam) + ':00' : timer} */}
                 </div>
             </div>
             {part_tester === 'p-p' ? (
