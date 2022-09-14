@@ -27,21 +27,6 @@ const DocumentList = ({ docs }) => {
             title: 'Тип документа',
             dataIndex: 'document_type',
             key: 'document_type',
-            filters: [
-                {
-                    text: 'Диплом',
-                    value: 'DIPLOMA',
-                },
-                {
-                    text: 'Образование, ученая степень',
-                    value: 'TITLESDEGREES',
-                },
-                {
-                    text: 'Паспорт',
-                    value: 'PASSPORT',
-                },
-            ],
-            onFilter: (value, record) => record.document_type === value,
             render: (type) =>
                 type === 'DIPLOMA'
                     ? 'Диплом'
@@ -56,6 +41,7 @@ const DocumentList = ({ docs }) => {
             dataIndex: 'name',
             key: 'name',
             render: (name) => (name ? name : '-'),
+            ellipsis: true,
         },
         {
             title: 'Действие',

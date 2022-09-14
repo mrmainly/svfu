@@ -38,6 +38,12 @@ const UploadDocumentsTable = ({ data, loading }) => {
             title: 'Описание',
             dataIndex: 'name',
             key: 'name',
+            render: (name) => (
+                <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', width: 300 }}>
+                    {name}
+                </div>
+            ),
+            ellipsis: true,
         },
         {
             title: 'Действие',

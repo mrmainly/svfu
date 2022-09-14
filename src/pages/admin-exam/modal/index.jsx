@@ -127,9 +127,9 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="experts">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={field.key}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -138,8 +138,9 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Эксперт ${key + 1} `}
-                                            name={key}
+                                            {...field}
+                                            label={`Эксперт ${field.key + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
@@ -153,7 +154,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
@@ -186,9 +187,9 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     <Form.List name="moderators">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={field.key}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -197,8 +198,8 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Модератор ${key + 1} `}
-                                            name={key}
+                                            label={`Модератор ${field.key + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
@@ -212,7 +213,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
