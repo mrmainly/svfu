@@ -29,6 +29,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
             }
         })
     }
+    console.log(data)
     return (
         <div>
             <Modal
@@ -63,7 +64,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
                         ['patronymic']: data?.patronymic,
                         ['phone']: data?.phone,
                         ['email']: data?.email,
-                        ['birth_date']: moment(data?.birth_date),
+                        ['birth_date']: data?.birth_date === null ? null : moment(data?.birth_date),
                         ['inn']: data?.inn,
                         ['snils']: data?.snils,
                         ['vk']: data?.vk,
