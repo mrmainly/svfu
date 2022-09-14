@@ -1,4 +1,3 @@
-import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
 import ParamsList from './params/ParamsList'
@@ -17,7 +16,6 @@ export const AttestedInfo = ({ contacts, profileData, bio }) => {
             <div>
                 <InfoList params={bio} />
             </div>
-            <Button danger>Заблокировать</Button>
         </>
     )
 }
