@@ -74,7 +74,8 @@ const QBAddModal = ({ open, setOpen }) => {
                 (item, index) =>
                     (item = { name: item.name, is_true: radioId === index ? true : false })
             )
-        } else {
+        }
+        if (data.technique === 'DESCRIBE') {
             data.difficulty = 'DESCRIBE'
         }
         setVariantTrueFalse(data.variant.find((item) => item.is_true === true))
