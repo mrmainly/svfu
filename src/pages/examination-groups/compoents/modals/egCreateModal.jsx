@@ -14,7 +14,6 @@ const { Option } = Select
 const EgCreateModal = ({ open, setOpen, direction }) => {
     const [postTestGroup] = usePostTesterGroupMutation()
     const [id, setId] = useState(0)
-    // const [testers, setTesters] = useState()
     const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
 
     const onSubmit = (data) => {
@@ -27,6 +26,8 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
             }
         })
     }
+
+    console.log(tester)
     return (
         <div>
             <Modal
@@ -94,10 +95,28 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                             >
                                                 {tester
                                                     ? tester.results?.map((item, index) => (
-                                                          <Option key={index} value={item.user.id}>
+                                                          <Option
+                                                              key={index}
+                                                              value={item.user.id}
+                                                              disabled={
+                                                                  item?.user?.is_active
+                                                                      ? false
+                                                                      : true
+                                                              }
+                                                          >
                                                               {item.user.last_name}{' '}
                                                               {item.user.first_name}{' '}
                                                               {item.user.patronymic}
+                                                              {!item.user.is_active && (
+                                                                  <span
+                                                                      style={{
+                                                                          color: '#f28585',
+                                                                          marginLeft: 5,
+                                                                      }}
+                                                                  >
+                                                                      не активен
+                                                                  </span>
+                                                              )}
                                                           </Option>
                                                       ))
                                                     : ''}
