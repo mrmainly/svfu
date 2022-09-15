@@ -114,7 +114,7 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                                                           marginLeft: 5,
                                                                       }}
                                                                   >
-                                                                      не активен
+                                                                      заблокирован
                                                                   </span>
                                                               )}
                                                           </Option>
