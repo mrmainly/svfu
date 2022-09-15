@@ -78,8 +78,13 @@ const QBAddModal = ({ open, setOpen }) => {
         if (data.technique === 'DESCRIBE') {
             data.difficulty = 'DESCRIBE'
         }
-        setVariantTrueFalse(data.variant.find((item) => item.is_true === true))
-        if (variantTrueFalse === undefined) {
+        if (data.technique === 'ONE_CHOICE' || data.technique === 'MULTIPLE_CHOICE') {
+            setVariantTrueFalse(data.variant.find((item) => item.is_true === true))
+        }
+        if (
+            (data.technique === 'ONE_CHOICE' || data.technique === 'MULTIPLE_CHOICE') &&
+            variantTrueFalse === undefined
+        ) {
             message.error('Минимум 1 правильный вариант ответа')
         } else {
             postConstructorQuestion(data).then((res) => {
