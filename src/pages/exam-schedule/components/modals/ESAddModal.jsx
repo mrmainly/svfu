@@ -186,9 +186,9 @@ const ESAddModal = ({ open, setOpen }) => {
                     <Form.List name="experts">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={field.key}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -197,8 +197,8 @@ const ESAddModal = ({ open, setOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Эксперт ${key + 1} `}
-                                            name={key}
+                                            label={`Эксперт ${field.key + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             rules={[
                                                 {
@@ -217,7 +217,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
@@ -257,9 +257,9 @@ const ESAddModal = ({ open, setOpen }) => {
                     <Form.List name="moderators">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={field.key}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -268,8 +268,8 @@ const ESAddModal = ({ open, setOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Модератор ${key + 1} `}
-                                            name={key}
+                                            label={`Модератор ${field.key + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             rules={[
                                                 {
@@ -288,7 +288,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
