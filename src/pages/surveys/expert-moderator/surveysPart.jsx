@@ -1,5 +1,9 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
+import { BsArrowLeft } from 'react-icons/bs'
+
+import { Line } from '../../../components'
 
 import TheoreticalPartExMo from './components/parts/theoretical_part_exmo'
 import PracticalPartExMo from './components/parts/practical_part_exmo'
@@ -11,6 +15,7 @@ import VerificationSubscribeModalModerator from './components/modals/Verificatio
 
 const SurveysPart = () => {
     const location = useLocation()
+    const navigate = useNavigate()
 
     const state = location.state
 
@@ -19,6 +24,34 @@ const SurveysPart = () => {
     const role = JSON.parse(localStorage.getItem('role'))
     return (
         <div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                    marginBottom: '10px',
+                }}
+            >
+                <BsArrowLeft
+                    style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
+                    onClick={() => {
+                        navigate(-1)
+                    }}
+                />
+                <span
+                    style={{
+                        fontFamily: 'Roboto',
+                        fontStyle: 'normal',
+                        fontWeight: '400',
+                        fontSize: '20px',
+                        lineHeight: '30px',
+                    }}
+                >
+                    {surveyquest?.survey.name}
+                </span>
+            </div>
+            <Line />
             {role === 'MODERATOR' && appeal ? (
                 <AppealModeratorModal id={id} surveyquest={surveyquest} appeal_text={appeal_text} />
             ) : role === 'MODERATOR' ? (
