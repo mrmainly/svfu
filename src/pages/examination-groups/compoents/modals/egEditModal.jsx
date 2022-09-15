@@ -103,9 +103,9 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                     <Form.List name="testers">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={field.key}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -114,8 +114,8 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Аттестуемый ${key + 1} `}
-                                            name={key}
+                                            label={`Аттестуемый ${index + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
@@ -133,7 +133,7 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
