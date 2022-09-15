@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Checkbox, message, Typography } from 'antd'
+import { Button, Modal, Form, Input, Checkbox, message, Typography, Radio } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -35,6 +35,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
             if (res.data) {
                 dispatch(openExpertTheoreticalPartOpen(false))
                 dispatch(openSubscribeModal(true))
+                console.log(data)
             } else {
                 message.error('Вы не оставили рекомендацию')
             }
@@ -161,17 +162,21 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                                 label="Результат практической части"
                                 labelCol={{ span: 24 }}
                                 name="pass_practical_part"
-                                valuePropName="checked"
                             >
-                                <Checkbox>Сдано</Checkbox>
+                                <Radio.Group>
+                                    <Radio value={true}>Сдано</Radio>
+                                    <Radio value={false}>Не сдано</Radio>
+                                </Radio.Group>
                             </Form.Item>
                             <Form.Item
                                 label="Результат экзамена"
                                 labelCol={{ span: 24 }}
                                 name="pass_test_part"
-                                valuePropName="checked"
                             >
-                                <Checkbox>Сдано</Checkbox>
+                                <Radio.Group>
+                                    <Radio value={true}>Сдано</Radio>
+                                    <Radio value={false}>Не сдано</Radio>
+                                </Radio.Group>
                             </Form.Item>
                         </>
                     ) : (
