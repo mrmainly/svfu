@@ -130,7 +130,7 @@ const PracticalPart = ({ id }) => {
                                   labelCol={{ span: 24 }}
                                   name="file"
                               >
-                                  <Dragger>
+                                  <Dragger beforeUpload={true}>
                                       <p className="ant-upload-drag-icon">
                                           <InboxOutlined />
                                       </p>
