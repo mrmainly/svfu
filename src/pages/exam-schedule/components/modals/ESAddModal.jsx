@@ -197,7 +197,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Эксперт ${field.key + 1} `}
+                                            label={`Эксперт ${index + 1} `}
                                             name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             rules={[
@@ -268,7 +268,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Модератор ${field.key + 1} `}
+                                            label={`Модератор ${index + 1} `}
                                             name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             rules={[
