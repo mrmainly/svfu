@@ -40,7 +40,7 @@ const PracticalPart = ({ id }) => {
         if (data.file) {
             formData.append('file', data.file.file.originFileObj)
         }
-        formData.append('q_id', practical_data.surveyquest[0].question.id)
+        formData.append('q_id', practical_data?.surveyquest[0].question.id)
         formData.append('describe', data.describe)
         postPracticalPart({
             id: id,
@@ -62,84 +62,90 @@ const PracticalPart = ({ id }) => {
                 onFinish={onSubmitFurther}
                 id="form-practical-part"
             >
-                {practical_data.surveyquest.map((item, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <Title level={4}>Практический вопрос</Title>
-                        <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
+                {practical_data.surveyquest.length
+                    ? practical_data.surveyquest.map((item, index) => (
+                          <div
+                              key={index}
+                              style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                              }}
+                          >
+                              <Title level={4}>Практический вопрос</Title>
+                              <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
 
-                        {item?.question?.question_images.length && (
-                            <div style={{ display: 'flex', flexDirection: ' column' }}>
-                                {item?.question?.question_images.map((itemImage, index) => (
-                                    <div
-                                        key={index}
-                                        style={{
-                                            height: 150,
-                                            objectFit: 'cover',
-                                            marginTop: 20,
-                                            background: `url(${itemImage.image})`,
-                                            backgroundRepeat: 'no-repeat',
-                                            backgroundSize: 'contain',
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                        {item.question?.question_files?.length && (
-                            <div
-                                style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}
-                            >
-                                <Text>Прикрепленныe файлы:</Text>
-                                <div style={{ display: 'flex', marginTop: 10 }}>
-                                    {item.question.question_files.map((itemFile, index) => (
-                                        <a
-                                            href={itemFile.file}
-                                            target="_blank"
-                                            key={index}
-                                            style={{ marginLeft: index === 0 ? 0 : 10 }}
-                                            rel="noopener noreferrer"
-                                        >
-                                            {decodeURI(itemFile.file).split('/')[5]}
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                        <Form.Item
-                            name="describe"
-                            labelCol={{ span: 24 }}
-                            label={<Text style={{ fontSize: 16 }}>Ответ:</Text>}
-                            style={{ marginTop: 10 }}
-                            required
-                        >
-                            <TextArea style={{ height: 134 }} />
-                        </Form.Item>
-                        <Form.Item
-                            label={<Text style={{ fontSize: 16 }}>Загрузить файл:</Text>}
-                            style={{ marginTop: 20 }}
-                            labelCol={{ span: 24 }}
-                            name="file"
-                        >
-                            <Dragger>
-                                <p className="ant-upload-drag-icon">
-                                    <InboxOutlined />
-                                </p>
-                                <p className="ant-upload-text">
-                                    Click or drag file to this area to upload
-                                </p>
-                                <p className="ant-upload-hint">
-                                    Support for a single or bulk upload. Strictly prohibit from
-                                    uploading company data or other band files
-                                </p>
-                            </Dragger>
-                        </Form.Item>
-                    </div>
-                ))}
+                              {item?.question?.question_images.length && (
+                                  <div style={{ display: 'flex', flexDirection: ' column' }}>
+                                      {item?.question?.question_images.map((itemImage, index) => (
+                                          <div
+                                              key={index}
+                                              style={{
+                                                  height: 150,
+                                                  objectFit: 'cover',
+                                                  marginTop: 20,
+                                                  background: `url(${itemImage.image})`,
+                                                  backgroundRepeat: 'no-repeat',
+                                                  backgroundSize: 'contain',
+                                              }}
+                                          />
+                                      ))}
+                                  </div>
+                              )}
+                              {item.question?.question_files?.length && (
+                                  <div
+                                      style={{
+                                          display: 'flex',
+                                          flexDirection: 'column',
+                                          marginTop: 10,
+                                      }}
+                                  >
+                                      <Text>Прикрепленныe файлы:</Text>
+                                      <div style={{ display: 'flex', marginTop: 10 }}>
+                                          {item.question.question_files.map((itemFile, index) => (
+                                              <a
+                                                  href={itemFile.file}
+                                                  target="_blank"
+                                                  key={index}
+                                                  style={{ marginLeft: index === 0 ? 0 : 10 }}
+                                                  rel="noopener noreferrer"
+                                              >
+                                                  {decodeURI(itemFile.file).split('/')[5]}
+                                              </a>
+                                          ))}
+                                      </div>
+                                  </div>
+                              )}
+                              <Form.Item
+                                  name="describe"
+                                  labelCol={{ span: 24 }}
+                                  label={<Text style={{ fontSize: 16 }}>Ответ:</Text>}
+                                  style={{ marginTop: 10 }}
+                                  required
+                              >
+                                  <TextArea style={{ height: 134 }} />
+                              </Form.Item>
+                              <Form.Item
+                                  label={<Text style={{ fontSize: 16 }}>Загрузить файл:</Text>}
+                                  style={{ marginTop: 20 }}
+                                  labelCol={{ span: 24 }}
+                                  name="file"
+                              >
+                                  <Dragger>
+                                      <p className="ant-upload-drag-icon">
+                                          <InboxOutlined />
+                                      </p>
+                                      <p className="ant-upload-text">
+                                          Click or drag file to this area to upload
+                                      </p>
+                                      <p className="ant-upload-hint">
+                                          Support for a single or bulk upload. Strictly prohibit
+                                          from uploading company data or other band files
+                                      </p>
+                                  </Dragger>
+                              </Form.Item>
+                          </div>
+                      ))
+                    : 'Нету практической части'}
             </Form>
         </div>
     )

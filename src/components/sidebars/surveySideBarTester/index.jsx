@@ -127,6 +127,7 @@ const SurveysSideBar = () => {
                 )
             )
         }
+        console.log()
     }, [dataList])
 
     if (isFetching) {
