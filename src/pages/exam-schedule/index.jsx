@@ -5,9 +5,11 @@ import ExamScheduleTable from './components/table'
 import ESAddModal from './components/modals/ESAddModal'
 import ESEditModal from './components/modals/ESEditModal'
 import { useGetTutorExamQuery } from '../../services/TutorService'
+import ModalAnswerDeleteExam from './components/modals/ModalAnswerDeleteExam'
 import { MyButton } from '../../components'
 import ViewSurveyModal from './components/modals/ViewSurveyModal'
 import './exam-schedule.css'
+import { useModal } from '../../hooks'
 
 const ExamSchedule = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -30,6 +32,7 @@ const ExamSchedule = () => {
     const [modalAddES, setModalAddES] = useState(false)
     const [currentSurveyId, setCurrentSurveyId] = useState()
     const [viewSurveyModalOpen, setViewSurveyModalOpen] = useState(false)
+    const { open, handleOpen, handleClose } = useModal()
 
     const onChange = (page) => {
         setCurrentPage(page)
@@ -63,13 +66,24 @@ const ExamSchedule = () => {
             value: '-date_finish',
         },
     ]
+
     return (
         <div>
             <MyButton style={{ marginBottom: 20 }} onClick={() => setModalAddES(true)}>
                 Назначить экзамен
             </MyButton>
             <ESAddModal open={modalAddES} setOpen={setModalAddES} />
-            <ESEditModal open={modalEditES} setOpen={setModalEditES} dataList={currentData} />
+            <ESEditModal
+                open={modalEditES}
+                setOpen={setModalEditES}
+                dataList={currentData}
+                handleOpen={handleOpen}
+            />
+            <ModalAnswerDeleteExam
+                open={open}
+                handleClose={handleClose}
+                currentData={currentData}
+            />
             {viewSurveyModalOpen && (
                 <ViewSurveyModal
                     open={viewSurveyModalOpen}

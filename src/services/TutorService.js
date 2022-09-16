@@ -92,6 +92,16 @@ export const Tutor = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Application' }],
         }),
+        deleteTutorExam: build.mutation({
+            query({ id, data }) {
+                return {
+                    url: `tutor/exam/${id}`,
+                    method: 'DELETE',
+                    body: data,
+                }
+            },
+            invalidatesTags: [{ type: 'TestGroup' }],
+        }),
         putUserApplicationReject: build.mutation({
             query({ id, data }) {
                 return {
@@ -149,7 +159,7 @@ export const {
     usePatchTesterGroupMutation,
     useDeleteTesterGroupMutation,
     useGetApplicationIdQuery,
-
+    useDeleteTutorExamMutation,
     usePatchTestExamMutation,
     useGetUsersRoleQuery,
     useGetCertifiedIdQuery,

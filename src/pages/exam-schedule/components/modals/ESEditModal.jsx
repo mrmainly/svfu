@@ -15,7 +15,7 @@ import {
 
 const { Option } = Select
 
-const ESEditModal = ({ open, setOpen, dataList }) => {
+const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
     const [direction, setDirection] = useState(dataList?.direction)
     const [testGroup, setTestGroup] = useState(dataList?.test_group)
     const [unit, setUnit] = useState(dataList?.unit)
@@ -28,6 +28,7 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [patchTestExam] = usePatchTestExamMutation()
+
     useEffect(() => {
         setDirection(dataList?.direction)
         setTestGroup(dataList?.test_group)
@@ -65,9 +66,19 @@ const ESEditModal = ({ open, setOpen, dataList }) => {
                         htmlType="submit"
                         form="ese-form"
                         type="primary"
+                        size="large"
                         disabled={dataList?.exam_status === 'WAITING' ? false : true}
                     >
                         Сохранить
+                    </Button>,
+                    <Button
+                        key="delete"
+                        type="danger"
+                        size="large"
+                        disabled={dataList?.exam_status === 'IN_PROGRESS' ? false : true}
+                        onClick={handleOpen}
+                    >
+                        Отменить
                     </Button>,
                     <MyButton
                         key="back"
@@ -307,6 +318,7 @@ ESEditModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
     dataList: PropTypes.object,
+    handleOpen: PropTypes.func,
 }
 
 export default ESEditModal
