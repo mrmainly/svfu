@@ -150,7 +150,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                 id: dataList?.question_images[0].id,
                 formData: formData,
             })
-        } else if (dataList?.question_images.length === 0) {
+        } else if (dataList?.question_images.length === 0 && img != null) {
             const formData = new FormData()
             formData.append('image', img)
 
@@ -158,7 +158,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                 id: dataList?.id,
                 formData: formData,
             })
-        } else if (typeof img !== 'string') {
+        } else if (dataList?.question_images.length !== 0 && typeof img !== 'string') {
             deleteImage(dataList?.question_images[0].id)
         }
 
@@ -191,11 +191,9 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
         } else {
             data.difficulty = 'DESCRIBE'
         }
-
         if (dataList?.is_active !== active) {
             putConstructorQuestion({ id: dataList?.id })
         }
-
         patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Вопрос изменен')

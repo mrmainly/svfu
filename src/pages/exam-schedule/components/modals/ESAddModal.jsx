@@ -183,8 +183,19 @@ const ESAddModal = ({ open, setOpen }) => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Form.List name="experts">
-                        {(fields, { add, remove }) => (
+                    <Form.List
+                        name="experts"
+                        rules={[
+                            {
+                                validator: async (_, names) => {
+                                    if (!names || names.length < 2) {
+                                        return Promise.reject(new Error('Не менее 1 эксперта'))
+                                    }
+                                },
+                            },
+                        ]}
+                    >
+                        {(fields, { add, remove }, { errors }) => (
                             <>
                                 {fields.map((field, index) => (
                                     <div
@@ -232,6 +243,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                     >
                                         Добавить эксперта
                                     </Button>
+                                    <Form.ErrorList errors={errors} />
                                 </Form.Item>
                             </>
                         )}
@@ -254,8 +266,19 @@ const ESAddModal = ({ open, setOpen }) => {
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.List name="moderators">
-                        {(fields, { add, remove }) => (
+                    <Form.List
+                        name="moderators"
+                        rules={[
+                            {
+                                validator: async (_, names) => {
+                                    if (!names || names.length < 2) {
+                                        return Promise.reject(new Error('Не менее 1 модератора'))
+                                    }
+                                },
+                            },
+                        ]}
+                    >
+                        {(fields, { add, remove }, { errors }) => (
                             <>
                                 {fields.map((field, index) => (
                                     <div
@@ -303,6 +326,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                     >
                                         Добавить модератора
                                     </Button>
+                                    <Form.ErrorList errors={errors} />
                                 </Form.Item>
                             </>
                         )}
