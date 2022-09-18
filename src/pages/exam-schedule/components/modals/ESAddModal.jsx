@@ -188,7 +188,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         rules={[
                             {
                                 validator: async (_, names) => {
-                                    if (!names || names.length < 2) {
+                                    if (!names || names.length < 1) {
                                         return Promise.reject(new Error('Не менее 1 эксперта'))
                                     }
                                 },
@@ -226,10 +226,12 @@ const ESAddModal = ({ open, setOpen }) => {
                                                 ))}
                                             </Select>
                                         </Form.Item>
-                                        <DeleteTwoTone
-                                            twoToneColor="#EB5757"
-                                            onClick={() => remove(field.name)}
-                                        />
+                                        {fields.length > 1 ? (
+                                            <DeleteTwoTone
+                                                twoToneColor="#EB5757"
+                                                onClick={() => remove(field.name)}
+                                            />
+                                        ) : null}
                                     </div>
                                 ))}
                                 <Form.Item>
@@ -271,7 +273,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         rules={[
                             {
                                 validator: async (_, names) => {
-                                    if (!names || names.length < 2) {
+                                    if (!names || names.length < 1) {
                                         return Promise.reject(new Error('Не менее 1 модератора'))
                                     }
                                 },
@@ -309,10 +311,12 @@ const ESAddModal = ({ open, setOpen }) => {
                                                 ))}
                                             </Select>
                                         </Form.Item>
-                                        <DeleteTwoTone
-                                            twoToneColor="#EB5757"
-                                            onClick={() => remove(field.name)}
-                                        />
+                                        {fields.length > 1 ? (
+                                            <DeleteTwoTone
+                                                twoToneColor="#EB5757"
+                                                onClick={() => remove(field.name)}
+                                            />
+                                        ) : null}
                                     </div>
                                 ))}
                                 <Form.Item>

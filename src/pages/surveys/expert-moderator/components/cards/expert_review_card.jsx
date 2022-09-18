@@ -6,6 +6,7 @@ import { Card, Typography } from 'antd'
 const { Text } = Typography
 
 const ExpertReviewCard = ({ recommendationPartOne, recommendationPartTwo, id }) => {
+    console.log('recommendationPartOne', recommendationPartOne)
     return (
         <Card
             title={<Text style={{ color: '#2F80ED' }}>id: {id}</Text>}
@@ -13,11 +14,11 @@ const ExpertReviewCard = ({ recommendationPartOne, recommendationPartTwo, id }) 
                 width: '100%',
                 marginTop: 10,
             }}
-            extra={
-                <div style={{ fontSize: 16 }}>
-                    {recommendationPartOne ? 'Теоретическая часть' : 'Практическая часть'}
-                </div>
-            }
+            // extra={
+            //     <div style={{ fontSize: 16 }}>
+            //         {recommendationPartOne ? 'Теоретическая часть' : 'Практическая часть'}
+            //     </div>
+            // }
         >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Text>
