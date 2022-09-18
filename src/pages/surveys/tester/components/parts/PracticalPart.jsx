@@ -38,10 +38,16 @@ const PracticalPart = ({ id }) => {
     const onSubmitFurther = (data) => {
         const formData = new FormData()
         if (data.file) {
-            formData.append('file', data.file.file.originFileObj)
+            formData.append('file', data.file.file)
         }
-        formData.append('q_id', practical_data?.surveyquest[0].question.id)
-        formData.append('describe', data.describe)
+
+        formData.append(
+            'q_id',
+            practical_data?.surveyquest[0]?.question.id
+                ? practical_data?.surveyquest[0]?.question.id
+                : 1
+        )
+        formData.append('describe', data.describe ? data.describe : '')
         postPracticalPart({
             id: id,
             body: formData,
