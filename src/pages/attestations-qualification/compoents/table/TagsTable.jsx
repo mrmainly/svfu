@@ -3,12 +3,28 @@ import PropTypes from 'prop-types'
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 
-const TagsTable = ({ data, loading, setCurrentData, handleOpen }) => {
+const TagsTable = ({ data, loading, setCurrentData, handleOpen, setId }) => {
+    const onTableChange = (newPagination, filters, sorter) => {
+        if (sorter?.order === 'descend') {
+            {
+                setId('-id')
+            }
+        } else if (sorter?.order === 'ascend') {
+            {
+                setId('id')
+            }
+        } else {
+            {
+                setId('')
+            }
+        }
+    }
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
+            sorter: true,
         },
         {
             title: 'Название квалификации',
@@ -42,6 +58,7 @@ const TagsTable = ({ data, loading, setCurrentData, handleOpen }) => {
                 rowKey="id"
                 pagination={false}
                 scroll={{ x: true }}
+                onChange={onTableChange}
             />
         </>
     )
@@ -52,6 +69,7 @@ TagsTable.propTypes = {
     loading: PropTypes.bool,
     setCurrentData: PropTypes.func,
     handleOpen: PropTypes.func,
+    setId: PropTypes.func,
 }
 
 export default TagsTable

@@ -3,7 +3,8 @@ import { api } from './api'
 export const attestation = api.injectEndpoints({
     endpoints: (build) => ({
         getAttestationsTag: build.query({
-            query: () => `constructor/direction/tag`,
+            query: ({ currentPage, ordering, name }) =>
+                `constructor/direction/tag?page=${currentPage}&ordering=${ordering}&name=${name}`,
             providesTags: ['Attestation'],
         }),
         postAttestationsTag: build.mutation({
