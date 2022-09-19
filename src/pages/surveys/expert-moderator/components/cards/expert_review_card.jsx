@@ -13,24 +13,21 @@ const ExpertReviewCard = ({ recommendationPartOne, recommendationPartTwo, id }) 
                 width: '100%',
                 marginTop: 10,
             }}
-            extra={
-                <div style={{ fontSize: 16 }}>
-                    {recommendationPartOne ? 'Теоретическая часть' : 'Практическая часть'}
-                </div>
-            }
+            // extra={
+            //     <div style={{ fontSize: 16 }}>
+            //         {recommendationPartOne ? 'Теоретическая часть' : 'Практическая часть'}
+            //     </div>
+            // }
         >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {recommendationPartOne ? (
-                    <Text style={{ marginTop: 10 }}>
-                        Рекомендация:{' '}
-                        <span style={{ fontWeight: 'bold' }}>{recommendationPartOne}</span>
-                    </Text>
-                ) : (
-                    <Text style={{ marginTop: 10 }}>
-                        Рекомендация:{' '}
-                        <span style={{ fontWeight: 'bold' }}>{recommendationPartTwo}</span>
-                    </Text>
-                )}
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Text style={{ marginTop: 10 }}>Рекомендация по теоретической части:</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{recommendationPartOne}</Text>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Text style={{ marginTop: 10 }}>Рекомендация по практической части:</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{recommendationPartTwo}</Text>
+                </div>
             </div>
         </Card>
     )
