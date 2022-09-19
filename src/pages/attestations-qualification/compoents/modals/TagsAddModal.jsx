@@ -48,7 +48,7 @@ const TagsAddModal = ({ open, handleClose }) => {
                 style={{ marginBottom: '-20px' }}
                 id="form-create-tag"
             >
-                <Form.Item label="Название квалификации" name="name">
+                <Form.Item label="Название тега" name="name">
                     <Input />
                 </Form.Item>
             </Form>

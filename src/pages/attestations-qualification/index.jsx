@@ -41,9 +41,7 @@ const AttestationsQualifications = () => {
     return (
         <div>
             <div className="inputs-container">
-                <MyButton onClick={() => setModalNewQuali(true)}>
-                    Создать новую квалификацию
-                </MyButton>
+                <MyButton onClick={() => setModalNewQuali(true)}>Создать квалификацию</MyButton>
                 <MyButton onClick={() => navigate(ROUTES.TAGS_LIST)}>Теги</MyButton>
             </div>
 

@@ -68,7 +68,7 @@ const TagsEditModal = ({ data, open, handleClose }) => {
                 onFinish={onSubmit}
                 id="form-tag-edit-modal"
             >
-                <Form.Item label="Название квалификации" name="name">
+                <Form.Item label="Название тега" name="name">
                     <Input />
                 </Form.Item>
             </Form>
