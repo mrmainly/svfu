@@ -8,6 +8,7 @@ import { Line } from '../../../components'
 import ROUTES from '../../../routes'
 import { useGetSurveyExpertIdQuery } from '../../../services/ExpertService'
 import ExpertReviewCard from './components/cards/expert_review_card'
+import './expert.css'
 
 const { Title } = Typography
 
@@ -45,7 +46,6 @@ const Expert = () => {
                 <Title level={5}>
                     Тест был начат:
                     <span style={{ marginLeft: 10 }}>
-                        {' '}
                         {moment(surveyquest.exam_date_start).format('DD-MM-YYYY HH:mm:ss')}
                     </span>
                 </Title>
@@ -83,20 +83,6 @@ const Expert = () => {
                                 />
                             ))}
                     </div>
-                    {/* <div style={{ marginTop: 20 }}>
-                        <Title level={5} style={{ marginBottom: 20 }}>
-                            Заключения по практической части
-                        </Title>
-                        {surveyquest.expert_review.length &&
-                            surveyquest.expert_review.map((item, index) => (
-                                <ExpertReviewCard
-                                    key={index}
-                                    expert_name={item.user}
-                                    recommendation={item.conclusion_second_part}
-                                    id={item.id}
-                                />
-                            ))}
-                    </div> */}
                 </>
             )}
             <Line />

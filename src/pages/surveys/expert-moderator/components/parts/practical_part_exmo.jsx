@@ -91,7 +91,7 @@ const PracticalPartExMo = () => {
                               </div>
                           </div>
                       ))
-                    : ''}
+                    : 'Нету практической части'}
             </Form>
         </div>
     )

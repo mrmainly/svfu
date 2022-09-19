@@ -1,0 +1,22 @@
+.action-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer-user-text {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.answer-user-block {
+    display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+    .answer-user-block {
+        flex-direction: column;
+    }
+    .answer-user-text {
+        margin-left: 0px;
+    }
+}
