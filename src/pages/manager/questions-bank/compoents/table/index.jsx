@@ -5,7 +5,7 @@ import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
 import QBEditModal from '../modals/qbeditmodal'
-import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
+import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 
 const QuestionsBankTable = ({ data, loading, setId }) => {
     const { data: dataDirection } = useGetToolsDirectionQuery()

@@ -1,11 +1,11 @@
 import { Modal, message, Input, Select, Form } from 'antd'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../components'
+import { MyButton } from '../../../../../components'
 import {
     usePostAttestationsQualificationMutation,
     useGetAttestationsTagQuery,
-} from '../../../../services/AttestationService'
+} from '../../../../../services/AttestationService'
 const { TextArea } = Input
 const { Option } = Select
 

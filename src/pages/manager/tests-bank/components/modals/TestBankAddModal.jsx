@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
-import moment from 'moment'
+import { useState } from 'react'
 import {
-    message,
     Modal,
     Row,
     Col,
@@ -11,21 +9,18 @@ import {
     TimePicker,
     InputNumber,
     Typography,
-    Space,
-    Switch,
+    message,
 } from 'antd'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../components'
-import {
-    usePatchAttestationsTestsBankIdMutation,
-    usePutAttestationsTestsBankIdMutation,
-} from '../../../../services/AttestationService'
-import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
+import { MyButton } from '../../../../../components'
+import { usePostAttestationsTestsBankMutation } from '../../../../../services/AttestationService'
 
+import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 const { Option } = Select
 
-const TBEditModal = ({ open, setOpen, dataList }) => {
+const TBAddModal = ({ open, setOpen }) => {
     const [bc, setBc] = useState(0)
     const [ac, setAc] = useState(0)
     const [ec, setEc] = useState(0)
@@ -33,53 +28,48 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
     const [aas, setAs] = useState(0)
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
-    const [active, setActive] = useState()
-    const { data: dataDirection } = useGetToolsDirectionQuery()
-    const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
-    const [putAttestationsTestsBankId] = usePutAttestationsTestsBankIdMutation()
-    useEffect(() => {
-        setBc(dataList[0]?.beginner_count)
-        setAc(dataList[0]?.advanced_count)
-        setEc(dataList[0]?.expert_count)
-        setBs(dataList[0]?.beginner_score)
-        setAs(dataList[0]?.advanced_score)
-        setEs(dataList[0]?.expert_score)
-        setPro(dataList[0]?.passing_percent_score)
-        setActive(dataList[0]?.is_active)
-    }, [dataList])
+    const [postAttestationsTestsBankMutation] = usePostAttestationsTestsBankMutation()
+    const { data } = useGetToolsDirectionQuery()
 
     const onSubmit = (data) => {
-        const minutes =
+        const hhminuts =
             parseInt(moment(data.test_time).format('HH') * 60) +
             parseInt(moment(data.test_time).format('mm'))
 
-        data.test_time = minutes
-        if (dataList[0]?.is_active !== active) {
-            putAttestationsTestsBankId({ id: dataList[0]?.id }).then((res) => {
-                if (!res.data) {
-                    message.error(res.error.data.errors[0])
-                }
-            })
-        }
-        patchAttestationsTestsBankId({ id: dataList[0].id, body: data }).then((res) => {
+        data.test_time = hhminuts
+        postAttestationsTestsBankMutation(data).then((res) => {
             if (res.data) {
-                message.success('Тест изменен')
+                message.success('Тестирование создано')
                 setOpen(false)
+                setBc(0)
+                setAc(0)
+                setEc(0)
+                setBs(0)
+                setAs(0)
+                setEs(0)
+                setPro(0)
             } else {
                 message.error(res.error.data.errors[0])
             }
         })
     }
-    const hours = Math.floor(dataList[0]?.test_time / 60) + ':' + (dataList[0]?.test_time % 60)
-    const hhminuts = moment(hours, 'HH:mm')
 
     return (
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Редактирование тестирования"
+                title="Создание тестирования"
                 visible={open}
-                onCancel={() => setOpen(false)}
+                onCancel={() => {
+                    setOpen(false)
+                    setBc(0)
+                    setAc(0)
+                    setEc(0)
+                    setBs(0)
+                    setAs(0)
+                    setEs(0)
+                    setPro(0)
+                }}
                 style={{ top: 0 }}
                 footer={[
                     <MyButton key="submit" htmlType="submit" form="tbadd-form">
@@ -89,7 +79,16 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                         key="back"
                         type="default"
                         style={{ background: '#FFF' }}
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                            setOpen(false)
+                            setBc(0)
+                            setAc(0)
+                            setEc(0)
+                            setBs(0)
+                            setAs(0)
+                            setEs(0)
+                            setPro(0)
+                        }}
                     >
                         Отмена
                     </MyButton>,
@@ -97,44 +96,30 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
             >
                 <Form
                     layout="vertical"
-                    initialValues={{
-                        ['name']: dataList[0]?.name,
-                        ['direction']: dataList[0]?.direction?.id,
-                        ['test_time']: hhminuts,
-                        ['beginner_count']: dataList[0]?.beginner_count,
-                        ['advanced_count']: dataList[0]?.advanced_count,
-                        ['expert_count']: dataList[0]?.expert_count,
-                        ['beginner_score']: dataList[0]?.beginner_score,
-                        ['advanced_score']: dataList[0]?.advanced_score,
-                        ['expert_score']: dataList[0]?.expert_score,
-                        ['passing_percent_score']: dataList[0]?.passing_percent_score,
-                    }}
                     onFinish={onSubmit}
                     id="tbadd-form"
+                    initialValues={{
+                        ['passing_percent_score']: 0,
+                    }}
                 >
-                    <Form.Item label="Название теста" name="name">
+                    <Form.Item required label="Название теста" name="name">
                         <Input placeholder="Название теста" />
                     </Form.Item>
-                    <Form.Item label="Квалификация" name="direction">
+                    <Form.Item required label="Квалификация" name="direction">
                         <Select
                             placeholder="Выберите квалификацию"
                             style={{
                                 width: '100%',
                             }}
                         >
-                            {!dataList[0]?.direction?.is_active && (
-                                <Option disabled value={dataList[0]?.direction?.id} key="qwe">
-                                    {dataList[0]?.direction?.name}
-                                </Option>
-                            )}
-                            {dataDirection?.map((item, index) => (
+                            {data?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Время на тест(ЧЧ:мм)" name="test_time">
+                    <Form.Item required label="Время на тест(ЧЧ:мм)" name="test_time">
                         <TimePicker
                             placeholder="Таймер тестирования"
                             style={{ width: '100%' }}
@@ -144,19 +129,31 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
 
                     <Row gutter={[16, 0]}>
                         <Col span={12}>
-                            <Form.Item label="Количество легких вопросов" name="beginner_count">
+                            <Form.Item
+                                required
+                                label="Количество легких вопросов"
+                                name="beginner_count"
+                            >
                                 <InputNumber
                                     onChange={(value) => setBc(value)}
                                     style={{ width: '100%' }}
                                 />
                             </Form.Item>
-                            <Form.Item label="Количество средних вопросов" name="advanced_count">
+                            <Form.Item
+                                required
+                                label="Количество средних вопросов"
+                                name="advanced_count"
+                            >
                                 <InputNumber
                                     onChange={(value) => setAc(value)}
                                     style={{ width: '100%' }}
                                 />
                             </Form.Item>
-                            <Form.Item label="Количество сложных вопросов" name="expert_count">
+                            <Form.Item
+                                required
+                                label="Количество сложных вопросов"
+                                name="expert_count"
+                            >
                                 <InputNumber
                                     onChange={(value) => setEc(value)}
                                     style={{ width: '100%' }}
@@ -164,19 +161,31 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item label="Балл за правильный ответ" name="beginner_score">
+                            <Form.Item
+                                required
+                                label="Балл за правильный ответ"
+                                name="beginner_score"
+                            >
                                 <InputNumber
                                     onChange={(value) => setBs(value)}
                                     style={{ width: '100%' }}
                                 />
                             </Form.Item>
-                            <Form.Item label="Балл за правильный ответ" name="advanced_score">
+                            <Form.Item
+                                required
+                                label="Балл за правильный ответ"
+                                name="advanced_score"
+                            >
                                 <InputNumber
                                     onChange={(value) => setAs(value)}
                                     style={{ width: '100%' }}
                                 />
                             </Form.Item>
-                            <Form.Item label="Балл за правильный ответ" name="expert_score">
+                            <Form.Item
+                                required
+                                label="Балл за правильный ответ"
+                                name="expert_score"
+                            >
                                 <InputNumber
                                     onChange={(value) => setEs(value)}
                                     style={{ width: '100%' }}
@@ -185,6 +194,7 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                         </Col>
                     </Row>
                     <Form.Item
+                        required
                         label="Допустимый балл теоретической части(в процентах)"
                         name="passing_percent_score"
                     >
@@ -210,27 +220,15 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                             <Typography>{((bc * bs + aas * ac + es * ec) / 100) * pro}</Typography>
                         </Col>
                     </Row>
-                    <Space align="baseline">
-                        <Form.Item>
-                            <Switch
-                                defaultChecked={active}
-                                onChange={(e) => {
-                                    setActive(e)
-                                }}
-                            />
-                        </Form.Item>
-                        <Typography>Активность квалификации</Typography>
-                    </Space>
                 </Form>
             </Modal>
         </div>
     )
 }
 
-TBEditModal.propTypes = {
-    dataList: PropTypes.array,
+TBAddModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
 }
 
-export default TBEditModal
+export default TBAddModal

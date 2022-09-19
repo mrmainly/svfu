@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { Modal, message, Input, Select, Form, Switch, Typography, Space } from 'antd'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../components'
+import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
     useGetAttestationsTagQuery,
-} from '../../../../services/AttestationService'
+} from '../../../../../services/AttestationService'
 
 const { TextArea } = Input
 const { Option } = Select

@@ -1,53 +1,45 @@
 import { useState, useEffect } from 'react'
-import { Input, Pagination, Select } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { Pagination, Input, Select } from 'antd'
 
-import AttestationsQualificationsTable from './compoents/table'
-import AQAddModal from './compoents/modals/aqaddmodal'
-import { MyButton } from '../../components'
-import './attestations-qualification.css'
-import ROUTES from '../../routes'
+import TBAddModal from './components/modals/TestBankAddModal'
+import { useGetAttestationsTestsBankQuery } from '../../../services/AttestationService'
+import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
 
-import {
-    useGetAttestationsQualificationQuery,
-    useGetAttestationsTagQuery,
-} from '../../services/AttestationService'
+import TestsBankTable from './components/table/TestBankTable'
+import { MyButton } from '../../../components'
+import './test-bank.css'
 
-const AttestationsQualifications = () => {
+const TestsBank = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [name, setName] = useState('')
-    const [tag, setTag] = useState('')
     const [status, setStatus] = useState('')
+    const [directionName, setDirectionName] = useState('')
     const [id, setId] = useState('')
-    const { data, isFetching } = useGetAttestationsQualificationQuery({
+    const { data, isLoading } = useGetAttestationsTestsBankQuery({
         currentPage: currentPage,
         name: name,
-        tag: tag,
         is_active: status,
+        direction_name: directionName,
         id: id,
     })
-    const { data: directionTag } = useGetAttestationsTagQuery()
-    const [modalNewQuali, setModalNewQuali] = useState(false)
+    const { data: directionSelect } = useGetToolsDirectionQuery()
+    const [modalNewTest, setModalNewTest] = useState(false)
     const onChange = (page) => {
         setCurrentPage(page)
     }
+
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
-
-    const navigate = useNavigate()
-
     return (
         <div>
-            <div className="inputs-container">
-                <MyButton onClick={() => setModalNewQuali(true)}>Создать квалификацию</MyButton>
-                <MyButton onClick={() => navigate(ROUTES.TAGS_LIST)}>Теги</MyButton>
-            </div>
-
+            <MyButton onClick={() => setModalNewTest(true)} style={{ marginBottom: 20 }}>
+                Создать новый тест
+            </MyButton>
             <div className="inputs-container">
                 <Input.Search
-                    placeholder="Квалификация"
+                    placeholder="Название квалификации"
                     enterButton
                     onSearch={(value) => {
                         const currValue = value
@@ -56,12 +48,18 @@ const AttestationsQualifications = () => {
                     className="input-search"
                 ></Input.Search>
                 <Select
-                    placeholder="Тег"
+                    showSearch
                     className="input-search"
-                    onChange={(value) => setTag(value)}
+                    placeholder="Квалификация"
+                    optionFilterProp="children"
+                    filterOption={(input, option) => option.children.includes(input)}
+                    filterSort={(optionA, optionB) =>
+                        optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                    }
+                    onChange={(value) => setDirectionName(value)}
                 >
-                    <Select.Option value=""> Все теги</Select.Option>
-                    {directionTag?.results?.map((item, index) => (
+                    <Select.Option value=""> Все квалификации</Select.Option>
+                    {directionSelect?.map((item, index) => (
                         <Select.Option value={item.name} key={index}>
                             {item.name}
                         </Select.Option>
@@ -77,12 +75,8 @@ const AttestationsQualifications = () => {
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
             </div>
-            <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
-            <AttestationsQualificationsTable
-                data={data?.results}
-                loading={isFetching}
-                setId={setId}
-            />
+            {modalNewTest && <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />}
+            <TestsBankTable data={data?.results} loading={isLoading} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
@@ -97,4 +91,4 @@ const AttestationsQualifications = () => {
     )
 }
 
-export default AttestationsQualifications
+export default TestsBank

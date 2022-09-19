@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Input, Pagination } from 'antd'
 
-import { MyButton } from '../../components'
+import { MyButton } from '../../../components'
 import TagsTable from './compoents/table/TagsTable'
-import { useGetAttestationsTagQuery } from '../../services/AttestationService'
+import { useGetAttestationsTagQuery } from '../../../services/AttestationService'
 import TagsAddModal from './compoents/modals/TagsAddModal'
 import TagsEditModal from './compoents/modals/TagsEditModal'
-import { useModal } from '../../hooks'
+import { useModal } from '../../../hooks'
 import './attestations-qualification.css'
 
 const TagsList = () => {

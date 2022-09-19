@@ -3,10 +3,10 @@ import { Pagination, Select, Input } from 'antd'
 
 import QuestionsBankTable from './compoents/table'
 import QBAddModal from './compoents/modals/qbaddmodal'
-import { useGetConstructorQuestionQuery } from '../../services/ManagerService'
-import { useGetToolsDirectionQuery } from '../../services/ToolsService'
+import { useGetConstructorQuestionQuery } from '../../../services/ManagerService'
+import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
 
-import { MyButton } from '../../components'
+import { MyButton } from '../../../components'
 import './questions-bank.css'
 
 const QuestionsBank = () => {

@@ -2,11 +2,11 @@ import React from 'react'
 import { Modal, Input, Form, message, Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../components'
+import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsTagMutation,
     useDeleteAttestationsTagMutation,
-} from '../../../../services/AttestationService'
+} from '../../../../../services/AttestationService'
 
 const TagsEditModal = ({ data, open, handleClose }) => {
     const [patchAttestationsTag] = usePatchAttestationsTagMutation()
