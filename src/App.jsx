@@ -11,9 +11,9 @@ import {
     ProfileDetail,
     AvailableTest,
     MyQualification,
-    QualificationAdded,
-    QualificationDetail,
-    QualificationEdit,
+    // QualificationAdded,
+    // QualificationDetail,
+    // QualificationEdit,
     CertificationResultsDetial,
     Applying,
     TesterSurveyPart,
@@ -60,7 +60,7 @@ function App() {
                     <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route element={<TestResult />} path={`${ROUTES.TEST_RESULT}/:id`} />
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
-                    <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
+                    {/* <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
                     <Route
                         element={<QualificationDetail />}
                         path={`${ROUTES.QUALIFICATION_DETAIL}/:id`}
@@ -68,7 +68,7 @@ function App() {
                     <Route
                         element={<QualificationEdit />}
                         path={`${ROUTES.QUALIFICATION_EDITING}/:id`}
-                    />
+                    /> */}
                     <Route element={<TesterSurveyPart />} path={ROUTES.TESTER_SURVEY_PART} />
                     <Route element={<Applying />} path={ROUTES.APPILYNG} />
                     <Route

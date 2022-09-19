@@ -5,9 +5,9 @@ import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import AvailableTest from './tester/available-tests'
 import CertificationResults from './certification-results'
-import QualificationAdded from './qualifications/added'
-import QualificationDetail from './qualifications/detail'
-import QualificationEdit from './qualifications/edit'
+// import QualificationAdded from './documents/qualifications/added'
+// import QualificationDetail from './documents/qualifications/detail'
+// import QualificationEdit from './documents/qualifications/edit'
 import CertificationResultsDetial from './certification-results/detail'
 import Applying from './tester/applying'
 import TesterSurveyPart from './surveys/tester'
@@ -48,9 +48,9 @@ export {
     ProfileDetail,
     AvailableTest,
     CertificationResults,
-    QualificationAdded,
-    QualificationDetail,
-    QualificationEdit,
+    // QualificationAdded,
+    // QualificationDetail,
+    // QualificationEdit,
     TesterSurveyPart,
     CertificationResultsDetial,
     Applying,
