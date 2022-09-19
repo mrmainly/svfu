@@ -81,6 +81,7 @@ const ExamSchedule = () => {
             />
             <ModalAnswerDeleteExam
                 open={open}
+                setOpen={setModalEditES}
                 handleClose={handleClose}
                 currentData={currentData}
             />

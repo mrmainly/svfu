@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Checkbox, message, Typography, Radio } from 'antd'
+import { Button, Modal, Form, Input, Checkbox, message, Radio } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -8,8 +8,6 @@ import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertSe
 import ExpertReviewCard from '../cards/expert_review_card'
 
 const { TextArea } = Input
-
-const { Title } = Typography
 
 const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) => {
     const [subscribe, setSubscribe] = useState(false)
@@ -87,34 +85,16 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
             >
                 {main_expert && (
                     <div style={{ marginBottom: 20 }}>
-                        <div>
-                            <Title level={5} style={{ marginBottom: 20 }}>
-                                Заключения по теоретической части
-                            </Title>
-                            {expert_review.length &&
-                                expert_review.map((item, index) => (
-                                    <ExpertReviewCard
-                                        key={index}
-                                        expert_name={item.user}
-                                        recommendation={item.conclusion_first_part}
-                                        id={item.id}
-                                    />
-                                ))}
-                        </div>
-                        <div style={{ marginTop: 20 }}>
-                            <Title level={5} style={{ marginBottom: 20 }}>
-                                Заключения по практической части
-                            </Title>
-                            {expert_review.length &&
-                                expert_review.map((item, index) => (
-                                    <ExpertReviewCard
-                                        key={index}
-                                        expert_name={item.user}
-                                        recommendation={item.conclusion_second_part}
-                                        id={item.id}
-                                    />
-                                ))}
-                        </div>
+                        {expert_review.length &&
+                            expert_review.map((item, index) => (
+                                <ExpertReviewCard
+                                    key={index}
+                                    expert_name={item.user}
+                                    recommendationPartOne={item.conclusion_first_part}
+                                    recommendationPartTwo={item.conclusion_second_part}
+                                    id={item.user_id}
+                                />
+                            ))}
                     </div>
                 )}
                 <Form id="form-expert-theoretical-part" onFinish={onFinishSubmit}>

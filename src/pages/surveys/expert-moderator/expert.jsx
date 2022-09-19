@@ -36,8 +36,6 @@ const Expert = () => {
         )
     }
 
-    console.log('survey', surveyquest)
-
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', marginTop: 10 }}>
@@ -81,7 +79,7 @@ const Expert = () => {
                                     expert_name={item.user}
                                     recommendationPartOne={item.conclusion_first_part}
                                     recommendationPartTwo={item.conclusion_second_part}
-                                    id={item.id}
+                                    id={item.user_id}
                                 />
                             ))}
                     </div>

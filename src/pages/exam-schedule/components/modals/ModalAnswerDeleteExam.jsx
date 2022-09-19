@@ -6,26 +6,28 @@ import PropTypes from 'prop-types'
 
 const { TextArea } = Input
 
-const ModalAnswerDeleteExam = ({ open, setOpen, currentData }) => {
-    const [deleteTutorExam] = useDeleteTutorExamMutation()
+const ModalAnswerDeleteExam = ({ open, handleClose, currentData, setOpen }) => {
+    const [deleteTutorExam, { isLoading }] = useDeleteTutorExamMutation()
 
     const handleDeleteTutorExam = (data) => {
         deleteTutorExam({ id: currentData.id, data }).then((res) => {
             if (res.data) {
                 message.success('Экзамен принудительно отменен')
+                handleClose()
                 setOpen(false)
             } else {
                 message.error('что то пошло не так')
             }
         })
     }
+
     return (
         <div>
             <Modal
                 destroyOnClose={true}
                 title="Отмена теста"
                 visible={open}
-                onCancel={() => setOpen(false)}
+                onCancel={handleClose}
                 footer={[
                     <Button
                         key="delete"
@@ -38,7 +40,12 @@ const ModalAnswerDeleteExam = ({ open, setOpen, currentData }) => {
                     </Button>,
                 ]}
             >
-                <Form onFinish={handleDeleteTutorExam} id="deleteExamForm" layout="vertical">
+                <Form
+                    onFinish={handleDeleteTutorExam}
+                    id="deleteExamForm"
+                    layout="vertical"
+                    style={{ opacity: isLoading ? 0.5 : 1 }}
+                >
                     <Form.Item name="reason" label="Причина" required>
                         <TextArea placeholder="Опишите причину отмены" style={{ height: 200 }} />
                     </Form.Item>
@@ -50,8 +57,9 @@ const ModalAnswerDeleteExam = ({ open, setOpen, currentData }) => {
 
 ModalAnswerDeleteExam.propTypes = {
     open: PropTypes.bool,
-    setOpen: PropTypes.func,
+    handleClose: PropTypes.func,
     currentData: PropTypes.object,
+    setOpen: PropTypes.func,
 }
 
 export default ModalAnswerDeleteExam
