@@ -4,9 +4,12 @@ import { Modal, Space, Typography, message } from 'antd'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { useGetSurveysIdQuery, useSurveyPatchMutation } from '../../../../services/SurveysService'
-import { MyButton } from '../../../../components'
-import ROUTES from '../../../../routes'
+import {
+    useGetSurveysIdQuery,
+    useSurveyPatchMutation,
+} from '../../../../../services/SurveysService'
+import { MyButton } from '../../../../../components'
+import ROUTES from '../../../../../routes'
 
 const { Text } = Typography
 

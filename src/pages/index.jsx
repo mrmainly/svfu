@@ -3,13 +3,13 @@ import Registration from './auth/registration'
 import Profile from './profile'
 import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
-import Test from './tests'
+import AvailableTest from './tester/available-tests'
 import CertificationResults from './certification-results'
 import QualificationAdded from './qualifications/added'
 import QualificationDetail from './qualifications/detail'
 import QualificationEdit from './qualifications/edit'
 import CertificationResultsDetial from './certification-results/detail'
-import Applying from './applying'
+import Applying from './tester/applying'
 import TesterSurveyPart from './surveys/tester'
 import UsersDetail from './users/detail'
 import UsersList from './users/list'
@@ -27,7 +27,7 @@ import MyQualification from './documents/my-qualification/list'
 import LprUsers from './lpr-users'
 import UserApplicationsDetail from './userApplications/detail'
 import CertifiedDetail from './certified/detail'
-import TestResult from './tests/result'
+import TestResult from './tester/result'
 import LprExam from './lpr-exam'
 import AdminUsers from './admin-users/list'
 import AdminUsersDetail from './admin-users/detail'
@@ -46,7 +46,7 @@ export {
     Profile,
     ForgotPassword,
     ProfileDetail,
-    Test,
+    AvailableTest,
     CertificationResults,
     QualificationAdded,
     QualificationDetail,

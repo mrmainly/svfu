@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import AvailableTestTable from './components/table'
-import { useGetTesterSurveyQuery } from '../../services/TesterService'
+import { useGetTesterSurveyQuery } from '../../../services/TesterService'
 import { Pagination, Input, Select } from 'antd'
 import './tests.css'
 

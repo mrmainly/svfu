@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import TestDetail from '../modal/detail'
-import ROUTES from '../../../../routes'
-import { statusChoices } from '../../../../constants'
-import useModal from '../../../../hooks/useModal'
+import TestDetail from '../modal/DetailModal'
+import ROUTES from '../../../../../routes'
+import { statusChoices } from '../../../../../constants'
+import useModal from '../../../../../hooks/useModal'
 
 const AvailableTestTable = ({ data, loading }) => {
     const navigate = useNavigate()

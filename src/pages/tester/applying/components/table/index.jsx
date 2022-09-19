@@ -1,12 +1,12 @@
 import { Table, message, Typography, Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../components'
+import { MyButton } from '../../../../../components'
 
 import {
     usePostTesterApplicationMutation,
     usePutTesterApplicationMutation,
-} from '../../../../services/TesterService'
+} from '../../../../../services/TesterService'
 const { Text } = Typography
 
 const AppilyngTable = ({ data, loading, setOrdering }) => {

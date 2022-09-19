@@ -4,11 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Spin, Space, Typography, Button } from 'antd'
 import { BsArrowLeft } from 'react-icons/bs'
 
-import { useGetTestResultsIDQuery } from '../../../src/services/SurveysService'
-import { Line } from '../../components'
-import AppealModal from './components/modal/AppealModal'
-import CancelModal from './components/modal/CancelModal'
-import ROUTES from '../../routes'
+import { useGetTestResultsIDQuery } from '../../../services/SurveysService'
+import { Line } from '../../../components'
+import AppealModal from './components/modals/AppealModal'
+import CancelModal from './components/modals/CancelModal'
+import ROUTES from '../../../routes'
 
 const { Text } = Typography
 

@@ -9,7 +9,7 @@ import {
     Profile,
     ForgotPassword,
     ProfileDetail,
-    Test,
+    AvailableTest,
     MyQualification,
     QualificationAdded,
     QualificationDetail,
@@ -57,7 +57,7 @@ function App() {
                     <Route element={<Login />} path={ROUTES.LOGIN} />
                     <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
                     <Route element={<UploadDocuments />} path={ROUTES.UPLOAD_DOCUMENTS} />
-                    <Route element={<Test />} path={ROUTES.AVAILABLE_TESTS} />
+                    <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route element={<TestResult />} path={`${ROUTES.TEST_RESULT}/:id`} />
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
                     <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />

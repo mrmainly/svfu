@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination, Input } from 'antd'
-import { useGetTesterDirectionQuery } from '../../services/TesterService'
+import { useGetTesterDirectionQuery } from '../../../services/TesterService'
 import AppilyngTable from './components/table'
 import './applying.css'
 const Applying = () => {
