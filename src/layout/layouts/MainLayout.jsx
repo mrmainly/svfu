@@ -13,7 +13,7 @@ const MainLayout = ({ params }) => {
     const path = pathname(params)
     return (
         <Layout>
-            <Content style={{ margin: '24px 24px 24px' }}>
+            <Content className="content">
                 <div
                     className="site-layout-background"
                     style={{

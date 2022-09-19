@@ -12,6 +12,7 @@ import UserChangeModal from './components/modals/UserChangeModal'
 import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
 import { rolesChoises } from '../../../constants'
 import { Line } from '../../../components'
+import '../admin-users.css'
 
 const AdminUsersDetail = () => {
     const params = useParams()
@@ -177,11 +178,17 @@ const AdminUsersDetail = () => {
                 </span>
             </div>
             <Line />
-            <div style={{ display: 'flex', justifyContent: 'space-between', margin: '16px 0' }}>
+            <div className="buttongroups">
                 <Radio.Group onChange={handleModeChange} value={mode}>
-                    <Radio.Button value="info">Информация</Radio.Button>
-                    <Radio.Button value="docs">Документы</Radio.Button>
-                    <Radio.Button value="classification">Квалификация</Radio.Button>
+                    <Radio.Button value="info" className="buttongroups_buttonItem">
+                        Информация
+                    </Radio.Button>
+                    <Radio.Button value="docs" className="buttongroups_buttonItem">
+                        Документы
+                    </Radio.Button>
+                    <Radio.Button value="classification" className="buttongroups_buttonItem">
+                        Квалификация
+                    </Radio.Button>
                 </Radio.Group>
                 <Button
                     style={{ display: mode === 'info' ? 'block' : 'none' }}

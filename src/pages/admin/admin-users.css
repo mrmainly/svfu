@@ -1,0 +1,16 @@
+.buttongroups {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .buttongroups {
+        flex-direction: column;
+    }
+    .buttongroups_buttonItem {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
