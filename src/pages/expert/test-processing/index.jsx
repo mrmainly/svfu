@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TestProcessingTable from './compoents/table'
 import { Pagination, Input, Select } from 'antd'
 
-import { useGetExpertResultQuery } from '../../services/ExpertService'
+import { useGetExpertResultQuery } from '../../../services/ExpertService'
 import './test-processing.css'
 
 const TestProcessing = () => {

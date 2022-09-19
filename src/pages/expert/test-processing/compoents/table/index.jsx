@@ -3,9 +3,9 @@ import { Button, Table, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import ROUTES from '../../../../routes'
-import { usePutMainExpertMutation } from '../../../../services/ExpertService'
-import { statusChoices } from '../../../../constants'
+import ROUTES from '../../../../../routes'
+import { usePutMainExpertMutation } from '../../../../../services/ExpertService'
+import { statusChoices } from '../../../../../constants'
 
 const TestProcessingTable = ({ data, loading, setOrdering }) => {
     const [putMainExpert] = usePutMainExpertMutation()
