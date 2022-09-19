@@ -2,7 +2,7 @@ import { Modal } from 'antd'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../components'
+import { MyButton } from '../../../../components'
 
 const LprExamModal = ({ open, setOpen, data }) => {
     const dataList = [

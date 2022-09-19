@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import UsersTable from '../users/components/tables/UsersTable'
 import { Pagination, Input } from 'antd'
 
-import { useGetAttestationUsersQuery } from '../../services/AttestationProtocolService'
+import UsersTable from '../../users/components/tables/UsersTable'
+import { useGetAttestationUsersQuery } from '../../../services/AttestationProtocolService'
 import './lpr-users.css'
 
 const LprUsers = () => {
