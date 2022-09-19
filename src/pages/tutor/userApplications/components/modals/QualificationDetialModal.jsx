@@ -97,7 +97,7 @@ const QualificationDetailModal = ({ open, setOpen, data }) => {
 }
 
 QualificationDetailModal.propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.array,
     open: PropTypes.bool,
     setOpen: PropTypes.func,
 }

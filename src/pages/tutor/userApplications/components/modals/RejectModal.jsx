@@ -61,7 +61,7 @@ const RejectModal = ({ open, setOpen, id }) => {
 }
 
 RejectModal.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string,
     open: PropTypes.bool,
     setOpen: PropTypes.func,
 }

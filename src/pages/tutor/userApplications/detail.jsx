@@ -158,16 +158,16 @@ const UserApplicationsDetail = () => {
                         )}
                     </div>
                     <Line />
-                    <Radio.Group
-                        onChange={handleModeChange}
-                        value={mode}
-                        style={{
-                            marginBottom: 8,
-                        }}
-                    >
-                        <Radio.Button value="info">Информация</Radio.Button>
-                        <Radio.Button value="docs">Документы</Radio.Button>
-                        <Radio.Button value="classification">Квалификация</Radio.Button>
+                    <Radio.Group onChange={handleModeChange} value={mode} style={{ width: '100%' }}>
+                        <Radio.Button value="info" className="buttongroups_buttonItem">
+                            Информация
+                        </Radio.Button>
+                        <Radio.Button value="docs" className="buttongroups_buttonItem">
+                            Документы
+                        </Radio.Button>
+                        <Radio.Button value="classification" className="buttongroups_buttonItem">
+                            Квалификация
+                        </Radio.Button>
                     </Radio.Group>
                     <div style={{ marginTop: 15 }}>
                         {mode === 'info' && <Information data={data} />}
