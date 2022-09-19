@@ -14,7 +14,7 @@ import {
     // QualificationAdded,
     // QualificationDetail,
     // QualificationEdit,
-    CertificationResultsDetial,
+    // CertificationResultsDetial,
     Applying,
     TesterSurveyPart,
     UsersDetail,
@@ -71,10 +71,10 @@ function App() {
                     /> */}
                     <Route element={<TesterSurveyPart />} path={ROUTES.TESTER_SURVEY_PART} />
                     <Route element={<Applying />} path={ROUTES.APPILYNG} />
-                    <Route
+                    {/* <Route
                         element={<CertificationResultsDetial />}
                         path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
-                    />
+                    /> */}
                     {/* <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} /> */}
                     {/* <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} /> */}
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
