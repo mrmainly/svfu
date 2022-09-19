@@ -89,13 +89,7 @@ const UserApplicationsDetail = () => {
                         </span>
                     </div>
                     <Line />
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                        }}
-                    >
+                    <div className="statement_box">
                         <Text style={{ fontSize: 16 }}>
                             Заявление на квалификацию:
                             <span style={{ color: '#2F80ED' }}> {data.direction.name}</span>

@@ -10,6 +10,7 @@ import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import { Line } from '../../components'
+import './users.css'
 
 import { useGetAttestationUserIdQuery } from '../../services/AttestationProtocolService'
 import { useGetModeratorUserIdQuery } from '../../services/ModeratorService'
@@ -175,7 +176,7 @@ const UsersDetail = () => {
             </div>
         )
     }
-    console.log(data)
+
     return (
         <div>
             <div
@@ -211,11 +212,18 @@ const UsersDetail = () => {
                 value={mode}
                 style={{
                     margin: '16px 0',
+                    width: '100%',
                 }}
             >
-                <Radio.Button value="info">Информация</Radio.Button>
-                <Radio.Button value="docs">Документы</Radio.Button>
-                <Radio.Button value="classification">Квалификация</Radio.Button>
+                <Radio.Button value="info" className="buttongroups_buttonItem">
+                    Информация
+                </Radio.Button>
+                <Radio.Button value="docs" className="buttongroups_buttonItem">
+                    Документы
+                </Radio.Button>
+                <Radio.Button value="classification" className="buttongroups_buttonItem">
+                    Квалификация
+                </Radio.Button>
             </Radio.Group>
             {mode === 'info' && (
                 <AttestedInfo profileData={profileData} bio={bio} contacts={contacts} />

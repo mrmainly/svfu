@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Radio, Button, Pagination } from 'antd'
 import Table from 'antd/lib/table'
 
 import moment from 'moment'
 
 import { useGetAttestationProtocolQuery } from '../../../services/AttestationProtocolService'
-import { useEffect } from 'react'
+import './attestation-protocol.css'
 
 const AttestationProtocol = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -106,10 +106,15 @@ const AttestationProtocol = () => {
                 value={mode}
                 style={{
                     marginBottom: 8,
+                    width: '100%',
                 }}
             >
-                <Radio.Button value="INDIVIDUAL">Индивидульные</Radio.Button>
-                <Radio.Button value="GROUP">Групповые</Radio.Button>
+                <Radio.Button value="INDIVIDUAL" className="buttongroups_buttonItem">
+                    Индивидульные
+                </Radio.Button>
+                <Radio.Button value="GROUP" className="buttongroups_buttonItem">
+                    Групповые
+                </Radio.Button>
             </Radio.Group>
 
             <Table
