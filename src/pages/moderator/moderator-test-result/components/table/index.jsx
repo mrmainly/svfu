@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Table, message } from 'antd'
 import PropTypes from 'prop-types'
 
-import ROUTES from '../../../../routes'
-import { DynamicPathSlice } from '../../../../reducers/DynamicPathSlice'
-import { usePutMainModeratorMutation } from '../../../../services/ModeratorService'
-import { statusChoices } from '../../../../constants'
+import ROUTES from '../../../../../routes'
+import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'
+import { usePutMainModeratorMutation } from '../../../../../services/ModeratorService'
+import { statusChoices } from '../../../../../constants'
 
 const TestResultTable = ({ data, loading, setOrdering }) => {
     const { handlePath, handleFullName, handleRole, handleCurrentPath } = DynamicPathSlice.actions

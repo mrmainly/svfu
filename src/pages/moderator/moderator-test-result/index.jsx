@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TestResultTable from './components/table'
 import { Pagination, Input, Select } from 'antd'
 
-import { useGetModeratorResultQuery } from '../../services/ModeratorService'
+import { useGetModeratorResultQuery } from '../../../services/ModeratorService'
 import './moderator-test-result.css'
 
 const ModeratorTestResult = () => {

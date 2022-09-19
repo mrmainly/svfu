@@ -5,8 +5,8 @@ import moment from 'moment'
 
 import { Button, Table } from 'antd'
 
-import { statusChoices } from '../../../../constants'
-import ROUTES from '../../../../routes'
+import { statusChoices } from '../../../../../constants'
+import ROUTES from '../../../../../routes'
 
 const AppealTable = ({ data, loading, setOrdering }) => {
     const navigate = useNavigate()
