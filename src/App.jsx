@@ -11,10 +11,6 @@ import {
     ProfileDetail,
     AvailableTest,
     MyQualification,
-    // QualificationAdded,
-    // QualificationDetail,
-    // QualificationEdit,
-    // CertificationResultsDetial,
     Applying,
     TesterSurveyPart,
     UsersDetail,
@@ -60,23 +56,9 @@ function App() {
                     <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route element={<TestResult />} path={`${ROUTES.TEST_RESULT}/:id`} />
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
-                    {/* <Route element={<QualificationAdded />} path={ROUTES.QUALIFICATION_ADDED} />
-                    <Route
-                        element={<QualificationDetail />}
-                        path={`${ROUTES.QUALIFICATION_DETAIL}/:id`}
-                    />
-                    <Route
-                        element={<QualificationEdit />}
-                        path={`${ROUTES.QUALIFICATION_EDITING}/:id`}
-                    /> */}
+
                     <Route element={<TesterSurveyPart />} path={ROUTES.TESTER_SURVEY_PART} />
                     <Route element={<Applying />} path={ROUTES.APPILYNG} />
-                    {/* <Route
-                        element={<CertificationResultsDetial />}
-                        path={`${ROUTES.CERTIFICATION_RESULTS_DETAIL}/:id`}
-                    /> */}
-                    {/* <Route element={<Attested />} path={ROUTES.USERS_ATTESTED} /> */}
-                    {/* <Route element={<PracticalPart />} path={ROUTES.PRACTICAL_PART} /> */}
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
                     <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />
