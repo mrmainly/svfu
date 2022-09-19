@@ -7,7 +7,7 @@ import {
     useGetAdminExamIDQuery,
     useGetRoleQuery,
     usePatchExamMutation,
-} from '../../../services/AdminService'
+} from '../../../../services/AdminService'
 
 const { Option } = Select
 

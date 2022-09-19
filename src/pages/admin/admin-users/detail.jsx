@@ -3,16 +3,15 @@ import { BsArrowLeft } from 'react-icons/bs'
 
 import { Radio, Button, message } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
+import moment from 'moment'
 
 import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import UserChangeModal from './components/modals/UserChangeModal'
-import { useGetUserIdQuery, usePutUserMutation } from '../../services/AdminService'
-import { rolesChoises } from '../../constants'
-
-import moment from 'moment'
-import { Line } from '../../components'
+import { useGetUserIdQuery, usePutUserMutation } from '../../../services/AdminService'
+import { rolesChoises } from '../../../constants'
+import { Line } from '../../../components'
 
 const AdminUsersDetail = () => {
     const params = useParams()

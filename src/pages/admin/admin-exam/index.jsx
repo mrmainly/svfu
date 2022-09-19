@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
-import { useGetAdminExamQuery } from '../../services/AdminService'
+import { useGetAdminExamQuery } from '../../../services/AdminService'
 import AdminExamModal from './modal'
 import AdminExamTable from './table'
 import './admin-exam.css'
