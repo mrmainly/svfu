@@ -3,7 +3,7 @@ import { Form, Input, Button, Typography, message } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { useRegisterProfileVersionMutation } from '../../../../services/LoginService'
+import { useRegisterProfileVersionMutation } from '../../../../services/auth/Registration'
 import { RegisterVersionSlice } from '../../../../reducers/RegisterVersionSlice'
 import ROUTES from '../../../../routes'
 

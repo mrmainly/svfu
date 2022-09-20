@@ -5,7 +5,7 @@ import '../forgot_password.css'
 import { useDispatch } from 'react-redux'
 
 import ROUTES from '../../../../routes'
-import { useForgotEmailVersionMutation } from '../../../../services/LoginService'
+import { useForgotEmailVersionMutation } from '../../../../services/auth/ForgotPassword'
 import { ForgotVersionSlice } from '../../../../reducers/ForgotVersionSlice'
 
 const { Text } = Typography

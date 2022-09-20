@@ -3,13 +3,13 @@ import { Typography, Form, Input, Button, Space, message } from 'antd'
 import '../forgot_password.css'
 import { useDispatch } from 'react-redux'
 
-import { useRegisterVerifyVersionMutation } from '../../../../services/LoginService'
+import { usePostVerifyCodeMutation } from '../../../../services/auth/Tools'
 import { ForgotVersionSlice } from '../../../../reducers/ForgotVersionSlice'
 
 const { Text } = Typography
 
 const PasswordForm = () => {
-    const [postForgotVerify] = useRegisterVerifyVersionMutation()
+    const [postForgotVerify] = usePostVerifyCodeMutation()
     const {
         handleOpenEmailFormVersion,
         handleOpenVerifyFormVersion,

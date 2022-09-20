@@ -2,13 +2,13 @@ import React from 'react'
 import { Form, Input, Button, Typography, Space, message } from 'antd'
 import { useDispatch } from 'react-redux'
 
-import { useRegisterVerifyVersionMutation } from '../../../../services/LoginService'
+import { usePostVerifyCodeMutation } from '../../../../services/auth/Tools'
 import { RegisterVersionSlice } from '../../../../reducers/RegisterVersionSlice'
 
 const { Text } = Typography
 
 const RegisterVerify = () => {
-    const [postRegisterVerify] = useRegisterVerifyVersionMutation()
+    const [postRegisterVerify] = usePostVerifyCodeMutation()
     const { handleOpenVerifyVersion, handleOpenProfileVersion, handleOpenEmailVersion, addedCode } =
         RegisterVersionSlice.actions
 

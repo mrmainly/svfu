@@ -1,19 +1,18 @@
 import { api } from '../api'
 
-export const Login = api.injectEndpoints({
+export const Tools = api.injectEndpoints({
     endpoints: (build) => ({
         //авторизация
-        login: build.mutation({
+        postVerifyCode: build.mutation({
             query(body) {
                 return {
-                    url: `users/login/`,
+                    url: `users/code/verify/`,
                     method: 'POST',
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'Profile' }],
         }),
     }),
 })
 
-export const { useLoginMutation } = Login
+export const { usePostVerifyCodeMutation } = Tools

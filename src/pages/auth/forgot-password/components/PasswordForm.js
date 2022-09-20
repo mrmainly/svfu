@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import '../forgot_password.css'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useForgotPasswordVersionMutation } from '../../../../services/LoginService'
+import { useForgotPasswordVersionMutation } from '../../../../services/auth/ForgotPassword'
 import { ForgotVersionSlice } from '../../../../reducers/ForgotVersionSlice'
 import ROUTES from '../../../../routes'
 

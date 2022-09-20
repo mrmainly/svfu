@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import ROUTES from '../../../../routes'
-import { useRegisterEmailVersionMutation } from '../../../../services/LoginService'
+import { useRegisterEmailVersionMutation } from '../../../../services/auth/Registration'
 import { RegisterVersionSlice } from '../../../../reducers/RegisterVersionSlice'
 
 const { Text } = Typography

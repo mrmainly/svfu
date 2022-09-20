@@ -5,7 +5,7 @@ import cookie from 'js-cookie'
 import './login.css'
 
 import ROUTES from '../../../routes'
-import { useLoginMutation } from '../../../services/LoginService'
+import { useLoginMutation } from '../../../services/auth/Login'
 
 const { Text } = Typography
 
