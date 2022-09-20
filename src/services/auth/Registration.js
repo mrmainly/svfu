@@ -2,6 +2,7 @@ import { api } from '../api'
 
 export const Registration = api.injectEndpoints({
     endpoints: (build) => ({
+        //отправка email
         registerEmailVersion: build.mutation({
             query(body) {
                 return {
@@ -11,6 +12,7 @@ export const Registration = api.injectEndpoints({
                 }
             },
         }),
+        //отправка данных пользователя
         registerProfileVersion: build.mutation({
             query(body) {
                 return {

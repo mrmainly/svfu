@@ -5,17 +5,17 @@ import PropTypes from 'prop-types'
 
 import {
     useGetAdminExamIDQuery,
-    useGetRoleQuery,
-    usePatchExamMutation,
-} from '../../../../services/AdminService'
+    useGetUserRoleQuery,
+    usePatchAdminExamMutation,
+} from '../../../../services/admin/AdminExam'
 
 const { Option } = Select
 
 const AdminExamModal = ({ open, setOpen, dataList }) => {
-    const [patchExam] = usePatchExamMutation()
+    const [patchExam] = usePatchAdminExamMutation()
     const { data: admData } = useGetAdminExamIDQuery({ id: dataList?.id })
-    const { data: expertData } = useGetRoleQuery({ role: 'EXPERT' })
-    const { data: moderatorData } = useGetRoleQuery({ role: 'MODERATOR' })
+    const { data: expertData } = useGetUserRoleQuery({ role: 'EXPERT' })
+    const { data: moderatorData } = useGetUserRoleQuery({ role: 'MODERATOR' })
 
     const onSubmit = (data) => {
         patchExam({ id: dataList.id, body: data }).then((res) => {

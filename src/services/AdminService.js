@@ -6,10 +6,7 @@ export const Admin = api.injectEndpoints({
             query: () => `admin/admin/users/`,
             providesTags: ['Admin'],
         }),
-        getRole: build.query({
-            query: ({ role }) => `admin/admin/users/?role=${role}`,
-            providesTags: ['Admin'],
-        }),
+
         getUserId: build.query({
             query: ({ id }) => `admin/admin/users/${id}`,
             providesTags: ['Admin'],
@@ -34,16 +31,7 @@ export const Admin = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'AdminUser' }],
         }),
-        patchExam: build.mutation({
-            query({ id, body }) {
-                return {
-                    url: `admin/admin/exam/${id}`,
-                    method: 'PATCH',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'Admin' }],
-        }),
+
         putUser: build.mutation({
             query({ id }) {
                 return {
@@ -52,18 +40,6 @@ export const Admin = api.injectEndpoints({
                 }
             },
             invalidatesTags: [{ type: 'Admin' }],
-        }),
-
-        getAdminExamID: build.query({
-            query: ({ id }) => `admin/admin/exam/${id}`,
-            providesTags: ['Admin'],
-        }),
-
-        //расписание экзаменов
-        getAdminExam: build.query({
-            query: ({ currentPage, unit, testGroup, testers, examStatus, ordering }) =>
-                `admin/admin/exam/?page=${currentPage}&unit=${unit}&test_group=${testGroup}&testers=${testers}&exam_status=${examStatus}&ordering=${ordering}`,
-            providesTags: ['Admin'],
         }),
 
         //пользователи
@@ -77,16 +53,14 @@ export const Admin = api.injectEndpoints({
 
 export const {
     useGetUsersQuery,
-    useGetRoleQuery,
+
     useGetUserIdQuery,
     usePostUserMutation,
     usePatchUserMutation,
-    usePatchExamMutation,
+
     usePutUserMutation,
-    useGetAdminExamIDQuery,
 
     //расписание экзаменов
-    useGetAdminExamQuery,
 
     //пользователи
     useGetAdminUsersQuery,

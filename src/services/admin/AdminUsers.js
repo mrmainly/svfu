@@ -1,6 +1,6 @@
 import { api } from '../api'
 
-export const ForgotPassword = api.injectEndpoints({
+export const AdminUsers = api.injectEndpoints({
     endpoints: (build) => ({
         //отправка email
         forgotEmailVersion: build.mutation({
@@ -25,4 +25,4 @@ export const ForgotPassword = api.injectEndpoints({
     }),
 })
 
-export const { useForgotEmailVersionMutation, useForgotPasswordVersionMutation } = ForgotPassword
+export const { useForgotEmailVersionMutation, useForgotPasswordVersionMutation } = AdminUsers
