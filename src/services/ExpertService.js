@@ -2,11 +2,13 @@ import { api } from './api'
 
 export const expert = api.injectEndpoints({
     endpoints: (build) => ({
+        //обработка тестов
         getExpertResult: build.query({
             query: ({ currentPage, direction, userId, statusResult, ordering }) =>
                 `expert/result/?page=${currentPage}&direction=${direction}&user_id=${userId}&status_result=${statusResult}&ordering=${ordering}`,
             providesTags: ['TestProcessing'],
         }),
+        //ответ эксперта
         sendAnswerExpert: build.mutation({
             query({ body, id }) {
                 return {
@@ -17,6 +19,7 @@ export const expert = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'TestProcessing' }],
         }),
+        //тест
         getSurveyExpertId: build.query({
             query(id) {
                 return {
@@ -24,6 +27,7 @@ export const expert = api.injectEndpoints({
                 }
             },
         }),
+        //подпись протокола
         sendSubscribeExpert: build.mutation({
             query({ id }) {
                 return {
@@ -33,6 +37,7 @@ export const expert = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'TestProcessing' }],
         }),
+        //проверка кода
         sendCode: build.mutation({
             query({ code }) {
                 return {
@@ -42,6 +47,7 @@ export const expert = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'TestProcessing' }],
         }),
+        //начало проваерки теста
         putMainExpert: build.mutation({
             query({ id }) {
                 return {
