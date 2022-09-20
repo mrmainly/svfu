@@ -7,7 +7,7 @@ import SocialNetworks from './components/SocialNetworks'
 import InfoScreen from './components/InfoScreen'
 import { Line } from '../../components'
 import ROUTES from '../../routes'
-import { useGetProfileQuery } from '../../services/ProfileService'
+import { useGetProfileQuery } from '../../services/profile/Profile'
 
 import './profile.css'
 

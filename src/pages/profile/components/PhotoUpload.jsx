@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import {
     useProfilePostPhotoMutation,
     useProfileDeletePhotoMutation,
-} from '../../../services/ProfileService'
+} from '../../../services/profile/Profile'
 
 const { Text } = Typography
 

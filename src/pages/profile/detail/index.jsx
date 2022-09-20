@@ -1,6 +1,7 @@
 import { Form, Spin, message } from 'antd'
+
 import { Line, MyButton } from '../../../components'
-import { useGetProfileQuery, useProfilePatchMutation } from '../../../services/ProfileService'
+import { useGetProfileQuery, useProfilePatchMutation } from '../../../services/profile/Profile'
 
 import InfoForm from './components/InfoForm'
 import ProfileForm from './components/ProfileForm'

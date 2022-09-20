@@ -1,7 +1,8 @@
-import { api } from './api'
+import { api } from '../api'
 
-export const profile = api.injectEndpoints({
+export const Profile = api.injectEndpoints({
     endpoints: (build) => ({
+        //профиль
         getProfile: build.query({
             query() {
                 return {
@@ -18,6 +19,7 @@ export const profile = api.injectEndpoints({
             },
             providesTags: ['Profile'],
         }),
+        //изменение профиля
         profilePatch: build.mutation({
             query(body) {
                 return {
@@ -28,6 +30,7 @@ export const profile = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Profile' }],
         }),
+        //добавление фото
         profilePostPhoto: build.mutation({
             query(body) {
                 return {
@@ -38,6 +41,7 @@ export const profile = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Profile' }],
         }),
+        //удаление фото
         profileDeletePhoto: build.mutation({
             query() {
                 return {
@@ -55,4 +59,4 @@ export const {
     useProfilePatchMutation,
     useProfilePostPhotoMutation,
     useProfileDeletePhotoMutation,
-} = profile
+} = Profile

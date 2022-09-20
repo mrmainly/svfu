@@ -9,7 +9,7 @@ import MainLayout from './layouts/MainLayout'
 import SurveyLayout from './layouts/SurveyLayout'
 import RolesDivisionMenuItem from './rolesDivisionMenuItem'
 import Header from '../components/header'
-import { useGetProfileQuery } from '../services/ProfileService'
+import { useGetProfileQuery } from '../services/profile/Profile'
 
 import './layout.css'
 
