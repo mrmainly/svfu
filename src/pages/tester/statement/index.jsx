@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Pagination, Input } from 'antd'
-import { useGetStatementQuery } from '../../../services/TesterService'
+import { useGetStatementQuery } from '../../../services/tester/Statement'
 import StatementTable from './components/table'
 import './statement.css'
 

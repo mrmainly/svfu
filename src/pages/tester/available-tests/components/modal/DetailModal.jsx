@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import {
     useGetSurveyPartOneIdQuery,
     usePatchSurveyPartOneMutation,
-} from '../../../../../services/TesterService'
+} from '../../../../../services/tester/Surveys'
 import { MyButton } from '../../../../../components'
 import ROUTES from '../../../../../routes'
 

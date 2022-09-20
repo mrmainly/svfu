@@ -6,7 +6,7 @@ import { MyButton } from '../../../../../components'
 import {
     usePostStatementMutation,
     usePutStatementMutation,
-} from '../../../../../services/TesterService'
+} from '../../../../../services/tester/Statement'
 const { Text } = Typography
 
 const StatementTable = ({ data, loading, setOrdering }) => {

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import {
     useGetPracticalPartIdQuery,
     usePostPracticalPartMutation,
-} from '../../../../../services/TesterService'
+} from '../../../../../services/tester/Surveys'
 import ROUTES from '../../../../../routes'
 
 const { Text, Title } = Typography

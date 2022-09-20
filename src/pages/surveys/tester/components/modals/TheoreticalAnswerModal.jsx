@@ -2,7 +2,7 @@ import { Button, Modal, message } from 'antd'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { usePostResultPartOneMutation } from '../../../../../services/TesterService'
+import { usePostResultPartOneMutation } from '../../../../../services/tester/Surveys'
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 
 const TheoreticalAnswerModal = ({ open, setOpen, id, postData, handleOpenFailedModal }) => {

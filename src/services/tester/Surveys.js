@@ -1,44 +1,7 @@
-import { api } from './api'
+import { api } from '../api'
 
-export const tester = api.injectEndpoints({
+export const Surveys = api.injectEndpoints({
     endpoints: (build) => ({
-        //Подача заявления
-        getStatement: build.query({
-            query: ({ currentPage, ordering, name }) =>
-                `tester/direction/?page=${currentPage}&ordering=${ordering}&name=${name}`,
-            providesTags: ['Applying'],
-        }),
-
-        //отправка заявления
-        postStatement: build.mutation({
-            query(body) {
-                return {
-                    url: `tester/application/`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'Applying' }],
-        }),
-
-        //отмена заявления
-        putStatement: build.mutation({
-            query(id) {
-                return {
-                    url: `/tester/application/${id}/cancel/`,
-                    method: 'PUT',
-                }
-            },
-            invalidatesTags: [{ type: 'Applying' }],
-        }),
-
-        //Доступные тесты
-        getAvailableTests: build.query({
-            query: ({ currentPage, name, ordering, survey_status }) =>
-                `tester/survey/?page=${currentPage}&name=${name}&ordering=${ordering}&survey_status=${survey_status}`,
-            providesTags: ['SURVEYS_TESTER'],
-        }),
-
         //теоретическая часть
         getSurveyPartOneId: build.query({
             query: ({ id }) => `tester/survey/part-one/${id}`,
@@ -96,13 +59,9 @@ export const tester = api.injectEndpoints({
 })
 
 export const {
-    useGetStatementQuery,
-    usePostStatementMutation,
-    usePutStatementMutation,
-    useGetAvailableTestsQuery,
     useGetSurveyPartOneIdQuery,
     usePatchSurveyPartOneMutation,
     usePostResultPartOneMutation,
     useGetPracticalPartIdQuery,
     usePostPracticalPartMutation,
-} = tester
+} = Surveys

@@ -8,7 +8,7 @@ import {
     usePostResultPartOneMutation,
     useGetPracticalPartIdQuery,
     usePostPracticalPartMutation,
-} from '../../../../../services/TesterService'
+} from '../../../../../services/tester/Surveys'
 
 import ROUTES from '../../../../../routes'
 

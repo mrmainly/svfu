@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import AvailableTestTable from './components/table'
-import { useGetAvailableTestsQuery } from '../../../services/TesterService'
+import { useGetAvailableTestsQuery } from '../../../services/tester/AvailableTests'
 import { Pagination, Input, Select } from 'antd'
 import './tests.css'
 
