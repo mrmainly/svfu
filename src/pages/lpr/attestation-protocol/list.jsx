@@ -4,7 +4,7 @@ import Table from 'antd/lib/table'
 
 import moment from 'moment'
 
-import { useGetAttestationProtocolQuery } from '../../../services/LprService'
+import { useGetAttestationProtocolQuery } from '../../../services/lpr/AttestationProtocol'
 import './attestation-protocol.css'
 
 const AttestationProtocol = () => {

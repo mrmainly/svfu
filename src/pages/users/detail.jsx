@@ -12,7 +12,7 @@ import QualificationTable from './components/tables/QuailificationTable'
 import { Line } from '../../components'
 import './users.css'
 
-import { useGetLprUserIdQuery } from '../../services/LprService'
+import { useGetLprUserIdQuery } from '../../services/lpr/LprUser'
 import { useGetModeratorUserIdQuery } from '../../services/ModeratorService'
 
 const UsersDetail = () => {

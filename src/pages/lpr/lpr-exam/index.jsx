@@ -3,7 +3,7 @@ import { Input, Select, Button, Table, Pagination } from 'antd'
 
 import moment from 'moment'
 
-import { useGetLprExamListQuery } from '../../../services/LprService'
+import { useGetLprExamListQuery } from '../../../services/lpr/LprExamList'
 import LprExamModal from './modal'
 import './lpr-exam.css'
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination, Input } from 'antd'
 
 import UsersTable from '../../users/components/tables/UsersTable'
-import { useGetLprUserQuery } from '../../../services/LprService'
+import { useGetLprUserQuery } from '../../../services/lpr/LprUser'
 import './lpr-users.css'
 
 const LprUsers = () => {
