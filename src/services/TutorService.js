@@ -2,39 +2,6 @@ import { api } from './api'
 
 export const Tutor = api.injectEndpoints({
     endpoints: (build) => ({
-        getUnit: build.query({
-            query: ({ direction }) => `tutor/unit?direction=${direction}`,
-            providesTags: ['TestGroup'],
-        }),
-
-        getUsersRole: build.query({
-            query: ({ role }) => ({
-                url: `tutor/users?role=${role}`,
-                dependencies: role,
-            }),
-            providesTags: ['TestGroup'],
-        }),
-
-        deleteTutorExam: build.mutation({
-            query({ id, data }) {
-                return {
-                    url: `tutor/exam/${id}`,
-                    method: 'DELETE',
-                    body: data,
-                }
-            },
-            invalidatesTags: [{ type: 'TestGroup' }],
-        }),
-        putUserApplicationReject: build.mutation({
-            query({ id, data }) {
-                return {
-                    url: `tutor/application/${id}`,
-                    method: 'PUT',
-                    body: data,
-                }
-            },
-        }),
-
         //аттестуемые
         getCertified: build.query({
             query: ({ currentPage, ordering, fullName, application }) =>
@@ -69,12 +36,23 @@ export const Tutor = api.injectEndpoints({
         getUserId: build.query({
             query: ({ id }) => `tutor/application/user/?direction=${id}`,
         }),
+        //отколнение заявления
+        putUserApplicationReject: build.mutation({
+            query({ id, data }) {
+                return {
+                    url: `tutor/application/${id}`,
+                    method: 'PUT',
+                    body: data,
+                }
+            },
+            invalidatesTags: [{ type: 'Application' }],
+        }),
 
         //экзаменационные группы
         getExaminationGroups: build.query({
             query: ({ currentPage, ordering, examStatus, directionName }) =>
                 `tutor/testgroup?page=${currentPage}&ordering=${ordering}&direction_name=${directionName}&exam_status=${examStatus}`,
-            providesTags: ['TestGroup'],
+            providesTags: ['ExaminationGroups'],
         }),
         //создание экзаменационной группы
         postExaminationGroups: build.mutation({
@@ -85,7 +63,7 @@ export const Tutor = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'TestGroup' }],
+            invalidatesTags: [{ type: 'ExaminationGroups' }],
         }),
         //изменение экзаменационной группы
         patchExaminationGroups: build.mutation({
@@ -96,7 +74,7 @@ export const Tutor = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'TestGroup' }],
+            invalidatesTags: [{ type: 'ExaminationGroups' }],
         }),
         //удаление экзаменационной группы
         deleteExaminationGroups: build.mutation({
@@ -106,14 +84,14 @@ export const Tutor = api.injectEndpoints({
                     method: 'DELETE',
                 }
             },
-            invalidatesTags: [{ type: 'TestGroup' }],
+            invalidatesTags: [{ type: 'ExaminationGroups' }],
         }),
 
         //расписание экзаменов
         getExamSchedule: build.query({
             query: ({ currentPage, unit, testGroup, testers, examStatus, ordering }) =>
                 `tutor/exam?page=${currentPage}&unit=${unit}&test_group=${testGroup}&testers=${testers}&exam_status=${examStatus}&ordering=${ordering}`,
-            providesTags: ['TestGroup'],
+            providesTags: ['ExamSchedule'],
         }),
         //создание расписание экзаменов
         postExamSchedule: build.mutation({
@@ -124,7 +102,7 @@ export const Tutor = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'TestGroup' }],
+            invalidatesTags: [{ type: 'ExamSchedule' }],
         }),
         //кфалификация
         getDirectionTuter: build.query({
@@ -133,10 +111,10 @@ export const Tutor = api.injectEndpoints({
         //список групп аттестуемых
         getExaminationGroupsDirection: build.query({
             query: ({ direction }) => `tutor/testgroup?direction=${direction}`,
-            providesTags: ['TestGroup'],
+            providesTags: ['ExamSchedule'],
         }),
         //выбор тестирование
-        getUnitId: build.query({
+        getTestingId: build.query({
             query: ({ id }) => `tutor/unit/${id}`,
         }),
         //изменение расписание экзамена
@@ -148,28 +126,52 @@ export const Tutor = api.injectEndpoints({
                     body,
                 }
             },
-            invalidatesTags: [{ type: 'TestGroup' }],
+            invalidatesTags: [{ type: 'ExamSchedule' }],
+        }),
+        //список тестирования
+        getTestingList: build.query({
+            query: ({ direction }) => `tutor/unit?direction=${direction}`,
+            providesTags: ['ExamSchedule'],
+        }),
+        //роль поьзователя
+        getUsersRole: build.query({
+            query: ({ role }) => ({
+                url: `tutor/users?role=${role}`,
+                dependencies: role,
+            }),
+            providesTags: ['ExamSchedule'],
+        }),
+        //удаление группы аттестуемых
+        deleteExamSchedule: build.mutation({
+            query({ id, data }) {
+                return {
+                    url: `tutor/exam/${id}`,
+                    method: 'DELETE',
+                    body: data,
+                }
+            },
+            invalidatesTags: [{ type: 'ExamSchedule' }],
         }),
     }),
 })
 
 export const {
     useGetExaminationGroupsDirectionQuery,
-    useGetUnitQuery,
+    useGetTestingListQuery,
     useGetDirectionTuterQuery,
     usePostExaminationGroupsMutation,
     usePostExamScheduleMutation,
     usePatchExaminationGroupsMutation,
     useDeleteExaminationGroupsMutation,
     useGetUserApplicationIdQuery,
-    useDeleteTutorExamMutation,
+    useDeleteExamScheduleMutation,
     usePatchExamScheduleMutation,
     useGetUsersRoleQuery,
     useGetCertifiedIdQuery,
     usePostAcceptUserApplicationMutation,
     usePutUserApplicationRejectMutation,
     useGetUserIdQuery,
-    useGetUnitIdQuery,
+    useGetTestingIdQuery,
     useGetCertifiedQuery,
     useGetUserApplicationQuery,
     useGetExaminationGroupsQuery,

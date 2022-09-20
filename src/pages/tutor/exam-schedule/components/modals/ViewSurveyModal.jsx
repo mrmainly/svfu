@@ -1,6 +1,6 @@
 import { Modal, Typography } from 'antd'
 
-import { useGetUnitIdQuery } from '../../../../../services/TutorService'
+import { useGetTestingIdQuery } from '../../../../../services/TutorService'
 
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 const { Text } = Typography
 
 const ViewSurveyModal = ({ open, setOpen, currentSurveyId }) => {
-    const { data } = useGetUnitIdQuery({ id: currentSurveyId })
+    const { data } = useGetTestingIdQuery({ id: currentSurveyId })
 
     return (
         <div>

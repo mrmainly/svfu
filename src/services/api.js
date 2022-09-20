@@ -39,6 +39,10 @@ export const api = createApi({
 
         //manager
         'ManagerConstructorQuestion',
+        //tutor экзаменационные группы
+        'ExaminationGroups',
+        //tutor расписание экзаменов
+        'ExamSchedule',
     ],
 
     endpoints: () => ({}),

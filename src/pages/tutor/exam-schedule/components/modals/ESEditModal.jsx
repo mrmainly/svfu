@@ -8,9 +8,9 @@ import { MyButton } from '../../../../../components'
 import {
     useGetDirectionTuterQuery,
     useGetExaminationGroupsDirectionQuery,
-    useGetUnitQuery,
+    useGetTestingListQuery,
     useGetUsersRoleQuery,
-    usePatchTestExamMutation,
+    usePatchExamScheduleMutation,
 } from '../../../../../services/TutorService'
 
 const { Option } = Select
@@ -24,10 +24,13 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
         { direction: direction },
         { skip: !direction }
     )
-    const { data: dataUnit } = useGetUnitQuery({ direction: direction }, { skip: !direction })
+    const { data: dataUnit } = useGetTestingListQuery(
+        { direction: direction },
+        { skip: !direction }
+    )
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
-    const [patchTestExam] = usePatchTestExamMutation()
+    const [patchTestExam] = usePatchExamScheduleMutation()
 
     useEffect(() => {
         setDirection(dataList?.direction)

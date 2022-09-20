@@ -8,7 +8,7 @@ import { MyButton } from '../../../../../components'
 import {
     useGetDirectionTuterQuery,
     useGetExaminationGroupsDirectionQuery,
-    useGetUnitQuery,
+    useGetTestingIdQuery,
     useGetUsersRoleQuery,
     usePostExamScheduleMutation,
 } from '../../../../../services/TutorService'
@@ -23,7 +23,7 @@ const ESAddModal = ({ open, setOpen }) => {
         { direction: direction },
         { skip: !direction }
     )
-    const { data: dataUnit } = useGetUnitQuery({ direction: direction }, { skip: !direction })
+    const { data: dataUnit } = useGetTestingIdQuery({ direction: direction }, { skip: !direction })
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [postTestExam] = usePostExamScheduleMutation()

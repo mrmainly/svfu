@@ -1,13 +1,13 @@
 import { Modal, Button, message, Input, Form } from 'antd'
 
-import { useDeleteTutorExamMutation } from '../../../../../services/TutorService'
+import { useDeleteExamScheduleMutation } from '../../../../../services/TutorService'
 
 import PropTypes from 'prop-types'
 
 const { TextArea } = Input
 
 const ModalAnswerDeleteExam = ({ open, handleClose, currentData, setOpen }) => {
-    const [deleteTutorExam, { isLoading }] = useDeleteTutorExamMutation()
+    const [deleteTutorExam, { isLoading }] = useDeleteExamScheduleMutation()
 
     const handleDeleteTutorExam = (data) => {
         deleteTutorExam({ id: currentData.id, data }).then((res) => {
