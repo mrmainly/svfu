@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
-import { useSendCodeMutation } from '../../../../../services/ExpertService'
+import { useSendCodeMutation } from '../../../../../services/ToolsService'
 import {
     useSendAnswerModeratorMutation,
     useSendAnswerMainModeratorMutation,

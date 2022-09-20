@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TestProcessingTable from './compoents/table'
 import { Pagination, Input, Select } from 'antd'
 
-import { useGetExpertResultQuery } from '../../../services/ExpertService'
+import { useGetTestProcessingQuery } from '../../../services/expert/TestProcessing'
 import './test-processing.css'
 
 const TestProcessing = () => {
@@ -13,7 +13,7 @@ const TestProcessing = () => {
     const [ordering, setOrdering] = useState('')
     const [totalPage, setTotalPage] = useState(30)
 
-    const { data, isFetching } = useGetExpertResultQuery({
+    const { data, isFetching } = useGetTestProcessingQuery({
         currentPage: currentPage,
         direction: direction,
         userId: userId,

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
-import { useSendSubscribeExpertMutation } from '../../../../../services/ExpertService'
+import { useSendSubscribeExpertMutation } from '../../../../../services/expert/Surveys'
 import ExpertReviewCard from '../cards/expert_review_card'
 
 const { TextArea } = Input

@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
-import { useGetSurveyExpertIdQuery } from '../../../services/ExpertService'
+import { useGetSurveyExpertIdQuery } from '../../../services/expert/Surveys'
 import ExpertReviewCard from './components/cards/expert_review_card'
 import './expert.css'
 

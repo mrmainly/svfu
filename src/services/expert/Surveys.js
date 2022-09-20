@@ -1,13 +1,7 @@
-import { api } from './api'
+import { api } from '../api'
 
-export const expert = api.injectEndpoints({
+export const Surveys = api.injectEndpoints({
     endpoints: (build) => ({
-        //обработка тестов
-        getExpertResult: build.query({
-            query: ({ currentPage, direction, userId, statusResult, ordering }) =>
-                `expert/result/?page=${currentPage}&direction=${direction}&user_id=${userId}&status_result=${statusResult}&ordering=${ordering}`,
-            providesTags: ['TestProcessing'],
-        }),
         //ответ эксперта
         sendAnswerExpert: build.mutation({
             query({ body, id }) {
@@ -37,16 +31,7 @@ export const expert = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'TestProcessing' }],
         }),
-        //проверка кода
-        sendCode: build.mutation({
-            query({ code }) {
-                return {
-                    url: `tools/signature/${code}`,
-                    method: 'POST',
-                }
-            },
-            invalidatesTags: [{ type: 'TestProcessing' }],
-        }),
+
         //начало проваерки теста
         putMainExpert: build.mutation({
             query({ id }) {
@@ -61,10 +46,8 @@ export const expert = api.injectEndpoints({
 })
 
 export const {
-    useGetExpertResultQuery,
     useSendAnswerExpertMutation,
     useSendSubscribeExpertMutation,
-    useSendCodeMutation,
     useGetSurveyExpertIdQuery,
     usePutMainExpertMutation,
-} = expert
+} = Surveys

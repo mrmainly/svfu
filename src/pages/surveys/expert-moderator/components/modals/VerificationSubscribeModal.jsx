@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
-import {
-    useSendCodeMutation,
-    useSendAnswerExpertMutation,
-} from '../../../../../services/ExpertService'
+import { useSendAnswerExpertMutation } from '../../../../../services/expert/Surveys'
+import { useSendCodeMutation } from '../../../../../services/ToolsService'
 import ROUTES from '../../../../../routes'
 
 const VerificationSubscribeModal = ({ id, main_expert }) => {
