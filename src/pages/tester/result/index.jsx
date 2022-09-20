@@ -114,11 +114,11 @@ const TestResult = () => {
 
                 {dataResult?.appeal[dataResult?.appeal?.length - 1]?.status === 'WAITING' ? (
                     <Button type="primary" danger onClick={() => setCancelModal(true)}>
-                        Отменить аппеляцию
+                        Отменить апелляцию
                     </Button>
                 ) : (
                     <Button type="primary" danger ghost onClick={() => setAppealModal(true)}>
-                        Подать аппеляцию
+                        Подать апелляцию
                     </Button>
                 )}
             </div>

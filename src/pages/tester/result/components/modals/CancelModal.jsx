@@ -11,7 +11,7 @@ const CancelModal = ({ open, setOpen, ID }) => {
         appealPut({ id: ID }).then((res) => {
             if (res.data) {
                 Modal.success({
-                    content: 'Аппеляция отменена!',
+                    content: 'Апелляция отменена!',
                 })
                 setOpen(false)
             } else {
@@ -25,7 +25,7 @@ const CancelModal = ({ open, setOpen, ID }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="АППЕЛЯЦИЯ"
+                title="АПЕЛЛЯЦИЯ"
                 visible={open}
                 onOk={() => {
                     setOpen(false)
