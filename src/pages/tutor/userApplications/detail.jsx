@@ -14,7 +14,7 @@ import QualificationDetailModal from './components/modals/QualificationDetialMod
 import {
     useGetUserApplicationIdQuery,
     usePostAcceptUserApplicationMutation,
-} from '../../../services/TutorService'
+} from '../../../services/tutor/UserApplication'
 import { rolesChoises } from '../../../constants'
 
 const { Text } = Typography

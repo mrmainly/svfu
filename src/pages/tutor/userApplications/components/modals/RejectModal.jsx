@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
-import { usePutUserApplicationRejectMutation } from '../../../../../services/TutorService'
+import { usePutUserApplicationRejectMutation } from '../../../../../services/tutor/UserApplication'
 import ROUTES from '../../../../../routes'
 
 const { TextArea } = Input

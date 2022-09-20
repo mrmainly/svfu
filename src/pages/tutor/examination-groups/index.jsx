@@ -3,10 +3,8 @@ import { Pagination, Input, Select } from 'antd'
 
 import { MyButton } from '../../../components'
 import ExaminationGroupsTable from './compoents/table'
-import {
-    useGetExaminationGroupsQuery,
-    useGetDirectionTuterQuery,
-} from '../../../services/TutorService'
+import { useGetExaminationGroupsQuery } from '../../../services/tutor/ExaminationGroups'
+import { useGetDirectionTuterQuery } from '../../../services/tutor/Tools'
 import EgCreateModal from './compoents/modals/egCreateModal'
 import EgEditModal from './compoents/modals/egEditModal'
 import './examination-groups.css'

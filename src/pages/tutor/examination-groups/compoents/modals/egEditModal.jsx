@@ -7,8 +7,8 @@ import { MyButton } from '../../../../../components'
 import {
     usePatchExaminationGroupsMutation,
     useDeleteExaminationGroupsMutation,
-    useGetUserIdQuery,
-} from '../../../../../services/TutorService'
+} from '../../../../../services/tutor/ExaminationGroups'
+import { useGetUserIdQuery } from '../../../../../services/tutor/Tools'
 
 const { Option } = Select
 

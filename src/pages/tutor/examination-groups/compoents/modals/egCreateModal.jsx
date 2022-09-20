@@ -4,10 +4,8 @@ import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
-import {
-    usePostExaminationGroupsMutation,
-    useGetUserIdQuery,
-} from '../../../../../services/TutorService'
+import { usePostExaminationGroupsMutation } from '../../../../../services/tutor/ExaminationGroups'
+import { useGetUserIdQuery } from '../../../../../services/tutor/Tools'
 
 const { Option } = Select
 

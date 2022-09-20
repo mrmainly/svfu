@@ -1,6 +1,6 @@
 import { Modal, Button, message, Input, Form } from 'antd'
 
-import { useDeleteExamScheduleMutation } from '../../../../../services/TutorService'
+import { useDeleteExamScheduleMutation } from '../../../../../services/tutor/ExamSchedule'
 
 import PropTypes from 'prop-types'
 

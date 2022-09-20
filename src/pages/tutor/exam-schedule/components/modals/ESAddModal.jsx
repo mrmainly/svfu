@@ -6,12 +6,13 @@ import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
-    useGetDirectionTuterQuery,
     useGetExaminationGroupsDirectionQuery,
     useGetTestingIdQuery,
     useGetUsersRoleQuery,
     usePostExamScheduleMutation,
-} from '../../../../../services/TutorService'
+} from '../../../../../services/tutor/ExamSchedule'
+import { useGetDirectionTuterQuery } from '../../../../../services/tutor/Tools'
+
 const { Option } = Select
 
 const ESAddModal = ({ open, setOpen }) => {

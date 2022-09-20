@@ -1,6 +1,6 @@
 import { Modal, Typography } from 'antd'
 
-import { useGetTestingIdQuery } from '../../../../../services/TutorService'
+import { useGetTestingIdQuery } from '../../../../../services/tutor/ExamSchedule'
 
 import moment from 'moment'
 import PropTypes from 'prop-types'

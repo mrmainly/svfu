@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination, Input } from 'antd'
 
 import CerifiedTable from './components/tables/CerifiedTable'
-import { useGetCertifiedQuery } from '../../../services/TutorService'
+import { useGetCertifiedQuery } from '../../../services/tutor/Certified'
 import './certified.css'
 
 const Certified = () => {

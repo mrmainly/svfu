@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
 import UserApplicationsTable from './components/tables/UserApplicationTable'
-import { useGetUserApplicationQuery } from '../../../services/TutorService'
+import { useGetUserApplicationQuery } from '../../../services/tutor/UserApplication'
 import './userApplication.css'
 
 const UserApplications = () => {

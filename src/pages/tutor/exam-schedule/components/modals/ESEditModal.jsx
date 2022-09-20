@@ -6,12 +6,12 @@ import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
-    useGetDirectionTuterQuery,
     useGetExaminationGroupsDirectionQuery,
     useGetTestingListQuery,
     useGetUsersRoleQuery,
     usePatchExamScheduleMutation,
-} from '../../../../../services/TutorService'
+} from '../../../../../services/tutor/ExamSchedule'
+import { useGetDirectionTuterQuery } from '../../../../../services/tutor/Tools'
 
 const { Option } = Select
 
