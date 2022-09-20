@@ -1,18 +1,13 @@
-import { api } from './api'
+import { api } from '../api'
 
-export const surveys = api.injectEndpoints({
+export const Results = api.injectEndpoints({
     endpoints: (build) => ({
-        getDirection: build.query({
-            query: () => `tester/direction/`,
-        }),
-        getTestResults: build.query({
-            query: () => `tester/result/`,
-        }),
+        //результат теста
         getTestResultsID: build.query({
             query: ({ id }) => `tester/result/${id}`,
             providesTags: ['Appeal'],
         }),
-
+        //подать апелляцию
         appealPost: build.mutation({
             query({ body, id }) {
                 return {
@@ -23,6 +18,7 @@ export const surveys = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
+        //отменить апелляцию
         appealPut: build.mutation({
             query({ id }) {
                 return {
@@ -35,10 +31,4 @@ export const surveys = api.injectEndpoints({
     }),
 })
 
-export const {
-    useGetDirectionQuery,
-    useAppealPostMutation,
-    useAppealPutMutation,
-    useGetTestResultsQuery,
-    useGetTestResultsIDQuery,
-} = surveys
+export const { useAppealPostMutation, useAppealPutMutation, useGetTestResultsIDQuery } = Results

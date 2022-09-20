@@ -6,8 +6,8 @@ import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
-    useGetAttestationsTagQuery,
-} from '../../../../../services/AttestationService'
+} from '../../../../../services/manager/AttestationQualification'
+import { useGetAttestationsTagQuery } from '../../../../../services/manager/Tags'
 
 const { TextArea } = Input
 const { Option } = Select

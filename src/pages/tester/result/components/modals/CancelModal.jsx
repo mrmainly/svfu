@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, message } from 'antd'
 import PropTypes from 'prop-types'
 
-import { useAppealPutMutation } from '../../../../../services/SurveysService'
+import { useAppealPutMutation } from '../../../../../services/tester/Results'
 import { MyButton } from '../../../../../components'
 
 const CancelModal = ({ open, setOpen, ID }) => {
@@ -25,7 +25,7 @@ const CancelModal = ({ open, setOpen, ID }) => {
         <div>
             <Modal
                 destroyOnClose={true}
-                title="АПЕЛЛЯЦИЯ"
+                title="Отмена апелляции"
                 visible={open}
                 onOk={() => {
                     setOpen(false)

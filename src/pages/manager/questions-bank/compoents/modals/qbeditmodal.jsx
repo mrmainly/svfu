@@ -32,7 +32,7 @@ import {
     useDeleteConstructorQuestionIdFileMutation,
     useDeleteConstructorQuestionIdImageMutation,
     useDeleteConstructorAnswerMutation,
-} from '../../../../../services/ManagerService'
+} from '../../../../../services/manager/QuestionsBank'
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 
 const { Option } = Select

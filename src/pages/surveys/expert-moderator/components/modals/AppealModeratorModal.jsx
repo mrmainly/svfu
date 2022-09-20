@@ -9,7 +9,7 @@ import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import {
     usePutAppealRejectIdMutation,
     usePutAppealAcceptIdMutation,
-} from '../../../../../services/ModeratorService'
+} from '../../../../../services/moderator/AttestedAppeal'
 import { statusChoices } from '../../../../../constants'
 import ModeratorReviewCard from '../cards/moderator_review_card'
 

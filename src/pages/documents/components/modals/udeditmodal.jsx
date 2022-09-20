@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import {
     usePatchDocumentsMutation,
     useDeleteDocumentMutation,
-} from '../../../../services/DocumentsService'
+} from '../../../../services/documents/Documents'
 import { documentsChoises } from '../../../../constants'
 
 const { Text } = Typography

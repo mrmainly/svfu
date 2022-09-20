@@ -8,10 +8,8 @@ import { MyButton } from '../../../components'
 import './attestations-qualification.css'
 import ROUTES from '../../../routes'
 
-import {
-    useGetAttestationsQualificationQuery,
-    useGetAttestationsTagQuery,
-} from '../../../services/AttestationService'
+import { useGetAttestationsQualificationQuery } from '../../../services/manager/AttestationQualification'
+import { useGetAttestationsTagQuery } from '../../../services/manager/Tags'
 
 const AttestationsQualifications = () => {
     const [currentPage, setCurrentPage] = useState(1)

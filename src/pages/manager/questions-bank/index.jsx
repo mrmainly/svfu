@@ -3,7 +3,7 @@ import { Pagination, Select, Input } from 'antd'
 
 import QuestionsBankTable from './compoents/table'
 import QBAddModal from './compoents/modals/qbaddmodal'
-import { useGetConstructorQuestionQuery } from '../../../services/ManagerService'
+import { useGetConstructorQuestionQuery } from '../../../services/manager/QuestionsBank'
 import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
 
 import { MyButton } from '../../../components'

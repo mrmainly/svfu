@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Spin, Space, Typography, Button } from 'antd'
 import { BsArrowLeft } from 'react-icons/bs'
 
-import { useGetTestResultsIDQuery } from '../../../services/SurveysService'
+import { useGetTestResultsIDQuery } from '../../../services/tester/Results'
 import { Line } from '../../../components'
 import AppealModal from './components/modals/AppealModal'
 import CancelModal from './components/modals/CancelModal'

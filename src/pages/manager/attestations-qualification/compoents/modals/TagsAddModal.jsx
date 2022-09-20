@@ -3,7 +3,7 @@ import { Modal, Input, Form, message } from 'antd'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
-import { usePostAttestationsTagMutation } from '../../../../../services/AttestationService'
+import { usePostAttestationsTagMutation } from '../../../../../services/manager/Tags'
 
 const TagsAddModal = ({ open, handleClose }) => {
     const [postAttestationsTag] = usePostAttestationsTagMutation()

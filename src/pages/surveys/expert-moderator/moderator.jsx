@@ -9,7 +9,7 @@ import moment from 'moment'
 import { Line } from '../../../components'
 import ModeratorReviewCard from './components/cards/moderator_review_card'
 import ROUTES from '../../../routes'
-import { useGetSurveyModeratorIdQuery } from '../../../services/ModeratorService'
+import { useGetSurveyModeratorIdQuery } from '../../../services/moderator/Surveys'
 
 const { Title, Text } = Typography
 

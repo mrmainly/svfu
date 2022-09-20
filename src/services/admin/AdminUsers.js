@@ -2,27 +2,56 @@ import { api } from '../api'
 
 export const AdminUsers = api.injectEndpoints({
     endpoints: (build) => ({
-        //отправка email
-        forgotEmailVersion: build.mutation({
-            query(body) {
-                return {
-                    url: `users/reset/email/`,
-                    method: 'POST',
-                    body,
-                }
-            },
+        //пользователи
+        getAdminUsers: build.query({
+            query: ({ currentPage, role, ordering, fullName, application, isActive }) =>
+                `admin/admin/users/?page=${currentPage}&role=${role}&ordering=${ordering}&full_name=${fullName}&application=${application}&is_active=${isActive}`,
+            providesTags: ['AdminUser'],
         }),
-        //Новый пароль
-        forgotPasswordVersion: build.mutation({
-            query(body) {
+        //пользователь
+        getUserId: build.query({
+            query: ({ id }) => `admin/admin/users/${id}`,
+            providesTags: ['Admin'],
+        }),
+        //создание пользователя
+        postUser: build.mutation({
+            query({ body }) {
                 return {
-                    url: `users/reset/password/`,
+                    url: `admin/admin/users/`,
                     method: 'POST',
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'AdminUser' }],
+        }),
+        //редактирование пользователя
+        patchUser: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `admin/admin/users/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'AdminUser' }],
+        }),
+        //заблокировать пользователя
+        putUser: build.mutation({
+            query({ id }) {
+                return {
+                    url: `admin/admin/users/${id}`,
+                    method: 'PUT',
+                }
+            },
+            invalidatesTags: [{ type: 'Admin' }],
         }),
     }),
 })
 
-export const { useForgotEmailVersionMutation, useForgotPasswordVersionMutation } = AdminUsers
+export const {
+    useGetAdminUsersQuery,
+    useGetUserIdQuery,
+    usePostUserMutation,
+    usePatchUserMutation,
+    usePutUserMutation,
+} = AdminUsers

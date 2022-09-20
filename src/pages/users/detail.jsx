@@ -13,7 +13,7 @@ import { Line } from '../../components'
 import './users.css'
 
 import { useGetLprUserIdQuery } from '../../services/lpr/LprUser'
-import { useGetModeratorUserIdQuery } from '../../services/ModeratorService'
+import { useGetModeratorUserIdQuery } from '../../services/moderator/Surveys'
 
 const UsersDetail = () => {
     const params = useParams()

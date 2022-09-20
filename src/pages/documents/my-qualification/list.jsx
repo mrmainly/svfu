@@ -3,7 +3,7 @@ import { Pagination, Input, Select } from 'antd'
 
 import MyQualificationTable from '../components/tables/MyQualificationTable'
 import MQAddModal from '../components/modals/mqaddmodal'
-import { useGetQualificationsQuery } from '../../../services/QualificationsService'
+import { useGetQualificationsQuery } from '../../../services/documents/Qualifications'
 import { MyButton } from '../../../components'
 import './my-qualification.css'
 

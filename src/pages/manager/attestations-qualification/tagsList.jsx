@@ -3,7 +3,7 @@ import { Input, Pagination } from 'antd'
 
 import { MyButton } from '../../../components'
 import TagsTable from './compoents/table/TagsTable'
-import { useGetAttestationsTagQuery } from '../../../services/AttestationService'
+import { useGetAttestationsTagQuery } from '../../../services/manager/Tags'
 import TagsAddModal from './compoents/modals/TagsAddModal'
 import TagsEditModal from './compoents/modals/TagsEditModal'
 import { useModal } from '../../../hooks'

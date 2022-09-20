@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Input, message, Form } from 'antd'
 import PropTypes from 'prop-types'
 
-import { useAppealPostMutation } from '../../../../../services/SurveysService'
+import { useAppealPostMutation } from '../../../../../services/tester/Results'
 import { MyButton } from '../../../../../components'
 
 const AppealModal = ({ open, setOpen, ID }) => {

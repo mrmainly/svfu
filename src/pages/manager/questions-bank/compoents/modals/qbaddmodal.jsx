@@ -23,7 +23,7 @@ import {
     usePostConstructorQuestionImageMutation,
     usePostConstructorQuestionMutation,
     usePostConstructorQuestionFileMutation,
-} from '../../../../../services/ManagerService'
+} from '../../../../../services/manager/QuestionsBank'
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 const { Option } = Select
 const { TextArea } = Input

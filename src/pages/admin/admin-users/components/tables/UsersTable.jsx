@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import Table from 'antd/lib/table'
 import { Button, Pagination, Input, Select } from 'antd'
 
-import { useGetAdminUsersQuery } from '../../../../../services/AdminService'
+import { useGetAdminUsersQuery } from '../../../../../services/admin/AdminUsers'
 import UserAddModal from '../modals/UserAddModal'
 import { MyButton } from '../../../../../components'
 import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'

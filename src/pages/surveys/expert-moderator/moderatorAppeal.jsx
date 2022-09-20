@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import { Line } from '../../../components'
 import ROUTES from '../../../routes'
-import { useGetAppealIdQuery } from '../../../services/ModeratorService'
+import { useGetAppealIdQuery } from '../../../services/moderator/AttestedAppeal'
 import ModeratorReviewCard from './components/cards/moderator_review_card'
 import { statusChoices } from '../../../constants'
 const { Title, Text } = Typography

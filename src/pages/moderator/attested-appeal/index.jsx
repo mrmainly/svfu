@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AppealTable from './components/table'
 import { Pagination, Input, Select } from 'antd'
 
-import { useGetModeratorAppealQuery } from '../../../services/ModeratorService'
+import { useGetModeratorAppealQuery } from '../../../services/moderator/AttestedAppeal'
 import './attested-appeal.css'
 
 const AttestedAppeal = () => {

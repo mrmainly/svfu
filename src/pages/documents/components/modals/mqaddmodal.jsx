@@ -6,7 +6,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
-import { usePostQualificationMutation } from '../../../../services/QualificationsService'
+import { usePostQualificationMutation } from '../../../../services/documents/Qualifications'
 
 const { Text } = Typography
 const { RangePicker } = DatePicker

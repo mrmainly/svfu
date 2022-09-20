@@ -6,7 +6,7 @@ import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsTagMutation,
     useDeleteAttestationsTagMutation,
-} from '../../../../../services/AttestationService'
+} from '../../../../../services/manager/Tags'
 
 const TagsEditModal = ({ data, open, handleClose }) => {
     const [patchAttestationsTag] = usePatchAttestationsTagMutation()

@@ -20,7 +20,7 @@ import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsTestsBankIdMutation,
     usePutAttestationsTestsBankIdMutation,
-} from '../../../../../services/AttestationService'
+} from '../../../../../services/manager/TestsBank'
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 
 const { Option } = Select

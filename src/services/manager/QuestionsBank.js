@@ -1,6 +1,6 @@
-import { api } from './api'
+import { api } from '../api'
 
-export const manager = api.injectEndpoints({
+export const QuestionsBank = api.injectEndpoints({
     endpoints: (build) => ({
         //Банк вопросов
         getConstructorQuestion: build.query({
@@ -118,7 +118,6 @@ export const manager = api.injectEndpoints({
 })
 
 export const {
-    //Банк вопросов
     useGetConstructorQuestionQuery,
 
     usePostConstructorQuestionImageMutation,
@@ -135,4 +134,4 @@ export const {
     useDeleteConstructorQuestionIdFileMutation,
     useDeleteConstructorQuestionIdImageMutation,
     useDeleteConstructorAnswerMutation,
-} = manager
+} = QuestionsBank

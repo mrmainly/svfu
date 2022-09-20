@@ -15,7 +15,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
-import { usePostAttestationsTestsBankMutation } from '../../../../../services/AttestationService'
+import { usePostAttestationsTestsBankMutation } from '../../../../../services/manager/TestsBank'
 
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 const { Option } = Select

@@ -3,7 +3,7 @@ import { Typography, Button, Modal, Select, Upload, Input, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
-import { usePostDocumentsMutation } from '../../../../services/DocumentsService'
+import { usePostDocumentsMutation } from '../../../../services/documents/Documents'
 
 const { Option } = Select
 const { Text } = Typography

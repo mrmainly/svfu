@@ -7,7 +7,7 @@ import moment from 'moment'
 import { inputs, bioInput, roles } from './UserChangeModalData'
 import { MyButton } from '../../../../../components'
 
-import { usePatchUserMutation } from '../../../../../services/AdminService'
+import { usePatchUserMutation } from '../../../../../services/admin/AdminUsers'
 
 const { Option } = Select
 const { TextArea } = Input

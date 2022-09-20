@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 import ROUTES from '../../../../../routes'
 import { DynamicPathSlice } from '../../../../../reducers/DynamicPathSlice'
-import { usePutMainModeratorMutation } from '../../../../../services/ModeratorService'
+import { usePutMainModeratorMutation } from '../../../../../services/moderator/ModeratorTestResult'
 import { statusChoices } from '../../../../../constants'
 
 const TestResultTable = ({ data, loading, setOrdering }) => {

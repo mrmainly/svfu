@@ -2,7 +2,7 @@ import { api } from '../api'
 
 export const AdminExam = api.injectEndpoints({
     endpoints: (build) => ({
-        //список расписание экзаменов
+        //список расписаний экзаменов
         getAdminExam: build.query({
             query: ({ currentPage, unit, testGroup, testers, examStatus, ordering }) =>
                 `admin/admin/exam/?page=${currentPage}&unit=${unit}&test_group=${testGroup}&testers=${testers}&exam_status=${examStatus}&ordering=${ordering}`,

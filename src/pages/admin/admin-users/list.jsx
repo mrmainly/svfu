@@ -1,6 +1,6 @@
 import UsersTable from './components/tables/UsersTable'
 
-const LprUsers = () => {
+const AdminUsers = () => {
     return (
         <div>
             <UsersTable />
@@ -8,4 +8,4 @@ const LprUsers = () => {
     )
 }
 
-export default LprUsers
+export default AdminUsers

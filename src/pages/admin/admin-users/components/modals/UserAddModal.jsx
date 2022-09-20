@@ -3,7 +3,7 @@ import { MyButton } from '../../../../../components'
 import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
 import PropTypes from 'prop-types'
 
-import { usePostUserMutation } from '../../../../../services/AdminService'
+import { usePostUserMutation } from '../../../../../services/admin/AdminUsers'
 import { roles } from './UserChangeModalData'
 import moment from 'moment'
 

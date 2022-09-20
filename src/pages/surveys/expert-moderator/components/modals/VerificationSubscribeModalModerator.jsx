@@ -8,7 +8,7 @@ import { useSendCodeMutation } from '../../../../../services/ToolsService'
 import {
     useSendAnswerModeratorMutation,
     useSendAnswerMainModeratorMutation,
-} from '../../../../../services/ModeratorService'
+} from '../../../../../services/moderator/Surveys'
 import ROUTES from '../../../../../routes'
 
 const VerificationSubscribeModalModerator = ({ id, main_moderator }) => {

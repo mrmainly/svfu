@@ -9,7 +9,7 @@ import { MyButton } from '../../../../components'
 import {
     usePatchQualificationIdMutation,
     useDeleteQualificationIdMutation,
-} from '../../../../services/QualificationsService'
+} from '../../../../services/documents/Qualifications'
 
 const { Text } = Typography
 const { RangePicker } = DatePicker

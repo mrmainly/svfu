@@ -6,7 +6,7 @@ import UDAddModal from '../components/modals/udaddmodal'
 import { MyButton } from '../../../components'
 import './upload-documents.css'
 
-import { useGetDocumentsQuery } from '../../../services/DocumentsService'
+import { useGetDocumentsQuery } from '../../../services/documents/Documents'
 
 const UploadDocuments = () => {
     const [currentPage, setCurrentPage] = useState(1)
