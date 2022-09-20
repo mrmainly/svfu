@@ -22,7 +22,7 @@ export const pathname = (params) => {
             return 'Мои квалификации'
         case ROUTES.QUALIFICATION_EDITING:
             return 'Редактирование квалификации'
-        case ROUTES.APPILYNG:
+        case ROUTES.STATEMENT:
             return 'Подача заявления'
         case ROUTES.QUALIFICATION_ADDED:
             return 'Загрузить квалификацию'

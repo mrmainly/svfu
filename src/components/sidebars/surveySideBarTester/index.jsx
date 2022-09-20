@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
 import TimeIsUpModal from '../../../pages/surveys/tester/components/modals/TimeIsUpModal'
-import { useGetSurveysIdQuery } from '../../../services/SurveysService'
+import { useGetSurveyPartOneIdQuery } from '../../../services/TesterService'
 
 import '../surveySideBar.css'
 
@@ -59,7 +59,7 @@ const subtractionExamTime = (first, second) => {
 }
 
 const SurveysSideBar = () => {
-    const { data: dataList, isFetching } = useGetSurveysIdQuery({
+    const { data: dataList, isFetching } = useGetSurveyPartOneIdQuery({
         id: JSON.parse(localStorage.getItem('survey-datas')).id,
     })
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import AvailableTestTable from './components/table'
-import { useGetTesterSurveyQuery } from '../../../services/TesterService'
+import { useGetAvailableTestsQuery } from '../../../services/TesterService'
 import { Pagination, Input, Select } from 'antd'
 import './tests.css'
 
@@ -11,7 +11,7 @@ const Test = () => {
     const [survey_status, setSurvey_status] = useState('')
     const [ordering, setOrdering] = useState('')
     const [name, setName] = useState('')
-    const { data, isFetching } = useGetTesterSurveyQuery({
+    const { data, isFetching } = useGetAvailableTestsQuery({
         currentPage: currentPage,
         survey_status: survey_status,
         name: name,

@@ -11,7 +11,7 @@ import {
     ProfileDetail,
     AvailableTest,
     MyQualification,
-    Applying,
+    Statement,
     TesterSurveyPart,
     UsersDetail,
     UsersList,
@@ -58,7 +58,7 @@ function App() {
                     <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
 
                     <Route element={<TesterSurveyPart />} path={ROUTES.TESTER_SURVEY_PART} />
-                    <Route element={<Applying />} path={ROUTES.APPILYNG} />
+                    <Route element={<Statement />} path={ROUTES.STATEMENT} />
                     <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
                     <Route element={<UsersList />} path={ROUTES.USERS} />
                     <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />

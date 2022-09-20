@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 
 import {
     useGetPracticalPartIdQuery,
-    usePracticalPartPostMutation,
-} from '../../../../../services/SurveysService'
+    usePostPracticalPartMutation,
+} from '../../../../../services/TesterService'
 import ROUTES from '../../../../../routes'
 
 const { Text, Title } = Typography
@@ -16,7 +16,7 @@ const { TextArea } = Input
 
 const PracticalPart = ({ id }) => {
     const { data: practical_data, isLoading } = useGetPracticalPartIdQuery({ id: id })
-    const [postPracticalPart] = usePracticalPartPostMutation()
+    const [postPracticalPart] = usePostPracticalPartMutation()
 
     const navigate = useNavigate()
 

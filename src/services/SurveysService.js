@@ -13,28 +13,6 @@ export const surveys = api.injectEndpoints({
             providesTags: ['Appeal'],
         }),
 
-        getSurveysId: build.query({
-            query: ({ id }) => `tester/survey/part-one/${id}`,
-            async onQueryStarted(undefiend, { queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled
-                    window.localStorage.setItem('survey-datas', JSON.stringify(data, null, '\t'))
-                } catch (err) {
-                    console.log(err)
-                }
-            },
-            providesTags: ['SURVEYS_TESTER'],
-        }),
-        postResultPartOne: build.mutation({
-            query({ body, id }) {
-                return {
-                    url: `tester/survey/part-one/${id}`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
-        }),
         appealPost: build.mutation({
             query({ body, id }) {
                 return {
@@ -54,41 +32,13 @@ export const surveys = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
-        surveyPatch: build.mutation({
-            query({ id }) {
-                return {
-                    url: `tester/survey/part-one/${id}`,
-                    method: 'PATCH',
-                }
-            },
-            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
-        }),
-        getPracticalPartId: build.query({
-            query: ({ id }) => `tester/survey/part-two/${id}`,
-        }),
-        practicalPartPost: build.mutation({
-            query({ body, id }) {
-                return {
-                    url: `tester/survey/part-two/${id}`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
-        }),
     }),
 })
 
 export const {
-    // useGetAvailableTestQuery,
     useGetDirectionQuery,
-    useGetSurveysIdQuery,
-    usePostResultPartOneMutation,
     useAppealPostMutation,
     useAppealPutMutation,
-    useSurveyPatchMutation,
-    useGetPracticalPartIdQuery,
-    usePracticalPartPostMutation,
     useGetTestResultsQuery,
     useGetTestResultsIDQuery,
 } = surveys

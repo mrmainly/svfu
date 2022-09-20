@@ -5,17 +5,17 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import {
-    useGetSurveysIdQuery,
-    useSurveyPatchMutation,
-} from '../../../../../services/SurveysService'
+    useGetSurveyPartOneIdQuery,
+    usePatchSurveyPartOneMutation,
+} from '../../../../../services/TesterService'
 import { MyButton } from '../../../../../components'
 import ROUTES from '../../../../../routes'
 
 const { Text } = Typography
 
 const TestDetail = ({ open, handleClose, ID }) => {
-    const { data } = useGetSurveysIdQuery({ id: ID })
-    const [surveyPatch] = useSurveyPatchMutation()
+    const { data } = useGetSurveyPartOneIdQuery({ id: ID })
+    const [surveyPatch] = usePatchSurveyPartOneMutation()
     const navigate = useNavigate()
 
     const items = [

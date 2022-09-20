@@ -4,14 +4,15 @@ import PropTypes from 'prop-types'
 import { MyButton } from '../../../../../components'
 
 import {
-    usePostTesterApplicationMutation,
-    usePutTesterApplicationMutation,
+    usePostStatementMutation,
+    usePutStatementMutation,
 } from '../../../../../services/TesterService'
 const { Text } = Typography
 
-const AppilyngTable = ({ data, loading, setOrdering }) => {
-    const [postDirection] = usePostTesterApplicationMutation()
-    const [putDirection] = usePutTesterApplicationMutation()
+const StatementTable = ({ data, loading, setOrdering }) => {
+    const [postDirection] = usePostStatementMutation()
+    const [putDirection] = usePutStatementMutation()
+
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
             {
@@ -108,10 +109,10 @@ const AppilyngTable = ({ data, loading, setOrdering }) => {
     )
 }
 
-AppilyngTable.propTypes = {
+StatementTable.propTypes = {
     loading: PropTypes.bool,
     data: PropTypes.array,
     setOrdering: PropTypes.func,
 }
 
-export default AppilyngTable
+export default StatementTable

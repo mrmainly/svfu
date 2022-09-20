@@ -13,7 +13,7 @@ const ROUTES = {
     TEST_DETAIL: '/test-detail',
     QUALIFICATION_ADDED: '/qualification-added',
     CERTIFICATION_RESULTS_DETAIL: '/certification-results_detail',
-    APPILYNG: '/appilyng',
+    STATEMENT: '/statement',
     USERS_ATTESTED: '/users-attested',
     TESTER_SURVEY_PART: '/tester-survey-part',
     USERS: '/users',

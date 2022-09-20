@@ -4,7 +4,7 @@ import Profile from './profile'
 import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import AvailableTest from './tester/available-tests'
-import Applying from './tester/applying'
+import Statement from './tester/statement'
 import TesterSurveyPart from './surveys/tester'
 import UsersDetail from './users/detail'
 import UsersList from './users/list'
@@ -43,7 +43,7 @@ export {
     ProfileDetail,
     AvailableTest,
     TesterSurveyPart,
-    Applying,
+    Statement,
     UsersDetail,
     UsersList,
     AttestationsQualifications,

@@ -3,16 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
+
 import {
     usePostResultPartOneMutation,
-    usePracticalPartPostMutation,
     useGetPracticalPartIdQuery,
-} from '../../../../../services/SurveysService'
+    usePostPracticalPartMutation,
+} from '../../../../../services/TesterService'
+
 import ROUTES from '../../../../../routes'
 
 const TimeIsUpModal = ({ open, setOpen, id }) => {
     const [postResultPartOne] = usePostResultPartOneMutation()
-    const [practicalPartPost] = usePracticalPartPostMutation()
+    const [practicalPartPost] = usePostPracticalPartMutation()
 
     const { data: practical_data } = useGetPracticalPartIdQuery({ id: id })
 
