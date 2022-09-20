@@ -12,7 +12,7 @@ import QualificationTable from './components/tables/QuailificationTable'
 import { Line } from '../../components'
 import './users.css'
 
-import { useGetAttestationUserIdQuery } from '../../services/AttestationProtocolService'
+import { useGetLprUserIdQuery } from '../../services/LprService'
 import { useGetModeratorUserIdQuery } from '../../services/ModeratorService'
 
 const UsersDetail = () => {
@@ -27,7 +27,7 @@ const UsersDetail = () => {
     const state = location.state
     const { type } = state
 
-    const { data: lprUserData, isloading: lprIsLoading } = useGetAttestationUserIdQuery(
+    const { data: lprUserData, isloading: lprIsLoading } = useGetLprUserIdQuery(
         {
             id: params.id,
         },

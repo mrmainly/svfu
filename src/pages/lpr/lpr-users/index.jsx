@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination, Input } from 'antd'
 
 import UsersTable from '../../users/components/tables/UsersTable'
-import { useGetAttestationUsersQuery } from '../../../services/AttestationProtocolService'
+import { useGetLprUserQuery } from '../../../services/LprService'
 import './lpr-users.css'
 
 const LprUsers = () => {
@@ -11,7 +11,7 @@ const LprUsers = () => {
     const [role, setRole] = useState('')
     const [id, setId] = useState('')
     const [name, setName] = useState('')
-    const { data, isLoading } = useGetAttestationUsersQuery({
+    const { data, isLoading } = useGetLprUserQuery({
         name: name,
         id: id,
         role: role,
