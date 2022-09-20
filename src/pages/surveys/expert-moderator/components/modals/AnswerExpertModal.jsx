@@ -112,7 +112,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                             placeholder={
                                 main_expert
                                     ? 'Рекомендация к ответу'
-                                    : 'Напишите заключение по теоретической части'
+                                    : 'Наведите заключение по теоретической части'
                             }
                             style={{ height: 150 }}
                         />
@@ -131,7 +131,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                             placeholder={
                                 main_expert
                                     ? 'Рекомендация к ответу'
-                                    : 'Напишите заключение по практической части'
+                                    : 'Наведите заключение по практической части'
                             }
                             style={{ height: 150 }}
                         />

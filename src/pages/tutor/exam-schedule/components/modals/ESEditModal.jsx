@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { MyButton } from '../../../../../components'
 import {
     useGetDirectionTuterQuery,
-    useGetTestGroupDirectionQuery,
+    useGetExaminationGroupsDirectionQuery,
     useGetUnitQuery,
     useGetUsersRoleQuery,
     usePatchTestExamMutation,
@@ -20,7 +20,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
     const [testGroup, setTestGroup] = useState(dataList?.test_group)
     const [unit, setUnit] = useState(dataList?.unit)
     const { data: dataTutor } = useGetDirectionTuterQuery()
-    const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
+    const { data: dataTestGroup } = useGetExaminationGroupsDirectionQuery(
         { direction: direction },
         { skip: !direction }
     )

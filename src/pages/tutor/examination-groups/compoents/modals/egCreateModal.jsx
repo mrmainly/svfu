@@ -5,16 +5,16 @@ import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
-    usePostTesterGroupMutation,
-    useGetApplicationUserQuery,
+    usePostExaminationGroupsMutation,
+    useGetUserIdQuery,
 } from '../../../../../services/TutorService'
 
 const { Option } = Select
 
 const EgCreateModal = ({ open, setOpen, direction }) => {
-    const [postTestGroup] = usePostTesterGroupMutation()
+    const [postTestGroup] = usePostExaminationGroupsMutation()
     const [id, setId] = useState(0)
-    const { data: tester } = useGetApplicationUserQuery({ id: id }, { skip: !id })
+    const { data: tester } = useGetUserIdQuery({ id: id }, { skip: !id })
 
     const onSubmit = (data) => {
         postTestGroup(data).then((res) => {
@@ -27,7 +27,6 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
         })
     }
 
-    console.log(tester)
     return (
         <div>
             <Modal

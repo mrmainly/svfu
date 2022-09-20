@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
 import UserApplicationsTable from './components/tables/UserApplicationTable'
-import { useGetTutorApplicationQuery } from '../../../services/TutorService'
+import { useGetUserApplicationQuery } from '../../../services/TutorService'
 import './userApplication.css'
 
 const UserApplications = () => {
@@ -13,7 +13,7 @@ const UserApplications = () => {
     const [fullName, setFullName] = useState('')
     const [directionName, setDirectionName] = useState('')
     const [post, setPost] = useState('')
-    const { data, isFetching } = useGetTutorApplicationQuery({
+    const { data, isFetching } = useGetUserApplicationQuery({
         currentPage: currentPage,
         ordering: ordering,
         status: status,

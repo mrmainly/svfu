@@ -4,7 +4,7 @@ import { Pagination, Input, Select } from 'antd'
 import { MyButton } from '../../../components'
 import ExaminationGroupsTable from './compoents/table'
 import {
-    useGetTutorTestgroupQuery,
+    useGetExaminationGroupsQuery,
     useGetDirectionTuterQuery,
 } from '../../../services/TutorService'
 import EgCreateModal from './compoents/modals/egCreateModal'
@@ -19,7 +19,7 @@ const ExaminationGroups = () => {
     const [ordering, setOrdering] = useState('')
     const [examStatus, setExamStatus] = useState('')
     const [directionName, setDirectionName] = useState('')
-    const { data, isFetching } = useGetTutorTestgroupQuery({
+    const { data, isFetching } = useGetExaminationGroupsQuery({
         currentPage: currentPage,
         ordering: ordering,
         examStatus: examStatus,

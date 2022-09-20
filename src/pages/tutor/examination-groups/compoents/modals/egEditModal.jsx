@@ -5,19 +5,19 @@ import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
-    usePatchTesterGroupMutation,
-    useDeleteTesterGroupMutation,
-    useGetApplicationUserQuery,
+    usePatchExaminationGroupsMutation,
+    useDeleteExaminationGroupsMutation,
+    useGetUserIdQuery,
 } from '../../../../../services/TutorService'
 
 const { Option } = Select
 
 const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
-    const [patchTestGroup] = usePatchTesterGroupMutation()
-    const [deleteTestGroup] = useDeleteTesterGroupMutation()
+    const [patchTestGroup] = usePatchExaminationGroupsMutation()
+    const [deleteTestGroup] = useDeleteExaminationGroupsMutation()
     const [testerId, setTesterId] = useState(0)
     const [testGroupId, setTestGroupId] = useState(0)
-    const { data: tester } = useGetApplicationUserQuery({ id: testerId }, { skip: !testerId })
+    const { data: tester } = useGetUserIdQuery({ id: testerId }, { skip: !testerId })
     useEffect(() => {
         setTesterId(testGroup?.direction.id)
         setTestGroupId(testGroup?.id)

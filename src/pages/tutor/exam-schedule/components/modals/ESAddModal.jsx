@@ -7,10 +7,10 @@ import PropTypes from 'prop-types'
 import { MyButton } from '../../../../../components'
 import {
     useGetDirectionTuterQuery,
-    useGetTestGroupDirectionQuery,
+    useGetExaminationGroupsDirectionQuery,
     useGetUnitQuery,
     useGetUsersRoleQuery,
-    usePostTestExamMutation,
+    usePostExamScheduleMutation,
 } from '../../../../../services/TutorService'
 const { Option } = Select
 
@@ -19,14 +19,14 @@ const ESAddModal = ({ open, setOpen }) => {
     const [testGroup, setTestGroup] = useState()
     const [unit, setUnit] = useState()
     const { data: dataTutor } = useGetDirectionTuterQuery()
-    const { data: dataTestGroup } = useGetTestGroupDirectionQuery(
+    const { data: dataTestGroup } = useGetExaminationGroupsDirectionQuery(
         { direction: direction },
         { skip: !direction }
     )
     const { data: dataUnit } = useGetUnitQuery({ direction: direction }, { skip: !direction })
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
-    const [postTestExam] = usePostTestExamMutation()
+    const [postTestExam] = usePostExamScheduleMutation()
     const onSubmit = (data) => {
         data.date_start = moment(data.date_start._d).format('YYYY-MM-DD HH:mm:ss')
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')

@@ -4,7 +4,7 @@ import { Pagination, Input, Select } from 'antd'
 import ExamScheduleTable from './components/table'
 import ESAddModal from './components/modals/ESAddModal'
 import ESEditModal from './components/modals/ESEditModal'
-import { useGetTutorExamQuery } from '../../../services/TutorService'
+import { useGetExamScheduleQuery } from '../../../services/TutorService'
 import ModalAnswerDeleteExam from './components/modals/ModalAnswerDeleteExam'
 import { MyButton } from '../../../components'
 import ViewSurveyModal from './components/modals/ViewSurveyModal'
@@ -20,7 +20,7 @@ const ExamSchedule = () => {
     const [testers, setTesters] = useState('')
     const [examStatus, setExamStatus] = useState('')
     const [ordering, setOrdering] = useState('')
-    const { data, isFetching } = useGetTutorExamQuery({
+    const { data, isFetching } = useGetExamScheduleQuery({
         currentPage: currentPage,
         unit,
         testGroup,

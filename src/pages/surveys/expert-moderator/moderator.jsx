@@ -53,6 +53,8 @@ const Moderator = () => {
         )
     }
 
+    console.log(surveyquest)
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div
@@ -153,29 +155,31 @@ const Moderator = () => {
                     </div>
                 </div>
             ))}
-            <div style={{ marginTop: '8px' }}>
-                <Typography
-                    style={{
-                        marginBottom: '16px',
-                        fontFamily: 'Roboto',
-                        fontWeight: '400',
-                        fontStyle: 'italic',
-                        fontSize: '18px',
-                        lineHeight: '27px',
-                    }}
-                >
-                    Решения модераторов
-                </Typography>
-                {surveyquest?.moderator_review?.length &&
-                    surveyquest.moderator_review.map((item, index) => (
-                        <ModeratorReviewCard
-                            key={index}
-                            moderator_name={item.user_id}
-                            recommendation={item.conclusion}
-                            estimate={item.estimate}
-                        />
-                    ))}
-            </div>
+            {surveyquest?.main_moderator && (
+                <div style={{ marginTop: '8px' }}>
+                    <Typography
+                        style={{
+                            marginBottom: '16px',
+                            fontFamily: 'Roboto',
+                            fontWeight: '400',
+                            fontStyle: 'italic',
+                            fontSize: '18px',
+                            lineHeight: '27px',
+                        }}
+                    >
+                        Решения модераторов
+                    </Typography>
+                    {surveyquest?.moderator_review?.length &&
+                        surveyquest.moderator_review.map((item, index) => (
+                            <ModeratorReviewCard
+                                key={index}
+                                moderator_name={item.user_id}
+                                recommendation={item.conclusion}
+                                estimate={item.estimate}
+                            />
+                        ))}
+                </div>
+            )}
             <Line />
             <Button
                 type="primary"

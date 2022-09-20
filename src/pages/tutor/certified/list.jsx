@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Pagination, Input } from 'antd'
 
 import CerifiedTable from './components/tables/CerifiedTable'
-import { useGetTutorTesterQuery } from '../../../services/TutorService'
+import { useGetCertifiedQuery } from '../../../services/TutorService'
 import './certified.css'
 
 const Certified = () => {
@@ -11,7 +11,7 @@ const Certified = () => {
     const [ordering, setOrdering] = useState('')
     const [fullName, setFullName] = useState('')
     const [application, setApplication] = useState('')
-    const { data: tester, isLoading } = useGetTutorTesterQuery({
+    const { data: tester, isLoading } = useGetCertifiedQuery({
         currentPage: currentPage,
         ordering: ordering,
         fullName: fullName,

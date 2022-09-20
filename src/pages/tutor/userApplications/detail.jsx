@@ -12,8 +12,8 @@ import Information from './components/Information'
 import RejectModal from './components/modals/RejectModal'
 import QualificationDetailModal from './components/modals/QualificationDetialModal'
 import {
-    useGetApplicationIdQuery,
-    usePostAcceptApplicationMutation,
+    useGetUserApplicationIdQuery,
+    usePostAcceptUserApplicationMutation,
 } from '../../../services/TutorService'
 import { rolesChoises } from '../../../constants'
 
@@ -25,12 +25,12 @@ const UserApplicationsDetail = () => {
     const [openRejectModal, setOpenRejectModal] = useState(false)
     const [qualificationData, setQualificationData] = useState([])
 
-    const [postAcceptApplication] = usePostAcceptApplicationMutation()
+    const [postAcceptApplication] = usePostAcceptUserApplicationMutation()
 
     const params = useParams()
     const navigate = useNavigate()
 
-    const { data, isLoading } = useGetApplicationIdQuery(params.id)
+    const { data, isLoading } = useGetUserApplicationIdQuery(params.id)
 
     const role = rolesChoises[data?.user.role]
 
