@@ -122,10 +122,28 @@ const EgEditModal = ({ open, setOpen, direction, testGroup }) => {
                                             <Select placeholder="Выберите аттестуемого">
                                                 {tester
                                                     ? tester.results?.map((item, index) => (
-                                                          <Option key={index} value={item.user.id}>
+                                                          <Option
+                                                              key={index}
+                                                              value={item.user.id}
+                                                              disabled={
+                                                                  item?.user?.is_active
+                                                                      ? false
+                                                                      : true
+                                                              }
+                                                          >
                                                               {item.user.last_name}{' '}
                                                               {item.user.first_name}{' '}
                                                               {item.user.patronymic}
+                                                              {!item.user.is_active && (
+                                                                  <span
+                                                                      style={{
+                                                                          color: '#f28585',
+                                                                          marginLeft: 5,
+                                                                      }}
+                                                                  >
+                                                                      заблокирован
+                                                                  </span>
+                                                              )}
                                                           </Option>
                                                       ))
                                                     : ''}

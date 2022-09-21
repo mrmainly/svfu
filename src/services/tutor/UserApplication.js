@@ -6,6 +6,7 @@ export const UserApplication = api.injectEndpoints({
         getUserApplication: build.query({
             query: ({ currentPage, ordering, status, fullName, directionName, post }) =>
                 `tutor/application/?page=${currentPage}&ordering=${ordering}&status=${status}&full_name=${fullName}&direction_name=${directionName}&post=${post}`,
+            providesTags: ['Application'],
         }),
         //заявка пользователя + информация
         getUserApplicationId: build.query({
