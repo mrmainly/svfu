@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { MyButton } from '../../../../../components'
 import {
     useGetExaminationGroupsDirectionQuery,
-    useGetTestingIdQuery,
+    useGetTestingListQuery,
     useGetUsersRoleQuery,
     usePostExamScheduleMutation,
 } from '../../../../../services/tutor/ExamSchedule'
@@ -24,7 +24,10 @@ const ESAddModal = ({ open, setOpen }) => {
         { direction: direction },
         { skip: !direction }
     )
-    const { data: dataUnit } = useGetTestingIdQuery({ direction: direction }, { skip: !direction })
+    const { data: dataUnit } = useGetTestingListQuery(
+        { direction: direction },
+        { skip: !direction }
+    )
     const { data: dataExpert } = useGetUsersRoleQuery({ role: 'EXPERT' })
     const { data: dataModerator } = useGetUsersRoleQuery({ role: 'MODERATOR' })
     const [postTestExam] = usePostExamScheduleMutation()
@@ -42,6 +45,7 @@ const ESAddModal = ({ open, setOpen }) => {
             }
         })
     }
+
     return (
         <div>
             <Modal
