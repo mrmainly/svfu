@@ -9,7 +9,7 @@ export const AdminUsers = api.injectEndpoints({
             providesTags: ['AdminUser'],
         }),
         //пользователь
-        getUserId: build.query({
+        getAdminUserId: build.query({
             query: ({ id }) => `admin/admin/users/${id}`,
             providesTags: ['Admin'],
         }),
@@ -50,7 +50,7 @@ export const AdminUsers = api.injectEndpoints({
 
 export const {
     useGetAdminUsersQuery,
-    useGetUserIdQuery,
+    useGetAdminUserIdQuery,
     usePostUserMutation,
     usePatchUserMutation,
     usePutUserMutation,

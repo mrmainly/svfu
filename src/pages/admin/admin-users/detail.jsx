@@ -9,14 +9,14 @@ import { AttestedInfo } from './components/AttestedInfo'
 import DocumentList from './documents/DocumentList'
 import QualificationTable from './components/tables/QuailificationTable'
 import UserChangeModal from './components/modals/UserChangeModal'
-import { useGetUserIdQuery, usePutUserMutation } from '../../../services/admin/AdminUsers'
+import { useGetAdminUserIdQuery, usePutUserMutation } from '../../../services/admin/AdminUsers'
 import { rolesChoises } from '../../../constants'
 import { Line } from '../../../components'
 import '../admin-users.css'
 
 const AdminUsersDetail = () => {
     const params = useParams()
-    const { data } = useGetUserIdQuery({ id: params.id })
+    const { data } = useGetAdminUserIdQuery({ id: params.id })
     const [putUser] = usePutUserMutation()
     const navigate = useNavigate()
     const [mode, setMode] = useState('info')
