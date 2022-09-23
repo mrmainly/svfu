@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import cookie from 'js-cookie'
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://notalone.medic.fun/api/v1/',
+    baseUrl: process.env.REACT_APP_API_KEY,
     prepareHeaders: (headers) => {
         const token = cookie.get('token')
         if (token) {
@@ -32,15 +32,13 @@ export const api = createApi({
         'LprUser',
         'AdminUser',
         'Application',
-
         //tester
         'Applying',
         'SURVEYS_TESTER',
-
         //manager
         'ManagerConstructorQuestion',
         //tutor экзаменационные группы
-        'ExaminationGroups',
+        'ExaminationGroups ',
         //tutor расписание экзаменов
         'ExamSchedule',
     ],
