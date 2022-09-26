@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
+
 import { useState } from 'react'
-import { Modal, Select, Form, Button, message } from 'antd'
+
+import { Modal, Select, Form, Button, message, AutoComplete } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
@@ -9,10 +12,29 @@ import { useGetUserIdQuery } from '../../../../../services/tutor/Tools'
 
 const { Option } = Select
 
+// const is_action_user = (item) => {
+//     if (!item.user.is_active) {
+//         return (
+//             <span
+//                 style={{
+//                     color: '#f28585',
+//                     marginLeft: 5,
+//                 }}
+//             >
+//                 заблокирован
+//             </span>
+//         )
+//     } else {
+//         return ''
+//     }
+// }
+
 const EgCreateModal = ({ open, setOpen, direction }) => {
     const [postTestGroup] = usePostExaminationGroupsMutation()
     const [id, setId] = useState(0)
-    const { data: tester } = useGetUserIdQuery({ id: id }, { skip: !id })
+    const [value, setValue] = useState('')
+
+    const { data: testers } = useGetUserIdQuery({ id: id, full_name: value }, { skip: !id })
 
     const onSubmit = (data) => {
         postTestGroup(data).then((res) => {
@@ -23,6 +45,10 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                 message.error(res.error.data.errors[0])
             }
         })
+    }
+
+    const handleSearchText = (searchText) => {
+        setValue(searchText)
     }
 
     return (
@@ -87,36 +113,33 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                                             required
                                         >
                                             <Select
+                                                onSearch={handleSearchText}
                                                 placeholder="Выберите аттестуемого"
-                                                // onChange={(e) => setTesters(e)}
+                                                showSearch
+                                                optionFilterProp="children"
                                             >
-                                                {tester
-                                                    ? tester.results?.map((item, index) => (
-                                                          <Option
-                                                              key={index}
-                                                              value={item.user.id}
-                                                              disabled={
-                                                                  item?.user?.is_active
-                                                                      ? false
-                                                                      : true
-                                                              }
-                                                          >
-                                                              {item.user.last_name}{' '}
-                                                              {item.user.first_name}{' '}
-                                                              {item.user.patronymic}
-                                                              {!item.user.is_active && (
-                                                                  <span
-                                                                      style={{
-                                                                          color: '#f28585',
-                                                                          marginLeft: 5,
-                                                                      }}
-                                                                  >
-                                                                      заблокирован
-                                                                  </span>
-                                                              )}
-                                                          </Option>
-                                                      ))
-                                                    : ''}
+                                                {testers?.map((item) => (
+                                                    <Option
+                                                        key={item.user.id}
+                                                        disabled={
+                                                            item?.user?.is_active ? false : true
+                                                        }
+                                                        value={item.user.id}
+                                                    >
+                                                        {item.user.last_name} {item.user.first_name}{' '}
+                                                        {item.user.patronymic}
+                                                        {!item.user.is_active && (
+                                                            <span
+                                                                style={{
+                                                                    color: '#f28585',
+                                                                    marginLeft: 5,
+                                                                }}
+                                                            >
+                                                                заблокирован
+                                                            </span>
+                                                        )}
+                                                    </Option>
+                                                ))}
                                             </Select>
                                         </Form.Item>
                                         <DeleteTwoTone

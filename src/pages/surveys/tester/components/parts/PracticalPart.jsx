@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Typography, Input, Form, Spin, Upload, message } from 'antd'
