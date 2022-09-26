@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { Modal, Select, Form, Button, message, AutoComplete } from 'antd'
+import { Modal, Select, Form, Button, message } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
