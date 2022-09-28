@@ -27,7 +27,7 @@ const AttestationsQualifications = () => {
         is_active: status,
         id: id,
     })
-    const { data: directionTag } = useGetAttestationsTagListQuery()
+    const { data: directionTag } = useGetAttestationsTagListQuery(tag)
     const [modalNewQuali, setModalNewQuali] = useState(false)
     const onChange = (page) => {
         setCurrentPage(page)
@@ -37,6 +37,10 @@ const AttestationsQualifications = () => {
     }, [data])
 
     const navigate = useNavigate()
+
+    const handleSearchText = (searchText) => {
+        setTag(searchText)
+    }
 
     return (
         <div>
@@ -59,9 +63,12 @@ const AttestationsQualifications = () => {
                     placeholder="Тег"
                     className="input-search"
                     onChange={(value) => setTag(value)}
+                    showSearch
+                    optionFilterProp="children"
+                    onSearch={handleSearchText}
                 >
                     <Select.Option value=""> Все теги</Select.Option>
-                    {directionTag?.results?.map((item, index) => (
+                    {directionTag?.map((item, index) => (
                         <Select.Option value={item.name} key={index}>
                             {item.name}
                         </Select.Option>

@@ -13,9 +13,11 @@ const { TextArea } = Input
 const { Option } = Select
 
 const AQEditModal = ({ open, setOpen, dataList }) => {
+    const [tagFilter, setTagFilter] = useState('')
+
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
     const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
-    const { data } = useGetAttestationsTagListQuery()
+    const { data } = useGetAttestationsTagListQuery(tagFilter)
     const [active, setActive] = useState()
 
     const onSubmit = (data) => {
@@ -39,6 +41,11 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
     useEffect(() => {
         setActive(dataList[0]?.is_active)
     }, [dataList])
+
+    const handleSearchText = (searchText) => {
+        setTagFilter(searchText)
+    }
+
     return (
         <div>
             <Modal
@@ -80,8 +87,13 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                         <TextArea />
                     </Form.Item>
                     <Form.Item label="Тег квалификации" name="tag_direction">
-                        <Select placeholder="Выберите тег">
-                            {data?.results.map((item, index) => (
+                        <Select
+                            placeholder="Выберите тег"
+                            showSearch
+                            optionFilterProp="children"
+                            onSearch={handleSearchText}
+                        >
+                            {data?.map((item, index) => (
                                 <Option key={index} value={item?.id}>
                                     {item?.name}
                                 </Option>

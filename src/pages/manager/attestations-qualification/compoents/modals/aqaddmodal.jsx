@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Modal, message, Input, Select, Form } from 'antd'
 import PropTypes from 'prop-types'
 
@@ -11,8 +12,11 @@ const { TextArea } = Input
 const { Option } = Select
 
 const AQAddModal = ({ open, setOpen }) => {
+    const [tagFilter, setTagFilter] = useState('')
+
     const [postAttestationsQualification] = usePostAttestationsQualificationMutation()
-    const { data } = useGetAttestationsTagListQuery()
+    const { data } = useGetAttestationsTagListQuery(tagFilter)
+
     const onSubmit = (data) => {
         postAttestationsQualification(data).then((res) => {
             if (res.data) {
@@ -23,6 +27,10 @@ const AQAddModal = ({ open, setOpen }) => {
             }
             console.log(res)
         })
+    }
+
+    const handleSearchText = (searchText) => {
+        setTagFilter(searchText)
     }
 
     return (
@@ -66,8 +74,13 @@ const AQAddModal = ({ open, setOpen }) => {
                         <TextArea />
                     </Form.Item>
                     <Form.Item label="Тег квалификации" name="tag_direction">
-                        <Select placeholder="Выберите тег">
-                            {data?.results.map((item, index) => (
+                        <Select
+                            placeholder="Выберите тег"
+                            showSearch
+                            optionFilterProp="children"
+                            onSearch={handleSearchText}
+                        >
+                            {data?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.name}
                                 </Option>
