@@ -6,8 +6,8 @@ import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
+    useGetAttestationsTagListQuery,
 } from '../../../../../services/manager/AttestationQualification'
-import { useGetAttestationsTagQuery } from '../../../../../services/manager/Tags'
 
 const { TextArea } = Input
 const { Option } = Select
@@ -15,7 +15,7 @@ const { Option } = Select
 const AQEditModal = ({ open, setOpen, dataList }) => {
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
     const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
-    const { data } = useGetAttestationsTagQuery()
+    const { data } = useGetAttestationsTagListQuery()
     const [active, setActive] = useState()
 
     const onSubmit = (data) => {

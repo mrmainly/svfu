@@ -41,6 +41,9 @@ export const AttestationQualification = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        getAttestationsTagList: build.query({
+            query: () => `constructor/direction/tag`,
+        }),
     }),
 })
 
@@ -49,4 +52,5 @@ export const {
     usePostAttestationsQualificationMutation,
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
+    useGetAttestationsTagListQuery,
 } = AttestationQualification

@@ -8,8 +8,10 @@ import { MyButton } from '../../../components'
 import './attestations-qualification.css'
 import ROUTES from '../../../routes'
 
-import { useGetAttestationsQualificationQuery } from '../../../services/manager/AttestationQualification'
-import { useGetAttestationsTagQuery } from '../../../services/manager/Tags'
+import {
+    useGetAttestationsQualificationQuery,
+    useGetAttestationsTagListQuery,
+} from '../../../services/manager/AttestationQualification'
 
 const AttestationsQualifications = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -25,7 +27,7 @@ const AttestationsQualifications = () => {
         is_active: status,
         id: id,
     })
-    const { data: directionTag } = useGetAttestationsTagQuery()
+    const { data: directionTag } = useGetAttestationsTagListQuery()
     const [modalNewQuali, setModalNewQuali] = useState(false)
     const onChange = (page) => {
         setCurrentPage(page)

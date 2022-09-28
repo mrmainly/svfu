@@ -2,15 +2,17 @@ import { Modal, message, Input, Select, Form } from 'antd'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
-import { usePostAttestationsQualificationMutation } from '../../../../../services/manager/AttestationQualification'
-import { useGetAttestationsTagQuery } from '../../../../../services/manager/Tags'
+import {
+    usePostAttestationsQualificationMutation,
+    useGetAttestationsTagListQuery,
+} from '../../../../../services/manager/AttestationQualification'
 
 const { TextArea } = Input
 const { Option } = Select
 
 const AQAddModal = ({ open, setOpen }) => {
     const [postAttestationsQualification] = usePostAttestationsQualificationMutation()
-    const { data } = useGetAttestationsTagQuery()
+    const { data } = useGetAttestationsTagListQuery()
     const onSubmit = (data) => {
         postAttestationsQualification(data).then((res) => {
             if (res.data) {
