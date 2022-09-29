@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react'
 
 import { Typography, Button } from 'antd'
 
-import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { useSelector, useDispatch } from 'react-redux'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
 
 import '../surveySideBar.css'
@@ -21,7 +22,7 @@ const SurveysSideBar = () => {
     useEffect(() => {
         const newData = JSON.parse(localStorage.getItem('side_bar_data_ex_mo'))
         setData(newData)
-    }, [localStorage.getItem('side_bar_data_ex_mo')])
+    }, [])
 
     const colorSwitchDanger = (id) => {
         const newData = data.answers_first_part

@@ -114,7 +114,7 @@ const MyLayout = () => {
                                         },
                                     ],
                                 },
-                                ...RolesDivisionMenuItem(navigate),
+                                RolesDivisionMenuItem(navigate),
                             ]}
                             theme="dark"
                         />

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import { Typography, Form, Input, Button, Divider, message } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
@@ -23,7 +24,7 @@ const Login = () => {
                 message.error(res?.error?.data?.errors[0])
             } else {
                 cookie.set('token', res.data.token)
-                localStorage.setItem('role', JSON.stringify(res.data.role, null, '\t'))
+                window.localStorage.setItem('role', JSON.stringify(res.data.role, null, '\t'))
                 // navigate(ROUTES.PROFILE)
                 window.location.href = ROUTES.PROFILE
             }

@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState, useRef } from 'react'
 
 import { Typography, Button, Skeleton } from 'antd'
-import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
@@ -127,7 +128,6 @@ const SurveysSideBar = () => {
                 )
             )
         }
-        console.log()
     }, [dataList])
 
     if (isFetching) {
