@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState } from 'react'
 import { Layout, Drawer, Button } from 'antd'
 import { Outlet, useLocation } from 'react-router-dom'
@@ -7,6 +8,7 @@ import '../layout.css'
 import { SurveysSideBar, SurveysSideBarTester } from '../../components'
 import { SurveysSlice } from '../../reducers/SurveysSlice'
 import ROUTES from '../../routes'
+import LayoutWrapper from './components/WrapperLayout'
 
 const { Content } = Layout
 
@@ -32,73 +34,75 @@ const SurveyLayout = () => {
     }, [])
 
     return (
-        <Layout>
-            <Content
-                style={{
-                    margin: '24px 24px 24px',
-                    display: 'flex',
-                    alignItems: 'start',
-                    flexDirection: drawerState ? 'column' : 'row',
-                }}
-            >
-                {drawerState && (
-                    <Button
-                        style={{
-                            width: '100%',
-                            marginBottom: 16,
-                            height: 40,
-                            borderColor: '#0D6EFD',
-                            color: '#0D6EFD',
-                            fontSize: 20,
-                            borderRadius: 5,
-                        }}
-                        onClick={() => dispatch(changeDrawerMobileOpen(true))}
-                    >
-                        Навигация по тесту
-                    </Button>
-                )}
-                <div
-                    className="site-layout-background"
+        <LayoutWrapper>
+            <Layout>
+                <Content
                     style={{
-                        paddingLeft: 24,
-                        paddingTop: 16,
-                        paddingRight: 24,
-                        paddingBottom: 16,
+                        margin: '24px 24px 24px',
+                        display: 'flex',
+                        alignItems: 'start',
+                        flexDirection: drawerState ? 'column' : 'row',
                     }}
                 >
-                    <Outlet />
-                </div>
-                {params.pathname === ROUTES.TESTER_SURVEY_PART ? (
-                    <div>
-                        {drawerState ? (
-                            <Drawer
-                                visible={mobileDrawer}
-                                onClose={() => dispatch(changeDrawerMobileOpen(false))}
-                                width={300}
-                            >
+                    {drawerState && (
+                        <Button
+                            style={{
+                                width: '100%',
+                                marginBottom: 16,
+                                height: 40,
+                                borderColor: '#0D6EFD',
+                                color: '#0D6EFD',
+                                fontSize: 20,
+                                borderRadius: 5,
+                            }}
+                            onClick={() => dispatch(changeDrawerMobileOpen(true))}
+                        >
+                            Навигация по тесту
+                        </Button>
+                    )}
+                    <div
+                        className="site-layout-background"
+                        style={{
+                            paddingLeft: 24,
+                            paddingTop: 16,
+                            paddingRight: 24,
+                            paddingBottom: 16,
+                        }}
+                    >
+                        <Outlet />
+                    </div>
+                    {params.pathname === ROUTES.TESTER_SURVEY_PART ? (
+                        <div>
+                            {drawerState ? (
+                                <Drawer
+                                    visible={mobileDrawer}
+                                    onClose={() => dispatch(changeDrawerMobileOpen(false))}
+                                    width={300}
+                                >
+                                    <SurveysSideBarTester />
+                                </Drawer>
+                            ) : (
                                 <SurveysSideBarTester />
-                            </Drawer>
-                        ) : (
-                            <SurveysSideBarTester />
-                        )}
-                    </div>
-                ) : (
-                    <div>
-                        {drawerState ? (
-                            <Drawer
-                                visible={mobileDrawer}
-                                onClose={() => dispatch(changeDrawerMobileOpen(false))}
-                                width={300}
-                            >
+                            )}
+                        </div>
+                    ) : (
+                        <div>
+                            {drawerState ? (
+                                <Drawer
+                                    visible={mobileDrawer}
+                                    onClose={() => dispatch(changeDrawerMobileOpen(false))}
+                                    width={300}
+                                >
+                                    <SurveysSideBar />
+                                </Drawer>
+                            ) : (
                                 <SurveysSideBar />
-                            </Drawer>
-                        ) : (
-                            <SurveysSideBar />
-                        )}
-                    </div>
-                )}
-            </Content>
-        </Layout>
+                            )}
+                        </div>
+                    )}
+                </Content>
+            </Layout>
+        </LayoutWrapper>
     )
 }
 
