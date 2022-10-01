@@ -1,5 +1,16 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Checkbox, message, Select, Typography, Divider } from 'antd'
+import {
+    Button,
+    Modal,
+    Form,
+    Input,
+    Checkbox,
+    message,
+    Select,
+    Typography,
+    Divider,
+    Spin,
+} from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -11,7 +22,7 @@ const { TextArea } = Input
 const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
     const [subscribe, setSubscribe] = useState(false)
 
-    const [sendSubscribeExpert] = useSendSubscribeExpertMutation()
+    const [sendSubscribeExpert, { isLoading }] = useSendSubscribeExpertMutation()
 
     const { expertTheoreticalPartModalOpen } = useSelector((state) => state.survey_slice)
     const { openExpertTheoreticalPartOpen, openSubscribeModalModerator, setTextAnswerModerator } =
@@ -29,7 +40,6 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
                 message.error('Вы не оставили рекомендацию')
             }
         })
-        console.log(data)
     }
 
     const handleClose = () => {
@@ -56,40 +66,52 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
         },
     ]
     return (
-        <>
-            <Modal
-                title="Заключение"
-                visible={expertTheoreticalPartModalOpen}
-                onOk={handleClose}
-                onCancel={handleClose}
-                footer={[
-                    <Button
-                        size="medium"
-                        style={{
-                            borderRadius: 4,
-                        }}
-                        key="save"
-                        form="form-moderator-theoretical-part"
-                        type="primary"
-                        disabled={!subscribe ? true : false}
-                        htmlType="submit"
-                    >
-                        Отправить
-                    </Button>,
-                    <Button
-                        size="medium"
-                        style={{
-                            background: '#6C757D',
-                            color: 'white',
-                            borderRadius: 4,
-                        }}
-                        onClick={handleClose}
-                        key="back"
-                    >
-                        Отмена
-                    </Button>,
-                ]}
-            >
+        <Modal
+            title="Заключение"
+            visible={expertTheoreticalPartModalOpen}
+            onOk={handleClose}
+            onCancel={handleClose}
+            footer={[
+                <Button
+                    size="medium"
+                    style={{
+                        borderRadius: 4,
+                    }}
+                    key="save"
+                    form="form-moderator-theoretical-part"
+                    type="primary"
+                    disabled={!subscribe ? true : false}
+                    htmlType="submit"
+                >
+                    Отправить
+                </Button>,
+                <Button
+                    size="medium"
+                    style={{
+                        background: '#6C757D',
+                        color: 'white',
+                        borderRadius: 4,
+                    }}
+                    onClick={handleClose}
+                    key="back"
+                >
+                    Отмена
+                </Button>,
+            ]}
+        >
+            {isLoading && (
+                <Spin
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        zIndex: 1,
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                    size="large"
+                />
+            )}
+            <div style={{ opacity: isLoading ? 0.5 : 1 }}>
                 {info.map((item, index) => (
                     <div key={index}>
                         <Typography.Text
@@ -180,8 +202,8 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
                     </Form.Item>
                 </Form>
                 <Checkbox onChange={onChange}>Подписать протокол</Checkbox>
-            </Modal>
-        </>
+            </div>
+        </Modal>
     )
 }
 
