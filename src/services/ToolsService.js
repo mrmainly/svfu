@@ -3,7 +3,7 @@ import { api } from './api'
 export const tools = api.injectEndpoints({
     endpoints: (build) => ({
         getToolsDirection: build.query({
-            query: () => `/tools/directions/`,
+            query: () => `/tools/tools/direction/`,
         }),
         //проверка кода
         sendCode: build.mutation({

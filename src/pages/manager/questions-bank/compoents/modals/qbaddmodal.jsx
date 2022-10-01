@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState } from 'react'
 
 import {
@@ -116,6 +117,9 @@ const QBAddModal = ({ open, setOpen }) => {
             })
         }
     }
+
+    console.log(data)
+
     return (
         <div>
             <Modal
