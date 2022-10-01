@@ -13,7 +13,7 @@ import { useGetSurveyModeratorIdQuery } from '../../../services/moderator/Survey
 
 const { Title, Text } = Typography
 
-const Moderator = () => {
+const ModeratorSurvey = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -52,8 +52,6 @@ const Moderator = () => {
             </div>
         )
     }
-
-    console.log(surveyquest)
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -200,7 +198,7 @@ const Moderator = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.SURVEYS_PART, {
+                    navigate(ROUTES.SURVEY_PARTS_MODERATOR, {
                         state: {
                             surveyquest: surveyquest,
                             id: id,
@@ -214,4 +212,4 @@ const Moderator = () => {
     )
 }
 
-export default Moderator
+export default ModeratorSurvey

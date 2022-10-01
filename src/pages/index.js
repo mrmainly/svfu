@@ -5,7 +5,7 @@ import ForgotPassword from './auth/forgot-password'
 import ProfileDetail from './profile/detail'
 import AvailableTest from './tester/available-tests'
 import Statement from './tester/statement'
-import TesterSurveyPart from './surveys/tester'
+import TesterSurveyPart from './tester/survey'
 import UsersDetail from './users/detail'
 import UsersList from './users/list'
 import AttestationsQualifications from './manager/attestations-qualification'
@@ -27,12 +27,13 @@ import LprExam from './lpr/lpr-exam'
 import AdminUsers from './admin/admin-users/list'
 import AdminUsersDetail from './admin/admin-users/detail'
 import AdminExam from './admin/admin-exam'
-import Expert from './surveys/expert-moderator/expert'
-import Moderator from './surveys/expert-moderator/moderator'
+import Expert from './expert/survey'
+import Moderator from './moderator/survey'
 import ModeratorTestResult from './moderator/moderator-test-result'
 import AttestedAppeal from './moderator/attested-appeal'
-import SurveysPart from './surveys/expert-moderator/surveysPart'
-import ModeratorAppeal from './surveys/expert-moderator/moderatorAppeal'
+import SurveyPartsExpert from './expert/survey/surveyParts'
+import SurveyPartsModerator from './moderator/survey/surveyParts'
+import ModeratorAppeal from './moderator/survey/moderatorAppeal'
 import TagsList from './manager/attestations-qualification/tagsList'
 
 export {
@@ -69,7 +70,8 @@ export {
     ModeratorTestResult,
     AttestedAppeal,
     Moderator,
-    SurveysPart,
+    SurveyPartsExpert,
+    SurveyPartsModerator,
     ModeratorAppeal,
     TagsList,
 }

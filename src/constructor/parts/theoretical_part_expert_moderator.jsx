@@ -2,9 +2,9 @@ import { Typography, Space } from 'antd'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { Line } from '../../../../../components'
+import { Line } from '../../components'
 
-import ActionButton from '../action-button'
+import ActionButton from './compoentns/action-button'
 
 const { Text, Title } = Typography
 

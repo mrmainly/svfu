@@ -12,7 +12,7 @@ import './expert.css'
 
 const { Title } = Typography
 
-const Expert = () => {
+const ExpertSurvey = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -90,7 +90,7 @@ const Expert = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.SURVEYS_PART, {
+                    navigate(ROUTES.SURVEY_PARTS_EXPERT, {
                         state: {
                             surveyquest: surveyquest,
                             id: id,
@@ -104,4 +104,4 @@ const Expert = () => {
     )
 }
 
-export default Expert
+export default ExpertSurvey

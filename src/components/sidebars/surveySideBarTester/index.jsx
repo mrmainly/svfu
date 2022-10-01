@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import TimeIsUpModal from '../../../pages/surveys/tester/components/modals/TimeIsUpModal'
+import TimeIsUpModal from '../../../pages/tester/survey/components/modals/TimeIsUpModal'
 import { useGetSurveyPartOneIdQuery } from '../../../services/tester/Surveys'
 
 import '../surveySideBar.css'

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { Button } from 'antd'
 
-import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
+import { SurveysSlice } from '../../../../reducers/SurveysSlice'
 
 const ActionButton = ({ arrayIndex, surveyquest_length }) => {
     const { handleArrayIndex } = SurveysSlice.actions

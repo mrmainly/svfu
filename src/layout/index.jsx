@@ -20,7 +20,8 @@ const MyLayout = () => {
                     <Outlet />
                 </div>
             ) : params.pathname === ROUTES.TESTER_SURVEY_PART ||
-              params.pathname === ROUTES.SURVEYS_PART ? (
+              params.pathname === ROUTES.SURVEY_PARTS_MODERATOR ||
+              params.pathname === ROUTES.SURVEY_PARTS_EXPERT ? (
                 <SurveyLayout />
             ) : (
                 <MainLayout params={params} />
