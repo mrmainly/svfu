@@ -118,8 +118,6 @@ const QBAddModal = ({ open, setOpen }) => {
         }
     }
 
-    console.log(data)
-
     return (
         <div>
             <Modal

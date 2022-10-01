@@ -1,6 +1,6 @@
 import { MyButton } from '../../../../../components'
 
-import { Modal, Form, Input, DatePicker, Select, message, Typography } from 'antd'
+import { Modal, Form, Input, DatePicker, Select, message, Typography, Spin } from 'antd'
 import PropTypes from 'prop-types'
 
 import { usePostUserMutation } from '../../../../../services/admin/AdminUsers'
@@ -12,7 +12,7 @@ const { Option } = Select
 const { TextArea } = Input
 
 const UserAddModal = ({ open, setOpen }) => {
-    const [postUser] = usePostUserMutation()
+    const [postUser, { isLoading }] = usePostUserMutation()
 
     const inputs = [
         {
@@ -200,68 +200,112 @@ const UserAddModal = ({ open, setOpen }) => {
                     </MyButton>,
                 ]}
             >
-                <Form
-                    initialValues={{
-                        ['role']: '',
-                    }}
-                    layout="vertical"
-                    onFinish={onSubmit}
-                    id="useradd-form"
-                    scrollToFirstError
-                >
-                    {inputs.map((item, index) => (
-                        <Form.Item
-                            key={index}
-                            label={
-                                <Text
-                                    style={{
-                                        fontWeight: 600,
-                                        fontSize: 16,
-                                    }}
-                                >
-                                    {item.label}
-                                </Text>
-                            }
-                            name={item.name}
-                            rules={
-                                item?.pattern
-                                    ? [
-                                          {
-                                              pattern: item.pattern,
-                                              message: item.pattern_message,
-                                          },
-                                          {
-                                              required: item.required,
-                                              message: item.requiredText ? item.requiredText : '',
-                                          },
-                                      ]
-                                    : [
-                                          {
-                                              required: item.required,
-                                              message: item.requiredText ? item.requiredText : '',
-                                          },
-                                      ]
-                            }
-                            labelCol={{ span: 24 }}
-                        >
-                            {item.type !== 'date' ? (
-                                <Input
-                                    placeholder={item.requiredText}
-                                    size="medium"
+                {isLoading && (
+                    <Spin
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            zIndex: 1,
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                        }}
+                        size="large"
+                    />
+                )}
+                <div style={{ opacity: isLoading ? 0.5 : 1 }}>
+                    <Form
+                        initialValues={{
+                            ['role']: '',
+                        }}
+                        layout="vertical"
+                        onFinish={onSubmit}
+                        id="useradd-form"
+                        scrollToFirstError
+                    >
+                        {inputs.map((item, index) => (
+                            <Form.Item
+                                key={index}
+                                label={
+                                    <Text
+                                        style={{
+                                            fontWeight: 600,
+                                            fontSize: 16,
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Text>
+                                }
+                                name={item.name}
+                                rules={
+                                    item?.pattern
+                                        ? [
+                                              {
+                                                  pattern: item.pattern,
+                                                  message: item.pattern_message,
+                                              },
+                                              {
+                                                  required: item.required,
+                                                  message: item.requiredText
+                                                      ? item.requiredText
+                                                      : '',
+                                              },
+                                          ]
+                                        : [
+                                              {
+                                                  required: item.required,
+                                                  message: item.requiredText
+                                                      ? item.requiredText
+                                                      : '',
+                                              },
+                                          ]
+                                }
+                                labelCol={{ span: 24 }}
+                            >
+                                {item.type !== 'date' ? (
+                                    <Input
+                                        placeholder={item.requiredText}
+                                        size="medium"
+                                        type={item.type ? item.type : ''}
+                                    />
+                                ) : (
+                                    <DatePicker
+                                        style={{ width: '100%' }}
+                                        placeholder={item.requiredText}
+                                        format={item.format}
+                                    />
+                                )}
+                            </Form.Item>
+                        ))}
+                        {bioInput.map((item, index) => (
+                            <Form.Item
+                                key={index}
+                                label={
+                                    <Text
+                                        style={{
+                                            fontWeight: 600,
+                                            fontSize: 16,
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Text>
+                                }
+                                name={item.name}
+                                rules={[
+                                    {
+                                        required: item.required,
+                                        message: item.requiredText,
+                                    },
+                                ]}
+                                labelCol={{ span: 24 }}
+                            >
+                                <TextArea
+                                    placeholder={item.placeholder}
+                                    rows={4}
                                     type={item.type ? item.type : ''}
                                 />
-                            ) : (
-                                <DatePicker
-                                    style={{ width: '100%' }}
-                                    placeholder={item.requiredText}
-                                    format={item.format}
-                                />
-                            )}
-                        </Form.Item>
-                    ))}
-                    {bioInput.map((item, index) => (
+                            </Form.Item>
+                        ))}
                         <Form.Item
-                            key={index}
                             label={
                                 <Text
                                     style={{
@@ -269,109 +313,83 @@ const UserAddModal = ({ open, setOpen }) => {
                                         fontSize: 16,
                                     }}
                                 >
-                                    {item.label}
+                                    Общий стаж работы
                                 </Text>
                             }
-                            name={item.name}
+                            name={'total_experience'}
+                            labelCol={{ span: 24 }}
+                        >
+                            <Input placeholder="Общий стаж работы" size="medium" type="number" />
+                        </Form.Item>
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        fontWeight: 600,
+                                        fontSize: 16,
+                                    }}
+                                >
+                                    Стаж работы по специальности
+                                </Text>
+                            }
+                            name={'specialty_experience'}
+                            labelCol={{ span: 24 }}
+                        >
+                            <Input
+                                placeholder="Стаж работы по специальности"
+                                size="medium"
+                                type="number"
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        fontWeight: 600,
+                                        fontSize: 16,
+                                    }}
+                                >
+                                    Должность
+                                </Text>
+                            }
+                            name={'post'}
+                            labelCol={{ span: 24 }}
+                        >
+                            <Input placeholder="Должность" size="medium" />
+                        </Form.Item>
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        fontWeight: 600,
+                                        fontSize: 16,
+                                    }}
+                                >
+                                    Выберите роль
+                                </Text>
+                            }
+                            name={'role'}
                             rules={[
                                 {
-                                    required: item.required,
-                                    message: item.requiredText,
+                                    required: true,
+                                    message: 'Выберите роль',
                                 },
                             ]}
                             labelCol={{ span: 24 }}
                         >
-                            <TextArea
-                                placeholder={item.placeholder}
-                                rows={4}
-                                type={item.type ? item.type : ''}
-                            />
-                        </Form.Item>
-                    ))}
-                    <Form.Item
-                        label={
-                            <Text
-                                style={{
-                                    fontWeight: 600,
-                                    fontSize: 16,
-                                }}
-                            >
-                                Общий стаж работы
-                            </Text>
-                        }
-                        name={'total_experience'}
-                        labelCol={{ span: 24 }}
-                    >
-                        <Input placeholder="Общий стаж работы" size="medium" type="number" />
-                    </Form.Item>
-                    <Form.Item
-                        label={
-                            <Text
-                                style={{
-                                    fontWeight: 600,
-                                    fontSize: 16,
-                                }}
-                            >
-                                Стаж работы по специальности
-                            </Text>
-                        }
-                        name={'specialty_experience'}
-                        labelCol={{ span: 24 }}
-                    >
-                        <Input
-                            placeholder="Стаж работы по специальности"
-                            size="medium"
-                            type="number"
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label={
-                            <Text
-                                style={{
-                                    fontWeight: 600,
-                                    fontSize: 16,
-                                }}
-                            >
-                                Должность
-                            </Text>
-                        }
-                        name={'post'}
-                        labelCol={{ span: 24 }}
-                    >
-                        <Input placeholder="Должность" size="medium" />
-                    </Form.Item>
-                    <Form.Item
-                        label={
-                            <Text
-                                style={{
-                                    fontWeight: 600,
-                                    fontSize: 16,
-                                }}
-                            >
-                                Выберите роль
-                            </Text>
-                        }
-                        name={'role'}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Выберите роль',
-                            },
-                        ]}
-                        labelCol={{ span: 24 }}
-                    >
-                        <Select>
-                            <Option disabled value="">
-                                Выберите роль
-                            </Option>
-                            {roles.map((item, index) => (
-                                <Option value={item.value} key={index}>
-                                    {item.text}
+                            <Select>
+                                <Option disabled value="">
+                                    Выберите роль
                                 </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                </Form>
+                                {roles.map((item, index) => (
+                                    <Option value={item.value} key={index}>
+                                        {item.text}
+                                    </Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
+                    </Form>
+                </div>
             </Modal>
         </div>
     )

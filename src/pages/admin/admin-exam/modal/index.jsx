@@ -1,4 +1,4 @@
-import { Modal, message, Select, Form, Row, Col, Button, DatePicker } from 'antd'
+import { Modal, message, Select, Form, Row, Col, Button, DatePicker, Spin } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -12,7 +12,7 @@ import {
 const { Option } = Select
 
 const AdminExamModal = ({ open, setOpen, dataList }) => {
-    const [patchExam] = usePatchAdminExamMutation()
+    const [patchExam, { isLoading }] = usePatchAdminExamMutation()
     const { data: admData } = useGetAdminExamIDQuery({ id: dataList?.id })
     const { data: expertData } = useGetUserRoleQuery({ role: 'EXPERT' })
     const { data: moderatorData } = useGetUserRoleQuery({ role: 'MODERATOR' })
@@ -29,29 +29,41 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
         })
     }
     return (
-        <div>
-            <Modal
-                destroyOnClose={true}
-                title="Редактирование запланированного экзамена"
-                visible={open}
-                onOk={() => setOpen(false)}
-                onCancel={() => setOpen(false)}
-                footer={[
-                    <Button key="submit" type="primary" htmlType="submit" form="admedit-form">
-                        Сохранить
-                    </Button>,
-                    <Button
-                        key="back"
-                        type="default"
-                        style={{
-                            background: '#FFF',
-                        }}
-                        onClick={() => setOpen(false)}
-                    >
-                        Отмена
-                    </Button>,
-                ]}
-            >
+        <Modal
+            destroyOnClose={true}
+            title="Редактирование запланированного экзамена"
+            visible={open}
+            onOk={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+            footer={[
+                <Button key="submit" type="primary" htmlType="submit" form="admedit-form">
+                    Сохранить
+                </Button>,
+                <Button
+                    key="back"
+                    type="default"
+                    style={{
+                        background: '#FFF',
+                    }}
+                    onClick={() => setOpen(false)}
+                >
+                    Отмена
+                </Button>,
+            ]}
+        >
+            {isLoading && (
+                <Spin
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        zIndex: 1,
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                    size="large"
+                />
+            )}
+            <div style={{ opacity: isLoading ? 0.5 : 1 }}>
                 <Form
                     layout="vertical"
                     initialValues={{
@@ -243,8 +255,8 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                         </Select>
                     </Form.Item>
                 </Form>
-            </Modal>
-        </div>
+            </div>
+        </Modal>
     )
 }
 
