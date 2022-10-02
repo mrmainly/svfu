@@ -5,6 +5,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import ROUTES from '../routes'
 import MainLayout from './layouts/MainLayout'
 import SurveyLayout from './layouts/SurveyLayout'
+import HeaderLogin from '../components/header/headerlogin'
 
 import './layout.css'
 
@@ -17,6 +18,7 @@ const MyLayout = () => {
             params.pathname == ROUTES.REGISTRATION ||
             params.pathname == ROUTES.FORGOT_PASSWORD ? (
                 <div>
+                    <HeaderLogin />
                     <Outlet />
                 </div>
             ) : params.pathname === ROUTES.TESTER_SURVEY_PART ||
