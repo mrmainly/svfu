@@ -26,7 +26,7 @@ const MyLayout = () => {
               params.pathname === ROUTES.SURVEY_PARTS_EXPERT ? (
                 <SurveyLayout />
             ) : (
-                <MainLayout params={params} />
+                ''
             )}
         </>
     )
