@@ -28,7 +28,6 @@ const LayoutWrapper = ({ children }) => {
 
     useEffect(() => {
         if (token === '' || token === undefined || token === null || !token) {
-            navigate(ROUTES.LOGIN)
             setSkip(true)
         } else {
             setSkip(false)

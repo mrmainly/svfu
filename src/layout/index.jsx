@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import cookie from 'js-cookie'
 
 import ROUTES from '../routes'
 import MainLayout from './layouts/MainLayout'
@@ -11,6 +12,15 @@ import './layout.css'
 
 const MyLayout = () => {
     const params = useLocation()
+    const navigate = useNavigate()
+
+    const token = cookie.get('token')
+
+    useEffect(() => {
+        if (token === '' || token === undefined || token === null || !token) {
+            navigate(ROUTES.LOGIN)
+        }
+    }, [token])
 
     return (
         <>
@@ -26,7 +36,7 @@ const MyLayout = () => {
               params.pathname === ROUTES.SURVEY_PARTS_EXPERT ? (
                 <SurveyLayout />
             ) : (
-                ''
+                <MainLayout params={params} />
             )}
         </>
     )
