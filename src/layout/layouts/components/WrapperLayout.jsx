@@ -16,7 +16,7 @@ const { Sider } = Layout
 const LayoutWrapper = ({ children }) => {
     const [skip, setSkip] = useState(true)
     const [isToggled, setToggled] = useState(false)
-    const { data } = useGetProfileQuery('', { skip: skip })
+    const { data, error } = useGetProfileQuery('', { skip: skip })
 
     const onClose = () => {
         setToggled(false)
@@ -34,6 +34,10 @@ const LayoutWrapper = ({ children }) => {
             setSkip(false)
         }
     }, [token])
+
+    if (error) {
+        console.log('error')
+    }
 
     return (
         <>
