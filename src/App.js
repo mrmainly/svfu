@@ -51,7 +51,7 @@ function App() {
                     <Route index element={<Login />} />
                     <Route element={<Registration />} path={ROUTES.REGISTRATION} />
                     <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
-                    <Route element={<Profile />} path={ROUTES.Profile} />
+                    <Route element={<Profile />} path={ROUTES.PROFILE} />
                     <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
                     <Route element={<UploadDocuments />} path={ROUTES.UPLOAD_DOCUMENTS} />
                     <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
