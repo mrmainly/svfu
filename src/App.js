@@ -47,11 +47,11 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={ROUTES.PROFILE} element={<Layout />}>
-                    <Route index element={<Profile />} />
+                <Route path={ROUTES.LOGIN} element={<Layout />}>
+                    <Route index element={<Login />} />
                     <Route element={<Registration />} path={ROUTES.REGISTRATION} />
                     <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
-                    <Route element={<Login />} path={ROUTES.LOGIN} />
+                    <Route element={<Profile />} path={ROUTES.Profile} />
                     <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
                     <Route element={<UploadDocuments />} path={ROUTES.UPLOAD_DOCUMENTS} />
                     <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
