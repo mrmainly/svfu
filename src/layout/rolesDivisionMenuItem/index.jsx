@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import TESTER from './menuItems/Tester'
 import TUTOR from './menuItems/Tutor'
 import CONSTRUCTOR from './menuItems/Constructor'
@@ -23,6 +24,8 @@ const RolesDivisionMenuItem = (navigate) => {
         return ADMIN(navigate)
     } else if (role === 'MODERATOR') {
         return MODERATOR(navigate)
+    } else {
+        return []
     }
 }
 

@@ -103,7 +103,7 @@ const LayoutWrapper = ({ children }) => {
                                     },
                                 ],
                             },
-                            RolesDivisionMenuItem(navigate),
+                            ...RolesDivisionMenuItem(navigate),
                         ]}
                         theme="dark"
                     />

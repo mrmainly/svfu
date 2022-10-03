@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 import ROUTES from '../routes'
 import MainLayout from './layouts/MainLayout'
@@ -11,7 +11,6 @@ import './layout.css'
 
 const MyLayout = () => {
     const params = useLocation()
-    const navigate = useNavigate()
 
     return (
         <>
