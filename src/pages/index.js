@@ -1,40 +1,42 @@
-import Login from './auth/login'
-import Registration from './auth/registration'
-import Profile from './profile'
-import ForgotPassword from './auth/forgot-password'
-import ProfileDetail from './profile/detail'
-import AvailableTest from './tester/available-tests'
-import Statement from './tester/statement'
-import TesterSurveyPart from './tester/survey'
-import UsersDetail from './users/detail'
-import UsersList from './users/list'
-import AttestationsQualifications from './manager/attestations-qualification'
-import AttestationProtocol from './lpr/attestation-protocol/list'
-import TestsBank from './manager/tests-bank'
-import QuestionsBank from './manager/questions-bank'
-import ExaminationGroups from './tutor/examination-groups'
-import UserApplications from './tutor/userApplications/list'
-import Certified from './tutor/certified/list'
-import ExamSchedule from './tutor/exam-schedule'
-import TestProcessing from './expert/test-processing'
-import UploadDocuments from './documents/upload-documents/list'
-import MyQualification from './documents/my-qualification/list'
-import LprUsers from './lpr/lpr-users'
-import UserApplicationsDetail from './tutor/userApplications/detail'
-import CertifiedDetail from './tutor/certified/detail'
-import TestResult from './tester/result'
-import LprExam from './lpr/lpr-exam'
-import AdminUsers from './admin/admin-users/list'
-import AdminUsersDetail from './admin/admin-users/detail'
-import AdminExam from './admin/admin-exam'
-import Expert from './expert/survey'
-import Moderator from './moderator/survey'
-import ModeratorTestResult from './moderator/moderator-test-result'
-import AttestedAppeal from './moderator/attested-appeal'
-import SurveyPartsExpert from './expert/survey/surveyParts'
-import SurveyPartsModerator from './moderator/survey/surveyParts'
-import ModeratorAppeal from './moderator/survey/moderatorAppeal'
-import TagsList from './manager/attestations-qualification/tagsList'
+import { lazy } from 'react'
+
+const Login = lazy(() => import('./auth/login'))
+const Registration = lazy(() => import('./auth/registration'))
+const Profile = lazy(() => import('./profile'))
+const ForgotPassword = lazy(() => import('./auth/forgot-password'))
+const ProfileDetail = lazy(() => import('./profile/detail'))
+const AvailableTest = lazy(() => import('./tester/available-tests'))
+const Statement = lazy(() => import('./tester/statement'))
+const TesterSurveyPart = lazy(() => import('./tester/survey'))
+const UsersDetail = lazy(() => import('./users/detail'))
+const UsersList = lazy(() => import('./users/list'))
+const AttestationsQualifications = lazy(() => import('./manager/attestations-qualification'))
+const AttestationProtocol = lazy(() => import('./lpr/attestation-protocol/list'))
+const TestsBank = lazy(() => import('./manager/tests-bank'))
+const QuestionsBank = lazy(() => import('./manager/questions-bank'))
+const ExaminationGroups = lazy(() => import('./tutor/examination-groups'))
+const UserApplications = lazy(() => import('./tutor/userApplications/list'))
+const Certified = lazy(() => import('./tutor/certified/list'))
+const ExamSchedule = lazy(() => import('./tutor/exam-schedule'))
+const TestProcessing = lazy(() => import('./expert/test-processing'))
+const UploadDocuments = lazy(() => import('./documents/upload-documents/list'))
+const MyQualification = lazy(() => import('./documents/my-qualification/list'))
+const LprUsers = lazy(() => import('./lpr/lpr-users'))
+const UserApplicationsDetail = lazy(() => import('./tutor/userApplications/detail'))
+const CertifiedDetail = lazy(() => import('./tutor/certified/detail'))
+const TestResult = lazy(() => import('./tester/result'))
+const LprExam = lazy(() => import('./lpr/lpr-exam'))
+const AdminUsers = lazy(() => import('./admin/admin-users/list'))
+const AdminUsersDetail = lazy(() => import('./admin/admin-users/detail'))
+const AdminExam = lazy(() => import('./admin/admin-exam'))
+const Expert = lazy(() => import('./expert/survey'))
+const Moderator = lazy(() => import('./moderator/survey'))
+const ModeratorTestResult = lazy(() => import('./moderator/moderator-test-result'))
+const AttestedAppeal = lazy(() => import('./moderator/attested-appeal'))
+const SurveyPartsExpert = lazy(() => import('./expert/survey/surveyParts'))
+const SurveyPartsModerator = lazy(() => import('./moderator/survey/surveyParts'))
+const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
+const TagsList = lazy(() => import('./manager/attestations-qualification/tagsList'))
 
 export {
     Login,

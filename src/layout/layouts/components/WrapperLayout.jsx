@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { Layout, Menu, Divider, Drawer } from 'antd'
 import cookie from 'js-cookie'
@@ -14,25 +14,15 @@ import ROUTES from '../../../routes'
 const { Sider } = Layout
 
 const LayoutWrapper = ({ children }) => {
-    const [skip, setSkip] = useState(true)
+    // const [skip, setSkip] = useState(true)
     const [isToggled, setToggled] = useState(false)
-    const { data } = useGetProfileQuery({ skip: skip })
+    const { data } = useGetProfileQuery()
 
     const onClose = () => {
         setToggled(false)
     }
 
     const navigate = useNavigate()
-
-    const token = cookie.get('token')
-
-    useEffect(() => {
-        if (token === '' || token === undefined || token === null || !token) {
-            setSkip(true)
-        } else {
-            setSkip(false)
-        }
-    }, [token])
 
     return (
         <>

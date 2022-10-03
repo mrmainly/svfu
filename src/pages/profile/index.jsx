@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import { Button, Spin } from 'antd'
 import { useNavigate } from 'react-router-dom'

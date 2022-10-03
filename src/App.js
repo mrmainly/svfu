@@ -1,11 +1,12 @@
+import React, { Suspense } from 'react'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import 'antd/dist/antd.min.css'
 
 import ROUTES from './routes'
 import Layout from './layout'
 import {
-    Registration,
     Login,
+    Registration,
     Profile,
     ForgotPassword,
     ProfileDetail,
@@ -42,17 +43,54 @@ import {
     ModeratorAppeal,
     TagsList,
 } from './pages'
+import { Loading } from './components'
 
 function App() {
     return (
         <BrowserRouter>
+            {/* <Suspense
+                fallback={
+                    <div
+                        style={{
+                            display: 'flex',
+                            height: '100vh',
+                            width: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Spin />
+                    </div>
+                }
+            > */}
             <Routes>
                 <Route path={ROUTES.LOGIN} element={<Layout />}>
                     <Route index element={<Login />} />
                     <Route element={<Registration />} path={ROUTES.REGISTRATION} />
-                    <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
-                    <Route element={<Profile />} path={ROUTES.PROFILE} />
-                    <Route element={<ProfileDetail />} path={ROUTES.PROFILE_EDITING} />
+                    <Route
+                        element={
+                            <Suspense fallback={<Loading />}>
+                                <ForgotPassword />
+                            </Suspense>
+                        }
+                        path={ROUTES.FORGOT_PASSWORD}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <Profile />
+                            </Suspense>
+                        }
+                        path={ROUTES.PROFILE}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <ProfileDetail />
+                            </Suspense>
+                        }
+                        path={ROUTES.PROFILE_EDITING}
+                    />
                     <Route element={<UploadDocuments />} path={ROUTES.UPLOAD_DOCUMENTS} />
                     <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
                     <Route element={<TestResult />} path={`${ROUTES.TEST_RESULT}/:id`} />
@@ -101,6 +139,7 @@ function App() {
                     <Route element={<TagsList />} path={ROUTES.TAGS_LIST} />
                 </Route>
             </Routes>
+            {/* </Suspense> */}
         </BrowserRouter>
     )
 }

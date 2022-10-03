@@ -19,7 +19,7 @@ export const api = createApi({
 
     tagTypes: [
         'Profile',
-        'Qualification',
+
         'Document',
         'Attestation',
         'TestProcessing',
@@ -41,6 +41,10 @@ export const api = createApi({
         'ExaminationGroups ',
         //tutor расписание экзаменов
         'ExamSchedule',
+
+        //мои квалификации
+        'Qualification',
+        //мои документы
     ],
 
     endpoints: () => ({}),

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 
 import { Divider, Typography } from 'antd'
@@ -25,6 +26,7 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
                         <img
                             src="/img/image11.svg"
                             style={{ height: '52px', cursor: 'pointer', marginTop: 4 }}
+                            alt=""
                             onClick={() => navigate(ROUTES.PROFILE)}
                         />
                         <Text style={{ fontSize: 20, color: '#175680', fontFamily: 'Roboto' }}>
@@ -39,7 +41,7 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
                         width: '100%',
                     }}
                 >
-                    <img src="/img/mobilebackgrund.png" />
+                    <img src="/img/mobilebackgrund.png" alt="" />
                 </div>
             </div>
             <div
@@ -78,6 +80,7 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
                         className="user-button"
                         onClick={() => {
                             cookie.remove('token')
+                            localStorage.removeItem('profile')
                             navigate(ROUTES.LOGIN)
                         }}
                     >
