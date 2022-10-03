@@ -43,7 +43,7 @@ import {
     ModeratorAppeal,
     TagsList,
 } from './pages'
-import { Loading } from './components'
+// import { Loading } from './components'
 
 function App() {
     return (
@@ -69,7 +69,7 @@ function App() {
                     <Route element={<Registration />} path={ROUTES.REGISTRATION} />
                     <Route
                         element={
-                            <Suspense fallback={<Loading />}>
+                            <Suspense fallback={null}>
                                 <ForgotPassword />
                             </Suspense>
                         }
@@ -91,52 +91,264 @@ function App() {
                         }
                         path={ROUTES.PROFILE_EDITING}
                     />
-                    <Route element={<UploadDocuments />} path={ROUTES.UPLOAD_DOCUMENTS} />
-                    <Route element={<AvailableTest />} path={ROUTES.AVAILABLE_TESTS} />
-                    <Route element={<TestResult />} path={`${ROUTES.TEST_RESULT}/:id`} />
-                    <Route element={<MyQualification />} path={ROUTES.MY_QUALIFICATIONS} />
-
-                    <Route element={<TesterSurveyPart />} path={ROUTES.TESTER_SURVEY_PART} />
-                    <Route element={<Statement />} path={ROUTES.STATEMENT} />
-                    <Route element={<UsersDetail />} path={ROUTES.USERS_DETAIL + '/:id'} />
-                    <Route element={<UsersList />} path={ROUTES.USERS} />
-                    <Route element={<LprUsers />} path={ROUTES.LPR_USERS} />
-                    <Route element={<AdminUsers />} path={ROUTES.ADMIN_USERS} />
                     <Route
-                        element={<AdminUsersDetail />}
+                        element={
+                            <Suspense fallback={null}>
+                                <UploadDocuments />
+                            </Suspense>
+                        }
+                        path={ROUTES.UPLOAD_DOCUMENTS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <AvailableTest />
+                            </Suspense>
+                        }
+                        path={ROUTES.AVAILABLE_TESTS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <TestResult />
+                            </Suspense>
+                        }
+                        path={`${ROUTES.TEST_RESULT}/:id`}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <MyQualification />
+                            </Suspense>
+                        }
+                        path={ROUTES.MY_QUALIFICATIONS}
+                    />
+
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <TesterSurveyPart />
+                            </Suspense>
+                        }
+                        path={ROUTES.TESTER_SURVEY_PART}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <Statement />
+                            </Suspense>
+                        }
+                        path={ROUTES.STATEMENT}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <UsersDetail />
+                            </Suspense>
+                        }
+                        path={ROUTES.USERS_DETAIL + '/:id'}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <UsersList />
+                            </Suspense>
+                        }
+                        path={ROUTES.USERS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <LprUsers />
+                            </Suspense>
+                        }
+                        path={ROUTES.LPR_USERS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <AdminUsers />
+                            </Suspense>
+                        }
+                        path={ROUTES.ADMIN_USERS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <AdminUsersDetail />
+                            </Suspense>
+                        }
                         path={ROUTES.ADMIN_USERS_DETAIL + '/:id'}
                     />
                     <Route
-                        element={<AttestationsQualifications />}
+                        element={
+                            <Suspense fallback={null}>
+                                <AttestationsQualifications />
+                            </Suspense>
+                        }
                         path={ROUTES.ATTESTATION_QUALI}
                     />
-                    <Route element={<TestProcessing />} path={ROUTES.TEST_PROCESSING} />
-                    <Route element={<TestsBank />} path={ROUTES.ATTESTATION_TESTS_BANK} />
-                    <Route element={<AttestationProtocol />} path={ROUTES.ATTESTATION_PROTOCOL} />
-                    <Route element={<QuestionsBank />} path={ROUTES.ATTESTATION_QUESTIONS_BANK} />
-                    <Route element={<ExaminationGroups />} path={ROUTES.EXAMINATION_GROUPS} />
-                    <Route element={<UserApplications />} path={ROUTES.USER_APPLICATIONS} />
-                    <Route element={<Certified />} path={ROUTES.CERTIFIED} />
-                    <Route element={<ExamSchedule />} path={ROUTES.EXAM_SCHEDULE} />
-                    <Route element={<LprExam />} path={ROUTES.LPR_EXAM} />
-                    <Route element={<AdminExam />} path={ROUTES.ADMIN_EXAM} />
                     <Route
-                        element={<UserApplicationsDetail />}
+                        element={
+                            <Suspense fallback={null}>
+                                <TestProcessing />
+                            </Suspense>
+                        }
+                        path={ROUTES.TEST_PROCESSING}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <TestsBank />
+                            </Suspense>
+                        }
+                        path={ROUTES.ATTESTATION_TESTS_BANK}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <AttestationProtocol />
+                            </Suspense>
+                        }
+                        path={ROUTES.ATTESTATION_PROTOCOL}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <QuestionsBank />
+                            </Suspense>
+                        }
+                        path={ROUTES.ATTESTATION_QUESTIONS_BANK}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <ExaminationGroups />
+                            </Suspense>
+                        }
+                        path={ROUTES.EXAMINATION_GROUPS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <UserApplications />
+                            </Suspense>
+                        }
+                        path={ROUTES.USER_APPLICATIONS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <Certified />
+                            </Suspense>
+                        }
+                        path={ROUTES.CERTIFIED}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <ExamSchedule />
+                            </Suspense>
+                        }
+                        path={ROUTES.EXAM_SCHEDULE}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <LprExam />
+                            </Suspense>
+                        }
+                        path={ROUTES.LPR_EXAM}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <AdminExam />
+                            </Suspense>
+                        }
+                        path={ROUTES.ADMIN_EXAM}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <UserApplicationsDetail />
+                            </Suspense>
+                        }
                         path={`${ROUTES.USER_APPLICATIONS_DETAIL}/:id`}
                     />
-                    <Route element={<CertifiedDetail />} path={`${ROUTES.CERTIFIED_DETAIL}/:id`} />
-                    <Route element={<Expert />} path={ROUTES.EXPERT} />
-                    <Route element={<Moderator />} path={ROUTES.MODERATOR} />
-                    <Route element={<ModeratorTestResult />} path={ROUTES.MODERATOR_TEST_RESULT} />
-                    <Route element={<ModeratorAppeal />} path={ROUTES.MODERATOR_APPEAL} />
-                    <Route element={<AttestedAppeal />} path={ROUTES.ATTESTED_APPEAL} />
-
-                    <Route element={<SurveyPartsExpert />} path={ROUTES.SURVEY_PARTS_EXPERT} />
                     <Route
-                        element={<SurveyPartsModerator />}
+                        element={
+                            <Suspense fallback={null}>
+                                <CertifiedDetail />
+                            </Suspense>
+                        }
+                        path={`${ROUTES.CERTIFIED_DETAIL}/:id`}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <Expert />
+                            </Suspense>
+                        }
+                        path={ROUTES.EXPERT}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <Moderator />
+                            </Suspense>
+                        }
+                        path={ROUTES.MODERATOR}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <ModeratorTestResult />
+                            </Suspense>
+                        }
+                        path={ROUTES.MODERATOR_TEST_RESULT}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <ModeratorAppeal />
+                            </Suspense>
+                        }
+                        path={ROUTES.MODERATOR_APPEAL}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <AttestedAppeal />
+                            </Suspense>
+                        }
+                        path={ROUTES.ATTESTED_APPEAL}
+                    />
+
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <SurveyPartsExpert />
+                            </Suspense>
+                        }
+                        path={ROUTES.SURVEY_PARTS_EXPERT}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <SurveyPartsModerator />
+                            </Suspense>
+                        }
                         path={ROUTES.SURVEY_PARTS_MODERATOR}
                     />
-                    <Route element={<TagsList />} path={ROUTES.TAGS_LIST} />
+                    <Route
+                        element={
+                            <Suspense fallback={null}>
+                                <TagsList />
+                            </Suspense>
+                        }
+                        path={ROUTES.TAGS_LIST}
+                    />
                 </Route>
             </Routes>
             {/* </Suspense> */}
