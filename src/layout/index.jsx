@@ -3,12 +3,12 @@ import React, { lazy, Suspense } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
 import ROUTES from '../routes'
+import { Loading } from '../components'
+import './layout.css'
+
 const LazySurveyLayout = lazy(() => import('./layouts/SurveyLayout'))
 const LazyHeaderLogin = lazy(() => import('../components/headers/headerlogin'))
 const LazyMainLayout = lazy(() => import('./layouts/MainLayout'))
-import { Loading } from '../components'
-
-import './layout.css'
 
 const MyLayout = () => {
     const params = useLocation()

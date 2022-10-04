@@ -28,13 +28,18 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
             console.log(res)
         })
     }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
     return (
         <Modal
             destroyOnClose={true}
             title="Редактирование запланированного экзамена"
             visible={open}
-            onOk={() => setOpen(false)}
-            onCancel={() => setOpen(false)}
+            onOk={handleClose}
+            onCancel={handleClose}
             footer={[
                 <Button key="submit" type="primary" htmlType="submit" form="admedit-form">
                     Сохранить
@@ -45,7 +50,7 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
                     style={{
                         background: '#FFF',
                     }}
-                    onClick={() => setOpen(false)}
+                    onClick={handleClose}
                 >
                     Отмена
                 </Button>,

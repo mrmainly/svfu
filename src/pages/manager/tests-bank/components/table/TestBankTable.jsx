@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
@@ -10,6 +10,14 @@ import TBEditModal from '../modals/TestBankEditModal'
 const TestsBankTable = ({ data, loading, setId }) => {
     const [currentData, setCurrentData] = useState([])
     const [modalEditTB, setModalEditTB] = useState(false)
+
+    const handleClickTable = (id) =>
+        useMemo(() => {
+            const itemData = data?.filter((e) => e.id === id)
+            setCurrentData(itemData)
+            setModalEditTB(true)
+        }, [id])
+
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
             {
@@ -61,14 +69,7 @@ const TestsBankTable = ({ data, loading, setId }) => {
             dataIndex: 'id',
             key: 'x',
             render: (id) => (
-                <Button
-                    type="primary"
-                    onClick={() => {
-                        const itemData = data?.filter((e) => e.id === id)
-                        setCurrentData(itemData)
-                        setModalEditTB(true)
-                    }}
-                >
+                <Button type="primary" onClick={handleClickTable(id)}>
                     Изменить
                 </Button>
             ),

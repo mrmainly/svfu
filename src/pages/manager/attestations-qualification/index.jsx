@@ -61,7 +61,7 @@ const AttestationsQualifications = () => {
                     enterButton
                     onSearch={handleQualificationFilter}
                     className="input-search"
-                ></Input.Search>
+                />
                 <Select
                     placeholder="Тег"
                     className="input-search"

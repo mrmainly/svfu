@@ -29,7 +29,7 @@ const HeaderUser = ({ setToggled, isToggled, data }) => {
                             alt=""
                             onClick={() => navigate(ROUTES.PROFILE)}
                         />
-                        <Text style={{ fontSize: 20, color: '#175680', fontFamily: 'Roboto' }}>
+                        <Text style={{ fontSize: 20, color: '#175680', fontFamily: 'sans-serif' }}>
                             САиЭС
                         </Text>
                     </div>

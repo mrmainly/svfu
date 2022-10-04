@@ -42,8 +42,8 @@ const TagsList = lazy(() => import('./manager/attestations-qualification/tagsLis
 export {
     Login,
     Registration,
-    Profile,
     ForgotPassword,
+    Profile,
     ProfileDetail,
     AvailableTest,
     TesterSurveyPart,

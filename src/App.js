@@ -43,26 +43,12 @@ import {
     ModeratorAppeal,
     TagsList,
 } from './pages'
-// import { Loading } from './components'
+
+import { LoadingInsideLayout } from './components'
 
 function App() {
     return (
         <BrowserRouter>
-            {/* <Suspense
-                fallback={
-                    <div
-                        style={{
-                            display: 'flex',
-                            height: '100vh',
-                            width: '100%',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Spin />
-                    </div>
-                }
-            > */}
             <Routes>
                 <Route path={ROUTES.LOGIN} element={<Layout />}>
                     <Route index element={<Login />} />
@@ -70,7 +56,7 @@ function App() {
                     <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <Profile />
                             </Suspense>
                         }
@@ -78,7 +64,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <ProfileDetail />
                             </Suspense>
                         }
@@ -86,7 +72,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <UploadDocuments />
                             </Suspense>
                         }
@@ -94,7 +80,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AvailableTest />
                             </Suspense>
                         }
@@ -102,7 +88,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <TestResult />
                             </Suspense>
                         }
@@ -110,7 +96,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <MyQualification />
                             </Suspense>
                         }
@@ -119,7 +105,7 @@ function App() {
 
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <TesterSurveyPart />
                             </Suspense>
                         }
@@ -127,7 +113,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <Statement />
                             </Suspense>
                         }
@@ -135,7 +121,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <UsersDetail />
                             </Suspense>
                         }
@@ -143,7 +129,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <UsersList />
                             </Suspense>
                         }
@@ -151,7 +137,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <LprUsers />
                             </Suspense>
                         }
@@ -159,7 +145,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AdminUsers />
                             </Suspense>
                         }
@@ -167,7 +153,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AdminUsersDetail />
                             </Suspense>
                         }
@@ -175,7 +161,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AttestationsQualifications />
                             </Suspense>
                         }
@@ -183,7 +169,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <TestProcessing />
                             </Suspense>
                         }
@@ -191,7 +177,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <TestsBank />
                             </Suspense>
                         }
@@ -199,7 +185,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AttestationProtocol />
                             </Suspense>
                         }
@@ -207,7 +193,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <QuestionsBank />
                             </Suspense>
                         }
@@ -215,7 +201,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <ExaminationGroups />
                             </Suspense>
                         }
@@ -223,7 +209,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <UserApplications />
                             </Suspense>
                         }
@@ -231,7 +217,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <Certified />
                             </Suspense>
                         }
@@ -239,7 +225,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <ExamSchedule />
                             </Suspense>
                         }
@@ -247,7 +233,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <LprExam />
                             </Suspense>
                         }
@@ -255,7 +241,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AdminExam />
                             </Suspense>
                         }
@@ -263,7 +249,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <UserApplicationsDetail />
                             </Suspense>
                         }
@@ -271,7 +257,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <CertifiedDetail />
                             </Suspense>
                         }
@@ -279,7 +265,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <Expert />
                             </Suspense>
                         }
@@ -287,7 +273,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <Moderator />
                             </Suspense>
                         }
@@ -295,7 +281,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <ModeratorTestResult />
                             </Suspense>
                         }
@@ -303,7 +289,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <ModeratorAppeal />
                             </Suspense>
                         }
@@ -311,7 +297,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <AttestedAppeal />
                             </Suspense>
                         }
@@ -320,7 +306,7 @@ function App() {
 
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <SurveyPartsExpert />
                             </Suspense>
                         }
@@ -328,7 +314,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <SurveyPartsModerator />
                             </Suspense>
                         }
@@ -336,7 +322,7 @@ function App() {
                     />
                     <Route
                         element={
-                            <Suspense fallback={null}>
+                            <Suspense fallback={<LoadingInsideLayout />}>
                                 <TagsList />
                             </Suspense>
                         }
