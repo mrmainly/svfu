@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
 import ROUTES from '../routes'
-import MainLayout from './layouts/MainLayout'
-import SurveyLayout from './layouts/SurveyLayout'
-import HeaderLogin from '../components/header/headerlogin'
+const LazySurveyLayout = lazy(() => import('./layouts/SurveyLayout'))
+const LazyHeaderLogin = lazy(() => import('../components/headers/headerlogin'))
+const LazyMainLayout = lazy(() => import('./layouts/MainLayout'))
+import { Loading } from '../components'
 
 import './layout.css'
 
@@ -17,16 +18,20 @@ const MyLayout = () => {
             {params.pathname == ROUTES.LOGIN ||
             params.pathname == ROUTES.REGISTRATION ||
             params.pathname == ROUTES.FORGOT_PASSWORD ? (
-                <div>
-                    <HeaderLogin />
+                <Suspense fallback={<Loading />}>
+                    <LazyHeaderLogin />
                     <Outlet />
-                </div>
+                </Suspense>
             ) : params.pathname === ROUTES.TESTER_SURVEY_PART ||
               params.pathname === ROUTES.SURVEY_PARTS_MODERATOR ||
               params.pathname === ROUTES.SURVEY_PARTS_EXPERT ? (
-                <SurveyLayout />
+                <Suspense fallback={<Loading />}>
+                    <LazySurveyLayout />
+                </Suspense>
             ) : (
-                <MainLayout params={params} />
+                <Suspense fallback={<Loading />}>
+                    <LazyMainLayout params={params} />
+                </Suspense>
             )}
         </>
     )

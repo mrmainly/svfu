@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import Login from './auth/login'
 import Registration from './auth/registration'
 import ForgotPassword from './auth/forgot-password'
+
 const Profile = lazy(() => import('./profile'))
 const ProfileDetail = lazy(() => import('./profile/detail'))
 const AvailableTest = lazy(() => import('./tester/available-tests'))

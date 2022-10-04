@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy } from 'react'
 import { Input, Pagination, Select } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import AttestationsQualificationsTable from './compoents/table'
-import AQAddModal from './compoents/modals/aqaddmodal'
 import { MyButton } from '../../../components'
 import './attestations-qualification.css'
 import ROUTES from '../../../routes'
+
+const LazyAqAddModal = lazy(() => import('./compoents/modals/aqaddmodal'))
 
 import {
     useGetAttestationsQualificationQuery,
@@ -41,6 +42,11 @@ const AttestationsQualifications = () => {
     const handleSearchText = (searchText) => {
         setTag(searchText)
     }
+    //fix
+    const handleQualificationFilter = (value) => {
+        const currValue = value
+        setName(currValue)
+    }
 
     return (
         <div>
@@ -53,10 +59,7 @@ const AttestationsQualifications = () => {
                 <Input.Search
                     placeholder="Квалификация"
                     enterButton
-                    onSearch={(value) => {
-                        const currValue = value
-                        setName(currValue)
-                    }}
+                    onSearch={handleQualificationFilter}
                     className="input-search"
                 ></Input.Search>
                 <Select
@@ -84,7 +87,7 @@ const AttestationsQualifications = () => {
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
             </div>
-            <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
+            <LazyAqAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
             <AttestationsQualificationsTable
                 data={data?.results}
                 loading={isFetching}

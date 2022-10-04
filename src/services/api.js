@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import cookie from 'js-cookie'
 
+// process.env.REACT_APP_API_KEY
+
 const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_KEY,
+    baseUrl: 'https://nefu.osher.tech/api/v1/',
     prepareHeaders: (headers) => {
         const token = cookie.get('token')
         if (token) {

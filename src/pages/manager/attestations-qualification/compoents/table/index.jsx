@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import AQEditModal from '../modals/aqeditmodal'
@@ -23,6 +23,14 @@ const AttestationsQualificationsTable = ({ data, loading, setId }) => {
             }
         }
     }
+
+    const handleClickTable = (id) =>
+        useMemo(() => {
+            const itemData = data?.filter((e) => e.id === id)
+            setCurrentData(itemData)
+            setModalEditQuali(true)
+        }, [id])
+
     const columns = [
         {
             title: 'ID',
@@ -57,14 +65,7 @@ const AttestationsQualificationsTable = ({ data, loading, setId }) => {
             dataIndex: 'id',
             key: 'x',
             render: (id) => (
-                <Button
-                    type="primary"
-                    onClick={() => {
-                        const itemData = data?.filter((e) => e.id === id)
-                        setCurrentData(itemData)
-                        setModalEditQuali(true)
-                    }}
-                >
+                <Button type="primary" onClick={handleClickTable(id)}>
                     Изменить
                 </Button>
             ),

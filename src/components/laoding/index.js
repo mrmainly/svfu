@@ -9,7 +9,7 @@ const Loading = () => {
                 height: '100vh',
                 width: '100%',
                 justifyContent: 'center',
-                paddingTop: 100,
+                alignItems: 'center',
             }}
         >
             <Spin />

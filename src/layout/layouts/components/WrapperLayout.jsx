@@ -7,14 +7,13 @@ import { UserOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
 import RolesDivisionMenuItem from '../../rolesDivisionMenuItem'
-import Header from '../../../components/header'
+import Header from '../../../components/headers/headeruser'
 import { useGetProfileQuery } from '../../../services/profile/Profile'
 import ROUTES from '../../../routes'
 
 const { Sider } = Layout
 
 const LayoutWrapper = ({ children }) => {
-    // const [skip, setSkip] = useState(true)
     const [isToggled, setToggled] = useState(false)
     const { data } = useGetProfileQuery()
 
