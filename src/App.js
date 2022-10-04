@@ -67,14 +67,7 @@ function App() {
                 <Route path={ROUTES.LOGIN} element={<Layout />}>
                     <Route index element={<Login />} />
                     <Route element={<Registration />} path={ROUTES.REGISTRATION} />
-                    <Route
-                        element={
-                            <Suspense fallback={null}>
-                                <ForgotPassword />
-                            </Suspense>
-                        }
-                        path={ROUTES.FORGOT_PASSWORD}
-                    />
+                    <Route element={<ForgotPassword />} path={ROUTES.FORGOT_PASSWORD} />
                     <Route
                         element={
                             <Suspense fallback={null}>
