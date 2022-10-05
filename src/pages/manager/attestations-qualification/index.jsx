@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy } from 'react'
+import { useState, useEffect } from 'react'
 import { Input, Pagination, Select } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,7 +7,8 @@ import { MyButton } from '../../../components'
 import './attestations-qualification.css'
 import ROUTES from '../../../routes'
 
-const LazyAqAddModal = lazy(() => import('./compoents/modals/aqaddmodal'))
+// const LazyAqAddModal = lazy(() => import('./compoents/modals/aqaddmodal'))
+import AQAddModal from './compoents/modals/aqaddmodal'
 
 import {
     useGetAttestationsQualificationQuery,
@@ -87,7 +88,7 @@ const AttestationsQualifications = () => {
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
             </div>
-            <LazyAqAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
+            <AQAddModal open={modalNewQuali} setOpen={setModalNewQuali} />
             <AttestationsQualificationsTable
                 data={data?.results}
                 loading={isFetching}

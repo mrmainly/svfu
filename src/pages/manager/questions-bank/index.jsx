@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy } from 'react'
 import { Pagination, Select, Input } from 'antd'
 
 import QuestionsBankTable from './compoents/table'
-import QBAddModal from './compoents/modals/qbaddmodal'
 import { useGetConstructorQuestionQuery } from '../../../services/manager/QuestionsBank'
 import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
-
 import { MyButton } from '../../../components'
 import './questions-bank.css'
+
+const LazyQBAddModal = lazy(() => import('./compoents/modals/qbaddmodal'))
 
 const QuestionsBank = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -87,7 +87,7 @@ const QuestionsBank = () => {
                     <Select.Option value="DESCRIBE">Открытый</Select.Option>
                 </Select>
             </div>
-            <QBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
+            <LazyQBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
             <QuestionsBankTable data={data?.results} loading={isFetching} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination

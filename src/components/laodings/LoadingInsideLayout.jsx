@@ -13,7 +13,7 @@ const LoadingInsideLayout = () => {
                 paddingTop: 100,
             }}
         >
-            <Spin />
+            <Spin size="large" />
         </div>
     )
 }

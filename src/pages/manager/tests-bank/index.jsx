@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy } from 'react'
 import { Pagination, Input, Select } from 'antd'
 
-import TBAddModal from './components/modals/TestBankAddModal'
 import { useGetAttestationsTestsBankQuery } from '../../../services/manager/TestsBank'
 import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
 
 import TestsBankTable from './components/table/TestBankTable'
 import { MyButton } from '../../../components'
 import './test-bank.css'
+
+const LazyTBAddModal = lazy(() => import('./components/modals/TestBankAddModal'))
 
 const TestsBank = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -75,7 +76,7 @@ const TestsBank = () => {
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
             </div>
-            {modalNewTest && <TBAddModal open={modalNewTest} setOpen={setModalNewTest} />}
+            <LazyTBAddModal open={modalNewTest} setOpen={setModalNewTest} />
             <TestsBankTable data={data?.results} loading={isLoading} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
