@@ -45,6 +45,7 @@ const ROUTES = {
     ADMIN_USERS_DETAIL: '/admin-users-detail',
     MODERATOR_USERS_DETAIL: '/moderator-users-detail',
     TAGS_LIST: '/tags-list',
+    NEW_QUESTION: '/new-question',
 }
 
 export default ROUTES

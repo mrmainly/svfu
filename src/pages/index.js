@@ -38,6 +38,7 @@ const SurveyPartsExpert = lazy(() => import('./expert/survey/surveyParts'))
 const SurveyPartsModerator = lazy(() => import('./moderator/survey/surveyParts'))
 const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
 const TagsList = lazy(() => import('./manager/attestations-qualification/tagsList'))
+const NewQuestion = lazy(() => import('./manager/new-question'))
 
 export {
     Login,
@@ -77,4 +78,5 @@ export {
     SurveyPartsModerator,
     ModeratorAppeal,
     TagsList,
+    NewQuestion,
 }
