@@ -144,13 +144,14 @@ const SurveysSideBar = () => {
         )
     }
 
+    console.log(data)
+
     return (
         <div className="survey-sidebar">
             {timer == '00:00' && <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} />}
             <Text style={{ fontWeight: 600 }}>{data?.name}</Text>
 
             <div className="root">
-                <Text style={{ marginLeft: 12 }}>Теоретическая часть:</Text>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {data?.surveyquest?.length
                         ? data.surveyquest.map((item, index) => (
@@ -228,7 +229,7 @@ const SurveysSideBar = () => {
                     form="my-form"
                     className="theoretical-form-button"
                 >
-                    Завершить тестовую часть
+                    Завершить тест
                 </Button>
             )}
         </div>

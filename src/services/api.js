@@ -21,7 +21,6 @@ export const api = createApi({
 
     tagTypes: [
         'Profile',
-
         'Document',
         'Attestation',
         'TestProcessing',
