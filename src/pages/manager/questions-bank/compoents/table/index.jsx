@@ -1,16 +1,18 @@
-import { useState } from 'react'
-
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import QBEditModal from '../modals/qbeditmodal'
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 
-const QuestionsBankTable = ({ data, loading, setId }) => {
+const QuestionsBankTable = ({
+    data,
+    loading,
+    setId,
+    handleOpenEditQuestionModal,
+    setCurrentData,
+}) => {
     const { data: dataDirection } = useGetToolsDirectionQuery()
-    const [currentData, setCurrentData] = useState()
-    const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
+
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
             {
@@ -84,7 +86,7 @@ const QuestionsBankTable = ({ data, loading, setId }) => {
                     type="primary"
                     onClick={() => {
                         setCurrentData(record)
-                        setModalEditQuestionsBank(true)
+                        handleOpenEditQuestionModal()
                     }}
                 >
                     Изменить
@@ -95,11 +97,6 @@ const QuestionsBankTable = ({ data, loading, setId }) => {
 
     return (
         <>
-            <QBEditModal
-                open={modalEditQuestionsBank}
-                setOpen={setModalEditQuestionsBank}
-                dataList={currentData}
-            />
             <Table
                 columns={columns}
                 dataSource={data}
@@ -117,6 +114,8 @@ QuestionsBankTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
     setId: PropTypes.func,
+    handleOpenEditQuestionModal: PropTypes.func,
+    setCurrentData: PropTypes.func,
 }
 
 export default QuestionsBankTable

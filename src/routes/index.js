@@ -21,7 +21,7 @@ const ROUTES = {
     ATTESTATION_QUALI: '/attestation_qualification',
     ATTESTATION_PROTOCOL: '/attestation_protocol',
     ATTESTATION_TESTS_BANK: '/attestation_tests_bank',
-    ATTESTATION_QUESTIONS_BANK: '/attestation_questions_bank',
+    SOFT_QUESTIONS: '/soft-questions',
     EXAMINATION_GROUPS: '/examination-groups',
     USER_APPLICATIONS: '/user-applocations',
     CERTIFIED: '/certified',
@@ -46,6 +46,7 @@ const ROUTES = {
     MODERATOR_USERS_DETAIL: '/moderator-users-detail',
     TAGS_LIST: '/tags-list',
     NEW_QUESTION: '/new-question',
+    HARD_QUESTIONS: '/hard-questions',
 }
 
 export default ROUTES

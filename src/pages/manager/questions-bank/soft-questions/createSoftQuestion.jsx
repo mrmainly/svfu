@@ -3,7 +3,7 @@ import { Input, Form, Select } from 'antd'
 const { Option } = Select
 const { TextArea } = Input
 
-const NewQuestion = () => {
+const CreateSoftQuestiuon = () => {
     return (
         <div>
             <Form layout="vertical" id="qbadd-form">
@@ -71,4 +71,4 @@ const NewQuestion = () => {
     )
 }
 
-export default NewQuestion
+export default CreateSoftQuestiuon

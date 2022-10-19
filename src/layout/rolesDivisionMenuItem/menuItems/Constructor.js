@@ -13,13 +13,22 @@ const CONSTRUCTOR = (navigate) => {
                 ROUTES.ATTESTATION_QUALI,
                 navigate
             ),
-            SubMenuItem(
-                'БВ',
-                'Банк вопросов',
-                'submenu-item-1-2',
-                ROUTES.ATTESTATION_QUESTIONS_BANK,
-                navigate
-            ),
+            MenuSection('Банк вопросов', 'submenu-1-1', <div>БВ</div>, [
+                SubMenuItem(
+                    'SВ',
+                    '(soft) вопросы',
+                    'submenu-item-1-1-1',
+                    ROUTES.SOFT_QUESTIONS,
+                    navigate
+                ),
+                SubMenuItem(
+                    'HВ',
+                    '(hard) вопросы',
+                    'submenu-item-1-1-2',
+                    ROUTES.HARD_QUESTIONS,
+                    navigate
+                ),
+            ]),
             SubMenuItem(
                 'БТ',
                 'Банк тестирований',

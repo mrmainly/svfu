@@ -84,6 +84,10 @@ export const pathname = (params) => {
                     <span>Создание вопроса</span>
                 </div>
             )
+        case ROUTES.SOFT_QUESTIONS:
+            return 'Soft вопросы'
+        case ROUTES.HARD_QUESTIONS:
+            return 'Hard вопросы'
         default:
             new Error()
     }

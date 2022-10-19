@@ -1,17 +1,15 @@
-import { useState, useEffect, lazy } from 'react'
+import { useState, useEffect } from 'react'
 import { Pagination, Select, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import QuestionsBankTable from './compoents/table'
-import { useGetConstructorQuestionQuery } from '../../../services/manager/QuestionsBank'
-import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
-import { MyButton } from '../../../components'
-import './questions-bank.css'
-import ROUTES from '../../../routes'
+import QuestionsBankTable from '../compoents/table'
+import { useGetConstructorQuestionQuery } from '../../../../services/manager/QuestionsBank'
+import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
+import { MyButton } from '../../../../components'
+import '../questions-bank.css'
+import ROUTES from '../../../../routes'
 
-const LazyQBAddModal = lazy(() => import('./compoents/modals/qbaddmodal'))
-
-const QuestionsBank = () => {
+const SoftQuestions = () => {
     const navigate = useNavigate()
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
@@ -29,7 +27,6 @@ const QuestionsBank = () => {
         direction: direction,
     })
     const { data: directionSelect } = useGetToolsDirectionQuery()
-    const [modalNewQuestion, setModalNewQuestion] = useState(false)
     const onChange = (page) => {
         setCurrentPage(page)
     }
@@ -38,9 +35,6 @@ const QuestionsBank = () => {
     }, [data])
     return (
         <div>
-            <MyButton style={{ marginBottom: 16 }} onClick={() => setModalNewQuestion(true)}>
-                Создать вопрос
-            </MyButton>
             <MyButton style={{ marginBottom: 16 }} onClick={() => navigate(ROUTES.NEW_QUESTION)}>
                 Создать вопрос
             </MyButton>
@@ -93,7 +87,6 @@ const QuestionsBank = () => {
                     <Select.Option value="DESCRIBE">Открытый</Select.Option>
                 </Select>
             </div>
-            <LazyQBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
             <QuestionsBankTable data={data?.results} loading={isFetching} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
@@ -109,4 +102,4 @@ const QuestionsBank = () => {
     )
 }
 
-export default QuestionsBank
+export default SoftQuestions

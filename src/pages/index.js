@@ -14,7 +14,7 @@ const UsersList = lazy(() => import('./users/list'))
 const AttestationsQualifications = lazy(() => import('./manager/attestations-qualification'))
 const AttestationProtocol = lazy(() => import('./lpr/attestation-protocol/list'))
 const TestsBank = lazy(() => import('./manager/tests-bank'))
-const QuestionsBank = lazy(() => import('./manager/questions-bank'))
+const QuestionsBank = lazy(() => import('./manager/questions-bank/soft-questions'))
 const ExaminationGroups = lazy(() => import('./tutor/examination-groups'))
 const UserApplications = lazy(() => import('./tutor/userApplications/list'))
 const Certified = lazy(() => import('./tutor/certified/list'))
@@ -38,7 +38,10 @@ const SurveyPartsExpert = lazy(() => import('./expert/survey/surveyParts'))
 const SurveyPartsModerator = lazy(() => import('./moderator/survey/surveyParts'))
 const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
 const TagsList = lazy(() => import('./manager/attestations-qualification/tagsList'))
-const NewQuestion = lazy(() => import('./manager/new-question'))
+const CreateSoftQuestion = lazy(() =>
+    import('./manager/questions-bank/soft-questions/createSoftQuestion')
+)
+const HardQuestions = lazy(() => import('./manager/questions-bank/hard-questions'))
 
 export {
     Login,
@@ -78,5 +81,6 @@ export {
     SurveyPartsModerator,
     ModeratorAppeal,
     TagsList,
-    NewQuestion,
+    CreateSoftQuestion,
+    HardQuestions,
 }

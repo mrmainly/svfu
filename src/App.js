@@ -42,7 +42,8 @@ import {
     SurveyPartsModerator,
     ModeratorAppeal,
     TagsList,
-    NewQuestion,
+    CreateSoftQuestion,
+    HardQuestions,
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -198,7 +199,7 @@ function App() {
                                 <QuestionsBank />
                             </Suspense>
                         }
-                        path={ROUTES.ATTESTATION_QUESTIONS_BANK}
+                        path={ROUTES.SOFT_QUESTIONS}
                     />
                     <Route
                         element={
@@ -332,10 +333,18 @@ function App() {
                     <Route
                         element={
                             <Suspense fallback={<LoadingInsideLayout />}>
-                                <NewQuestion />
+                                <CreateSoftQuestion />
                             </Suspense>
                         }
                         path={ROUTES.NEW_QUESTION}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <HardQuestions />
+                            </Suspense>
+                        }
+                        path={ROUTES.HARD_QUESTIONS}
                     />
                 </Route>
             </Routes>
