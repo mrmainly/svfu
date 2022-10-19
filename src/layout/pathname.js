@@ -1,6 +1,10 @@
 import ROUTES from '../routes'
+import { BsArrowLeft } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 
 export const pathname = (params) => {
+    const navigate = useNavigate()
+
     switch (params.pathname) {
         case ROUTES.PROFILE:
             return 'Профиль'
@@ -60,6 +64,26 @@ export const pathname = (params) => {
             return 'Апелляции'
         case ROUTES.TAGS_LIST:
             return 'Теги'
+        case ROUTES.NEW_QUESTION:
+            return (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'start',
+                        alignItems: 'center',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <BsArrowLeft
+                        style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
+                        onClick={() => {
+                            navigate(-1)
+                        }}
+                    />
+                    <span>Создание вопроса</span>
+                </div>
+            )
         default:
             new Error()
     }

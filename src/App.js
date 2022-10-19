@@ -42,6 +42,7 @@ import {
     SurveyPartsModerator,
     ModeratorAppeal,
     TagsList,
+    NewQuestion,
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -327,6 +328,14 @@ function App() {
                             </Suspense>
                         }
                         path={ROUTES.TAGS_LIST}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <NewQuestion />
+                            </Suspense>
+                        }
+                        path={ROUTES.NEW_QUESTION}
                     />
                 </Route>
             </Routes>
