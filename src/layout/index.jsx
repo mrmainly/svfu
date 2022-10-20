@@ -24,6 +24,7 @@ const MyLayout = () => {
                 </Suspense>
             ) : params.pathname === ROUTES.TESTER_SURVEY_PART ||
               params.pathname === ROUTES.SURVEY_PARTS_MODERATOR ||
+              params.pathname === ROUTES.SURVEY_PARTS_EXPERT_SOFT ||
               params.pathname === ROUTES.SURVEY_PARTS_EXPERT ? (
                 <Suspense fallback={<Loading />}>
                     <LazySurveyLayout />

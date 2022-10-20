@@ -40,7 +40,10 @@ const ExpertSurvey = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title level={5}>Аттестуемый {surveyquest.user}</Title>
+                <Title level={5}>Аттестуемый: {surveyquest.user}</Title>
+            </div>
+            <div style={{ display: 'flex', marginTop: 10 }}>
+                <Title level={5}>Тип теста: soft/hard</Title>
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>
@@ -98,7 +101,21 @@ const ExpertSurvey = () => {
                     })
                 }}
             >
-                Начать экспертизу
+                Начать экспертизу hard
+            </Button>
+            <Button
+                type="primary"
+                style={{ width: 'max-content', marginTop: '10px' }}
+                onClick={() => {
+                    navigate(ROUTES.SURVEY_PARTS_EXPERT_SOFT, {
+                        state: {
+                            surveyquest: surveyquest,
+                            id: id,
+                        },
+                    })
+                }}
+            >
+                Начать экспертизу soft
             </Button>
         </div>
     )

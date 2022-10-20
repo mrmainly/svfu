@@ -39,6 +39,7 @@ import {
     AttestedAppeal,
     ModeratorTestResult,
     SurveyPartsExpert,
+    SurveyPartsExpertSoft,
     SurveyPartsModerator,
     ModeratorAppeal,
     TagsList,
@@ -313,6 +314,14 @@ function App() {
                             </Suspense>
                         }
                         path={ROUTES.SURVEY_PARTS_EXPERT}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <SurveyPartsExpertSoft />
+                            </Suspense>
+                        }
+                        path={ROUTES.SURVEY_PARTS_EXPERT_SOFT}
                     />
                     <Route
                         element={

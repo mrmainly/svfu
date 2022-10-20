@@ -41,6 +41,7 @@ const ROUTES = {
     MODERATOR_TEST_RESULT: '/moderator-test-result',
     ATTESTED_APPEAL: '/attested-appeal',
     SURVEY_PARTS_EXPERT: '/survey-parts-expert',
+    SURVEY_PARTS_EXPERT_SOFT: '/survey-parts-expert-soft',
     SURVEY_PARTS_MODERATOR: '/survey-parts-moderator',
     ADMIN_USERS_DETAIL: '/admin-users-detail',
     MODERATOR_USERS_DETAIL: '/moderator-users-detail',
