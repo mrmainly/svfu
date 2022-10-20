@@ -39,6 +39,11 @@ const TestProcessingTable = ({ data, loading, setOrdering }) => {
             key: 'direction',
         },
         {
+            title: 'Тип',
+            dataIndex: 'direction',
+            key: 'direction',
+        },
+        {
             title: 'ID аттестуемого',
             dataIndex: 'user',
             key: 'user',
