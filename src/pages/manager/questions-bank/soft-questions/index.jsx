@@ -47,7 +47,7 @@ const SoftQuestions = () => {
                         setDescription(currValue)
                     }}
                     className="input-search"
-                ></Input.Search>
+                />
                 <Select
                     showSearch
                     className="input-search"

@@ -40,6 +40,7 @@ const { Option } = Select
 const { TextArea } = Input
 const QBEditModal = ({ open, setOpen, dataList }) => {
     const { data: globalData } = useGetToolsDirectionQuery()
+
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')

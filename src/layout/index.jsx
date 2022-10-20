@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
 import ROUTES from '../routes'
@@ -12,6 +13,10 @@ const LazyMainLayout = lazy(() => import('./layouts/MainLayout'))
 
 const MyLayout = () => {
     const params = useLocation()
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [params.pathname])
 
     return (
         <>
