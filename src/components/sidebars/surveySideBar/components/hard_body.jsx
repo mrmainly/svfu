@@ -60,7 +60,7 @@ const HardBody = ({ data, changeQuestion, arrayIndex, part, handleParts, complet
                                         opacity: part === 'practical-part' ? 0.6 : 1,
                                         cursor: part === 'practical-part' ? 'text' : 'pointer',
                                     }}
-                                    onClick={changeQuestion}
+                                    onClick={() => changeQuestion(index)}
                                 >
                                     {index + 1}
                                 </div>

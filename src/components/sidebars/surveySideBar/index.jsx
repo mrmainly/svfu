@@ -21,8 +21,10 @@ const SurveysSideBar = () => {
         setData(newData)
     }, [])
 
-    const changeQuestion = () => {
-        !part === 'practical-part' && dispatch(handleArrayIndex(index))
+    const changeQuestion = (index) => {
+        if (part != 'practical-part') {
+            dispatch(handleArrayIndex(index))
+        }
     }
 
     const handleParts = () => {
