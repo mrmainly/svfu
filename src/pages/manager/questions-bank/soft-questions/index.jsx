@@ -3,7 +3,7 @@ import { Pagination, Select, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import QuestionsBankTable from '../compoents/table'
-import { useGetConstructorQuestionQuery } from '../../../../services/manager/QuestionsBank'
+import { useGetSoftQuestionListQuery } from '../../../../services/manager/question-bank/SoftQuestion'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 import { MyButton } from '../../../../components'
 import '../questions-bank.css'
@@ -18,7 +18,7 @@ const SoftQuestions = () => {
     const [is_active, setIs_active] = useState('')
     const [description, setDescription] = useState('')
     const [direction, setDirection] = useState('')
-    const { data, isFetching } = useGetConstructorQuestionQuery({
+    const { data, isFetching } = useGetSoftQuestionListQuery({
         currentPage: currentPage,
         id: id,
         difficulty: difficulty,

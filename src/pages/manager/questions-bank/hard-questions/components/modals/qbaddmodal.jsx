@@ -20,11 +20,11 @@ import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../../components'
 
+import { usePostConstructorQuestionMutation } from '../../../../../../services/manager/question-bank/HardQuestion'
 import {
     usePostConstructorQuestionImageMutation,
-    usePostConstructorQuestionMutation,
     usePostConstructorQuestionFileMutation,
-} from '../../../../../../services/manager/QuestionsBank'
+} from '../../../../../../services/manager/question-bank'
 import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
 const { Option } = Select
 const { TextArea } = Input

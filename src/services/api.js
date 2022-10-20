@@ -38,6 +38,7 @@ export const api = createApi({
         'SURVEYS_TESTER',
         //manager
         'ManagerConstructorQuestion',
+        'SoftQuestion',
         //tutor экзаменационные группы
         'ExaminationGroups ',
         //tutor расписание экзаменов

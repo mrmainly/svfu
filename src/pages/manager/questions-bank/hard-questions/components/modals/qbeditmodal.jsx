@@ -25,15 +25,17 @@ import { MyButton } from '../../../../../../components'
 import {
     usePostConstructorQuestionFileMutation,
     usePostConstructorQuestionImageMutation,
+    usePatchConstructorQuestionIdImageMutation,
+    useDeleteConstructorQuestionIdFileMutation,
+    useDeleteConstructorQuestionIdImageMutation,
+} from '../../../../../../services/manager/question-bank'
+import {
     usePostConstructorAnswerQuestionMutation,
     usePutConstructorQuestionMutation,
     usePatchConstructorQuestionMutation,
-    usePatchConstructorQuestionIdImageMutation,
     usePatchConstructorAnswerMutation,
-    useDeleteConstructorQuestionIdFileMutation,
-    useDeleteConstructorQuestionIdImageMutation,
     useDeleteConstructorAnswerMutation,
-} from '../../../../../../services/manager/QuestionsBank'
+} from '../../../../../../services/manager/question-bank/HardQuestion'
 import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
 
 const { Option } = Select

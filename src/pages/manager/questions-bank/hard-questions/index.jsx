@@ -2,7 +2,7 @@ import { useState, useEffect, lazy } from 'react'
 import { Pagination, Select, Input } from 'antd'
 
 import QuestionsBankTable from '../compoents/table'
-import { useGetConstructorQuestionQuery } from '../../../../services/manager/QuestionsBank'
+import { useGetConstructorQuestionQuery } from '../../../../services/manager/question-bank'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 import { MyButton } from '../../../../components'
 import QBEditModal from './components/modals/qbeditmodal'
