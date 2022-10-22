@@ -54,6 +54,16 @@ export const TestsBank = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        patchSoftTest: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `constructor/unit/soft/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
     }),
 })
 
@@ -64,4 +74,5 @@ export const {
     usePutAttestationsTestsBankIdMutation,
     useGetSoftQuestionListQuery,
     usePostSoftTestMutation,
+    usePatchSoftTestMutation,
 } = TestsBank
