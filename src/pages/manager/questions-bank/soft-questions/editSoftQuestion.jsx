@@ -37,7 +37,7 @@ const uploadButton = (
     </div>
 )
 
-const CreateSoftQuestion = () => {
+const EditSoftQuestion = () => {
     const [variantAnswerShow, setVariantAnswerShow] = useState(false)
     const [file, setFile] = useState('')
     const [showScoringPoints, setShowScoringPoints] = useState(false)
@@ -74,30 +74,21 @@ const CreateSoftQuestion = () => {
         },
     }
 
-    const props2 = {
-        beforeUpload: (file) => {
-            const isPNG = file.type === 'image/png' || file.type === 'image/jpeg'
-
-            if (!isPNG) {
-                message.error(`${file.name} не является PNG/JPEG файлом`)
-                return isPNG || Upload.LIST_IGNORE
-            }
-
-            return false
-        },
-    }
-
     const onFinish = (data) => {
-        postConstructorSoftQuestion({
-            body: data,
-        }).then((res) => {
-            if (res.data) {
-                message.success('Вопрос создан')
-                navigate(ROUTES.SOFT_QUESTIONS)
-            } else {
-                message.error('вопрос не создан')
-            }
-        })
+        console.log('data', data)
+        // postConstructorSoftQuestion({
+        //     body: {
+        //         ...data,
+        //     },
+        // }).then((res) => {
+        //     if (res.data) {
+        //         message.success('Вопрос создан')
+        //         navigate(ROUTES.SOFT_QUESTIONS)
+        //     } else {
+        //         message.error('вопрос не создан')
+        //     }
+        // })
+        // console.log('post data', data)
     }
 
     return (
@@ -197,17 +188,11 @@ const CreateSoftQuestion = () => {
                 )}
 
                 <Form.Item label="Изображение" name="img" style={{ marginTop: 25 }}>
-                    <Upload
-                        {...props2}
-                        listType="picture-card"
-                        multiple={false}
-                        maxCount={1}
-                        accept=".png,.jpg"
-                    >
+                    <Upload {...props} listType="picture-card" multiple={false} maxCount={1}>
                         {uploadButton}
                     </Upload>
                 </Form.Item>
-                <Form.Item label="Загрузка документа">
+                <Form.Item label="Загрузка дакумента">
                     <Upload
                         action="none"
                         {...props}
@@ -242,4 +227,4 @@ const CreateSoftQuestion = () => {
     )
 }
 
-export default CreateSoftQuestion
+export default EditSoftQuestion

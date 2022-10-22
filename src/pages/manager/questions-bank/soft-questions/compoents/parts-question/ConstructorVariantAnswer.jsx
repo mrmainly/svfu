@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const ConstructorVariantAnswer = ({ handleShowVariantAnswer }) => {
     return (
-        <Form.List name="variant" initialValue={[{}, {}]}>
+        <Form.List name="variants" initialValue={[{}, {}]}>
             {(fields, { add, remove }) => {
                 const reset = () => {
                     remove(

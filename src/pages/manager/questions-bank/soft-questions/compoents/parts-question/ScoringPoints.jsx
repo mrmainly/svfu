@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const ScoringPoints = ({ handleShowScoringPoints }) => {
     return (
-        <Form.List name="points" initialValue={[{}]}>
+        <Form.List name="hint" initialValue={[{}]}>
             {(fields, { add, remove }) => {
                 const reset = () => {
                     remove(
@@ -23,7 +23,7 @@ const ScoringPoints = ({ handleShowScoringPoints }) => {
                             <Space key={key} style={{ display: 'flex', alignItems: 'center' }}>
                                 <Form.Item
                                     {...restField}
-                                    name={[name, 'condition']}
+                                    name={[name, 'criterion']}
                                     label="Условие"
                                     rules={[
                                         {
@@ -37,7 +37,7 @@ const ScoringPoints = ({ handleShowScoringPoints }) => {
                                 </Form.Item>
                                 <Form.Item
                                     {...restField}
-                                    name={[name, 'point']}
+                                    name={[name, 'score']}
                                     label="Баллы"
                                     rules={[
                                         {
