@@ -37,7 +37,7 @@ const uploadButton = (
     </div>
 )
 
-const CreateSoftQuestion = () => {
+const EditSoftQuestion = () => {
     const [variantAnswerShow, setVariantAnswerShow] = useState(false)
     const [file, setFile] = useState('')
     const [showScoringPoints, setShowScoringPoints] = useState(false)
@@ -75,16 +75,20 @@ const CreateSoftQuestion = () => {
     }
 
     const onFinish = (data) => {
-        postConstructorSoftQuestion({
-            body: data,
-        }).then((res) => {
-            if (res.data) {
-                message.success('Вопрос создан')
-                navigate(ROUTES.SOFT_QUESTIONS)
-            } else {
-                message.error('вопрос не создан')
-            }
-        })
+        console.log('data', data)
+        // postConstructorSoftQuestion({
+        //     body: {
+        //         ...data,
+        //     },
+        // }).then((res) => {
+        //     if (res.data) {
+        //         message.success('Вопрос создан')
+        //         navigate(ROUTES.SOFT_QUESTIONS)
+        //     } else {
+        //         message.error('вопрос не создан')
+        //     }
+        // })
+        // console.log('post data', data)
     }
 
     return (
@@ -223,4 +227,4 @@ const CreateSoftQuestion = () => {
     )
 }
 
-export default CreateSoftQuestion
+export default EditSoftQuestion

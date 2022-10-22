@@ -42,6 +42,9 @@ const TagsList = lazy(() => import('./manager/attestations-qualification/tagsLis
 const CreateSoftQuestion = lazy(() =>
     import('./manager/questions-bank/soft-questions/createSoftQuestion')
 )
+const EditSoftQuestion = lazy(() =>
+    import('./manager/questions-bank/soft-questions/editSoftQuestion')
+)
 const HardQuestions = lazy(() => import('./manager/questions-bank/hard-questions'))
 
 export {
@@ -85,4 +88,5 @@ export {
     TagsList,
     CreateSoftQuestion,
     HardQuestions,
+    EditSoftQuestion,
 }

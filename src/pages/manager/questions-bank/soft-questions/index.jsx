@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Pagination, Select, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import QuestionsBankTable from '../compoents/table'
+import SoftQuestionTable from './compoents/table/SoftQuestionTable'
 import { useGetSoftQuestionListQuery } from '../../../../services/manager/question-bank/SoftQuestion'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 import { MyButton } from '../../../../components'
@@ -14,16 +14,15 @@ const SoftQuestions = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [id, setId] = useState('')
-    const [difficulty, setDifficulty] = useState('')
     const [is_active, setIs_active] = useState('')
-    const [description, setDescription] = useState('')
+    const [name, setName] = useState('')
     const [direction, setDirection] = useState('')
     const { data, isFetching } = useGetSoftQuestionListQuery({
         currentPage: currentPage,
         id: id,
-        difficulty: difficulty,
+
         is_active: is_active,
-        description: description,
+        name: name,
         direction: direction,
     })
     const { data: directionSelect } = useGetToolsDirectionQuery()
@@ -32,7 +31,9 @@ const SoftQuestions = () => {
     }
     useEffect(() => {
         setTotalPage(data?.count)
+        console.log(data)
     }, [data])
+
     return (
         <div>
             <MyButton style={{ marginBottom: 16 }} onClick={() => navigate(ROUTES.NEW_QUESTION)}>
@@ -40,11 +41,10 @@ const SoftQuestions = () => {
             </MyButton>
             <div className="inputs-container">
                 <Input.Search
-                    placeholder="Текст вопроса"
+                    placeholder="Название вопроса"
                     enterButton
                     onSearch={(value) => {
-                        const currValue = value
-                        setDescription(currValue)
+                        setName(value)
                     }}
                     className="input-search"
                 />
@@ -75,19 +75,8 @@ const SoftQuestions = () => {
                     <Select.Option value="true">Активна</Select.Option>
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
-                <Select
-                    placeholder="Сложность"
-                    className="input-search"
-                    onChange={(value) => setDifficulty(value)}
-                >
-                    <Select.Option value="">Все уровни сложности</Select.Option>
-                    <Select.Option value="BEGINNER">Легкий</Select.Option>
-                    <Select.Option value="ADVANCED">Средний</Select.Option>
-                    <Select.Option value="EXPERT">Сложный</Select.Option>
-                    <Select.Option value="DESCRIBE">Открытый</Select.Option>
-                </Select>
             </div>
-            <QuestionsBankTable data={data?.results} loading={isFetching} setId={setId} />
+            <SoftQuestionTable data={data?.results} loading={isFetching} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
