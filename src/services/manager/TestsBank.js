@@ -40,6 +40,20 @@ export const TestsBank = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
+        getSoftQuestionList: build.query({
+            query: ({ direction }) => `constructor/question/soft/?direction=${direction}`,
+            providesTags: ['SoftQuestion'],
+        }),
+        postSoftTest: build.mutation({
+            query(body) {
+                return {
+                    url: `constructor/unit/soft/`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
     }),
 })
 
@@ -48,4 +62,6 @@ export const {
     useGetAttestationsTestsBankQuery,
     usePatchAttestationsTestsBankIdMutation,
     usePutAttestationsTestsBankIdMutation,
+    useGetSoftQuestionListQuery,
+    usePostSoftTestMutation,
 } = TestsBank
