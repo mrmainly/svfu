@@ -74,6 +74,19 @@ const CreateSoftQuestion = () => {
         },
     }
 
+    const props2 = {
+        beforeUpload: (file) => {
+            const isPNG = file.type === 'image/png' || file.type === 'image/jpeg'
+
+            if (!isPNG) {
+                message.error(`${file.name} не является PNG/JPEG файлом`)
+                return isPNG || Upload.LIST_IGNORE
+            }
+
+            return false
+        },
+    }
+
     const onFinish = (data) => {
         postConstructorSoftQuestion({
             body: data,
@@ -184,11 +197,17 @@ const CreateSoftQuestion = () => {
                 )}
 
                 <Form.Item label="Изображение" name="img" style={{ marginTop: 25 }}>
-                    <Upload {...props} listType="picture-card" multiple={false} maxCount={1}>
+                    <Upload
+                        {...props2}
+                        listType="picture-card"
+                        multiple={false}
+                        maxCount={1}
+                        accept=".png,.jpg"
+                    >
                         {uploadButton}
                     </Upload>
                 </Form.Item>
-                <Form.Item label="Загрузка дакумента">
+                <Form.Item label="Загрузка документа">
                     <Upload
                         action="none"
                         {...props}
