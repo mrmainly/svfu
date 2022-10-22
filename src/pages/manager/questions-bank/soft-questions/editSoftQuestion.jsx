@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input, Form, Select, Radio, Button, Typography, Upload, message } from 'antd'
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import ConstructorVariantAnswer from './compoents/parts-question/ConstructorVariantAnswer'
 import ScoringPoints from './compoents/parts-question/ScoringPoints'
 import { MyButton } from '../../../../components'
 import ConstructorTableQuestion from './compoents/parts-question/ConstructorTableQuestion'
-import { usePostConstructorSoftQuestionMutation } from '../../../../services/manager/question-bank/SoftQuestion'
+import {
+    useGetSoftQuestionIdQuery,
+    usePatchConstructorSoftQuestionMutation,
+} from '../../../../services/manager/question-bank/SoftQuestion'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 import ROUTES from '../../../../routes'
 
@@ -38,15 +41,27 @@ const uploadButton = (
 )
 
 const EditSoftQuestion = () => {
+    const location = useLocation()
+    const state = location.state
+
+    const { id } = state
+
     const [variantAnswerShow, setVariantAnswerShow] = useState(false)
     const [file, setFile] = useState('')
     const [showScoringPoints, setShowScoringPoints] = useState(false)
     const [showTableQuest, setShowTableQuest] = useState(false)
 
-    const [postConstructorSoftQuestion] = usePostConstructorSoftQuestionMutation()
-    const { data } = useGetToolsDirectionQuery()
+    const [patchConstructorSoft] = usePatchConstructorSoftQuestionMutation()
+    const { data: diractionList } = useGetToolsDirectionQuery()
+    const { data, isFetching } = useGetSoftQuestionIdQuery({ id: id })
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setVariantAnswerShow(data?.variants ? true : false)
+        setShowScoringPoints(data?.hint ? true : false)
+        setShowTableQuest(data?.table_quest ? true : false)
+    }, [data])
 
     const handleShowVariantAnswer = () => {
         setVariantAnswerShow(!variantAnswerShow)
@@ -75,20 +90,27 @@ const EditSoftQuestion = () => {
     }
 
     const onFinish = (data) => {
-        console.log('data', data)
-        // postConstructorSoftQuestion({
-        //     body: {
-        //         ...data,
-        //     },
-        // }).then((res) => {
-        //     if (res.data) {
-        //         message.success('Вопрос создан')
-        //         navigate(ROUTES.SOFT_QUESTIONS)
-        //     } else {
-        //         message.error('вопрос не создан')
-        //     }
-        // })
-        // console.log('post data', data)
+        const { table_quest, variants, hint, ...rest } = data
+        patchConstructorSoft({
+            body: {
+                table_quest: table_quest ? table_quest : [],
+                variants: variants ? variants : [],
+                hint: hint ? hint : [],
+                ...rest,
+            },
+            id: id,
+        }).then((res) => {
+            if (res.data) {
+                message.success(`Вопрос номер ${id} изменен`)
+                navigate(ROUTES.SOFT_QUESTIONS)
+            } else {
+                message.error('вопрос не изменен')
+            }
+        })
+    }
+
+    if (isFetching) {
+        return <div>Loading</div>
     }
 
     return (
@@ -98,6 +120,15 @@ const EditSoftQuestion = () => {
                 id="qbadd-form"
                 style={{ display: 'flex', flexDirection: 'column', width: 500 }}
                 onFinish={onFinish}
+                initialValues={{
+                    ['direction']: data.direction,
+                    ['description']: data.description,
+                    ['name']: data.name,
+                    ['variants']: data?.variants,
+                    ['hint']: data?.hint,
+                    ['is_describe']: data.is_describe,
+                    ['table_quest']: data?.table_quest,
+                }}
             >
                 <Form.Item
                     label="Квалификация вопроса"
@@ -110,7 +141,7 @@ const EditSoftQuestion = () => {
                     ]}
                 >
                     <Select mode="multiple">
-                        {data?.map((item, index) => (
+                        {diractionList?.map((item, index) => (
                             <Option value={item.id} key={index}>
                                 {item.name}
                             </Option>
@@ -157,7 +188,9 @@ const EditSoftQuestion = () => {
                     </Radio.Group>
                 </Form.Item>
                 <Text style={{ marginBottom: 10 }}>Варианты ответа</Text>
-                {!variantAnswerShow ? (
+                {variantAnswerShow ? (
+                    <ConstructorVariantAnswer handleShowVariantAnswer={handleShowVariantAnswer} />
+                ) : (
                     <Button
                         block
                         type="primary"
@@ -168,8 +201,6 @@ const EditSoftQuestion = () => {
                     >
                         Добавить варианты ответа
                     </Button>
-                ) : (
-                    <ConstructorVariantAnswer handleShowVariantAnswer={handleShowVariantAnswer} />
                 )}
                 <Text style={{ marginBottom: 10, marginTop: 25 }}>Добавить TableQuest</Text>
                 {!showTableQuest ? (

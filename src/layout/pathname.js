@@ -88,6 +88,8 @@ export const pathname = (params) => {
             return 'Soft вопросы'
         case ROUTES.HARD_QUESTIONS:
             return 'Hard вопросы'
+        case ROUTES.EDIT_SOFT_QUESTION:
+            return 'Редактирование soft вопрсов'
         default:
             new Error()
     }

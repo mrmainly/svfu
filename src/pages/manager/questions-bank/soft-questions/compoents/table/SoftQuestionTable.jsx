@@ -1,11 +1,15 @@
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 
 import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
+import ROUTES from '../../../../../../routes'
 
 const SoftQuestionTable = ({ data, loading, setId }) => {
     const { data: dataDirection } = useGetToolsDirectionQuery()
+
+    const navigate = useNavigate()
 
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
@@ -67,30 +71,39 @@ const SoftQuestionTable = ({ data, loading, setId }) => {
             title: 'Статус',
             dataIndex: 'is_active',
             key: 'is_active',
-
-            render: (is_active) =>
-                is_active === true ? 'Активна' : is_active === false ? 'Не активна' : '',
+            render: (is_active) => (is_active ? 'Активна' : 'Не активна'),
         },
         {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: () => <Button type="primary">Изменить</Button>,
+            render: (id) => (
+                <Button
+                    type="primary"
+                    onClick={() => {
+                        navigate(ROUTES.EDIT_SOFT_QUESTION, {
+                            state: {
+                                id: id,
+                            },
+                        })
+                    }}
+                >
+                    Изменить
+                </Button>
+            ),
         },
     ]
 
     return (
-        <>
-            <Table
-                columns={columns}
-                dataSource={data}
-                loading={loading}
-                rowKey="id"
-                pagination={false}
-                scroll={{ x: true }}
-                onChange={onTableChange}
-            />
-        </>
+        <Table
+            columns={columns}
+            dataSource={data}
+            loading={loading}
+            rowKey="id"
+            pagination={false}
+            scroll={{ x: true }}
+            onChange={onTableChange}
+        />
     )
 }
 

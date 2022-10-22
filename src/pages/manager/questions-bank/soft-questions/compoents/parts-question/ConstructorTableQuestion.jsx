@@ -9,17 +9,8 @@ const ConstructorTableQuestion = ({ handleShowTableQuestion }) => {
         <Form.List name="table_quest" initialValue={[{}]}>
             {(fields, { add, remove }) => {
                 const reset = () => {
-                    remove(
-                        fields.map((item) => {
-                            if (item.name === 0) {
-                                return ''
-                            } else {
-                                return item.name
-                            }
-                        })
-                    )
+                    remove(fields.map((item) => item.name))
                 }
-
                 const resetVariant = (key) => {
                     remove(
                         fields.map((item) => {

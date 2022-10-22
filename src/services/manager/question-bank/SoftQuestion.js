@@ -7,6 +7,10 @@ export const SoftQuestion = api.injectEndpoints({
                 `constructor/question/soft/?page=${currentPage}&ordering=${id}&is_active=${is_active}&name=${name}&direction=${direction}`,
             providesTags: ['SoftQuestion'],
         }),
+        getSoftQuestionId: build.query({
+            query: ({ id }) => `constructor/question/soft/${id}`,
+            providesTags: ['SoftQuestion'],
+        }),
         postConstructorSoftQuestion: build.mutation({
             query({ body }) {
                 return {
@@ -17,7 +21,22 @@ export const SoftQuestion = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'SoftQuestion' }],
         }),
+        patchConstructorSoftQuestion: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `constructor/question/soft/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'SoftQuestion' }],
+        }),
     }),
 })
 
-export const { useGetSoftQuestionListQuery, usePostConstructorSoftQuestionMutation } = SoftQuestion
+export const {
+    useGetSoftQuestionListQuery,
+    usePostConstructorSoftQuestionMutation,
+    useGetSoftQuestionIdQuery,
+    usePatchConstructorSoftQuestionMutation,
+} = SoftQuestion
