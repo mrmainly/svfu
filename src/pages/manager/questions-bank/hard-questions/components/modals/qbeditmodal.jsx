@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState, useEffect } from 'react'
 
 import {
@@ -18,6 +17,7 @@ import {
     Typography,
 } from 'antd'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 
 import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 
@@ -36,6 +36,8 @@ import {
     usePatchConstructorAnswerMutation,
     useDeleteConstructorAnswerMutation,
 } from '../../../../../../services/manager/question-bank/HardQuestion'
+import { usePatchQuestionSoftFileMutation } from '../../../../../../services/manager/question-bank/SoftQuestion'
+
 import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
 
 const { Option } = Select
@@ -43,31 +45,18 @@ const { TextArea } = Input
 const QBEditModal = ({ open, setOpen, dataList }) => {
     const { data: globalData } = useGetToolsDirectionQuery()
 
+    const navigate = useNavigate()
+
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
-    const [fileList, setFileList] = useState(null)
-    const [deletedId, setDeletedId] = useState([])
-    const [uploadFiles, setUploadFiles] = useState([])
     const [active, setActive] = useState()
+    const [file, setFile] = useState('')
     useEffect(() => {
-        setFileList(null)
-        setDeletedId([])
-        setUploadFiles([])
         setComponentTech(dataList?.technique)
         setRadioId(dataList?.variant?.findIndex((item) => item.is_true))
         setImg(dataList?.question_images.length !== 0 ? dataList?.question_images[0].image : null)
-        setFileList(
-            dataList?.question_files?.map(
-                (item) =>
-                    (item = {
-                        name: decodeURI(item.file).split('/')[5],
-                        uid: item.id,
-                        status: 'done',
-                        url: item.file,
-                    })
-            )
-        )
+        console.log(dataList)
         setActive(dataList?.is_active)
     }, [dataList])
 
@@ -93,14 +82,15 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
     }
     const props2 = {
         beforeUpload: (file) => {
-            setUploadFiles([...uploadFiles, file])
-            setFileList([...fileList, file])
+            setFile(file)
+            const isPDF = file.type === 'application/pdf'
+
+            if (!isPDF) {
+                message.error(`${file.name} не является pdf файлом`)
+                return isPDF || Upload.LIST_IGNORE
+            }
+
             return false
-        },
-        onRemove: (file) => {
-            setDeletedId([...deletedId, file.uid])
-            setFileList(fileList.filter((item) => item.uid !== file.uid))
-            setUploadFiles(uploadFiles.filter((item) => item.uid !== file.uid))
         },
     }
     const children = [
@@ -109,14 +99,6 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
         { value: 'DESCRIBE', label: 'Открытый вопрос' },
     ]
 
-    const defualtFileList = [
-        {
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: `${img}`,
-        },
-    ]
     const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
     const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
     const [postConstructorAnswerQuestion] = usePostConstructorAnswerQuestionMutation()
@@ -127,24 +109,42 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
     const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
     const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
     const [deleteAnswer] = useDeleteConstructorAnswerMutation()
+    const [patchQuestionSoftFile] = usePatchQuestionSoftFileMutation()
+
+    const defualtFileList = [
+        {
+            uid: '-1',
+            name: dataList?.question_files[0]?.file,
+            status: 'done',
+            url: dataList?.question_files[0]?.file,
+        },
+    ]
 
     const onSubmit = (data) => {
+        setOpen(false)
+        navigate('/hard-questions')
         if (data.technique === 'DESCRIBE') {
-            deletedId.forEach((element) => {
-                dataList?.question_files?.forEach((file) => {
-                    if (file.id === element) {
-                        deleteFile(element)
+            if (typeof file === 'object' && dataList?.question_files[0]?.file) {
+                const formData = new FormData()
+                formData.append('file', file)
+                patchQuestionSoftFile({
+                    formData: formData,
+                    id: dataList?.question_files[0].id,
+                }).then((res) => {
+                    console.log('resdsa', res)
+                })
+            } else if (file !== '' && dataList?.question_files?.length === 0) {
+                const formData = new FormData()
+                formData.append('file', file)
+                formData.append('question_id', dataList.id)
+                postConstructorQuestionFile({ formData: formData }).then((res) => {
+                    if (res.error) {
+                        message.error('Файл не корректно загружен')
                     }
                 })
-            })
-            uploadFiles.forEach((item) => {
-                const formData = new FormData()
-                formData.append('file', item)
-                postConstructorQuestionFile({
-                    id: dataList?.id,
-                    formData: formData,
-                })
-            })
+            } else if (dataList?.question_files[0]?.file && typeof file == 'string') {
+                deleteFile(dataList?.question_files[0].id)
+            }
         }
 
         if (typeof img === 'object' && dataList?.question_images.length) {
@@ -209,8 +209,6 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                 message.error(res.error.data.errors[0])
             }
         })
-
-        setOpen(false)
     }
 
     return (
@@ -457,9 +455,10 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                         <Upload
                             //  action="none"
                             {...props2}
-                            multiple={true}
                             labelCol={{ span: 24 }}
-                            fileList={fileList === null ? null : fileList}
+                            defaultFileList={dataList?.question_files[0]?.file && defualtFileList}
+                            multiple={false}
+                            maxCount={1}
                             //  onChange={handleChange}
                         >
                             <Button icon={<UploadOutlined />}>Upload</Button>

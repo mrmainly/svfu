@@ -34,7 +34,8 @@ const QBAddModal = ({ open, setOpen }) => {
     const [variantTrueFalse, setVariantTrueFalse] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
-    const [fileList, setFileList] = useState([])
+    const [file, setFile] = useState('')
+
     const uploadButton = (
         <div>
             <PlusOutlined />
@@ -56,10 +57,17 @@ const QBAddModal = ({ open, setOpen }) => {
     }
     const props2 = {
         beforeUpload: (file) => {
-            setFileList([...fileList, file])
+            const isPDF = file.type === 'application/pdf'
+
+            if (!isPDF) {
+                message.error(`${file.name} не является pdf файлом`)
+                return isPDF || Upload.LIST_IGNORE
+            } else {
+                setFile(file)
+            }
+
             return false
         },
-        fileList,
     }
     const children = [
         { value: 'MULTIPLE_CHOICE', label: 'Вопрос с множественными ответами' },
@@ -106,13 +114,13 @@ const QBAddModal = ({ open, setOpen }) => {
                         })
                     }
                     if (data.technique === 'DESCRIBE') {
-                        fileList.forEach((file) => {
-                            const formData = new FormData()
-                            formData.append('file', file)
-                            postConstructorQuestionFile({
-                                id: res.data.question_id,
-                                formData: formData,
-                            })
+                        const formData = new FormData()
+                        formData.append('file', file)
+                        formData.append('question_id', res.data.question_id)
+                        postConstructorQuestionFile({ formData: formData }).then(() => {
+                            if (rest.error) {
+                                message.error('Файл не корректно загружен')
+                            }
                         })
                     }
                     setOpen(false)

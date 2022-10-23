@@ -39,7 +39,7 @@ export const SoftQuestion = api.injectEndpoints({
                     body: formData,
                 }
             },
-            invalidatesTags: [{ type: 'SoftQuestion' }],
+            invalidatesTags: [{ type: 'SoftQuestion' }, { type: 'ManagerConstructorQuestion' }],
         }),
     }),
 })
