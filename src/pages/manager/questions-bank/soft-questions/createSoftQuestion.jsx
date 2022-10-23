@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import { Input, Form, Select, Radio, Button, Typography, Upload, message } from 'antd'
@@ -10,6 +11,10 @@ import { MyButton } from '../../../../components'
 import ConstructorTableQuestion from './compoents/parts-question/ConstructorTableQuestion'
 import { usePostConstructorSoftQuestionMutation } from '../../../../services/manager/question-bank/SoftQuestion'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
+import {
+    usePostConstructorQuestionFileMutation,
+    usePostConstructorQuestionImageMutation,
+} from '../../../../services/manager/question-bank'
 import ROUTES from '../../../../routes'
 
 const { Option } = Select
@@ -44,6 +49,8 @@ const CreateSoftQuestion = () => {
     const [showTableQuest, setShowTableQuest] = useState(false)
 
     const [postConstructorSoftQuestion] = usePostConstructorSoftQuestionMutation()
+    const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
+    const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
     const { data } = useGetToolsDirectionQuery()
 
     const navigate = useNavigate()
@@ -62,12 +69,13 @@ const CreateSoftQuestion = () => {
 
     const props = {
         beforeUpload: (file) => {
-            setFile(file)
             const isPDF = file.type === 'application/pdf'
 
             if (!isPDF) {
                 message.error(`${file.name} не является pdf файлом`)
                 return isPDF || Upload.LIST_IGNORE
+            } else {
+                setFile(file)
             }
 
             return false
@@ -88,16 +96,41 @@ const CreateSoftQuestion = () => {
     }
 
     const onFinish = (data) => {
+        const { img, ...rest } = data
+
         postConstructorSoftQuestion({
-            body: data,
+            body: { ...rest },
         }).then((res) => {
             if (res.data) {
                 message.success('Вопрос создан')
-                navigate(ROUTES.SOFT_QUESTIONS)
+                console.log(res)
+                if (data.img) {
+                    const formData = new FormData()
+                    formData.append('image', img?.file)
+                    formData.append('question_soft_id', res.data.question_id)
+                    postConstructorQuestionImage({
+                        formData: formData,
+                    }).then((res) => {
+                        if (res.error) {
+                            message.error('Фотография не корректно загружено')
+                        }
+                    })
+                }
+                if (file != '') {
+                    const formData = new FormData()
+                    formData.append('file', file)
+                    formData.append('question_soft_id', res.data.question_id)
+                    postConstructorQuestionFile({ formData: formData }).then(() => {
+                        if (rest.error) {
+                            message.error('Файл не корректно загружен')
+                        }
+                    })
+                }
             } else {
                 message.error('вопрос не создан')
             }
         })
+        console.log(data)
     }
 
     return (

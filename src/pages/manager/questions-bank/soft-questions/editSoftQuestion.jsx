@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Input, Form, Select, Radio, Button, Typography, Upload, message } from 'antd'
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons'
@@ -12,6 +11,11 @@ import {
     useGetSoftQuestionIdQuery,
     usePatchConstructorSoftQuestionMutation,
 } from '../../../../services/manager/question-bank/SoftQuestion'
+import {
+    usePatchConstructorQuestionIdImageMutation,
+    useDeleteConstructorQuestionIdImageMutation,
+    usePostConstructorQuestionImageMutation,
+} from '../../../../services/manager/question-bank'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 import ROUTES from '../../../../routes'
 
@@ -19,19 +23,6 @@ const { Option } = Select
 const { TextArea } = Input
 
 const { Text } = Typography
-
-const props = {
-    beforeUpload: (file) => {
-        const isPNG = file.type === 'image/png' || file.type === 'image/jpeg'
-
-        if (!isPNG) {
-            message.error(`${file.name} не является PNG/JPEG файлом`)
-            return isPNG || Upload.LIST_IGNORE
-        }
-
-        return false
-    },
-}
 
 const uploadButton = (
     <div>
@@ -47,20 +38,28 @@ const EditSoftQuestion = () => {
     const { id } = state
 
     const [variantAnswerShow, setVariantAnswerShow] = useState(false)
+    // eslint-disable-next-line no-unused-vars
     const [file, setFile] = useState('')
     const [showScoringPoints, setShowScoringPoints] = useState(false)
     const [showTableQuest, setShowTableQuest] = useState(false)
+    const [img, setImg] = useState()
 
     const [patchConstructorSoft] = usePatchConstructorSoftQuestionMutation()
+    const [patchConstructorQuestionIdImage] = usePatchConstructorQuestionIdImageMutation()
+    const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
+    const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
+
     const { data: diractionList } = useGetToolsDirectionQuery()
     const { data, isFetching } = useGetSoftQuestionIdQuery({ id: id })
 
     const navigate = useNavigate()
 
     useEffect(() => {
+        console.log(data)
         setVariantAnswerShow(data?.variants ? true : false)
         setShowScoringPoints(data?.hint ? true : false)
         setShowTableQuest(data?.table_quest ? true : false)
+        setImg(data?.question_images?.length === 0 ? null : data?.question_images[0].image)
     }, [data])
 
     const handleShowVariantAnswer = () => {
@@ -73,6 +72,19 @@ const EditSoftQuestion = () => {
 
     const handleShowTableQuestion = () => {
         setShowTableQuest(!showTableQuest)
+    }
+    const propsImg = {
+        beforeUpload: (file) => {
+            setImg(file)
+            const isPNG = file.type === 'image/png' || file.type === 'image/jpeg'
+
+            if (!isPNG) {
+                message.error(`${file.name} не является PNG/JPEG файлом`)
+                return isPNG || Upload.LIST_IGNORE
+            }
+
+            return false
+        },
     }
 
     const props = {
@@ -90,7 +102,7 @@ const EditSoftQuestion = () => {
     }
 
     const onFinish = (data) => {
-        const { table_quest, variants, hint, ...rest } = data
+        const { table_quest, variants, hint, image, ...rest } = data
         patchConstructorSoft({
             body: {
                 table_quest: table_quest ? table_quest : [],
@@ -103,11 +115,64 @@ const EditSoftQuestion = () => {
             if (res.data) {
                 message.success(`Вопрос номер ${id} изменен`)
                 navigate(ROUTES.SOFT_QUESTIONS)
+                if (typeof image === 'object' && data?.question_images.length) {
+                    const formData = new FormData()
+                    formData.append('image', image?.file)
+
+                    patchConstructorQuestionIdImage({
+                        id: data?.question_images[0].id,
+                        formData: formData,
+                    }).then((res) => {
+                        if (res.error) {
+                            message.error('Фотография не корректно загружено')
+                        }
+                    })
+                } else if (data?.question_images.length === 0 && image != null) {
+                    const formData = new FormData()
+                    formData.append('image', image?.file)
+                    formData.append('question_soft_id', res.data.question_id)
+                    postConstructorQuestionImage({
+                        formData: formData,
+                    }).then((res) => {
+                        if (res.error) {
+                            message.error('Фотография не корректно загружено')
+                        }
+                    })
+                } else if (data?.question_images.length !== 0 && typeof img !== 'string') {
+                    deleteImage(data?.question_images[0].id)
+                }
+
+                // if (data.img) {
+                //     const formData = new FormData()
+
+                //     postConstructorQuestionImage({
+                //         formData: formData,
+                //     })
+                // }
+                // if (file != '') {
+                //     const formData = new FormData()
+                //     formData.append('file', file)
+                //     formData.append('question_soft_id', res.data.question_id)
+                //     postConstructorQuestionFile({ formData: formData }).then(() => {
+                //         if (rest.error) {
+                //             message.error('Файл не корректно загружен')
+                //         }
+                //     })
+                // }
             } else {
                 message.error('вопрос не изменен')
             }
         })
     }
+
+    const defualtFileList = [
+        {
+            uid: '-1',
+            name: 'image.png',
+            status: 'done',
+            url: img || data?.question_images[0].image,
+        },
+    ]
 
     if (isFetching) {
         return <div>Loading</div>
@@ -219,7 +284,16 @@ const EditSoftQuestion = () => {
                 )}
 
                 <Form.Item label="Изображение" name="img" style={{ marginTop: 25 }}>
-                    <Upload {...props} listType="picture-card" multiple={false} maxCount={1}>
+                    <Upload
+                        {...propsImg}
+                        listType="picture-card"
+                        multiple={false}
+                        maxCount={1}
+                        onRemove={() => setImg()}
+                        defaultFileList={
+                            data?.question_images?.length === 0 ? null : defualtFileList
+                        }
+                    >
                         {uploadButton}
                     </Upload>
                 </Form.Item>

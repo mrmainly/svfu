@@ -127,6 +127,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
     const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
     const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
     const [deleteAnswer] = useDeleteConstructorAnswerMutation()
+    console.log(img)
     const onSubmit = (data) => {
         if (data.technique === 'DESCRIBE') {
             deletedId.forEach((element) => {
@@ -157,10 +158,13 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
         } else if (dataList?.question_images.length === 0 && img != null) {
             const formData = new FormData()
             formData.append('image', img)
-
+            formData.append('question_id', dataList?.id)
             postConstructorQuestionImage({
-                id: dataList?.id,
                 formData: formData,
+            }).then((res) => {
+                if (res.error) {
+                    message.error('Фотография не корректно загружено')
+                }
             })
         } else if (dataList?.question_images.length !== 0 && typeof img !== 'string') {
             deleteImage(dataList?.question_images[0].id)
@@ -208,6 +212,8 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
 
         setOpen(false)
     }
+
+    console.log(dataList)
 
     return (
         <div>

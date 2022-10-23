@@ -122,7 +122,7 @@ const CreateSoftTest = ({ setOpen }) => {
                                         }}
                                     >
                                         <Select placeholder="Выберите квалификацию">
-                                            {softQuestionList.results?.map((item, index) => (
+                                            {softQuestionList?.results?.map((item, index) => (
                                                 <Option key={index} value={item.id}>
                                                     {item.name}
                                                 </Option>

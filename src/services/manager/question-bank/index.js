@@ -8,9 +8,9 @@ export const QuestionsBank = api.injectEndpoints({
             providesTags: ['ManagerConstructorQuestion'],
         }),
         postConstructorQuestionImage: build.mutation({
-            query({ id, formData }) {
+            query({ formData }) {
                 return {
-                    url: `constructor/question/image/${id}`,
+                    url: 'constructor/question/image/',
                     method: 'POST',
                     body: formData,
                 }
@@ -18,9 +18,9 @@ export const QuestionsBank = api.injectEndpoints({
             invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
         }),
         postConstructorQuestionFile: build.mutation({
-            query({ id, formData }) {
+            query({ formData }) {
                 return {
-                    url: `constructor/question/file/${id}`,
+                    url: `constructor/question/file/`,
                     method: 'POST',
                     body: formData,
                 }
