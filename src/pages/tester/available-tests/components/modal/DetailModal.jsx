@@ -37,11 +37,18 @@ const TestDetail = ({ open, handleClose, ID }) => {
         },
     ]
 
+    console.log(data)
+
     const patchSurvey = () => {
         surveyPatch({ id: data.id }).then((res) => {
             if (res.data) {
                 navigate(ROUTES.TESTER_SURVEY_PART, {
-                    state: { surveyquest: data.surveyquest, id: data.id },
+                    state: {
+                        surveyquest: data.surveyquest,
+                        id: data.id,
+                        unit_type: data.unit_type,
+                        softquestions: data.softquestions,
+                    },
                 })
             } else {
                 message.error('Вы уже прошли тестирование')
@@ -62,7 +69,12 @@ const TestDetail = ({ open, handleClose, ID }) => {
                         onClick={() =>
                             data?.survey_status === 'IN_PROGRESS'
                                 ? navigate(ROUTES.TESTER_SURVEY_PART, {
-                                      state: { surveyquest: data.surveyquest, id: data.id },
+                                      state: {
+                                          surveyquest: data.surveyquest,
+                                          id: data.id,
+                                          unit_type: data.unit_type,
+                                          softquestions: data.softquestions,
+                                      },
                                   })
                                 : patchSurvey()
                         }

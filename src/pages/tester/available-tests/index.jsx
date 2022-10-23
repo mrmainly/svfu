@@ -23,7 +23,6 @@ const Test = () => {
     useEffect(() => {
         setTotalPage(data?.count)
     }, [data])
-
     const orderSelect = [
         {
             text: 'Без сортировки',
