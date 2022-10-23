@@ -15,7 +15,7 @@ export const QuestionsBank = api.injectEndpoints({
                     body: formData,
                 }
             },
-            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }, { type: 'SoftQuestion' }],
         }),
         postConstructorQuestionFile: build.mutation({
             query({ formData }) {
@@ -25,7 +25,7 @@ export const QuestionsBank = api.injectEndpoints({
                     body: formData,
                 }
             },
-            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }, { type: 'SoftQuestion' }],
         }),
         patchConstructorQuestionIdImage: build.mutation({
             query({ id, formData }) {
@@ -35,7 +35,7 @@ export const QuestionsBank = api.injectEndpoints({
                     body: formData,
                 }
             },
-            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }, { type: 'SoftQuestion' }],
         }),
         deleteConstructorQuestionIdFile: build.mutation({
             query(id) {
@@ -44,7 +44,7 @@ export const QuestionsBank = api.injectEndpoints({
                     method: 'DELETE',
                 }
             },
-            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }, { type: 'SoftQuestion' }],
         }),
         deleteConstructorQuestionIdImage: build.mutation({
             query(id) {
@@ -53,7 +53,7 @@ export const QuestionsBank = api.injectEndpoints({
                     method: 'DELETE',
                 }
             },
-            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }, { type: 'SoftQuestion' }],
         }),
     }),
 })

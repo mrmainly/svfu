@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react'
-import { Input, Form, Select, Radio, Button, Typography, Upload, message } from 'antd'
+import { Input, Form, Select, Radio, Button, Typography, Upload, message, Spin } from 'antd'
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons'
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -10,11 +12,14 @@ import ConstructorTableQuestion from './compoents/parts-question/ConstructorTabl
 import {
     useGetSoftQuestionIdQuery,
     usePatchConstructorSoftQuestionMutation,
+    usePatchQuestionSoftFileMutation,
 } from '../../../../services/manager/question-bank/SoftQuestion'
 import {
     usePatchConstructorQuestionIdImageMutation,
     useDeleteConstructorQuestionIdImageMutation,
     usePostConstructorQuestionImageMutation,
+    usePostConstructorQuestionFileMutation,
+    useDeleteConstructorQuestionIdFileMutation,
 } from '../../../../services/manager/question-bank'
 import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
 import ROUTES from '../../../../routes'
@@ -42,12 +47,15 @@ const EditSoftQuestion = () => {
     const [file, setFile] = useState('')
     const [showScoringPoints, setShowScoringPoints] = useState(false)
     const [showTableQuest, setShowTableQuest] = useState(false)
-    const [img, setImg] = useState()
+    const [img, setImg] = useState(null)
 
     const [patchConstructorSoft] = usePatchConstructorSoftQuestionMutation()
     const [patchConstructorQuestionIdImage] = usePatchConstructorQuestionIdImageMutation()
     const [postConstructorQuestionImage] = usePostConstructorQuestionImageMutation()
     const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
+    const [patchQuestionSoftFile] = usePatchQuestionSoftFileMutation()
+    const [postConstructorQuestionFile] = usePostConstructorQuestionFileMutation()
+    const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
 
     const { data: diractionList } = useGetToolsDirectionQuery()
     const { data, isFetching } = useGetSoftQuestionIdQuery({ id: id })
@@ -55,7 +63,6 @@ const EditSoftQuestion = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(data)
         setVariantAnswerShow(data?.variants ? true : false)
         setShowScoringPoints(data?.hint ? true : false)
         setShowTableQuest(data?.table_quest ? true : false)
@@ -101,8 +108,42 @@ const EditSoftQuestion = () => {
         },
     }
 
-    const onFinish = (data) => {
-        const { table_quest, variants, hint, image, ...rest } = data
+    const defualtImgList = [
+        {
+            uid: '-1',
+            name: img || data?.question_images[0]?.image,
+            status: 'done',
+            url: img || data?.question_images[0]?.image,
+        },
+    ]
+    const defualtFileList = [
+        {
+            uid: '-1',
+            name: file != '' || data?.question_files[0]?.file,
+            status: 'done',
+            url: file != '' || data?.question_files[0]?.file,
+        },
+    ]
+
+    console.log(data)
+
+    if (isFetching) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    paddingTop: 150,
+                    height: '100rem',
+                }}
+            >
+                <Spin />
+            </div>
+        )
+    }
+
+    const onFinish = (formSoftData) => {
+        const { table_quest, variants, hint, image, ...rest } = formSoftData
         patchConstructorSoft({
             body: {
                 table_quest: table_quest ? table_quest : [],
@@ -115,9 +156,9 @@ const EditSoftQuestion = () => {
             if (res.data) {
                 message.success(`Вопрос номер ${id} изменен`)
                 navigate(ROUTES.SOFT_QUESTIONS)
-                if (typeof image === 'object' && data?.question_images.length) {
+                if (typeof img === 'object' && data?.question_images[0]?.image) {
                     const formData = new FormData()
-                    formData.append('image', image?.file)
+                    formData.append('image', img)
 
                     patchConstructorQuestionIdImage({
                         id: data?.question_images[0].id,
@@ -127,10 +168,10 @@ const EditSoftQuestion = () => {
                             message.error('Фотография не корректно загружено')
                         }
                     })
-                } else if (data?.question_images.length === 0 && image != null) {
+                } else if (data?.question_images?.length === 0 && img !== null) {
                     const formData = new FormData()
-                    formData.append('image', image?.file)
-                    formData.append('question_soft_id', res.data.question_id)
+                    formData.append('image', img)
+                    formData.append('question_soft_id', data.id)
                     postConstructorQuestionImage({
                         formData: formData,
                     }).then((res) => {
@@ -138,44 +179,34 @@ const EditSoftQuestion = () => {
                             message.error('Фотография не корректно загружено')
                         }
                     })
-                } else if (data?.question_images.length !== 0 && typeof img !== 'string') {
+                } else if (data?.question_images[0]?.image && typeof img !== 'string') {
                     deleteImage(data?.question_images[0].id)
                 }
-
-                // if (data.img) {
-                //     const formData = new FormData()
-
-                //     postConstructorQuestionImage({
-                //         formData: formData,
-                //     })
-                // }
-                // if (file != '') {
-                //     const formData = new FormData()
-                //     formData.append('file', file)
-                //     formData.append('question_soft_id', res.data.question_id)
-                //     postConstructorQuestionFile({ formData: formData }).then(() => {
-                //         if (rest.error) {
-                //             message.error('Файл не корректно загружен')
-                //         }
-                //     })
-                // }
+                if (typeof file === 'object' && data?.question_files[0]?.file) {
+                    const formData = new FormData()
+                    formData.append('file', file)
+                    patchQuestionSoftFile({
+                        formData: formData,
+                        id: data?.question_files[0].id,
+                    }).then((res) => {
+                        console.log('resdsa', res)
+                    })
+                } else if (file !== '' && data?.question_files?.length === 0) {
+                    const formData = new FormData()
+                    formData.append('file', file)
+                    formData.append('question_soft_id', data.id)
+                    postConstructorQuestionFile({ formData: formData }).then(() => {
+                        if (rest.error) {
+                            message.error('Файл не корректно загружен')
+                        }
+                    })
+                } else if (data?.question_files[0]?.file && typeof file == 'string') {
+                    deleteFile(data?.question_files[0].id)
+                }
             } else {
                 message.error('вопрос не изменен')
             }
         })
-    }
-
-    const defualtFileList = [
-        {
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: img || data?.question_images[0].image,
-        },
-    ]
-
-    if (isFetching) {
-        return <div>Loading</div>
     }
 
     return (
@@ -291,7 +322,7 @@ const EditSoftQuestion = () => {
                         maxCount={1}
                         onRemove={() => setImg()}
                         defaultFileList={
-                            data?.question_images?.length === 0 ? null : defualtFileList
+                            data?.question_images?.length === 0 ? null : defualtImgList
                         }
                     >
                         {uploadButton}
@@ -306,6 +337,9 @@ const EditSoftQuestion = () => {
                         maxCount={1}
                         labelCol={{ span: 24 }}
                         accept=".pdf"
+                        defaultFileList={
+                            data?.question_files?.length === 0 ? null : defualtFileList
+                        }
                     >
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>

@@ -89,7 +89,25 @@ export const pathname = (params) => {
         case ROUTES.HARD_QUESTIONS:
             return 'Hard вопросы'
         case ROUTES.EDIT_SOFT_QUESTION:
-            return 'Редактирование soft вопрсов'
+            return (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'start',
+                        alignItems: 'center',
+                        marginBottom: '10px',
+                    }}
+                >
+                    <BsArrowLeft
+                        style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
+                        onClick={() => {
+                            navigate(-1)
+                        }}
+                    />
+                    <span>Редактирование soft вопрсов</span>
+                </div>
+            )
         default:
             new Error()
     }

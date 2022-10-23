@@ -31,7 +31,6 @@ const SoftQuestions = () => {
     }
     useEffect(() => {
         setTotalPage(data?.count)
-        console.log(data)
     }, [data])
 
     return (

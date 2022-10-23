@@ -31,6 +31,16 @@ export const SoftQuestion = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'SoftQuestion' }],
         }),
+        patchQuestionSoftFile: build.mutation({
+            query({ formData, id }) {
+                return {
+                    url: `constructor/question/${id}/file/`,
+                    method: 'PATCH',
+                    body: formData,
+                }
+            },
+            invalidatesTags: [{ type: 'SoftQuestion' }],
+        }),
     }),
 })
 
@@ -39,4 +49,5 @@ export const {
     usePostConstructorSoftQuestionMutation,
     useGetSoftQuestionIdQuery,
     usePatchConstructorSoftQuestionMutation,
+    usePatchQuestionSoftFileMutation,
 } = SoftQuestion

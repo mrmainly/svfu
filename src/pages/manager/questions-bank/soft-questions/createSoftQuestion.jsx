@@ -130,8 +130,9 @@ const CreateSoftQuestion = () => {
                 message.error('вопрос не создан')
             }
         })
-        console.log(data)
     }
+
+    console.log(file)
 
     return (
         <div>
