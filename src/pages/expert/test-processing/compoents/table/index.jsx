@@ -9,7 +9,6 @@ import { statusChoices } from '../../../../../constants'
 
 const TestProcessingTable = ({ data, loading, setOrdering }) => {
     const [putMainExpert] = usePutMainExpertMutation()
-    console.log(data)
     const navigate = useNavigate()
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
@@ -35,11 +34,6 @@ const TestProcessingTable = ({ data, loading, setOrdering }) => {
         },
         {
             title: 'Название тестирования',
-            dataIndex: 'direction',
-            key: 'direction',
-        },
-        {
-            title: 'Тип',
             dataIndex: 'direction',
             key: 'direction',
         },

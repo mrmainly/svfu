@@ -39,6 +39,18 @@ export const Surveys = api.injectEndpoints({
             invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
 
+        //отправление ответов в софт тесте
+        postResultSoft: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `tester/survey/soft/${id}`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
+        }),
+
         //практическая часть
         getPracticalPartId: build.query({
             query: ({ id }) => `tester/survey/part-two/${id}`,
@@ -62,6 +74,7 @@ export const {
     useGetSurveyPartOneIdQuery,
     usePatchSurveyPartOneMutation,
     usePostResultPartOneMutation,
+    usePostResultSoftMutation,
     useGetPracticalPartIdQuery,
     usePostPracticalPartMutation,
 } = Surveys

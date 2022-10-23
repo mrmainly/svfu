@@ -12,77 +12,77 @@ const { Text, Title } = Typography
 const SoftTestExMo = ({ surveyquest }) => {
     console.log('survey', surveyquest)
     const { arrayIndex } = useSelector((state) => state.survey_slice)
-    const columns = [
-        {
-            title: 'Вариант ответа',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'Правильный вариант',
-            dataIndex: 'is_true',
-            key: 'is_true',
-            fixed: 'right',
-            render: (is_true) => (is_true === true ? 'Да' : 'Нет'),
-        },
-        {
-            title: 'Ответ аттестуемого',
-            dataIndex: 'answer',
-            key: 'answer',
-            fixed: 'right',
-            render: (name, record) => {
-                const answer = surveyquest?.answers_first_part?.map((itemAnswer) => {
-                    if (itemAnswer.answer_id === record.id) {
-                        return true
-                    }
-                })
-                if (!answer) {
-                    return '-'
-                } else {
-                    return <Text>Ответил</Text>
-                }
-            },
-        },
-    ]
-    const pointColumns = [
-        {
-            title: 'Критерий оценки',
-            dataIndex: 'condition',
-            key: 'condition',
-        },
-        {
-            title: 'Балл',
-            dataIndex: 'point',
-            key: 'point',
-        },
-    ]
-    const data = [
-        {
-            condition:
-                'Описание конкретной ситуации. Подробное конкретное описание проведенной работы, включая свои действия и слова. Действия и слова носят мотивирующий характер, побуждающий к действиям и вере в достижение результата. ',
-            point: 3,
-        },
-        {
-            condition:
-                'Общее описание ситуации. Описание проведенной работы, включая свои действия и слова. Действия и слова носят мотивирующий характер, побуждающий к действиям и вере в достижение результата.',
-            point: 2,
-        },
-        {
-            condition:
-                'Общее описание  ситуации. Схематичное описание проведенной работы, включая свои действия и слова. Действия и слова не носят мотивирующий характер, побуждающий к действиям и вере в достижение результата.',
-            point: 1,
-        },
-        {
-            condition:
-                'Общее описание  ситуации. Схематичное описание проведенной работы, без описания конкретных дейсвий и слов. ',
-            point: 0,
-        },
-    ]
+    // const columns = [
+    //     {
+    //         title: 'Вариант ответа',
+    //         dataIndex: 'name',
+    //         key: 'name',
+    //     },
+    //     {
+    //         title: 'Правильный вариант',
+    //         dataIndex: 'is_true',
+    //         key: 'is_true',
+    //         fixed: 'right',
+    //         render: (is_true) => (is_true === true ? 'Да' : 'Нет'),
+    //     },
+    //     {
+    //         title: 'Ответ аттестуемого',
+    //         dataIndex: 'answer',
+    //         key: 'answer',
+    //         fixed: 'right',
+    //         render: (name, record) => {
+    //             const answer = surveyquest?.answers_first_part?.map((itemAnswer) => {
+    //                 if (itemAnswer.answer_id === record.id) {
+    //                     return true
+    //                 }
+    //             })
+    //             if (!answer) {
+    //                 return '-'
+    //             } else {
+    //                 return <Text>Ответил</Text>
+    //             }
+    //         },
+    //     },
+    // ]
+    // const pointColumns = [
+    //     {
+    //         title: 'Критерий оценки',
+    //         dataIndex: 'condition',
+    //         key: 'condition',
+    //     },
+    //     {
+    //         title: 'Балл',
+    //         dataIndex: 'point',
+    //         key: 'point',
+    //     },
+    // ]
+    // const data = [
+    //     {
+    //         condition:
+    //             'Описание конкретной ситуации. Подробное конкретное описание проведенной работы, включая свои действия и слова. Действия и слова носят мотивирующий характер, побуждающий к действиям и вере в достижение результата. ',
+    //         point: 3,
+    //     },
+    //     {
+    //         condition:
+    //             'Общее описание ситуации. Описание проведенной работы, включая свои действия и слова. Действия и слова носят мотивирующий характер, побуждающий к действиям и вере в достижение результата.',
+    //         point: 2,
+    //     },
+    //     {
+    //         condition:
+    //             'Общее описание  ситуации. Схематичное описание проведенной работы, включая свои действия и слова. Действия и слова не носят мотивирующий характер, побуждающий к действиям и вере в достижение результата.',
+    //         point: 1,
+    //     },
+    //     {
+    //         condition:
+    //             'Общее описание  ситуации. Схематичное описание проведенной работы, без описания конкретных дейсвий и слов. ',
+    //         point: 0,
+    //     },
+    // ]
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {surveyquest?.survey?.surveyquest?.length &&
-                    surveyquest?.survey?.surveyquest.map((item, index) => (
+                {surveyquest?.survey?.softquestions?.length &&
+                    surveyquest?.survey?.softquestions?.map((item, index) => (
                         <div
                             key={index}
                             style={{
@@ -92,12 +92,12 @@ const SoftTestExMo = ({ surveyquest }) => {
                         >
                             <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
                             <Text style={{ marginTop: 20, fontWeight: 'bold' }}>Описание</Text>
-                            <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
+                            <Text style={{ marginTop: 12 }}>{item.description}</Text>
                             <Text style={{ marginTop: 20, fontWeight: 'bold' }}>Задание</Text>
+                            <Text style={{ marginTop: 12 }}>{item.name}</Text>
                             <Image />
-                            <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
 
-                            <Table
+                            {/* <Table
                                 columns={columns}
                                 dataSource={item.question.variant}
                                 pagination={false}
@@ -110,7 +110,7 @@ const SoftTestExMo = ({ surveyquest }) => {
                                 title={() => (
                                     <Text style={{ fontWeight: 'bold' }}>Шкала оценки</Text>
                                 )}
-                            />
+                            /> */}
 
                             <div
                                 style={{

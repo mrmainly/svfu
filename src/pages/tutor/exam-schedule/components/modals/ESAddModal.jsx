@@ -113,7 +113,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         >
                             {dataUnit?.results.map((item, index) => (
                                 <Option key={index} value={item.id}>
-                                    {item.name}
+                                    {item.name}({item.unit_type})
                                 </Option>
                             ))}
                         </Select>

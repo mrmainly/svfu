@@ -6,14 +6,16 @@ import { MyButton } from '../../../../../components'
 
 import {
     usePostResultPartOneMutation,
+    usePostResultSoftMutation,
     useGetPracticalPartIdQuery,
     usePostPracticalPartMutation,
 } from '../../../../../services/tester/Surveys'
 
 import ROUTES from '../../../../../routes'
 
-const TimeIsUpModal = ({ open, setOpen, id }) => {
+const TimeIsUpModal = ({ open, setOpen, id, unit_type }) => {
     const [postResultPartOne] = usePostResultPartOneMutation()
+    const [postResultSoft] = usePostResultSoftMutation()
     const [practicalPartPost] = usePostPracticalPartMutation()
 
     const { data: practical_data } = useGetPracticalPartIdQuery({ id: id })
@@ -21,12 +23,17 @@ const TimeIsUpModal = ({ open, setOpen, id }) => {
     const navigate = useNavigate()
 
     const onFinishSubmit = () => {
-        const formData = new FormData()
-        formData.append('q_id', practical_data?.surveyquest[0]?.question.id)
-        formData.append('describe', '')
-        postResultPartOne({ body: { answers: [] }, id: id })
-        practicalPartPost({ body: formData, id: id })
-        navigate(ROUTES.AVAILABLE_TESTS)
+        if (unit_type === 'HARD') {
+            const formData = new FormData()
+            formData.append('q_id', practical_data?.surveyquest[0]?.question.id)
+            formData.append('describe', '')
+            postResultPartOne({ body: { answers: [] }, id: id })
+            practicalPartPost({ body: formData, id: id })
+            navigate(ROUTES.AVAILABLE_TESTS)
+        } else {
+            postResultSoft({ body: { answers: [] }, id: id })
+            navigate(ROUTES.AVAILABLE_TESTS)
+        }
     }
 
     const handleClose = () => {
@@ -55,6 +62,7 @@ TimeIsUpModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
     id: PropTypes.number,
+    unit_type: PropTypes.string,
 }
 
 export default TimeIsUpModal
