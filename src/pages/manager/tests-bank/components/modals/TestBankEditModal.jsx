@@ -33,9 +33,9 @@ const TBEditModal = ({ open, setOpen, dataList }) => {
                 ]}
             >
                 {dataList[0]?.unit_type === 'SOFT' ? (
-                    <EditSoftTest getData={dataList[0]} />
+                    <EditSoftTest getData={dataList[0]} setOpen={setOpen} />
                 ) : (
-                    <EditHardTest dataList={dataList} />
+                    <EditHardTest dataList={dataList} setOpen={setOpen} />
                 )}
             </Modal>
         </div>

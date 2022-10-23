@@ -30,7 +30,7 @@ const { Option } = Select
 const { TextArea } = Input
 const QBAddModal = ({ open, setOpen }) => {
     const { data } = useGetToolsDirectionQuery()
-    const [img, setImg] = useState()
+    const [img, setImg] = useState('')
     const [variantTrueFalse, setVariantTrueFalse] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
@@ -41,8 +41,9 @@ const QBAddModal = ({ open, setOpen }) => {
             <div style={{ marginTop: 8 }}>Upload</div>
         </div>
     )
-    const props = {
+    const propsImg = {
         beforeUpload: (file) => {
+            setImg(file)
             const isPNG = file.type === 'image/png' || file.type === 'image/jpeg'
 
             if (!isPNG) {
@@ -91,13 +92,17 @@ const QBAddModal = ({ open, setOpen }) => {
             postConstructorQuestion(data).then((res) => {
                 if (res.data) {
                     message.success('Вопрос создан')
-                    if (img) {
+                    if (img != '') {
                         const formData = new FormData()
                         formData.append('image', img)
-
+                        formData.append('question_id', res.data.question_id)
                         postConstructorQuestionImage({
-                            id: res.data.question_id,
                             formData: formData,
+                        }).then((res) => {
+                            console.log(res)
+                            if (res.error) {
+                                message.error('Фотография не корректно загружено')
+                            }
                         })
                     }
                     if (data.technique === 'DESCRIBE') {
@@ -194,7 +199,7 @@ const QBAddModal = ({ open, setOpen }) => {
                     </Form.Item>
                     <Form.Item label="Изображение">
                         <Upload
-                            {...props}
+                            {...propsImg}
                             listType="picture-card"
                             multiple={false}
                             maxCount={1}

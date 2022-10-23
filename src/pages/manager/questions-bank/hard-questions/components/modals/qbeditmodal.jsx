@@ -127,7 +127,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
     const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
     const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
     const [deleteAnswer] = useDeleteConstructorAnswerMutation()
-    console.log(img)
+
     const onSubmit = (data) => {
         if (data.technique === 'DESCRIBE') {
             deletedId.forEach((element) => {
@@ -212,8 +212,6 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
 
         setOpen(false)
     }
-
-    console.log(dataList)
 
     return (
         <div>

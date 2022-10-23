@@ -103,7 +103,7 @@ const CreateSoftQuestion = () => {
         }).then((res) => {
             if (res.data) {
                 message.success('Вопрос создан')
-                console.log(res)
+                navigate(ROUTES.SOFT_QUESTIONS)
                 if (data.img) {
                     const formData = new FormData()
                     formData.append('image', img?.file)
