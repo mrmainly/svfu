@@ -54,20 +54,6 @@ const SoftQuestionTable = ({ data, loading, setId }) => {
                     .join(', '),
         },
         {
-            title: 'Сложность',
-            dataIndex: 'difficulty',
-            key: 'difficulty',
-
-            render: (difficulty) =>
-                difficulty === 'BEGINNER'
-                    ? 'Легкий'
-                    : difficulty === 'ADVANCED'
-                    ? 'Средний'
-                    : difficulty === 'EXPERT'
-                    ? 'Сложный'
-                    : 'Открытый',
-        },
-        {
             title: 'Статус',
             dataIndex: 'is_active',
             key: 'is_active',
