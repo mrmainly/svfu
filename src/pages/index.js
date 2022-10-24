@@ -37,6 +37,7 @@ const AttestedAppeal = lazy(() => import('./moderator/attested-appeal'))
 const SurveyPartsExpert = lazy(() => import('./expert/survey/surveyParts'))
 const SurveyPartsExpertSoft = lazy(() => import('./expert/survey/surveyPartsSoft'))
 const SurveyPartsModerator = lazy(() => import('./moderator/survey/surveyParts'))
+const SurveyPartsModeratorSoft = lazy(() => import('./moderator/survey/surveyPartsSoft'))
 const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
 const TagsList = lazy(() => import('./manager/attestations-qualification/tagsList'))
 const CreateSoftQuestion = lazy(() =>
@@ -84,6 +85,7 @@ export {
     SurveyPartsExpert,
     SurveyPartsExpertSoft,
     SurveyPartsModerator,
+    SurveyPartsModeratorSoft,
     ModeratorAppeal,
     TagsList,
     CreateSoftQuestion,

@@ -13,8 +13,9 @@ const { setSoftAnswerExpert } = SurveysSlice.actions
 const { Text, Title } = Typography
 
 const SoftTestExMo = ({ surveyquest }) => {
+    const role = JSON.parse(localStorage.getItem('role'))
     const dispatch = useDispatch()
-
+    console.log(role)
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const columns = [
         {
@@ -231,26 +232,69 @@ const SoftTestExMo = ({ surveyquest }) => {
                                         marginBottom: 20,
                                     }}
                                 />
-
-                                <Form.Item
-                                    name={[index, 'q_id']}
-                                    initialValue={item.id}
-                                    style={{ display: 'none' }}
-                                ></Form.Item>
-                                <Form.Item
-                                    label={<Text style={{ fontWeight: 'bold' }}>Оценка</Text>}
-                                    name={[index, 'score']}
-                                    initialValue={0}
-                                >
-                                    <InputNumber size="small" min={0} />
-                                </Form.Item>
-                                <Form.Item
-                                    label={<Text style={{ fontWeight: 'bold' }}>Ревью</Text>}
-                                    name={[index, 'comment']}
-                                    initialValue={''}
-                                >
-                                    <Input.TextArea />
-                                </Form.Item>
+                                {role === 'MODERATOR' &&
+                                surveyquest?.status_result !== 'CHECKED_BY_MAIN_MODERATOR' ? (
+                                    <div>
+                                        <div style={{ marginTop: 20 }}>
+                                            <Text style={{ fontWeight: 'bold' }}>
+                                                Балл председателя экспертов:{' '}
+                                            </Text>
+                                            {surveyquest?.main_expert_review_soft_part?.map(
+                                                (itemAnswer, index) => {
+                                                    if (parseInt(itemAnswer.q_id) === item.id)
+                                                        return (
+                                                            <Text key={index}>
+                                                                {itemAnswer.score}
+                                                            </Text>
+                                                        )
+                                                }
+                                            )}
+                                        </div>
+                                        <div style={{ marginTop: 20 }}>
+                                            <Text style={{ fontWeight: 'bold' }}>
+                                                Комментарий председателя экспертов:{' '}
+                                            </Text>
+                                            {surveyquest?.main_expert_review_soft_part?.map(
+                                                (itemAnswer, index) => {
+                                                    if (parseInt(itemAnswer.q_id) === item.id)
+                                                        return (
+                                                            <Text key={index}>
+                                                                {itemAnswer.comment}
+                                                            </Text>
+                                                        )
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                ) : role === 'EXPERT' ? (
+                                    <div>
+                                        <Form.Item
+                                            name={[index, 'q_id']}
+                                            initialValue={item.id}
+                                            style={{ display: 'none' }}
+                                        ></Form.Item>
+                                        <Form.Item
+                                            label={
+                                                <Text style={{ fontWeight: 'bold' }}>Оценка</Text>
+                                            }
+                                            name={[index, 'score']}
+                                            initialValue={0}
+                                        >
+                                            <InputNumber size="small" min={0} />
+                                        </Form.Item>
+                                        <Form.Item
+                                            label={
+                                                <Text style={{ fontWeight: 'bold' }}>Ревью</Text>
+                                            }
+                                            name={[index, 'comment']}
+                                            initialValue={''}
+                                        >
+                                            <Input.TextArea />
+                                        </Form.Item>
+                                    </div>
+                                ) : (
+                                    <></>
+                                )}
 
                                 <Line />
                                 <ActionButton
@@ -267,6 +311,7 @@ const SoftTestExMo = ({ surveyquest }) => {
 
 SoftTestExMo.propTypes = {
     surveyquest: PropTypes.object,
+    role: PropTypes.string,
 }
 
 export default SoftTestExMo

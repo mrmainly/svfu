@@ -65,6 +65,7 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
             },
         },
     ]
+    console.log('dsad', surveyquest)
     return (
         <Modal
             title="Заключение"
@@ -112,45 +113,90 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
                 />
             )}
             <div style={{ opacity: isLoading ? 0.5 : 1 }}>
-                {info.map((item, index) => (
-                    <div key={index}>
-                        <Typography.Text
-                            style={{
-                                marginBottom: '16px',
-                                fontFamily: 'Roboto',
-                                fontWeight: '400',
-                                fontStyle: 'italic',
-                                fontSize: '18px',
-                                lineHeight: '27px',
-                            }}
-                        >
-                            {item.title}
-                        </Typography.Text>
-                        <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                {surveyquest?.survey?.survey_status === 'HARD' ? (
+                    info.map((item, index) => (
+                        <div key={index}>
                             <Typography.Text
                                 style={{
-                                    width: '120px',
+                                    marginBottom: '16px',
                                     fontFamily: 'Roboto',
-                                    fontWeight: '500',
-                                    fontSize: '16px',
-                                    lineHeight: '24px',
+                                    fontWeight: '400',
+                                    fontStyle: 'italic',
+                                    fontSize: '18px',
+                                    lineHeight: '27px',
                                 }}
                             >
-                                {item.recomendation.name}
+                                {item.title}
                             </Typography.Text>
-                            <Typography.Text
-                                style={{
-                                    fontFamily: 'Roboto',
-                                    fontWeight: '500',
-                                    fontSize: '16px',
-                                    lineHeight: '24px',
-                                }}
-                            >
-                                {item.recomendation.label}
-                            </Typography.Text>
+                            <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                                <Typography.Text
+                                    style={{
+                                        width: '120px',
+                                        fontFamily: 'Roboto',
+                                        fontWeight: '500',
+                                        fontSize: '16px',
+                                        lineHeight: '24px',
+                                    }}
+                                >
+                                    {item.recomendation.name}
+                                </Typography.Text>
+                                <Typography.Text
+                                    style={{
+                                        fontFamily: 'Roboto',
+                                        fontWeight: '500',
+                                        fontSize: '16px',
+                                        lineHeight: '24px',
+                                    }}
+                                >
+                                    {item.recomendation.label}
+                                </Typography.Text>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : surveyquest?.status_result !== 'CHECKED_BY_MAIN_MODERATOR' ? (
+                    <>
+                        {' '}
+                        <div>
+                            <Typography.Text
+                                style={{
+                                    marginBottom: '16px',
+                                    fontFamily: 'Roboto',
+                                    fontWeight: '400',
+                                    fontStyle: 'italic',
+                                    fontSize: '18px',
+                                    lineHeight: '27px',
+                                }}
+                            >
+                                Заключение председателя экспертов по тесту
+                            </Typography.Text>
+                            <div style={{ display: 'flex', marginBottom: '8px' }}>
+                                <Typography.Text
+                                    style={{
+                                        width: '120px',
+                                        fontFamily: 'Roboto',
+                                        fontWeight: '500',
+                                        fontSize: '16px',
+                                        lineHeight: '24px',
+                                    }}
+                                >
+                                    Рекомендация:
+                                </Typography.Text>
+                                <Typography.Text
+                                    style={{
+                                        fontFamily: 'Roboto',
+                                        fontWeight: '500',
+                                        fontSize: '16px',
+                                        lineHeight: '24px',
+                                    }}
+                                >
+                                    {surveyquest?.main_expert_review_first_part}
+                                </Typography.Text>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <></>
+                )}
                 {surveyquest?.main_moderator && (
                     <div style={{ marginTop: '8px' }}>
                         <Typography
@@ -176,7 +222,6 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
                             ))}
                     </div>
                 )}
-
                 <Divider />
                 <Form id="form-moderator-theoretical-part" onFinish={onFinishSubmit}>
                     <Form.Item required label="Аттестация" labelCol={{ span: 24 }} name="estimate">

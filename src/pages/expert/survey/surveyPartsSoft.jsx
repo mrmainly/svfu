@@ -52,7 +52,11 @@ const SurveyPartsSoft = () => {
                 expert_review={surveyquest?.expert_review}
                 main_expert={surveyquest.main_expert}
             />
-            <VerificationSubscribeModal id={id} main_expert={surveyquest?.main_expert} />
+            <VerificationSubscribeModal
+                id={id}
+                main_expert={surveyquest?.main_expert}
+                unit_type={surveyquest?.survey?.unit_type}
+            />
 
             <SoftTestExMo surveyquest={surveyquest} />
         </div>

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../../reducers/SurveysSlice'
 import { useSendSubscribeExpertMutation } from '../../../../../services/expert/Surveys'
-import ExpertReviewCard from '../cards/expert_review_card'
+import ExpertSoftReviewCard from '../cards/expert_soft_review_card'
 
 const { TextArea } = Input
 
@@ -99,11 +99,10 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
                     <div style={{ marginBottom: 20 }}>
                         {expert_review.length &&
                             expert_review.map((item, index) => (
-                                <ExpertReviewCard
+                                <ExpertSoftReviewCard
                                     key={index}
                                     expert_name={item.user}
                                     recommendationPartOne={item.conclusion_first_part}
-                                    recommendationPartTwo={item.conclusion_second_part}
                                     id={item.user_id}
                                 />
                             ))}
@@ -111,27 +110,11 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
                 )}
 
                 <Form id="form-expert-soft" onFinish={onFinishSubmit}>
-                    <Form.Item>Сумма баллов за тест: {main_score}</Form.Item>
                     <Form.Item
                         required
-                        label={main_expert ? 'Рекомендация тесту' : 'Заключение по тесту'}
+                        label={main_expert ? 'Рекомендация к тесту' : 'Заключение по тесту'}
                         labelCol={{ span: 24 }}
                         name="conclusion_first_part"
-                    >
-                        <TextArea
-                            placeholder={
-                                main_expert
-                                    ? 'Рекомендация к тесту'
-                                    : 'Введите заключение по практической части'
-                            }
-                            style={{ height: 150 }}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        required
-                        label={main_expert ? 'Рекомендация тесту' : 'Заключение тесту'}
-                        labelCol={{ span: 24 }}
-                        name="conclusion_second_part"
                     >
                         <TextArea
                             placeholder={
@@ -145,16 +128,6 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
                     {main_expert ? (
                         <>
                             <Form.Item
-                                label="Результат практической части"
-                                labelCol={{ span: 24 }}
-                                name="pass_practical_part"
-                            >
-                                <Radio.Group>
-                                    <Radio value={true}>Сдано</Radio>
-                                    <Radio value={false}>Не сдано</Radio>
-                                </Radio.Group>
-                            </Form.Item>
-                            <Form.Item
                                 label="Результат экзамена"
                                 labelCol={{ span: 24 }}
                                 name="pass_test_part"
@@ -164,6 +137,7 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
                                     <Radio value={false}>Не сдано</Radio>
                                 </Radio.Group>
                             </Form.Item>
+                            <Form.Item>Сумма баллов за тест: {main_score}</Form.Item>
                         </>
                     ) : (
                         ''
