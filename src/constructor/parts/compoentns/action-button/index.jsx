@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Button } from 'antd'
 
 import { SurveysSlice } from '../../../../reducers/SurveysSlice'
+import './action-button.css'
 
 const ActionButton = ({ arrayIndex, surveyquest_length }) => {
     const { handleArrayIndex } = SurveysSlice.actions
