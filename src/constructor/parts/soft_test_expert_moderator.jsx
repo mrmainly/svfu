@@ -10,7 +10,6 @@ import ActionButton from './compoentns/action-button'
 const { Text, Title } = Typography
 
 const SoftTestExMo = ({ surveyquest }) => {
-    console.log('survey', surveyquest)
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     // const columns = [
     //     {

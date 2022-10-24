@@ -21,7 +21,6 @@ const ExpertSurvey = () => {
     const { id } = state
 
     const { data: surveyquest, isLoading } = useGetSurveyExpertIdQuery(id)
-    console.log(surveyquest)
 
     if (isLoading) {
         return (

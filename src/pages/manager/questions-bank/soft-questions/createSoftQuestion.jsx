@@ -132,8 +132,6 @@ const CreateSoftQuestion = () => {
         })
     }
 
-    console.log(file)
-
     return (
         <div>
             <Form

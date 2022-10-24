@@ -13,8 +13,6 @@ const TesterSurveyPart = () => {
 
     const { id, surveyquest, unit_type, softquestions } = state
 
-    console.log(state)
-
     return (
         <div>
             {unit_type === 'SOFT' ? (

@@ -37,8 +37,6 @@ const TestDetail = ({ open, handleClose, ID }) => {
         },
     ]
 
-    console.log(data)
-
     const patchSurvey = () => {
         surveyPatch({ id: data.id }).then((res) => {
             if (res.data) {

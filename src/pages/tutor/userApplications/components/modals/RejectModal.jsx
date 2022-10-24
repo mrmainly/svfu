@@ -15,7 +15,6 @@ const RejectModal = ({ open, setOpen, id }) => {
     const [putUserApplicationReject] = usePutUserApplicationRejectMutation()
 
     const onSubmit = (data) => {
-        console.log(data)
         putUserApplicationReject({ id: id, data }).then((res) => {
             if (res.data) {
                 message.success('Вы отклонили заявление')

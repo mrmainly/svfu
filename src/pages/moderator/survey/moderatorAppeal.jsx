@@ -50,7 +50,6 @@ const ModeratorAppeal = () => {
         )
     }
 
-    console.log('surveyquest', surveyquest)
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', marginTop: 10 }}>

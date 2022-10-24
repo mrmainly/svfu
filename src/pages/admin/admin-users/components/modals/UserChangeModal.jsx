@@ -29,7 +29,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
             }
         })
     }
-    console.log(data)
+
     return (
         <div>
             <Modal

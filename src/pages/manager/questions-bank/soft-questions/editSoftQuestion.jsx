@@ -125,8 +125,6 @@ const EditSoftQuestion = () => {
         },
     ]
 
-    console.log(data)
-
     if (isFetching) {
         return (
             <div
@@ -188,8 +186,6 @@ const EditSoftQuestion = () => {
                     patchQuestionSoftFile({
                         formData: formData,
                         id: data?.question_files[0].id,
-                    }).then((res) => {
-                        console.log('resdsa', res)
                     })
                 } else if (file !== '' && data?.question_files?.length === 0) {
                     const formData = new FormData()

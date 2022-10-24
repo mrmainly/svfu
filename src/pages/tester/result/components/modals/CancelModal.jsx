@@ -17,7 +17,6 @@ const CancelModal = ({ open, setOpen, ID }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
 

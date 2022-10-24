@@ -25,7 +25,6 @@ const AQAddModal = ({ open, setOpen }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
 

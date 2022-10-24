@@ -107,7 +107,6 @@ const QBAddModal = ({ open, setOpen }) => {
                         postConstructorQuestionImage({
                             formData: formData,
                         }).then((res) => {
-                            console.log(res)
                             if (res.error) {
                                 message.error('Фотография не корректно загружено')
                             }

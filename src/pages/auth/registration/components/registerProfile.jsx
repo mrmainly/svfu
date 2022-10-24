@@ -30,7 +30,6 @@ const RegisterProfile = () => {
                 } else {
                     message.error(res.error.data.errors[0])
                 }
-                console.log(res)
             })
         } else {
             message.error('Пароль не подошел')

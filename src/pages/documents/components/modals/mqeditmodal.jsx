@@ -27,7 +27,6 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
     }, [dataList])
 
     const onSubmit = (data) => {
-        console.log(data)
         const formData = new FormData()
         formData.append('name', data.name)
         formData.append('doc_id', data.doc_id)

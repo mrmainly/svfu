@@ -39,7 +39,6 @@ const UDAddModal = ({ open, setOpen }) => {
                         setOpen(false)
                     } else {
                         message.error(res.error.data.file[0])
-                        console.log(res)
                     }
                 })
                 setFile()

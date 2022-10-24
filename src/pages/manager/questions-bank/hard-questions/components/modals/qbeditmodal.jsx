@@ -56,7 +56,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
         setComponentTech(dataList?.technique)
         setRadioId(dataList?.variant?.findIndex((item) => item.is_true))
         setImg(dataList?.question_images.length !== 0 ? dataList?.question_images[0].image : null)
-        console.log(dataList)
+
         setActive(dataList?.is_active)
     }, [dataList])
 
@@ -130,8 +130,6 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                 patchQuestionSoftFile({
                     formData: formData,
                     id: dataList?.question_files[0].id,
-                }).then((res) => {
-                    console.log('resdsa', res)
                 })
             } else if (file !== '' && dataList?.question_files?.length === 0) {
                 const formData = new FormData()

@@ -25,7 +25,6 @@ const AdminExamModal = ({ open, setOpen, dataList }) => {
             } else {
                 message.error(res.error.data.errors[0])
             }
-            console.log(res)
         })
     }
 
