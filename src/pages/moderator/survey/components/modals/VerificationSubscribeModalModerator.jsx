@@ -48,7 +48,7 @@ const VerificationSubscribeModalModerator = ({ id, main_moderator }) => {
                             'Вы подтвердили экспертизу и результаты экзамена отправлены!'
                         )
                     } else {
-                        message.error('Вы не подтвердили2')
+                        message.error('Вы не подтвердили!')
                     }
                 })
             } else {

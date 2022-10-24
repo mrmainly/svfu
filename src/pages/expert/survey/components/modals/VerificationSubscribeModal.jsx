@@ -8,7 +8,7 @@ import { useSendAnswerExpertMutation } from '../../../../../services/expert/Surv
 import { useSendCodeMutation } from '../../../../../services/ToolsService'
 import ROUTES from '../../../../../routes'
 
-const VerificationSubscribeModal = ({ id, main_expert }) => {
+const VerificationSubscribeModal = ({ id, main_expert, unit_type }) => {
     const {
         soft_review,
         subscribeCodeModal,
@@ -16,21 +16,30 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
         conclusion_second_part,
         pass_practical_part,
         pass_test_part,
+        main_score,
     } = useSelector((state) => state.survey_slice)
     const { openSubscribeModal } = SurveysSlice.actions
-    console.log('ost', soft_review)
     const [sendCode] = useSendCodeMutation()
     const [sendAnswerExpert] = useSendAnswerExpertMutation()
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const onFinishSubmit = (data) => {
-        const body = {
+        const bodyHard = {
+            conclusion_first_part: conclusion_first_part,
+            conclusion_second_part: conclusion_second_part,
+        }
+
+        const bodySoft = {
             conclusion_first_part: conclusion_first_part,
             soft_review: soft_review,
         }
-
-        const bodyMainModerator = {
+        const bodyMainExpertSoft = {
+            conclusion_first_part: conclusion_first_part,
+            pass_test_part: pass_test_part,
+            soft_review: soft_review,
+            main_score: main_score,
+        }
+        const bodyMainExpertHard = {
             conclusion_first_part: conclusion_first_part,
             conclusion_second_part: conclusion_second_part,
             pass_practical_part: pass_practical_part,
@@ -40,7 +49,14 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
             if (res.data) {
                 sendAnswerExpert({
                     id: id,
-                    body: main_expert ? bodyMainModerator : body,
+                    body:
+                        main_expert && unit_type === 'SOFT'
+                            ? bodyMainExpertSoft
+                            : main_expert && unit_type === 'HARD'
+                            ? bodyMainExpertHard
+                            : !main_expert && unit_type === 'SOFT'
+                            ? bodySoft
+                            : bodyHard,
                 }).then((res) => {
                     if (res.data) {
                         dispatch(openSubscribeModal(false))
@@ -101,7 +117,8 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
 
 VerificationSubscribeModal.propTypes = {
     id: PropTypes.number,
-    main_expert: PropTypes.any,
+    main_expert: PropTypes.bool,
+    unit_type: PropTypes.string,
 }
 
 export default VerificationSubscribeModal

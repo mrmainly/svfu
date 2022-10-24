@@ -16,7 +16,6 @@ const SurveyPartsSoft = () => {
     const state = location.state
 
     const { surveyquest, id } = state
-
     return (
         <div>
             <div

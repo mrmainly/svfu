@@ -24,14 +24,14 @@ const ModeratorSurvey = () => {
     const { data: surveyquest, isLoading } = useGetSurveyModeratorIdQuery(id)
     const info = [
         {
-            title: 'Заключение по теоретической части',
+            title: 'Заключение председателя экспертов по теоретической части',
             recomendation: {
                 name: 'Рекомендация:',
                 label: surveyquest?.main_expert_review_first_part,
             },
         },
         {
-            title: 'Заключение практической части',
+            title: 'Заключение председателя экспертов по практической части',
             recomendation: {
                 name: 'Рекомендация:',
                 label: surveyquest?.main_expert_review_second_part,
@@ -52,6 +52,7 @@ const ModeratorSurvey = () => {
             </div>
         )
     }
+    console.log(surveyquest)
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -84,7 +85,10 @@ const ModeratorSurvey = () => {
             </div>
             <Line />
             <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title level={5}>Аттестуемый {surveyquest?.user}</Title>
+                <Title level={5}>Аттестуемый: {surveyquest?.user}</Title>
+            </div>
+            <div style={{ display: 'flex', marginTop: 10 }}>
+                <Title level={5}>Тип теста: {surveyquest?.survey?.unit_type}</Title>
             </div>
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>
@@ -95,27 +99,71 @@ const ModeratorSurvey = () => {
                     </span>
                 </Title>
             </div>
-            <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title level={5}>
-                    Итоговые баллы:
-                    <span
-                        style={{
-                            marginLeft: 10,
-                            color:
-                                surveyquest?.tester_percent_score <
-                                surveyquest.passing_percent_score
-                                    ? 'red'
-                                    : '#219653',
-                        }}
-                    >
-                        {surveyquest?.first_part_score}/{surveyquest?.max_score} (
-                        {surveyquest?.tester_percent_score}%)
-                    </span>
-                </Title>
-            </div>
+            {surveyquest?.survey?.unit_type === 'HARD' ? (
+                <div style={{ display: 'flex', marginTop: 10 }}>
+                    <Title level={5}>
+                        Итоговые баллы:
+                        <span
+                            style={{
+                                marginLeft: 10,
+                                color:
+                                    surveyquest?.tester_percent_score <
+                                    surveyquest.passing_percent_score
+                                        ? 'red'
+                                        : '#219653',
+                            }}
+                        >
+                            {surveyquest?.first_part_score}/{surveyquest?.max_score} (
+                            {surveyquest?.tester_percent_score}%)
+                        </span>
+                    </Title>
+                </div>
+            ) : (
+                <></>
+            )}
             <Line />
-            {info.map((item, index) => (
-                <div style={{ margin: '12px 0 16px 0' }} key={index}>
+            {surveyquest?.survey?.unit_type === 'HARD' ? (
+                info.map((item, index) => (
+                    <div style={{ margin: '12px 0 16px 0' }} key={index}>
+                        <Text
+                            style={{
+                                marginBottom: '16px',
+                                fontFamily: 'Roboto',
+                                fontWeight: '400',
+                                fontStyle: 'italic',
+                                fontSize: '18px',
+                                lineHeight: '27px',
+                            }}
+                        >
+                            {item.title}
+                        </Text>
+                        <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                            <Text
+                                style={{
+                                    width: '120px',
+                                    fontFamily: 'Roboto',
+                                    fontWeight: '500',
+                                    fontSize: '16px',
+                                    lineHeight: '24px',
+                                }}
+                            >
+                                {item.recomendation.name}
+                            </Text>
+                            <Text
+                                style={{
+                                    fontFamily: 'Roboto',
+                                    fontWeight: '500',
+                                    fontSize: '16px',
+                                    lineHeight: '24px',
+                                }}
+                            >
+                                {item.recomendation.label}
+                            </Text>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <div style={{ margin: '12px 0 16px 0' }}>
                     <Text
                         style={{
                             marginBottom: '16px',
@@ -126,7 +174,7 @@ const ModeratorSurvey = () => {
                             lineHeight: '27px',
                         }}
                     >
-                        {item.title}
+                        Заключение председателя экспертов
                     </Text>
                     <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
                         <Text
@@ -138,7 +186,7 @@ const ModeratorSurvey = () => {
                                 lineHeight: '24px',
                             }}
                         >
-                            {item.recomendation.name}
+                            Рекомендация:
                         </Text>
                         <Text
                             style={{
@@ -148,11 +196,12 @@ const ModeratorSurvey = () => {
                                 lineHeight: '24px',
                             }}
                         >
-                            {item.recomendation.label}
+                            {surveyquest?.main_expert_review_first_part}
                         </Text>
                     </div>
                 </div>
-            ))}
+            )}
+
             {surveyquest?.main_moderator && (
                 <div style={{ marginTop: '8px' }}>
                     <Typography
@@ -198,12 +247,19 @@ const ModeratorSurvey = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.SURVEY_PARTS_MODERATOR, {
-                        state: {
-                            surveyquest: surveyquest,
-                            id: id,
-                        },
-                    })
+                    surveyquest.survey.unit_type === 'HARD'
+                        ? navigate(ROUTES.SURVEY_PARTS_MODERATOR, {
+                              state: {
+                                  surveyquest: surveyquest,
+                                  id: id,
+                              },
+                          })
+                        : navigate(ROUTES.SURVEY_PARTS_MODERATOR_SOFT, {
+                              state: {
+                                  surveyquest: surveyquest,
+                                  id: id,
+                              },
+                          })
                 }}
             >
                 Начать экспертизу

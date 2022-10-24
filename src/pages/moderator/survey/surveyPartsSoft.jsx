@@ -6,8 +6,9 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { Line } from '../../../components'
 
 import SoftTestExMo from '../../../constructor/parts/soft_test_expert_moderator'
-import SoftAnswerExpertModal from './components/modals/SoftAnswerExpertModal'
-import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
+import AnswerModeratorModal from './components/modals/AnswerModeratorModal'
+import AppealModeratorModal from './components/modals/AppealModeratorModal'
+import VerificationSubscribeModalModerator from './components/modals/VerificationSubscribeModalModerator'
 
 const SurveyPartsSoft = () => {
     const location = useLocation()
@@ -15,10 +16,8 @@ const SurveyPartsSoft = () => {
 
     const state = location.state
 
-    const { surveyquest, id } = state
-
-    console.log('data', surveyquest)
-
+    const { surveyquest, id, appeal, appeal_text } = state
+    const role = JSON.parse(localStorage.getItem('role'))
     return (
         <div>
             <div
@@ -49,18 +48,20 @@ const SurveyPartsSoft = () => {
                 </span>
             </div>
             <Line />
-            <SoftAnswerExpertModal
-                id={id}
-                expert_review={surveyquest?.expert_review}
-                main_expert={surveyquest.main_expert}
-            />
-            <VerificationSubscribeModal
-                id={id}
-                main_expert={surveyquest?.main_expert}
-                unit_type={surveyquest?.survey?.unit_type}
-            />
-
-            <SoftTestExMo surveyquest={surveyquest} />
+            {role === 'MODERATOR' && appeal ? (
+                <AppealModeratorModal id={id} surveyquest={surveyquest} appeal_text={appeal_text} />
+            ) : (
+                role === 'MODERATOR' && (
+                    <>
+                        <AnswerModeratorModal id={id} surveyquest={surveyquest} />
+                        <VerificationSubscribeModalModerator
+                            id={id}
+                            main_moderator={surveyquest?.main_moderator}
+                        />
+                    </>
+                )
+            )}
+            <SoftTestExMo role="moderator" surveyquest={surveyquest} />
         </div>
     )
 }

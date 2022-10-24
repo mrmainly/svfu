@@ -43,6 +43,7 @@ const ROUTES = {
     SURVEY_PARTS_EXPERT: '/survey-parts-expert',
     SURVEY_PARTS_EXPERT_SOFT: '/survey-parts-expert-soft',
     SURVEY_PARTS_MODERATOR: '/survey-parts-moderator',
+    SURVEY_PARTS_MODERATOR_SOFT: '/survey-parts-moderator-soft',
     ADMIN_USERS_DETAIL: '/admin-users-detail',
     MODERATOR_USERS_DETAIL: '/moderator-users-detail',
     TAGS_LIST: '/tags-list',
