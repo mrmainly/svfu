@@ -15,7 +15,7 @@ const { Text, Title } = Typography
 const SoftTestExMo = ({ surveyquest }) => {
     const role = JSON.parse(localStorage.getItem('role'))
     const dispatch = useDispatch()
-    console.log(role)
+    console.log(surveyquest)
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const columns = [
         {
@@ -356,7 +356,7 @@ const SoftTestExMo = ({ surveyquest }) => {
                                 <Line />
                                 <ActionButton
                                     arrayIndex={arrayIndex}
-                                    surveyquest_length={surveyquest?.survey?.surveyquest?.length}
+                                    surveyquest_length={surveyquest?.survey?.softquestions?.length}
                                 />
                             </div>
                         ))}

@@ -199,7 +199,7 @@ const SoftPart = ({ softquestions, id }) => {
                         <Line />
                         <ActionButton
                             arrayIndex={arrayIndex}
-                            softquestions_length={softquestions?.length}
+                            softquestions_length={softquestions?.survey.softquestions?.length}
                         />
                     </div>
                 ))}

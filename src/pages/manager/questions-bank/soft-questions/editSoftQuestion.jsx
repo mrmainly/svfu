@@ -324,7 +324,7 @@ const EditSoftQuestion = () => {
                         {uploadButton}
                     </Upload>
                 </Form.Item>
-                <Form.Item label="Загрузка дакумента">
+                <Form.Item label="Загрузка документа">
                     <Upload
                         action="none"
                         {...props}

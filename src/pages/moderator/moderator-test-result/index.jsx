@@ -13,7 +13,7 @@ const ModeratorTestResult = () => {
     const [statusResult, setStatusResult] = useState('')
     const [ordering, setOrdering] = useState('')
 
-    const { data, isLoading } = useGetModeratorResultQuery({
+    const { data, isFetching } = useGetModeratorResultQuery({
         currentPage: currentPage,
         direction: direction,
         userId: userId,
@@ -113,7 +113,7 @@ const ModeratorTestResult = () => {
                     ))}
                 </Select>
             </div>
-            <TestResultTable data={data?.results} loading={isLoading} setOrdering={setOrdering} />
+            <TestResultTable data={data?.results} loading={isFetching} setOrdering={setOrdering} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}

@@ -24,6 +24,7 @@ export const ModeratorSurveys = api.injectEndpoints({
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'TestResult' }],
         }),
         sendAnswerMainModerator: build.mutation({
             query({ id }) {
@@ -32,6 +33,7 @@ export const ModeratorSurveys = api.injectEndpoints({
                     method: 'POST',
                 }
             },
+            invalidatesTags: [{ type: 'TestResult' }],
         }),
     }),
 })
