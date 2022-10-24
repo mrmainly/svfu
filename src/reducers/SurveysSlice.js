@@ -12,6 +12,8 @@ const initialState = {
     subscribeCodeModalModerator: false,
     conclusion_first_part: '',
     conclusion_second_part: '',
+    soft_review: [],
+    main_score: '',
     estimate: '',
     conclusion: '',
     pass_practical_part: false,
@@ -57,6 +59,10 @@ export const SurveysSlice = createSlice({
             state.conclusion_second_part = action.payload[1]
             state.pass_practical_part = action.payload[2]
             state.pass_test_part = action.payload[3]
+        },
+        setSoftAnswerExpert(state, action) {
+            state.soft_review = action.payload[0]
+            state.main_score = action.payload[1]
         },
         setTextAnswerModerator(state, action) {
             state.estimate = action.payload[0]

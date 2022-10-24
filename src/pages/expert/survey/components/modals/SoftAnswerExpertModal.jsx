@@ -9,7 +9,8 @@ import ExpertReviewCard from '../cards/expert_review_card'
 
 const { TextArea } = Input
 
-const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) => {
+const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
+    const { main_score } = useSelector((state) => state.survey_slice)
     const [subscribe, setSubscribe] = useState(false)
     const [sendSubscribeExpert, { isLoading }] = useSendSubscribeExpertMutation()
 
@@ -32,6 +33,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
             if (res.data) {
                 dispatch(openExpertTheoreticalPartOpen(false))
                 dispatch(openSubscribeModal(true))
+                console.log(data)
             } else {
                 message.error('Вы не оставили рекомендацию')
             }
@@ -59,7 +61,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                         borderRadius: 4,
                     }}
                     key="save"
-                    form="form-expert-theoretical-part"
+                    form="form-expert-soft"
                     type="primary"
                     disabled={!subscribe ? true : false}
                     htmlType="submit"
@@ -108,40 +110,33 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                     </div>
                 )}
 
-                <Form id="form-expert-theoretical-part" onFinish={onFinishSubmit}>
+                <Form id="form-expert-soft" onFinish={onFinishSubmit}>
+                    <Form.Item>Сумма баллов за тест: {main_score}</Form.Item>
                     <Form.Item
                         required
-                        label={
-                            main_expert
-                                ? 'Рекомендация по теоретической части'
-                                : 'Заключение по теоретической части'
-                        }
+                        label={main_expert ? 'Рекомендация тесту' : 'Заключение по тесту'}
                         labelCol={{ span: 24 }}
                         name="conclusion_first_part"
                     >
                         <TextArea
                             placeholder={
                                 main_expert
-                                    ? 'Рекомендация к ответу'
-                                    : 'Введите заключение по теоретической части'
+                                    ? 'Рекомендация к тесту'
+                                    : 'Введите заключение по практической части'
                             }
                             style={{ height: 150 }}
                         />
                     </Form.Item>
                     <Form.Item
                         required
-                        label={
-                            main_expert
-                                ? 'Рекомендация по практической части'
-                                : 'Заключение по практической части'
-                        }
+                        label={main_expert ? 'Рекомендация тесту' : 'Заключение тесту'}
                         labelCol={{ span: 24 }}
                         name="conclusion_second_part"
                     >
                         <TextArea
                             placeholder={
                                 main_expert
-                                    ? 'Рекомендация к ответу'
+                                    ? 'Рекомендация к тесту'
                                     : 'Введите заключение по практической части'
                             }
                             style={{ height: 150 }}
@@ -184,10 +179,10 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
     )
 }
 
-AnswerTheoreticalPartExpertModal.propTypes = {
+SoftAnswerExpertModal.propTypes = {
     id: PropTypes.number,
     expert_review: PropTypes.array,
     main_expert: PropTypes.bool,
 }
 
-export default AnswerTheoreticalPartExpertModal
+export default SoftAnswerExpertModal

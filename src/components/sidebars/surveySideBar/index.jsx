@@ -6,6 +6,7 @@ import { SurveysSlice } from '../../../reducers/SurveysSlice'
 
 import '../surveySideBar.css'
 import HardBody from './components/hard_body'
+import SoftBody from './components/soft_body'
 
 const SurveysSideBar = () => {
     const [data, setData] = useState([])
@@ -39,14 +40,23 @@ const SurveysSideBar = () => {
 
     return (
         <>
-            <HardBody
-                changeQuestion={changeQuestion}
-                arrayIndex={arrayIndex}
-                part={part}
-                data={data}
-                handleParts={handleParts}
-                completeConclusion={completeConclusion}
-            />
+            {data?.survey?.unit_type === 'HARD' ? (
+                <HardBody
+                    changeQuestion={changeQuestion}
+                    arrayIndex={arrayIndex}
+                    part={part}
+                    data={data}
+                    handleParts={handleParts}
+                    completeConclusion={completeConclusion}
+                />
+            ) : (
+                <SoftBody
+                    changeQuestion={changeQuestion}
+                    arrayIndex={arrayIndex}
+                    data={data}
+                    completeConclusion={completeConclusion}
+                />
+            )}
         </>
     )
 }

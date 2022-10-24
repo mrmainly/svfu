@@ -100,29 +100,22 @@ const ExpertSurvey = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.SURVEY_PARTS_EXPERT, {
-                        state: {
-                            surveyquest: surveyquest,
-                            id: id,
-                        },
-                    })
+                    surveyquest.survey.unit_type === 'HARD'
+                        ? navigate(ROUTES.SURVEY_PARTS_EXPERT, {
+                              state: {
+                                  surveyquest: surveyquest,
+                                  id: id,
+                              },
+                          })
+                        : navigate(ROUTES.SURVEY_PARTS_EXPERT_SOFT, {
+                              state: {
+                                  surveyquest: surveyquest,
+                                  id: id,
+                              },
+                          })
                 }}
             >
-                Начать экспертизу hard
-            </Button>
-            <Button
-                type="primary"
-                style={{ width: 'max-content', marginTop: '10px' }}
-                onClick={() => {
-                    navigate(ROUTES.SURVEY_PARTS_EXPERT_SOFT, {
-                        state: {
-                            surveyquest: surveyquest,
-                            id: id,
-                        },
-                    })
-                }}
-            >
-                Начать экспертизу soft
+                Начать экспертизу
             </Button>
         </div>
     )
