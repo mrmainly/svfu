@@ -6,7 +6,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 import { Line } from '../../../components'
 
 import SoftTestExMo from '../../../constructor/parts/soft_test_expert_moderator'
-import AnswerExpertModal from './components/modals/AnswerExpertModal'
+import SoftAnswerExpertModal from './components/modals/SoftAnswerExpertModal'
 import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
 
 const SurveyPartsSoft = () => {
@@ -47,7 +47,7 @@ const SurveyPartsSoft = () => {
                 </span>
             </div>
             <Line />
-            <AnswerExpertModal
+            <SoftAnswerExpertModal
                 id={id}
                 expert_review={surveyquest?.expert_review}
                 main_expert={surveyquest.main_expert}

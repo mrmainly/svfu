@@ -10,6 +10,7 @@ import ROUTES from '../../../../../routes'
 
 const VerificationSubscribeModal = ({ id, main_expert }) => {
     const {
+        soft_review,
         subscribeCodeModal,
         conclusion_first_part,
         conclusion_second_part,
@@ -17,7 +18,7 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
         pass_test_part,
     } = useSelector((state) => state.survey_slice)
     const { openSubscribeModal } = SurveysSlice.actions
-
+    console.log('ost', soft_review)
     const [sendCode] = useSendCodeMutation()
     const [sendAnswerExpert] = useSendAnswerExpertMutation()
 
@@ -26,7 +27,7 @@ const VerificationSubscribeModal = ({ id, main_expert }) => {
     const onFinishSubmit = (data) => {
         const body = {
             conclusion_first_part: conclusion_first_part,
-            conclusion_second_part: conclusion_second_part,
+            soft_review: soft_review,
         }
 
         const bodyMainModerator = {
