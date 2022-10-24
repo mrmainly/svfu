@@ -51,9 +51,9 @@ const TestsBankTable = ({ data, loading, setId }) => {
             render: (direction) => <>{direction?.name}</>,
         },
         {
-            title: 'Вопросов',
-            dataIndex: 'question_count',
-            key: 'question_count',
+            title: 'Тип теста',
+            dataIndex: 'unit_type',
+            key: 'unit_type',
         },
         {
             title: 'Статус',

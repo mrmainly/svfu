@@ -4,8 +4,8 @@ export const TestsBank = api.injectEndpoints({
     endpoints: (build) => ({
         //Банк тестов
         getAttestationsTestsBank: build.query({
-            query: ({ currentPage, name, is_active, direction_name, id }) =>
-                `constructor/unit/?name=${name}&is_active=${is_active}&direction_name=${direction_name}&page=${currentPage}&ordering=${id}`,
+            query: ({ currentPage, name, is_active, direction_name, id, unit_type }) =>
+                `constructor/unit/?name=${name}&is_active=${is_active}&direction_name=${direction_name}&page=${currentPage}&ordering=${id}&unit_type=${unit_type}`,
             providesTags: ['Attestation'],
         }),
         //создать новый тест

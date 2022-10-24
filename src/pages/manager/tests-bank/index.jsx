@@ -17,12 +17,14 @@ const TestsBank = () => {
     const [status, setStatus] = useState('')
     const [directionName, setDirectionName] = useState('')
     const [id, setId] = useState('')
-    const { data, isLoading } = useGetAttestationsTestsBankQuery({
+    const [unitType, setUnitType] = useState('')
+    const { data, isFetching } = useGetAttestationsTestsBankQuery({
         currentPage: currentPage,
         name: name,
         is_active: status,
         direction_name: directionName,
         id: id,
+        unit_type: unitType,
     })
     const { data: directionSelect } = useGetToolsDirectionQuery()
     const [modalNewTest, setModalNewTest] = useState(false)
@@ -75,9 +77,18 @@ const TestsBank = () => {
                     <Select.Option value="true">Активна</Select.Option>
                     <Select.Option value="false">Не активна</Select.Option>
                 </Select>
+                <Select
+                    placeholder="Тип вопроса"
+                    className="input-search"
+                    onChange={(value) => setUnitType(value)}
+                >
+                    <Select.Option value="">Все статусы</Select.Option>
+                    <Select.Option value="SOFT">SOFT</Select.Option>
+                    <Select.Option value="HARD">HARD</Select.Option>
+                </Select>
             </div>
             <LazyTBAddModal open={modalNewTest} setOpen={setModalNewTest} />
-            <TestsBankTable data={data?.results} loading={isLoading} setId={setId} />
+            <TestsBankTable data={data?.results} loading={isFetching} setId={setId} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
