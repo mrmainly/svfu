@@ -209,9 +209,15 @@ const SoftTestExMo = ({ surveyquest }) => {
                                 )}
 
                                 {item?.is_describe && (
-                                    <div style={{ marginTop: 20 }}>
+                                    <div
+                                        style={{
+                                            marginTop: 20,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                        }}
+                                    >
                                         <Text style={{ fontWeight: 'bold' }}>
-                                            Развернутый ответ аттестуемого:{' '}
+                                            Развернутый ответ аттестуемого:
                                         </Text>
                                         {surveyquest?.answers_soft_part?.map(
                                             (itemAnswer, index) => {
@@ -222,6 +228,58 @@ const SoftTestExMo = ({ surveyquest }) => {
                                     </div>
                                 )}
 
+                                <div
+                                    style={{
+                                        height: 1,
+                                        background: '#E6E6E6',
+                                        width: '100%',
+                                        marginTop: 20,
+                                        marginBottom: 20,
+                                    }}
+                                />
+                                <div>
+                                    {surveyquest?.expert_review.map((itemReviewList) => {
+                                        return itemReviewList.soft_review.map(
+                                            (itemReview, index) => {
+                                                if (item.id == itemReview.q_id)
+                                                    return (
+                                                        <div
+                                                            key={index}
+                                                            style={{
+                                                                display: 'flex',
+                                                                flexDirection: 'column',
+                                                                marginTop: 10,
+                                                            }}
+                                                        >
+                                                            <Text>
+                                                                <span
+                                                                    style={{
+                                                                        marginRight: 10,
+                                                                        fontWeight: 'bold',
+                                                                    }}
+                                                                >
+                                                                    Ревью эксперта:
+                                                                </span>
+                                                                {itemReview.comment}
+                                                            </Text>
+                                                            <Text style={{ marginTop: 5 }}>
+                                                                <span
+                                                                    style={{
+                                                                        marginRight: 10,
+                                                                        fontWeight: 'bold',
+                                                                    }}
+                                                                >
+                                                                    Выставленные баллы:
+                                                                </span>
+
+                                                                {itemReview.score}
+                                                            </Text>
+                                                        </div>
+                                                    )
+                                            }
+                                        )
+                                    })}
+                                </div>
                                 <div
                                     style={{
                                         height: 1,
