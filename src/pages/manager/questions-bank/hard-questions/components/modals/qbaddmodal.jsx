@@ -39,7 +39,7 @@ const QBAddModal = ({ open, setOpen }) => {
     const uploadButton = (
         <div>
             <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+            <div style={{ marginTop: 8 }}>Загрузить</div>
         </div>
     )
     const propsImg = {
@@ -57,14 +57,7 @@ const QBAddModal = ({ open, setOpen }) => {
     }
     const props2 = {
         beforeUpload: (file) => {
-            const isPDF = file.type === 'application/pdf'
-
-            if (!isPDF) {
-                message.error(`${file.name} не является pdf файлом`)
-                return isPDF || Upload.LIST_IGNORE
-            } else {
-                setFile(file)
-            }
+            setFile(file)
 
             return false
         },
@@ -211,6 +204,7 @@ const QBAddModal = ({ open, setOpen }) => {
                             multiple={false}
                             maxCount={1}
                             onRemove={() => setImg()}
+                            accept=".jpg,.jpeg,.png"
                         >
                             {uploadButton}
                         </Upload>
@@ -396,7 +390,7 @@ const QBAddModal = ({ open, setOpen }) => {
                     ) : null}
                     {componentTech === 'DESCRIBE' ? (
                         <Upload action="none" {...props2} multiple={true} labelCol={{ span: 24 }}>
-                            <Button icon={<UploadOutlined />}>Upload</Button>
+                            <Button icon={<UploadOutlined />}>Загрузить</Button>
                         </Upload>
                     ) : null}
                 </Form>

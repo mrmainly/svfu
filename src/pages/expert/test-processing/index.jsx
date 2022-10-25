@@ -19,6 +19,7 @@ const TestProcessing = () => {
         userId: userId,
         statusResult: statusResult,
         ordering: ordering,
+        unit_type: '',
     })
 
     useEffect(() => {
