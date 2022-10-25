@@ -4,6 +4,7 @@ export const tools = api.injectEndpoints({
     endpoints: (build) => ({
         getToolsDirection: build.query({
             query: () => `/tools/tools/direction/`,
+            providesTags: ['Attestation'],
         }),
         //проверка кода
         sendCode: build.mutation({

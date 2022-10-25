@@ -123,6 +123,9 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
     const onSubmit = (data) => {
         setOpen(false)
         navigate('/hard-questions')
+        if (dataList?.is_active != active) {
+            putConstructorQuestion({ id: dataList?.id })
+        }
         if (data.technique === 'DESCRIBE') {
             if (typeof file === 'object' && dataList?.question_files[0]?.file) {
                 const formData = new FormData()
@@ -197,9 +200,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
         } else {
             data.difficulty = 'DESCRIBE'
         }
-        if (dataList?.is_active !== active) {
-            putConstructorQuestion({ id: dataList?.id })
-        }
+
         patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
             if (res.data) {
                 message.success('Вопрос изменен')
@@ -463,14 +464,12 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                         </Upload>
                     ) : null}
                     <Space align="baseline">
-                        <Form.Item>
-                            <Switch
-                                defaultChecked={active}
-                                onChange={(e) => {
-                                    setActive(e)
-                                }}
-                            />
-                        </Form.Item>
+                        <Switch
+                            defaultChecked={active}
+                            onChange={(e) => {
+                                setActive(e)
+                            }}
+                        />
                         <Typography>Активность квалификации</Typography>
                     </Space>
                 </Form>
