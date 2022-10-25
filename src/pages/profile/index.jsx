@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Spin } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import MainInfo from './components/MainInfo'
 import SocialNetworks from './components/SocialNetworks'
@@ -9,13 +10,25 @@ import InfoScreen from './components/InfoScreen'
 import { Line } from '../../components'
 import ROUTES from '../../routes'
 import { useGetProfileQuery } from '../../services/profile/Profile'
+import { ProfileSlice } from '../../reducers/ProfileSlice'
 
 import './profile.css'
 
 const Profile = () => {
     const { data, isFetching } = useGetProfileQuery('')
 
+    const { handleStatusPost } = ProfileSlice.actions
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (data?.post !== null) {
+            dispatch(handleStatusPost('normal'))
+        } else {
+            dispatch(handleStatusPost('error'))
+        }
+    }, [data])
 
     if (isFetching) {
         return (

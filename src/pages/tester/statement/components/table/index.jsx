@@ -1,17 +1,20 @@
 import { Table, message, Typography, Button } from 'antd'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
 import { MyButton } from '../../../../../components'
-
 import {
     usePostStatementMutation,
     usePutStatementMutation,
 } from '../../../../../services/tester/Statement'
+
 const { Text } = Typography
 
 const StatementTable = ({ data, loading, setOrdering }) => {
     const [postDirection] = usePostStatementMutation()
     const [putDirection] = usePutStatementMutation()
+
+    const { post_status } = useSelector((state) => state.profile_slice)
 
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
@@ -29,13 +32,17 @@ const StatementTable = ({ data, loading, setOrdering }) => {
         }
     }
     const onSubmit = (data) => {
-        postDirection({ direction: data }).then((res) => {
-            if (res.data) {
-                message.success('Заявление подано')
-            } else {
-                message.error(res.error.data.errors[0])
-            }
-        })
+        if (post_status === 'normal') {
+            postDirection({ direction: data }).then((res) => {
+                if (res.data) {
+                    message.success('Заявление подано')
+                } else {
+                    message.error(res.error.data.errors[0])
+                }
+            })
+        } else {
+            message.error('Вы не заполнили поле должность в профиле')
+        }
     }
     const columns = [
         {
