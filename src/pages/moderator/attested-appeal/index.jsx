@@ -27,6 +27,7 @@ const AttestedAppeal = () => {
     }
     useEffect(() => {
         setTotalPage(data?.count)
+        console.log(data)
     }, [data])
     const statusSelect = [
         {

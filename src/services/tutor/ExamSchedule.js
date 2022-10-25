@@ -22,7 +22,7 @@ export const ExamSchedule = api.injectEndpoints({
         //список групп аттестуемых
         getExaminationGroupsDirection: build.query({
             query: ({ direction }) => `tutor/testgroup?direction=${direction}`,
-            // providesTags: ['ExamSchedule'],
+            providesTags: ['ExaminationGroups'],
         }),
         //выбор тестирование
         getTestingId: build.query({

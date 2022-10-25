@@ -55,9 +55,10 @@ const AppealTable = ({ data, loading, setOrdering }) => {
             render: (status) => <div>{statusChoices[status]}</div>,
         },
         {
-            title: 'Баллы',
+            title: 'Тип теста',
             dataIndex: 'score_first_part',
             key: 'score_first_part',
+            render: (_, record) => <div>{record?.result.survey.unit_type}</div>,
         },
         {
             title: 'Действие',

@@ -11,12 +11,15 @@ const Test = () => {
     const [survey_status, setSurvey_status] = useState('')
     const [ordering, setOrdering] = useState('')
     const [name, setName] = useState('')
-    const { data, isFetching } = useGetAvailableTestsQuery({
-        currentPage: currentPage,
-        survey_status: survey_status,
-        name: name,
-        ordering: ordering,
-    })
+    const { data, isLoading } = useGetAvailableTestsQuery(
+        {
+            currentPage: currentPage,
+            survey_status: survey_status,
+            name: name,
+            ordering: ordering,
+        },
+        { pollingInterval: 5000 }
+    )
     const onChange = (page) => {
         setCurrentPage(page)
     }
@@ -126,7 +129,7 @@ const Test = () => {
                     ))}
                 </Select>
             </div>
-            <AvailableTestTable data={data?.results} loading={isFetching} />
+            <AvailableTestTable data={data?.results} loading={isLoading} />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
                     defaultCurrent={1}
