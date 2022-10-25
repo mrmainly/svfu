@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
 
-import { Radio, Button, message } from 'antd'
+import { Radio, Button, message, Spin } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment'
 
@@ -16,7 +16,7 @@ import '../admin-users.css'
 
 const AdminUsersDetail = () => {
     const params = useParams()
-    const { data } = useGetAdminUserIdQuery({ id: params.id })
+    const { data, isFetching } = useGetAdminUserIdQuery({ id: params.id })
     const [putUser] = usePutUserMutation()
     const navigate = useNavigate()
     const [mode, setMode] = useState('info')
@@ -148,6 +148,21 @@ const AdminUsersDetail = () => {
     const fisrtName = data?.first_name ? data?.first_name + ' ' : ''
 
     const patronymic = data?.patronymic ? data?.patronymic : ''
+
+    if (isFetching) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    paddingTop: 100,
+                    height: 800,
+                }}
+            >
+                <Spin />
+            </div>
+        )
+    }
     return (
         <div>
             <div
@@ -167,7 +182,6 @@ const AdminUsersDetail = () => {
                 />
                 <span
                     style={{
-                        fontFamily: 'Roboto',
                         fontStyle: 'normal',
                         fontWeight: '400',
                         fontSize: '20px',

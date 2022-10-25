@@ -53,8 +53,8 @@ const UserApplicationsDetail = () => {
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        paddingTop: 50,
-                        paddingBottom: 50,
+                        paddingTop: 100,
+                        height: 800,
                     }}
                 >
                     <Spin />
