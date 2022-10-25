@@ -10,7 +10,8 @@ const ActionButton = ({ arrayIndex, surveyquest_length }) => {
     const { handleArrayIndex } = SurveysSlice.actions
 
     const dispatch = useDispatch()
-
+    console.log('arrayIndex', arrayIndex)
+    console.log('surveyquest_length', surveyquest_length)
     return (
         <div className="action-button">
             {arrayIndex === 0 ? (
