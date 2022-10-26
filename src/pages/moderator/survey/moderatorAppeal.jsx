@@ -35,6 +35,19 @@ const ModeratorAppeal = () => {
             },
         },
     ]
+
+    const infoSoft = [
+        {
+            title: 'Заключение',
+            recomendation: {
+                name: 'Рекомендация главного эксперта:',
+                label: surveyquest?.result.main_expert_review_first_part,
+            },
+        },
+    ]
+
+    console.log(surveyquest)
+
     if (isLoading) {
         return (
             <div
@@ -70,24 +83,26 @@ const ModeratorAppeal = () => {
                     </span>
                 </Title>
             </div>
-            <div style={{ display: 'flex', marginTop: 10 }}>
-                <Title level={5}>
-                    Итоговые баллы:
-                    <span
-                        style={{
-                            marginLeft: 10,
-                            color:
-                                surveyquest?.result.tester_percent_score <
-                                surveyquest?.result.passing_percent_score
-                                    ? 'red'
-                                    : '#219653',
-                        }}
-                    >
-                        {surveyquest?.result.first_part_score}/{surveyquest?.result.max_score} (
-                        {surveyquest?.result.tester_percent_score})%
-                    </span>
-                </Title>
-            </div>
+            {surveyquest.result.survey.unit_type === 'HARD' && (
+                <div style={{ display: 'flex', marginTop: 10 }}>
+                    <Title level={5}>
+                        Итоговые баллы:
+                        <span
+                            style={{
+                                marginLeft: 10,
+                                color:
+                                    surveyquest?.result.tester_percent_score <
+                                    surveyquest?.result.passing_percent_score
+                                        ? 'red'
+                                        : '#219653',
+                            }}
+                        >
+                            {surveyquest?.result.first_part_score}/{surveyquest?.result.max_score} (
+                            {surveyquest?.result.tester_percent_score})%
+                        </span>
+                    </Title>
+                </div>
+            )}
             <div style={{ display: 'flex', marginTop: 10 }}>
                 <Title level={5}>
                     Сообщение аттестуемого:
@@ -96,78 +111,116 @@ const ModeratorAppeal = () => {
             </div>
 
             <Line />
-            {info.map((item, index) => (
-                <div style={{ margin: '12px 0 16px 0' }} key={index}>
-                    <Text
-                        style={{
-                            marginBottom: '16px',
-                            fontFamily: 'Roboto',
-                            fontWeight: '400',
-                            fontStyle: 'italic',
-                            fontSize: '18px',
-                            lineHeight: '27px',
-                        }}
-                    >
-                        {item.title}
-                    </Text>
-                    <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
-                        <Text
-                            style={{
-                                width: '120px',
-                                fontFamily: 'Roboto',
-                                fontWeight: '500',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                marginTop: '8px',
-                            }}
-                        >
-                            {item.recomendation.name}
-                        </Text>
-                        <Text
-                            style={{
-                                fontFamily: 'Roboto',
-                                fontWeight: '500',
-                                fontSize: '16px',
-                                lineHeight: '24px',
-                                marginTop: '8px',
-                            }}
-                        >
-                            {item.recomendation.label}
-                        </Text>
-                    </div>
-                </div>
-            ))}
+            {surveyquest.result.survey.unit_type === 'HARD'
+                ? info.map((item, index) => (
+                      <div style={{ margin: '12px 0 16px 0' }} key={index}>
+                          <Text
+                              style={{
+                                  marginBottom: '16px',
+                                  fontFamily: 'Roboto',
+                                  fontWeight: '400',
+                                  fontStyle: 'italic',
+                                  fontSize: '18px',
+                                  lineHeight: '27px',
+                              }}
+                          >
+                              {item.title}
+                          </Text>
+                          <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                              <Text
+                                  style={{
+                                      width: '120px',
+
+                                      fontWeight: '500',
+                                      fontSize: '16px',
+                                      lineHeight: '24px',
+                                      marginTop: '8px',
+                                  }}
+                              >
+                                  {item.recomendation.name}
+                              </Text>
+                              <Text
+                                  style={{
+                                      fontWeight: '500',
+                                      fontSize: '16px',
+                                      lineHeight: '24px',
+                                      marginTop: '8px',
+                                  }}
+                              >
+                                  {item.recomendation.label}
+                              </Text>
+                          </div>
+                      </div>
+                  ))
+                : infoSoft.map((item, index) => (
+                      <div style={{ margin: '12px 0 16px 0' }} key={index}>
+                          <Text
+                              style={{
+                                  marginBottom: '16px',
+
+                                  fontWeight: '400',
+
+                                  fontSize: '18px',
+                                  lineHeight: '27px',
+                              }}
+                          >
+                              {item.title}
+                          </Text>
+                          <div style={{ display: 'flex', gap: '16px', marginBottom: '8px' }}>
+                              <Text
+                                  style={{
+                                      fontSize: '16px',
+                                      lineHeight: '24px',
+                                      marginTop: '8px',
+                                  }}
+                              >
+                                  {item.recomendation.name}
+                              </Text>
+                              <Text
+                                  style={{
+                                      fontWeight: '500',
+                                      fontSize: '16px',
+                                      lineHeight: '24px',
+                                      marginTop: '8px',
+                                  }}
+                              >
+                                  {item.recomendation.label}
+                              </Text>
+                          </div>
+                      </div>
+                  ))}
             <div style={{ marginTop: '8px' }}>
                 <Typography
                     style={{
                         marginBottom: '16px',
-                        fontFamily: 'Roboto',
+
                         fontWeight: '400',
-                        fontStyle: 'italic',
+
                         fontSize: '18px',
                         lineHeight: '27px',
                     }}
                 >
                     Решения модераторов
                 </Typography>
-                {surveyquest?.result?.moderator_review?.length &&
-                    surveyquest?.result.moderator_review.map((item, index) => (
-                        <ModeratorReviewCard
-                            key={index}
-                            moderator_name={item.user_id}
-                            recommendation={item.conclusion}
-                            estimate={item.estimate}
-                        />
-                    ))}
+                {surveyquest?.result?.moderator_review?.length
+                    ? surveyquest?.result.moderator_review.map((item, index) => (
+                          <ModeratorReviewCard
+                              key={index}
+                              moderator_name={item.user_id}
+                              recommendation={item.conclusion}
+                              estimate={item.estimate}
+                          />
+                      ))
+                    : 'Нет решений модераторов'}
             </div>
             <Line />
             <div style={{ margin: '12px 0 16px 0' }}>
                 <Text
                     style={{
                         marginBottom: '16px',
-                        fontFamily: 'Roboto',
+
                         fontWeight: '400',
-                        fontStyle: 'italic',
+
                         fontSize: '18px',
                         lineHeight: '27px',
                     }}
@@ -178,7 +231,7 @@ const ModeratorAppeal = () => {
                     <Text
                         style={{
                             width: '120px',
-                            fontFamily: 'Roboto',
+
                             fontWeight: '500',
                             fontSize: '16px',
                             lineHeight: '24px',
@@ -189,7 +242,6 @@ const ModeratorAppeal = () => {
                     </Text>
                     <Text
                         style={{
-                            fontFamily: 'Roboto',
                             fontWeight: '500',
                             fontSize: '16px',
                             lineHeight: '24px',
@@ -203,7 +255,7 @@ const ModeratorAppeal = () => {
                     <Text
                         style={{
                             width: '120px',
-                            fontFamily: 'Roboto',
+
                             fontWeight: '500',
                             fontSize: '16px',
                             lineHeight: '24px',
@@ -214,7 +266,6 @@ const ModeratorAppeal = () => {
                     </Text>
                     <Text
                         style={{
-                            fontFamily: 'Roboto',
                             fontWeight: '500',
                             fontSize: '16px',
                             lineHeight: '24px',
@@ -231,7 +282,7 @@ const ModeratorAppeal = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.SURVEYS_PART, {
+                    navigate(ROUTES.MODERATOR, {
                         state: {
                             surveyquest: surveyquest?.result,
                             id: id,
