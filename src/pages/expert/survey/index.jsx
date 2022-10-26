@@ -22,6 +22,8 @@ const ExpertSurvey = () => {
 
     const { data: surveyquest, isLoading } = useGetSurveyExpertIdQuery(id)
 
+    console.log(surveyquest)
+
     if (isLoading) {
         return (
             <div
@@ -56,7 +58,7 @@ const ExpertSurvey = () => {
                     </span>
                 </Title>
             </div>
-            {surveyquest.survey.unit_type === 'HARD' ? (
+            {surveyquest.survey.unit_type === 'HARD' && (
                 <div style={{ display: 'flex', marginTop: 10 }}>
                     <Title
                         level={5}
@@ -71,8 +73,6 @@ const ExpertSurvey = () => {
                         <span style={{ marginLeft: 10 }}>{surveyquest.tester_percent_score}%</span>
                     </Title>
                 </div>
-            ) : (
-                <></>
             )}
 
             {surveyquest.main_expert && (
@@ -82,8 +82,8 @@ const ExpertSurvey = () => {
                         <Title level={5} style={{ marginBottom: 20 }}>
                             Заключения по тестам
                         </Title>
-                        {surveyquest.expert_review.length &&
-                            surveyquest.expert_review.map((item, index) => (
+                        {surveyquest?.expert_review.length &&
+                            surveyquest?.expert_review.map((item, index) => (
                                 <ExpertReviewCard
                                     key={index}
                                     expert_name={item.user}

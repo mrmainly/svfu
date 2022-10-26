@@ -39,7 +39,7 @@ const PracticalPartExMo = () => {
                                       ))}
                                   </div>
                               )}
-                              {item.question?.question_files?.length && (
+                              {item.question?.question_files?.length > 0 && (
                                   <div
                                       style={{
                                           display: 'flex',

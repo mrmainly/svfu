@@ -125,7 +125,7 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
                             style={{ height: 150 }}
                         />
                     </Form.Item>
-                    {main_expert ? (
+                    {main_expert && (
                         <>
                             <Form.Item
                                 label="Результат экзамена"
@@ -139,8 +139,6 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
                             </Form.Item>
                             <Form.Item>Сумма баллов за тест: {main_score}</Form.Item>
                         </>
-                    ) : (
-                        ''
                     )}
                 </Form>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

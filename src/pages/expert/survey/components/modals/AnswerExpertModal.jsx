@@ -147,7 +147,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                             style={{ height: 150 }}
                         />
                     </Form.Item>
-                    {main_expert ? (
+                    {main_expert && (
                         <>
                             <Form.Item
                                 label="Результат практической части"
@@ -170,8 +170,6 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                                 </Radio.Group>
                             </Form.Item>
                         </>
-                    ) : (
-                        ''
                     )}
                 </Form>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -7,9 +7,9 @@ const { Text } = Typography
 
 const HardBody = ({ data, changeQuestion, arrayIndex, part, handleParts, completeConclusion }) => {
     const colorSwitchDanger = (id) => {
-        const newData = data.answers_first_part
+        const newData = data?.answers_first_part
             .map((itemAnswer) => {
-                if (itemAnswer.question_id === id) {
+                if (itemAnswer?.question_id === id) {
                     return itemAnswer.score
                 }
             })
@@ -22,6 +22,8 @@ const HardBody = ({ data, changeQuestion, arrayIndex, part, handleParts, complet
             return '#2f80ed'
         }
     }
+
+    console.log(data)
 
     return (
         <div className="survey-sidebar">
