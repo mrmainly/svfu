@@ -13,7 +13,6 @@ const { setSoftAnswerExpert } = SurveysSlice.actions
 const { Text, Title } = Typography
 
 const SoftTestExMo = ({ surveyquest }) => {
-    console.log(surveyquest)
     const role = JSON.parse(localStorage.getItem('role'))
     const dispatch = useDispatch()
     const { arrayIndex } = useSelector((state) => state.survey_slice)

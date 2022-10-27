@@ -8,7 +8,6 @@ const PracticalPartExMo = () => {
     const location = useLocation()
     const state = location.state
     const { surveyquest } = state
-    console.log(surveyquest)
     return (
         <div>
             <Form style={{ display: 'flex', flexDirection: 'column' }}>
