@@ -20,7 +20,6 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
             .reduce((prev, curr) => prev + curr, 0)
         return newArray
     }
-
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>

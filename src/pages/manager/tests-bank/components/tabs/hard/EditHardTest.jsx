@@ -31,7 +31,7 @@ const EditHardTest = ({ dataList, setOpen }) => {
     const [aas, setAs] = useState(0)
     const [es, setEs] = useState(0)
     const [pro, setPro] = useState(0)
-    const [active, setActive] = useState()
+    const [active, setActive] = useState(dataList[0].is_active)
     const { data: dataDirection } = useGetToolsDirectionQuery()
     const [patchAttestationsTestsBankId] = usePatchAttestationsTestsBankIdMutation()
     const [putAttestationsTestsBankId] = usePutAttestationsTestsBankIdMutation()
@@ -45,7 +45,7 @@ const EditHardTest = ({ dataList, setOpen }) => {
         setPro(dataList[0]?.passing_percent_score)
         setActive(dataList[0]?.is_active)
     }, [dataList])
-
+    console.log(dataList)
     const onSubmit = (data) => {
         const minutes =
             parseInt(moment(data.test_time).format('HH') * 60) +

@@ -8,7 +8,7 @@ const PracticalPartExMo = () => {
     const location = useLocation()
     const state = location.state
     const { surveyquest } = state
-
+    console.log(surveyquest)
     return (
         <div>
             <Form style={{ display: 'flex', flexDirection: 'column' }}>
@@ -49,7 +49,7 @@ const PracticalPartExMo = () => {
                                   >
                                       <Text>Прикрепленныe файлы:</Text>
                                       <div style={{ display: 'flex', marginTop: 10 }}>
-                                          {item.question.question_files.map((itemFile, index) => (
+                                          {item.question?.question_files.map((itemFile, index) => (
                                               <a
                                                   href={itemFile.file}
                                                   target="_blank"

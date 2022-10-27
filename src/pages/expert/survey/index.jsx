@@ -8,6 +8,8 @@ import { Line } from '../../../components'
 import ROUTES from '../../../routes'
 import { useGetSurveyExpertIdQuery } from '../../../services/expert/Surveys'
 import ExpertReviewCard from './components/cards/expert_review_card'
+import ExpertSoftReviewCard from './components/cards/expert_soft_review_card'
+
 import './expert.css'
 
 const { Title } = Typography
@@ -21,7 +23,6 @@ const ExpertSurvey = () => {
     const { id } = state
 
     const { data: surveyquest, isLoading } = useGetSurveyExpertIdQuery(id)
-
     if (isLoading) {
         return (
             <div
@@ -83,15 +84,25 @@ const ExpertSurvey = () => {
                             Заключения по тестам
                         </Title>
                         {surveyquest.expert_review.length &&
-                            surveyquest.expert_review.map((item, index) => (
-                                <ExpertReviewCard
-                                    key={index}
-                                    expert_name={item.user}
-                                    recommendationPartOne={item.conclusion_first_part}
-                                    recommendationPartTwo={item.conclusion_second_part}
-                                    id={item.user_id}
-                                />
-                            ))}
+                            surveyquest.expert_review.map((item, index) =>
+                                surveyquest?.survey?.unit_type === 'SOFT' ? (
+                                    <ExpertSoftReviewCard
+                                        key={index}
+                                        expert_name={item.user}
+                                        recommendationPartOne={item.conclusion_first_part}
+                                        recommendationPartTwo={item.conclusion_second_part}
+                                        id={item.user_id}
+                                    />
+                                ) : (
+                                    <ExpertReviewCard
+                                        key={index}
+                                        expert_name={item.user}
+                                        recommendationPartOne={item.conclusion_first_part}
+                                        recommendationPartTwo={item.conclusion_second_part}
+                                        id={item.user_id}
+                                    />
+                                )
+                            )}
                     </div>
                 </>
             )}

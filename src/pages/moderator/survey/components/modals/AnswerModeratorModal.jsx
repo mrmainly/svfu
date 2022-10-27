@@ -65,7 +65,6 @@ const AnswerTheoreticalPartModeratorModal = ({ id, surveyquest }) => {
             },
         },
     ]
-    console.log('dsad', surveyquest)
     return (
         <Modal
             title="Заключение"

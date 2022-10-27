@@ -44,6 +44,7 @@ const ESAddModal = ({ open, setOpen }) => {
                 message.error(res.error.data.errors[0])
             }
         })
+        console.log(data)
     }
 
     return (

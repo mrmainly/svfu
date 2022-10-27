@@ -19,7 +19,6 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
         SurveysSlice.actions
 
     const dispatch = useDispatch()
-
     const onFinishSubmit = (data) => {
         dispatch(
             setTextAnswerExpert([
@@ -33,7 +32,6 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
             if (res.data) {
                 dispatch(openExpertTheoreticalPartOpen(false))
                 dispatch(openSubscribeModal(true))
-                console.log(data)
             } else {
                 message.error('Вы не оставили рекомендацию')
             }

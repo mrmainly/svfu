@@ -13,9 +13,9 @@ const { setSoftAnswerExpert } = SurveysSlice.actions
 const { Text, Title } = Typography
 
 const SoftTestExMo = ({ surveyquest }) => {
+    console.log(surveyquest)
     const role = JSON.parse(localStorage.getItem('role'))
     const dispatch = useDispatch()
-    console.log(surveyquest)
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const columns = [
         {
@@ -162,17 +162,7 @@ const SoftTestExMo = ({ surveyquest }) => {
                                         />
                                     </div>
                                 )}
-                                {item?.hint?.length > 0 && (
-                                    <div style={{ marginTop: 20 }}>
-                                        <Text style={{ fontWeight: 'bold' }}>Шкала оценки:</Text>
-                                        <Table
-                                            columns={columns}
-                                            dataSource={item.hint}
-                                            style={{ marginTop: 12 }}
-                                            pagination={false}
-                                        ></Table>
-                                    </div>
-                                )}
+
                                 {item?.table_quest?.length > 0 && (
                                     <div style={{ marginTop: 20 }}>
                                         <Text style={{ fontWeight: 'bold' }}>
@@ -220,12 +210,13 @@ const SoftTestExMo = ({ surveyquest }) => {
                                         <Text style={{ fontWeight: 'bold' }}>
                                             Развернутый ответ аттестуемого:
                                         </Text>
-                                        {surveyquest?.answers_soft_part?.map(
-                                            (itemAnswer, index) => {
-                                                if (parseInt(itemAnswer.q_id) === item.id)
-                                                    return <Text key={index}>{itemAnswer.q_d}</Text>
+                                        <Text>
+                                            {
+                                                surveyquest?.answers_soft_part?.find(
+                                                    (itemAnswer) => itemAnswer.q_id == item.id
+                                                ).q_d
                                             }
-                                        )}
+                                        </Text>
                                     </div>
                                 )}
                                 <div
@@ -237,6 +228,17 @@ const SoftTestExMo = ({ surveyquest }) => {
                                         marginBottom: 20,
                                     }}
                                 />
+                                {item?.hint?.length > 0 && (
+                                    <div>
+                                        <Text style={{ fontWeight: 'bold' }}>Шкала оценки:</Text>
+                                        <Table
+                                            columns={columns}
+                                            dataSource={item.hint}
+                                            style={{ marginTop: 12 }}
+                                            pagination={false}
+                                        ></Table>
+                                    </div>
+                                )}
                                 {role === 'MODERATOR' &&
                                 surveyquest?.status_result !== 'CHECKED_BY_MAIN_MODERATOR' ? (
                                     <div>
@@ -273,58 +275,89 @@ const SoftTestExMo = ({ surveyquest }) => {
                                     </div>
                                 ) : role === 'EXPERT' ? (
                                     <div>
-                                        <div>
-                                            {surveyquest?.expert_review.map((itemReviewList) => {
-                                                return itemReviewList.soft_review.map(
-                                                    (itemReview, index) => {
-                                                        if (item.id == itemReview.q_id)
-                                                            return (
-                                                                <div
-                                                                    key={index}
-                                                                    style={{
-                                                                        display: 'flex',
-                                                                        flexDirection: 'column',
-                                                                        marginTop: 10,
-                                                                    }}
-                                                                >
-                                                                    <Text>
-                                                                        <span
-                                                                            style={{
-                                                                                marginRight: 10,
-                                                                                fontWeight: 'bold',
-                                                                            }}
-                                                                        >
-                                                                            Ревью эксперта:
-                                                                        </span>
-                                                                        {itemReview.comment}
-                                                                    </Text>
-                                                                    <Text style={{ marginTop: 5 }}>
-                                                                        <span
-                                                                            style={{
-                                                                                marginRight: 10,
-                                                                                fontWeight: 'bold',
-                                                                            }}
-                                                                        >
-                                                                            Выставленные баллы:
-                                                                        </span>
+                                        {surveyquest?.status_result === 'CHECKED_BY_MAIN_EXPERT' ? (
+                                            <div>
+                                                <div>
+                                                    {surveyquest?.expert_review?.map(
+                                                        (itemReviewList) => {
+                                                            return itemReviewList?.soft_review.map(
+                                                                (itemReview, index) => {
+                                                                    if (item.id == itemReview.q_id)
+                                                                        return (
+                                                                            <div
+                                                                                key={index}
+                                                                                style={{
+                                                                                    display: 'flex',
+                                                                                    flexDirection:
+                                                                                        'column',
+                                                                                    marginTop: 10,
+                                                                                }}
+                                                                            >
+                                                                                <Text
+                                                                                    style={{
+                                                                                        marginTop: 5,
+                                                                                    }}
+                                                                                >
+                                                                                    <span
+                                                                                        style={{
+                                                                                            marginRight: 10,
+                                                                                            fontWeight:
+                                                                                                'bold',
+                                                                                        }}
+                                                                                    >
+                                                                                        Выставленные
+                                                                                        баллы
+                                                                                        эксперта{' '}
+                                                                                        {
+                                                                                            itemReviewList.user_id
+                                                                                        }
+                                                                                        :
+                                                                                    </span>
 
-                                                                        {itemReview.score}
-                                                                    </Text>
-                                                                </div>
+                                                                                    {
+                                                                                        itemReview.score
+                                                                                    }
+                                                                                </Text>
+                                                                                <Text>
+                                                                                    <span
+                                                                                        style={{
+                                                                                            marginRight: 10,
+                                                                                            fontWeight:
+                                                                                                'bold',
+                                                                                        }}
+                                                                                    >
+                                                                                        Ревью
+                                                                                        эксперта{' '}
+                                                                                        {
+                                                                                            itemReviewList.user_id
+                                                                                        }
+                                                                                        :
+                                                                                    </span>
+                                                                                    {
+                                                                                        itemReview.comment
+                                                                                    }
+                                                                                </Text>
+                                                                            </div>
+                                                                        )
+                                                                }
                                                             )
-                                                    }
-                                                )
-                                            })}
-                                        </div>
-                                        <div
-                                            style={{
-                                                height: 1,
-                                                background: '#E6E6E6',
-                                                width: '100%',
-                                                marginTop: 20,
-                                                marginBottom: 20,
-                                            }}
-                                        />
+                                                        }
+                                                    )}
+                                                </div>
+                                                <div
+                                                    style={{
+                                                        height: 1,
+                                                        background: '#E6E6E6',
+                                                        width: '100%',
+                                                        marginTop: 20,
+                                                        marginBottom: 20,
+                                                    }}
+                                                />
+                                            </div>
+                                        ) : (
+                                            <></>
+                                        )}
+
                                         <Form.Item
                                             name={[index, 'q_id']}
                                             initialValue={item.id}
@@ -332,7 +365,9 @@ const SoftTestExMo = ({ surveyquest }) => {
                                         ></Form.Item>
                                         <Form.Item
                                             label={
-                                                <Text style={{ fontWeight: 'bold' }}>Оценка</Text>
+                                                <Text style={{ fontWeight: 'bold', marginTop: 12 }}>
+                                                    Оценка
+                                                </Text>
                                             }
                                             name={[index, 'score']}
                                             initialValue={0}
