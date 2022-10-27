@@ -282,14 +282,23 @@ const ModeratorAppeal = () => {
                 type="primary"
                 style={{ width: 'max-content' }}
                 onClick={() => {
-                    navigate(ROUTES.MODERATOR, {
-                        state: {
-                            surveyquest: surveyquest?.result,
-                            id: id,
-                            appeal: true,
-                            appeal_text: surveyquest?.appeal_text,
-                        },
-                    })
+                    surveyquest?.result?.survey?.unit_type === 'HARD'
+                        ? navigate(ROUTES.SURVEY_PARTS_MODERATOR, {
+                              state: {
+                                  surveyquest: surveyquest?.result,
+                                  id: id,
+                                  appeal: true,
+                                  appeal_text: surveyquest?.appeal_text,
+                              },
+                          })
+                        : navigate(ROUTES.SURVEY_PARTS_MODERATOR_SOFT, {
+                              state: {
+                                  surveyquest: surveyquest?.result,
+                                  id: id,
+                                  appeal: true,
+                                  appeal_text: surveyquest?.appeal_text,
+                              },
+                          })
                 }}
             >
                 Начать экспертизу

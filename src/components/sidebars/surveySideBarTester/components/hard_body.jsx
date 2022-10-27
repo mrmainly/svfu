@@ -130,7 +130,12 @@ const HardBodyTester = ({ dataList }) => {
                 <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} unit_type="HARD" />
             )}
             <Text style={{ fontWeight: 600 }}>{data?.name}</Text>
-
+            {part_tester === 'p-p' ? (
+                <div className="time-block">Практическая часть</div>
+            ) : (
+                <div className="time-block">Теоретическая часть</div>
+            )}
+            <div></div>
             <div className="root">
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {data?.surveyquest?.length

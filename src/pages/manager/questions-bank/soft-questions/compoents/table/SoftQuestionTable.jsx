@@ -53,12 +53,7 @@ const SoftQuestionTable = ({ data, loading, setId }) => {
                     })
                     .join(', '),
         },
-        {
-            title: 'Статус',
-            dataIndex: 'is_active',
-            key: 'is_active',
-            render: (is_active) => (is_active ? 'Активна' : 'Не активна'),
-        },
+
         {
             title: 'Действие',
             dataIndex: 'id',

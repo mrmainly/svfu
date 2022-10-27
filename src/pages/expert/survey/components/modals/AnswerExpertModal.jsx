@@ -150,6 +150,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                     {main_expert && (
                         <>
                             <Form.Item
+                                required
                                 label="Результат практической части"
                                 labelCol={{ span: 24 }}
                                 name="pass_practical_part"
@@ -160,6 +161,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
                                 </Radio.Group>
                             </Form.Item>
                             <Form.Item
+                                required
                                 label="Результат экзамена"
                                 labelCol={{ span: 24 }}
                                 name="pass_test_part"

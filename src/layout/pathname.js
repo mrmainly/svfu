@@ -102,7 +102,7 @@ export const pathname = (params) => {
                     <BsArrowLeft
                         style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px' }}
                         onClick={() => {
-                            navigate(-1)
+                            navigate('/soft-questions')
                         }}
                     />
                     <span>Редактирование soft вопрсов</span>

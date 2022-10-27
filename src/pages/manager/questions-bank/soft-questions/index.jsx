@@ -14,14 +14,11 @@ const SoftQuestions = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [id, setId] = useState('')
-    const [is_active, setIs_active] = useState('')
     const [name, setName] = useState('')
     const [direction, setDirection] = useState('')
     const { data, isFetching } = useGetSoftQuestionListQuery({
         currentPage: currentPage,
         id: id,
-
-        is_active: is_active,
         name: name,
         direction: direction,
     })
@@ -64,15 +61,6 @@ const SoftQuestions = () => {
                             {item.name}
                         </Select.Option>
                     ))}
-                </Select>
-                <Select
-                    placeholder="Статус"
-                    className="input-search"
-                    onChange={(value) => setIs_active(value)}
-                >
-                    <Select.Option value="">Все статусы</Select.Option>
-                    <Select.Option value="true">Активна</Select.Option>
-                    <Select.Option value="false">Не активна</Select.Option>
                 </Select>
             </div>
             <SoftQuestionTable data={data?.results} loading={isFetching} setId={setId} />

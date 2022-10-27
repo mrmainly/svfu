@@ -81,7 +81,7 @@ const PracticalPart = ({ id }) => {
                               <Title level={4}>Практический вопрос</Title>
                               <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
 
-                              {item?.question?.question_images.length && (
+                              {item?.question?.question_images.length > 0 && (
                                   <div style={{ display: 'flex', flexDirection: ' column' }}>
                                       {item?.question?.question_images.map((itemImage, index) => (
                                           <div
@@ -98,7 +98,7 @@ const PracticalPart = ({ id }) => {
                                       ))}
                                   </div>
                               )}
-                              {item.question?.question_files?.length && (
+                              {item.question?.question_files?.length > 0 && (
                                   <div
                                       style={{
                                           display: 'flex',

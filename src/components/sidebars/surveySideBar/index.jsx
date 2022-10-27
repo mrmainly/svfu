@@ -37,7 +37,6 @@ const SurveysSideBar = () => {
     const completeConclusion = () => {
         dispatch(openExpertTheoreticalPartOpen(true))
     }
-
     return (
         <>
             {data?.survey?.unit_type === 'HARD' ? (

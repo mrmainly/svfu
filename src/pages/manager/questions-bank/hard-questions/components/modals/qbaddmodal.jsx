@@ -235,7 +235,7 @@ const QBAddModal = ({ open, setOpen }) => {
                             <Select>
                                 <Option value="BEGINNER">Легкая</Option>
                                 <Option value="ADVANCED">Средняя</Option>
-                                <Option value="EXPERT">Тяжелая</Option>
+                                <Option value="EXPERT">Сложная</Option>
                             </Select>
                         </Form.Item>
                     ) : null}
@@ -390,7 +390,7 @@ const QBAddModal = ({ open, setOpen }) => {
                     ) : null}
                     {componentTech === 'DESCRIBE' ? (
                         <Upload action="none" {...props2} multiple={true} labelCol={{ span: 24 }}>
-                            <Button icon={<UploadOutlined />}>Загрузить</Button>
+                            <Button icon={<UploadOutlined />}>Загрузить файл</Button>
                         </Upload>
                     ) : null}
                 </Form>

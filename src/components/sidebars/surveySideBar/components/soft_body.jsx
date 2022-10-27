@@ -22,7 +22,6 @@ const SoftBody = ({ data, changeQuestion, arrayIndex, completeConclusion }) => {
             return '#2f80ed'
         }
     }
-
     return (
         <div className="survey-sidebar">
             <Text style={{ fontWeight: 600 }}>{data?.direction}</Text>

@@ -3,8 +3,8 @@ import { api } from '../../api'
 export const SoftQuestion = api.injectEndpoints({
     endpoints: (build) => ({
         getSoftQuestionList: build.query({
-            query: ({ currentPage, id, is_active, name, direction }) =>
-                `constructor/question/soft/?page=${currentPage}&ordering=${id}&is_active=${is_active}&name=${name}&direction=${direction}`,
+            query: ({ currentPage, id, name, direction }) =>
+                `constructor/question/soft/?page=${currentPage}&ordering=${id}&name=${name}&direction=${direction}`,
             providesTags: ['SoftQuestion'],
         }),
         getSoftQuestionId: build.query({

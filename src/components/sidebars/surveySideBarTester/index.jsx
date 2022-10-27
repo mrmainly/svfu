@@ -23,7 +23,6 @@ const SurveySideBarTester = () => {
             </div>
         )
     }
-
     return (
         <div>
             {data?.unit_type === 'SOFT' ? (

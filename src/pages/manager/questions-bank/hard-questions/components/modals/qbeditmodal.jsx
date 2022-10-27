@@ -17,7 +17,6 @@ import {
     Space,
 } from 'antd'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
 
 import { PlusOutlined, UploadOutlined, DeleteTwoTone } from '@ant-design/icons'
 
@@ -47,8 +46,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
     const { data: globalData } = useGetToolsDirectionQuery()
     const { data: dataList, isFetching } = useGetConstructorQuestionIdQuery({ id: id })
 
-    const navigate = useNavigate()
-
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
@@ -62,7 +59,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
     const uploadButton = (
         <div>
             <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+            <div style={{ marginTop: 8 }}>Загрузить</div>
         </div>
     )
 
@@ -82,12 +79,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
     const props2 = {
         beforeUpload: (file) => {
             setFile(file)
-            const isPDF = file.type === 'application/pdf'
-
-            if (!isPDF) {
-                message.error(`${file.name} не является pdf файлом`)
-                return isPDF || Upload.LIST_IGNORE
-            }
 
             return false
         },
@@ -118,17 +109,16 @@ const QBEditModal = ({ open, setOpen, id }) => {
             url: dataList?.question_files[0]?.file,
         },
     ]
-
+    const defualtImgList = [
+        {
+            uid: '-1',
+            name: dataList?.question_images[0]?.image,
+            status: 'done',
+            url: dataList?.question_images[0]?.image,
+        },
+    ]
+    console.log(dataList)
     const onSubmit = (data) => {
-        setOpen(false)
-        navigate('/hard-questions')
-        patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
-            if (res.data) {
-                message.success('Вопрос изменен')
-            } else {
-                message.error(res.error.data.errors[0])
-            }
-        })
         if (data?.is_active != dataList?.is_active) {
             putConstructorQuestion({ id: id }).then(() => {
                 message.success('активность')
@@ -208,6 +198,14 @@ const QBEditModal = ({ open, setOpen, id }) => {
         } else {
             data.difficulty = 'DESCRIBE'
         }
+        patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
+            if (res.data) {
+                message.success('Вопрос изменен')
+                setOpen(false)
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+        })
     }
 
     if (isFetching) {
@@ -302,7 +300,8 @@ const QBEditModal = ({ open, setOpen, id }) => {
                             multiple={false}
                             maxCount={1}
                             onRemove={() => setImg()}
-                            defaultFileList={img === null ? null : defualtFileList}
+                            defaultFileList={img === null ? null : defualtImgList}
+                            accept=".jpg,.jpeg,.png"
                         >
                             {uploadButton}
                         </Upload>
@@ -316,7 +315,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
                             <Select>
                                 <Option value="BEGINNER">Легкая</Option>
                                 <Option value="ADVANCED">Средняя</Option>
-                                <Option value="EXPERT">Тяжелая</Option>
+                                <Option value="EXPERT">Сложная</Option>
                             </Select>
                         </Form.Item>
                     ) : null}
@@ -478,7 +477,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
                             maxCount={1}
                         >
                             <Button icon={<UploadOutlined />} style={{ marginBottom: 20 }}>
-                                Upload
+                                Загрузить файл
                             </Button>
                         </Upload>
                     ) : null}
