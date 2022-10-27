@@ -57,7 +57,7 @@ const ExpertSurvey = () => {
                     </span>
                 </Title>
             </div>
-            {surveyquest.survey.unit_type === 'HARD' ? (
+            {surveyquest.survey.unit_type === 'HARD' && (
                 <div style={{ display: 'flex', marginTop: 10 }}>
                     <Title
                         level={5}
@@ -72,8 +72,6 @@ const ExpertSurvey = () => {
                         <span style={{ marginLeft: 10 }}>{surveyquest.tester_percent_score}%</span>
                     </Title>
                 </div>
-            ) : (
-                <></>
             )}
 
             {surveyquest.main_expert && (

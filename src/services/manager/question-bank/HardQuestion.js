@@ -2,6 +2,10 @@ import { api } from '../../api'
 
 export const HardQuestion = api.injectEndpoints({
     endpoints: (build) => ({
+        getConstructorQuestionId: build.query({
+            query: ({ id }) => `constructor/question/${id}`,
+            providesTags: ['ManagerConstructorQuestion'],
+        }),
         postConstructorQuestion: build.mutation({
             query(body) {
                 return {
@@ -67,6 +71,7 @@ export const HardQuestion = api.injectEndpoints({
 })
 
 export const {
+    useGetConstructorQuestionIdQuery,
     usePostConstructorQuestionMutation,
     usePostConstructorAnswerQuestionMutation,
     usePutConstructorQuestionMutation,

@@ -41,7 +41,7 @@ const ESAddModal = ({ open, setOpen }) => {
                 message.success('Экзамен создан')
                 setOpen(false)
             } else {
-                message.error(res.error.data.errors[0])
+                message.error('Экзамен не создан')
             }
         })
     }

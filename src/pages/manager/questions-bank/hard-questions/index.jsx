@@ -96,11 +96,13 @@ const HardQuestions = () => {
                     <Select.Option value="DESCRIBE">Открытый</Select.Option>
                 </Select>
             </div>
-            <QBEditModal
-                open={modalEditQuestionsBank}
-                setOpen={setModalEditQuestionsBank}
-                dataList={currentData}
-            />
+            {modalEditQuestionsBank && (
+                <QBEditModal
+                    open={modalEditQuestionsBank}
+                    setOpen={setModalEditQuestionsBank}
+                    id={currentData?.id}
+                />
+            )}
             <LazyQBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
             <QuestionsBankTable
                 data={data?.results}

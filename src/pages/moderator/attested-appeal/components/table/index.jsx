@@ -65,7 +65,7 @@ const AppealTable = ({ data, loading, setOrdering }) => {
             dataIndex: 'status',
             key: 'x',
             render: (status, record) =>
-                status === 'WAITING' ? (
+                status === 'WAITING' && record.result.main_moderator ? (
                     <Button
                         type="primary"
                         onClick={() => {

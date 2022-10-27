@@ -13,7 +13,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
 
     const sum = (question_id, array) => {
         const newArray = array
-            .map((itemAnswer) => {
+            ?.map((itemAnswer) => {
                 if (itemAnswer.question_id === question_id) return itemAnswer.score
             })
             .filter((element) => element != undefined)
@@ -40,7 +40,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                             <div style={{ marginTop: 10 }}>
                                 {item.question.technique === 'ONE_CHOICE' ? (
                                     <Space direction="vertical">
-                                        {item.question.variant.map((item, index) => (
+                                        {item?.question?.variant.map((item, index) => (
                                             <Text key={index}>
                                                 {item.name}
                                                 <span style={{ marginLeft: 3, fontWeight: 'bold' }}>
@@ -57,7 +57,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                                             marginTop: '-10px',
                                         }}
                                     >
-                                        {item.question.variant.map((item, index) => (
+                                        {item?.question?.variant.map((item, index) => (
                                             <Text
                                                 style={{
                                                     marginTop: 10,

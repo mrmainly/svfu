@@ -15,6 +15,7 @@ const { Text, Title } = Typography
 const SoftTestExMo = ({ surveyquest }) => {
     const role = JSON.parse(localStorage.getItem('role'))
     const dispatch = useDispatch()
+
     const { arrayIndex } = useSelector((state) => state.survey_slice)
     const columns = [
         {
@@ -191,7 +192,7 @@ const SoftTestExMo = ({ surveyquest }) => {
                                             (itemAnswer, index) => {
                                                 if (parseInt(itemAnswer.q_id) === item.id)
                                                     return (
-                                                        <Text key={index}>{itemAnswer.q_a}; </Text>
+                                                        <Text key={index}>{itemAnswer.q_a} </Text>
                                                     )
                                             }
                                         )}

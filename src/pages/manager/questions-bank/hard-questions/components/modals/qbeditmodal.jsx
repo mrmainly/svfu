@@ -12,9 +12,9 @@ import {
     message,
     Radio,
     Checkbox,
-    Space,
     Switch,
-    Typography,
+    Spin,
+    Space,
 } from 'antd'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
@@ -35,6 +35,7 @@ import {
     usePatchConstructorQuestionMutation,
     usePatchConstructorAnswerMutation,
     useDeleteConstructorAnswerMutation,
+    useGetConstructorQuestionIdQuery,
 } from '../../../../../../services/manager/question-bank/HardQuestion'
 import { usePatchQuestionSoftFileMutation } from '../../../../../../services/manager/question-bank/SoftQuestion'
 
@@ -42,22 +43,20 @@ import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsServi
 
 const { Option } = Select
 const { TextArea } = Input
-const QBEditModal = ({ open, setOpen, dataList }) => {
+const QBEditModal = ({ open, setOpen, id }) => {
     const { data: globalData } = useGetToolsDirectionQuery()
+    const { data: dataList, isFetching } = useGetConstructorQuestionIdQuery({ id: id })
 
     const navigate = useNavigate()
 
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
-    const [active, setActive] = useState()
     const [file, setFile] = useState('')
     useEffect(() => {
         setComponentTech(dataList?.technique)
         setRadioId(dataList?.variant?.findIndex((item) => item.is_true))
         setImg(dataList?.question_images.length !== 0 ? dataList?.question_images[0].image : null)
-
-        setActive(dataList?.is_active)
     }, [dataList])
 
     const uploadButton = (
@@ -123,8 +122,17 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
     const onSubmit = (data) => {
         setOpen(false)
         navigate('/hard-questions')
-        if (dataList?.is_active != active) {
-            putConstructorQuestion({ id: dataList?.id })
+        patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
+            if (res.data) {
+                message.success('Вопрос изменен')
+            } else {
+                message.error(res.error.data.errors[0])
+            }
+        })
+        if (data?.is_active != dataList?.is_active) {
+            putConstructorQuestion({ id: id }).then(() => {
+                message.success('активность')
+            })
         }
         if (data.technique === 'DESCRIBE') {
             if (typeof file === 'object' && dataList?.question_files[0]?.file) {
@@ -200,14 +208,10 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
         } else {
             data.difficulty = 'DESCRIBE'
         }
+    }
 
-        patchConstructorQuestion({ id: dataList?.id, body: data }).then((res) => {
-            if (res.data) {
-                message.success('Вопрос изменен')
-            } else {
-                message.error(res.error.data.errors[0])
-            }
-        })
+    if (isFetching) {
+        return <div></div>
     }
 
     return (
@@ -237,6 +241,18 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                     </MyButton>,
                 ]}
             >
+                {isFetching && (
+                    <Spin
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            zIndex: 1,
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                        }}
+                        size="large"
+                    />
+                )}
                 <Form
                     layout="vertical"
                     initialValues={{
@@ -245,9 +261,11 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                         ['description']: dataList?.description,
                         ['difficulty']: dataList?.difficulty,
                         ['variant']: dataList?.variant,
+                        ['is_active']: dataList?.is_active,
                     }}
                     onFinish={onSubmit}
                     id="qbedit-form"
+                    style={{ opacity: isFetching ? 0.5 : 1 }}
                 >
                     <Form.Item label="Квалификация вопроса" name="direction">
                         <Select
@@ -458,19 +476,17 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
                             defaultFileList={dataList?.question_files[0]?.file && defualtFileList}
                             multiple={false}
                             maxCount={1}
-                            //  onChange={handleChange}
                         >
-                            <Button icon={<UploadOutlined />}>Upload</Button>
+                            <Button icon={<UploadOutlined />} style={{ marginBottom: 20 }}>
+                                Upload
+                            </Button>
                         </Upload>
                     ) : null}
                     <Space align="baseline">
-                        <Switch
-                            defaultChecked={active}
-                            onChange={(e) => {
-                                setActive(e)
-                            }}
-                        />
-                        <Typography>Активность квалификации</Typography>
+                        <Form.Item name="is_active" valuePropName="checked" noStyle>
+                            <Switch checkedChildren="Yes" unCheckedChildren="No" />
+                        </Form.Item>
+                        <span>Активность квалификации</span>
                     </Space>
                 </Form>
             </Modal>
@@ -481,7 +497,7 @@ const QBEditModal = ({ open, setOpen, dataList }) => {
 QBEditModal.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
-    dataList: PropTypes.object,
+    id: PropTypes.number,
 }
 
 export default QBEditModal

@@ -17,8 +17,6 @@ const SurveyPartsSoft = () => {
 
     const { surveyquest, id } = state
 
-    console.log('data', surveyquest)
-
     return (
         <div>
             <div
