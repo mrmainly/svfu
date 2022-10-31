@@ -54,6 +54,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
         setComponentTech(dataList?.technique)
         setRadioId(dataList?.variant?.findIndex((item) => item.is_true))
         setImg(dataList?.question_images.length !== 0 ? dataList?.question_images[0].image : null)
+        setFile(dataList?.question_files[0]?.file)
     }, [dataList])
 
     const uploadButton = (
@@ -140,7 +141,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
                         message.error('Файл не корректно загружен')
                     }
                 })
-            } else if (dataList?.question_files[0]?.file && typeof file == 'string') {
+            } else if (dataList?.question_files[0]?.file && file === '') {
                 deleteFile(dataList?.question_files[0].id)
             }
         }
@@ -474,13 +475,14 @@ const QBEditModal = ({ open, setOpen, id }) => {
                             defaultFileList={dataList?.question_files[0]?.file && defualtFileList}
                             multiple={false}
                             maxCount={1}
+                            style={{marginBottom: 10}}
                         >
-                            <Button icon={<UploadOutlined />} style={{ marginBottom: 20 }}>
+                            <Button icon={<UploadOutlined />}>
                                 Загрузить файл
                             </Button>
                         </Upload>
                     ) : null}
-                    <Space align="baseline">
+                    <Space align="baseline" style={{marginTop: 20}}>
                         <Form.Item name="is_active" valuePropName="checked" noStyle>
                             <Switch checkedChildren="Yes" unCheckedChildren="No" />
                         </Form.Item>
