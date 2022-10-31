@@ -35,7 +35,7 @@ const UserChangeModal = ({ open, setOpen, data }) => {
             <Modal
                 style={{ top: 0 }}
                 destroyOnClose={true}
-                title="Создание пользователя"
+                title="Редактирование пользователя"
                 visible={open}
                 onOk={() => {
                     setOpen(false)
