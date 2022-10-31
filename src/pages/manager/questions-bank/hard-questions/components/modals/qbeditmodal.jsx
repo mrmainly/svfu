@@ -30,7 +30,7 @@ import {
 } from '../../../../../../services/manager/question-bank'
 import {
     usePostConstructorAnswerQuestionMutation,
-    usePutConstructorQuestionMutation,
+    
     usePatchConstructorQuestionMutation,
     usePatchConstructorAnswerMutation,
     useDeleteConstructorAnswerMutation,
@@ -96,7 +96,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
     const [patchConstructorQuestion] = usePatchConstructorQuestionMutation()
     const [patchConstructorQuestionIdImage] = usePatchConstructorQuestionIdImageMutation()
     const [patchConstructorAnswer] = usePatchConstructorAnswerMutation()
-    const [putConstructorQuestion] = usePutConstructorQuestionMutation()
     const [deleteFile] = useDeleteConstructorQuestionIdFileMutation()
     const [deleteImage] = useDeleteConstructorQuestionIdImageMutation()
     const [deleteAnswer] = useDeleteConstructorAnswerMutation()
@@ -119,11 +118,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
         },
     ]
     const onSubmit = (data) => {
-        if (data?.is_active != dataList?.is_active) {
-            putConstructorQuestion({ id: id }).then(() => {
-                message.success('активность')
-            })
-        }
         if (data.technique === 'DESCRIBE') {
             if (typeof file === 'object' && dataList?.question_files[0]?.file) {
                 const formData = new FormData()

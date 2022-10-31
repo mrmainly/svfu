@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { useState, useEffect } from 'react'
-import { Input, Form, Select, Radio, Button, Typography, Upload, message, Spin } from 'antd'
+import { Input, Form, Select, Radio, Button, Typography, Upload, message, Spin, Space, Switch } from 'antd'
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons'
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -142,6 +142,7 @@ const EditSoftQuestion = () => {
 
     const onFinish = (formSoftData) => {
         const { table_quest, variants, hint, image, ...rest } = formSoftData
+    
         patchConstructorSoft({
             body: {
                 table_quest: table_quest ? table_quest : [],
@@ -219,6 +220,7 @@ const EditSoftQuestion = () => {
                     ['hint']: data?.hint,
                     ['is_describe']: data.is_describe,
                     ['table_quest']: data?.table_quest,
+                    ['is_active']: data?.is_active
                 }}
             >
                 <Form.Item
@@ -355,8 +357,13 @@ const EditSoftQuestion = () => {
                         <ScoringPoints handleShowScoringPoints={handleShowScoringPoints} />
                     )}
                 </Form.Item>
-
-                <MyButton htmlType="submit">Сохранить</MyButton>
+                <Space align="baseline" style={{marginTop: '-20px'}}>
+                        <Form.Item name="is_active" valuePropName="checked" noStyle>
+                            <Switch checkedChildren="Yes" unCheckedChildren="No" />
+                        </Form.Item>
+                        <span>Активность квалификации</span>
+                </Space>
+                <MyButton htmlType="submit" style={{marginTop: 20}}>Сохранить</MyButton>
             </Form>
         </div>
     )

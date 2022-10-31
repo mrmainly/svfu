@@ -37,6 +37,7 @@ const SoftQuestionTable = ({ data, loading, setId }) => {
             title: 'Название вопроса',
             dataIndex: 'name',
             key: 'name',
+            width: 700,
         },
         {
             title: 'Квалификации',
