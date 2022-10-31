@@ -19,7 +19,6 @@ const SurveyParts = () => {
 
     const { surveyquest, id } = state
     const { part } = useSelector((state) => state.survey_slice)
-    console.log('unit', surveyquest?.survey?.unit_type)
 
     return (
         <div>

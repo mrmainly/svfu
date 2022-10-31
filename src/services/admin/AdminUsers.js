@@ -11,7 +11,7 @@ export const AdminUsers = api.injectEndpoints({
         //пользователь
         getAdminUserId: build.query({
             query: ({ id }) => `admin/admin/users/${id}`,
-            providesTags: ['Admin'],
+            providesTags: ['Admin', 'AdminUser'],
         }),
         //создание пользователя
         postUser: build.mutation({

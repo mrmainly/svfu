@@ -205,7 +205,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
     if (isFetching) {
         return <div></div>
     }
-    console.log(dataList)
     return (
         <div>
             <Modal
@@ -469,14 +468,12 @@ const QBEditModal = ({ open, setOpen, id }) => {
                             defaultFileList={dataList?.question_files[0]?.file && defualtFileList}
                             multiple={false}
                             maxCount={1}
-                            style={{marginBottom: 10}}
+                            style={{ marginBottom: 10 }}
                         >
-                            <Button icon={<UploadOutlined />}>
-                                Загрузить файл
-                            </Button>
+                            <Button icon={<UploadOutlined />}>Загрузить файл</Button>
                         </Upload>
                     ) : null}
-                    <Space align="baseline" style={{marginTop: 20}}>
+                    <Space align="baseline" style={{ marginTop: 20 }}>
                         <Form.Item name="is_active" valuePropName="checked" noStyle>
                             <Switch checkedChildren="Yes" unCheckedChildren="No" />
                         </Form.Item>

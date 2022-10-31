@@ -5,7 +5,7 @@ export const Results = api.injectEndpoints({
         //результат теста
         getTestResultsID: build.query({
             query: ({ id }) => `tester/result/${id}`,
-            providesTags: ['Appeal'],
+            providesTags: ['Appeal', 'SURVEYS_TESTER'],
         }),
         //подать апелляцию
         appealPost: build.mutation({
