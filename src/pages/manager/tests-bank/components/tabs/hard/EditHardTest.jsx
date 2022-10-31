@@ -45,7 +45,6 @@ const EditHardTest = ({ dataList, setOpen }) => {
         setPro(dataList[0]?.passing_percent_score)
         setActive(dataList[0]?.is_active)
     }, [dataList])
-    console.log(dataList)
     const onSubmit = (data) => {
         const minutes =
             parseInt(moment(data.test_time).format('HH') * 60) +

@@ -159,24 +159,24 @@ const CreateSoftQuestion = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Задание"
-                    name="name"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Напишите задание',
-                        },
-                    ]}
-                >
-                    <TextArea />
-                </Form.Item>
-                <Form.Item
                     label="Описание"
                     name="description"
                     rules={[
                         {
                             required: true,
                             message: 'Напишите описание',
+                        },
+                    ]}
+                >
+                    <TextArea />
+                </Form.Item>
+                <Form.Item
+                    label="Задание"
+                    name="name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Напишите задание',
                         },
                     ]}
                 >
@@ -234,7 +234,7 @@ const CreateSoftQuestion = () => {
                         listType="picture-card"
                         multiple={false}
                         maxCount={1}
-                        accept=".png,.jpg"
+                        accept=".jpg,.jpeg,.png"
                     >
                         {uploadButton}
                     </Upload>

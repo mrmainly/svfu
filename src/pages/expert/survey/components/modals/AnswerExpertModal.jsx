@@ -20,6 +20,7 @@ const AnswerTheoreticalPartExpertModal = ({ id, expert_review, main_expert }) =>
     const dispatch = useDispatch()
 
     const onFinishSubmit = (data) => {
+        console.log(data)
         dispatch(
             setTextAnswerExpert([
                 data.conclusion_first_part,

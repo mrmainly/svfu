@@ -86,7 +86,7 @@ const AttestationProtocol = () => {
             title: 'Дата формирования',
             dataIndex: 'created',
             key: 'created',
-            render: (date) => (date ? moment(date).format('DD.MM.YYYY, hh:mm') : '-'),
+            render: (date) => (date ? moment(date).format('DD.MM.YYYY, HH:mm') : '-'),
         },
         {
             title: 'Действие',

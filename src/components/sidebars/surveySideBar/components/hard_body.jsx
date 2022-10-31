@@ -23,8 +23,6 @@ const HardBody = ({ data, changeQuestion, arrayIndex, part, handleParts, complet
         }
     }
 
-    console.log(data)
-
     return (
         <div className="survey-sidebar">
             <Text style={{ fontWeight: 600 }}>{data?.direction}</Text>

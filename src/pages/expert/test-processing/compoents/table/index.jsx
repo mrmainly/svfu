@@ -33,7 +33,7 @@ const TestProcessingTable = ({ data, loading, setOrdering }) => {
             sorter: true,
         },
         {
-            title: 'Название тестирования',
+            title: 'Название квалификации',
             dataIndex: 'direction',
             key: 'direction',
         },
@@ -54,7 +54,7 @@ const TestProcessingTable = ({ data, loading, setOrdering }) => {
             title: 'Дата выдачи теста',
             dataIndex: 'exam_date_start',
             key: 'exam_date_start',
-            render: (exam_date_start) => moment(exam_date_start).format('DD.MM.YYYY, hh:mm'),
+            render: (exam_date_start) => moment(exam_date_start).format('DD.MM.YYYY, HH:mm'),
         },
         {
             title: 'Статус',

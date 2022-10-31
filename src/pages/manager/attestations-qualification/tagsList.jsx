@@ -48,7 +48,7 @@ const TagsList = () => {
             </MyButton>
             <div className="inputs-container">
                 <Input.Search
-                    placeholder="Квалификация"
+                    placeholder="Тег"
                     enterButton
                     onSearch={(value) => {
                         const currValue = value

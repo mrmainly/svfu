@@ -37,7 +37,7 @@ const ExpertSurvey = () => {
             </div>
         )
     }
-
+    console.log(surveyquest)
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', marginTop: 10 }}>
@@ -53,7 +53,7 @@ const ExpertSurvey = () => {
                 <Title level={5}>
                     Тест был начат:
                     <span style={{ marginLeft: 10 }}>
-                        {moment(surveyquest.exam_date_start).format('DD-MM-YYYY HH:mm:ss')}
+                        {moment(surveyquest.created).format('DD-MM-YYYY HH:mm:ss')}
                     </span>
                 </Title>
             </div>

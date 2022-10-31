@@ -27,7 +27,7 @@ const TagsTable = ({ data, loading, setCurrentData, handleOpen, setId }) => {
             sorter: true,
         },
         {
-            title: 'Название квалификации',
+            title: 'Название тега',
             dataIndex: 'name',
             key: 'name',
         },

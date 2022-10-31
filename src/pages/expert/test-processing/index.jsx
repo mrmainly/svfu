@@ -87,7 +87,7 @@ const TestProcessing = () => {
         <div>
             <div className="inputs-container">
                 <Input.Search
-                    placeholder="Тестирование"
+                    placeholder="Квалификация"
                     enterButton
                     onSearch={(value) => {
                         const currValue = value

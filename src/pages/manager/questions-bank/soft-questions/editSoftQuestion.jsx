@@ -204,7 +204,6 @@ const EditSoftQuestion = () => {
             }
         })
     }
-
     return (
         <div>
             <Form
@@ -241,24 +240,24 @@ const EditSoftQuestion = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Задание"
-                    name="name"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Напишите задание',
-                        },
-                    ]}
-                >
-                    <TextArea />
-                </Form.Item>
-                <Form.Item
                     label="Описание"
                     name="description"
                     rules={[
                         {
                             required: true,
                             message: 'Напишите описание',
+                        },
+                    ]}
+                >
+                    <TextArea />
+                </Form.Item>
+                <Form.Item
+                    label="Задание"
+                    name="name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Напишите задание',
                         },
                     ]}
                 >
@@ -317,6 +316,7 @@ const EditSoftQuestion = () => {
                         multiple={false}
                         maxCount={1}
                         onRemove={() => setImg()}
+                        accept=".jpg,.jpeg,.png"
                         defaultFileList={
                             data?.question_images?.length === 0 ? null : defualtImgList
                         }

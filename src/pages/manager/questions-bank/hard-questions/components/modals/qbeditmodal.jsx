@@ -117,7 +117,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
             url: dataList?.question_images[0]?.image,
         },
     ]
-    console.log(dataList)
     const onSubmit = (data) => {
         if (data?.is_active != dataList?.is_active) {
             putConstructorQuestion({ id: id }).then(() => {
@@ -211,7 +210,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
     if (isFetching) {
         return <div></div>
     }
-
+    console.log(dataList)
     return (
         <div>
             <Modal

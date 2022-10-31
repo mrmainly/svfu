@@ -257,7 +257,7 @@ const SoftTestExMo = ({ surveyquest }) => {
                                                 }
                                             )}
                                         </div>
-                                        <div style={{ marginTop: 20 }}>
+                                        <div>
                                             <Text style={{ fontWeight: 'bold' }}>
                                                 Комментарий председателя экспертов:{' '}
                                             </Text>

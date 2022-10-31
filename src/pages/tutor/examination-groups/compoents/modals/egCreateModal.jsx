@@ -78,7 +78,7 @@ const EgCreateModal = ({ open, setOpen, direction }) => {
                 <Form layout="vertical" onFinish={onSubmit} id="egCreate-form">
                     <Form.Item label="Квалификация" name="direction">
                         <Select
-                            placeholder="Выберите тег"
+                            placeholder="Выберите квалификацию"
                             onChange={(e) => {
                                 setId(e)
                             }}

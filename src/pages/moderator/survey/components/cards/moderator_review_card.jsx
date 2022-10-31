@@ -35,6 +35,7 @@ const ModeratorReviewCard = ({ moderator_name, recommendation, estimate }) => {
                 </Text>
                 <Text
                     style={{
+                        width: 'calc(100% - 120px - 16px)',
                         fontFamily: 'Roboto',
                         fontWeight: '500',
                         fontSize: '16px',
@@ -58,6 +59,7 @@ const ModeratorReviewCard = ({ moderator_name, recommendation, estimate }) => {
                 </Text>
                 <Text
                     style={{
+                        width: 'calc(100% - 120px - 16px)',
                         fontFamily: 'Roboto',
                         fontWeight: '500',
                         fontSize: '16px',

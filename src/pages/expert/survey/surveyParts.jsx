@@ -19,6 +19,7 @@ const SurveyParts = () => {
 
     const { surveyquest, id } = state
     const { part } = useSelector((state) => state.survey_slice)
+    console.log('unit', surveyquest?.survey?.unit_type)
 
     return (
         <div>
@@ -55,7 +56,11 @@ const SurveyParts = () => {
                 expert_review={surveyquest?.expert_review}
                 main_expert={surveyquest.main_expert}
             />
-            <VerificationSubscribeModal id={id} main_expert={surveyquest?.main_expert} />
+            <VerificationSubscribeModal
+                id={id}
+                main_expert={surveyquest?.main_expert}
+                unit_type={surveyquest?.survey?.unit_type}
+            />
             {part === 'theoretical-part' ? (
                 <TheoreticalPartExMo surveyquest={surveyquest} />
             ) : (

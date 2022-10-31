@@ -113,14 +113,14 @@ const LprExam = () => {
             dataIndex: 'date_start',
             key: 'date_start',
             render: (date_start) =>
-                date_start ? moment(date_start).format('DD.MM.YYYY, hh:mm') : '-',
+                date_start ? moment(date_start).format('DD.MM.YYYY, HH:mm') : '-',
         },
         {
             title: 'Конец',
             dataIndex: 'date_finish',
             key: 'date_finish',
             render: (date_finish) =>
-                date_finish ? moment(date_finish).format('DD.MM.YYYY, hh:mm') : '-',
+                date_finish ? moment(date_finish).format('DD.MM.YYYY, HH:mm') : '-',
         },
         {
             title: 'Статус',

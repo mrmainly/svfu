@@ -46,8 +46,6 @@ const ModeratorAppeal = () => {
         },
     ]
 
-    console.log(surveyquest)
-
     if (isLoading) {
         return (
             <div
