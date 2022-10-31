@@ -37,7 +37,6 @@ const ExpertSurvey = () => {
             </div>
         )
     }
-    console.log(surveyquest)
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', marginTop: 10 }}>

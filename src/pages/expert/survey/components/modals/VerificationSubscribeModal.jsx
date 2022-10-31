@@ -77,7 +77,6 @@ const VerificationSubscribeModal = ({ id, main_expert, unit_type }) => {
     const handleClose = () => {
         dispatch(openSubscribeModal(false))
     }
-    console.log('pass', unit_type)
 
     return (
         <>
