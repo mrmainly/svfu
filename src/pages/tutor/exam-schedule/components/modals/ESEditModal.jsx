@@ -197,9 +197,9 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                     <Form.List name="experts">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={index}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -208,8 +208,8 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Эксперт ${key + 1} `}
-                                            name={key}
+                                            label={`Эксперт ${index + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
@@ -223,7 +223,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
@@ -256,9 +256,9 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                     <Form.List name="moderators">
                         {(fields, { add, remove }) => (
                             <>
-                                {fields.map(({ key, name }) => (
+                                {fields.map((field, index) => (
                                     <div
-                                        key={key}
+                                        key={index}
                                         style={{
                                             width: '100%',
                                             display: 'flex',
@@ -267,8 +267,8 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                         }}
                                     >
                                         <Form.Item
-                                            label={`Модератор ${key + 1} `}
-                                            name={key}
+                                            label={`Модератор ${index + 1} `}
+                                            name={index}
                                             style={{ width: '100%', marginRight: 20 }}
                                             required
                                         >
@@ -282,7 +282,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                         </Form.Item>
                                         <DeleteTwoTone
                                             twoToneColor="#EB5757"
-                                            onClick={() => remove(name)}
+                                            onClick={() => remove(field.name)}
                                         />
                                     </div>
                                 ))}
