@@ -49,12 +49,13 @@ const QBEditModal = ({ open, setOpen, id }) => {
     const [img, setImg] = useState()
     const [componentTech, setComponentTech] = useState()
     const [radioId, setRadioId] = useState('')
-    const [file, setFile] = useState('')
+    const [file, setFile] = useState(null)
     useEffect(() => {
         setComponentTech(dataList?.technique)
         setRadioId(dataList?.variant?.findIndex((item) => item.is_true))
         setImg(dataList?.question_images.length !== 0 ? dataList?.question_images[0].image : null)
-        setFile(dataList?.question_files[0]?.file)
+    
+        console.log('data', dataList)
     }, [dataList])
 
     const uploadButton = (
@@ -109,6 +110,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
             url: dataList?.question_files[0]?.file,
         },
     ]
+    console.log('file',file)
     const defualtImgList = [
         {
             uid: '-1',
@@ -117,6 +119,11 @@ const QBEditModal = ({ open, setOpen, id }) => {
             url: dataList?.question_images[0]?.image,
         },
     ]
+
+    const handleDeleteFile = () => {
+        deleteFile(dataList?.question_files[0].id)
+    }
+
     const onSubmit = (data) => {
         if (data.technique === 'DESCRIBE') {
             if (typeof file === 'object' && dataList?.question_files[0]?.file) {
@@ -135,8 +142,6 @@ const QBEditModal = ({ open, setOpen, id }) => {
                         message.error('Файл не корректно загружен')
                     }
                 })
-            } else if (dataList?.question_files[0]?.file && file === '') {
-                deleteFile(dataList?.question_files[0].id)
             }
         }
 
@@ -469,6 +474,7 @@ const QBEditModal = ({ open, setOpen, id }) => {
                             multiple={false}
                             maxCount={1}
                             style={{ marginBottom: 10 }}
+                            onRemove={() => handleDeleteFile()}
                         >
                             <Button icon={<UploadOutlined />}>Загрузить файл</Button>
                         </Upload>
