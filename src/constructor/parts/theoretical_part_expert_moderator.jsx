@@ -1,4 +1,4 @@
-import { Typography, Space } from 'antd'
+import { Typography, Space, Table } from 'antd'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -20,6 +20,41 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
             .reduce((prev, curr) => prev + curr, 0)
         return newArray
     }
+    const columns = [
+        {
+            title: 'Вариант ответа',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'Правильный вариант',
+            dataIndex: 'is_true',
+            key: 'is_true',
+            width: 10,
+            fixed: 'right',
+            render: (is_true) => (is_true === true ? 'Да' : 'Нет'),
+        },
+        {
+            title: 'Ответ аттестуемого',
+            dataIndex: 'answer',
+            key: 'answer',
+            width: 10,
+            fixed: 'right',
+            render: (name, record) => {
+                let answer
+                surveyquest?.answers_first_part?.map((itemAnswer) => {
+                    if (record.id === itemAnswer.answer_id) {
+                        answer = true
+                    }
+                })
+                if (!answer) {
+                    return '-'
+                } else {
+                    return <Text>Ответил</Text>
+                }
+            },
+        },
+    ]
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -34,10 +69,16 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                         >
                             <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
                             <Text style={{ marginTop: 12 }}>{item.question.description}</Text>
-                            <Text style={{ marginTop: 20, fontWeight: 'bold' }}>
+                            {/* <Text style={{ marginTop: 20, fontWeight: 'bold' }}>
                                 Варианты ответа:
-                            </Text>
-                            <div style={{ marginTop: 10 }}>
+                            </Text> */}
+                            <Table
+                                style={{ marginTop: 20 }}
+                                columns={columns}
+                                dataSource={item?.question?.variant}
+                                pagination={false}
+                            />
+                            {/* <div style={{ marginTop: 10 }}>
                                 {item.question.technique === 'ONE_CHOICE' ? (
                                     <Space direction="vertical">
                                         {item?.question?.variant.map((item, index) => (
@@ -73,7 +114,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                                         ))}
                                     </div>
                                 )}
-                            </div>
+                            </div> */}
                             <div
                                 style={{
                                     height: 1,
@@ -84,7 +125,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                                 }}
                             />
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <div className="answer-user-block">
+                                {/* <div className="answer-user-block">
                                     <Text>Ответ аттестуемого:</Text>
                                     {surveyquest?.answers_first_part?.map((itemAnswer, index) => {
                                         if (itemAnswer.question_id === item.question.id)
@@ -94,7 +135,7 @@ const TheoreticalPartExMo = ({ surveyquest }) => {
                                                 </Text>
                                             )
                                     })}
-                                </div>
+                                </div> */}
                                 <Space style={{ marginTop: 10 }}>
                                     <Text>Балл:</Text>
                                     {sum(item.question.id, surveyquest.answers_first_part)}
