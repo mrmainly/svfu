@@ -6,7 +6,7 @@ import { SubMenuItem, MenuSection, ReusableMenu } from './compoents'
 const Tutor = (navigate) => {
     return [
         MenuSection('Аттестация', 'submenu-1', <BsPeople />, [
-            SubMenuItem('A', 'Аттестируемые', 'submenu-item-1-1', ROUTES.CERTIFIED, navigate),
+            SubMenuItem('A', 'Аттестуемые', 'submenu-item-1-1', ROUTES.CERTIFIED, navigate),
             SubMenuItem(
                 'ЭГ',
                 'Заявки пользователей',
