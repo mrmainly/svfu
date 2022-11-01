@@ -42,7 +42,7 @@ const TestsBank = () => {
             </MyButton>
             <div className="inputs-container">
                 <Input.Search
-                    placeholder="Название квалификации"
+                    placeholder="Название теста"
                     enterButton
                     onSearch={(value) => {
                         const currValue = value
