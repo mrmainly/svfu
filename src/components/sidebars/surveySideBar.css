@@ -47,6 +47,7 @@
 
 .survey-sidebar {
     margin-left: 28px;
+    width: 240px
 }
 
 @media only screen and (max-width: 768px) {

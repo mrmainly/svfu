@@ -61,7 +61,6 @@ const SoftPart = ({ softquestions, id }) => {
         setOpenModal(true)
         setPostList(postData)
     }
-
     return (
         <div>
             <TheoreticalAnswerModal

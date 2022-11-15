@@ -133,7 +133,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                             <Text style={{ fontWeight: 600, fontSize: 16 }}>Номер документа</Text>
                         }
                         name="doc_id"
-                        style={{ width: 350 }}
+                        style={{ width: 350, fontWeight: 600, fontSize: 16 }}
                     >
                         <Text style={{ fontWeight: 400, fontSize: 16 }}>{dataList?.id}</Text>
                     </Form.Item>
@@ -144,7 +144,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                             </Text>
                         }
                         name="name"
-                        style={{ width: 350 }}
+                        style={{ width: 350, fontWeight: 600, fontSize: 16 }}
                         labelCol={{ span: 24 }}
                     >
                         <Input size="large" />
@@ -152,11 +152,11 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                     <Form.Item
                         label={
                             <Text style={{ fontWeight: 600, fontSize: 16 }}>
-                                Дата выдачи документа:
+                                Дата выдачи документа
                             </Text>
                         }
                         name="created"
-                        style={{ width: 350 }}
+                        style={{ width: 350, fontWeight: 600, fontSize: 16 }}
                     >
                         <Text style={{ fontWeight: 400, fontSize: 16 }}>
                             {dataList?.created.substring(0, 10)}
@@ -186,7 +186,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                         labelCol={{ span: 24 }}
                         required
                         label={
-                            <Text style={{ fontWeight: 600, fontSize: 16 }}>Загрузить файл:</Text>
+                            <Text style={{ fontWeight: 600, fontSize: 16 }}>Загрузить файл</Text>
                         }
                     >
                         <Upload

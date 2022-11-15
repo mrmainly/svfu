@@ -40,7 +40,7 @@ const TestResult = () => {
 
     const items = [
         {
-            label: 'Квалификация',
+            label: 'Квалификация:',
             value: dataResult?.survey?.name,
         },
         {
@@ -52,7 +52,7 @@ const TestResult = () => {
             value: moment(dataResult?.finish_date).format('DD.MM.YYYY, HH:mm'),
         },
         {
-            label: 'Итоговые балыы:',
+            label: 'Итоговые баллы:',
             value: `${dataResult?.first_part_score}/${dataResult?.max_score} (${dataResult?.tester_percent_score}%)`,
             color: '#219653',
         },
@@ -77,7 +77,6 @@ const TestResult = () => {
             ),
         },
     ]
-
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div

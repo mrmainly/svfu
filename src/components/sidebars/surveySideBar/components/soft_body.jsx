@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { Typography, Button } from 'antd'
+import { Button } from 'antd'
 import { PropTypes } from 'prop-types'
 
-const { Text } = Typography
 
 const SoftBody = ({ data, changeQuestion, arrayIndex, completeConclusion }) => {
     const colorSwitchDanger = (id) => {
@@ -24,7 +23,6 @@ const SoftBody = ({ data, changeQuestion, arrayIndex, completeConclusion }) => {
     }
     return (
         <div className="survey-sidebar">
-            <Text style={{ fontWeight: 600 }}>{data?.direction}</Text>
             <div
                 className="root"
                 style={{

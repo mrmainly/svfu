@@ -12,7 +12,6 @@ const TesterSurveyPart = () => {
     const { part_tester } = useSelector((state) => state.survey_slice)
 
     const { id, surveyquest, unit_type, softquestions } = state
-
     return (
         <div>
             {unit_type === 'SOFT' ? (

@@ -15,6 +15,7 @@ const { Text } = Typography
 
 const TestDetail = ({ open, handleClose, ID }) => {
     const { data } = useGetSurveyPartOneIdQuery({ id: ID })
+    console.log(data)
     const [surveyPatch] = usePatchSurveyPartOneMutation()
     const navigate = useNavigate()
 

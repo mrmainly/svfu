@@ -128,7 +128,7 @@ const SoftBodyTester = ({ dataList }) => {
             {timer == '00:00' && (
                 <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} unit_type="SOFT" />
             )}
-            <Text style={{ fontWeight: 600 }}>{data?.name}</Text>
+            <Text style={{ fontWeight: 600, wordWrap: 'break-word' }}>{data?.name}</Text>
             <div className="root">
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {data?.softquestions?.length
