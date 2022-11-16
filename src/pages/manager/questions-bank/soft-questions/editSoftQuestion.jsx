@@ -244,12 +244,6 @@ const EditSoftQuestion = () => {
                 <Form.Item
                     label="Описание"
                     name="description"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Напишите описание',
-                        },
-                    ]}
                 >
                     <TextArea />
                 </Form.Item>
@@ -271,7 +265,7 @@ const EditSoftQuestion = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Напишите описание',
+                            message: 'Выберите один из вариантов',
                         },
                     ]}
                 >
@@ -361,7 +355,7 @@ const EditSoftQuestion = () => {
                         <Form.Item name="is_active" valuePropName="checked" noStyle>
                             <Switch checkedChildren="Yes" unCheckedChildren="No" />
                         </Form.Item>
-                        <span>Активность квалификации</span>
+                        <span>Активность вопроса</span>
                 </Space>
                 <MyButton htmlType="submit" style={{marginTop: 20}}>Сохранить</MyButton>
             </Form>

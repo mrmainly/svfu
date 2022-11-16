@@ -4,8 +4,8 @@ export const AttestationQualification = api.injectEndpoints({
     endpoints: (build) => ({
         //Квалификации аттестаций
         getAttestationsQualification: build.query({
-            query: ({ is_active, name, tag, currentPage, id }) =>
-                `constructor/direction/?is_active=${is_active}&name=${name}&tag=${tag}&page=${currentPage}&ordering=${id}`,
+            query: ({ is_active, name, currentPage, id }) =>
+                `constructor/direction/?is_active=${is_active}&name=${name}&page=${currentPage}&ordering=${id}`,
             providesTags: ['Attestation'],
         }),
 
@@ -41,9 +41,6 @@ export const AttestationQualification = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
-        getAttestationsTagList: build.query({
-            query: (name) => `constructor/direction/tag/autocomplete?name=${name}`,
-        }),
     }),
 })
 
@@ -52,5 +49,4 @@ export const {
     usePostAttestationsQualificationMutation,
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
-    useGetAttestationsTagListQuery,
 } = AttestationQualification

@@ -1,21 +1,16 @@
-import { useState } from 'react'
-import { Modal, message, Input, Select, Form } from 'antd'
+import { Modal, message, Input, Form } from 'antd'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
     usePostAttestationsQualificationMutation,
-    useGetAttestationsTagListQuery,
 } from '../../../../../services/manager/AttestationQualification'
 
 const { TextArea } = Input
-const { Option } = Select
 
 const AQAddModal = ({ open, setOpen }) => {
-    const [tagFilter, setTagFilter] = useState('')
 
     const [postAttestationsQualification] = usePostAttestationsQualificationMutation()
-    const { data } = useGetAttestationsTagListQuery(tagFilter)
 
     const onSubmit = (data) => {
         postAttestationsQualification(data).then((res) => {
@@ -26,10 +21,6 @@ const AQAddModal = ({ open, setOpen }) => {
                 message.error(res.error.data.errors[0])
             }
         })
-    }
-
-    const handleSearchText = (searchText) => {
-        setTagFilter(searchText)
     }
 
     return (
@@ -71,20 +62,6 @@ const AQAddModal = ({ open, setOpen }) => {
                     </Form.Item>
                     <Form.Item label="Описание" name="description">
                         <TextArea />
-                    </Form.Item>
-                    <Form.Item label="Тег квалификации" name="tag_direction">
-                        <Select
-                            placeholder="Выберите тег"
-                            showSearch
-                            optionFilterProp="children"
-                            onSearch={handleSearchText}
-                        >
-                            {data?.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.name}
-                                </Option>
-                            ))}
-                        </Select>
                     </Form.Item>
                 </Form>
             </Modal>

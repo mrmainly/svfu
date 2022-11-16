@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Modal, message, Select, Form, Row, Col, DatePicker, Button } from 'antd'
+import { Modal, Select, Form, Row, Col, DatePicker, Button, message } from 'antd'
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -36,6 +36,7 @@ const ESAddModal = ({ open, setOpen }) => {
         data.date_finish = moment(data.date_finish._d).format('YYYY-MM-DD HH:mm:ss')
         data.test_group = testGroup
         data.unit = unit
+        console.log(data)
         postTestExam(data).then((res) => {
             if (res.data) {
                 message.success('Экзамен создан')
@@ -80,7 +81,6 @@ const ESAddModal = ({ open, setOpen }) => {
                             },
                         ]}
                         label="Квалификация"
-                        name="direction"
                     >
                         <Select
                             placeholder="Выберите квалификацию"

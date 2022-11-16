@@ -43,7 +43,6 @@ import {
     SurveyPartsModerator,
     SurveyPartsModeratorSoft,
     ModeratorAppeal,
-    TagsList,
     CreateSoftQuestion,
     HardQuestions,
     EditSoftQuestion,
@@ -340,14 +339,6 @@ function App() {
                             </Suspense>
                         }
                         path={ROUTES.SURVEY_PARTS_MODERATOR_SOFT}
-                    />
-                    <Route
-                        element={
-                            <Suspense fallback={<LoadingInsideLayout />}>
-                                <TagsList />
-                            </Suspense>
-                        }
-                        path={ROUTES.TAGS_LIST}
                     />
                     <Route
                         element={

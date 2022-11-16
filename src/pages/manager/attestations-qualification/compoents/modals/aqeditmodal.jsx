@@ -1,23 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Modal, message, Input, Select, Form, Switch, Typography, Space } from 'antd'
+import { Modal, message, Input, Form, Switch, Typography, Space } from 'antd'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
     usePatchAttestationsQualificationIdMutation,
     usePutAttestationsQualificationIdMutation,
-    useGetAttestationsTagListQuery,
 } from '../../../../../services/manager/AttestationQualification'
 
 const { TextArea } = Input
-const { Option } = Select
 
 const AQEditModal = ({ open, setOpen, dataList }) => {
-    const [tagFilter, setTagFilter] = useState('')
 
     const [patchAttestationsQualificationId] = usePatchAttestationsQualificationIdMutation()
     const [putAttestationsQualificationId] = usePutAttestationsQualificationIdMutation()
-    const { data } = useGetAttestationsTagListQuery(tagFilter)
     const [active, setActive] = useState()
 
     const onSubmit = (data) => {
@@ -41,10 +37,6 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
     useEffect(() => {
         setActive(dataList[0]?.is_active)
     }, [dataList])
-
-    const handleSearchText = (searchText) => {
-        setTagFilter(searchText)
-    }
 
     return (
         <div>
@@ -75,7 +67,6 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                     initialValues={{
                         ['name']: dataList[0]?.name,
                         ['description']: dataList[0]?.description,
-                        ['tag_direction']: dataList[0]?.tag_direction?.id,
                     }}
                     onFinish={onSubmit}
                     id="aqedit-form"
@@ -85,20 +76,6 @@ const AQEditModal = ({ open, setOpen, dataList }) => {
                     </Form.Item>
                     <Form.Item label="Описание" name="description">
                         <TextArea />
-                    </Form.Item>
-                    <Form.Item label="Тег квалификации" name="tag_direction">
-                        <Select
-                            placeholder="Выберите тег"
-                            showSearch
-                            optionFilterProp="children"
-                            onSearch={handleSearchText}
-                        >
-                            {data?.map((item, index) => (
-                                <Option key={index} value={item?.id}>
-                                    {item?.name}
-                                </Option>
-                            ))}
-                        </Select>
                     </Form.Item>
                     <Space align="baseline">
                         <Form.Item>

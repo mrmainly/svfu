@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, Radio } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 
@@ -24,6 +24,22 @@ const ConstructorTableQuestion = ({ handleShowTableQuestion }) => {
                             <div key={key}>
                                 <Form.Item name={[name, 'name']} {...restField}>
                                     <TextArea placeholder="Описание вопроса" />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Несколько вариантов ответа"
+                                    name={[name, 'is_one']}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Выберите один из вариантов',
+                                        },
+                                    ]}
+                                    {...restField}
+                                >
+                                    <Radio.Group >
+                                        <Radio value={false}>Да</Radio>
+                                        <Radio value={true}>Нет</Radio>
+                                    </Radio.Group>
                                 </Form.Item>
                                 <Form.List initialValue={[{}, {}]} name={[name, 'variants']}>
                                     {(fields, { add, remove }) => {

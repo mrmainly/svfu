@@ -161,12 +161,6 @@ const CreateSoftQuestion = () => {
                 <Form.Item
                     label="Описание"
                     name="description"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Напишите описание',
-                        },
-                    ]}
                 >
                     <TextArea />
                 </Form.Item>

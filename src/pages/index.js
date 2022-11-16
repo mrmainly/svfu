@@ -39,7 +39,6 @@ const SurveyPartsExpertSoft = lazy(() => import('./expert/survey/surveyPartsSoft
 const SurveyPartsModerator = lazy(() => import('./moderator/survey/surveyParts'))
 const SurveyPartsModeratorSoft = lazy(() => import('./moderator/survey/surveyPartsSoft'))
 const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
-const TagsList = lazy(() => import('./manager/attestations-qualification/tagsList'))
 const CreateSoftQuestion = lazy(() =>
     import('./manager/questions-bank/soft-questions/createSoftQuestion')
 )
@@ -87,7 +86,6 @@ export {
     SurveyPartsModerator,
     SurveyPartsModeratorSoft,
     ModeratorAppeal,
-    TagsList,
     CreateSoftQuestion,
     HardQuestions,
     EditSoftQuestion,

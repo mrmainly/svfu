@@ -102,7 +102,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                         ['date_finish']: moment(dataList?.date_finish),
                         ['experts']: dataList?.experts,
                         ['moderators']: dataList?.moderators,
-                        ['direction']: dataList?.direction,
+                        // ['direction']: dataList?.direction,
                         ['main_expert']: dataList?.main_expert,
                         ['main_moderator']: dataList?.main_moderator,
                     }}
@@ -110,8 +110,9 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                     id="ese-form"
                     disabled={dataList?.exam_status === 'WAITING' ? false : true}
                 >
-                    <Form.Item required label="Квалификация" name="direction">
+                    <Form.Item required label="Квалификация" >
                         <Select
+                            defaultValue={dataList?.direction}
                             placeholder="Выберите квалификацию"
                             onChange={(e) => {
                                 setDirection(e)

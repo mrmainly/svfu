@@ -37,7 +37,6 @@ const SoftPart = ({ softquestions, id }) => {
         const postData = {
             answers: [],
         }
-
         abjArr.forEach(([key, value]) => {
             if (Array.isArray(value.q_a) && value.table_quest === undefined) {
                 value?.q_a.forEach((item) => {
@@ -87,10 +86,12 @@ const SoftPart = ({ softquestions, id }) => {
                         }}
                     >
                         <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
-                        <div style={{ marginTop: 12 }}>
-                            <Text style={{ fontWeight: 'bold' }}>Описание: </Text>
-                            <span>{item.description}</span>
-                        </div>
+                        {item.description &&
+                            <div style={{ marginTop: 12 }}>
+                                <Text style={{ fontWeight: 'bold' }}>Описание: </Text>
+                                <span>{item.description}</span>
+                            </div>
+                        }
                         <div style={{ marginTop: 12 }}>
                             <Text style={{ fontWeight: 'bold' }}>Задание: </Text>
                             <span>{item.name}</span>
@@ -162,23 +163,23 @@ const SoftPart = ({ softquestions, id }) => {
                                         initialValue={[]}
                                     >
                                         <Checkbox.Group
-                                            style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                            }}
-                                        >
-                                            {item2.variants.map((item, index) => (
-                                                <Checkbox
-                                                    value={item.name}
-                                                    key={index}
-                                                    style={{
-                                                        marginLeft: index === 0 && 8,
-                                                        marginTop: 5,
-                                                    }}
-                                                >
-                                                    {item.name}
-                                                </Checkbox>
-                                            ))}
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                }}
+                                            >
+                                                {item2.variants.map((item, index) => (
+                                                    <Checkbox
+                                                        value={item.name}
+                                                        key={index}
+                                                        style={{
+                                                            marginLeft: index === 0 && 8,
+                                                            marginTop: 5,
+                                                        }}
+                                                    >
+                                                        {item.name}
+                                                    </Checkbox>
+                                                ))}
                                         </Checkbox.Group>
                                     </Form.Item>
                                 </div>

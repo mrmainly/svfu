@@ -46,7 +46,6 @@ const ROUTES = {
     SURVEY_PARTS_MODERATOR_SOFT: '/survey-parts-moderator-soft',
     ADMIN_USERS_DETAIL: '/admin-users-detail',
     MODERATOR_USERS_DETAIL: '/moderator-users-detail',
-    TAGS_LIST: '/tags-list',
     NEW_QUESTION: '/new-question',
     HARD_QUESTIONS: '/hard-questions',
     EDIT_SOFT_QUESTION: '/edit-soft-question',
