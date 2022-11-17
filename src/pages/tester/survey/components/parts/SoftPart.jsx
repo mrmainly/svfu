@@ -21,8 +21,6 @@ const SoftPart = ({ softquestions, id }) => {
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
 
-    console.log('softquestions', softquestions)
-
     const onSubmit = (data) => {
         const abjArr = Object.entries(data)
         const postData = {

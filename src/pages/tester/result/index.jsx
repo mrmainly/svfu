@@ -124,10 +124,10 @@ const TestResult = () => {
             <AppealModal open={appealModal} setOpen={setAppealModal} ID={dataResult?.id} />
             <CancelModal open={cancelModal} setOpen={setCancelModal} ID={dataResult?.id} />
             {items.map((item, index) => (
-                <Space size="large" key={index} style={{ marginTop: index === 0 ? 0 : 15 }}>
-                    <div style={{ fontWeight: 600 }}>{item.label}</div>
-                    <Text style={{ color: item.color }}>{item.value}</Text>
-                </Space>
+                    <Space size="large" key={index} style={{ marginTop: index === 0 ? 0 : 15 }}>
+                        <div style={{ fontWeight: 600 }}>{item.label}</div>
+                        <Text style={{ color: item.color }}>{item.value}</Text>
+                    </Space>
             ))}
             <Line />
             <Text style={{ fontStyle: 'italic', fontSize: '18px', marginBottom: '16px' }}>
