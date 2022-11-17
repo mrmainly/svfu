@@ -47,7 +47,6 @@ const MyQualification = () => {
             value: '-date_of_issue',
         },
     ]
-    console.log(data)
     return (
         <div>
             <MyButton style={{ marginBottom: 20 }} onClick={() => setModalNewQualification(true)}>
