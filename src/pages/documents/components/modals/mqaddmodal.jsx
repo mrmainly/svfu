@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { Modal, Form, Input, message, Typography, DatePicker, Upload, Button } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
-import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../components'
@@ -29,18 +28,6 @@ const MQAddModal = ({ open, setOpen }) => {
             type: 'date',
         },
         {
-            title: 'Срок действия - Начало:',
-            name: 'date_start',
-            text: 'Введите срок действия',
-            type: 'range-picker',
-        },
-        // {
-        //     title: 'Срок действия - Конец:',
-        //     name: 'date_finish',
-        //     text: 'Введите срок действия',
-        //     type: 'date',
-        // },
-        {
             title: 'Выберите файл',
             name: 'file',
             text: 'Выберите файл',
@@ -65,8 +52,6 @@ const MQAddModal = ({ open, setOpen }) => {
         const formData = new FormData()
         formData.append('name', data.name)
         formData.append('date_of_issue', data.date_of_issue)
-        formData.append('date_start', moment(data.date_start[0]._d).format('YYYY-MM-DD'))
-        formData.append('date_finish', moment(data.date_start[1]._d).format('YYYY-MM-DD'))
         formData.append('file', file)
 
         postQualification({ formData: formData }).then((res) => {

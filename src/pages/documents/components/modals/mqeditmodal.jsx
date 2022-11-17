@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react'
-import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { Modal, Form, Typography, Input, message, DatePicker, Upload, Button } from 'antd'
+import { Modal, Form, Typography, Input, message, Upload, Button } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 
 import { MyButton } from '../../../../components'
@@ -12,26 +10,16 @@ import {
 } from '../../../../services/documents/Qualifications'
 
 const { Text } = Typography
-const { RangePicker } = DatePicker
 
 const MQEditModal = ({ open, setOpen, dataList }) => {
-    const [date_start, setDate_start] = useState(new Date())
-    const [date_finish, setDate_finish] = useState(new Date())
 
     const [patchQualificationId] = usePatchQualificationIdMutation()
     const [deleteQualification] = useDeleteQualificationIdMutation()
-
-    useEffect(() => {
-        setDate_start(new Date(dataList?.date_start))
-        setDate_finish(new Date(dataList?.date_finish))
-    }, [dataList])
 
     const onSubmit = (data) => {
         const formData = new FormData()
         formData.append('name', data.name)
         formData.append('doc_id', data.doc_id)
-        formData.append('date_start', moment(date_start).format('YYYY-MM-DD'))
-        formData.append('date_finish', moment(date_finish).format('YYYY-MM-DD'))
         if (data.file?.fileList) {
             formData.append('file', data.file.fileList[0]?.originFileObj)
         }
@@ -46,10 +34,6 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
         })
     }
 
-    function onChange(dates) {
-        setDate_start(dates[0])
-        setDate_finish(dates[1])
-    }
 
     const defualtFileList = [
         {
@@ -121,9 +105,7 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                     initialValues={{
                         ['doc_id']: dataList?.id,
                         ['name']: dataList?.name,
-                        ['date_start']: moment(date_start),
-                        ['date_finish']: moment(date_finish),
-                        ['created']: dataList?.date_of_issue,
+                        ['date_of_issue']: dataList?.date_of_issue,
                     }}
                     onFinish={onSubmit}
                     id="mqedit-form"
@@ -155,27 +137,13 @@ const MQEditModal = ({ open, setOpen, dataList }) => {
                                 Дата выдачи документа
                             </Text>
                         }
-                        name="created"
+                        name="date_of_issue"
                         style={{ width: 350, fontWeight: 600, fontSize: 16 }}
                     >
                         <Text style={{ fontWeight: 400, fontSize: 16 }}>
-                            {dataList?.created.substring(0, 10)}
+                            {dataList?.date_of_issue?.substring(0, 10)}
                         </Text>
                     </Form.Item>
-                    <Form.Item
-                        label={
-                            <Text style={{ fontWeight: 600, fontSize: 16 }}>Срок действия:</Text>
-                        }
-                        style={{ width: 350 }}
-                        labelCol={{ span: 24 }}
-                    >
-                        <RangePicker
-                            defaultValue={[moment(date_start), moment(date_finish)]}
-                            onChange={onChange}
-                            size="large"
-                        ></RangePicker>
-                    </Form.Item>
-
                     <Form.Item
                         style={{
                             display: 'flex',
