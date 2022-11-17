@@ -108,6 +108,20 @@ export const pathname = (params) => {
                     <span>Редактирование soft вопрсов</span>
                 </div>
             )
+        case ROUTES.EXPERT:
+                return (
+                    <div
+                        style={{display: 'flex', alignItems: 'center',}}
+                    >
+                        <BsArrowLeft
+                            style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px', marginBottom: 2 }}
+                            onClick={() => {
+                                navigate(-1)
+                            }}
+                        />
+                        <div>Просмотр теста</div>
+                    </div>
+                )
         default:
             new Error()
     }

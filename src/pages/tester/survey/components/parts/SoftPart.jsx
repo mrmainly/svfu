@@ -1,21 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import {
-    Typography,
-    Form,
-    Image,
-    Select,
-    Checkbox,
-    Descriptions,
-    Button,
-    Input,
-    Col,
-    Row,
-} from 'antd'
+import { Typography, Form, Image, Select, Checkbox, Radio } from 'antd'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { Line, MultipleChoice, OneChoice, DetailedResponse } from '../../../../../components'
+import { Line } from '../../../../../components'
 import TheoreticalAnswerModal from '../modals/TheoreticalAnswerModal'
 import FailedModal from '../modals/FailedModal'
 import { useModal } from '../../../../../hooks'
@@ -32,6 +21,8 @@ const SoftPart = ({ softquestions, id }) => {
 
     const { arrayIndex } = useSelector((state) => state.survey_slice)
 
+    console.log('softquestions', softquestions)
+
     const onSubmit = (data) => {
         const abjArr = Object.entries(data)
         const postData = {
@@ -45,9 +36,13 @@ const SoftPart = ({ softquestions, id }) => {
             } else {
                 const table_quest = []
                 value?.table_quest?.forEach((element) => {
-                    element?.answers?.forEach((elem) => {
-                        table_quest.push({ name: element.name, answers: elem })
-                    })
+                    if (typeof element?.answers === 'string') {
+                        table_quest.push({ name: element.name, answers: element.answers })
+                    } else {
+                        element?.answers?.forEach((elem) => {
+                            table_quest.push({ name: element.name, answers: elem })
+                        })
+                    }
                 })
                 postData.answers.push({
                     q_id: Number(key),
@@ -86,12 +81,12 @@ const SoftPart = ({ softquestions, id }) => {
                         }}
                     >
                         <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
-                        {item.description &&
+                        {item.description && (
                             <div style={{ marginTop: 12 }}>
                                 <Text style={{ fontWeight: 'bold' }}>Описание: </Text>
                                 <span>{item.description}</span>
                             </div>
-                        }
+                        )}
                         <div style={{ marginTop: 12 }}>
                             <Text style={{ fontWeight: 'bold' }}>Задание: </Text>
                             <span>{item.name}</span>
@@ -162,7 +157,27 @@ const SoftPart = ({ softquestions, id }) => {
                                         }
                                         initialValue={[]}
                                     >
-                                        <Checkbox.Group
+                                        {item2.is_one ? (
+                                            <Radio.Group
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                }}
+                                            >
+                                                {item2.variants.map((item, index) => (
+                                                    <Radio
+                                                        value={item.name}
+                                                        key={index}
+                                                        style={{
+                                                            marginTop: 5,
+                                                        }}
+                                                    >
+                                                        {item.name}
+                                                    </Radio>
+                                                ))}
+                                            </Radio.Group>
+                                        ) : (
+                                            <Checkbox.Group
                                                 style={{
                                                     display: 'flex',
                                                     flexDirection: 'column',
@@ -180,7 +195,8 @@ const SoftPart = ({ softquestions, id }) => {
                                                         {item.name}
                                                     </Checkbox>
                                                 ))}
-                                        </Checkbox.Group>
+                                            </Checkbox.Group>
+                                        )}
                                     </Form.Item>
                                 </div>
                             ))}
