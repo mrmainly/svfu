@@ -49,6 +49,7 @@ const ROUTES = {
     NEW_QUESTION: '/new-question',
     HARD_QUESTIONS: '/hard-questions',
     EDIT_SOFT_QUESTION: '/edit-soft-question',
+    TEST_SOFT_QUESTION: '/test-soft-question'
 }
 
 export default ROUTES

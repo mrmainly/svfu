@@ -46,6 +46,7 @@ import {
     CreateSoftQuestion,
     HardQuestions,
     EditSoftQuestion,
+    TestSoftQuestion
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -364,6 +365,15 @@ function App() {
                         }
                         path={ROUTES.EDIT_SOFT_QUESTION}
                     />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <TestSoftQuestion />
+                            </Suspense>
+                        }
+                        path={ROUTES.TEST_SOFT_QUESTION}
+                    />
+
                 </Route>
             </Routes>
             {/* </Suspense> */}

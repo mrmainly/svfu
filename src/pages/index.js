@@ -46,6 +46,7 @@ const EditSoftQuestion = lazy(() =>
     import('./manager/questions-bank/soft-questions/editSoftQuestion')
 )
 const HardQuestions = lazy(() => import('./manager/questions-bank/hard-questions'))
+const TestSoftQuestion = lazy(() => import('./test-soft'))
 
 export {
     Login,
@@ -89,4 +90,5 @@ export {
     CreateSoftQuestion,
     HardQuestions,
     EditSoftQuestion,
+    TestSoftQuestion,
 }

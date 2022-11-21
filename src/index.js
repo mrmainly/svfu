@@ -4,9 +4,13 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { Provider } from 'react-redux/'
+import { Provider } from 'react-redux'
 
 import { setupStore } from './store'
+
+window.Popper = require("popper.js").default;
+window.$ = window.jQuery = require("jquery");
+require("bootstrap");
 
 const store = setupStore()
 
