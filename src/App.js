@@ -46,7 +46,9 @@ import {
     CreateSoftQuestion,
     HardQuestions,
     EditSoftQuestion,
-    TestSoftQuestion
+    TestSoftQuestion,
+    TestTests,
+    TestTestPageAdd
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -373,7 +375,22 @@ function App() {
                         }
                         path={ROUTES.TEST_SOFT_QUESTION}
                     />
-
+                    <Route
+                    element={
+                        <Suspense fallback={<LoadingInsideLayout />}>
+                            <TestTests />
+                        </Suspense>
+                    }
+                    path={ROUTES.TEST_TESTS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <TestTestPageAdd />
+                            </Suspense>
+                        }
+                        path={ROUTES.TEST_TEST_PAGE_ADD}
+                    />
                 </Route>
             </Routes>
             {/* </Suspense> */}

@@ -14,11 +14,13 @@ const { Option } = Select
 
 const CreateSoftTest = ({ setOpen }) => {
     const [directionName, setDirectionName] = useState('ewewr')
+    const [name, setName] = useState('ewewr')
 
     const [postSoftTest] = usePostSoftTestMutation()
     const { data: directionList, isLoading: isDirectionLoading } = useGetToolsDirectionQuery()
     const { data: softQuestionList, isFetching } = useGetSoftQuestionListQuery({
         direction: directionName,
+        name: name
     })
 
     const onFinish = (data) => {
@@ -121,7 +123,17 @@ const CreateSoftTest = ({ setOpen }) => {
                                             width: '100%',
                                         }}
                                     >
-                                        <Select placeholder="Выберите задание">
+                                        <Select
+                                            showSearch
+                                            className="input-search"
+                                            optionFilterProp="children"
+                                            placeholder="Выберите задание"
+                                            filterOption={(input, option) => option.children.includes(input)}
+                                            filterSort={(optionA, optionB) =>
+                                                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                                            }
+                                            onSearch={(value) => setName(value)}
+                                        >
                                             {softQuestionList?.results?.map((item, index) => (
                                                 <Option key={index} value={item.id}>
                                                     {item.name}

@@ -1,0 +1,25 @@
+.floatButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    transition: all 1s linear;
+    width: auto;
+    height: auto;
+    padding: 5px;
+}
+
+/*.floatButton span{*/
+/*    opacity: 1;*/
+/*}*/
+
+.icon {
+    font-size: 45px;
+
+}
+.floatButton:hover{
+    transform: rotate(360deg);
+}
+
+
+

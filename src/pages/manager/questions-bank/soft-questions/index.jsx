@@ -38,6 +38,9 @@ const SoftQuestions = () => {
             <MyButton style={{ marginBottom: 16 }} onClick={() => navigate(ROUTES.TEST_SOFT_QUESTION)}>
                 Создать вопрос test
             </MyButton>
+            <MyButton style={{ marginBottom: 16 }} onClick={() =>navigate(ROUTES.TEST_TESTS)}>
+                Создать новый тествый тест
+            </MyButton>
             <div className="inputs-container">
                 <Input.Search
                     placeholder="Название вопроса"

@@ -1,7 +1,7 @@
 import { Card, Divider, Drawer, List } from 'antd'
 import PropTypes from 'prop-types'
 
-const MyDrawer = ({open, onClose}) => {
+const MyDrawer = ({open, onClose, setQuestion}) => {
     const data = [
         'Одиночный выбор',
         'Множественный выбор',
@@ -23,7 +23,14 @@ const MyDrawer = ({open, onClose}) => {
                 size={'small'}
                 bordered
                 dataSource={data}
-                renderItem={(item) => <List.Item>{item}</List.Item>}
+                renderItem={(item) => <List.Item>
+                    <div
+                        onClick={()=>setQuestion(item)}
+                        style={{cursor: 'pointer'}}
+                    >
+                        {item}
+                    </div>
+                </List.Item>}
             />
 
             <Divider orientation={'left'}>Блок комиссии</Divider>
@@ -37,5 +44,6 @@ const MyDrawer = ({open, onClose}) => {
 MyDrawer.propTypes = {
     open: PropTypes.bool,
     onClose: PropTypes.func,
+    setQuestion: PropTypes.func
 }
 export default MyDrawer
