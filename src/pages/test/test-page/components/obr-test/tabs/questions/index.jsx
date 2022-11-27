@@ -1,12 +1,23 @@
-import { Button, Card, Form } from 'antd'
+// eslint-disable-next-line no-unused-vars
+import { Button, Card } from 'antd'
 import { DeleteTwoTone, SettingTwoTone } from '@ant-design/icons'
 import { useState } from 'react'
-import QuestionDrawer from './drawer'
+import { useSelector, useDispatch } from 'react-redux'
 
+import QuestionDrawer from './drawer'
 import questions from './mock'
 import './questions.css'
+import {ConstructorQuestionSlice} from '../../../../../../../reducers/ConstructorQuestionSlice'
+
 const ObrTestQuestions = () => {
-    console.log(questions)
+    const {deleteElement} = ConstructorQuestionSlice.actions
+    const { questionList } = useSelector(
+        (state) => state.constructor_question_slice
+    );
+
+    const dispatch = useDispatch()
+
+    console.log(questionList)
     const [open, setOpen] = useState(false)
     const showDrawer = () => {
         setOpen(true)
@@ -24,37 +35,22 @@ const ObrTestQuestions = () => {
                 icon={ <SettingTwoTone className="icon" />}
             />
             <QuestionDrawer open={open} onClose={onClose} data={questions}/>
-            <Form.List name={'questionss'} initialValue={[{}]}>
-                {(fields, {add, remove}) => (
-                    <div>
-                        {fields.map(
-                            (field, index) => (
-                                <Card
-                                    key={index}
-                                    hoverable={true}
-                                    title={`Вопрос ${index+1}`}
-                                    extra={
-                                        <DeleteTwoTone
-                                            twoToneColor={'#EB5757'}
-                                            onClick={() => remove(field.name)}
-                                        />
-                                    }
-                                    style={{marginBottom: '12px'}}
-                                >
-                                    Вопрос
-                                </Card>
-                            )
-                        )}
-                        <Form.Item>
-                            <Button
-                                onClick={() => add()}
-                            >
-                                Добавить вопрос
-                            </Button>
-                        </Form.Item>
-                    </div>
-                )}
-            </Form.List>
+            {questionList?.map((item, index) => (
+                <Card
+                    key={index}
+                    hoverable={true}
+                    title={`Вопрос ${index+1}`}
+                    extra={
+                        <DeleteTwoTone
+                            twoToneColor={'#EB5757'}
+                            onClick={() => dispatch(deleteElement(index))}
+                        />
+                    }
+                    style={{marginBottom: '12px'}}
+                >
+                    {item.title}
+                </Card>
+            ))}
         </div>
     )
 }

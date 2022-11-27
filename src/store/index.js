@@ -6,6 +6,7 @@ import forgot_version_slice from '../reducers/ForgotVersionSlice'
 import survey_slice from '../reducers/SurveysSlice'
 import dynamic_path_slice from '../reducers/DynamicPathSlice'
 import profile_slice from '../reducers/ProfileSlice'
+import constructor_question_slice from '../reducers/ConstructorQuestionSlice'
 
 const rootReducer = combineReducers({
     register_verison_slice,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     survey_slice,
     dynamic_path_slice,
     profile_slice,
+    constructor_question_slice,
     [api.reducerPath]: api.reducer,
 })
 
