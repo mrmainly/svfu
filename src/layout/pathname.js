@@ -86,6 +86,8 @@ export const pathname = (params) => {
             )
         case ROUTES.MANAGER_QUESTIONS_PAGE:
             return 'Банк вопросов'
+        case ROUTES.MANAGER_QUESTIONS_CREATE_PAGE:
+            return 'Создание вопросов'
         case ROUTES.HARD_QUESTIONS:
             return 'Hard вопросы'
         case ROUTES.EDIT_SOFT_QUESTION:

@@ -1,13 +1,19 @@
 /* eslint-disable react/prop-types */
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Modal, Radio, Space } from 'antd'
 
-// import ROUTES from '../../../../../routes'
+import ROUTES from '../../../../../routes'
 
 const SwitchQuestionModal = ({ open, setOpen }) => {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
-    const handleChange = () => {}
+    const handleChange = (value) => {
+        navigate(ROUTES.MANAGER_QUESTIONS_CREATE_PAGE, {
+            state: {
+                type: value,
+            },
+        })
+    }
 
     return (
         <Modal

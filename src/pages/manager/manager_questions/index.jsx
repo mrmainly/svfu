@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Pagination, Select, Input, Button } from 'antd'
 
-import QuestionsTable from './compoents/tables/QuestionsTable'
-import SwitchQuestionModal from './compoents/modals/SwitchQuestionModal'
+import QuestionsTable from './components/tables/QuestionsTable'
+import SwitchQuestionModal from './components/modals/SwitchQuestionModal'
 import { useGetConstructorQuestionQuery } from '../../../services/manager/question-bank'
 import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
 import './managerQuestions.css'

@@ -46,7 +46,7 @@ import {
     // CreateSoftQuestion,
     // HardQuestions,
     // EditSoftQuestion,
-    TestSoftQuestion,
+    ManagerQuestionCreatePage,
     TestTests,
     TestTestPageAdd,
     ManagerQuestionsPage,
@@ -371,10 +371,10 @@ function App() {
                     <Route
                         element={
                             <Suspense fallback={<LoadingInsideLayout />}>
-                                <TestSoftQuestion />
+                                <ManagerQuestionCreatePage />
                             </Suspense>
                         }
-                        path={ROUTES.TEST_SOFT_QUESTION}
+                        path={ROUTES.MANAGER_QUESTIONS_CREATE_PAGE}
                     />
                     <Route
                         element={

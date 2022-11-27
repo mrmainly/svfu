@@ -47,10 +47,12 @@ const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
 // )
 // const HardQuestions = lazy(() => import('./manager/manager_questions/hard-questions'))
 
-const TestSoftQuestion = lazy(() => import('./test/test-questions'))
 const TestTests = lazy(() => import('./test/test-tests'))
 const TestTestPageAdd = lazy(() => import('./test/test-page'))
 const ManagerQuestionsPage = lazy(() => import('./manager/manager_questions'))
+const ManagerQuestionCreatePage = lazy(() =>
+    import('./manager/manager_questions/questionCreatePage')
+)
 
 export {
     Login,
@@ -94,8 +96,8 @@ export {
     // CreateSoftQuestion,
     // HardQuestions,
     // EditSoftQuestion,
-    TestSoftQuestion,
     TestTests,
     TestTestPageAdd,
     ManagerQuestionsPage,
+    ManagerQuestionCreatePage,
 }
