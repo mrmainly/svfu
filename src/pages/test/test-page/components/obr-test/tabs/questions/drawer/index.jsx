@@ -1,10 +1,17 @@
 import { Card, Drawer } from 'antd'
 import { PlusCircleTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
+import {useDispatch} from 'react-redux'
+
+import {ConstructorQuestionSlice} from '../../../../../../../../reducers/ConstructorQuestionSlice'
 
 const QuestionDrawer = ({open, onClose, data}) => {
-    const onClick = () => {
-        console.log("fas")
+    const {addItemQuestionList} = ConstructorQuestionSlice.actions
+
+    const dispatch = useDispatch()
+
+    const onClick = (item) => {
+        dispatch(addItemQuestionList(item))
     }
     return(
         <Drawer
@@ -23,7 +30,7 @@ const QuestionDrawer = ({open, onClose, data}) => {
                          <PlusCircleTwoTone style={{fontSize: '20px'}}/>
                     }
                     style={{marginBottom: '12px'}}
-                    onClick={onClick}
+                    onClick={() => onClick(item)}
                 >
                     {item?.name}
                 </Card>
