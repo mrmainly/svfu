@@ -1,6 +1,6 @@
 import { Button, Form, Tabs } from 'antd'
 
-import 'react-summernote/dist/react-summernote.css' // import styles
+import 'react-summernote/dist/react-summernote.css'
 import 'bootstrap/js/dist/modal'
 import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/tooltip'
@@ -18,7 +18,11 @@ const TestSoftQuestion = () => {
     return (
         <div>
             <Form layout={'horizontal'} onFinish={onFinish}>
-                <Tabs defaultActiveKey="1" type={'card'}>
+                <Tabs
+                    defaultActiveKey="1"
+                    type={'card'}
+                    tabBarExtraContent={<Button size="large">Создать вопрос</Button>}
+                >
                     <Tabs.TabPane tab={'Редактор'} key={'1'}>
                         <TestSoftEditor />
                     </Tabs.TabPane>
@@ -30,7 +34,6 @@ const TestSoftQuestion = () => {
                     </Tabs.TabPane>
                 </Tabs>
             </Form>
-            <Button>Сохранить</Button>
         </div>
     )
 }

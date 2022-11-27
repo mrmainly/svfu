@@ -4,28 +4,16 @@ import PropTypes from 'prop-types'
 
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
 
-const QuestionsBankTable = ({
-    data,
-    loading,
-    setId,
-    handleOpenEditQuestionModal,
-    setCurrentData,
-}) => {
+const QuestionsTable = ({ data, loading, setId, handleOpenEditQuestionModal, setCurrentData }) => {
     const { data: dataDirection } = useGetToolsDirectionQuery()
 
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
-            {
-                setId('-id')
-            }
+            setId('-id')
         } else if (sorter?.order === 'ascend') {
-            {
-                setId('id')
-            }
+            setId('id')
         } else {
-            {
-                setId('')
-            }
+            setId('')
         }
     }
     const columns = [
@@ -110,7 +98,7 @@ const QuestionsBankTable = ({
     )
 }
 
-QuestionsBankTable.propTypes = {
+QuestionsTable.propTypes = {
     data: PropTypes.array,
     loading: PropTypes.bool,
     setId: PropTypes.func,
@@ -118,4 +106,4 @@ QuestionsBankTable.propTypes = {
     setCurrentData: PropTypes.func,
 }
 
-export default QuestionsBankTable
+export default QuestionsTable

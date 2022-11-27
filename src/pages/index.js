@@ -14,7 +14,7 @@ const UsersList = lazy(() => import('./users/list'))
 const AttestationsQualifications = lazy(() => import('./manager/attestations-qualification'))
 const AttestationProtocol = lazy(() => import('./lpr/attestation-protocol/list'))
 const TestsBank = lazy(() => import('./manager/tests-bank'))
-const QuestionsBank = lazy(() => import('./manager/questions-bank/soft-questions'))
+const QuestionsBank = lazy(() => import('./manager/manager_questions'))
 const ExaminationGroups = lazy(() => import('./tutor/examination-groups'))
 const UserApplications = lazy(() => import('./tutor/userApplications/list'))
 const Certified = lazy(() => import('./tutor/certified/list'))
@@ -39,17 +39,18 @@ const SurveyPartsExpertSoft = lazy(() => import('./expert/survey/surveyPartsSoft
 const SurveyPartsModerator = lazy(() => import('./moderator/survey/surveyParts'))
 const SurveyPartsModeratorSoft = lazy(() => import('./moderator/survey/surveyPartsSoft'))
 const ModeratorAppeal = lazy(() => import('./moderator/survey/moderatorAppeal'))
-const CreateSoftQuestion = lazy(() =>
-    import('./manager/questions-bank/soft-questions/createSoftQuestion')
-)
-const EditSoftQuestion = lazy(() =>
-    import('./manager/questions-bank/soft-questions/editSoftQuestion')
-)
-const HardQuestions = lazy(() => import('./manager/questions-bank/hard-questions'))
+// const CreateSoftQuestion = lazy(() =>
+//     import('./manager/manager_questions/soft-questions/createSoftQuestion')
+// )
+// const EditSoftQuestion = lazy(() =>
+//     import('./manager/manager_questions/soft-questions/editSoftQuestion')
+// )
+// const HardQuestions = lazy(() => import('./manager/manager_questions/hard-questions'))
 
 const TestSoftQuestion = lazy(() => import('./test/test-questions'))
 const TestTests = lazy(() => import('./test/test-tests'))
 const TestTestPageAdd = lazy(() => import('./test/test-page'))
+const ManagerQuestionsPage = lazy(() => import('./manager/manager_questions'))
 
 export {
     Login,
@@ -90,10 +91,11 @@ export {
     SurveyPartsModerator,
     SurveyPartsModeratorSoft,
     ModeratorAppeal,
-    CreateSoftQuestion,
-    HardQuestions,
-    EditSoftQuestion,
+    // CreateSoftQuestion,
+    // HardQuestions,
+    // EditSoftQuestion,
     TestSoftQuestion,
     TestTests,
     TestTestPageAdd,
+    ManagerQuestionsPage,
 }

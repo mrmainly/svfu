@@ -84,8 +84,8 @@ export const pathname = (params) => {
                     <span>Создание вопроса</span>
                 </div>
             )
-        case ROUTES.SOFT_QUESTIONS:
-            return 'Soft вопросы'
+        case ROUTES.MANAGER_QUESTIONS_PAGE:
+            return 'Банк вопросов'
         case ROUTES.HARD_QUESTIONS:
             return 'Hard вопросы'
         case ROUTES.EDIT_SOFT_QUESTION:
@@ -109,19 +109,22 @@ export const pathname = (params) => {
                 </div>
             )
         case ROUTES.EXPERT:
-                return (
-                    <div
-                        style={{display: 'flex', alignItems: 'center',}}
-                    >
-                        <BsArrowLeft
-                            style={{ fontSize: 30, cursor: 'pointer', marginRight: '10px', marginBottom: 2 }}
-                            onClick={() => {
-                                navigate(-1)
-                            }}
-                        />
-                        <div>Просмотр теста</div>
-                    </div>
-                )
+            return (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <BsArrowLeft
+                        style={{
+                            fontSize: 30,
+                            cursor: 'pointer',
+                            marginRight: '10px',
+                            marginBottom: 2,
+                        }}
+                        onClick={() => {
+                            navigate(-1)
+                        }}
+                    />
+                    <div>Просмотр теста</div>
+                </div>
+            )
         default:
             new Error()
     }

@@ -1,16 +1,13 @@
-import { useState, useEffect, lazy } from 'react'
-import { Pagination, Select, Input } from 'antd'
+import { useState, useEffect } from 'react'
+import { Pagination, Select, Input, Button } from 'antd'
 
-import QuestionsBankTable from '../compoents/table'
-import { useGetConstructorQuestionQuery } from '../../../../services/manager/question-bank'
-import { useGetToolsDirectionQuery } from '../../../../services/ToolsService'
-import { MyButton } from '../../../../components'
-import QBEditModal from './components/modals/qbeditmodal'
-import '../questions-bank.css'
+import QuestionsTable from './compoents/tables/QuestionsTable'
+import SwitchQuestionModal from './compoents/modals/SwitchQuestionModal'
+import { useGetConstructorQuestionQuery } from '../../../services/manager/question-bank'
+import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
+import './managerQuestions.css'
 
-const LazyQBAddModal = lazy(() => import('./components/modals/qbaddmodal'))
-
-const HardQuestions = () => {
+const ManagerQuestionsPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [id, setId] = useState('')
@@ -18,7 +15,7 @@ const HardQuestions = () => {
     const [is_active, setIs_active] = useState('')
     const [description, setDescription] = useState('')
     const [direction, setDirection] = useState('')
-    const [currentData, setCurrentData] = useState()
+    // const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
     const { data, isFetching } = useGetConstructorQuestionQuery({
         currentPage: currentPage,
@@ -29,7 +26,7 @@ const HardQuestions = () => {
         direction: direction,
     })
     const { data: directionSelect } = useGetToolsDirectionQuery()
-    const [modalNewQuestion, setModalNewQuestion] = useState(false)
+    const [showCreateQuestionModal, setShowCreateQuestionModal] = useState(false)
     const onChange = (page) => {
         setCurrentPage(page)
     }
@@ -43,10 +40,13 @@ const HardQuestions = () => {
 
     return (
         <div>
-            <MyButton style={{ marginBottom: 16 }} onClick={() => setModalNewQuestion(true)}>
+            <Button style={{ marginBottom: 16 }} onClick={() => setShowCreateQuestionModal(true)}>
                 Создать вопрос
-            </MyButton>
-
+            </Button>
+            <SwitchQuestionModal
+                open={showCreateQuestionModal}
+                setOpen={setShowCreateQuestionModal}
+            />
             <div className="inputs-container">
                 <Input.Search
                     placeholder="Текст вопроса"
@@ -96,20 +96,20 @@ const HardQuestions = () => {
                     <Select.Option value="DESCRIBE">Открытый</Select.Option>
                 </Select>
             </div>
-            {modalEditQuestionsBank && (
+            {/* {modalEditQuestionsBank && (
                 <QBEditModal
                     open={modalEditQuestionsBank}
                     setOpen={setModalEditQuestionsBank}
                     id={currentData?.id}
                 />
-            )}
-            <LazyQBAddModal open={modalNewQuestion} setOpen={setModalNewQuestion} />
-            <QuestionsBankTable
+            )} */}
+
+            <QuestionsTable
                 data={data?.results}
                 loading={isFetching}
                 setId={setId}
                 handleOpenEditQuestionModal={handleOpenEditQuestionModal}
-                setCurrentData={setCurrentData}
+                // setCurrentData={setCurrentData}
             />
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
@@ -125,4 +125,4 @@ const HardQuestions = () => {
     )
 }
 
-export default HardQuestions
+export default ManagerQuestionsPage

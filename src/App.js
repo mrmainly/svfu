@@ -43,12 +43,13 @@ import {
     SurveyPartsModerator,
     SurveyPartsModeratorSoft,
     ModeratorAppeal,
-    CreateSoftQuestion,
-    HardQuestions,
-    EditSoftQuestion,
+    // CreateSoftQuestion,
+    // HardQuestions,
+    // EditSoftQuestion,
     TestSoftQuestion,
     TestTests,
-    TestTestPageAdd
+    TestTestPageAdd,
+    ManagerQuestionsPage,
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -343,7 +344,7 @@ function App() {
                         }
                         path={ROUTES.SURVEY_PARTS_MODERATOR_SOFT}
                     />
-                    <Route
+                    {/* <Route
                         element={
                             <Suspense fallback={<LoadingInsideLayout />}>
                                 <CreateSoftQuestion />
@@ -366,7 +367,7 @@ function App() {
                             </Suspense>
                         }
                         path={ROUTES.EDIT_SOFT_QUESTION}
-                    />
+                    /> */}
                     <Route
                         element={
                             <Suspense fallback={<LoadingInsideLayout />}>
@@ -376,12 +377,20 @@ function App() {
                         path={ROUTES.TEST_SOFT_QUESTION}
                     />
                     <Route
-                    element={
-                        <Suspense fallback={<LoadingInsideLayout />}>
-                            <TestTests />
-                        </Suspense>
-                    }
-                    path={ROUTES.TEST_TESTS}
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <TestTests />
+                            </Suspense>
+                        }
+                        path={ROUTES.TEST_TESTS}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <ManagerQuestionsPage />
+                            </Suspense>
+                        }
+                        path={ROUTES.MANAGER_QUESTIONS_PAGE}
                     />
                     <Route
                         element={

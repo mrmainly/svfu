@@ -1,6 +1,8 @@
 import { Card, Divider, Drawer, List } from 'antd'
 import PropTypes from 'prop-types'
 
+import './drawer.css'
+
 const MyDrawer = ({ open, onClose, setQuestion }) => {
     const data = [
         'Одиночный выбор',
@@ -17,7 +19,7 @@ const MyDrawer = ({ open, onClose, setQuestion }) => {
     }
 
     return (
-        <Drawer title={'Вопросы'} placement={'right'} visible={open} onClose={onClose} mask={false}>
+        <Drawer title={'Вопросы'} placement={'right'} visible={open} onClose={onClose}>
             <Divider orientation={'left'}>Блок аттестуемого</Divider>
             <List
                 size={'small'}
@@ -25,7 +27,7 @@ const MyDrawer = ({ open, onClose, setQuestion }) => {
                 dataSource={data}
                 renderItem={(item) => (
                     <List.Item>
-                        <div onClick={() => handleQuestions(item)} style={{ cursor: 'pointer' }}>
+                        <div onClick={() => handleQuestions(item)} className="list-item">
                             {item}
                         </div>
                     </List.Item>
