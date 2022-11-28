@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom'
 import { Modal, Radio, Space } from 'antd'
+import { useDispatch } from 'react-redux'
 
 import ROUTES from '../../../../../routes'
+import { ConstructorQuestionSlice } from '../../../../../reducers/ConstructorQuestionSlice'
 
 const SwitchQuestionModal = ({ open, setOpen }) => {
-    const navigate = useNavigate()
+    const { handleQuestionType } = ConstructorQuestionSlice.actions
 
-    const handleChange = (value) => {
-        navigate(ROUTES.MANAGER_QUESTIONS_CREATE_PAGE, {
-            state: {
-                type: value,
-            },
-        })
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleChange = (e) => {
+        navigate(ROUTES.MANAGER_QUESTIONS_CREATE_PAGE)
+        dispatch(handleQuestionType(e.target.value))
     }
 
     return (
