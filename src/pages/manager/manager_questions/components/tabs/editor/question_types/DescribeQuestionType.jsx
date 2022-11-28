@@ -3,8 +3,8 @@ import ReactSummernote from 'react-summernote'
 
 const DescribeQuestionType = () => {
     return (
-        <Card hoverable={false} title={`Ответ в свободной форме`} style={{ marginBottom: '12px' }}>
-            <Form.Item>
+        <Card hoverable={false} title={`Ответ в свободной форме`} className="card">
+            <Form.Item style={{ marginBottom: '-1px' }}>
                 <ReactSummernote
                     value="Default value"
                     options={{

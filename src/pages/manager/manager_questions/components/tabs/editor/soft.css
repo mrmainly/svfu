@@ -13,13 +13,13 @@
 /*    opacity: 1;*/
 /*}*/
 
+.card {
+    margin-bottom: 12px;
+}
+
 .icon {
     font-size: 45px;
-
 }
-.floatButton:hover{
+.floatButton:hover {
     transform: rotate(360deg);
 }
-
-
-

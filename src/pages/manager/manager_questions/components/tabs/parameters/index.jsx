@@ -25,14 +25,32 @@ const TestSoftParameters = () => {
             value: 'EXPERT',
         },
         {
-            label: 'DESCRIBE ',
-            value: 'DESCRIBE ',
+            label: 'DESCRIBE',
+            value: 'DESCRIBE',
         },
     ]
 
     return (
-        <Card style={{ marginBottom: '12px' }}>
-            <Form.Item>
+        <Card>
+            <Form.Item
+                label="Сложность задания"
+                labelCol={{ span: 24 }}
+                style={{ marginBottom: 10 }}
+            >
+                <Select style={{ width: 220 }} defaultValue="BEGINNER">
+                    {difficulty.map((item, index) => (
+                        <Option key={index}>{item.label}</Option>
+                    ))}
+                </Select>
+            </Form.Item>
+            <Form.Item label="Квалификация" labelCol={{ span: 24 }} style={{ marginBottom: 20 }}>
+                <Select style={{ width: 220 }} defaultValue="BEGINNER">
+                    {difficulty.map((item, index) => (
+                        <Option key={index}>{item.label}</Option>
+                    ))}
+                </Select>
+            </Form.Item>
+            <Form.Item style={{ marginBottom: 10 }}>
                 <Space direction={'vertical'}>
                     <Checkbox onChange={() => setTime(!time)}>
                         Ограничить время ответа на вопрос
@@ -45,16 +63,8 @@ const TestSoftParameters = () => {
                     )}
                 </Space>
             </Form.Item>
-            <Form.Item>
+            <Form.Item style={{ marginBottom: 0 }}>
                 <Checkbox onChange={() => setFile(!file)}>Загрузка файла аттестуемым</Checkbox>
-            </Form.Item>
-
-            <Form.Item label="Сложность задания" labelCol={{ span: 24 }}>
-                <Select style={{ width: 220 }} defaultValue="BEGINNER">
-                    {difficulty.map((item, index) => (
-                        <Option key={index}>{item.label}</Option>
-                    ))}
-                </Select>
             </Form.Item>
         </Card>
     )

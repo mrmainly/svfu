@@ -56,9 +56,9 @@ const MultipleChoiseQuestionType = () => {
                                 </Form.Item>
                             </List.Item>
                         ))}
-                        <Form.Item>
-                            <Button onClick={() => add()}>Добавить вариант ответа</Button>
-                        </Form.Item>
+                        <Button onClick={add} style={{ marginTop: 20 }}>
+                            Добавить вариант ответа
+                        </Button>
                     </List>
                 )}
             </Form.List>

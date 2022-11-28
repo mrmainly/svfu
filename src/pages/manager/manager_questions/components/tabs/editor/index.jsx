@@ -29,6 +29,8 @@ const TestSoftEditor = () => {
         console.log('onChange', content)
     }
 
+    console.log(question)
+
     return (
         <div>
             <Button
@@ -40,12 +42,8 @@ const TestSoftEditor = () => {
             />
             <MyDrawer open={open} onClose={onClose} setQuestion={setQuestion} />
 
-            <Card
-                hoverable={false}
-                title={`Задание и описание вопроса`}
-                style={{ marginBottom: '12px' }}
-            >
-                <Form.Item>
+            <Card hoverable={false} title={`Задание и описание вопроса`} className="card">
+                <Form.Item style={{ marginBottom: '-1px' }}>
                     <ReactSummernote
                         value="Default value"
                         options={{
@@ -66,8 +64,21 @@ const TestSoftEditor = () => {
                     />
                 </Form.Item>
             </Card>
+            {/* <Card style={{ marginBottom: 12 }}>
+                <Form.Item>
+                    <Upload
+                        // {...props}
+                        multiple={false}
+                        maxCount={1}
+                        accept=".pdf"
+                    >
+                        <Button icon={<UploadOutlined />}>Загрузить фотографию</Button>
+                    </Upload>
+                </Form.Item>
+            </Card> */}
 
             {question === 'Ответ в свободной форме' && <DescribeQuestionType />}
+            {question === 'Ответ в свободной форме(практическая часть)' && <DescribeQuestionType />}
             {question === 'Одиночный выбор' && <OneChoiseQuestionType />}
             {question === 'Множественный выбор' && <MultipleChoiseQuestionType />}
             {questionType === 'SOFT' && <ScoringPoints />}
