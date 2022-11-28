@@ -1,5 +1,5 @@
 import { SettingTwoTone } from '@ant-design/icons'
-import { Button, Card, Form, Select } from 'antd'
+import { Button, Card, Form } from 'antd'
 import { useState } from 'react'
 import ReactSummernote from 'react-summernote'
 import { useSelector } from 'react-redux'
@@ -12,8 +12,6 @@ import {
 import ScoringPoints from './scoring_points'
 import MyDrawer from '../../drawer'
 import './soft.css'
-
-const { Option } = Select
 
 const TestSoftEditor = () => {
     const [question, setQuestion] = useState('')
@@ -30,25 +28,6 @@ const TestSoftEditor = () => {
     const onChange = (content) => {
         console.log('onChange', content)
     }
-
-    const difficulty = [
-        {
-            label: 'BEGINNER',
-            value: 'BEGINNER',
-        },
-        {
-            label: 'ADVANCED',
-            value: 'ADVANCED',
-        },
-        {
-            label: 'EXPERT',
-            value: 'EXPERT',
-        },
-        {
-            label: 'DESCRIBE ',
-            value: 'DESCRIBE ',
-        },
-    ]
 
     return (
         <div>
@@ -85,15 +64,6 @@ const TestSoftEditor = () => {
                         }}
                         onChange={(content) => onChange(content)}
                     />
-                </Form.Item>
-            </Card>
-            <Card title="Сложность задания" style={{ marginBottom: '12px' }}>
-                <Form.Item>
-                    <Select style={{ width: 220 }} defaultValue="BEGINNER">
-                        {difficulty.map((item, index) => (
-                            <Option key={index}>{item.label}</Option>
-                        ))}
-                    </Select>
                 </Form.Item>
             </Card>
 
