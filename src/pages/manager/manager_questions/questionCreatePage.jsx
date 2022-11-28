@@ -1,4 +1,5 @@
 import { Button, Form, Tabs } from 'antd'
+import { useSelector } from 'react-redux'
 
 import 'react-summernote/dist/react-summernote.css'
 import 'bootstrap/js/dist/modal'
@@ -11,6 +12,8 @@ import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
 
 const QuestionCreatePage = () => {
+    const { questionType } = useSelector((state) => state.constructor_question_slice)
+
     const onFinish = (data) => {
         console.log(data)
     }
@@ -26,9 +29,11 @@ const QuestionCreatePage = () => {
                     <Tabs.TabPane tab={'Редактор'} key={'1'}>
                         <TestSoftEditor />
                     </Tabs.TabPane>
-                    <Tabs.TabPane tab={'Блок комиссии'} key={'2'}>
-                        <TestSoftComments />
-                    </Tabs.TabPane>
+                    {questionType === 'SOFT' && (
+                        <Tabs.TabPane tab={'Блок комиссии'} key={'2'}>
+                            <TestSoftComments />
+                        </Tabs.TabPane>
+                    )}
                     <Tabs.TabPane tab={'Параметры'} key={'3'}>
                         <TestSoftParameters />
                     </Tabs.TabPane>

@@ -26,8 +26,8 @@ const SwitchQuestionModal = ({ open, setOpen }) => {
         >
             <Radio.Group onChange={handleChange}>
                 <Space direction="vertical">
-                    <Radio value={'Hard'}>Hard вопрос</Radio>
-                    <Radio value={'Soft'}>Soft вопрос</Radio>
+                    <Radio value={'HARD'}>Hard вопрос</Radio>
+                    <Radio value={'SOFT'}>Soft вопрос</Radio>
                 </Space>
             </Radio.Group>
         </Modal>

@@ -1,7 +1,8 @@
 import { SettingTwoTone } from '@ant-design/icons'
-import { Button, Card, Form } from 'antd'
+import { Button, Card, Form, Select } from 'antd'
 import { useState } from 'react'
 import ReactSummernote from 'react-summernote'
+import { useSelector } from 'react-redux'
 
 import {
     OneChoiseQuestionType,
@@ -12,9 +13,14 @@ import ScoringPoints from './scoring_points'
 import MyDrawer from '../../drawer'
 import './soft.css'
 
+const { Option } = Select
+
 const TestSoftEditor = () => {
     const [question, setQuestion] = useState('')
     const [open, setOpen] = useState(false)
+
+    const { questionType } = useSelector((state) => state.constructor_question_slice)
+
     const showDrawer = () => {
         setOpen(true)
     }
@@ -24,6 +30,26 @@ const TestSoftEditor = () => {
     const onChange = (content) => {
         console.log('onChange', content)
     }
+
+    const difficulty = [
+        {
+            label: 'BEGINNER',
+            value: 'BEGINNER',
+        },
+        {
+            label: 'ADVANCED',
+            value: 'ADVANCED',
+        },
+        {
+            label: 'EXPERT',
+            value: 'EXPERT',
+        },
+        {
+            label: 'DESCRIBE ',
+            value: 'DESCRIBE ',
+        },
+    ]
+
     return (
         <div>
             <Button
@@ -61,10 +87,20 @@ const TestSoftEditor = () => {
                     />
                 </Form.Item>
             </Card>
+            <Card title="Сложность задания" style={{ marginBottom: '12px' }}>
+                <Form.Item>
+                    <Select style={{ width: 220 }} defaultValue="BEGINNER">
+                        {difficulty.map((item, index) => (
+                            <Option key={index}>{item.label}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            </Card>
+
             {question === 'Ответ в свободной форме' && <DescribeQuestionType />}
             {question === 'Одиночный выбор' && <OneChoiseQuestionType />}
             {question === 'Множественный выбор' && <MultipleChoiseQuestionType />}
-            <ScoringPoints />
+            {questionType === 'SOFT' && <ScoringPoints />}
         </div>
     )
 }
