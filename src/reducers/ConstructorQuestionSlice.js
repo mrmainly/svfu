@@ -32,6 +32,15 @@ export const ConstructorQuestionSlice = createSlice({
         handleQuestionType(state, action) {
             state.questionType = action.payload
         },
+        deleteChapter(state, action) {
+            state.testQuestionList.forEach((item) => {
+                item.chapterId === action.payload
+                && state.questionList.push(item)
+            })
+            state.testQuestionList.splice(
+                state.testQuestionList.findIndex((item) => item.chapterId === action.payload),
+                1)
+        },
     },
 })
 
