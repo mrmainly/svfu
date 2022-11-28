@@ -5,8 +5,8 @@ const ObrTest = () => {
     return (
         <div>
             <Form layout={"horizontal"}>
-                <Tabs defaultActiveKey="1" type={'card'}>
-                    <Tabs.TabPane tab={'Вопросы'} key={'1'}>
+                <Tabs defaultActiveKey="1" type={'card'} tabBarExtraContent={<Button>Создать тест</Button>}>
+                    <Tabs.TabPane tab={'Разделы'} key={'1'}>
                         <ObrTestQuestions/>
                     </Tabs.TabPane>
                     <Tabs.TabPane tab={'Настройки'} key={'2'}>
@@ -17,9 +17,6 @@ const ObrTest = () => {
                     </Tabs.TabPane>
                 </Tabs>
             </Form>
-            <Button>
-                Сохранить
-            </Button>
         </div>
     )
 }

@@ -7,10 +7,13 @@ import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
 import TestsBankTable from './components/table/TestBankTable'
 import { MyButton } from '../../../components'
 import './test-bank.css'
+import { useNavigate } from 'react-router-dom'
+import ROUTES from '../../../routes'
 
 const LazyTBAddModal = lazy(() => import('./components/modals/TestBankAddModal'))
 
 const TestsBank = () => {
+    const navigate = useNavigate()
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(30)
     const [name, setName] = useState('')
@@ -39,6 +42,9 @@ const TestsBank = () => {
         <div>
             <MyButton onClick={() => setModalNewTest(true)} style={{ marginBottom: 20 }}>
                 Создать новый тест
+            </MyButton>
+            <MyButton onClick={() => navigate(ROUTES.TEST_TESTS)} style={{ marginBottom: 20 }}>
+                Создать новый тестовый тест
             </MyButton>
             <div className="inputs-container">
                 <Input.Search
