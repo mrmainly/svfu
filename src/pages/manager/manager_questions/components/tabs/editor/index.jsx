@@ -25,9 +25,6 @@ const TestSoftEditor = () => {
     const onClose = () => {
         setOpen(false)
     }
-    const onChange = (content) => {
-        console.log('onChange', content)
-    }
 
     return (
         <div>
@@ -41,7 +38,16 @@ const TestSoftEditor = () => {
             <MyDrawer open={open} onClose={onClose} setQuestion={setQuestion} />
 
             <Card hoverable={false} title={`Задание и описание вопроса`} className="card">
-                <Form.Item style={{ marginBottom: '-1px' }}>
+                <Form.Item
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Задание и описание вопроса является обязательной строкой',
+                        },
+                    ]}
+                    name="description"
+                    style={{ marginBottom: 0 }}
+                >
                     <ReactSummernote
                         value="Default value"
                         options={{
@@ -58,22 +64,9 @@ const TestSoftEditor = () => {
                                 ['view', ['codeview']],
                             ],
                         }}
-                        onChange={(content) => onChange(content)}
                     />
                 </Form.Item>
             </Card>
-            {/* <Card style={{ marginBottom: 12 }}>
-                <Form.Item>
-                    <Upload
-                        // {...props}
-                        multiple={false}
-                        maxCount={1}
-                        accept=".pdf"
-                    >
-                        <Button icon={<UploadOutlined />}>Загрузить фотографию</Button>
-                    </Upload>
-                </Form.Item>
-            </Card> */}
             {question === 'Ответ в свободной форме' && <DescribeQuestionType />}
             {question === 'Ответ в свободной форме(практическая часть)' && <DescribeQuestionType />}
             {question === 'Одиночный выбор' && <OneChoiseQuestionType />}

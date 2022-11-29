@@ -24,9 +24,10 @@ const OneChoiseQuestionType = () => {
                                 ]}
                             >
                                 <List.Item.Meta
-                                    avatar={<Form.Item>{index + 1}</Form.Item>}
+                                    avatar={<Form.Item noStyle>{index + 1}</Form.Item>}
                                     description={
                                         <Form.Item
+                                            noStyle
                                             name={[field.name, 'name']}
                                             rules={[
                                                 {
@@ -56,7 +57,7 @@ const OneChoiseQuestionType = () => {
                                 </Form.Item>
                             </List.Item>
                         ))}
-                        <Button onClick={add} style={{ marginTop: 20 }}>
+                        <Button onClick={() => add()} style={{ marginTop: 20 }}>
                             Добавить вариант ответа
                         </Button>
                     </List>

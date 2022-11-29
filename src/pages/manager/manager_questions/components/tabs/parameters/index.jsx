@@ -1,11 +1,15 @@
 import { Card, Checkbox, Form, Space, TimePicker, Select } from 'antd'
 import { useState } from 'react'
 
+import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
+
 const { Option } = Select
 
 const TestSoftParameters = () => {
     const [time, setTime] = useState(false)
     const [file, setFile] = useState(false)
+
+    const { data: directionList, isLoading: isDirectionLoading } = useGetToolsDirectionQuery()
 
     const onTime = (time, timeString) => {
         console.log(time, timeString)
@@ -30,6 +34,10 @@ const TestSoftParameters = () => {
         },
     ]
 
+    if (isDirectionLoading) {
+        return <div>asd</div>
+    }
+
     return (
         <Card>
             <Form.Item
@@ -43,14 +51,21 @@ const TestSoftParameters = () => {
                     ))}
                 </Select>
             </Form.Item>
-            <Form.Item label="Квалификация" labelCol={{ span: 24 }} style={{ marginBottom: 20 }}>
-                <Select style={{ width: 220 }} defaultValue="BEGINNER">
-                    {difficulty.map((item, index) => (
-                        <Option key={index}>{item.label}</Option>
+            <Form.Item
+                label="Квалификация"
+                name="direction"
+                labelCol={{ span: 24 }}
+                style={{ marginBottom: 20 }}
+            >
+                <Select mode="multiple" style={{ width: 220 }} placeholder="Квалификация">
+                    {directionList?.map((item, index) => (
+                        <Option value={item.id} key={index}>
+                            {item.name}
+                        </Option>
                     ))}
                 </Select>
             </Form.Item>
-            <Form.Item style={{ marginBottom: 10 }}>
+            <Form.Item style={{ marginBottom: 10 }} name="time">
                 <Space direction={'vertical'}>
                     <Checkbox onChange={() => setTime(!time)}>
                         Ограничить время ответа на вопрос
