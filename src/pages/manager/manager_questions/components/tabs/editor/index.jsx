@@ -29,8 +29,6 @@ const TestSoftEditor = () => {
         console.log('onChange', content)
     }
 
-    console.log(question)
-
     return (
         <div>
             <Button
@@ -76,7 +74,6 @@ const TestSoftEditor = () => {
                     </Upload>
                 </Form.Item>
             </Card> */}
-
             {question === 'Ответ в свободной форме' && <DescribeQuestionType />}
             {question === 'Ответ в свободной форме(практическая часть)' && <DescribeQuestionType />}
             {question === 'Одиночный выбор' && <OneChoiseQuestionType />}
