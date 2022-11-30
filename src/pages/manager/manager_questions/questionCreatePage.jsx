@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import TestSoftEditor from './components/tabs/editor'
 import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
+<<<<<<< HEAD
 import {
     useQuestionCreateStepOnePostMutation,
     useQuestionCreateStepTwoPostMutation,
@@ -21,9 +22,14 @@ const QuestionCreatePage = () => {
     const [questionCreateStepOne] = useQuestionCreateStepOnePostMutation()
     const [questionCreateStepTwo] = useQuestionCreateStepTwoPostMutation()
     const [questionCreateStepThree] = useQuestionCreateStepThreePostMutation()
+=======
+
+const QuestionCreatePage = () => {
+>>>>>>> 5c527d2e02a26f0af9d265d0180735e004ae73c2
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
 
+<<<<<<< HEAD
     const onFinish = (data) => {
         questionCreateStepOne({
             description: data.description,
@@ -50,6 +56,14 @@ const QuestionCreatePage = () => {
             })
         })
         console.log(data)
+=======
+    const onFinish = () => {
+        // questionCreateStepOne({
+            
+        // }).then(() => {
+
+        // })
+>>>>>>> 5c527d2e02a26f0af9d265d0180735e004ae73c2
     }
 
     return (

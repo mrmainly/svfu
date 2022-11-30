@@ -1,96 +1,80 @@
-import { Button, Card, Form, InputNumber, List, Space, Switch } from 'antd'
-import { DeleteTwoTone } from '@ant-design/icons'
+import { Card, Form, Select, Switch, TimePicker } from 'antd'
+import { useState } from 'react'
+import ResponseText from './response-text'
+import ResponseScore from './response-score'
 
+const {Option} = Select
 
 const ObrTestSettings = () => {
+    const [response, setResponse] = useState('score')
     return (
         <>
-            <Card
-                hoverable={true}
-                title={`Подсказка для комиссии`}
-                style={{marginBottom: '12px'}}
-            >
-                <Form.Item>
-                    <Space direction={'vertical'}>
-                        <Space>
-                            <Switch/>
-                            Перемешать вопросы
-                        </Space>
-                        <Space>
-                            <Switch/>
-                            Перемешать варианты ответов
-                        </Space>
-                    </Space>
-                </Form.Item>
+            <Card style={{marginBottom: '12px'}} title={'Параметры'}>
+                <Card.Grid style={{width: '50%'}} hoverable={false}>
+                    <Form.Item
+                        name={'direction'}
+                        label={'Квалификация'}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Обязательное поле',
+                            },
+                        ]}
+                    >
+                        <Select
+                            placeholder={'Выберите квалификацию'}
+                        >
+                            <Option value={1}>
+                                Ранжирование
+                            </Option>
+                            <Option value={2}>
+                                СВФУ
+                            </Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        label="Время на тест(ЧЧ:мм)"
+                        name="test_time"
+                        required={true}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Время теста обязательное поле',
+                            },
+                        ]}
+                    >
+                        <TimePicker
+                            placeholder="Таймер тестирования"
+                            style={{ width: '100%' }}
+                            format="HH:mm"
+                        />
+                    </Form.Item>
+                </Card.Grid>
+                <Card.Grid style={{width: '50%'}} hoverable={false}>
+                    <Form.Item name={'use_criterion_chapters'} valuePropName={'checked'} label={'Оценивать по разделам'}>
+                        <Switch/>
+                    </Form.Item>
+                </Card.Grid>
             </Card>
-            <Card hoverable={false} title={`Выставление баллов - макс. балл (число)`} style={{ marginBottom: '12px' }}>
-                <Form.List name={'scores'} initialValue={[{}]}>
-                    {(fields2, { add, remove }) => (
-                        <List header={<div>Заполните поля условий </div>}>
-                            {fields2.map((field, index) => (
-                                <List.Item
-                                    key={field.key}
-                                    actions={[
-                                        fields2.length > 1 ? (
-                                            <DeleteTwoTone
-                                                twoToneColor={'#EB5757'}
-                                                onClick={() => remove(field.name)}
-                                            />
-                                        ) : null,
-                                    ]}
-                                >
-                                    <List.Item.Meta
-                                        avatar={<Form.Item>{index + 1}</Form.Item>}
-                                        description={
-                                            <Space>
-                                                <Form.Item
-                                                    name={[field.name, 'name']}
-                                                    label={'Мин.'}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                            message:
-                                                                'Заполните вариант ответа или удалите поле',
-                                                        },
-                                                    ]}
-                                                >
-                                                    <InputNumber />
-                                                </Form.Item>
-                                                <Form.Item
-                                                    name={[field.name, 'name2']}
-                                                    label={'Макс.'}
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                            message:
-                                                                'Заполните вариант ответа или удалите поле',
-                                                        },
-                                                    ]}
-                                                >
-                                                    <InputNumber />
-                                                </Form.Item>
-                                            </Space>
-                                        }
-                                    />
-                                    <Form.Item
-                                        name={[field.name, 'score']}
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Выставите баллы',
-                                            },
-                                        ]}
-                                    >
-                                        <InputNumber placeholder={'Балл'} />
-                                    </Form.Item>
-                                </List.Item>
-                            ))}
-                            <Form.Item>
-                                <Button onClick={() => add()}>Добавить условие</Button>
-                            </Form.Item>
-                        </List>
-                    )}
-                </Form.List>
+            <Card
+                hoverable={false}
+                title={`Выставление баллов - макс. балл`}
+                style={{ marginBottom: '12px' }}
+                extra={
+                    <Select defaultValue="score" onChange={(value) => setResponse(value)}>
+                        <Select.Option value={'score'}>
+                            балл
+                        </Select.Option>
+                        <Select.Option value={'text'}>
+                            текст
+                        </Select.Option>
+                    </Select>
+                }
+            >
+                {response === 'score'
+                    ? <ResponseScore/>
+                    : <ResponseText/>
+                }
             </Card>
 
         </>
