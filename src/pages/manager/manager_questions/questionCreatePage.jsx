@@ -10,14 +10,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import TestSoftEditor from './components/tabs/editor'
 import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
-import { useQuestionCreateStepOnePostMutation } from '../../../services/manager/question-bank/QuestionCreate'
 
 const QuestionCreatePage = () => {
-    const [questionCreateStepOne] = useQuestionCreateStepOnePostMutation()
 
     const { questionType } = useSelector((state) => state.constructor_question_slice)
 
-    const onFinish = (data) => {
+    const onFinish = () => {
         // questionCreateStepOne({
             
         // }).then(() => {
