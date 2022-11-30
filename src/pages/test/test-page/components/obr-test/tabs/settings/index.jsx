@@ -24,10 +24,10 @@ const ObrTestSettings = () => {
                         <Select
                             placeholder={'Выберите квалификацию'}
                         >
-                            <Option value={'Ранжирование'}>
+                            <Option value={1}>
                                 Ранжирование
                             </Option>
-                            <Option value={'СВФУ'}>
+                            <Option value={2}>
                                 СВФУ
                             </Option>
                         </Select>

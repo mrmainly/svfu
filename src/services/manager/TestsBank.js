@@ -44,21 +44,54 @@ export const TestsBank = api.injectEndpoints({
             query: ({ direction, name }) => `constructor/question/soft/?direction=${direction}&name=${name}`,
             providesTags: ['SoftQuestion'],
         }),
-        postSoftTest: build.mutation({
-            query(body) {
+        // postSoftTest: build.mutation({
+        //     query(body) {
+        //         return {
+        //             url: `constructor/unit/soft/`,
+        //             method: 'POST',
+        //             body,
+        //         }
+        //     },
+        //     invalidatesTags: [{ type: 'Attestation' }],
+        // }),
+        patchSoftTest: build.mutation({
+            query({ body, id }) {
                 return {
-                    url: `constructor/unit/soft/`,
+                    url: `constructor/unit/soft/${id}`,
+                    method: 'PATCH',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+
+        //2.0 добавить софт тест
+        postUnit: build.mutation({
+            query(formData) {
+                return {
+                    url: `constructor/unit`,
+                    method: 'POST',
+                    body: formData,
+                    header: 'multipart/form-data',
+                }
+            },
+            invalidatesTags: [{ type: 'Attestation' }],
+        }),
+        postUnitSoft: build.mutation({
+            query({ body, id }) {
+                return {
+                    url: `constructor/unit/${id}/soft`,
                     method: 'POST',
                     body,
                 }
             },
             invalidatesTags: [{ type: 'Attestation' }],
         }),
-        patchSoftTest: build.mutation({
+        postUnitSoftChapter: build.mutation({
             query({ body, id }) {
                 return {
-                    url: `constructor/unit/soft/${id}`,
-                    method: 'PATCH',
+                    url: `constructor/unit/${id}/soft/chapter`,
+                    method: 'POST',
                     body,
                 }
             },
@@ -75,4 +108,7 @@ export const {
     useGetSoftQuestionListQuery,
     usePostSoftTestMutation,
     usePatchSoftTestMutation,
+    usePostUnitMutation,
+    usePostUnitSoftMutation,
+    usePostUnitSoftChapterMutation,
 } = TestsBank
