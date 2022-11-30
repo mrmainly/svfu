@@ -54,9 +54,6 @@ const ObrTestSettings = () => {
                     <Form.Item name={'use_criterion_chapters'} valuePropName={'checked'} label={'Оценивать по разделам'}>
                         <Switch/>
                     </Form.Item>
-                    <Form.Item name={'use_criterion_chapters'} valuePropName={'checked'} label={'Оценивать по разделам'}>
-                        <Switch/>
-                    </Form.Item>
                 </Card.Grid>
             </Card>
             <Card

@@ -2,9 +2,41 @@ import { Button, Form, Input, Tabs } from 'antd'
 import ObrTestSettings from './tabs/settings'
 import ObrTestQuestions from './tabs/questions'
 import Description from './tabs/description'
+
+import { useSelector } from 'react-redux'
+
 const ObrTest = () => {
+    const { testQuestionList } = useSelector(
+        (state) => state.constructor_question_slice
+    )
+    console.log('testQuestionList', testQuestionList)
     const handleSubmit = (data) => {
+        const chapters = data.chapters
+        chapters.map((chapter, index) => {
+            chapter.question = []
+            testQuestionList.forEach((item) => (
+                item.chapterId === index && (
+                    chapter.question.push(item.id)
+                )
+            ))
+        })
+
         console.log("data", data)
+
+        const unit = {
+            name: data.name,
+            description: data.description,
+            direction: data.direction,
+            test_time: data.test_time,
+            unit_type: 'SOFT',
+        }
+        const unit_criterion = {
+            main_criterion: data.main_criterion,
+            use_criterion_chapters: data.use_criterion_chapters,
+        }
+        console.log('unit', unit)
+        console.log('unit_criterion', unit_criterion)
+        console.log('chapter', chapters)
     }
     return (
         <div>
@@ -15,6 +47,7 @@ const ObrTest = () => {
                 initialValues={{
                     ['вопросы']: false,
                     ['варианты ответов']: false,
+                    ['use_criterion_chapters']: false,
             }}
             >
                 <Form.Item

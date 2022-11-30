@@ -3,7 +3,7 @@ import { DeleteTwoTone } from '@ant-design/icons'
 
 const ResponseScore = () => {
     return (
-        <Form.List name={'response'} initialValue={[{}]}>
+        <Form.List name={'main_criterion'} initialValue={[{}]}>
             {(fields, { add, remove }) => (
                 <List header={<div>Заполните поля условий </div>}>
                     {fields.map((field, index) => (
@@ -52,7 +52,7 @@ const ResponseScore = () => {
                                 }
                             />
                             <Form.Item
-                                name={[field.name, 'response_score']}
+                                name={[field.name, 'response']}
                                 rules={[
                                     {
                                         required: true,
