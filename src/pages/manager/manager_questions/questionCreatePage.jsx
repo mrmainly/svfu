@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { Button, Form, Tabs } from 'antd'
+import { Button, Form, Tabs, message, Spin } from 'antd'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import 'react-summernote/dist/react-summernote.css'
 import 'bootstrap/js/dist/modal'
@@ -11,25 +12,24 @@ import 'bootstrap/dist/css/bootstrap.css'
 import TestSoftEditor from './components/tabs/editor'
 import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
-<<<<<<< HEAD
 import {
     useQuestionCreateStepOnePostMutation,
     useQuestionCreateStepTwoPostMutation,
     useQuestionCreateStepThreePostMutation,
 } from '../../../services/manager/question-bank/QuestionCreate'
+import ROUTES from '../../../routes'
 
 const QuestionCreatePage = () => {
-    const [questionCreateStepOne] = useQuestionCreateStepOnePostMutation()
-    const [questionCreateStepTwo] = useQuestionCreateStepTwoPostMutation()
-    const [questionCreateStepThree] = useQuestionCreateStepThreePostMutation()
-=======
-
-const QuestionCreatePage = () => {
->>>>>>> 5c527d2e02a26f0af9d265d0180735e004ae73c2
+    const [questionCreateStepOne, { isLoading: isStepOneLoading }] =
+        useQuestionCreateStepOnePostMutation()
+    const [questionCreateStepTwo, { isLoading: isStepTwoLoading }] =
+        useQuestionCreateStepTwoPostMutation()
+    const [questionCreateStepThree, { isLoading: isStepThreeLaoding }] =
+        useQuestionCreateStepThreePostMutation()
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
+    const navigate = useNavigate()
 
-<<<<<<< HEAD
     const onFinish = (data) => {
         questionCreateStepOne({
             description: data.description,
@@ -51,24 +51,51 @@ const QuestionCreatePage = () => {
                                 is_true: questionType === 'HARD' ? true : false,
                             }
                         }),
+                    }).then((res) => {
+                        if (res.data) {
+                            message.success(`${questionType} вопрос создан`)
+                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                        } else {
+                            message.error('Вопрос не создан')
+                        }
                     })
+                } else {
+                    if (res.data) {
+                        message.success(`${questionType} вопрос создан`)
+                        navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                    } else {
+                        message.error('Вопрос не создан')
+                    }
                 }
             })
         })
-        console.log(data)
-=======
-    const onFinish = () => {
-        // questionCreateStepOne({
-            
-        // }).then(() => {
-
-        // })
->>>>>>> 5c527d2e02a26f0af9d265d0180735e004ae73c2
     }
 
     return (
         <div>
-            <Form layout={'horizontal'} onFinish={onFinish}>
+            {isStepOneLoading ||
+                isStepTwoLoading ||
+                (isStepThreeLaoding && (
+                    <div
+                        style={{
+                            top: '50%',
+                            position: 'fixed',
+                            height: '100vh',
+                            width: '100%',
+                            zIndex: 1,
+                            left: '50%',
+                        }}
+                    >
+                        <Spin size="large" />
+                    </div>
+                ))}
+            <Form
+                layout={'horizontal'}
+                onFinish={onFinish}
+                style={{
+                    opacity: isStepOneLoading || isStepTwoLoading || isStepThreeLaoding ? 0.4 : 1,
+                }}
+            >
                 <Tabs
                     defaultActiveKey="1"
                     type={'card'}

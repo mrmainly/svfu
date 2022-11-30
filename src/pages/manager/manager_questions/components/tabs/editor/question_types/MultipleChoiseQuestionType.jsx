@@ -39,6 +39,7 @@ const MultipleChoiseQuestionType = () => {
                                             <Input
                                                 placeholder={'Вариант ответа'}
                                                 bordered={false}
+                                                style={{ width: '80%' }}
                                             />
                                         </Form.Item>
                                     }

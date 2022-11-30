@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Pagination, Select, Input, Button } from 'antd'
+import { Pagination, Select, Input } from 'antd'
 
 import QuestionsTable from './components/tables/QuestionsTable'
 import SwitchQuestionModal from './components/modals/SwitchQuestionModal'
 import { useGetConstructorQuestionQuery } from '../../../services/manager/question-bank'
 import { useGetToolsDirectionQuery } from '../../../services/ToolsService'
+import { MyButton } from '../../../components'
 import './managerQuestions.css'
 
 const ManagerQuestionsPage = () => {
@@ -40,9 +41,9 @@ const ManagerQuestionsPage = () => {
 
     return (
         <div>
-            <Button style={{ marginBottom: 16 }} onClick={() => setShowCreateQuestionModal(true)}>
+            <MyButton style={{ marginBottom: 16 }} onClick={() => setShowCreateQuestionModal(true)}>
                 Создать вопрос
-            </Button>
+            </MyButton>
             <SwitchQuestionModal
                 open={showCreateQuestionModal}
                 setOpen={setShowCreateQuestionModal}
