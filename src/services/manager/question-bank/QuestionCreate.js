@@ -10,14 +10,14 @@ export const QuestionCreate = api.injectEndpoints({
         questionCreateStepOnePost: build.mutation({
             query(body) {
                 return {
-                    url: `constructor/question/`,
+                    url: `constructor/question`,
                     method: 'POST',
                     body,
                 }
             },
         }),
         questionCreateStepTwoPost: build.mutation({
-            query({ body, id }) {
+            query({ id, body }) {
                 return {
                     url: `constructor/question/${id}/choice`,
                     method: 'POST',
@@ -42,4 +42,5 @@ export const {
     useGetConstructorQuestionQuery,
     useQuestionCreateStepOnePostMutation,
     useQuestionCreateStepTwoPostMutation,
+    useQuestionCreateStepThreePostMutation,
 } = QuestionCreate

@@ -4,7 +4,7 @@ export const QuestionsBank = api.injectEndpoints({
     endpoints: (build) => ({
         getConstructorQuestion: build.query({
             query: ({ currentPage, id, difficulty, is_active, description, direction }) =>
-                `constructor/question/?page=${currentPage}&ordering=${id}&difficulty=${difficulty}&is_active=${is_active}&description=${description}&direction=${direction}`,
+                `constructor/question?page=${currentPage}&ordering=${id}&difficulty=${difficulty}&is_active=${is_active}&description=${description}&direction=${direction}`,
             providesTags: ['ManagerConstructorQuestion'],
         }),
         postConstructorQuestionImage: build.mutation({

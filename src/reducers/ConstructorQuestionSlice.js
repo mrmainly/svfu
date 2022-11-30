@@ -4,6 +4,7 @@ const initialState = {
     testQuestionList: [],
     questionList: [],
     questionType: '',
+    technique: '',
 }
 
 export const ConstructorQuestionSlice = createSlice({
@@ -34,12 +35,15 @@ export const ConstructorQuestionSlice = createSlice({
         },
         deleteChapter(state, action) {
             state.testQuestionList.forEach((item) => {
-                item.chapterId === action.payload
-                && state.questionList.push(item)
+                item.chapterId === action.payload && state.questionList.push(item)
             })
             state.testQuestionList.splice(
                 state.testQuestionList.findIndex((item) => item.chapterId === action.payload),
-                1)
+                1
+            )
+        },
+        handleTechnique(state, action) {
+            state.technique = action.payload
         },
     },
 })

@@ -1,4 +1,4 @@
-import { Card, Checkbox, Form, Space, TimePicker, Select } from 'antd'
+import { Card, Checkbox, Form, Space, TimePicker, Select, Spin } from 'antd'
 import { useState } from 'react'
 
 import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
@@ -7,7 +7,6 @@ const { Option } = Select
 
 const TestSoftParameters = () => {
     const [time, setTime] = useState(false)
-    const [file, setFile] = useState(false)
 
     const { data: directionList, isLoading: isDirectionLoading } = useGetToolsDirectionQuery()
 
@@ -35,7 +34,19 @@ const TestSoftParameters = () => {
     ]
 
     if (isDirectionLoading) {
-        return <div>asd</div>
+        return (
+            <div
+                style={{
+                    width: '100%',
+                    height: 400,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Spin />
+            </div>
+        )
     }
 
     return (
@@ -44,10 +55,19 @@ const TestSoftParameters = () => {
                 label="Сложность задания"
                 labelCol={{ span: 24 }}
                 style={{ marginBottom: 10 }}
+                name="difficulty"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Сложность задания является обязательным полем',
+                    },
+                ]}
             >
-                <Select style={{ width: 220 }} defaultValue="BEGINNER">
+                <Select style={{ width: 220 }} placeholder="Сложность задания">
                     {difficulty.map((item, index) => (
-                        <Option key={index}>{item.label}</Option>
+                        <Option key={index} value={item.label}>
+                            {item.label}
+                        </Option>
                     ))}
                 </Select>
             </Form.Item>
@@ -56,6 +76,12 @@ const TestSoftParameters = () => {
                 name="direction"
                 labelCol={{ span: 24 }}
                 style={{ marginBottom: 20 }}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Квалификация является обязательным полем',
+                    },
+                ]}
             >
                 <Select mode="multiple" style={{ width: 220 }} placeholder="Квалификация">
                     {directionList?.map((item, index) => (
@@ -78,8 +104,8 @@ const TestSoftParameters = () => {
                     )}
                 </Space>
             </Form.Item>
-            <Form.Item style={{ marginBottom: 0 }}>
-                <Checkbox onChange={() => setFile(!file)}>Загрузка файла аттестуемым</Checkbox>
+            <Form.Item style={{ marginBottom: 0 }} name="is_active">
+                <Checkbox defaultChecked>Активность вопроса</Checkbox>
             </Form.Item>
         </Card>
     )

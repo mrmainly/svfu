@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button, Form, Tabs } from 'antd'
 import { useSelector } from 'react-redux'
 
@@ -10,19 +11,45 @@ import 'bootstrap/dist/css/bootstrap.css'
 import TestSoftEditor from './components/tabs/editor'
 import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
-import { useQuestionCreateStepOnePostMutation } from '../../../services/manager/question-bank/QuestionCreate'
+import {
+    useQuestionCreateStepOnePostMutation,
+    useQuestionCreateStepTwoPostMutation,
+    useQuestionCreateStepThreePostMutation,
+} from '../../../services/manager/question-bank/QuestionCreate'
 
 const QuestionCreatePage = () => {
     const [questionCreateStepOne] = useQuestionCreateStepOnePostMutation()
+    const [questionCreateStepTwo] = useQuestionCreateStepTwoPostMutation()
+    const [questionCreateStepThree] = useQuestionCreateStepThreePostMutation()
 
-    const { questionType } = useSelector((state) => state.constructor_question_slice)
+    const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
 
     const onFinish = (data) => {
-        // questionCreateStepOne({
-            
-        // }).then(() => {
-
-        // })
+        questionCreateStepOne({
+            description: data.description,
+            direction: data.direction,
+            question_type: questionType,
+            is_active: data.is_active,
+            time: data.time,
+            difficulty: data.difficulty,
+            technique: technique,
+        }).then((res) => {
+            questionCreateStepTwo({ id: res.data.question_id, body: {} }).then((res) => {
+                if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
+                    questionCreateStepThree({
+                        id: res.data.question_id,
+                        body: data.questions.map((item) => {
+                            return {
+                                name: item.name,
+                                score: item.score,
+                                is_true: questionType === 'HARD' ? true : false,
+                            }
+                        }),
+                    })
+                }
+            })
+        })
+        console.log(data)
     }
 
     return (

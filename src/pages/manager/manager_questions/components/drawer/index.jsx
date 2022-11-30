@@ -1,21 +1,27 @@
 import { Divider, Drawer, List } from 'antd'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { ConstructorQuestionSlice } from '../../../../../reducers/ConstructorQuestionSlice'
 import './drawer.css'
 
-const MyDrawer = ({ open, onClose, setQuestion }) => {
+const MyDrawer = ({ open, onClose }) => {
     const { questionType } = useSelector((state) => state.constructor_question_slice)
+    const { handleTechnique } = ConstructorQuestionSlice.actions
 
-    console.log(questionType)
+    const dispatch = useDispatch()
 
     const data = [
-        { label: 'Одиночный выбор', type: 'ANY' },
-        { label: 'Множественный выбор', type: 'ANY' },
-        { label: 'Ответ в свободной форме', type: 'SOFT' },
+        { label: 'Одиночный выбор', type: 'ANY', technique: 'ONE_CHOICE' },
+        { label: 'Множественный выбор', type: 'ANY', technique: 'MULTIPLE_CHOICE' },
+        { label: 'Ответ в свободной форме', type: 'SOFT', technique: 'DESCRIBE' },
         { label: 'Установление соответствий', type: 'SOFT' },
         { label: 'Table quest', type: 'SOFT' },
-        { label: 'Ответ в свободной форме(практическая часть)', type: 'HARD' },
+        {
+            label: 'Ответ в свободной форме(практическая часть)',
+            type: 'HARD',
+            technique: 'DESCRIBE',
+        },
     ]
 
     const commission = [
@@ -26,7 +32,7 @@ const MyDrawer = ({ open, onClose, setQuestion }) => {
     ]
 
     const handleQuestions = (item) => {
-        setQuestion(item)
+        dispatch(handleTechnique(item))
         onClose()
     }
 
@@ -41,7 +47,7 @@ const MyDrawer = ({ open, onClose, setQuestion }) => {
                     if (item.type === questionType || item.type === 'ANY') {
                         return (
                             <List.Item
-                                onClick={() => handleQuestions(item.label)}
+                                onClick={() => handleQuestions(item.technique)}
                                 className="list-item"
                             >
                                 {item.label}
@@ -76,6 +82,5 @@ const MyDrawer = ({ open, onClose, setQuestion }) => {
 MyDrawer.propTypes = {
     open: PropTypes.bool,
     onClose: PropTypes.func,
-    setQuestion: PropTypes.func,
 }
 export default MyDrawer

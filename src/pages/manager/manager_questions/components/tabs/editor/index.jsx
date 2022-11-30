@@ -14,10 +14,9 @@ import MyDrawer from '../../drawer'
 import './soft.css'
 
 const TestSoftEditor = () => {
-    const [question, setQuestion] = useState('')
     const [open, setOpen] = useState(false)
 
-    const { questionType } = useSelector((state) => state.constructor_question_slice)
+    const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
 
     const showDrawer = () => {
         setOpen(true)
@@ -35,14 +34,14 @@ const TestSoftEditor = () => {
                 shape="circle"
                 icon={<SettingTwoTone className="icon" />}
             />
-            <MyDrawer open={open} onClose={onClose} setQuestion={setQuestion} />
+            <MyDrawer open={open} onClose={onClose} />
 
             <Card hoverable={false} title={`Задание и описание вопроса`} className="card">
                 <Form.Item
                     rules={[
                         {
                             required: true,
-                            message: 'Задание и описание вопроса является обязательной строкой',
+                            message: 'Задание и описание вопроса является обязательным полем',
                         },
                     ]}
                     name="description"
@@ -67,10 +66,9 @@ const TestSoftEditor = () => {
                     />
                 </Form.Item>
             </Card>
-            {question === 'Ответ в свободной форме' && <DescribeQuestionType />}
-            {question === 'Ответ в свободной форме(практическая часть)' && <DescribeQuestionType />}
-            {question === 'Одиночный выбор' && <OneChoiseQuestionType />}
-            {question === 'Множественный выбор' && <MultipleChoiseQuestionType />}
+            {technique === 'DESCRIBE' && <DescribeQuestionType />}
+            {technique === 'ONE_CHOICE' && <OneChoiseQuestionType />}
+            {technique === 'MULTIPLE_CHOICE' && <MultipleChoiseQuestionType />}
             {questionType === 'SOFT' && <ScoringPoints />}
         </div>
     )
