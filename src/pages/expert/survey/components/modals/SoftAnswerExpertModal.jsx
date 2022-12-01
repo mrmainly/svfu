@@ -19,6 +19,7 @@ const SoftAnswerExpertModal = ({ id, expert_review, main_expert }) => {
         SurveysSlice.actions
 
     const dispatch = useDispatch()
+
     const onFinishSubmit = (data) => {
         dispatch(
             setTextAnswerExpert([

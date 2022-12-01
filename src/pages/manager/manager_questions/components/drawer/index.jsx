@@ -18,6 +18,16 @@ const MyDrawer = ({ open, onClose }) => {
         { label: 'Установление соответствий', type: 'SOFT' },
         { label: 'Table quest', type: 'SOFT' },
         {
+            label: 'Текстовое поле',
+            type: 'ANY',
+            technique: 'INPUT_TEXT',
+        },
+        {
+            label: 'Числовое поле',
+            type: 'ANY',
+            technique: 'INPUT_INT',
+        },
+        {
             label: 'Ответ в свободной форме(практическая часть)',
             type: 'HARD',
             technique: 'DESCRIBE',

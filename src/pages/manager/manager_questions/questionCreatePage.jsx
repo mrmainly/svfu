@@ -40,60 +40,70 @@ const QuestionCreatePage = () => {
             difficulty: data.difficulty,
             technique: technique,
         }).then((res) => {
-            questionCreateStepTwo({ id: res.data.question_id, body: {} }).then((res) => {
-                if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
-                    questionCreateStepThree({
-                        id: res.data.question_id,
-                        body: data.questions.map((item) => {
-                            return {
-                                name: item.name,
-                                score: item.score,
-                                is_true: questionType === 'HARD' ? true : false,
+            if (res.data) {
+                questionCreateStepTwo({ id: res.data.question_id, body: {} }).then((res) => {
+                    if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
+                        questionCreateStepThree({
+                            id: res.data.question_id,
+                            body: data.questions.map((item) => {
+                                return {
+                                    name: item.name,
+                                    score: item.score,
+                                    is_true: questionType === 'HARD' ? true : false,
+                                }
+                            }),
+                        }).then((res) => {
+                            if (res.data) {
+                                message.success(`${questionType} вопрос создан`)
+                                navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                            } else {
+                                message.error('Вопрос не создан')
                             }
-                        }),
-                    }).then((res) => {
+                        })
+                    } else {
                         if (res.data) {
                             message.success(`${questionType} вопрос создан`)
                             navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
                         } else {
                             message.error('Вопрос не создан')
                         }
-                    })
-                } else {
-                    if (res.data) {
-                        message.success(`${questionType} вопрос создан`)
-                        navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
-                    } else {
-                        message.error('Вопрос не создан')
                     }
-                }
-            })
+                })
+            } else {
+                message.error('Вы не добавили ни один из типов вопросов')
+            }
         })
+    }
+
+    const allLoading = () => {
+        if (isStepOneLoading || isStepTwoLoading) {
+            return true
+        } else {
+            return false
+        }
     }
 
     return (
         <div>
-            {isStepOneLoading ||
-                isStepTwoLoading ||
-                (isStepThreeLaoding && (
-                    <div
-                        style={{
-                            top: '50%',
-                            position: 'fixed',
-                            height: '100vh',
-                            width: '100%',
-                            zIndex: 1,
-                            left: '50%',
-                        }}
-                    >
-                        <Spin size="large" />
-                    </div>
-                ))}
+            {allLoading() && (
+                <div
+                    style={{
+                        top: '50%',
+                        position: 'fixed',
+                        height: '100vh',
+                        width: '100%',
+                        zIndex: 1,
+                        left: '50%',
+                    }}
+                >
+                    <Spin size="large" />
+                </div>
+            )}
             <Form
                 layout={'horizontal'}
                 onFinish={onFinish}
                 style={{
-                    opacity: isStepOneLoading || isStepTwoLoading || isStepThreeLaoding ? 0.4 : 1,
+                    opacity: allLoading() ? 0.4 : 1,
                 }}
             >
                 <Tabs

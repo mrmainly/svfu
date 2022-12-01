@@ -8,6 +8,8 @@ import {
     OneChoiseQuestionType,
     MultipleChoiseQuestionType,
     DescribeQuestionType,
+    TextInput,
+    NumberInput,
 } from './question_types'
 import ScoringPoints from './scoring_points'
 import MyDrawer from '../../drawer'
@@ -69,6 +71,8 @@ const TestSoftEditor = () => {
             {technique === 'DESCRIBE' && <DescribeQuestionType />}
             {technique === 'ONE_CHOICE' && <OneChoiseQuestionType />}
             {technique === 'MULTIPLE_CHOICE' && <MultipleChoiseQuestionType />}
+            {technique === 'INPUT_TEXT' && <TextInput />}
+            {technique === 'INPUT_INT' && <NumberInput />}
             {questionType === 'SOFT' && <ScoringPoints />}
         </div>
     )
