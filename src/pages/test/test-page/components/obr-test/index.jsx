@@ -14,6 +14,7 @@ const ObrTest = () => {
     const { testQuestionList } = useSelector(
         (state) => state.constructor_question_slice
     )
+
     console.log('testQuestionList', testQuestionList)
     const handleSubmit = (data) => {
         const chapters = data.chapters
@@ -50,25 +51,62 @@ const ObrTest = () => {
         console.log('unit', unit)
         console.log('unit_criterion', unit_criterion)
         console.log('chapter', chapters)
-        postUnit({formData: unitFormData}).then((res) => {
-            if (res.data) {
-                postUnitSoft({body: unit_criterion, id: res.data.unit_id}).then((res) => {
-                    if (res.data) {
-                        postUnitSoftChapter({body: chapters, id: res.data.unit_id}).then((res) => {
-                            if (res.data) {
-                                message.success('Тест создан')
-                            } else {
-                                message.error(res.error.data.errors[0])
-                            }
-                        })
-                    } else {
-                        message.error(res.error.data.errors[0])
-                    }
-                })
-            } else {
-                message.error(res.error.data.errors[0])
-            }
-        })
+
+        const responseUnit = postUnit({formData: unitFormData})
+
+        if (responseUnit.data) {
+            const promiseUnitSoft = new Promise((resolve, reject) => {
+                const responseUnitSoft = postUnitSoft({body: unit_criterion, id: responseUnit.data.unit_id})
+                {responseUnitSoft.data ? resolve() : reject('то не то')}
+            })
+
+            const promiseUnitSoftChapter = new Promise((resolve, reject) => {
+                const responseUnitSoftChapter = postUnitSoftChapter({body: chapters, id: responseUnit.data.unit_id})
+                {responseUnitSoftChapter.data ? resolve() : reject('xто не то')}
+            })
+            Promise.all([promiseUnitSoft, promiseUnitSoftChapter])
+                .then((data) => message.success(data[0], data[1]))
+                .catch((error) => message.error(error))
+        } else {
+            message.error('тест не создан')
+        }
+
+        // const response = postUnit()
+        // if (response.success) {
+        //     try{
+        //         const response2 = postUnitSoft()
+        //         if (response2.success){
+        //             const response3 = postUnitSoftChapter()
+        //             try (response3.success){} catch {
+        //
+        //             } catch (
+        //                 new Error()
+        //                 )
+        //         } catch {
+        //             postUnitSoftDelete()
+        //             new Error()
+        //         }
+        //     } catch {
+        //         postDelete(response.id)
+        //     }
+        // }
+
+        // postUnit({formData: unitFormData}).then((res) => {
+        //     if (res.data) {
+        //         postUnitSoft({body: unit_criterion, id: res.data.unit_id}).then((res) => {
+        //             if (!res.data) {
+        //                 message.error('Что то пошло не так')
+        //             }
+        //         })
+        //         postUnitSoftChapter({body: chapters, id: res.data.unit_id}).then((res) => {
+        //             if (!res.data) {
+        //                 message.error('Что то пошло не так')
+        //             }
+        //         })
+        //     } else {
+        //         message.error(res.error.data.errors[0])
+        //     }
+        // })
     }
     return (
         <div>
