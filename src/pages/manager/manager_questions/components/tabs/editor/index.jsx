@@ -50,7 +50,7 @@ const TestSoftEditor = () => {
                     style={{ marginBottom: 0 }}
                 >
                     <ReactSummernote
-                        value="Default value"
+                        value="defautl value"
                         options={{
                             lang: 'ru-RU',
                             height: 250,

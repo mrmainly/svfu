@@ -21,15 +21,35 @@ const QuestionEditPage = () => {
 
     const { id } = state
 
-    const { data: questionListId, isFetching } = useGetManagerQuestionEditIdQuery({ id: id })
+    const { data, isFetching } = useGetManagerQuestionEditIdQuery({ id: id })
 
     const { questionType } = useSelector((state) => state.constructor_question_slice)
 
-    console.log(questionListId)
+    if (isFetching) {
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 400,
+                }}
+            >
+                <Spin />
+            </div>
+        )
+    }
+
+    console.log(data)
 
     return (
         <div>
-            <Form layout={'horizontal'}>
+            <Form
+                layout={'horizontal'}
+                initialValues={{
+                    ['description']: data.description,
+                }}
+            >
                 <Tabs
                     defaultActiveKey="1"
                     type={'card'}
@@ -40,9 +60,9 @@ const QuestionEditPage = () => {
                     }
                 >
                     <Tabs.TabPane tab={'Редактор'} key={'1'}>
-                        <TestSoftEditor />
+                        <TestSoftEditor data={data} />
                     </Tabs.TabPane>
-                    {questionType === 'SOFT' && (
+                    {data.question_type === 'SOFT' && (
                         <Tabs.TabPane tab={'Блок комиссии'} key={'2'}>
                             <TestSoftComments />
                         </Tabs.TabPane>
