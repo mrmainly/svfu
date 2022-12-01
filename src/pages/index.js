@@ -53,6 +53,7 @@ const ManagerQuestionsPage = lazy(() => import('./manager/manager_questions'))
 const ManagerQuestionCreatePage = lazy(() =>
     import('./manager/manager_questions/questionCreatePage')
 )
+const ManagerQuestionEditPage = lazy(() => import('./manager/manager_questions/questionEditPage'))
 
 export {
     Login,
@@ -100,4 +101,5 @@ export {
     TestTestPageAdd,
     ManagerQuestionsPage,
     ManagerQuestionCreatePage,
+    ManagerQuestionEditPage,
 }

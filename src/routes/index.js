@@ -54,6 +54,7 @@ const ROUTES = {
     TEST_TEST_PAGE_ADD: '/test-tests-page-add',
     MANAGER_QUESTIONS_PAGE: '/manager-questions-page',
     MANAGER_QUESTIONS_CREATE_PAGE: '/manager-question-page',
+    MANAGER_QUESTIONS_EDIT_PAGE: '/manager-question-edit-page',
 }
 
 export default ROUTES

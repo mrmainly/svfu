@@ -50,6 +50,7 @@ import {
     TestTests,
     TestTestPageAdd,
     ManagerQuestionsPage,
+    ManagerQuestionEditPage,
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -399,6 +400,14 @@ function App() {
                             </Suspense>
                         }
                         path={ROUTES.TEST_TEST_PAGE_ADD}
+                    />
+                    <Route
+                        element={
+                            <Suspense fallback={<LoadingInsideLayout />}>
+                                <ManagerQuestionEditPage />
+                            </Suspense>
+                        }
+                        path={ROUTES.MANAGER_QUESTIONS_EDIT_PAGE}
                     />
                 </Route>
             </Routes>

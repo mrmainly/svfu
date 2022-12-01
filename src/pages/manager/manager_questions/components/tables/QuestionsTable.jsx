@@ -1,11 +1,15 @@
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 
 import { useGetToolsDirectionQuery } from '../../../../../services/ToolsService'
+import ROUTES from '../../../../../routes'
 
-const QuestionsTable = ({ data, loading, setId, handleOpenEditQuestionModal, setCurrentData }) => {
+const QuestionsTable = ({ data, loading, setId }) => {
     const { data: dataDirection } = useGetToolsDirectionQuery()
+
+    const navigate = useNavigate()
 
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
@@ -69,12 +73,15 @@ const QuestionsTable = ({ data, loading, setId, handleOpenEditQuestionModal, set
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (text, record) => (
+            render: (id) => (
                 <Button
                     type="primary"
                     onClick={() => {
-                        setCurrentData(record)
-                        handleOpenEditQuestionModal()
+                        navigate(ROUTES.MANAGER_QUESTIONS_EDIT_PAGE, {
+                            state: {
+                                id: id,
+                            },
+                        })
                     }}
                 >
                     Изменить
@@ -84,17 +91,15 @@ const QuestionsTable = ({ data, loading, setId, handleOpenEditQuestionModal, set
     ]
 
     return (
-        <>
-            <Table
-                columns={columns}
-                dataSource={data}
-                loading={loading}
-                rowKey="id"
-                pagination={false}
-                scroll={{ x: true }}
-                onChange={onTableChange}
-            />
-        </>
+        <Table
+            columns={columns}
+            dataSource={data}
+            loading={loading}
+            rowKey="id"
+            pagination={false}
+            scroll={{ x: true }}
+            onChange={onTableChange}
+        />
     )
 }
 
