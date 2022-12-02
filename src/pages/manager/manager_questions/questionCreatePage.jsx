@@ -14,8 +14,9 @@ import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
 import {
     useQuestionCreateStepOnePostMutation,
-    useQuestionCreateStepTwoPostMutation,
-    useQuestionCreateStepThreePostMutation,
+    useQuestionCreateChoiseMutation,
+    useQuestionCreateInputPostMutation,
+    useQuestionDeleteMutation,
 } from '../../../services/manager/question-bank/QuestionCreate'
 import ROUTES from '../../../routes'
 
@@ -23,13 +24,16 @@ const QuestionCreatePage = () => {
     const [questionCreateStepOne, { isLoading: isStepOneLoading }] =
         useQuestionCreateStepOnePostMutation()
     const [questionCreateChoise, { isLoading: isCreateChoiseLaoding }] =
-        useQuestionCreateStepThreePostMutation()
+        useQuestionCreateChoiseMutation()
+    const [questionCreateInput, { isLoading: isCreateInputLaoding }] =
+        useQuestionCreateInputPostMutation()
+    const [questionDelete, { isLoading: isDeleteQuestionLaoding }] = useQuestionDeleteMutation()
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
     const navigate = useNavigate()
 
     const onFinish = (data) => {
-        const responseStepOne = questionCreateStepOne({
+        questionCreateStepOne({
             description: data.description,
             direction: data.direction,
             question_type: questionType,
@@ -38,14 +42,11 @@ const QuestionCreatePage = () => {
             difficulty: data.difficulty,
             technique: technique,
             use_criterion: 'false',
-        })
-
-        if (responseStepOne.data) {
-            let promiseResponse
-            if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
-                promiseResponse = new Promise((resolve, reject) => {
-                    const responseChoise = questionCreateChoise({
-                        id: responseStepOne.data.question_id,
+        }).then((mainResponse) => {
+            if (mainResponse.data) {
+                if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
+                    questionCreateChoise({
+                        id: mainResponse.data.question_id,
                         body: data.questions.map((item) => {
                             return {
                                 name: item.name,
@@ -53,20 +54,50 @@ const QuestionCreatePage = () => {
                                 is_true: questionType === 'HARD' ? true : false,
                             }
                         }),
+                    }).then((res) => {
+                        if (res.data) {
+                            message.success('Вопрос с вариантами ответов создана')
+                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                        } else {
+                            message.error('Вопрос не создан')
+                            questionDelete({ id: res.data.question_id })
+                        }
                     })
-                    {
-                        responseChoise.data ? resolve() : reject('то не то')
-                    }
-                })
+                } else if (technique === 'INPUT_INT' || technique === 'INPUT_TEXT') {
+                    questionCreateInput({
+                        id: mainResponse.data.question_id,
+                        body: {
+                            input_answers: data.questions.map((item) => {
+                                return {
+                                    input_text: item.input_text,
+                                    score: item.score,
+                                    input_int: item.input_int,
+                                }
+                            }),
+                        },
+                    }).then((res) => {
+                        if (res.data) {
+                            message.success('Вопрос с полями ввода созданы')
+                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                        } else {
+                            message.error('Вопрос не создан')
+                            questionDelete({ id: mainResponse.data.question_id })
+                        }
+                    })
+                }
+            } else {
+                message.error('Не все поля были введины')
             }
-            Promise.all([promiseResponse])
-                .then((data) => message.success(data[0], data[1]))
-                .catch((error) => message.error(error))
-        }
+        })
     }
 
     const allLoading = () => {
-        if (isStepOneLoading || isCreateChoiseLaoding) {
+        if (
+            isStepOneLoading ||
+            isCreateChoiseLaoding ||
+            isCreateInputLaoding ||
+            isDeleteQuestionLaoding
+        ) {
             return true
         } else {
             return false

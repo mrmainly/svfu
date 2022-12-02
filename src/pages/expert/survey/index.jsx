@@ -15,8 +15,8 @@ import './expert.css'
 const { Title } = Typography
 
 const ExpertSurvey = () => {
-    const location = useLocation()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const state = location.state
 

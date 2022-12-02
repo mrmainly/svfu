@@ -16,20 +16,31 @@ export const QuestionCreate = api.injectEndpoints({
                 }
             },
         }),
-        questionCreateStepTwoPost: build.mutation({
-            query({ id, body }) {
+        questionCreateChoise: build.mutation({
+            query({ body, id }) {
                 return {
                     url: `constructor/question/${id}/choice`,
                     method: 'POST',
                     body,
                 }
             },
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
         }),
-        questionCreateStepThreePost: build.mutation({
+        questionCreateInputPost: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `constructor/question/${id}/input`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+        }),
+        questionDelete: build.mutation({
             query({ body, id }) {
                 return {
-                    url: `constructor/question/${id}/choice`,
-                    method: 'PATCH',
+                    url: `constructor/question/${id}`,
+                    method: 'DELETE',
                     body,
                 }
             },
@@ -41,6 +52,7 @@ export const QuestionCreate = api.injectEndpoints({
 export const {
     useGetConstructorQuestionQuery,
     useQuestionCreateStepOnePostMutation,
-    useQuestionCreateStepTwoPostMutation,
-    useQuestionCreateStepThreePostMutation,
+    useQuestionCreateChoiseMutation,
+    useQuestionCreateInputPostMutation,
+    useQuestionDeleteMutation,
 } = QuestionCreate

@@ -30,7 +30,7 @@ const TextInput = () => {
                                     }
                                     description={
                                         <Form.Item
-                                            name={[field.name, 'name']}
+                                            name={[field.name, 'input_text']}
                                             rules={[
                                                 {
                                                     required: true,
