@@ -22,16 +22,14 @@ import ROUTES from '../../../routes'
 const QuestionCreatePage = () => {
     const [questionCreateStepOne, { isLoading: isStepOneLoading }] =
         useQuestionCreateStepOnePostMutation()
-    const [questionCreateStepTwo, { isLoading: isStepTwoLoading }] =
-        useQuestionCreateStepTwoPostMutation()
-    const [questionCreateStepThree, { isLoading: isStepThreeLaoding }] =
+    const [questionCreateChoise, { isLoading: isCreateChoiseLaoding }] =
         useQuestionCreateStepThreePostMutation()
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
     const navigate = useNavigate()
 
     const onFinish = (data) => {
-        questionCreateStepOne({
+        const responseStepOne = questionCreateStepOne({
             description: data.description,
             direction: data.direction,
             question_type: questionType,
@@ -39,44 +37,36 @@ const QuestionCreatePage = () => {
             time: data.time,
             difficulty: data.difficulty,
             technique: technique,
-        }).then((res) => {
-            if (res.data) {
-                questionCreateStepTwo({ id: res.data.question_id, body: {} }).then((res) => {
-                    if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
-                        questionCreateStepThree({
-                            id: res.data.question_id,
-                            body: data.questions.map((item) => {
-                                return {
-                                    name: item.name,
-                                    score: item.score,
-                                    is_true: questionType === 'HARD' ? true : false,
-                                }
-                            }),
-                        }).then((res) => {
-                            if (res.data) {
-                                message.success(`${questionType} вопрос создан`)
-                                navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
-                            } else {
-                                message.error('Вопрос не создан')
+            use_criterion: 'false',
+        })
+
+        if (responseStepOne.data) {
+            let promiseResponse
+            if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
+                promiseResponse = new Promise((resolve, reject) => {
+                    const responseChoise = questionCreateChoise({
+                        id: responseStepOne.data.question_id,
+                        body: data.questions.map((item) => {
+                            return {
+                                name: item.name,
+                                score: item.score,
+                                is_true: questionType === 'HARD' ? true : false,
                             }
-                        })
-                    } else {
-                        if (res.data) {
-                            message.success(`${questionType} вопрос создан`)
-                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
-                        } else {
-                            message.error('Вопрос не создан')
-                        }
+                        }),
+                    })
+                    {
+                        responseChoise.data ? resolve() : reject('то не то')
                     }
                 })
-            } else {
-                message.error('Вы не добавили ни один из типов вопросов')
             }
-        })
+            Promise.all([promiseResponse])
+                .then((data) => message.success(data[0], data[1]))
+                .catch((error) => message.error(error))
+        }
     }
 
     const allLoading = () => {
-        if (isStepOneLoading || isStepTwoLoading) {
+        if (isStepOneLoading || isCreateChoiseLaoding) {
             return true
         } else {
             return false

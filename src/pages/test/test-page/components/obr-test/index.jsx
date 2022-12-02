@@ -5,29 +5,29 @@ import Description from './tabs/description'
 
 import { useSelector } from 'react-redux'
 
-import {usePostUnitMutation, usePostUnitSoftMutation, usePostUnitSoftChapterMutation} from '../../../../../services/manager/TestsBank'
+import {
+    usePostUnitMutation,
+    usePostUnitSoftMutation,
+    usePostUnitSoftChapterMutation,
+} from '../../../../../services/manager/TestsBank'
 
 const ObrTest = () => {
     const [postUnit] = usePostUnitMutation()
     const [postUnitSoft] = usePostUnitSoftMutation()
     const [postUnitSoftChapter] = usePostUnitSoftChapterMutation()
-    const { testQuestionList } = useSelector(
-        (state) => state.constructor_question_slice
-    )
+    const { testQuestionList } = useSelector((state) => state.constructor_question_slice)
 
     console.log('testQuestionList', testQuestionList)
     const handleSubmit = (data) => {
         const chapters = data.chapters
         chapters.map((chapter, index) => {
             chapter.question = []
-            testQuestionList.forEach((item) => (
-                item.chapterId === index && (
-                    chapter.question.push(item.id)
-                )
-            ))
+            testQuestionList.forEach(
+                (item) => item.chapterId === index && chapter.question.push(item.id)
+            )
         })
 
-        console.log("data", data)
+        console.log('data', data)
         const unit = {
             name: data.name,
             description: data.description,
@@ -52,17 +52,27 @@ const ObrTest = () => {
         console.log('unit_criterion', unit_criterion)
         console.log('chapter', chapters)
 
-        const responseUnit = postUnit({formData: unitFormData})
+        const responseUnit = postUnit({ formData: unitFormData })
 
         if (responseUnit.data) {
             const promiseUnitSoft = new Promise((resolve, reject) => {
-                const responseUnitSoft = postUnitSoft({body: unit_criterion, id: responseUnit.data.unit_id})
-                {responseUnitSoft.data ? resolve() : reject('то не то')}
+                const responseUnitSoft = postUnitSoft({
+                    body: unit_criterion,
+                    id: responseUnit.data.unit_id,
+                })
+                {
+                    responseUnitSoft.data ? resolve() : reject('то не то')
+                }
             })
 
             const promiseUnitSoftChapter = new Promise((resolve, reject) => {
-                const responseUnitSoftChapter = postUnitSoftChapter({body: chapters, id: responseUnit.data.unit_id})
-                {responseUnitSoftChapter.data ? resolve() : reject('xто не то')}
+                const responseUnitSoftChapter = postUnitSoftChapter({
+                    body: chapters,
+                    id: responseUnit.data.unit_id,
+                })
+                {
+                    responseUnitSoftChapter.data ? resolve() : reject('xто не то')
+                }
             })
             Promise.all([promiseUnitSoft, promiseUnitSoftChapter])
                 .then((data) => message.success(data[0], data[1]))
@@ -111,41 +121,35 @@ const ObrTest = () => {
     return (
         <div>
             <Form
-                layout={"horizontal"}
+                layout={'horizontal'}
                 onFinish={handleSubmit}
                 scrollToFirstError={true}
                 initialValues={{
                     ['вопросы']: false,
                     ['варианты ответов']: false,
                     ['use_criterion_chapters']: false,
-            }}
+                }}
             >
-                <Form.Item
-                    name={'name'}
-                >
+                <Form.Item name={'name'}>
                     <Input
                         bordered={false}
                         placeholder={'Название тестирования'}
-                        style={{backgroundColor: '#f5f5f5', color: 'black'}}
+                        style={{ backgroundColor: '#f5f5f5', color: 'black' }}
                     />
                 </Form.Item>
                 <Tabs
                     defaultActiveKey="1"
                     type={'card'}
-                    tabBarExtraContent={
-                        <Button htmlType={'submit'}>
-                            Создать
-                        </Button>
-                    }
+                    tabBarExtraContent={<Button htmlType={'submit'}>Создать</Button>}
                 >
                     <Tabs.TabPane tab={'Разделы'} key={'1'}>
-                        <ObrTestQuestions/>
+                        <ObrTestQuestions />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab={'Описание'} key={'2'}>
-                        <Description/>
+                        <Description />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab={'Параметры'} key={'3'}>
-                        <ObrTestSettings/>
+                        <ObrTestSettings />
                     </Tabs.TabPane>
                 </Tabs>
             </Form>
