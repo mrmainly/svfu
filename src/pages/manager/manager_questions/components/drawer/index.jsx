@@ -28,6 +28,11 @@ const MyDrawer = ({ open, onClose }) => {
             technique: 'INPUT_INT',
         },
         {
+            label: 'Matrix question',
+            type: 'SOFT',
+            technique: 'MATRIX',
+        },
+        {
             label: 'Ответ в свободной форме(практическая часть)',
             type: 'HARD',
             technique: 'DESCRIBE',

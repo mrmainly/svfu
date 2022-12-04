@@ -4,6 +4,7 @@ import DescribeQuestionType from './DescribeQuestionType'
 import TextInput from './TextInput'
 import NumberInput from './NumberInput'
 import Matching from './Matching'
+import MatrixQuestion from './Matrix'
 
 export {
     OneChoiseQuestionType,
@@ -12,4 +13,5 @@ export {
     TextInput,
     NumberInput,
     Matching,
+    MatrixQuestion,
 }

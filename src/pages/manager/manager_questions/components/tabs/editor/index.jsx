@@ -13,6 +13,7 @@ import {
     TextInput,
     NumberInput,
     Matching,
+    MatrixQuestion,
 } from './question_types'
 import MyDrawer from '../../drawer'
 import './soft.css'
@@ -81,6 +82,7 @@ const TestSoftEditor = ({ data }) => {
             {technique === 'INPUT_TEXT' && <TextInput />}
             {technique === 'INPUT_INT' && <NumberInput />}
             {technique === 'MATCHING' && <Matching />}
+            {technique === 'MATRIX' && <MatrixQuestion />}
         </div>
     )
 }
