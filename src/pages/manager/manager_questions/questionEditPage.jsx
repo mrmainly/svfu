@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
+import { useEffect } from 'react'
 import { Button, Form, Tabs, message, Spin } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import 'react-summernote/dist/react-summernote.css'
@@ -13,17 +14,22 @@ import TestSoftEditor from './components/tabs/editor'
 import TestSoftComments from './components/tabs/comments'
 import TestSoftParameters from './components/tabs/parameters'
 import { useGetManagerQuestionEditIdQuery } from '../../../services/manager/question-bank/QuestionEdit'
+import { ConstructorQuestionSlice } from '../../../reducers/ConstructorQuestionSlice'
 
 const QuestionEditPage = () => {
     const location = useLocation()
+    const dispatch = useDispatch()
 
     const state = location.state
-
     const { id } = state
-
     const { data, isFetching } = useGetManagerQuestionEditIdQuery({ id: id })
 
     const { questionType } = useSelector((state) => state.constructor_question_slice)
+    const { handleTechnique } = ConstructorQuestionSlice.actions
+
+    useEffect(() => {
+        dispatch(handleTechnique(data?.technique))
+    }, [data])
 
     if (isFetching) {
         return (

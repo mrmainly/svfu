@@ -16,7 +16,6 @@ const ManagerQuestionsPage = () => {
     const [is_active, setIs_active] = useState('')
     const [description, setDescription] = useState('')
     const [direction, setDirection] = useState('')
-    // const [currentData, setCurrentData] = useState()
     const [modalEditQuestionsBank, setModalEditQuestionsBank] = useState(false)
     const { data, isFetching } = useGetConstructorQuestionQuery({
         currentPage: currentPage,
@@ -97,13 +96,6 @@ const ManagerQuestionsPage = () => {
                     <Select.Option value="DESCRIBE">Открытый</Select.Option>
                 </Select>
             </div>
-            {/* {modalEditQuestionsBank && (
-                <QBEditModal
-                    open={modalEditQuestionsBank}
-                    setOpen={setModalEditQuestionsBank}
-                    id={currentData?.id}
-                />
-            )} */}
 
             <QuestionsTable
                 data={data?.results}
