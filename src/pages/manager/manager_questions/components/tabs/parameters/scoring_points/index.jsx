@@ -32,7 +32,7 @@ const ScoringPoints = () => {
     ]
     return (
         <Card style={{ marginTop: 20 }} title="Выставление баллов">
-            <Form.List name={'main_criterion'} initialValue={[{}]}>
+            <Form.List name={'criterion'}>
                 {(fields, { add, remove }) => (
                     <List header={<div>Заполните поля условий </div>}>
                         {fields.map((field, index) => (

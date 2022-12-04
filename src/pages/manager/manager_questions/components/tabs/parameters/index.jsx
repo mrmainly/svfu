@@ -9,7 +9,6 @@ const { Option } = Select
 
 const TestSoftParameters = () => {
     const [time, setTime] = useState(false)
-    const [criterionShow, setCriterionShow] = useState(false)
 
     const { data: directionList, isLoading: isDirectionLoading } = useGetToolsDirectionQuery()
     const { questionType } = useSelector((state) => state.constructor_question_slice)
@@ -109,7 +108,7 @@ const TestSoftParameters = () => {
                 </Space>
             </Form.Item>
             <Form.Item style={{ marginBottom: 10 }} name="is_active">
-                <Checkbox defaultChecked>Активность вопроса</Checkbox>
+                <Checkbox>Активность вопроса</Checkbox>
             </Form.Item>
             <Form.Item style={{ marginBottom: 10 }} name="expert_review">
                 <Checkbox>Проверка экспертом</Checkbox>
@@ -117,11 +116,11 @@ const TestSoftParameters = () => {
             {questionType === 'SOFT' && (
                 <div>
                     <Form.Item style={{ marginBottom: 0 }} name="use_criterion">
-                        <Checkbox onChange={() => setCriterionShow(!criterionShow)}>
-                            Выставление баллов
-                        </Checkbox>
+                        <Checkbox>Выставление баллов</Checkbox>
                     </Form.Item>
-                    {criterionShow && <ScoringPoints />}
+                    <Form.Item style={{ marginBottom: 0 }} name="criterion">
+                        <ScoringPoints />
+                    </Form.Item>
                 </div>
             )}
         </Card>
