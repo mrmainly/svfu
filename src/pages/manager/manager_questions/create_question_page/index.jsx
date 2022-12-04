@@ -46,7 +46,7 @@ const QuestionCreatePage = () => {
             technique: technique,
             use_criterion: 'false',
         }).then((mainResponse) => {
-            if (mainResponse.data) {
+            if (mainResponse.data && technique !== '') {
                 if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
                     questionCreateChoise({
                         id: mainResponse.data.question_id,
@@ -95,7 +95,7 @@ const QuestionCreatePage = () => {
                                 first_string: item.first_string,
                                 score: item.score,
                                 second_string: item.first_string,
-                                order_num: item.index + 1,
+                                order_num: index + 1,
                             }
                         }),
                     }).then((res) => {
@@ -109,7 +109,9 @@ const QuestionCreatePage = () => {
                     })
                 }
             } else {
-                message.error('Не все поля были введины')
+                message.error(
+                    technique === '' ? 'Вы не добавили вариант вопроса' : 'Не все поля были введины'
+                )
             }
         })
     }
