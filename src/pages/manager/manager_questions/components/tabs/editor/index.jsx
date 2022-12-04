@@ -10,6 +10,7 @@ import {
     DescribeQuestionType,
     TextInput,
     NumberInput,
+    Matching,
 } from './question_types'
 import ScoringPoints from './scoring_points'
 import MyDrawer from '../../drawer'
@@ -73,6 +74,7 @@ const TestSoftEditor = () => {
             {technique === 'INPUT_TEXT' && <TextInput />}
             {technique === 'INPUT_INT' && <NumberInput />}
             {questionType === 'SOFT' && <ScoringPoints />}
+            {technique === 'MATCHING' && <Matching />}
         </div>
     )
 }

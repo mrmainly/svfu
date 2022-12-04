@@ -14,20 +14,26 @@ const OneChoiseQuestionType = () => {
                         {fields.map((field, index) => (
                             <List.Item
                                 key={field.key}
+                                style={{ marginTop: 22 }}
                                 actions={[
                                     fields.length > 1 ? (
-                                        <DeleteTwoTone
-                                            twoToneColor={'#EB5757'}
-                                            onClick={() => remove(field.name)}
-                                        />
+                                        <div style={{ marginTop: '-15px' }}>
+                                            <DeleteTwoTone
+                                                twoToneColor={'#EB5757'}
+                                                onClick={() => remove(field.name)}
+                                            />
+                                        </div>
                                     ) : null,
                                 ]}
                             >
                                 <List.Item.Meta
-                                    avatar={<Form.Item noStyle>{index + 1}</Form.Item>}
+                                    avatar={
+                                        <Form.Item>
+                                            <div>{index + 1}</div>
+                                        </Form.Item>
+                                    }
                                     description={
                                         <Form.Item
-                                            noStyle
                                             name={[field.name, 'name']}
                                             rules={[
                                                 {
@@ -39,7 +45,7 @@ const OneChoiseQuestionType = () => {
                                         >
                                             <Input
                                                 placeholder={'Вариант ответа'}
-                                                bordered={false}
+                                                style={{ width: '95%' }}
                                             />
                                         </Form.Item>
                                     }

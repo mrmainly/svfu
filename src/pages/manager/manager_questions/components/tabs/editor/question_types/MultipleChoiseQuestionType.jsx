@@ -8,18 +8,21 @@ const MultipleChoiseQuestionType = () => {
             title={`Множественный выбор - варианты ответов`}
             style={{ marginBottom: '12px' }}
         >
-            <Form.List name={'questions'} initialValue={[{}]}>
+            <Form.List name={'questions'}>
                 {(fields, { add, remove }) => (
                     <List header={<div>Заполните варианты ответов и баллы</div>}>
                         {fields.map((field, index) => (
                             <List.Item
+                                style={{ marginTop: 22 }}
                                 key={field.key}
                                 actions={[
                                     fields.length > 1 ? (
-                                        <DeleteTwoTone
-                                            twoToneColor={'#EB5757'}
-                                            onClick={() => remove(field.name)}
-                                        />
+                                        <div style={{ marginTop: '-15px' }}>
+                                            <DeleteTwoTone
+                                                twoToneColor={'#EB5757'}
+                                                onClick={() => remove(field.name)}
+                                            />
+                                        </div>
                                     ) : null,
                                 ]}
                             >
@@ -38,8 +41,7 @@ const MultipleChoiseQuestionType = () => {
                                         >
                                             <Input
                                                 placeholder={'Вариант ответа'}
-                                                bordered={false}
-                                                style={{ width: '80%' }}
+                                                style={{ width: '95%' }}
                                             />
                                         </Form.Item>
                                     }

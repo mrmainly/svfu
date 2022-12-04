@@ -9,16 +9,17 @@ import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import TestSoftEditor from './components/tabs/editor'
-import TestSoftComments from './components/tabs/comments'
-import TestSoftParameters from './components/tabs/parameters'
+import TestSoftEditor from '../components/tabs/editor'
+import TestSoftComments from '../components/tabs/comments'
+import TestSoftParameters from '../components/tabs/parameters'
 import {
     useQuestionCreateStepOnePostMutation,
     useQuestionCreateChoiseMutation,
     useQuestionCreateInputPostMutation,
     useQuestionDeleteMutation,
-} from '../../../services/manager/question-bank/QuestionCreate'
-import ROUTES from '../../../routes'
+    useQuestionCreateMatchingPostMutation,
+} from '../../../../services/manager/question-bank/QuestionCreate'
+import ROUTES from '../../../../routes'
 
 const QuestionCreatePage = () => {
     const [questionCreateStepOne, { isLoading: isStepOneLoading }] =
@@ -28,6 +29,8 @@ const QuestionCreatePage = () => {
     const [questionCreateInput, { isLoading: isCreateInputLaoding }] =
         useQuestionCreateInputPostMutation()
     const [questionDelete, { isLoading: isDeleteQuestionLaoding }] = useQuestionDeleteMutation()
+    const [questionCreateMatching, { isLoading: isCreateMatchingLoading }] =
+        useQuestionCreateMatchingPostMutation()
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
     const navigate = useNavigate()
@@ -84,6 +87,26 @@ const QuestionCreatePage = () => {
                             questionDelete({ id: mainResponse.data.question_id })
                         }
                     })
+                } else if (technique === 'MATCHING') {
+                    questionCreateMatching({
+                        id: mainResponse.data.question_id,
+                        body: data.questions.map((item, index) => {
+                            return {
+                                first_string: item.first_string,
+                                score: item.score,
+                                second_string: item.first_string,
+                                order_num: item.index + 1,
+                            }
+                        }),
+                    }).then((res) => {
+                        if (res.data) {
+                            message.success('Вопрос с установлением соответствий создан')
+                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                        } else {
+                            message.error('Вопрос не создан')
+                            questionDelete({ id: mainResponse.data.question_id })
+                        }
+                    })
                 }
             } else {
                 message.error('Не все поля были введины')
@@ -96,7 +119,8 @@ const QuestionCreatePage = () => {
             isStepOneLoading ||
             isCreateChoiseLaoding ||
             isCreateInputLaoding ||
-            isDeleteQuestionLaoding
+            isDeleteQuestionLaoding ||
+            isCreateMatchingLoading
         ) {
             return true
         } else {

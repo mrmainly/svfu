@@ -46,8 +46,6 @@ const QuestionEditPage = () => {
         )
     }
 
-    console.log(data)
-
     return (
         <div>
             <Form
