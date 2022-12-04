@@ -107,20 +107,22 @@ const TestSoftParameters = () => {
                     )}
                 </Space>
             </Form.Item>
-            <Form.Item style={{ marginBottom: 10 }} name="is_active">
+            <Form.Item style={{ marginBottom: 10 }} name="is_active" valuePropName="checked">
                 <Checkbox>Активность вопроса</Checkbox>
             </Form.Item>
-            <Form.Item style={{ marginBottom: 10 }} name="expert_review">
+            <Form.Item style={{ marginBottom: 10 }} name="expert_review" valuePropName="checked">
                 <Checkbox>Проверка экспертом</Checkbox>
             </Form.Item>
             {questionType === 'SOFT' && (
                 <div>
-                    <Form.Item style={{ marginBottom: 0 }} name="use_criterion">
+                    <Form.Item
+                        style={{ marginBottom: 0 }}
+                        name="use_criterion"
+                        valuePropName="checked"
+                    >
                         <Checkbox>Выставление баллов</Checkbox>
                     </Form.Item>
-                    <Form.Item style={{ marginBottom: 0 }} name="criterion">
-                        <ScoringPoints />
-                    </Form.Item>
+                    <ScoringPoints />
                 </div>
             )}
         </Card>

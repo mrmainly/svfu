@@ -47,6 +47,7 @@ const QuestionCreatePage = () => {
             use_criterion: data?.use_criterion,
             criterion: data?.criterion,
             expert_review: data?.expert_review,
+            comment: data?.comment,
         }).then((mainResponse) => {
             if (mainResponse.data && technique !== '') {
                 if (technique === 'ONE_CHOICE' || technique === 'MULTIPLE_CHOICE') {
