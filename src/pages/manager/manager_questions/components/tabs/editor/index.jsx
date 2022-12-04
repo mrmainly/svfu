@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import { SettingTwoTone } from '@ant-design/icons'
 import { Button, Card, Form } from 'antd'
 import { useState } from 'react'
@@ -10,12 +12,13 @@ import {
     DescribeQuestionType,
     TextInput,
     NumberInput,
+    Matching,
 } from './question_types'
 import ScoringPoints from './scoring_points'
 import MyDrawer from '../../drawer'
 import './soft.css'
 
-const TestSoftEditor = () => {
+const TestSoftEditor = ({ data }) => {
     const [open, setOpen] = useState(false)
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
@@ -25,6 +28,11 @@ const TestSoftEditor = () => {
     }
     const onClose = () => {
         setOpen(false)
+    }
+
+    const onInit = () => {
+        const editArea = document.querySelector('.note-editable')
+        editArea.innerHTML = data?.description
     }
 
     return (
@@ -50,6 +58,7 @@ const TestSoftEditor = () => {
                     style={{ marginBottom: 0 }}
                 >
                     <ReactSummernote
+                        onInit={data && onInit}
                         options={{
                             lang: 'ru-RU',
                             height: 250,
@@ -73,6 +82,7 @@ const TestSoftEditor = () => {
             {technique === 'INPUT_TEXT' && <TextInput />}
             {technique === 'INPUT_INT' && <NumberInput />}
             {questionType === 'SOFT' && <ScoringPoints />}
+            {technique === 'MATCHING' && <Matching />}
         </div>
     )
 }

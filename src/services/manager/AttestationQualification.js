@@ -13,7 +13,7 @@ export const AttestationQualification = api.injectEndpoints({
         postAttestationsQualification: build.mutation({
             query(body) {
                 return {
-                    url: `constructor/direction/`,
+                    url: `constructor/direction`,
                     method: 'POST',
                     body,
                 }

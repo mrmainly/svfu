@@ -15,7 +15,7 @@ const MyDrawer = ({ open, onClose }) => {
         { label: 'Одиночный выбор', type: 'ANY', technique: 'ONE_CHOICE' },
         { label: 'Множественный выбор', type: 'ANY', technique: 'MULTIPLE_CHOICE' },
         { label: 'Ответ в свободной форме', type: 'SOFT', technique: 'DESCRIBE' },
-        { label: 'Установление соответствий', type: 'SOFT' },
+        { label: 'Установление соответствий', type: 'ANY', technique: 'MATCHING' },
         { label: 'Table quest', type: 'SOFT' },
         {
             label: 'Текстовое поле',

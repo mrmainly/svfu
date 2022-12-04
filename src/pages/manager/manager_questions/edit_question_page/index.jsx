@@ -10,11 +10,11 @@ import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import TestSoftEditor from './components/tabs/editor'
-import TestSoftComments from './components/tabs/comments'
-import TestSoftParameters from './components/tabs/parameters'
-import { useGetManagerQuestionEditIdQuery } from '../../../services/manager/question-bank/QuestionEdit'
-import { ConstructorQuestionSlice } from '../../../reducers/ConstructorQuestionSlice'
+import TestSoftEditor from '../components/tabs/editor'
+import TestSoftComments from '../components/tabs/comments'
+import TestSoftParameters from '../components/tabs/parameters'
+import { useGetManagerQuestionEditIdQuery } from '../../../../services/manager/question-bank/QuestionEdit'
+import { ConstructorQuestionSlice } from '../../../../reducers/ConstructorQuestionSlice'
 
 const QuestionEditPage = () => {
     const location = useLocation()
@@ -46,14 +46,16 @@ const QuestionEditPage = () => {
         )
     }
 
-    console.log(data)
-
     return (
         <div>
             <Form
                 layout={'horizontal'}
                 initialValues={{
-                    ['description']: data.description,
+                    ['questions']: data?.question_matching_variant,
+                    ['difficulty']: data?.difficulty,
+                    ['direction']: data?.direction,
+                    ['is_active']: data?.is_active,
+                    ['time']: data?.time,
                 }}
             >
                 <Tabs
@@ -61,7 +63,7 @@ const QuestionEditPage = () => {
                     type={'card'}
                     tabBarExtraContent={
                         <Button size="large" htmlType="submit">
-                            Создать вопрос
+                            Редактировать вопрос
                         </Button>
                     }
                 >
