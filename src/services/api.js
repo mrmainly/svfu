@@ -4,7 +4,7 @@ import cookie from 'js-cookie'
 // process.env.REACT_APP_API_KEY
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://51.250.2.56:8543/api/v1/',
+    baseUrl: 'http://84.252.138.134:8543/api/v1/',
     prepareHeaders: (headers) => {
         const token = cookie.get('token')
         if (token) {
