@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button, Form, Input, message, Tabs } from 'antd'
 import ObrTestSettings from './tabs/settings'
 import ObrTestQuestions from './tabs/questions'
@@ -12,12 +13,11 @@ import {
 } from '../../../../../services/manager/TestsBank'
 
 const ObrTest = () => {
+    const [unitData, setUnitData] = React.useState({})
     const [postUnit] = usePostUnitMutation()
     const [postUnitSoft] = usePostUnitSoftMutation()
     const [postUnitSoftChapter] = usePostUnitSoftChapterMutation()
     const { testQuestionList } = useSelector((state) => state.constructor_question_slice)
-
-    console.log('testQuestionList', testQuestionList)
     const handleSubmit = (data) => {
         const chapters = data.chapters
         chapters.map((chapter, index) => {
@@ -52,13 +52,18 @@ const ObrTest = () => {
         console.log('unit_criterion', unit_criterion)
         console.log('chapter', chapters)
 
-        const responseUnit = postUnit({ formData: unitFormData })
+        postUnit(unitFormData).then((res) => {
+            if(res.data) {
+                setUnitData(res.data)
+            }
 
-        if (responseUnit.data) {
+        })
+
+        if (unitData) {
             const promiseUnitSoft = new Promise((resolve, reject) => {
                 const responseUnitSoft = postUnitSoft({
                     body: unit_criterion,
-                    id: responseUnit.data.unit_id,
+                    id: unit.unit_id,
                 })
                 {
                     responseUnitSoft.data ? resolve() : reject('то не то')
@@ -68,7 +73,7 @@ const ObrTest = () => {
             const promiseUnitSoftChapter = new Promise((resolve, reject) => {
                 const responseUnitSoftChapter = postUnitSoftChapter({
                     body: chapters,
-                    id: responseUnit.data.unit_id,
+                    id: unit.unit_id,
                 })
                 {
                     responseUnitSoftChapter.data ? resolve() : reject('xто не то')

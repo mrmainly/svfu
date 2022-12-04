@@ -1,7 +1,35 @@
-import { Button, Form, InputNumber, List, Space } from 'antd'
+import { Button, Form, InputNumber, List, Select, Space } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
+import { useState } from 'react'
 
 const ResponseText = () => {
+    const [filter, setFilter] = useState('between')
+    const criterion = [
+        {
+            value: 'gt',
+            label: 'Больше (>)'
+        },
+        {
+            value: 'gte',
+            label: 'Больше или равно (>=)'
+        },
+        {
+            value: 'lt',
+            label: 'Меньше (<)'
+        },
+        {
+            value: 'lte',
+            label: 'Меньше или равно (<=)'
+        },
+        {
+            value: 'equal',
+            label: 'Равно (=)'
+        },
+        {
+            value: 'between',
+            label: 'Между (< значение <)'
+        },
+    ]
     return (
         <Form.List name={'main_criterion'} initialValue={[{}]}>
             {(fields, { add, remove }) => (
@@ -23,8 +51,8 @@ const ResponseText = () => {
                                 description={
                                     <Space>
                                         <Form.Item
-                                            name={[field.name, 'first_point']}
-                                            label={'Мин.'}
+                                            name={[field.name, 'criterion']}
+                                            label={'Условие'}
                                             rules={[
                                                 {
                                                     required: true,
@@ -33,11 +61,15 @@ const ResponseText = () => {
                                                 },
                                             ]}
                                         >
-                                            <InputNumber />
+                                            <Select
+                                                placeholder={'Выберите условие'}
+                                                onChange={(value) => setFilter(value)}
+                                                options={criterion}
+                                            />
                                         </Form.Item>
                                         <Form.Item
-                                            name={[field.name, 'second_point']}
-                                            label={'Макс.'}
+                                            name={[field.name, 'first_point']}
+                                            label={filter === 'between' ? 'Мин.' : 'Значение'}
                                             rules={[
                                                 {
                                                     required: true,
@@ -48,6 +80,21 @@ const ResponseText = () => {
                                         >
                                             <InputNumber />
                                         </Form.Item>
+                                        {filter === 'between' &&
+                                            <Form.Item
+                                                name={[field.name, 'second_point']}
+                                                label={'Макс.'}
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            'Заполните вариант ответа или удалите поле',
+                                                    },
+                                                ]}
+                                            >
+                                                <InputNumber />
+                                            </Form.Item>
+                                        }
                                     </Space>
                                 }
                             />

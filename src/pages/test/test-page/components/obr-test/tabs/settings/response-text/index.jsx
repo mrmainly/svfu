@@ -1,7 +1,35 @@
-import { Button, Form, InputNumber, Input, List, Space } from 'antd'
+import { Button, Form, InputNumber, Input, List, Space, Select } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
+import { useState } from 'react'
 
 const ResponseScore = () => {
+    const [filter, setFilter] = useState('between')
+    const criterion = [
+        {
+            value: 'gt',
+            label: 'Больше (>)'
+        },
+        {
+            value: 'gte',
+            label: 'Больше или равно (>=)'
+        },
+        {
+            value: 'lt',
+            label: 'Меньше (<)'
+        },
+        {
+            value: 'lte',
+            label: 'Меньше или равно (<=)'
+        },
+        {
+            value: 'equal',
+            label: 'Равно (=)'
+        },
+        {
+            value: 'between',
+            label: 'Между (< значение <)'
+        },
+    ]
     return (
         <Form.List name={'main_criterion'} initialValue={[{}]}>
             {(fields, { add, remove }) => (
@@ -23,8 +51,8 @@ const ResponseScore = () => {
                                 description={
                                     <Space>
                                         <Form.Item
-                                            name={[field.name, 'first_point']}
-                                            label={'Мин.'}
+                                            name={[field.name, 'criterion']}
+                                            label={'Условие'}
                                             rules={[
                                                 {
                                                     required: true,
@@ -33,11 +61,15 @@ const ResponseScore = () => {
                                                 },
                                             ]}
                                         >
-                                            <InputNumber />
+                                            <Select
+                                                placeholder={'Выберите условие'}
+                                                onChange={(value) => setFilter(value)}
+                                                options={criterion}
+                                            />
                                         </Form.Item>
                                         <Form.Item
-                                            name={[field.name, 'second_point']}
-                                            label={'Макс.'}
+                                            name={[field.name, 'first_point']}
+                                            label={filter === 'between' ? 'Значение' : 'Мин.'}
                                             rules={[
                                                 {
                                                     required: true,
@@ -48,6 +80,21 @@ const ResponseScore = () => {
                                         >
                                             <InputNumber />
                                         </Form.Item>
+                                        {filter === 'between' &&
+                                            <Form.Item
+                                                name={[field.name, 'second_point']}
+                                                label={'Макс.'}
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message:
+                                                            'Заполните вариант ответа или удалите поле',
+                                                    },
+                                                ]}
+                                            >
+                                                <InputNumber />
+                                            </Form.Item>
+                                        }
                                     </Space>
                                 }
                             />

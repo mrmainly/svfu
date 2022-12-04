@@ -7,7 +7,6 @@ const TestTests = () => {
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(1)
     const navigate = useNavigate()
-    console.log(value)
     const handleOk = () => {
         setOpen(false)
         navigate(ROUTES.TEST_TEST_PAGE_ADD, {
@@ -49,6 +48,14 @@ const TestTests = () => {
                         </Radio>
                         <Radio value={2}>
                             <div>
+                                <div style={{ fontWeight: 700 }}>Хард тест</div>
+                                <div style={{ fontStyle: 'italic' }}>
+                                    Тестовая и практическая части
+                                </div>
+                            </div>
+                        </Radio>
+                        <Radio value={3}>
+                            <div>
                                 <div style={{ fontWeight: 700 }}>Личностный тест</div>
                                 <div style={{ fontStyle: 'italic' }}>
                                     Сопоставляем каждый вариант ответа с определенным результатом и
@@ -56,7 +63,7 @@ const TestTests = () => {
                                 </div>
                             </div>
                         </Radio>
-                        <Radio value={3}>
+                        <Radio value={4}>
                             <div>
                                 <div style={{ fontWeight: 700 }}>Образовательный тест</div>
                                 <div style={{ fontStyle: 'italic' }}>

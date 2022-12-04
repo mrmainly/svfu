@@ -1,5 +1,6 @@
 import {useLocation} from 'react-router-dom'
 import ObrTest from './components/obr-test'
+import HardTest from './components/hard-test'
 const TestTestPageAdd = () => {
     const location = useLocation()
 
@@ -13,11 +14,14 @@ const TestTestPageAdd = () => {
                 <ObrTest/>
             )
             case 2: return (
+                <HardTest/>
+            )
+            case 3: return (
                 <div>
                     дssssssss {type}
                 </div>
             )
-            case 3: return (
+            case 4: return (
                 <div>
                     дssssssss {type}
                 </div>
