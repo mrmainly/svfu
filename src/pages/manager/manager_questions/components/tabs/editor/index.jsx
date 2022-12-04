@@ -14,14 +14,13 @@ import {
     NumberInput,
     Matching,
 } from './question_types'
-import ScoringPoints from './scoring_points'
 import MyDrawer from '../../drawer'
 import './soft.css'
 
 const TestSoftEditor = ({ data }) => {
     const [open, setOpen] = useState(false)
 
-    const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
+    const { technique } = useSelector((state) => state.constructor_question_slice)
 
     const showDrawer = () => {
         setOpen(true)
@@ -81,7 +80,6 @@ const TestSoftEditor = ({ data }) => {
             {technique === 'MULTIPLE_CHOICE' && <MultipleChoiseQuestionType />}
             {technique === 'INPUT_TEXT' && <TextInput />}
             {technique === 'INPUT_INT' && <NumberInput />}
-            {questionType === 'SOFT' && <ScoringPoints />}
             {technique === 'MATCHING' && <Matching />}
         </div>
     )

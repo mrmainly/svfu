@@ -1,6 +1,5 @@
-import { Button, Card, Form, Upload } from 'antd'
+import { Card, Form } from 'antd'
 import ReactSummernote from 'react-summernote'
-import { UploadOutlined } from '@ant-design/icons'
 
 const TestSoftComments = () => {
     const onChange = (content) => {
@@ -9,12 +8,8 @@ const TestSoftComments = () => {
 
     return (
         <div>
-            <Card
-                hoverable={true}
-                title={`Подсказка для комиссии`}
-                style={{ marginBottom: '12px' }}
-            >
-                <Form.Item>
+            <Card title={`Подсказка для комиссии`} style={{ marginBottom: '12px' }}>
+                <Form.Item name="comment">
                     <ReactSummernote
                         value="Default value"
                         options={{
@@ -36,11 +31,11 @@ const TestSoftComments = () => {
                 </Form.Item>
             </Card>
 
-            <Card hoverable={true} title={`Документ для комиссии`} style={{ marginBottom: '12px' }}>
+            {/* <Card hoverable={true} title={`Документ для комиссии`} style={{ marginBottom: '12px' }}>
                 <Upload>
                     <Button icon={<UploadOutlined />}>Загрузить документ</Button>
                 </Upload>
-            </Card>
+            </Card> */}
         </div>
     )
 }

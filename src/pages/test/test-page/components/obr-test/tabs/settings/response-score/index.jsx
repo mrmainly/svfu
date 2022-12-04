@@ -7,27 +7,27 @@ const ResponseText = () => {
     const criterion = [
         {
             value: 'gt',
-            label: 'Больше (>)'
+            label: 'Больше (>)',
         },
         {
             value: 'gte',
-            label: 'Больше или равно (>=)'
+            label: 'Больше или равно (>=)',
         },
         {
             value: 'lt',
-            label: 'Меньше (<)'
+            label: 'Меньше (<)',
         },
         {
             value: 'lte',
-            label: 'Меньше или равно (<=)'
+            label: 'Меньше или равно (<=)',
         },
         {
             value: 'equal',
-            label: 'Равно (=)'
+            label: 'Равно (=)',
         },
         {
             value: 'between',
-            label: 'Между (< значение <)'
+            label: 'Между (< значение <)',
         },
     ]
     return (
@@ -80,7 +80,7 @@ const ResponseText = () => {
                                         >
                                             <InputNumber />
                                         </Form.Item>
-                                        {filter === 'between' &&
+                                        {filter === 'between' && (
                                             <Form.Item
                                                 name={[field.name, 'second_point']}
                                                 label={'Макс.'}
@@ -94,7 +94,7 @@ const ResponseText = () => {
                                             >
                                                 <InputNumber />
                                             </Form.Item>
-                                        }
+                                        )}
                                     </Space>
                                 }
                             />

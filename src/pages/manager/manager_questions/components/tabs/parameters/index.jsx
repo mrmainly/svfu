@@ -1,14 +1,18 @@
 import { Card, Checkbox, Form, Space, TimePicker, Select, Spin } from 'antd'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { useGetToolsDirectionQuery } from '../../../../../../services/ToolsService'
+import ScoringPoints from './scoring_points'
 
 const { Option } = Select
 
 const TestSoftParameters = () => {
     const [time, setTime] = useState(false)
+    const [criterionShow, setCriterionShow] = useState(false)
 
     const { data: directionList, isLoading: isDirectionLoading } = useGetToolsDirectionQuery()
+    const { questionType } = useSelector((state) => state.constructor_question_slice)
 
     const onTime = (time, timeString) => {
         console.log(time, timeString)
@@ -104,9 +108,22 @@ const TestSoftParameters = () => {
                     )}
                 </Space>
             </Form.Item>
-            <Form.Item style={{ marginBottom: 0 }} name="is_active">
+            <Form.Item style={{ marginBottom: 10 }} name="is_active">
                 <Checkbox defaultChecked>Активность вопроса</Checkbox>
             </Form.Item>
+            <Form.Item style={{ marginBottom: 10 }} name="expert_review">
+                <Checkbox>Проверка экспертом</Checkbox>
+            </Form.Item>
+            {questionType === 'SOFT' && (
+                <div>
+                    <Form.Item style={{ marginBottom: 0 }} name="use_criterion">
+                        <Checkbox onChange={() => setCriterionShow(!criterionShow)}>
+                            Выставление баллов
+                        </Checkbox>
+                    </Form.Item>
+                    {criterionShow && <ScoringPoints />}
+                </div>
+            )}
         </Card>
     )
 }

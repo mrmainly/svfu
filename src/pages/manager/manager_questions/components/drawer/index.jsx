@@ -34,12 +34,12 @@ const MyDrawer = ({ open, onClose }) => {
         },
     ]
 
-    const commission = [
-        { label: 'Ключ' },
-        { label: 'Подсказка' },
-        { label: 'Выставление баллов' },
-        { label: 'Загрузить файла' },
-    ]
+    // const commission = [
+    //     { label: 'Ключ' },
+    //     { label: 'Подсказка' },
+    //     { label: 'Выставление баллов' },
+    //     { label: 'Загрузить файла' },
+    // ]
 
     const handleQuestions = (item) => {
         dispatch(handleTechnique(item))
@@ -66,7 +66,7 @@ const MyDrawer = ({ open, onClose }) => {
                     }
                 }}
             />
-            {questionType === 'SOFT' && (
+            {/* {questionType === 'SOFT' && (
                 <>
                     <Divider orientation={'left'}>Блок комиссии</Divider>
                     <List
@@ -85,7 +85,7 @@ const MyDrawer = ({ open, onClose }) => {
                         }}
                     />
                 </>
-            )}
+            )} */}
         </Drawer>
     )
 }
