@@ -46,6 +46,16 @@ export const QuestionCreate = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
         }),
+        questionCreateMatrixPost: build.mutation({
+            query({ id, body }) {
+                return {
+                    url: `constructor/question/${id}/matrix`,
+                    method: 'POST',
+                    body,
+                }
+            },
+            invalidatesTags: [{ type: 'ManagerConstructorQuestion' }],
+        }),
         questionDelete: build.mutation({
             query({ body, id }) {
                 return {
@@ -66,4 +76,5 @@ export const {
     useQuestionCreateInputPostMutation,
     useQuestionDeleteMutation,
     useQuestionCreateMatchingPostMutation,
+    useQuestionCreateMatrixPostMutation,
 } = QuestionCreate

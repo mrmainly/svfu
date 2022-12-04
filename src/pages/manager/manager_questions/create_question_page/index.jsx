@@ -18,6 +18,7 @@ import {
     useQuestionCreateInputPostMutation,
     useQuestionDeleteMutation,
     useQuestionCreateMatchingPostMutation,
+    useQuestionCreateMatrixPostMutation,
 } from '../../../../services/manager/question-bank/QuestionCreate'
 import ROUTES from '../../../../routes'
 
@@ -31,6 +32,8 @@ const QuestionCreatePage = () => {
     const [questionDelete, { isLoading: isDeleteQuestionLaoding }] = useQuestionDeleteMutation()
     const [questionCreateMatching, { isLoading: isCreateMatchingLoading }] =
         useQuestionCreateMatchingPostMutation()
+    const [questionCreateMatrix, { isLoading: isCreateMatrixLoading }] =
+        useQuestionCreateMatrixPostMutation()
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
     const navigate = useNavigate()
@@ -110,6 +113,32 @@ const QuestionCreatePage = () => {
                             questionDelete({ id: mainResponse.data.question_id })
                         }
                     })
+                } else if (technique === 'MATRIX') {
+                    questionCreateMatrix({
+                        id: mainResponse.data.question_id,
+                        body: data.table_quest.map((item) => {
+                            return {
+                                name: item?.name,
+                                score: item?.score,
+                                answers: item?.answers.map((item, index) => {
+                                    return {
+                                        name: item.name,
+                                        score: item.score,
+                                        a_id: index + 1,
+                                        is_true: true,
+                                    }
+                                }),
+                            }
+                        }),
+                    }).then((res) => {
+                        if (res.data) {
+                            message.success('Вопрос с установлением соответствий создан')
+                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                        } else {
+                            message.error('Вопрос не создан')
+                            questionDelete({ id: mainResponse.data.question_id })
+                        }
+                    })
                 }
             } else {
                 message.error(
@@ -117,6 +146,7 @@ const QuestionCreatePage = () => {
                 )
             }
         })
+        // console.log(data)
     }
 
     const allLoading = () => {

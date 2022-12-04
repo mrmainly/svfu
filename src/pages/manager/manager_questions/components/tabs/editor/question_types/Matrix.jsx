@@ -22,7 +22,10 @@ const MatrixQuestion = () => {
                                     <Form.Item name={[name, 'name']} {...restField}>
                                         <TextArea placeholder="Описание вопроса" />
                                     </Form.Item>
-                                    <Form.List initialValue={[{}, {}]} name={[name, 'variants']}>
+                                    <Form.Item {...restField} name={[key, 'score']}>
+                                        <Input placeholder="Заполните баллы" type="number" />
+                                    </Form.Item>
+                                    <Form.List initialValue={[{}, {}]} name={[name, 'answers']}>
                                         {(fields, { add, remove }) => {
                                             return (
                                                 <>
