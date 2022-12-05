@@ -6,6 +6,10 @@ export const tools = api.injectEndpoints({
             query: () => `/tools/tools/direction/`,
             providesTags: ['Attestation'],
         }),
+        getToolsDirectionAutocomplete: build.query({
+            query: ({name}) => `/tools/tools/direction/autocomplete?name=${name}`,
+            providesTags: ['Attestation'],
+        }),
         //проверка кода
         sendCode: build.mutation({
             query({ code }) {
@@ -19,4 +23,4 @@ export const tools = api.injectEndpoints({
     }),
 })
 
-export const { useGetToolsDirectionQuery, useSendCodeMutation } = tools
+export const { useGetToolsDirectionQuery, useGetToolsDirectionAutocompleteQuery, useSendCodeMutation } = tools

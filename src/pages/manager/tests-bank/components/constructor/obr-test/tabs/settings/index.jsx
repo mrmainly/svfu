@@ -2,10 +2,12 @@ import { Card, Form, Select, Switch, TimePicker } from 'antd'
 import { useState } from 'react'
 import ResponseText from './response-text'
 import ResponseScore from './response-score'
+import { useGetToolsDirectionAutocompleteQuery } from '../../../../../../../../services/ToolsService'
 
 const {Option} = Select
 
 const ObrTestSettings = () => {
+    const { data } = useGetToolsDirectionAutocompleteQuery()
     const [response, setResponse] = useState('score')
     return (
         <>
@@ -24,12 +26,11 @@ const ObrTestSettings = () => {
                         <Select
                             placeholder={'Выберите квалификацию'}
                         >
-                            <Option value={1}>
-                                Ранжирование
-                            </Option>
-                            <Option value={2}>
-                                СВФУ
-                            </Option>
+                            {data?.map((item, index) => (
+                                <Option value={item.id} key={index}>
+                                    {item.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                     <Form.Item
