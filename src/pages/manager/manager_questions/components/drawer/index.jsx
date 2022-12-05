@@ -41,6 +41,11 @@ const MyDrawer = ({ open, onClose }) => {
             type: 'ANY',
             technique: 'POLL',
         },
+        {
+            label: 'File',
+            type: 'ANY',
+            technique: 'FILE',
+        },
     ]
 
     // const commission = [

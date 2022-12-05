@@ -170,6 +170,9 @@ const QuestionCreatePage = () => {
                             questionDelete({ id: mainResponse.data.question_id })
                         }
                     })
+                } else if (technique === 'FILE' || technique === 'DESCRIBE') {
+                    message.success('Вопрос создан')
+                    navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
                 }
             } else {
                 message.error(
