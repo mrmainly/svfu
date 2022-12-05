@@ -3,7 +3,7 @@ import { PlusCircleTwoTone } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {ConstructorQuestionSlice} from '../../../../../../../../reducers/ConstructorQuestionSlice'
+import {ConstructorQuestionSlice} from '../../../../../../../../../reducers/ConstructorQuestionSlice'
 
 const QuestionDrawer = ({open, onClose, chapterId}) => {
     const {addItemQuestionList} = ConstructorQuestionSlice.actions
@@ -15,7 +15,7 @@ const QuestionDrawer = ({open, onClose, chapterId}) => {
     const onClick = (item) => {
         dispatch(addItemQuestionList(item))
     }
-
+    console.log(questionList)
     return(
         <Drawer
             title={"Вопросы"}
@@ -27,14 +27,14 @@ const QuestionDrawer = ({open, onClose, chapterId}) => {
                 <Card
                     hoverable={true}
                     key={index}
-                    title={item?.type}
+                    title={item?.technique}
                     extra={
                          <PlusCircleTwoTone style={{fontSize: '20px'}}/>
                     }
                     style={{marginBottom: '12px'}}
                     onClick={() => onClick({...item, chapterId: chapterId})}
                 >
-                    {item?.name}
+                    {item?.description}
                 </Card>
             ))}
         </Drawer>

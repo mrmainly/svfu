@@ -1,56 +1,81 @@
 import { useState } from 'react'
-import { Modal, Tabs } from 'antd'
+import { Button, Modal, Radio, Space} from 'antd'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../../components'
-import CreateHardTest from '../tabs/hard/CreateHardTest'
-import CreateSoftTest from '../tabs/soft/CreateSoftTest'
+import ROUTES from '../../../../../routes'
+import { useNavigate } from 'react-router-dom'
 
 const TBAddModal = ({ open, setOpen }) => {
-    const [tab, setTab] = useState('1')
-
-    const handleTab = (activeKey) => {
-        setTab(activeKey)
+    const [value, setValue] = useState(1)
+    const navigate = useNavigate()
+    const handleOk = () => {
+        setOpen(false)
+        navigate(ROUTES.TEST_CREATE, {
+            state: {
+                type: value,
+            },
+        })
+    }
+    const handleCancel = () => {
+        setOpen(false)
     }
 
     return (
         <div>
             <Modal
                 destroyOnClose={true}
-                title="Создание тестирования"
                 visible={open}
-                onCancel={() => {
-                    setOpen(false)
-                }}
-                style={{ top: 10 }}
+                title={'Добавление нового теста'}
+                onOk={handleOk}
+                onCancel={handleCancel}
                 footer={[
-                    <MyButton
-                        key="submit"
-                        htmlType="submit"
-                        form={tab === '1' ? 'tbadd-form' : 'soft-create-form'}
-                    >
-                        Сохранить
-                    </MyButton>,
-                    <MyButton
-                        key="back"
-                        type="default"
-                        style={{ background: '#FFF' }}
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                    >
+                    <Button key="back" onClick={handleCancel}>
                         Отмена
-                    </MyButton>,
+                    </Button>,
+                    <Button key="submit" type="primary" onClick={handleOk}>
+                        Добавить
+                    </Button>,
                 ]}
             >
-                <Tabs style={{ marginTop: '-10px' }} activeKey={tab} onChange={handleTab}>
-                    <Tabs.TabPane tab="Создание Hard теста" key="1">
-                        <CreateHardTest setOpen={setOpen} />
-                    </Tabs.TabPane>
-                    <Tabs.TabPane tab="Создание Soft теста" key="2">
-                        <CreateSoftTest setOpen={setOpen} />
-                    </Tabs.TabPane>
-                </Tabs>
+                <Radio.Group onChange={(e) => setValue(e.target.value)} value={value}>
+                    <Space direction="vertical">
+                        <Radio value={1}>
+                            <div>
+                                <div style={{ fontWeight: 700 }}>Психологический тест</div>
+                                <div style={{ fontStyle: 'italic' }}>
+                                    Суммируем баллы за ответы (или определяем преобладающий вариант
+                                    ответа) и выводим текстовую расшифровку.
+                                </div>
+                            </div>
+                        </Radio>
+                        <Radio value={2}>
+                            <div>
+                                <div style={{ fontWeight: 700 }}>Хард тест</div>
+                                <div style={{ fontStyle: 'italic' }}>
+                                    Тестовая и практическая части
+                                </div>
+                            </div>
+                        </Radio>
+                        <Radio value={3}>
+                            <div>
+                                <div style={{ fontWeight: 700 }}>Личностный тест</div>
+                                <div style={{ fontStyle: 'italic' }}>
+                                    Сопоставляем каждый вариант ответа с определенным результатом и
+                                    выбираем преобладающий.
+                                </div>
+                            </div>
+                        </Radio>
+                        <Radio value={4}>
+                            <div>
+                                <div style={{ fontWeight: 700 }}>Образовательный тест</div>
+                                <div style={{ fontStyle: 'italic' }}>
+                                    Суммируем количество баллов за правильные ответы, определяем
+                                    процент от максимального количества баллов и выставляем оценку.
+                                </div>
+                            </div>
+                        </Radio>
+                    </Space>
+                </Radio.Group>
             </Modal>
         </div>
     )

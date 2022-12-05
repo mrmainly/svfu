@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
-import ObrTest from './components/obr-test'
-import HardTest from './components/hard-test'
-const TestTestPageAdd = () => {
+import ObrTest from './obr-test'
+import HardTest from './hard-test'
+const TestAdd = () => {
     const location = useLocation()
 
     const state = location.state
@@ -24,4 +24,4 @@ const TestTestPageAdd = () => {
     return <div>{renderType()}</div>
 }
 
-export default TestTestPageAdd
+export default TestAdd

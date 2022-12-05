@@ -3,11 +3,11 @@ import { api } from '../api'
 export const TestsBank = api.injectEndpoints({
     endpoints: (build) => ({
         //Банк тестов
-        getAttestationsTestsBank: build.query({
-            query: ({ currentPage, name, is_active, direction_name, id, unit_type }) =>
-                `constructor/unit/?name=${name}&is_active=${is_active}&direction_name=${direction_name}&page=${currentPage}&ordering=${id}&unit_type=${unit_type}`,
-            providesTags: ['Attestation'],
-        }),
+        // getAttestationsTestsBank: build.query({
+        //     query: ({ currentPage, name, is_active, direction_name, id, unit_type }) =>
+        //         `constructor/unit/?name=${name}&is_active=${is_active}&direction_name=${direction_name}&page=${currentPage}&ordering=${id}&unit_type=${unit_type}`,
+        //     providesTags: ['Attestation'],
+        // }),
         //создать новый тест
         postAttestationsTestsBank: build.mutation({
             query(body) {
@@ -65,7 +65,17 @@ export const TestsBank = api.injectEndpoints({
             invalidatesTags: [{ type: 'Attestation' }],
         }),
 
-        //2.0 добавить софт тест
+        //2.0
+        getAttestationsTestsBank: build.query({
+            query: ({ currentPage, name, is_active, direction_name, id, unit_type }) =>
+                `constructor/unit?name=${name}&is_active=${is_active}&direction_name=${direction_name}&page=${currentPage}&ordering=${id}&unit_type=${unit_type}`,
+            providesTags: ['Attestation'],
+        }),
+        getConstructorTestCreateQuestions: build.query({
+            query: () =>
+                `constructor/question?question_type=SOFT&page=1`,
+            providesTags: ['ManagerConstructorQuestion'],
+        }),
         postUnit: build.mutation({
             query(formData) {
                 return {
@@ -106,6 +116,7 @@ export const {
     usePatchAttestationsTestsBankIdMutation,
     usePutAttestationsTestsBankIdMutation,
     useGetSoftQuestionListQuery,
+    useGetConstructorTestCreateQuestionsQuery,
     usePostSoftTestMutation,
     usePatchSoftTestMutation,
     usePostUnitMutation,
