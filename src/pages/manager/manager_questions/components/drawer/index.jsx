@@ -37,7 +37,7 @@ const MyDrawer = ({ open, onClose }) => {
             technique: 'DESCRIBE',
         },
         {
-            label: 'Poll Question',
+            label: 'PollQuestion Question',
             type: 'ANY',
             technique: 'POLL',
         },

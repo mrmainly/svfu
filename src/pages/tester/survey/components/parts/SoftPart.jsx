@@ -13,6 +13,11 @@ import TextArea from 'antd/lib/input/TextArea'
 import { useGetTesterSurveyIdQuery } from '../../../../../services/tester/Surveys'
 import MatchingQuestion from '../questions/MatchingQuestion'
 import InputIntQuestion from '../questions/InpitIntQuestion'
+import OneChoiceQuestion from '../questions/OneChoiceQuestion'
+import PollQuestion from '../questions/PollQuestion'
+import DescribeQuestion from '../questions/DescribeQuestion'
+import MatrixQuestion from '../questions/MatrixQuestion'
+import MultipleChoiceQuestion from '../questions/MultipleChoiceQuestion'
 
 const { Text, Title } = Typography
 const { Option } = Select
@@ -27,6 +32,7 @@ const SoftPart = ({ id }) => {
 
     console.log('getSurveyData', getSurveyData)
     const onSubmit = (data) => {
+        console.log('onSubmit', data)
         const abjArr = Object.entries(data)
         const postData = {
             answers: [],
@@ -75,7 +81,6 @@ const SoftPart = ({ id }) => {
             <Form
                 style={{ display: 'flex', flexDirection: 'column' }}
                 id="soft-tester-form"
-                layout="vertical"
                 onFinish={onSubmit}
             >
                 {getSurveyData?.map((item, index) => (
@@ -98,8 +103,16 @@ const SoftPart = ({ id }) => {
                             ></div>
                         </div>
 
-                        {item.technique === 'MATCHING' && <MatchingQuestion />}
-                        {item.technique === 'INPUT_INT' && <InputIntQuestion />}
+                        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Ответ: </Text>
+
+                        {item.technique === 'INPUT_INT' && <InputIntQuestion countInput={item.question_input.count_input} answerIndex={index}/>}
+                        {item.technique === 'ONE_CHOICE' && <OneChoiceQuestion variants={item.question_choice_variants} answerIndex={index}/>}
+                        {item.technique === 'POLL' && <PollQuestion questionPoll={item.question_poll} answerIndex={index}/>}
+                        {item.technique === 'DESCRIBE' && <DescribeQuestion answerIndex={index}/>}
+                        {item.technique === 'MATCHING' && <MatchingQuestion firstColumn={item.matching_variants_first} secondColumn={item.matching_variants_second} answerIndex={index}/>}
+                        {item.technique === 'MATRIX' && <MatrixQuestion questionMatrix={item.question_matrix} answerIndex={index}/>}
+                        {item.technique === 'MULTIPLE_CHOICE' && <MultipleChoiceQuestion questionVariants={item.question_choice_variants} answerIndex={index}/>}
+
                         <Line />
                         <ActionButton
                             arrayIndex={arrayIndex}

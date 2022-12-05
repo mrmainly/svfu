@@ -150,12 +150,12 @@ const QuestionCreatePage = () => {
                             strings: data.strings.map((item, index) => {
                                 return {
                                     id_string: index + 1,
-                                    name: item.strings_name,
+                                    name: item.name,
                                 }
                             }),
                             columns: data.columns.map((item, index) => {
                                 return {
-                                    name: item.columns_name,
+                                    name: item.name,
                                     id_column: index + 1,
                                     score: item.score,
                                 }

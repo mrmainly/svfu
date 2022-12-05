@@ -27,7 +27,7 @@ const PolQuestion = () => {
                                     description={
                                         <div style={{ display: 'flex', gap: 10 }}>
                                             <Form.Item
-                                                name={[field.name, 'strings_name']}
+                                                name={[field.name, 'name']}
                                                 style={{ width: '100%' }}
                                             >
                                                 <Input placeholder={'strings_name'} />
