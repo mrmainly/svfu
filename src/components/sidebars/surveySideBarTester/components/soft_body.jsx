@@ -7,8 +7,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../reducers/SurveysSlice'
-import TimeIsUpModal from '../../../../pages/tester/survey/components/modals/TimeIsUpModal'
-import { useGetTesterSurveyIdQuery } from '../../../../services/tester/Surveys'
+// import TimeIsUpModal from '../../../../pages/tester/survey/components/modals/TimeIsUpModal'
 
 const { Text } = Typography
 
@@ -59,17 +58,13 @@ const subtractionExamTime = (first, second) => {
 }
 
 const SoftBodyTester = ({ dataList }) => {
-    const { data: softSurveyData } = useGetTesterSurveyIdQuery({
-        id: window.localStorage.getItem('survey-id'),
-    })
-
     const Ref = useRef(null)
-    const [open, setOpen] = useState(true)
+    // const [open, setOpen] = useState(true)
 
-    const [data, setData] = useState([])
+    // const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
 
-    const { arrayIndex, part_tester } = useSelector((state) => state.survey_slice)
+    const { arrayIndex, part_tester, getSurveyData } = useSelector((state) => state.survey_slice)
     const { handleArrayIndex } = SurveysSlice.actions
     const dispatch = useDispatch()
 
@@ -114,6 +109,7 @@ const SoftBodyTester = ({ dataList }) => {
     }
 
     useEffect(() => {
+        console.log('getSurveyData', getSurveyData)
         if (dataList?.start_survey) {
             clearTimer(
                 getDeadTime(
@@ -128,28 +124,16 @@ const SoftBodyTester = ({ dataList }) => {
         }
     }, [dataList])
 
-    useEffect(() => {
-        const parsSideBarData = []
-
-        softSurveyData?.soft_chapters.forEach((item) => {
-            item.question.forEach((questionItem) => {
-                parsSideBarData.push(questionItem)
-            })
-        })
-        setData(parsSideBarData)
-        console.log('asd', parsSideBarData)
-    }, [softSurveyData])
-
     return (
         <div className="survey-sidebar">
-            {timer == '00:00' && (
+            {/* {timer == '00:00' && (
                 <TimeIsUpModal open={open} setOpen={setOpen} id={data.id} unit_type="SOFT" />
-            )}
-            <Text style={{ fontWeight: 600, wordWrap: 'break-word' }}>{data?.name}</Text>
+            )} */}
+            {/* <Text style={{ fontWeight: 600, wordWrap: 'break-word' }}>{data?.name}</Text> */}
             <div className="root">
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {data?.length
-                        ? data.map((item, index) => (
+                    {getSurveyData?.length
+                        ? getSurveyData.map((item, index) => (
                               <div
                                   key={index}
                                   className="circul"
