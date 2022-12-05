@@ -10,11 +10,14 @@ import FailedModal from '../modals/FailedModal'
 import { useModal } from '../../../../../hooks'
 import ActionButton from '../../../../../constructor/parts/compoentns/action-button'
 import TextArea from 'antd/lib/input/TextArea'
+import { useGetTesterSurveyIdQuery } from '../../../../../services/tester/Surveys'
 
 const { Text, Title } = Typography
 const { Option } = Select
 
-const SoftPart = ({ softquestions, id }) => {
+const SoftPart = ({ id }) => {
+    const {data: surveyQuestions, isLoading: isSurveyQuestionsLoading} = useGetTesterSurveyIdQuery({ id:id })
+    console.log('surveyQuestions', surveyQuestions)
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])
     const { open, handleClose, handleOpen } = useModal()
@@ -55,169 +58,169 @@ const SoftPart = ({ softquestions, id }) => {
     }
     return (
         <div>
-            <TheoreticalAnswerModal
-                open={openModal}
-                setOpen={setOpenModal}
-                id={id}
-                postData={postList}
-                handleOpenFailedModal={handleOpen}
-                unit_type="SOFT"
-            />
-            <FailedModal open={open} handleClose={handleClose} />
-            <Form
-                style={{ display: 'flex', flexDirection: 'column' }}
-                id="soft-tester-form"
-                layout="vertical"
-                onFinish={onSubmit}
-            >
-                {softquestions.map((item, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            display: index === arrayIndex ? 'flex' : 'none',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
-                        {item.description && (
-                            <div style={{ marginTop: 12 }}>
-                                <Text style={{ fontWeight: 'bold' }}>Описание: </Text>
-                                <span>{item.description}</span>
-                            </div>
-                        )}
-                        <div style={{ marginTop: 12 }}>
-                            <Text style={{ fontWeight: 'bold' }}>Задание: </Text>
-                            <span>{item.name}</span>
-                        </div>
-                        {item?.question_images?.length > 0 && (
-                            <div
-                                style={{ display: 'flex', flexDirection: ' column', marginTop: 12 }}
-                            >
-                                {item?.question_images.map((itemImage, index) => (
-                                    <Image key={index} width={100} src={`${itemImage.image}`} />
-                                ))}
-                            </div>
-                        )}
-                        {item?.question_files?.length > 0 && (
-                            <a
-                                href={item?.question_files[0].file}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ marginTop: 12 }}
-                            >
-                                {decodeURI(item?.question_files[0].file).split('/')[5]}
-                            </a>
-                        )}
-                        {item.variants?.length > 0 && (
-                            <Form.Item
-                                name={[item.id, 'q_a']}
-                                label={
-                                    <Text style={{ fontWeight: 'bold', marginTop: 12 }}>
-                                        Варианты ответа:
-                                    </Text>
-                                }
-                                initialValue={[]}
-                            >
-                                <Checkbox.Group
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        marginTop: '-10px',
-                                    }}
-                                >
-                                    {item.variants.map((item, index) => (
-                                        <Checkbox
-                                            style={{
-                                                marginTop: 10,
-                                                marginLeft: 1,
-                                            }}
-                                            key={index}
-                                            value={item.name}
-                                        >
-                                            {item.name}
-                                        </Checkbox>
-                                    ))}
-                                </Checkbox.Group>
-                            </Form.Item>
-                        )}
-                        {item.table_quest?.length > 0 &&
-                            item.table_quest.map((item2, index) => (
-                                <div key={index} style={{ marginTop: 12 }}>
-                                    <Form.Item
-                                        name={[item.id, 'table_quest', index, 'name']}
-                                        initialValue={item2.name}
-                                        style={{ display: 'none' }}
-                                    ></Form.Item>
-                                    <Form.Item
-                                        name={[item.id, 'table_quest', index, 'answers']}
-                                        label={
-                                            <Text style={{ fontWeight: 'bold' }}>{item2.name}</Text>
-                                        }
-                                        initialValue={[]}
-                                    >
-                                        {item2.is_one ? (
-                                            <Radio.Group
-                                                style={{
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                }}
-                                            >
-                                                {item2.variants.map((item, index) => (
-                                                    <Radio
-                                                        value={item.name}
-                                                        key={index}
-                                                        style={{
-                                                            marginTop: 5,
-                                                        }}
-                                                    >
-                                                        {item.name}
-                                                    </Radio>
-                                                ))}
-                                            </Radio.Group>
-                                        ) : (
-                                            <Checkbox.Group
-                                                style={{
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                }}
-                                            >
-                                                {item2.variants.map((item, index) => (
-                                                    <Checkbox
-                                                        value={item.name}
-                                                        key={index}
-                                                        style={{
-                                                            marginLeft: index === 0 && 8,
-                                                            marginTop: 5,
-                                                        }}
-                                                    >
-                                                        {item.name}
-                                                    </Checkbox>
-                                                ))}
-                                            </Checkbox.Group>
-                                        )}
-                                    </Form.Item>
-                                </div>
-                            ))}
-                        {item.is_describe && (
-                            <Form.Item
-                                name={[item.id, 'q_d']}
-                                label={
-                                    <Text style={{ fontWeight: 'bold', marginTop: 12 }}>
-                                        Ответ:
-                                    </Text>
-                                }
-                            >
-                                <TextArea />
-                            </Form.Item>
-                        )}
-                        <Line />
-                        <ActionButton
-                            arrayIndex={arrayIndex}
-                            surveyquest_length={softquestions?.length}
-                        />
-                    </div>
-                ))}
-            </Form>
+            {/*<TheoreticalAnswerModal*/}
+            {/*    open={openModal}*/}
+            {/*    setOpen={setOpenModal}*/}
+            {/*    id={id}*/}
+            {/*    postData={postList}*/}
+            {/*    handleOpenFailedModal={handleOpen}*/}
+            {/*    unit_type="SOFT"*/}
+            {/*/>*/}
+            {/*<FailedModal open={open} handleClose={handleClose} />*/}
+            {/*<Form*/}
+            {/*    style={{ display: 'flex', flexDirection: 'column' }}*/}
+            {/*    id="soft-tester-form"*/}
+            {/*    layout="vertical"*/}
+            {/*    onFinish={onSubmit}*/}
+            {/*>*/}
+            {/*    {surveyQuestions.map((item, index) => (*/}
+            {/*        <div*/}
+            {/*            key={index}*/}
+            {/*            style={{*/}
+            {/*                display: index === arrayIndex ? 'flex' : 'none',*/}
+            {/*                flexDirection: 'column',*/}
+            {/*            }}*/}
+            {/*        >*/}
+            {/*            <Title level={4}>Вопрос №{arrayIndex + 1}</Title>*/}
+            {/*            {item.description && (*/}
+            {/*                <div style={{ marginTop: 12 }}>*/}
+            {/*                    <Text style={{ fontWeight: 'bold' }}>Описание: </Text>*/}
+            {/*                    <span>{item.description}</span>*/}
+            {/*                </div>*/}
+            {/*            )}*/}
+            {/*            <div style={{ marginTop: 12 }}>*/}
+            {/*                <Text style={{ fontWeight: 'bold' }}>Задание: </Text>*/}
+            {/*                <span>{item.name}</span>*/}
+            {/*            </div>*/}
+            {/*            {item?.question_images?.length > 0 && (*/}
+            {/*                <div*/}
+            {/*                    style={{ display: 'flex', flexDirection: ' column', marginTop: 12 }}*/}
+            {/*                >*/}
+            {/*                    {item?.question_images.map((itemImage, index) => (*/}
+            {/*                        <Image key={index} width={100} src={`${itemImage.image}`} />*/}
+            {/*                    ))}*/}
+            {/*                </div>*/}
+            {/*            )}*/}
+            {/*            {item?.question_files?.length > 0 && (*/}
+            {/*                <a*/}
+            {/*                    href={item?.question_files[0].file}*/}
+            {/*                    target="_blank"*/}
+            {/*                    rel="noopener noreferrer"*/}
+            {/*                    style={{ marginTop: 12 }}*/}
+            {/*                >*/}
+            {/*                    {decodeURI(item?.question_files[0].file).split('/')[5]}*/}
+            {/*                </a>*/}
+            {/*            )}*/}
+            {/*            {item.variants?.length > 0 && (*/}
+            {/*                <Form.Item*/}
+            {/*                    name={[item.id, 'q_a']}*/}
+            {/*                    label={*/}
+            {/*                        <Text style={{ fontWeight: 'bold', marginTop: 12 }}>*/}
+            {/*                            Варианты ответа:*/}
+            {/*                        </Text>*/}
+            {/*                    }*/}
+            {/*                    initialValue={[]}*/}
+            {/*                >*/}
+            {/*                    <Checkbox.Group*/}
+            {/*                        style={{*/}
+            {/*                            display: 'flex',*/}
+            {/*                            flexDirection: 'column',*/}
+            {/*                            marginTop: '-10px',*/}
+            {/*                        }}*/}
+            {/*                    >*/}
+            {/*                        {item.variants.map((item, index) => (*/}
+            {/*                            <Checkbox*/}
+            {/*                                style={{*/}
+            {/*                                    marginTop: 10,*/}
+            {/*                                    marginLeft: 1,*/}
+            {/*                                }}*/}
+            {/*                                key={index}*/}
+            {/*                                value={item.name}*/}
+            {/*                            >*/}
+            {/*                                {item.name}*/}
+            {/*                            </Checkbox>*/}
+            {/*                        ))}*/}
+            {/*                    </Checkbox.Group>*/}
+            {/*                </Form.Item>*/}
+            {/*            )}*/}
+            {/*            {item.table_quest?.length > 0 &&*/}
+            {/*                item.table_quest.map((item2, index) => (*/}
+            {/*                    <div key={index} style={{ marginTop: 12 }}>*/}
+            {/*                        <Form.Item*/}
+            {/*                            name={[item.id, 'table_quest', index, 'name']}*/}
+            {/*                            initialValue={item2.name}*/}
+            {/*                            style={{ display: 'none' }}*/}
+            {/*                        ></Form.Item>*/}
+            {/*                        <Form.Item*/}
+            {/*                            name={[item.id, 'table_quest', index, 'answers']}*/}
+            {/*                            label={*/}
+            {/*                                <Text style={{ fontWeight: 'bold' }}>{item2.name}</Text>*/}
+            {/*                            }*/}
+            {/*                            initialValue={[]}*/}
+            {/*                        >*/}
+            {/*                            {item2.is_one ? (*/}
+            {/*                                <Radio.Group*/}
+            {/*                                    style={{*/}
+            {/*                                        display: 'flex',*/}
+            {/*                                        flexDirection: 'column',*/}
+            {/*                                    }}*/}
+            {/*                                >*/}
+            {/*                                    {item2.variants.map((item, index) => (*/}
+            {/*                                        <Radio*/}
+            {/*                                            value={item.name}*/}
+            {/*                                            key={index}*/}
+            {/*                                            style={{*/}
+            {/*                                                marginTop: 5,*/}
+            {/*                                            }}*/}
+            {/*                                        >*/}
+            {/*                                            {item.name}*/}
+            {/*                                        </Radio>*/}
+            {/*                                    ))}*/}
+            {/*                                </Radio.Group>*/}
+            {/*                            ) : (*/}
+            {/*                                <Checkbox.Group*/}
+            {/*                                    style={{*/}
+            {/*                                        display: 'flex',*/}
+            {/*                                        flexDirection: 'column',*/}
+            {/*                                    }}*/}
+            {/*                                >*/}
+            {/*                                    {item2.variants.map((item, index) => (*/}
+            {/*                                        <Checkbox*/}
+            {/*                                            value={item.name}*/}
+            {/*                                            key={index}*/}
+            {/*                                            style={{*/}
+            {/*                                                marginLeft: index === 0 && 8,*/}
+            {/*                                                marginTop: 5,*/}
+            {/*                                            }}*/}
+            {/*                                        >*/}
+            {/*                                            {item.name}*/}
+            {/*                                        </Checkbox>*/}
+            {/*                                    ))}*/}
+            {/*                                </Checkbox.Group>*/}
+            {/*                            )}*/}
+            {/*                        </Form.Item>*/}
+            {/*                    </div>*/}
+            {/*                ))}*/}
+            {/*            {item.is_describe && (*/}
+            {/*                <Form.Item*/}
+            {/*                    name={[item.id, 'q_d']}*/}
+            {/*                    label={*/}
+            {/*                        <Text style={{ fontWeight: 'bold', marginTop: 12 }}>*/}
+            {/*                            Ответ:*/}
+            {/*                        </Text>*/}
+            {/*                    }*/}
+            {/*                >*/}
+            {/*                    <TextArea />*/}
+            {/*                </Form.Item>*/}
+            {/*            )}*/}
+            {/*            <Line />*/}
+            {/*            <ActionButton*/}
+            {/*                arrayIndex={arrayIndex}*/}
+            {/*                surveyquest_length={surveyQuestions?.length}*/}
+            {/*            />*/}
+            {/*        </div>*/}
+            {/*    ))}*/}
+            {/*</Form>*/}
         </div>
     )
 }

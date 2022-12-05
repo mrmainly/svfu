@@ -113,10 +113,10 @@ const SoftBodyTester = ({ dataList }) => {
             clearTimer(
                 getDeadTime(
                     localDate(dataList?.start_survey) <= 0
-                        ? dataList?.time_exam
+                        ? dataList?.exam?.unit?.test_time
                         : subtractionExamTime(
                               localDate(dataList?.start_survey),
-                              dataList?.time_exam
+                            dataList?.exam?.unit?.test_time
                           )
                 )
             )
@@ -155,7 +155,7 @@ const SoftBodyTester = ({ dataList }) => {
             <div className="time-block">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
-                    {timerView(data?.time_exam)}:00
+                    {timerView(data?.exam?.unit?.test_time)}:00
                 </div>
                 <div
                     style={{
@@ -167,7 +167,7 @@ const SoftBodyTester = ({ dataList }) => {
                     <Text>Осталось:</Text>
                     {timer === 0 ? (
                         timerView(
-                            subtractionExamTime(localDate(data?.start_survey), data?.time_exam)
+                            subtractionExamTime(localDate(dataList?.start_survey), data?.exam?.unit?.test_time)
                         ) + ':00'
                     ) : (
                         <Text>{timer}</Text>

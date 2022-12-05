@@ -1,14 +1,16 @@
 import { Skeleton } from 'antd'
 
-import { useGetSurveyPartOneIdQuery } from '../../../services/tester/Surveys'
+import { useGetSurveyIdQuery } from '../../../services/tester/Surveys'
 import '../surveySideBar.css'
 import HardBodyTester from './components/hard_body'
 import SoftBodyTester from './components/soft_body'
 
 const SurveySideBarTester = () => {
-    const { data, isFetching } = useGetSurveyPartOneIdQuery({
-        id: JSON.parse(localStorage.getItem('survey-datas')).id,
+    const { data, isFetching } = useGetSurveyIdQuery({
+        id: window.localStorage.getItem('survey-id'),
     })
+
+    console.log(data)
 
     if (isFetching) {
         return (

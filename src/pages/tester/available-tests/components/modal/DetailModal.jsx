@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Modal, Space, Typography, message } from 'antd'
@@ -5,8 +7,8 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import {
-    useGetSurveyPartOneIdQuery,
-    usePatchSurveyPartOneMutation,
+    useGetSurveyIdQuery,
+    usePatchSurveyMutation,
 } from '../../../../../services/tester/Surveys'
 import { MyButton } from '../../../../../components'
 import ROUTES from '../../../../../routes'
@@ -14,9 +16,9 @@ import ROUTES from '../../../../../routes'
 const { Text } = Typography
 
 const TestDetail = ({ open, handleClose, ID }) => {
-    const { data } = useGetSurveyPartOneIdQuery({ id: ID })
-    console.log(data)
-    const [surveyPatch] = usePatchSurveyPartOneMutation()
+    const { data } = useGetSurveyIdQuery({ id: ID })
+    console.log('surveydata', data)
+    const [surveyPatch] = usePatchSurveyMutation()
     const navigate = useNavigate()
 
     const items = [
@@ -43,12 +45,11 @@ const TestDetail = ({ open, handleClose, ID }) => {
             if (res.data) {
                 navigate(ROUTES.TESTER_SURVEY_PART, {
                     state: {
-                        surveyquest: data.surveyquest,
                         id: data.id,
                         unit_type: data.unit_type,
-                        softquestions: data.softquestions,
                     },
                 })
+                window.localStorage.setItem('survey-id',ID)
             } else {
                 message.error('Вы уже прошли тестирование')
             }
@@ -69,12 +70,11 @@ const TestDetail = ({ open, handleClose, ID }) => {
                             data?.survey_status === 'IN_PROGRESS'
                                 ? navigate(ROUTES.TESTER_SURVEY_PART, {
                                       state: {
-                                          surveyquest: data.surveyquest,
                                           id: data.id,
                                           unit_type: data.unit_type,
-                                          softquestions: data.softquestions,
                                       },
-                                  })
+                                  },
+                                    window.localStorage.setItem('survey-id',ID))
                                 : patchSurvey()
                         }
                         key="start"
@@ -84,7 +84,7 @@ const TestDetail = ({ open, handleClose, ID }) => {
                     <MyButton
                         key="back"
                         type="default"
-                        style={{ background: '#FFF' }}
+                        style={{ background: '#FFF', color: 'black' }}
                         onClick={handleClose}
                     >
                         Отмена

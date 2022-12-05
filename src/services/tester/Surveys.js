@@ -3,24 +3,17 @@ import { api } from '../api'
 export const Surveys = api.injectEndpoints({
     endpoints: (build) => ({
         //теоретическая часть
-        getSurveyPartOneId: build.query({
-            query: ({ id }) => `tester/survey/part-one/${id}`,
-            async onQueryStarted(undefiend, { queryFulfilled }) {
-                try {
-                    const { data } = await queryFulfilled
-                    window.localStorage.setItem('survey-datas', JSON.stringify(data, null, '\t'))
-                } catch (err) {
-                    console.log(err)
-                }
-            },
+        getSurveyId: build.query({
+            query: ({ id }) => `tester/survey/${id}`,
+
             providesTags: ['SURVEYS_TESTER'],
         }),
 
         //начало теоретической части
-        patchSurveyPartOne: build.mutation({
+        patchSurvey: build.mutation({
             query({ id }) {
                 return {
-                    url: `tester/survey/part-one/${id}`,
+                    url: `tester/survey/${id}`,
                     method: 'PATCH',
                 }
             },
@@ -67,14 +60,22 @@ export const Surveys = api.injectEndpoints({
             },
             invalidatesTags: [{ type: 'SURVEYS_TESTER' }],
         }),
+
+        //список заданий
+        getTesterSurveyId: build.query({
+            query: ({id}) => `tester/survey/soft/survey/${id}`,
+
+            providesTags: ['SURVEYS_TESTER'],
+        }),
     }),
 })
 
 export const {
-    useGetSurveyPartOneIdQuery,
-    usePatchSurveyPartOneMutation,
+    useGetSurveyIdQuery,
+    usePatchSurveyMutation,
     usePostResultPartOneMutation,
     usePostResultSoftMutation,
     useGetPracticalPartIdQuery,
     usePostPracticalPartMutation,
+    useGetTesterSurveyIdQuery,
 } = Surveys

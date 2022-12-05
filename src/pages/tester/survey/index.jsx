@@ -11,15 +11,15 @@ const TesterSurveyPart = () => {
 
     const { part_tester } = useSelector((state) => state.survey_slice)
 
-    const { id, surveyquest, unit_type, softquestions } = state
+    const { id, unit_type } = state
     return (
         <div>
             {unit_type === 'SOFT' ? (
-                <SoftPart softquestions={softquestions} id={id} />
+                <SoftPart id={id} />
             ) : part_tester === 'p-p' ? (
                 <PracticalPart id={id} />
             ) : (
-                <TheoreticalPart surveyquest={surveyquest} id={id} />
+                <TheoreticalPart id={id} />
             )}
         </div>
     )
