@@ -12,6 +12,7 @@ import ActionButton from '../../../../../constructor/parts/compoentns/action-but
 import TextArea from 'antd/lib/input/TextArea'
 import { useGetTesterSurveyIdQuery } from '../../../../../services/tester/Surveys'
 import MatchingQuestion from '../questions/MatchingQuestion'
+import InputIntQuestion from '../questions/InpitIntQuestion'
 
 const { Text, Title } = Typography
 const { Option } = Select
@@ -96,6 +97,7 @@ const SoftPart = ({ id }) => {
                         </div>
 
                         {item.technique === "MATCHING" && <MatchingQuestion/>}
+                        {item.technique === "INPUT_INT" && <InputIntQuestion/>}
                         <Line />
                         <ActionButton
                             arrayIndex={arrayIndex}
