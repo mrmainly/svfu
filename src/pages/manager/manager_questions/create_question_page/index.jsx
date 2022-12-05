@@ -147,13 +147,13 @@ const QuestionCreatePage = () => {
                     questionCreatePoll({
                         id: mainResponse.data.question_id,
                         body: {
-                            strings: data.questions.map((item, index) => {
+                            strings: data.strings.map((item, index) => {
                                 return {
                                     id_string: index + 1,
                                     name: item.strings_name,
                                 }
                             }),
-                            columns: data.questions.map((item, index) => {
+                            columns: data.columns.map((item, index) => {
                                 return {
                                     name: item.columns_name,
                                     id_column: index + 1,
