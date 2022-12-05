@@ -1,11 +1,13 @@
 import { api } from '../api'
+import {SurveysSlice} from '../../reducers/SurveysSlice'
+
+const {getSurveyData} = SurveysSlice.actions
 
 export const Surveys = api.injectEndpoints({
     endpoints: (build) => ({
         //теоретическая часть
         getSurveyId: build.query({
             query: ({ id }) => `tester/survey/${id}`,
-
             providesTags: ['SURVEYS_TESTER'],
         }),
 
@@ -63,8 +65,15 @@ export const Surveys = api.injectEndpoints({
 
         //список заданий
         getTesterSurveyId: build.query({
-            query: ({id}) => `tester/survey/soft/survey/${id}`,
-
+            query: (id) => `tester/survey/soft/survey/${id}`,
+            async onQueryStarted(undefiend, {dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled
+                    dispatch(getSurveyData(data))
+                } catch (err) {
+                    console.log(err)
+                }
+            },
             providesTags: ['SURVEYS_TESTER'],
         }),
     }),

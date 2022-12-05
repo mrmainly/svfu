@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    data: [],
+    getSurveyData: [],
     arrayIndex: 0,
     modalText: '',
     modalOpenStatus: false,
@@ -18,7 +18,7 @@ const initialState = {
     conclusion: '',
     pass_practical_part: false,
     pass_test_part: false,
-    part: 'theoretical-part',
+    part: 'theoretical-part',``
     part_tester: 't-p',
     mobileDrawer: false,
 }
@@ -27,8 +27,8 @@ export const SurveysSlice = createSlice({
     name: 'SurveysSlice',
     initialState,
     reducers: {
-        getData(state, action) {
-            state.data = action.payload
+        getSurveyData(state, action) {
+            state.getSurveyData = action.payload
         },
         handleArrayIndex(state, action) {
             state.arrayIndex = action.payload
