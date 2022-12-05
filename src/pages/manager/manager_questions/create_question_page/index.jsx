@@ -125,14 +125,14 @@ const QuestionCreatePage = () => {
                                         name: item.name,
                                         score: item.score,
                                         a_id: index + 1,
-                                        is_true: true,
+                                        is_true: item?.is_true,
                                     }
                                 }),
                             }
                         }),
                     }).then((res) => {
                         if (res.data) {
-                            message.success('Вопрос с установлением соответствий создан')
+                            message.success('Matrix вопрос создан')
                             navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
                         } else {
                             message.error('Вопрос не создан')
@@ -146,7 +146,7 @@ const QuestionCreatePage = () => {
                 )
             }
         })
-        // console.log(data)
+        console.log(data)
     }
 
     const allLoading = () => {
@@ -155,7 +155,8 @@ const QuestionCreatePage = () => {
             isCreateChoiseLaoding ||
             isCreateInputLaoding ||
             isDeleteQuestionLaoding ||
-            isCreateMatchingLoading
+            isCreateMatchingLoading ||
+            isCreateMatrixLoading
         ) {
             return true
         } else {

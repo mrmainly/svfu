@@ -1,4 +1,4 @@
-import { Button, Form, Input, Card } from 'antd'
+import { Button, Form, Input, Card, Checkbox } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
 
 const { TextArea } = Input
@@ -67,14 +67,30 @@ const MatrixQuestion = () => {
                                                                         type="number"
                                                                     />
                                                                 </Form.Item>
+                                                                <Form.Item
+                                                                    style={{ marginBottom: 10 }}
+                                                                    name={[variant_name, 'is_true']}
+                                                                    valuePropName="checked"
+                                                                >
+                                                                    <Checkbox></Checkbox>
+                                                                </Form.Item>
                                                                 <Form.Item>
                                                                     {fields.length > 2 ? (
-                                                                        <DeleteTwoTone
-                                                                            twoToneColor="#EB5757"
-                                                                            onClick={() =>
-                                                                                remove(variant_name)
-                                                                            }
-                                                                        />
+                                                                        <div
+                                                                            style={{
+                                                                                marginTop: '-7px',
+                                                                                marginLeft: 10,
+                                                                            }}
+                                                                        >
+                                                                            <DeleteTwoTone
+                                                                                twoToneColor="#EB5757"
+                                                                                onClick={() =>
+                                                                                    remove(
+                                                                                        variant_name
+                                                                                    )
+                                                                                }
+                                                                            />
+                                                                        </div>
                                                                     ) : null}
                                                                 </Form.Item>
                                                             </div>
