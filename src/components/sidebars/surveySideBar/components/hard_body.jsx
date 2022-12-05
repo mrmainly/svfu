@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Typography, Button } from 'antd'
 import { PropTypes } from 'prop-types'
 

@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react'
-
 import { useSelector, useDispatch } from 'react-redux'
-import { SurveysSlice } from '../../../reducers/SurveysSlice'
 
 import '../surveySideBar.css'
+import { SurveysSlice } from '../../../reducers/SurveysSlice'
 import HardBody from './components/hard_body'
 import SoftBody from './components/soft_body'
 

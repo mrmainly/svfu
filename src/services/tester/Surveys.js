@@ -1,7 +1,7 @@
 import { api } from '../api'
-import {SurveysSlice} from '../../reducers/SurveysSlice'
+import { SurveysSlice } from '../../reducers/SurveysSlice'
 
-const {getSurveyData} = SurveysSlice.actions
+const { getSurveyData } = SurveysSlice.actions
 
 export const Surveys = api.injectEndpoints({
     endpoints: (build) => ({
@@ -38,7 +38,7 @@ export const Surveys = api.injectEndpoints({
         postResultSoft: build.mutation({
             query({ body, id }) {
                 return {
-                    url: `tester/survey/soft/${id}`,
+                    url: `tester/survey/soft/survey/${id}`,
                     method: 'POST',
                     body,
                 }
@@ -66,16 +66,16 @@ export const Surveys = api.injectEndpoints({
         //список заданий
         getTesterSurveyId: build.query({
             query: ({ id }) => `tester/survey/soft/survey/${id}`,
-            async onQueryStarted(undefiend, {dispatch, queryFulfilled }) {
+            async onQueryStarted(undefiend, { dispatch, queryFulfilled }) {
                 try {
-                    const {data} = await queryFulfilled
+                    const { data } = await queryFulfilled
                     const parsquestion = await []
                     await data?.soft_chapters.forEach((item) => {
                         item.question.forEach((questionItem) => {
                             parsquestion.push({
                                 ...questionItem,
                                 chapterName: item.name,
-                                chapterId: item.id
+                                chapterId: item.id,
                             })
                         })
                     })

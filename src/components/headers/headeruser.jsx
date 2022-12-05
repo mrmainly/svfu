@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import React from 'react'
-
 import { Divider, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import cookie from 'js-cookie'
