@@ -5,7 +5,6 @@ import '../surveySideBar.css'
 import { useGetSurveyIdQuery } from '../../../services/tester/Surveys'
 import HardBodyTester from './components/hard_body'
 import SoftBodyTester from './components/soft_body'
-import { useGetSurveyIdQuery } from '../../../services/tester/Surveys'
 
 const SurveySideBarTester = () => {
     const { data, isFetching } = useGetSurveyIdQuery({
