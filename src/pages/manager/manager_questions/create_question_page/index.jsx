@@ -104,7 +104,7 @@ const QuestionCreatePage = () => {
                             return {
                                 first_string: item.first_string,
                                 score: item.score,
-                                second_string: item.first_string,
+                                second_string: item.second_string,
                                 order_num: index + 1,
                             }
                         }),
