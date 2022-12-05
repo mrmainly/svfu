@@ -7,7 +7,7 @@ const PollQuestion = ({questionPoll, answerIndex}) => {
         <div>
             {questionPoll?.strings.map((stringsItem, index) => (
                 <div key={index}>
-                    <Form.Item name={[answerIndex, 'matrix_answers', index, 'answers', 'a_id']} label={stringsItem.name}>
+                    <Form.Item name={[answerIndex, 'matrix_answers', index, 'answers', 0, 'a_id']} label={stringsItem.name}>
                         <Select>
                             {questionPoll.columns.map((columnsItem, index) => (
                                 <Select.Option value={columnsItem.id_column} key={index}>

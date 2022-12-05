@@ -30,37 +30,57 @@ const SoftPart = ({ id }) => {
 
     const { arrayIndex, getSurveyData } = useSelector((state) => state.survey_slice)
 
-    console.log('getSurveyData', getSurveyData)
     const onSubmit = (data) => {
-        console.log('onSubmit', data)
-        const abjArr = Object.entries(data)
-        const postData = {
-            answers: [],
-        }
-        abjArr.forEach(([key, value]) => {
-            if (Array.isArray(value.q_a) && value.table_quest === undefined) {
-                value?.q_a.forEach((item) => {
-                    postData?.answers.push({ q_id: Number(key), q_a: item, q_d: value.q_d })
-                })
-            } else {
-                const table_quest = []
-                value?.table_quest?.forEach((element) => {
-                    if (typeof element?.answers === 'string') {
-                        table_quest.push({ name: element.name, answers: element.answers })
-                    } else {
-                        element?.answers?.forEach((elem) => {
-                            table_quest.push({ name: element.name, answers: elem })
-                        })
-                    }
-                })
-                postData.answers.push({
-                    q_id: Number(key),
-                    q_a: undefined,
-                    q_d: value.q_d,
-                    table_quest: table_quest,
-                })
+
+        const postData = getSurveyData.map((item, index) => {
+
+            if(item.technique === 'MATRIX') {
+                const post_matrix = []
+                    data[index]?.matrix_answers.forEach((item) => (
+                            item?.answers?.a_id.forEach((itemAnswer) => {
+                                post_matrix.push({a_id: itemAnswer})
+                            })
+                    ))
+                return {
+                    ...post_matrix,
+                    chapter_id: item.chapterId,
+                    q_id: item.id
+                }
+            }
+            return {
+                ...data[index],
+                chapter_id: item.chapterId,
+                q_id: item.id
             }
         })
+
+        // const postData = {
+        //     answers: [],
+        // }
+        // abjArr.forEach(([key, value]) => {
+        //     if (Array.isArray(value.q_a) && value.table_quest === undefined) {
+        //         value?.q_a.forEach((item) => {
+        //             postData?.answers.push({ q_id: Number(key), q_a: item, q_d: value.q_d })
+        //         })
+        //     } else {
+        //         const table_quest = []
+        //         value?.table_quest?.forEach((element) => {
+        //             if (typeof element?.answers === 'string') {
+        //                 table_quest.push({ name: element.name, answers: element.answers })
+        //             } else {
+        //                 element?.answers?.forEach((elem) => {
+        //                     table_quest.push({ name: element.name, answers: elem })
+        //                 })
+        //             }
+        //         })
+        //         postData.answers.push({
+        //             q_id: Number(key),
+        //             q_a: undefined,
+        //             q_d: value.q_d,
+        //             table_quest: table_quest,
+        //         })
+        //     }
+        // })
         setOpenModal(true)
         setPostList(postData)
     }
