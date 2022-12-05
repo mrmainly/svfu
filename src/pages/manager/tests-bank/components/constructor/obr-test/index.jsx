@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Input, message, Spin, Tabs } from 'antd'
+import { Button, Form, Input, message, Tabs } from 'antd'
 import ObrTestSettings from './tabs/settings'
 import ObrTestQuestions from './tabs/questions'
 import Description from './tabs/description'
