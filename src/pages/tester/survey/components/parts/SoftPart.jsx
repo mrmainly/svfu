@@ -17,7 +17,8 @@ const { Text, Title } = Typography
 const { Option } = Select
 
 const SoftPart = ({ id }) => {
-    const {data: surveyQuestions, isLoading: isSurveyQuestionsLoading} = useGetTesterSurveyIdQuery(id)
+    const { data: surveyQuestions, isLoading: isSurveyQuestionsLoading } =
+        useGetTesterSurveyIdQuery({ id: id })
     console.log('surveyQuestions', surveyQuestions)
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])

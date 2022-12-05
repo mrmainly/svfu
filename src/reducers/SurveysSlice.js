@@ -18,7 +18,7 @@ const initialState = {
     conclusion: '',
     pass_practical_part: false,
     pass_test_part: false,
-    part: 'theoretical-part',``
+    part: 'theoretical-part',
     part_tester: 't-p',
     mobileDrawer: false,
 }

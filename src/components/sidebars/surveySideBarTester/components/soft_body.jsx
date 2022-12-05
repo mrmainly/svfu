@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState, useRef } from 'react'
 
 import { Typography, Button } from 'antd'
@@ -7,6 +8,7 @@ import PropTypes from 'prop-types'
 
 import { SurveysSlice } from '../../../../reducers/SurveysSlice'
 import TimeIsUpModal from '../../../../pages/tester/survey/components/modals/TimeIsUpModal'
+import { useGetTesterSurveyIdQuery } from '../../../../services/tester/Surveys'
 
 const { Text } = Typography
 
@@ -57,6 +59,10 @@ const subtractionExamTime = (first, second) => {
 }
 
 const SoftBodyTester = ({ dataList }) => {
+    const { data: softSurveyData } = useGetTesterSurveyIdQuery({
+        id: window.localStorage.getItem('survey-id'),
+    })
+
     const Ref = useRef(null)
     const [open, setOpen] = useState(true)
 
@@ -108,7 +114,6 @@ const SoftBodyTester = ({ dataList }) => {
     }
 
     useEffect(() => {
-        setData(dataList)
         if (dataList?.start_survey) {
             clearTimer(
                 getDeadTime(
@@ -116,12 +121,24 @@ const SoftBodyTester = ({ dataList }) => {
                         ? dataList?.exam?.unit?.test_time
                         : subtractionExamTime(
                               localDate(dataList?.start_survey),
-                            dataList?.exam?.unit?.test_time
+                              dataList?.exam?.unit?.test_time
                           )
                 )
             )
         }
     }, [dataList])
+
+    useEffect(() => {
+        const parsSideBarData = []
+
+        softSurveyData?.soft_chapters.forEach((item) => {
+            item.question.forEach((questionItem) => {
+                parsSideBarData.push(questionItem)
+            })
+        })
+        setData(parsSideBarData)
+        console.log('asd', parsSideBarData)
+    }, [softSurveyData])
 
     return (
         <div className="survey-sidebar">
@@ -131,8 +148,8 @@ const SoftBodyTester = ({ dataList }) => {
             <Text style={{ fontWeight: 600, wordWrap: 'break-word' }}>{data?.name}</Text>
             <div className="root">
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {data?.softquestions?.length
-                        ? data.softquestions.map((item, index) => (
+                    {data?.length
+                        ? data.map((item, index) => (
                               <div
                                   key={index}
                                   className="circul"
@@ -155,7 +172,7 @@ const SoftBodyTester = ({ dataList }) => {
             <div className="time-block">
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Text>Общее время:</Text>
-                    {timerView(data?.exam?.unit?.test_time)}:00
+                    {timerView(dataList?.exam?.unit?.test_time)}:00
                 </div>
                 <div
                     style={{
@@ -167,7 +184,10 @@ const SoftBodyTester = ({ dataList }) => {
                     <Text>Осталось:</Text>
                     {timer === 0 ? (
                         timerView(
-                            subtractionExamTime(localDate(dataList?.start_survey), data?.exam?.unit?.test_time)
+                            subtractionExamTime(
+                                localDate(dataList?.start_survey),
+                                dataList?.exam?.unit?.test_time
+                            )
                         ) + ':00'
                     ) : (
                         <Text>{timer}</Text>
