@@ -1,21 +1,10 @@
-import { useState } from 'react'
 
 import Table from 'antd/lib/table'
 import { Button } from 'antd'
 
 import PropTypes from 'prop-types'
 
-import TBEditModal from '../modals/TestBankEditModal'
-
 const TestsBankTable = ({ data, loading, setId }) => {
-    const [currentData, setCurrentData] = useState([])
-    const [modalEditTB, setModalEditTB] = useState(false)
-
-    const handleClickTable = (id) => {
-        const itemData = data?.filter((e) => e.id === id)
-        setCurrentData(itemData)
-        setModalEditTB(true)
-    }
 
     const onTableChange = (newPagination, filters, sorter) => {
         if (sorter?.order === 'descend') {
@@ -67,8 +56,8 @@ const TestsBankTable = ({ data, loading, setId }) => {
             title: 'Действие',
             dataIndex: 'id',
             key: 'x',
-            render: (id) => (
-                <Button type="primary" onClick={() => handleClickTable(id)}>
+            render: () => (
+                <Button type="primary">
                     Изменить
                 </Button>
             ),
@@ -86,7 +75,6 @@ const TestsBankTable = ({ data, loading, setId }) => {
                 scroll={{ x: true }}
                 onChange={onTableChange}
             />
-            <TBEditModal open={modalEditTB} setOpen={setModalEditTB} dataList={currentData} />
         </>
     )
 }

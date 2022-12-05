@@ -5,14 +5,17 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import QuestionDrawer from './drawer'
-import questions from './mock'
 import './questions.css'
-import {ConstructorQuestionSlice} from '../../../../../../../reducers/ConstructorQuestionSlice'
+import {ConstructorQuestionSlice} from '../../../../../../../../reducers/ConstructorQuestionSlice'
+import {useGetConstructorTestCreateQuestionsQuery} from '../../../../../../../../services/manager/TestsBank'
 import QuestionSettingModal from './modal'
 
 const {Panel} = Collapse
 
 const ObrTestQuestions = () => {
+    const {data, isLoading} = useGetConstructorTestCreateQuestionsQuery()
+    console.log(data)
+
     const {deleteElement, initializationQuestionList, deleteChapter} = ConstructorQuestionSlice.actions
     const { testQuestionList } = useSelector(
         (state) => state.constructor_question_slice
@@ -31,8 +34,12 @@ const ObrTestQuestions = () => {
         setIsOpenDrawe(false)
     }
     useEffect(() => {
-            dispatch(initializationQuestionList(questions))
-    },[])
+            dispatch(initializationQuestionList(data?.results))
+    },[data])
+
+    if(isLoading) {
+      return <div>dsadasd</div>
+    }
     return (
         <div className="card-container">
             <QuestionDrawer open={isOpenDrawer} onClose={onClose} chapterId={id}/>
@@ -83,7 +90,7 @@ const ObrTestQuestions = () => {
                                                 }
                                                 style={{marginBottom: '12px'}}
                                             >
-                                                {item.name}
+                                                {item.description}
                                             </Card>
                                         )
                                     )}

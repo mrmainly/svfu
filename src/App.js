@@ -2,6 +2,12 @@
 import React, { Suspense, useState } from 'react'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import 'antd/dist/antd.min.css'
+import 'react-summernote/dist/react-summernote.css'
+import 'bootstrap/js/dist/modal'
+import 'bootstrap/js/dist/dropdown'
+import 'bootstrap/js/dist/tooltip'
+import 'bootstrap/dist/css/bootstrap.css'
+
 
 import ROUTES from './routes'
 import { ScreenVersionContext } from './context/ScreenVersionContext'
@@ -49,10 +55,9 @@ import {
     // HardQuestions,
     // EditSoftQuestion,
     ManagerQuestionCreatePage,
-    TestTests,
-    TestTestPageAdd,
     ManagerQuestionsPage,
     ManagerQuestionEditPage,
+    ManagerTestCreatePage,
 } from './pages'
 
 import { LoadingInsideLayout } from './components'
@@ -395,14 +400,6 @@ function App() {
                         <Route
                             element={
                                 <Suspense fallback={<LoadingInsideLayout />}>
-                                    <TestTests />
-                                </Suspense>
-                            }
-                            path={ROUTES.TEST_TESTS}
-                        />
-                        <Route
-                            element={
-                                <Suspense fallback={<LoadingInsideLayout />}>
                                     <ManagerQuestionsPage />
                                 </Suspense>
                             }
@@ -411,18 +408,18 @@ function App() {
                         <Route
                             element={
                                 <Suspense fallback={<LoadingInsideLayout />}>
-                                    <TestTestPageAdd />
-                                </Suspense>
-                            }
-                            path={ROUTES.TEST_TEST_PAGE_ADD}
-                        />
-                        <Route
-                            element={
-                                <Suspense fallback={<LoadingInsideLayout />}>
                                     <ManagerQuestionEditPage />
                                 </Suspense>
                             }
                             path={ROUTES.MANAGER_QUESTIONS_EDIT_PAGE}
+                        />
+                        <Route
+                            element={
+                                <Suspense fallback={<LoadingInsideLayout />}>
+                                    <ManagerTestCreatePage />
+                                </Suspense>
+                            }
+                            path={ROUTES.TEST_CREATE}
                         />
                     </Route>
                 </Routes>

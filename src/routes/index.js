@@ -50,11 +50,10 @@ const ROUTES = {
     HARD_QUESTIONS: '/hard-questions',
     EDIT_SOFT_QUESTION: '/edit-soft-question',
     TEST_SOFT_QUESTION: '/test-questions-question',
-    TEST_TESTS: '/test-tests',
-    TEST_TEST_PAGE_ADD: '/test-tests-page-add',
     MANAGER_QUESTIONS_PAGE: '/manager-questions-page',
     MANAGER_QUESTIONS_CREATE_PAGE: '/manager-question-page',
     MANAGER_QUESTIONS_EDIT_PAGE: '/manager-question-edit-page',
+    TEST_CREATE: '/manager-test-create'
 }
 
 export default ROUTES
