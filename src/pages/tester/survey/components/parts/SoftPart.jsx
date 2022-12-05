@@ -17,8 +17,7 @@ const { Text, Title } = Typography
 const { Option } = Select
 
 const SoftPart = ({ id }) => {
-    const { isLoading: isSurveyQuestionsLoading } =
-        useGetTesterSurveyIdQuery({ id: id })
+    const { isLoading: isSurveyQuestionsLoading } = useGetTesterSurveyIdQuery({ id: id })
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])
     const { open, handleClose, handleOpen } = useModal()
@@ -58,8 +57,8 @@ const SoftPart = ({ id }) => {
         setOpenModal(true)
         setPostList(postData)
     }
-    if (isSurveyQuestionsLoading){
-        return <Spin/>
+    if (isSurveyQuestionsLoading) {
+        return <Spin />
     }
     return (
         <div>
@@ -87,15 +86,18 @@ const SoftPart = ({ id }) => {
                         }}
                     >
                         <div>{item.chapterName}</div>
-                        <Divider/>
+                        <Divider />
                         <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
 
                         <div style={{ marginTop: 12 }}>
                             <Text style={{ fontWeight: 'bold' }}>Задание: </Text>
-                            <div>{item.description}</div>
+                            <div
+                                style={{ marginTop: 10 }}
+                                dangerouslySetInnerHTML={{ __html: item.description }}
+                            ></div>
                         </div>
 
-                        {item.technique === "MATCHING" && <MatchingQuestion/>}
+                        {item.technique === 'MATCHING' && <MatchingQuestion />}
                         <Line />
                         <ActionButton
                             arrayIndex={arrayIndex}
