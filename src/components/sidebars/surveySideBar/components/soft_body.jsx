@@ -1,8 +1,6 @@
 import React from 'react'
-
 import { Button } from 'antd'
 import { PropTypes } from 'prop-types'
-
 
 const SoftBody = ({ data, changeQuestion, arrayIndex, completeConclusion }) => {
     const colorSwitchDanger = (id) => {
