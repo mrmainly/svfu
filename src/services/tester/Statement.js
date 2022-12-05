@@ -11,11 +11,10 @@ export const Statement = api.injectEndpoints({
 
         //отправка заявления
         postStatement: build.mutation({
-            query(body) {
+            query({id}) {
                 return {
-                    url: `tester/application/`,
+                    url: `tester/application/${id}`,
                     method: 'POST',
-                    body,
                 }
             },
             invalidatesTags: [{ type: 'Applying' }],

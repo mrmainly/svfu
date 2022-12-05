@@ -31,14 +31,16 @@ const StatementTable = ({ data, loading, setOrdering }) => {
             }
         }
     }
-    const onSubmit = (data) => {
+    const onSubmit = (id) => {
         if (post_status === 'normal') {
-            postDirection({ direction: data }).then((res) => {
+            postDirection({ id: id }).then((res) => {
                 if (res.data) {
                     message.success('Заявление подано')
                 } else {
                     message.error(res.error.data.errors[0])
                 }
+            }).catch(() => {
+                message.error('Что то пошло не так')
             })
         } else {
             message.error('Вы не заполнили поле должность в профиле')

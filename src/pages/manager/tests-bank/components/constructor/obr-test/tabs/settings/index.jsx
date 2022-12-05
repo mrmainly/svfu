@@ -1,14 +1,30 @@
-import { Card, Form, Select, Switch, TimePicker } from 'antd'
-import { useState } from 'react'
+import { Card, Form, Select, Spin, Switch, TimePicker } from 'antd'
+import React, { useState } from 'react'
 import ResponseText from './response-text'
 import ResponseScore from './response-score'
-import { useGetToolsDirectionAutocompleteQuery } from '../../../../../../../../services/ToolsService'
+import { useGetToolsDirectionQuery } from '../../../../../../../../services/ToolsService'
 
 const {Option} = Select
 
 const ObrTestSettings = () => {
-    const { data } = useGetToolsDirectionAutocompleteQuery()
+    const { data, isLoading: isDirectionLoading } = useGetToolsDirectionQuery()
     const [response, setResponse] = useState('score')
+    console.log(data)
+    if (isDirectionLoading) {
+        return (
+            <div
+                style={{
+                    width: '100%',
+                    height: 400,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Spin />
+            </div>
+        )
+    }
     return (
         <>
             <Card style={{marginBottom: '12px'}} title={'Параметры'}>
