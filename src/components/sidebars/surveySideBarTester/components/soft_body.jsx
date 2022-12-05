@@ -137,7 +137,7 @@ const SoftBodyTester = ({ dataList }) => {
             })
         })
         setData(parsSideBarData)
-        console.log('asd', parsSideBarData)
+
     }, [softSurveyData])
 
     return (

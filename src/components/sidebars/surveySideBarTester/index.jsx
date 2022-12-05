@@ -10,8 +10,6 @@ const SurveySideBarTester = () => {
         id: window.localStorage.getItem('survey-id'),
     })
 
-    console.log(data)
-
     if (isFetching) {
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
