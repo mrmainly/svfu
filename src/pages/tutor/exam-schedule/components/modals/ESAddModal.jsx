@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 
 import { MyButton } from '../../../../../components'
 import {
-    useGetExaminationGroupsDirectionQuery,
+    //  useGetExaminationGroupsDirectionQuery,
+    useGetExaminationsDirectionQuery,
     useGetTestingListQuery,
     useGetUsersRoleQuery,
     usePostExamScheduleMutation,
@@ -16,14 +17,15 @@ import { useGetDirectionTuterQuery } from '../../../../../services/tutor/Tools'
 const { Option } = Select
 
 const ESAddModal = ({ open, setOpen }) => {
-    const [direction, setDirection] = useState(0)
+    const [direction, setDirection] = useState()
     const [testGroup, setTestGroup] = useState()
     const [unit, setUnit] = useState()
     const { data: dataTutor } = useGetDirectionTuterQuery()
-    const { data: dataTestGroup } = useGetExaminationGroupsDirectionQuery(
-        { direction: direction },
-        { skip: !direction }
-    )
+    //  const { data: dataTestGroup } = useGetExaminationGroupsDirectionQuery(
+    //      { direction: direction },
+    //      { skip: !direction }
+    //  )
+    const { data: dataExaminations } = useGetExaminationsDirectionQuery({ direction: direction })
     const { data: dataUnit } = useGetTestingListQuery(
         { direction: direction },
         { skip: !direction }
@@ -60,16 +62,16 @@ const ESAddModal = ({ open, setOpen }) => {
                     <MyButton key="submit" htmlType="submit" form="es-form">
                         Сохранить
                     </MyButton>,
-                    <MyButton
+                    <Button
                         key="back"
-                        type="default"
+                        size="large"
                         style={{
                             background: '#FFF',
                         }}
                         onClick={() => setOpen(false)}
                     >
                         Отмена
-                    </MyButton>,
+                    </Button>,
                 ]}
             >
                 <Form layout="vertical" onFinish={onSubmit} id="es-form">
@@ -122,19 +124,20 @@ const ESAddModal = ({ open, setOpen }) => {
                         rules={[
                             {
                                 required: true,
-                                message: 'Пожайлуста, выберите группу аттестуемых!',
+                                message: 'Пожайлуста, выберите аттестуемых!',
                             },
                         ]}
-                        label="Группа аттестуемых"
+                        label="Аттестуемые"
                     >
                         <Select
-                            placeholder="Выберите группу аттестуемых"
+                            mode="multiple"
+                            placeholder="Выберите аттестуемых"
                             onChange={(e) => setTestGroup(e)}
                             value={testGroup}
                         >
-                            {dataTestGroup?.results.map((item, index) => (
-                                <Option key={index} value={item.id}>
-                                    {item.id} {item.name}
+                            {dataExaminations?.map((item, index) => (
+                                <Option key={index} value={item.user.id}>
+                                    {item.user.id} {item.user.full_name}
                                 </Option>
                             ))}
                         </Select>
@@ -189,6 +192,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         </Col>
                     </Row>
                     <Form.List
+                        initialValue={[{}]}
                         name="experts"
                         rules={[
                             {
@@ -224,7 +228,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                             ]}
                                         >
                                             <Select placeholder="Выберите эксперта">
-                                                {dataExpert?.results.map((item, index) => (
+                                                {dataExpert?.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
                                                     </Option>
@@ -266,7 +270,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         name="main_expert"
                     >
                         <Select placeholder="Выберите председателя экспертов">
-                            {dataExpert?.results.map((item, index) => (
+                            {dataExpert?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
                                 </Option>
@@ -274,6 +278,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         </Select>
                     </Form.Item>
                     <Form.List
+                        initialValue={[{}]}
                         name="moderators"
                         rules={[
                             {
@@ -309,7 +314,7 @@ const ESAddModal = ({ open, setOpen }) => {
                                             ]}
                                         >
                                             <Select placeholder="Выберите модератора">
-                                                {dataModerator?.results.map((item, index) => (
+                                                {dataModerator?.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
                                                     </Option>
@@ -352,7 +357,7 @@ const ESAddModal = ({ open, setOpen }) => {
                         name="main_moderator"
                     >
                         <Select placeholder="Выберите председателя модераторов">
-                            {dataModerator?.results.map((item, index) => (
+                            {dataModerator?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
                                 </Option>

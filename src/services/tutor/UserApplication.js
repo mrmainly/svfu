@@ -14,11 +14,12 @@ export const UserApplication = api.injectEndpoints({
             providesTags: ['Application'],
         }),
         //подача заявления
-        postAcceptUserApplication: build.mutation({
-            query({ id }) {
+        patchAcceptUserApplication: build.mutation({
+            query({ body, id }) {
                 return {
                     url: `tutor/application/${id}`,
-                    method: 'POST',
+                    method: 'PATCH',
+                    body: body,
                 }
             },
             invalidatesTags: [{ type: 'Application' }],
@@ -39,7 +40,7 @@ export const UserApplication = api.injectEndpoints({
 
 export const {
     useGetUserApplicationIdQuery,
-    usePostAcceptUserApplicationMutation,
+    usePatchAcceptUserApplicationMutation,
     usePutUserApplicationRejectMutation,
     useGetUserApplicationQuery,
 } = UserApplication

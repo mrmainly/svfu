@@ -14,17 +14,17 @@ const Tutor = (navigate) => {
                 ROUTES.USER_APPLICATIONS,
                 navigate
             ),
-            SubMenuItem(
-                'ЗП',
-                'Экзаменационные группы',
-                'submenu-item-1-3',
-                ROUTES.EXAMINATION_GROUPS,
-                navigate
-            ),
+            // SubMenuItem(
+            //     'ЗП',
+            //     'Экзаменационные группы',
+            //     'submenu-item-1-3',
+            //     ROUTES.EXAMINATION_GROUPS,
+            //     navigate
+            // ),
             SubMenuItem(
                 'РЭ',
                 'Расписание экзаменов',
-                'submenu-item-1-4',
+                'submenu-item-1-3',
                 ROUTES.EXAM_SCHEDULE,
                 navigate
             ),

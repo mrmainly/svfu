@@ -4,9 +4,10 @@ import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { MyButton } from '../../../../../components'
+// import { MyButton } from '../../../../../components'
 import {
-    useGetExaminationGroupsDirectionQuery,
+    //  useGetExaminationGroupsDirectionQuery,
+    useGetExaminationsDirectionQuery,
     useGetTestingListQuery,
     useGetUsersRoleQuery,
     usePatchExamScheduleMutation,
@@ -20,10 +21,11 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
     const [testGroup, setTestGroup] = useState(dataList?.test_group)
     const [unit, setUnit] = useState(dataList?.unit)
     const { data: dataTutor } = useGetDirectionTuterQuery()
-    const { data: dataTestGroup } = useGetExaminationGroupsDirectionQuery(
-        { direction: direction },
-        { skip: !direction }
-    )
+    //  const { data: dataTestGroup } = useGetExaminationGroupsDirectionQuery(
+    //      { direction: direction },
+    //      { skip: !direction }
+    //  )
+    const { data: dataExaminations } = useGetExaminationsDirectionQuery({ direction: direction })
     const { data: dataUnit } = useGetTestingListQuery(
         { direction: direction },
         { skip: !direction }
@@ -83,16 +85,17 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                     >
                         Отменить
                     </Button>,
-                    <MyButton
+                    <Button
                         key="back"
                         type="default"
+                        size="large"
                         style={{
                             background: '#FFF',
                         }}
                         onClick={() => close()}
                     >
                         Отмена
-                    </MyButton>,
+                    </Button>,
                 ]}
             >
                 <Form
@@ -110,7 +113,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                     id="ese-form"
                     disabled={dataList?.exam_status === 'WAITING' ? false : true}
                 >
-                    <Form.Item required label="Квалификация" >
+                    <Form.Item required label="Квалификация">
                         <Select
                             defaultValue={dataList?.direction}
                             placeholder="Выберите квалификацию"
@@ -147,14 +150,15 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                 message: 'Please confirm your password!',
                             },
                         ]}
-                        label="Группа аттестуемых"
+                        label="Аттестуемые"
                     >
                         <Select
+                            mode="multiple"
                             placeholder="Выберите группу аттестуемых"
                             onChange={(e) => setTestGroup(e)}
                             value={testGroup}
                         >
-                            {dataTestGroup?.results.map((item, index) => (
+                            {dataExaminations?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.id} {item.name}
                                 </Option>
@@ -215,7 +219,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                             required
                                         >
                                             <Select placeholder="Выберите эксперта">
-                                                {dataExpert?.results.map((item, index) => (
+                                                {dataExpert?.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username} {item.full_name}
                                                     </Option>
@@ -246,7 +250,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
 
                     <Form.Item required label="Председатель экспертов" name="main_expert">
                         <Select placeholder="Выберите председателя экспертов">
-                            {dataExpert?.results.map((item, index) => (
+                            {dataExpert?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
                                 </Option>
@@ -274,7 +278,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
                                             required
                                         >
                                             <Select placeholder="Выберите модератора">
-                                                {dataModerator?.results.map((item, index) => (
+                                                {dataModerator?.map((item, index) => (
                                                     <Option key={index} value={item.id}>
                                                         {item.username}
                                                     </Option>
@@ -305,7 +309,7 @@ const ESEditModal = ({ open, setOpen, dataList, handleOpen }) => {
 
                     <Form.Item required label="Председатель модераторов" name="main_moderator">
                         <Select placeholder="Выберите председателя модераторов">
-                            {dataModerator?.results.map((item, index) => (
+                            {dataModerator?.map((item, index) => (
                                 <Option key={index} value={item.id}>
                                     {item.username}
                                 </Option>

@@ -8,7 +8,6 @@ import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/dist/css/bootstrap.css'
 
-
 import ROUTES from './routes'
 import { ScreenVersionContext } from './context/ScreenVersionContext'
 import Layout from './layout'
@@ -27,7 +26,7 @@ import {
     TestsBank,
     AttestationsQualifications,
     QuestionsBank,
-    ExaminationGroups,
+    //  ExaminationGroups,
     UserApplications,
     Certified,
     ExamSchedule,
@@ -228,14 +227,14 @@ function App() {
                             }
                             path={ROUTES.SOFT_QUESTIONS}
                         />
-                        <Route
+                        {/* <Route
                             element={
                                 <Suspense fallback={<LoadingInsideLayout />}>
                                     <ExaminationGroups />
                                 </Suspense>
                             }
                             path={ROUTES.EXAMINATION_GROUPS}
-                        />
+                        /> */}
                         <Route
                             element={
                                 <Suspense fallback={<LoadingInsideLayout />}>

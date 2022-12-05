@@ -15,7 +15,7 @@ const AttestationsQualifications = lazy(() => import('./manager/attestations-qua
 const AttestationProtocol = lazy(() => import('./lpr/attestation-protocol/list'))
 const TestsBank = lazy(() => import('./manager/tests-bank'))
 const QuestionsBank = lazy(() => import('./manager/manager_questions'))
-const ExaminationGroups = lazy(() => import('./tutor/examination-groups'))
+// const ExaminationGroups = lazy(() => import('./tutor/examination-groups'))
 const UserApplications = lazy(() => import('./tutor/userApplications/list'))
 const Certified = lazy(() => import('./tutor/certified/list'))
 const ExamSchedule = lazy(() => import('./tutor/exam-schedule'))
@@ -67,7 +67,7 @@ export {
     AttestationsQualifications,
     TestsBank,
     QuestionsBank,
-    ExaminationGroups,
+    //  ExaminationGroups,
     UserApplications,
     Certified,
     ExamSchedule,

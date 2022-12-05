@@ -13,7 +13,7 @@ import RejectModal from './components/modals/RejectModal'
 import QualificationDetailModal from './components/modals/QualificationDetialModal'
 import {
     useGetUserApplicationIdQuery,
-    usePostAcceptUserApplicationMutation,
+    usePatchAcceptUserApplicationMutation,
 } from '../../../services/tutor/UserApplication'
 import { rolesChoises } from '../../../constants'
 
@@ -25,7 +25,7 @@ const UserApplicationsDetail = () => {
     const [openRejectModal, setOpenRejectModal] = useState(false)
     const [qualificationData, setQualificationData] = useState([])
 
-    const [postAcceptApplication] = usePostAcceptUserApplicationMutation()
+    const [postAcceptApplication] = usePatchAcceptUserApplicationMutation()
 
     const params = useParams()
     const navigate = useNavigate()
@@ -100,7 +100,10 @@ const UserApplicationsDetail = () => {
                                     size="large"
                                     type="primary"
                                     onClick={() => {
-                                        postAcceptApplication({ id: params.id }).then((res) => {
+                                        postAcceptApplication({
+                                            body: { status: 'APPROVED' },
+                                            id: params.id,
+                                        }).then((res) => {
                                             if (res.data) {
                                                 message.success('Вы приняли заявление ')
                                             } else {

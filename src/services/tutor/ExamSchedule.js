@@ -24,6 +24,11 @@ export const ExamSchedule = api.injectEndpoints({
             query: ({ direction }) => `tutor/testgroup?direction=${direction}`,
             providesTags: ['ExaminationGroups'],
         }),
+        //список аттестуемых по квалификации
+        getExaminationsDirection: build.query({
+            query: ({ direction }) => `tutor/application/tester?direction=${direction}`,
+            providesTags: ['ExaminationGroups'],
+        }),
         //выбор тестирование
         getTestingId: build.query({
             query: ({ id }) => `tutor/unit/${id}`,
@@ -47,8 +52,8 @@ export const ExamSchedule = api.injectEndpoints({
         //роль поьзователя
         getUsersRole: build.query({
             query: ({ role }) => ({
-                url: `tutor/users?role=${role}`,
-                dependencies: role,
+                url: `tutor/reviewers?role=${role}`,
+                //  dependencies: role,
             }),
             // providesTags: ['ExamSchedule'],
         }),
@@ -68,6 +73,7 @@ export const ExamSchedule = api.injectEndpoints({
 
 export const {
     useGetExaminationGroupsDirectionQuery,
+    useGetExaminationsDirectionQuery,
     useGetTestingListQuery,
     usePostExamScheduleMutation,
     useDeleteExamScheduleMutation,
