@@ -28,13 +28,18 @@ const MyDrawer = ({ open, onClose }) => {
         },
         {
             label: 'Matrix question',
-            type: 'SOFT',
+            type: 'ANY',
             technique: 'MATRIX',
         },
         {
             label: 'Ответ в свободной форме(практическая часть)',
             type: 'HARD',
             technique: 'DESCRIBE',
+        },
+        {
+            label: 'Poll Question',
+            type: 'ANY',
+            technique: 'POLL',
         },
     ]
 

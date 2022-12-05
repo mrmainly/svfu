@@ -19,6 +19,7 @@ import {
     useQuestionDeleteMutation,
     useQuestionCreateMatchingPostMutation,
     useQuestionCreateMatrixPostMutation,
+    useQuestionCreatePollPostMutation,
 } from '../../../../services/manager/question-bank/QuestionCreate'
 import ROUTES from '../../../../routes'
 
@@ -34,6 +35,8 @@ const QuestionCreatePage = () => {
         useQuestionCreateMatchingPostMutation()
     const [questionCreateMatrix, { isLoading: isCreateMatrixLoading }] =
         useQuestionCreateMatrixPostMutation()
+    const [questionCreatePoll, { isLoading: isCreatePollLoading }] =
+        useQuestionCreatePollPostMutation()
 
     const { questionType, technique } = useSelector((state) => state.constructor_question_slice)
     const navigate = useNavigate()
@@ -139,6 +142,33 @@ const QuestionCreatePage = () => {
                             questionDelete({ id: mainResponse.data.question_id })
                         }
                     })
+                } else if (technique === 'POLL') {
+                    questionCreatePoll({
+                        id: mainResponse.data.question_id,
+                        body: {
+                            strings: data.questions.map((item, index) => {
+                                return {
+                                    id_string: index + 1,
+                                    name: item.strings_name,
+                                }
+                            }),
+                            columns: data.questions.map((item, index) => {
+                                return {
+                                    name: item.columns_name,
+                                    id_column: index + 1,
+                                    score: item.score,
+                                }
+                            }),
+                        },
+                    }).then((res) => {
+                        if (res.data) {
+                            message.success('POLL вопрос создан')
+                            navigate(ROUTES.MANAGER_QUESTIONS_PAGE)
+                        } else {
+                            message.error('Вопрос не создан')
+                            questionDelete({ id: mainResponse.data.question_id })
+                        }
+                    })
                 }
             } else {
                 message.error(
@@ -156,7 +186,8 @@ const QuestionCreatePage = () => {
             isCreateInputLaoding ||
             isDeleteQuestionLaoding ||
             isCreateMatchingLoading ||
-            isCreateMatrixLoading
+            isCreateMatrixLoading ||
+            isCreatePollLoading
         ) {
             return true
         } else {

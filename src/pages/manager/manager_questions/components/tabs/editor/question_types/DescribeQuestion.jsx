@@ -1,7 +1,7 @@
 import { Card, Form } from 'antd'
 import ReactSummernote from 'react-summernote'
 
-const DescribeQuestionType = () => {
+const DescribeQuestion = () => {
     return (
         <Card hoverable={false} title={`Ответ в свободной форме`} className="card">
             <Form.Item style={{ marginBottom: '-1px' }}>
@@ -27,4 +27,4 @@ const DescribeQuestionType = () => {
     )
 }
 
-export default DescribeQuestionType
+export default DescribeQuestion

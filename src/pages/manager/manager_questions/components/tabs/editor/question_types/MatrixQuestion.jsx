@@ -1,9 +1,12 @@
 import { Button, Form, Input, Card, Checkbox } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
 
 const { TextArea } = Input
 
 const MatrixQuestion = () => {
+    const { questionType } = useSelector((state) => state.constructor_question_slice)
+
     return (
         <Card title="Matrix Question">
             <Form.List name="table_quest" initialValue={[{}]}>
@@ -57,16 +60,21 @@ const MatrixQuestion = () => {
                                                                 >
                                                                     <Input placeholder="Вариант ответа" />
                                                                 </Form.Item>
-                                                                <Form.Item
-                                                                    {...restField}
-                                                                    name={[variant_name, 'score']}
-                                                                    style={{ marginRight: 10 }}
-                                                                >
-                                                                    <Input
-                                                                        placeholder="Заполните баллы"
-                                                                        type="number"
-                                                                    />
-                                                                </Form.Item>
+                                                                {questionType === 'SOFT' && (
+                                                                    <Form.Item
+                                                                        {...restField}
+                                                                        name={[
+                                                                            variant_name,
+                                                                            'score',
+                                                                        ]}
+                                                                        style={{ marginRight: 10 }}
+                                                                    >
+                                                                        <Input
+                                                                            placeholder="Заполните баллы"
+                                                                            type="number"
+                                                                        />
+                                                                    </Form.Item>
+                                                                )}
                                                                 <Form.Item
                                                                     style={{ marginBottom: 10 }}
                                                                     name={[variant_name, 'is_true']}
