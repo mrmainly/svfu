@@ -109,7 +109,6 @@ const SoftBodyTester = ({ dataList }) => {
     }
 
     useEffect(() => {
-        console.log('getSurveyData', getSurveyData)
         if (dataList?.start_survey) {
             clearTimer(
                 getDeadTime(

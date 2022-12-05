@@ -65,11 +65,21 @@ export const Surveys = api.injectEndpoints({
 
         //список заданий
         getTesterSurveyId: build.query({
-            query: (id) => `tester/survey/soft/survey/${id}`,
+            query: ({ id }) => `tester/survey/soft/survey/${id}`,
             async onQueryStarted(undefiend, {dispatch, queryFulfilled }) {
                 try {
-                    const { data } = await queryFulfilled
-                    dispatch(getSurveyData(data))
+                    const {data} = await queryFulfilled
+                    const parsquestion = await []
+                    await data?.soft_chapters.forEach((item) => {
+                        item.question.forEach((questionItem) => {
+                            parsquestion.push({
+                                ...questionItem,
+                                chapterName: item.name,
+                                chapterId: item.id
+                            })
+                        })
+                    })
+                    dispatch(getSurveyData(parsquestion))
                 } catch (err) {
                     console.log(err)
                 }

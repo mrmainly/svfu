@@ -17,16 +17,15 @@ const { Text, Title } = Typography
 const { Option } = Select
 
 const SoftPart = ({ id }) => {
-    const { data: surveyQuestions, isLoading: isSurveyQuestionsLoading } =
+    const { isLoading: isSurveyQuestionsLoading } =
         useGetTesterSurveyIdQuery({ id: id })
-    console.log('surveyQuestions', surveyQuestions)
     const [openModal, setOpenModal] = useState(false)
     const [postList, setPostList] = useState([])
     const { open, handleClose, handleOpen } = useModal()
 
     const { arrayIndex, getSurveyData } = useSelector((state) => state.survey_slice)
 
-    console.log('asdasd', getSurveyData)
+    console.log('getSurveyData', getSurveyData)
     const onSubmit = (data) => {
         const abjArr = Object.entries(data)
         const postData = {
@@ -79,7 +78,7 @@ const SoftPart = ({ id }) => {
                 layout="vertical"
                 onFinish={onSubmit}
             >
-                {surveyQuestions?.soft_chapters?.map((itemChapter, index) => (
+                {getSurveyData?.map((item, index) => (
                     <div
                         key={index}
                         style={{
@@ -87,35 +86,21 @@ const SoftPart = ({ id }) => {
                             flexDirection: 'column',
                         }}
                     >
-                        {itemChapter?.question?.map((itemQuestion, index)=>(
-                            <div
-                                key={index}
-                                style={{
-                                    display: index === arrayIndex ? 'flex' : 'none',
-                                    flexDirection: 'column',
-                                }}
-                            >
-                                <div>{itemChapter.name}</div>
-                                <Divider/>
-                                <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
-                                <div>
-                                    <Text style={{ fontWeight: 'bold' }}>Задание: </Text>
-                                    <div>{itemQuestion.description}</div>
-                                </div>
-                                {itemQuestion.technique === "MATCHING" && <MatchingQuestion/>}
-                            </div>
-                        ))}
-                        {/*<Title level={4}>Вопрос №{arrayIndex + 1}</Title>*/}
-                        {/*{item.description && (*/}
-                        {/*    <div style={{ marginTop: 12 }}>*/}
-                        {/*        <Text style={{ fontWeight: 'bold' }}>Описание: </Text>*/}
-                        {/*        <span>{item.description}</span>*/}
-                        {/*    </div>*/}
-                        {/*)}*/}
-                        {/*<div style={{ marginTop: 12 }}>*/}
-                        {/*    <Text style={{ fontWeight: 'bold' }}>Задание: </Text>*/}
-                        {/*    /!*<span>{item.name}</span>*!/*/}
-                        {/*</div>*/}
+                        <div>{item.chapterName}</div>
+                        <Divider/>
+                        <Title level={4}>Вопрос №{arrayIndex + 1}</Title>
+
+                        <div style={{ marginTop: 12 }}>
+                            <Text style={{ fontWeight: 'bold' }}>Задание: </Text>
+                            <div>{item.description}</div>
+                        </div>
+
+                        {item.technique === "MATCHING" && <MatchingQuestion/>}
+                        <Line />
+                        <ActionButton
+                            arrayIndex={arrayIndex}
+                            surveyquest_length={getSurveyData?.length}
+                        />
                         {/*{item?.question_images?.length > 0 && (*/}
                         {/*    <div*/}
                         {/*        style={{ display: 'flex', flexDirection: ' column', marginTop: 12 }}*/}
@@ -237,11 +222,6 @@ const SoftPart = ({ id }) => {
                         {/*        <TextArea />*/}
                         {/*    </Form.Item>*/}
                         {/*)}*/}
-                        {/*<Line />*/}
-                        {/*<ActionButton*/}
-                        {/*    arrayIndex={arrayIndex}*/}
-                        {/*    surveyquest_length={surveyQuestions?.length}*/}
-                        {/*/>*/}
                     </div>
                 ))}
             </Form>
