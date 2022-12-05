@@ -99,6 +99,7 @@ const SoftPart = ({ id }) => {
                         </div>
 
                         {item.technique === 'MATCHING' && <MatchingQuestion />}
+                        {item.technique === 'INPUT_INT' && <InputIntQuestion />}
                         <Line />
                         <ActionButton
                             arrayIndex={arrayIndex}
