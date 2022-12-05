@@ -85,6 +85,7 @@ const TestSoftEditor = ({ data }) => {
             {technique === 'MATCHING' && <Matching />}
             {technique === 'MATRIX' && <MatrixQuestion />}
             {technique === 'POLL' && <PolQuestion />}
+            {technique === 'FILE' && <div>Вы дали возможность добавить файл аттестуемым</div>}
         </div>
     )
 }
