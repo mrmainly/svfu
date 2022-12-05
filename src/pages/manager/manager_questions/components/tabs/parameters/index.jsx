@@ -54,26 +54,28 @@ const TestSoftParameters = () => {
 
     return (
         <Card>
-            <Form.Item
-                label="Сложность задания"
-                labelCol={{ span: 24 }}
-                style={{ marginBottom: 10 }}
-                name="difficulty"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Сложность задания является обязательным полем',
-                    },
-                ]}
-            >
-                <Select style={{ width: 220 }} placeholder="Сложность задания">
-                    {difficulty.map((item, index) => (
-                        <Option key={index} value={item.label}>
-                            {item.label}
-                        </Option>
-                    ))}
-                </Select>
-            </Form.Item>
+            {questionType === 'HARD' && (
+                <Form.Item
+                    label="Сложность задания"
+                    labelCol={{ span: 24 }}
+                    style={{ marginBottom: 10 }}
+                    name="difficulty"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Сложность задания является обязательным полем',
+                        },
+                    ]}
+                >
+                    <Select style={{ width: 220 }} placeholder="Сложность задания">
+                        {difficulty.map((item, index) => (
+                            <Option key={index} value={item.label}>
+                                {item.label}
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            )}
             <Form.Item
                 label="Квалификация"
                 name="direction"

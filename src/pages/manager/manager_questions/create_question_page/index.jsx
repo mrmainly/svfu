@@ -79,8 +79,9 @@ const QuestionCreatePage = () => {
                     questionCreateInput({
                         id: mainResponse.data.question_id,
                         body: {
-                            input_answers: data.questions.map((item) => {
+                            input_answers: data.questions.map((item, index) => {
                                 return {
+                                    a_id: index + 1,
                                     input_text: item.input_text,
                                     score: item.score,
                                     input_int: item.input_int,
@@ -147,16 +148,20 @@ const QuestionCreatePage = () => {
                         id: mainResponse.data.question_id,
                         body: {
                             strings: data.questions.map((item, index) => {
-                                return {
-                                    id_string: index + 1,
-                                    name: item.strings_name,
+                                if (item.strings_name) {
+                                    return {
+                                        id_string: index + 1,
+                                        name: item.strings_name,
+                                    }
                                 }
                             }),
                             columns: data.questions.map((item, index) => {
-                                return {
-                                    name: item.columns_name,
-                                    id_column: index + 1,
-                                    score: item.score,
+                                if (item.columns_name) {
+                                    return {
+                                        name: item.columns_name,
+                                        id_column: index + 1,
+                                        score: item.score,
+                                    }
                                 }
                             }),
                         },
