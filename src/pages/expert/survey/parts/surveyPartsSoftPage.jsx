@@ -1,25 +1,21 @@
 /* eslint-disable no-undef */
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 import { BsArrowLeft } from 'react-icons/bs'
 
-import { Line } from '../../../components'
+import { Line } from '../../../../components'
 
-import TheoreticalPartExMo from '../../../constructor/parts/theoretical_part_expert_moderator'
-import PracticalPartExMo from '../../../constructor/parts/practical_part_expert_moderator'
-import AnswerExpertModal from './components/modals/AnswerExpertModal'
-import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
+import SoftTestExaminer from '../../../../constructor/parts/SoftTestExaminer'
+import SoftAnswerExpertModal from '../components/modals/SoftAnswerExpertModal'
+import VerificationSubscribeModal from '../components/modals/VerificationSubscribeModal'
 
-const SurveyParts = () => {
+const SurveyPartsSoft = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
     const state = location.state
 
     const { surveyquest, id } = state
-    const { part } = useSelector((state) => state.survey_slice)
-
     return (
         <div>
             <div
@@ -50,7 +46,7 @@ const SurveyParts = () => {
                 </span>
             </div>
             <Line />
-            <AnswerExpertModal
+            <SoftAnswerExpertModal
                 id={id}
                 expert_review={surveyquest?.expert_review}
                 main_expert={surveyquest.main_expert}
@@ -60,13 +56,10 @@ const SurveyParts = () => {
                 main_expert={surveyquest?.main_expert}
                 unit_type={surveyquest?.survey?.unit_type}
             />
-            {part === 'theoretical-part' ? (
-                <TheoreticalPartExMo surveyquest={surveyquest} />
-            ) : (
-                <PracticalPartExMo />
-            )}
+
+            <SoftTestExaminer surveyquest={surveyquest} />
         </div>
     )
 }
 
-export default SurveyParts
+export default SurveyPartsSoft

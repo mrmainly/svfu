@@ -11,7 +11,7 @@ export const Statement = api.injectEndpoints({
 
         //отправка заявления
         postStatement: build.mutation({
-            query({id}) {
+            query({ id }) {
                 return {
                     url: `tester/application/${id}`,
                     method: 'POST',

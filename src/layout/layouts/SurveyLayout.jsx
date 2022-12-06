@@ -6,7 +6,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import '../layout.css'
-import { SurveysSideBar, SurveysSideBarTester } from '../../components'
+import { SurveysSideBarExaminer, SurveysSideBarTester } from '../../components'
 import { SurveysSlice } from '../../reducers/SurveysSlice'
 import ROUTES from '../../routes'
 import LayoutWrapper from './components/WrapperLayout'
@@ -94,10 +94,10 @@ const SurveyLayout = () => {
                                     onClose={() => dispatch(changeDrawerMobileOpen(false))}
                                     width={300}
                                 >
-                                    <SurveysSideBar />
+                                    <SurveysSideBarExaminer />
                                 </Drawer>
                             ) : (
-                                <SurveysSideBar />
+                                <SurveysSideBarExaminer />
                             )}
                         </div>
                     )}

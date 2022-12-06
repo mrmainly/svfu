@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import '../surveySideBar.css'
 import { SurveysSlice } from '../../../reducers/SurveysSlice'
-import HardBody from './components/hard_body'
-import SoftBody from './components/soft_body'
+import HardBody from './components/ExaminerHardBody'
+import SoftBody from './components/ExaminerSoftBody'
 
 const SurveysSideBar = () => {
     const [data, setData] = useState([])

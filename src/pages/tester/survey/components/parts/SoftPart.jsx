@@ -8,7 +8,7 @@ import { Line } from '../../../../../components'
 import TheoreticalAnswerModal from '../modals/TheoreticalAnswerModal'
 import FailedModal from '../modals/FailedModal'
 import { useModal } from '../../../../../hooks'
-import ActionButton from '../../../../../constructor/parts/compoentns/action-button'
+import ActionButton from '../../../../../constructor/parts/components/ActionButton'
 import TextArea from 'antd/lib/input/TextArea'
 import { useGetTesterSurveyIdQuery } from '../../../../../services/tester/Surveys'
 import MatchingQuestion from '../questions/MatchingQuestion'
@@ -31,26 +31,24 @@ const SoftPart = ({ id }) => {
     const { arrayIndex, getSurveyData } = useSelector((state) => state.survey_slice)
 
     const onSubmit = (data) => {
-
         const postData = getSurveyData.map((item, index) => {
-
-            if(item.technique === 'MATRIX') {
+            if (item.technique === 'MATRIX') {
                 const post_matrix = []
-                    data[index]?.matrix_answers.forEach((item) => (
-                            item?.answers?.a_id.forEach((itemAnswer) => {
-                                post_matrix.push({a_id: itemAnswer})
-                            })
-                    ))
+                data[index]?.matrix_answers.forEach((item) =>
+                    item?.answers?.a_id.forEach((itemAnswer) => {
+                        post_matrix.push({ a_id: itemAnswer })
+                    })
+                )
                 return {
                     ...post_matrix,
                     chapter_id: item.chapterId,
-                    q_id: item.id
+                    q_id: item.id,
                 }
             }
             return {
                 ...data[index],
                 chapter_id: item.chapterId,
-                q_id: item.id
+                q_id: item.id,
             }
         })
 
@@ -125,13 +123,41 @@ const SoftPart = ({ id }) => {
 
                         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Ответ: </Text>
 
-                        {item.technique === 'INPUT_INT' && <InputIntQuestion countInput={item.question_input.count_input} answerIndex={index}/>}
-                        {item.technique === 'ONE_CHOICE' && <OneChoiceQuestion variants={item.question_choice_variants} answerIndex={index}/>}
-                        {item.technique === 'POLL' && <PollQuestion questionPoll={item.question_poll} answerIndex={index}/>}
-                        {item.technique === 'DESCRIBE' && <DescribeQuestion answerIndex={index}/>}
-                        {item.technique === 'MATCHING' && <MatchingQuestion firstColumn={item.matching_variants_first} secondColumn={item.matching_variants_second} answerIndex={index}/>}
-                        {item.technique === 'MATRIX' && <MatrixQuestion questionMatrix={item.question_matrix} answerIndex={index}/>}
-                        {item.technique === 'MULTIPLE_CHOICE' && <MultipleChoiceQuestion questionVariants={item.question_choice_variants} answerIndex={index}/>}
+                        {item.technique === 'INPUT_INT' && (
+                            <InputIntQuestion
+                                countInput={item.question_input.count_input}
+                                answerIndex={index}
+                            />
+                        )}
+                        {item.technique === 'ONE_CHOICE' && (
+                            <OneChoiceQuestion
+                                variants={item.question_choice_variants}
+                                answerIndex={index}
+                            />
+                        )}
+                        {item.technique === 'POLL' && (
+                            <PollQuestion questionPoll={item.question_poll} answerIndex={index} />
+                        )}
+                        {item.technique === 'DESCRIBE' && <DescribeQuestion answerIndex={index} />}
+                        {item.technique === 'MATCHING' && (
+                            <MatchingQuestion
+                                firstColumn={item.matching_variants_first}
+                                secondColumn={item.matching_variants_second}
+                                answerIndex={index}
+                            />
+                        )}
+                        {item.technique === 'MATRIX' && (
+                            <MatrixQuestion
+                                questionMatrix={item.question_matrix}
+                                answerIndex={index}
+                            />
+                        )}
+                        {item.technique === 'MULTIPLE_CHOICE' && (
+                            <MultipleChoiceQuestion
+                                questionVariants={item.question_choice_variants}
+                                answerIndex={index}
+                            />
+                        )}
 
                         <Line />
                         <ActionButton

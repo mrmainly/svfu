@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 import { Line } from '../../components'
 
-import ActionButton from './compoentns/action-button'
+import ActionButton from './components/ActionButton'
 const { setSoftAnswerExpert } = SurveysSlice.actions
 
 const { Text, Title } = Typography

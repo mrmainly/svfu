@@ -1,21 +1,25 @@
 /* eslint-disable no-undef */
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { BsArrowLeft } from 'react-icons/bs'
 
-import { Line } from '../../../components'
+import { Line } from '../../../../components'
 
-import SoftTestExMo from '../../../constructor/parts/soft_test_expert_moderator'
-import SoftAnswerExpertModal from './components/modals/SoftAnswerExpertModal'
-import VerificationSubscribeModal from './components/modals/VerificationSubscribeModal'
+import TheoreticalPartExMo from '../../../../constructor/parts/TheoreticalPartExaminer'
+import PracticalPartExMo from '../../../../constructor/parts/PracticalPartExaminer'
+import AnswerExpertModal from '../components/modals/AnswerExpertModal'
+import VerificationSubscribeModal from '../components/modals/VerificationSubscribeModal'
 
-const SurveyPartsSoft = () => {
+const SurveyParts = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
     const state = location.state
 
     const { surveyquest, id } = state
+    const { part } = useSelector((state) => state.survey_slice)
+
     return (
         <div>
             <div
@@ -46,7 +50,7 @@ const SurveyPartsSoft = () => {
                 </span>
             </div>
             <Line />
-            <SoftAnswerExpertModal
+            <AnswerExpertModal
                 id={id}
                 expert_review={surveyquest?.expert_review}
                 main_expert={surveyquest.main_expert}
@@ -56,10 +60,13 @@ const SurveyPartsSoft = () => {
                 main_expert={surveyquest?.main_expert}
                 unit_type={surveyquest?.survey?.unit_type}
             />
-
-            <SoftTestExMo surveyquest={surveyquest} />
+            {part === 'theoretical-part' ? (
+                <TheoreticalPartExMo surveyquest={surveyquest} />
+            ) : (
+                <PracticalPartExMo />
+            )}
         </div>
     )
 }
 
-export default SurveyPartsSoft
+export default SurveyParts

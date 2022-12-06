@@ -5,7 +5,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 
 import { Line } from '../../../components'
 
-import SoftTestExMo from '../../../constructor/parts/soft_test_expert_moderator'
+import SoftTestExMo from '../../../constructor/parts/SoftTestExaminer'
 import AnswerModeratorModal from './components/modals/AnswerModeratorModal'
 import AppealModeratorModal from './components/modals/AppealModeratorModal'
 import VerificationSubscribeModalModerator from './components/modals/VerificationSubscribeModalModerator'

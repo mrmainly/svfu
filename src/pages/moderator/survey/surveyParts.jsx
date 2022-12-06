@@ -6,8 +6,8 @@ import { BsArrowLeft } from 'react-icons/bs'
 
 import { Line } from '../../../components'
 
-import TheoreticalPartExMo from '../../../constructor/parts/theoretical_part_expert_moderator'
-import PracticalPartExMo from '../../../constructor/parts/practical_part_expert_moderator'
+import TheoreticalPartExMo from '../../../constructor/parts/TheoreticalPartExaminer'
+import PracticalPartExMo from '../../../constructor/parts/PracticalPartExaminer'
 import AnswerModeratorModal from './components/modals/AnswerModeratorModal'
 import AppealModeratorModal from './components/modals/AppealModeratorModal'
 import VerificationSubscribeModalModerator from './components/modals/VerificationSubscribeModalModerator'
